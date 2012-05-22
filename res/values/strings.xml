@@ -104,10 +104,10 @@
     <string name="version">Apollo Version</string>
 
     <!-- Settings keys -->
-    <string name="key_themes">themepreview</string>
-    <string name="key_themes_package">themePackageName</string>
-    <string name="key_themes_preferences">themePrefences</string>
-    <string name="key_build_version">build_version</string>
+    <string name="key_themes" translatable="false">themepreview</string>
+    <string name="key_themes_package" translatable="false">themePackageName</string>
+    <string name="key_themes_preferences" translatable="false">themePrefences</string>
+    <string name="key_build_version" translatable="false">build_version</string>
 
     <!-- Theme layout Buttons -->
     <string name="apply_theme">Apply theme</string>
