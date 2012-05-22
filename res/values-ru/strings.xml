@@ -8,7 +8,7 @@
     <string name="cd_favorite">Сделать этот трек любимым</string>
     <string name="cd_search">Поиск по вашей музыке</string>
     <string name="cd_overflow">Больше возможностей</string>
-    <string name="cd_bottom_action_bar_album_art">Обложка альбома для этой песни</string>
+    <string name="cd_bottom_action_bar_album_art">Обложка альбома для этого трека</string>
     <string name="cd_repeat">Повтор одной или всех</string>
     <string name="cd_previous">Назад</string>
     <string name="cd_play">Воспр. или пауза</string>
@@ -71,7 +71,7 @@
     <!-- Share Intent -->
     <string name="now_listening_to">Я сейчас слушаю:</string>
     <string name="by">от</string>
-    <string name="share_track_using">Отправить трек через</string>
+    <string name="share_track_using">Отправить трек используя</string>
 
     <!-- ContextMenu items -->
     <string name="play_all">Играть всё</string>
@@ -108,4 +108,11 @@
     <!-- Something went wrong -->
     <string name="error">Ошибка</string>
 
+    <!-- Tabs -->
+    <string name="tab_recent">ПОСЛЕДНИЕ</string>
+    <string name="tab_artists">ИСПОЛНИТЕЛИ</string>
+    <string name="tab_albums">АЛЬБОМЫ</string>
+    <string name="tab_songs">ТРЕКИ</string>
+    <string name="tab_playlists">ПЛЕЙЛИСТЫ</string>
+    <string name="tab_genres">ЖАНРЫ</string>
 </resources>
