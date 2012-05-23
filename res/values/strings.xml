@@ -38,11 +38,10 @@
 
     <!-- Toasts after adding song(s) to playlists -->
     <plurals name="NNNtrackstoplaylist">
-
         <!-- message shown when one song was added -->
         <item quantity="one">1 song added to playlist</item>
         <!-- message shown when zero or more than one song was added -->
-        <item quantity="other"><xliff:g id="number" example="27">%d</xliff:g> songs added to playlis.</item>
+        <item quantity="other"><xliff:g id="number" example="27">%d</xliff:g> songs added to playlist</item>
     </plurals>
 
     <!-- Headers -->
