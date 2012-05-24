@@ -121,6 +121,14 @@
     <string name="save">Save</string>
     <string name="overwrite">Overwrite</string>
 
+    <!-- Tabs -->
+    <string name="tab_recent">RECENT</string>
+    <string name="tab_artists">ARTISTS</string>
+    <string name="tab_albums">ALBUMS</string>
+    <string name="tab_songs">SONGS</string>
+    <string name="tab_playlists">PLAYLISTS</string>
+    <string name="tab_genres">GENRES</string>
+
     <!-- Something went wrong -->
     <string name="error">Error</string>
 

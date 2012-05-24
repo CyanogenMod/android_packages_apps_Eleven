@@ -12,11 +12,6 @@ public interface Constants {
     // Last.fm API
     public String LASTFM_API_KEY = "0bec3f7ec1f914d7c960c12a916c8fb3";
 
-    // Tab titles
-    public String[] mTitles = {
-            "RECENT", "ARTISTS", "ALBUMS", "SONGS", "PLAYLISTS", "GENRES"
-    };
-
     // SharedPreferences
     public String APOLLO = "Apollo", APOLLO_PREFERENCES = "apollopreferences",
             ARTIST_IMAGE = "artistimage", ARTIST_IMAGE_ORIGINAL = "artistimageoriginal",
