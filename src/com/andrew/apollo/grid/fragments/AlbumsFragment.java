@@ -46,6 +46,7 @@ import static com.andrew.apollo.Constants.ARTIST_KEY;
 import static com.andrew.apollo.Constants.INTENT_ADD_TO_PLAYLIST;
 import static com.andrew.apollo.Constants.INTENT_PLAYLIST_LIST;
 import static com.andrew.apollo.Constants.MIME_TYPE;
+import static com.andrew.apollo.Constants.UP_STARTS_ALBUM_ACTIVITY;
 
 /**
  * @author Andrew Neal
@@ -189,6 +190,7 @@ public class AlbumsFragment extends Fragment implements LoaderCallbacks<Cursor>,
         bundle.putString(ARTIST_KEY, artistName);
         bundle.putString(ALBUM_KEY, albumName);
         bundle.putLong(BaseColumns._ID, id);
+        bundle.putBoolean(UP_STARTS_ALBUM_ACTIVITY, true);
 
         Intent intent = new Intent(Intent.ACTION_VIEW);
         intent.setClass(getActivity(), TracksBrowser.class);

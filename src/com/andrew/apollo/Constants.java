@@ -19,7 +19,8 @@ public final class Constants {
             GENRE_KEY = "genres", ARTIST_ID = "artistid", NUMWEEKS = "numweeks",
             PLAYLIST_NAME_FAVORITES = "Favorites", PLAYLIST_NAME = "playlist",
             THEME_PACKAGE_NAME = "themePackageName", THEME_DESCRIPTION = "themeDescription",
-            THEME_PREVIEW = "themepreview", THEME_TITLE = "themeTitle";
+            THEME_PREVIEW = "themepreview", THEME_TITLE = "themeTitle",
+            UP_STARTS_ALBUM_ACTIVITY = "upStartsAlbumActivity";
 
     // Bundle & Intent type
     public final static String MIME_TYPE = "mimetype", INTENT_ACTION = "action", DATA_SCHEME = "file";
