@@ -9,14 +9,13 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.andrew.apollo.Constants;
 import com.andrew.apollo.R;
 import com.andrew.apollo.utils.ThemeUtils;
 
 /**
  * @author Andrew Neal
  */
-public class ViewHolderList implements Constants {
+public class ViewHolderList {
 
     public final ImageView mViewHolderImage, mPeakOne, mPeakTwo, mQuickContextDivider,
             mQuickContextTip;

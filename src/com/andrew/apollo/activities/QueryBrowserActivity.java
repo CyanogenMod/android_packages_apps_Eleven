@@ -46,13 +46,17 @@ import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
 import android.widget.TextView;
 
-import com.andrew.apollo.Constants;
 import com.andrew.apollo.R;
 import com.andrew.apollo.service.ServiceToken;
 import com.andrew.apollo.utils.ApolloUtils;
 import com.andrew.apollo.utils.MusicUtils;
 
-public class QueryBrowserActivity extends ListActivity implements Constants, ServiceConnection {
+import static com.andrew.apollo.Constants.ALBUM_KEY;
+import static com.andrew.apollo.Constants.ARTIST_ID;
+import static com.andrew.apollo.Constants.ARTIST_KEY;
+import static com.andrew.apollo.Constants.MIME_TYPE;
+
+public class QueryBrowserActivity extends ListActivity implements ServiceConnection {
     private QueryListAdapter mAdapter;
 
     private boolean mAdapterSent;

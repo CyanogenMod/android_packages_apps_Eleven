@@ -12,7 +12,6 @@ import android.support.v4.widget.SimpleCursorAdapter;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.andrew.apollo.Constants;
 import com.andrew.apollo.R;
 import com.andrew.apollo.list.fragments.RecentlyAddedFragment;
 import com.andrew.apollo.tasks.LastfmGetAlbumImages;
@@ -22,10 +21,12 @@ import com.andrew.apollo.utils.MusicUtils;
 import com.andrew.apollo.views.ViewHolderList;
 import com.androidquery.AQuery;
 
+import static com.andrew.apollo.Constants.ALBUM_IMAGE;
+
 /**
  * @author Andrew Neal
  */
-public class RecentlyAddedAdapter extends SimpleCursorAdapter implements Constants {
+public class RecentlyAddedAdapter extends SimpleCursorAdapter {
 
     private AnimationDrawable mPeakOneAnimation, mPeakTwoAnimation;
 

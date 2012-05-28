@@ -31,7 +31,6 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.GridView;
 import android.widget.LinearLayout;
 
-import com.andrew.apollo.Constants;
 import com.andrew.apollo.NowPlayingCursor;
 import com.andrew.apollo.R;
 import com.andrew.apollo.adapters.QuickQueueAdapter;
@@ -42,7 +41,7 @@ import com.andrew.apollo.utils.MusicUtils;
  * @author Andrew Neal
  */
 public class QuickQueueFragment extends Fragment implements LoaderCallbacks<Cursor>,
-        OnItemClickListener, Constants {
+        OnItemClickListener {
 
     // Adapter
     private QuickQueueAdapter mQuickQueueAdapter;

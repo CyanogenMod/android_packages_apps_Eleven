@@ -9,7 +9,6 @@ import android.support.v4.widget.SimpleCursorAdapter;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.andrew.apollo.Constants;
 import com.andrew.apollo.R;
 import com.andrew.apollo.list.fragments.GenresFragment;
 import com.andrew.apollo.utils.MusicUtils;
@@ -18,7 +17,7 @@ import com.andrew.apollo.views.ViewHolderList;
 /**
  * @author Andrew Neal
  */
-public class GenreAdapter extends SimpleCursorAdapter implements Constants {
+public class GenreAdapter extends SimpleCursorAdapter {
 
     private WeakReference<ViewHolderList> holderReference;
 

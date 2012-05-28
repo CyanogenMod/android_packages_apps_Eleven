@@ -7,13 +7,13 @@ package com.andrew.apollo;
 /**
  * @author Andrew Neal
  */
-public interface Constants {
+public final class Constants {
 
     // Last.fm API
-    public String LASTFM_API_KEY = "0bec3f7ec1f914d7c960c12a916c8fb3";
+    public final static String LASTFM_API_KEY = "0bec3f7ec1f914d7c960c12a916c8fb3";
 
     // SharedPreferences
-    public String APOLLO = "Apollo", APOLLO_PREFERENCES = "apollopreferences",
+    public final static String APOLLO = "Apollo", APOLLO_PREFERENCES = "apollopreferences",
             ARTIST_IMAGE = "artistimage", ARTIST_IMAGE_ORIGINAL = "artistimageoriginal",
             ALBUM_IMAGE = "albumimage", ARTIST_KEY = "artist", ALBUM_KEY = "album",
             GENRE_KEY = "genres", ARTIST_ID = "artistid", NUMWEEKS = "numweeks",
@@ -22,10 +22,10 @@ public interface Constants {
             THEME_PREVIEW = "themepreview", THEME_TITLE = "themeTitle";
 
     // Bundle & Intent type
-    public String MIME_TYPE = "mimetype", INTENT_ACTION = "action", DATA_SCHEME = "file";
+    public final static String MIME_TYPE = "mimetype", INTENT_ACTION = "action", DATA_SCHEME = "file";
 
     // Storage Volume
-    public String EXTERNAL = "external";
+    public final static String EXTERNAL = "external";
 
     // Playlists
     public final static long PLAYLIST_UNKNOWN = -1, PLAYLIST_ALL_SONGS = -2, PLAYLIST_QUEUE = -3,
@@ -66,4 +66,7 @@ public interface Constants {
             INTENT_RENAME_PLAYLIST = "com.andrew.apollo.RENAME_PLAYLIST",
             INTENT_KEY_RENAME = "rename", INTENT_KEY_DEFAULT_NAME = "default_name";
 
+    private Constants() {
+        throw new UnsupportedOperationException();
+    }
 }

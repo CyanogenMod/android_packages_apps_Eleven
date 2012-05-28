@@ -37,10 +37,16 @@ import com.andrew.apollo.utils.ApolloUtils;
 import com.andrew.apollo.utils.MusicUtils;
 import com.andrew.apollo.utils.ThemeUtils;
 
+import static com.andrew.apollo.Constants.ALBUM_KEY;
+import static com.andrew.apollo.Constants.ALBUM_IMAGE;
+import static com.andrew.apollo.Constants.ARTIST_ID;
+import static com.andrew.apollo.Constants.ARTIST_KEY;
+import static com.andrew.apollo.Constants.MIME_TYPE;
+
 /**
  * @author Andrew Neal
  */
-public class AudioPlayerFragment extends Fragment implements Constants {
+public class AudioPlayerFragment extends Fragment {
 
     // Track, album, and artist name
     private TextView mTrackName, mAlbumArtistName;

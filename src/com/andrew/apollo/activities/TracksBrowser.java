@@ -34,7 +34,6 @@ import android.widget.TextView;
 
 import com.andrew.apollo.BottomActionBarControlsFragment;
 import com.andrew.apollo.BottomActionBarFragment;
-import com.andrew.apollo.Constants;
 import com.andrew.apollo.IApolloService;
 import com.andrew.apollo.R;
 import com.andrew.apollo.adapters.PagerAdapter;
@@ -49,11 +48,24 @@ import com.andrew.apollo.utils.ApolloUtils;
 import com.andrew.apollo.utils.MusicUtils;
 import com.andrew.apollo.utils.ThemeUtils;
 
+import static com.andrew.apollo.Constants.ALBUM_KEY;
+import static com.andrew.apollo.Constants.ALBUM_IMAGE;
+import static com.andrew.apollo.Constants.ARTIST_KEY;
+import static com.andrew.apollo.Constants.ARTIST_ID;
+import static com.andrew.apollo.Constants.ARTIST_IMAGE_ORIGINAL;
+import static com.andrew.apollo.Constants.GENRE_KEY;
+import static com.andrew.apollo.Constants.INTENT_ACTION;
+import static com.andrew.apollo.Constants.MIME_TYPE;
+import static com.andrew.apollo.Constants.PLAYLIST_NAME;
+import static com.andrew.apollo.Constants.PLAYLIST_QUEUE;
+import static com.andrew.apollo.Constants.PLAYLIST_FAVORITES;
+import static com.andrew.apollo.Constants.THEME_ITEM_BACKGROUND;
+
 /**
  * @author Andrew Neal
  * @Note This displays specific track or album listings
  */
-public class TracksBrowser extends FragmentActivity implements Constants, ServiceConnection {
+public class TracksBrowser extends FragmentActivity implements ServiceConnection {
 
     // Bundle
     private Bundle bundle;

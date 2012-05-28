@@ -11,15 +11,17 @@ import android.graphics.Bitmap;
 import android.os.AsyncTask;
 import android.widget.ImageView;
 
-import com.andrew.apollo.Constants;
 import com.andrew.apollo.R;
 import com.andrew.apollo.utils.ApolloUtils;
 import com.androidquery.AQuery;
 
+import static com.andrew.apollo.Constants.ALBUM_IMAGE;
+import static com.andrew.apollo.Constants.ARTIST_IMAGE_ORIGINAL;
+
 /**
  * @author Andrew Neal Returns a cached image for @TracksBrowser
  */
-public class GetCachedImages extends AsyncTask<String, Integer, Bitmap> implements Constants {
+public class GetCachedImages extends AsyncTask<String, Integer, Bitmap> {
 
     private final Context mContext;
 

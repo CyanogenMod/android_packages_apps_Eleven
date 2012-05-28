@@ -15,15 +15,16 @@ import android.provider.BaseColumns;
 import android.provider.MediaStore.Audio;
 import android.provider.MediaStore.Audio.ArtistColumns;
 
-import com.andrew.apollo.Constants;
 import com.andrew.apollo.utils.ApolloUtils;
+
+import static com.andrew.apollo.Constants.ARTIST_IMAGE;
 
 /**
  * @author Andrew Neal
  * @returns A String[] of all the artists on a device in default artist order
  *          that are then fed into the Last.fm API
  */
-public class FetchArtistImages extends AsyncTask<Void, Integer, String[]> implements Constants {
+public class FetchArtistImages extends AsyncTask<Void, Integer, String[]> {
 
     private final WeakReference<Context> contextReference;
 
