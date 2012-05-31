@@ -27,7 +27,7 @@
         <!-- message shown when zero or more than one song was added -->
         <item quantity="other"><xliff:g id="number" example="27" xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">%d</xliff:g> músicas foram adicionadas à lista de reprodução</item>
     </plurals>
-    <string name="album_header">LISTA DE ÁLBUMS</string>
+    <string name="album_header">LISTA DE ÁLBUNS</string>
     <string name="track_header">LISTA DE MÚSICAS</string>
     <string name="settings">Configurações</string>
     <string name="shuffle_all">Todas aleatoriamente</string>
@@ -50,7 +50,7 @@
     <string name="search">Buscar</string>
     <string name="remove">Remover da lista de reprodução</string>
     <string name="unknown">Desconhecido</string>
-    <string name="about">Sobre Apollo</string>
+    <string name="about">Sobre</string>
     <string name="eqalizer">Equalizador</string>
     <string name="header_interface">Interface</string>
     <string name="themes">Temas</string>
@@ -65,4 +65,12 @@
     <string name="save">Salvar</string>
     <string name="overwrite">Sobrescrever</string>
     <string name="error">Erro</string>
+
+    <!-- Tabs -->
+    <string name="tab_recent">RECENTE</string>
+    <string name="tab_artists">ARTISTAS</string>
+    <string name="tab_albums">ÁLBUNS</string>
+    <string name="tab_songs">MÚSICAS</string>
+    <string name="tab_playlists">LISTAS</string>
+    <string name="tab_genres">GÊNEROS</string>
 </resources>
