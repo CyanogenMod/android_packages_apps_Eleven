@@ -110,6 +110,13 @@
     <string name="save">Speichern</string>
     <string name="overwrite">Überschreiben</string>
 
+    <!-- Tabs -->
+    <string name="tab_recent">NEU</string>
+    <string name="tab_artists">INTERPRETEN</string>
+    <string name="tab_albums">ALBEN</string>
+    <string name="tab_songs">TITEL</string>
+    <string name="tab_playlists">WIEDERGABELISTEN</string>
+
     <!-- Something went wrong -->
     <string name="error">Fehler</string>
 
