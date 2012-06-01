@@ -103,6 +103,14 @@
     <string name="save">Opslaan</string>
     <string name="overwrite">Overschrijven</string>
 
+    <!-- Tabs -->
+    <string name="tab_recent">RECENT</string>
+    <string name="tab_artists">ARTIESTEN</string>
+    <string name="tab_albums">ALBUMS</string>
+    <string name="tab_songs">NUMMERS</string>
+    <string name="tab_playlists">AFSPEELLIJSTEN</string>
+    <string name="tab_genres">GENRES</string>
+
     <!-- Something went wrong -->
     <string name="error">Fout</string>
 
