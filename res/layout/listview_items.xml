@@ -25,8 +25,6 @@
         android:paddingLeft="@dimen/listview_items_padding_left_top"
         android:paddingRight="@dimen/listview_items_padding_right"
         android:paddingTop="@dimen/listview_items_padding_left_top"
-        android:shadowColor="@color/black"
-        android:shadowRadius="0.5"
         android:singleLine="true"
         android:textSize="@dimen/text_size_medium" />
 
@@ -40,8 +38,6 @@
         android:paddingLeft="@dimen/listview_items_padding_left_top"
         android:paddingRight="@dimen/listview_items_padding_right"
         android:paddingTop="@dimen/listview_items_padding_left_top"
-        android:shadowColor="@color/black"
-        android:shadowRadius="0.2"
         android:singleLine="true"
         android:textSize="@dimen/text_size_small" />
 
