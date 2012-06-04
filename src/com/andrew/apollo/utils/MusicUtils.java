@@ -38,17 +38,22 @@ import android.support.v4.app.FragmentActivity;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
-import com.andrew.apollo.Constants;
 import com.andrew.apollo.IApolloService;
 import com.andrew.apollo.R;
 import com.andrew.apollo.service.ApolloService;
 import com.andrew.apollo.service.ServiceBinder;
 import com.andrew.apollo.service.ServiceToken;
 
+import static com.andrew.apollo.Constants.EXTERNAL;
+import static com.andrew.apollo.Constants.GENRES_DB;
+import static com.andrew.apollo.Constants.PLAYLIST_NAME_FAVORITES;
+import static com.andrew.apollo.Constants.PLAYLIST_NEW;
+import static com.andrew.apollo.Constants.PLAYLIST_QUEUE;
+
 /**
  * Various methods used to help with specific music statements
  */
-public class MusicUtils implements Constants {
+public class MusicUtils {
 
     // Used to make number of albums/songs/time strings
     private final static StringBuilder sFormatBuilder = new StringBuilder();

@@ -26,18 +26,19 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 
-import com.andrew.apollo.Constants;
 import com.andrew.apollo.NowPlayingCursor;
 import com.andrew.apollo.R;
 import com.andrew.apollo.adapters.RecentlyAddedAdapter;
 import com.andrew.apollo.service.ApolloService;
 import com.andrew.apollo.utils.MusicUtils;
 
+import static com.andrew.apollo.Constants.NUMWEEKS;
+
 /**
  * @author Andrew Neal
  */
 public class RecentlyAddedFragment extends Fragment implements LoaderCallbacks<Cursor>,
-        OnItemClickListener, Constants {
+        OnItemClickListener {
 
     // Adapter
     private RecentlyAddedAdapter mRecentlyAddedAdapter;

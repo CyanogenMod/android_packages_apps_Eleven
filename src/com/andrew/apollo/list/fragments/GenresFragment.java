@@ -24,17 +24,19 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 
-import com.andrew.apollo.Constants;
 import com.andrew.apollo.R;
 import com.andrew.apollo.activities.TracksBrowser;
 import com.andrew.apollo.adapters.GenreAdapter;
 import com.andrew.apollo.utils.MusicUtils;
 
+import static com.andrew.apollo.Constants.GENRE_KEY;
+import static com.andrew.apollo.Constants.MIME_TYPE;
+
 /**
  * @author Andrew Neal
  * @Note This is the fifth and final tab
  */
-public class GenresFragment extends Fragment implements LoaderCallbacks<Cursor>, Constants,
+public class GenresFragment extends Fragment implements LoaderCallbacks<Cursor>,
         OnItemClickListener {
 
     // Adapter

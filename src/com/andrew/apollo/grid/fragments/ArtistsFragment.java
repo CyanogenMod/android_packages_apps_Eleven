@@ -31,7 +31,6 @@ import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.andrew.apollo.Constants;
 import com.andrew.apollo.R;
 import com.andrew.apollo.activities.TracksBrowser;
 import com.andrew.apollo.adapters.ArtistAdapter;
@@ -41,12 +40,19 @@ import com.andrew.apollo.tasks.LastfmGetArtistImagesOriginal;
 import com.andrew.apollo.utils.ApolloUtils;
 import com.andrew.apollo.utils.MusicUtils;
 
+import static com.andrew.apollo.Constants.ARTIST_ID;
+import static com.andrew.apollo.Constants.ARTIST_IMAGE_ORIGINAL;
+import static com.andrew.apollo.Constants.ARTIST_KEY;
+import static com.andrew.apollo.Constants.INTENT_ADD_TO_PLAYLIST;
+import static com.andrew.apollo.Constants.INTENT_PLAYLIST_LIST;
+import static com.andrew.apollo.Constants.MIME_TYPE;
+
 /**
  * @author Andrew Neal
  * @Note This is the first tab
  */
 public class ArtistsFragment extends Fragment implements LoaderCallbacks<Cursor>,
-        OnItemClickListener, Constants {
+        OnItemClickListener {
 
     // Adapter
     private ArtistAdapter mArtistAdapter;

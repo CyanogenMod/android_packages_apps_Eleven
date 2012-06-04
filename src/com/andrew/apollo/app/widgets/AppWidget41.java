@@ -26,7 +26,6 @@ import android.graphics.Bitmap;
 import android.view.View;
 import android.widget.RemoteViews;
 
-import com.andrew.apollo.Constants;
 import com.andrew.apollo.R;
 import com.andrew.apollo.activities.AudioPlayerHolder;
 import com.andrew.apollo.activities.MusicLibrary;
@@ -34,12 +33,14 @@ import com.andrew.apollo.service.ApolloService;
 import com.andrew.apollo.utils.ApolloUtils;
 import com.androidquery.AQuery;
 
+import static com.andrew.apollo.Constants.ALBUM_IMAGE;
+
 /**
  * Simple widget to show currently playing album art along with play/pause and
  * next track buttons.
  */
 
-public class AppWidget41 extends AppWidgetProvider implements Constants {
+public class AppWidget41 extends AppWidgetProvider {
 
     public static final String CMDAPPWIDGETUPDATE = "appwidgetupdate4x1";
 

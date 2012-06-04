@@ -29,7 +29,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.andrew.apollo.AudioPlayerFragment;
-import com.andrew.apollo.Constants;
 import com.andrew.apollo.IApolloService;
 import com.andrew.apollo.R;
 import com.andrew.apollo.adapters.PagerAdapter;
@@ -41,11 +40,17 @@ import com.andrew.apollo.utils.ApolloUtils;
 import com.andrew.apollo.utils.MusicUtils;
 import com.andrew.apollo.utils.ThemeUtils;
 
+import static com.andrew.apollo.Constants.INTENT_ADD_TO_PLAYLIST;
+import static com.andrew.apollo.Constants.INTENT_PLAYLIST_LIST;
+import static com.andrew.apollo.Constants.MIME_TYPE;
+import static com.andrew.apollo.Constants.PLAYLIST_QUEUE;
+import static com.andrew.apollo.Constants.THEME_ITEM_BACKGROUND;
+
 /**
  * @author Andrew Neal
  * @Note This is the "holder" for the @TracksFragment(queue) and @AudioPlayerFragment
  */
-public class AudioPlayerHolder extends FragmentActivity implements ServiceConnection, Constants {
+public class AudioPlayerHolder extends FragmentActivity implements ServiceConnection {
 
     private ServiceToken mToken;
 

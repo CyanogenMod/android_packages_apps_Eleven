@@ -31,7 +31,6 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import com.andrew.apollo.Constants;
 import com.andrew.apollo.R;
 import com.andrew.apollo.activities.TracksBrowser;
 import com.andrew.apollo.adapters.ArtistAlbumAdapter;
@@ -41,12 +40,20 @@ import com.andrew.apollo.tasks.LastfmGetAlbumImages;
 import com.andrew.apollo.utils.ApolloUtils;
 import com.andrew.apollo.utils.MusicUtils;
 
+import static com.andrew.apollo.Constants.ALBUM_IMAGE;
+import static com.andrew.apollo.Constants.ALBUM_KEY;
+import static com.andrew.apollo.Constants.ARTIST_KEY;
+import static com.andrew.apollo.Constants.EXTERNAL;
+import static com.andrew.apollo.Constants.INTENT_ADD_TO_PLAYLIST;
+import static com.andrew.apollo.Constants.INTENT_PLAYLIST_LIST;
+import static com.andrew.apollo.Constants.MIME_TYPE;
+
 /**
  * @author Andrew Neal
  * @Note This is used in the @TracksBrowser after touching an artist from @ArtistsFragment
  */
 public class ArtistAlbumsFragment extends Fragment implements LoaderCallbacks<Cursor>,
-        OnItemClickListener, Constants {
+        OnItemClickListener {
 
     // Adapter
     private ArtistAlbumAdapter mArtistAlbumAdapter;

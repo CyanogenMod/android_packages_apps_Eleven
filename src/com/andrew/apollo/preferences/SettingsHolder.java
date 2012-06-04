@@ -28,7 +28,6 @@ import android.view.View.OnClickListener;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.andrew.apollo.Constants;
 import com.andrew.apollo.IApolloService;
 import com.andrew.apollo.R;
 import com.andrew.apollo.activities.AudioPlayerHolder;
@@ -40,12 +39,16 @@ import com.andrew.apollo.utils.MusicUtils;
 import com.andrew.apollo.utils.ThemeUtils;
 import com.androidquery.AQuery;
 
+import static com.andrew.apollo.Constants.ALBUM_IMAGE;
+import static com.andrew.apollo.Constants.APOLLO;
+import static com.andrew.apollo.Constants.THEME_PACKAGE_NAME;
+import static com.andrew.apollo.Constants.THEME_PREVIEW;
 /**
  * @author Andrew Neal FIXME - Work on the IllegalStateException thrown when
  *         using PreferenceFragment and theme chooser
  */
 @SuppressWarnings("deprecation")
-public class SettingsHolder extends PreferenceActivity implements ServiceConnection, Constants {
+public class SettingsHolder extends PreferenceActivity implements ServiceConnection {
 
     // Service
     private ServiceToken mToken;

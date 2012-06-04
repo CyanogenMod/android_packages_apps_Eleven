@@ -14,10 +14,14 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.andrew.apollo.Constants;
 import com.andrew.apollo.R;
 
-public class ThemePreview extends Preference implements Constants {
+import static com.andrew.apollo.Constants.APOLLO;
+import static com.andrew.apollo.Constants.THEME_DESCRIPTION;
+import static com.andrew.apollo.Constants.THEME_PREVIEW;
+import static com.andrew.apollo.Constants.THEME_TITLE;
+
+public class ThemePreview extends Preference {
     private CharSequence themeName;
 
     private CharSequence themePackageName;

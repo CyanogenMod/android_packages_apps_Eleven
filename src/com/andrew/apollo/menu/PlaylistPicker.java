@@ -16,8 +16,14 @@ import android.widget.Toast;
 import com.andrew.apollo.R;
 import com.andrew.apollo.utils.MusicUtils;
 
+import static com.andrew.apollo.Constants.INTENT_ADD_TO_PLAYLIST;
+import static com.andrew.apollo.Constants.INTENT_CREATE_PLAYLIST;
+import static com.andrew.apollo.Constants.INTENT_PLAYLIST_LIST;
+import static com.andrew.apollo.Constants.PLAYLIST_QUEUE;
+import static com.andrew.apollo.Constants.PLAYLIST_NEW;
+
 public class PlaylistPicker extends FragmentActivity implements DialogInterface.OnClickListener,
-        DialogInterface.OnCancelListener, com.andrew.apollo.Constants {
+        DialogInterface.OnCancelListener {
 
     private AlertDialog mPlayListPickerDialog;
 

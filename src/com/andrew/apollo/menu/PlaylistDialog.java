@@ -37,11 +37,17 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
-import com.andrew.apollo.Constants;
 import com.andrew.apollo.R;
 import com.andrew.apollo.utils.MusicUtils;
 
-public class PlaylistDialog extends FragmentActivity implements Constants, TextWatcher,
+import static com.andrew.apollo.Constants.INTENT_CREATE_PLAYLIST;
+import static com.andrew.apollo.Constants.INTENT_KEY_DEFAULT_NAME;
+import static com.andrew.apollo.Constants.INTENT_KEY_RENAME;
+import static com.andrew.apollo.Constants.INTENT_PLAYLIST_LIST;
+import static com.andrew.apollo.Constants.INTENT_RENAME_PLAYLIST;
+import static com.andrew.apollo.Constants.PLAYLIST_NAME_FAVORITES;
+
+public class PlaylistDialog extends FragmentActivity implements TextWatcher,
         OnCancelListener, OnShowListener {
 
     private AlertDialog mPlaylistDialog;

@@ -18,7 +18,6 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.andrew.apollo.Constants;
 import com.andrew.apollo.R;
 import com.andrew.apollo.activities.AudioPlayerHolder;
 import com.andrew.apollo.activities.QuickQueue;
@@ -29,8 +28,7 @@ import com.andrew.apollo.utils.ThemeUtils;
 /**
  * @author Andrew Neal
  */
-public class BottomActionBar extends LinearLayout implements OnClickListener, OnLongClickListener,
-        Constants {
+public class BottomActionBar extends LinearLayout implements OnClickListener, OnLongClickListener {
 
     public BottomActionBar(Context context) {
         super(context);

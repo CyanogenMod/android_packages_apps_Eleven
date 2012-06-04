@@ -10,7 +10,6 @@ import android.support.v4.widget.SimpleCursorAdapter;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.andrew.apollo.Constants;
 import com.andrew.apollo.grid.fragments.QuickQueueFragment;
 import com.andrew.apollo.tasks.LastfmGetAlbumImages;
 import com.andrew.apollo.tasks.LastfmGetArtistImages;
@@ -19,10 +18,13 @@ import com.andrew.apollo.utils.ApolloUtils;
 import com.andrew.apollo.views.ViewHolderQueue;
 import com.androidquery.AQuery;
 
+import static com.andrew.apollo.Constants.ALBUM_IMAGE;
+import static com.andrew.apollo.Constants.ARTIST_IMAGE;
+
 /**
  * @author Andrew Neal
  */
-public class QuickQueueAdapter extends SimpleCursorAdapter implements Constants {
+public class QuickQueueAdapter extends SimpleCursorAdapter {
 
     private WeakReference<ViewHolderQueue> holderReference;
 

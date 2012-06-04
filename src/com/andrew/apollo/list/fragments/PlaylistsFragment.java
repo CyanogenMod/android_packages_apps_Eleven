@@ -28,16 +28,20 @@ import android.widget.AdapterView.AdapterContextMenuInfo;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 
-import com.andrew.apollo.Constants;
 import com.andrew.apollo.R;
 import com.andrew.apollo.activities.TracksBrowser;
 import com.andrew.apollo.adapters.PlaylistAdapter;
 import com.andrew.apollo.utils.MusicUtils;
 
+import static com.andrew.apollo.Constants.INTENT_KEY_RENAME;
+import static com.andrew.apollo.Constants.INTENT_RENAME_PLAYLIST;
+import static com.andrew.apollo.Constants.MIME_TYPE;
+import static com.andrew.apollo.Constants.PLAYLIST_NAME;
+
 /**
  * @author Andrew Neal
  */
-public class PlaylistsFragment extends Fragment implements LoaderCallbacks<Cursor>, Constants,
+public class PlaylistsFragment extends Fragment implements LoaderCallbacks<Cursor>,
         OnItemClickListener {
 
     // Adapter

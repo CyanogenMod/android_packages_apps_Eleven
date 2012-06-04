@@ -11,17 +11,19 @@ import android.graphics.Bitmap;
 import android.os.AsyncTask;
 import android.widget.ImageView;
 
-import com.andrew.apollo.Constants;
 import com.andrew.apollo.R;
 import com.andrew.apollo.utils.ApolloUtils;
 import com.andrew.apollo.views.ViewHolderGrid;
 import com.andrew.apollo.views.ViewHolderList;
 import com.androidquery.AQuery;
 
+import static com.andrew.apollo.Constants.ALBUM_IMAGE;
+import static com.andrew.apollo.Constants.ARTIST_IMAGE;
+
 /**
  * @author Andrew Neal
  */
-public class ViewHolderTask extends AsyncTask<String, Integer, Bitmap> implements Constants {
+public class ViewHolderTask extends AsyncTask<String, Integer, Bitmap> {
 
     private final ViewHolderList mViewHolderList;
 

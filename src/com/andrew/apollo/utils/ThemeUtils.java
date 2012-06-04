@@ -19,12 +19,15 @@ import android.widget.ImageView;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
-import com.andrew.apollo.Constants;
+import static com.andrew.apollo.Constants.APOLLO;
+import static com.andrew.apollo.Constants.APOLLO_PREFERENCES;
+import static com.andrew.apollo.Constants.THEME_ITEM_FOREGROUND;
+import static com.andrew.apollo.Constants.THEME_PACKAGE_NAME;
 
 /**
  * @author Andrew Neal TODO - clean this up
  */
-public class ThemeUtils implements Constants {
+public class ThemeUtils {
 
     /**
      * @param context

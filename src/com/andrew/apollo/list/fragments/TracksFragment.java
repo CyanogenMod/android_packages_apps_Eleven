@@ -36,7 +36,6 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import com.andrew.apollo.Constants;
 import com.andrew.apollo.NowPlayingCursor;
 import com.andrew.apollo.R;
 import com.andrew.apollo.adapters.TrackAdapter;
@@ -44,11 +43,18 @@ import com.andrew.apollo.service.ApolloService;
 import com.andrew.apollo.utils.ApolloUtils;
 import com.andrew.apollo.utils.MusicUtils;
 
+import static com.andrew.apollo.Constants.EXTERNAL;
+import static com.andrew.apollo.Constants.INTENT_ADD_TO_PLAYLIST;
+import static com.andrew.apollo.Constants.INTENT_PLAYLIST_LIST;
+import static com.andrew.apollo.Constants.MIME_TYPE;
+import static com.andrew.apollo.Constants.PLAYLIST_FAVORITES;
+import static com.andrew.apollo.Constants.PLAYLIST_QUEUE;
+
 /**
  * @author Andrew Neal
  */
 public class TracksFragment extends Fragment implements LoaderCallbacks<Cursor>,
-        OnItemClickListener, Constants {
+        OnItemClickListener {
 
     // Adapter
     private TrackAdapter mTrackAdapter;

@@ -64,7 +64,6 @@ import android.view.View;
 import android.widget.RemoteViews;
 import android.widget.Toast;
 
-import com.andrew.apollo.Constants;
 import com.andrew.apollo.IApolloService;
 import com.andrew.apollo.R;
 import com.andrew.apollo.app.widgets.AppWidget11;
@@ -75,7 +74,11 @@ import com.andrew.apollo.utils.MusicUtils;
 import com.andrew.apollo.utils.SharedPreferencesCompat;
 import com.androidquery.AQuery;
 
-public class ApolloService extends Service implements Constants {
+import static com.andrew.apollo.Constants.ALBUM_IMAGE;
+import static com.andrew.apollo.Constants.APOLLO_PREFERENCES;
+import static com.andrew.apollo.Constants.DATA_SCHEME;
+
+public class ApolloService extends Service {
     /**
      * used to specify whether enqueue() should start playing the new list of
      * files right away, next or once all the currently queued files have been

@@ -10,7 +10,6 @@ import java.util.Iterator;
 import android.content.Context;
 import android.os.AsyncTask;
 
-import com.andrew.apollo.Constants;
 import com.andrew.apollo.lastfm.api.Artist;
 import com.andrew.apollo.lastfm.api.Image;
 import com.andrew.apollo.lastfm.api.ImageSize;
@@ -18,11 +17,14 @@ import com.andrew.apollo.lastfm.api.PaginatedResult;
 import com.andrew.apollo.utils.ApolloUtils;
 import com.androidquery.AQuery;
 
+import static com.andrew.apollo.Constants.ARTIST_IMAGE;
+import static com.andrew.apollo.Constants.LASTFM_API_KEY;
+
 /**
  * @author Andrew Neal
  * @returns A convenient image size that's perfect for a GridView.
  */
-public class LastfmGetArtistImages extends AsyncTask<String, Integer, String> implements Constants {
+public class LastfmGetArtistImages extends AsyncTask<String, Integer, String> {
 
     // URL to cache
     private String url = null;

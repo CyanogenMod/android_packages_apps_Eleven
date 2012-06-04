@@ -32,15 +32,16 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.andrew.apollo.Constants;
 import com.andrew.apollo.R;
 import com.androidquery.util.AQUtility;
+
+import static com.andrew.apollo.Constants.MIME_TYPE;
 
 /**
  * @author Andrew Neal
  * @Note Various methods used to help with specific Apollo statements
  */
-public class ApolloUtils implements Constants {
+public class ApolloUtils {
 
     /**
      * Used to fit a Bitmap nicely inside a View

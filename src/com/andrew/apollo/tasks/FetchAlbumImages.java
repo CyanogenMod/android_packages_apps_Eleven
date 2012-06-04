@@ -15,8 +15,9 @@ import android.provider.BaseColumns;
 import android.provider.MediaStore.Audio;
 import android.provider.MediaStore.Audio.AlbumColumns;
 
-import com.andrew.apollo.Constants;
 import com.andrew.apollo.utils.ApolloUtils;
+
+import static com.andrew.apollo.Constants.ALBUM_IMAGE;
 
 /**
  * @author Andrew Neal
@@ -68,7 +69,7 @@ public class FetchAlbumImages {
      * @returns artist names in default album sort order that are then fed into
      *          the Last.fm API along with @getAlbumArtists()
      */
-    public class getAlbums extends AsyncTask<Void, Integer, String[]> implements Constants {
+    public class getAlbums extends AsyncTask<Void, Integer, String[]> {
 
         @Override
         protected String[] doInBackground(Void... params) {
