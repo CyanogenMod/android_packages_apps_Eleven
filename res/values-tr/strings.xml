@@ -20,6 +20,7 @@
 
     <!-- Used to indicate the number of albums for an artist -->
     <plurals name="Nalbums">
+
         <!-- Number of albums is one -->
         <item quantity="one">1 albüm</item>
         <!-- Number of albums is more than one -->
@@ -27,7 +28,9 @@
     </plurals>
 
     <!-- Used to indicate the number of songs for an album -->
+
     <plurals name="Nsongs">
+
         <!-- Number of songs is one -->
         <item quantity="one">1 şarkı</item>
         <item quantity="other"><xliff:g id="count">%d</xliff:g> şarkı</item>
@@ -105,6 +108,14 @@
     <string name="new_playlist_name_template"><xliff:g id="number">%d</xliff:g> çalma listesi</string>
     <string name="save">Kaydet</string>
     <string name="overwrite">Üzerine yaz</string>
+
+    <!-- Tabs -->
+    <string name="tab_recent">SON</string>
+    <string name="tab_artists">SANATÇILAR</string>
+    <string name="tab_albums">ALBÜMLER</string>
+    <string name="tab_songs">ŞARKILAR</string>
+    <string name="tab_playlists">LİSTELER</string>
+    <string name="tab_genres">TÜRLER</string>
 
     <!-- Something went wrong -->
     <string name="error">Hata</string>
