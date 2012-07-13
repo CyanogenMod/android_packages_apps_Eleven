@@ -69,7 +69,6 @@ import java.util.TreeSet;
  */
 @SuppressLint("NewApi")
 public class MusicPlaybackService extends Service {
-
     /**
      * Indicates that the music has paused or resumed
      */
@@ -94,6 +93,13 @@ public class MusicPlaybackService extends Service {
      * Indicates the shuffle mode chaned
      */
     public static final String SHUFFLEMODE_CHANGED = "com.andrew.apollo.shufflemodechanged";
+
+    /**
+     * For backwards compatibility reasons, also provide sticky
+     * broadcasts under the music package
+     */
+    public static final String APOLLO_PACKAGE_NAME = "com.andrew.apollo";
+    public static final String MUSIC_PACKAGE_NAME = "com.android.music";
 
     /**
      * Called to indicate a general service commmand. Used in
@@ -1217,6 +1223,10 @@ public class MusicPlaybackService extends Service {
         intent.putExtra("playing", isPlaying());
         intent.putExtra("isfavorite", isFavorite());
         sendStickyBroadcast(intent);
+
+        final Intent musicIntent = new Intent(intent);
+        musicIntent.setAction(what.replace(APOLLO_PACKAGE_NAME, MUSIC_PACKAGE_NAME));
+        sendStickyBroadcast(musicIntent);
 
         // Update the lockscreen controls
         updateRemoteControlClient(what);
