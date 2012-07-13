@@ -104,6 +104,10 @@ public class ApolloService extends Service {
 
     public static final int REPEAT_ALL = 2;
 
+    public static final String APOLLO_PACKAGE_NAME = "com.andrew.apollo";
+
+    public static final String MUSIC_PACKAGE_NAME = "com.android.music";
+
     public static final String PLAYSTATE_CHANGED = "com.andrew.apollo.playstatechanged";
 
     public static final String META_CHANGED = "com.andrew.apollo.metachanged";
@@ -902,6 +906,10 @@ public class ApolloService extends Service {
         i.putExtra("track", getTrackName());
         i.putExtra("playing", mIsSupposedToBePlaying);
         i.putExtra("isfavorite", isFavorite());
+        sendStickyBroadcast(i);
+
+        i = new Intent(i);
+        i.setAction(what.replace(APOLLO_PACKAGE_NAME, MUSIC_PACKAGE_NAME));
         sendStickyBroadcast(i);
 
         if (what.equals(PLAYSTATE_CHANGED)) {
