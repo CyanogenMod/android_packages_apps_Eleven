@@ -143,11 +143,13 @@ public class AppWidget42 extends AppWidgetProvider {
         if (playing) {
             views.setImageViewResource(R.id.four_by_two_control_play,
                     R.drawable.apollo_holo_light_pause);
-            views.setContentDescription(R.id.four_by_two_albumart, R.string.nowplaying);
+            views.setContentDescription(R.id.four_by_two_albumart,
+                service.getResources().getString(R.string.nowplaying));
         } else {
             views.setImageViewResource(R.id.four_by_two_control_play,
                     R.drawable.apollo_holo_light_play);
-            views.setContentDescription(R.id.four_by_two_albumart, R.string.app_name);
+            views.setContentDescription(R.id.four_by_two_albumart,
+                service.getResources().getString(R.string.app_name));
         }
 
         // Set correct drawable for repeat state

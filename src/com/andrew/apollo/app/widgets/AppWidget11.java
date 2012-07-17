@@ -117,9 +117,11 @@ public class AppWidget11 extends AppWidgetProvider {
         // Set correct contentDescription
         final boolean playing = service.isPlaying();
         if (playing) {
-            views.setContentDescription(R.id.one_by_one_albumart, R.string.nowplaying);
+            views.setContentDescription(R.id.one_by_one_albumart,
+                service.getResources().getString(R.string.nowplaying));
         } else {
-            views.setContentDescription(R.id.one_by_one_albumart, R.string.app_name);
+            views.setContentDescription(R.id.one_by_one_albumart,
+                service.getResources().getString(R.string.app_name));
         }
 
         // Link actions buttons to intents
