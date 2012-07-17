@@ -114,8 +114,13 @@ public class AppWidget11 extends AppWidgetProvider {
         } else {
             views.setViewVisibility(R.id.one_by_one_albumart, View.INVISIBLE);
         }
-        // Set correct drawable for pause state
+        // Set correct contentDescription
         final boolean playing = service.isPlaying();
+        if (playing) {
+            views.setContentDescription(R.id.one_by_one_albumart, R.string.nowplaying);
+        } else {
+            views.setContentDescription(R.id.one_by_one_albumart, R.string.app_name);
+        }
 
         // Link actions buttons to intents
         linkButtons(service, views, playing);

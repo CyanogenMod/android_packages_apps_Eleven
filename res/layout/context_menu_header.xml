@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@color/black" >
@@ -7,7 +8,8 @@
     <ImageView
         android:id="@+id/header_image"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/half_and_half_image_height" />
+        android:layout_height="@dimen/half_and_half_image_height"
+        tools:ignore="ContentDescription" />
 
     <TextView
         android:id="@+id/header_text"

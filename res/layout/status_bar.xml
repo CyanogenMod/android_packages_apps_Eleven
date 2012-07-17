@@ -41,12 +41,14 @@
 
     <ImageButton
         android:id="@+id/status_bar_play"
-        style="@style/StatusBarButton" />
+        style="@style/StatusBarButton"
+        android:contentDescription="@string/cd_play" />
 
     <ImageButton
         android:id="@+id/status_bar_next"
         style="@style/StatusBarButton"
-        android:src="@drawable/apollo_holo_dark_next" />
+        android:src="@drawable/apollo_holo_dark_next"
+        android:contentDescription="@string/cd_next" />
 
     <ImageButton
         android:id="@+id/status_bar_collapse"

@@ -137,14 +137,16 @@ public class AppWidget41 extends AppWidgetProvider {
             views.setViewVisibility(R.id.four_by_one_albumart, View.GONE);
         }
 
-        // Set correct drawable for pause state
+        // Set correct drawable and contentDescription for pause state
         final boolean playing = service.isPlaying();
         if (playing) {
             views.setImageViewResource(R.id.four_by_one_control_play,
                     R.drawable.apollo_holo_light_pause);
+            views.setContentDescription(R.id.four_by_one_albumart, R.string.nowplaying);
         } else {
             views.setImageViewResource(R.id.four_by_one_control_play,
                     R.drawable.apollo_holo_light_play);
+            views.setContentDescription(R.id.four_by_one_albumart, R.string.app_name);
         }
 
         // Link actions buttons to intents
