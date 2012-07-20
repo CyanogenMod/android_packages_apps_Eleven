@@ -128,6 +128,13 @@
     <string name="tab_playlists">PLAYLISTS</string>
     <string name="tab_genres">GENRES</string>
 
+    <!-- External file dialog -->
+    <string name="play_external_question_msg">Select the action to apply to: \n\n<b><xliff:g id="name">%s</xliff:g></b></string>
+    <string name="play_external_question_button_play">Play</string>
+    <string name="play_external_question_button_queue">Enqueue</string>
+    <string name="play_external_question_button_cancel">Cancel</string>
+    <string name="play_external_error">Failed to play file</string>
+
     <!-- Something went wrong -->
     <string name="error">Error</string>
 

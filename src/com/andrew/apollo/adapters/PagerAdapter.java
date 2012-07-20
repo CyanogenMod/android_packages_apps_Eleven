@@ -10,6 +10,8 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
+import com.andrew.apollo.utils.RefreshableFragment;
+
 /**
  * @author Andrew Neal
  */
@@ -34,6 +36,17 @@ public class PagerAdapter extends FragmentPagerAdapter {
     @Override
     public Fragment getItem(int position) {
         return mFragments.get(position);
+    }
+
+    /**
+     * This method update the fragments that extends the {@link RefreshableFragment} class
+     */
+    public void refresh() {
+        for (int i = 0; i < mFragments.size(); i++) {
+            if( mFragments.get(i) instanceof RefreshableFragment ) {
+                ((RefreshableFragment)mFragments.get(i)).refresh();
+            }
+        }
     }
 
 }

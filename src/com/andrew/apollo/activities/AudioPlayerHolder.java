@@ -61,6 +61,8 @@ public class AudioPlayerHolder extends FragmentActivity implements ServiceConnec
 
     private static final int EFFECTS_PANEL = 0;
 
+    private PagerAdapter mPagerAdapter;
+
     @Override
     protected void onCreate(Bundle icicle) {
         // For the theme chooser and overflow MenuItem
@@ -88,6 +90,17 @@ public class AudioPlayerHolder extends FragmentActivity implements ServiceConnec
         // Important!
         initPager();
         super.onCreate(icicle);
+    }
+
+    @Override
+    protected void onNewIntent(Intent intent) {
+        // If an activity is requesting access to this activity, and
+        // the activity is in the stack, the the fragments may need
+        // be refreshed. Update the page adapter
+        if (mPagerAdapter != null) {
+            mPagerAdapter.refresh();
+        }
+        super.onNewIntent(intent);
     }
 
     @Override
@@ -264,7 +277,7 @@ public class AudioPlayerHolder extends FragmentActivity implements ServiceConnec
      */
     public void initPager() {
         // Initiate PagerAdapter
-        PagerAdapter mPagerAdapter = new PagerAdapter(getSupportFragmentManager());
+        mPagerAdapter = new PagerAdapter(getSupportFragmentManager());
         Bundle bundle = new Bundle();
         bundle.putString(MIME_TYPE, Audio.Playlists.CONTENT_TYPE);
         bundle.putLong(BaseColumns._ID, PLAYLIST_QUEUE);

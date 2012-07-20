@@ -6,6 +6,7 @@ interface IApolloService
 {
     void openFile(String path);
     void open(in long [] list, int position);
+    long getIdFromPath(String path);
     int getQueuePosition();
     boolean isPlaying();
     void stop();

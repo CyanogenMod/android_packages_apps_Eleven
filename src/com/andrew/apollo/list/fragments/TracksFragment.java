@@ -19,7 +19,6 @@ import android.provider.MediaStore.Audio.AudioColumns;
 import android.provider.MediaStore.Audio.Genres;
 import android.provider.MediaStore.Audio.Playlists;
 import android.provider.MediaStore.MediaColumns;
-import android.support.v4.app.Fragment;
 import android.support.v4.app.LoaderManager.LoaderCallbacks;
 import android.support.v4.content.CursorLoader;
 import android.support.v4.content.Loader;
@@ -42,6 +41,7 @@ import com.andrew.apollo.adapters.TrackAdapter;
 import com.andrew.apollo.service.ApolloService;
 import com.andrew.apollo.utils.ApolloUtils;
 import com.andrew.apollo.utils.MusicUtils;
+import com.andrew.apollo.utils.RefreshableFragment;
 
 import static com.andrew.apollo.Constants.EXTERNAL;
 import static com.andrew.apollo.Constants.INTENT_ADD_TO_PLAYLIST;
@@ -53,7 +53,7 @@ import static com.andrew.apollo.Constants.PLAYLIST_QUEUE;
 /**
  * @author Andrew Neal
  */
-public class TracksFragment extends Fragment implements LoaderCallbacks<Cursor>,
+public class TracksFragment extends RefreshableFragment implements LoaderCallbacks<Cursor>,
         OnItemClickListener {
 
     // Adapter
@@ -113,6 +113,14 @@ public class TracksFragment extends Fragment implements LoaderCallbacks<Cursor>,
 
         // Important!
         getLoaderManager().initLoader(0, null, this);
+    }
+
+    @Override
+    public void refresh() {
+        // The data need to be refreshed
+        if( mListView != null ) {
+            getLoaderManager().restartLoader(0, null, this);
+        }
     }
 
     @Override
@@ -269,6 +277,7 @@ public class TracksFragment extends Fragment implements LoaderCallbacks<Cursor>,
             mAlbumIndex = data.getColumnIndexOrThrow(AudioColumns.ALBUM);
         }
         mTrackAdapter.changeCursor(data);
+        mListView.invalidateViews();
         mCursor = data;
     }
 
