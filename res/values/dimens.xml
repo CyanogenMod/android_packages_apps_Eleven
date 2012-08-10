@@ -67,7 +67,7 @@
     <dimen name="gridview_image_height">180dp</dimen>
     <dimen name="gridview_item_ccontainer_height">64dp</dimen>
     <dimen name="gridview_item_ccontainer_padding_left">8dp</dimen>
-    <dimen name="gridview_item_ccontainer_padding_right">80dp</dimen>
+    <dimen name="gridview_item_ccontainer_padding_right">8dp</dimen>
     <dimen name="peak_meter_one_padding_right">15dp</dimen>
     <dimen name="peak_meter_two_padding_right">5dp</dimen>
     <dimen name="peak_meter_padding_bottom">10dp</dimen>
