@@ -90,8 +90,8 @@
     <string name="unknown">Inconnu</string>
 
     <!-- Settings -->
-    <string name="about">A propos d\'Apollo</string>
-    <string name="eqalizer">Egaliseur</string>
+    <string name="about">À propos d\'Apollo</string>
+    <string name="eqalizer">Égaliseur</string>
     <string name="header_interface">Interface</string>
     <string name="themes">Thèmes</string>
     <string name="apollo_themes">Choix du thème Apollo</string>
@@ -111,7 +111,7 @@
     <string name="overwrite">Remplacer</string>
 
     <!-- Tabs -->
-    <string name="tab_recent">RECENT</string>
+    <string name="tab_recent">RÉCENT</string>
     <string name="tab_artists">ARTISTES</string>
     <string name="tab_albums">ALBUMS</string>
     <string name="tab_songs">TITRES</string>
