@@ -58,11 +58,6 @@
     <!-- Set track as ringtone -->
     <string name="set_as_ringtone">S\'ha establert \"<xliff:g id="name" example="Alarm Bell">%s</xliff:g>\" com a to del telèfon</string>
 
-    <!-- Do not translate. Duration format for duration < 1 hour -->
-    <string name="durationformatshort" translatable="false"><xliff:g id="format">%2$d:%5$02d</xliff:g></string>
-    <!-- Do not translate. Duration format for duration >= 1 hour -->
-    <string name="durationformatlong" translatable="false"><xliff:g id="format">%1$d:%3$02d:%5$02d</xliff:g></string>
-
     <!-- Transient popup message shown after renaming a playlist -->
     <string name="rename_playlist">Canvia el nom de la llista</string>
 
