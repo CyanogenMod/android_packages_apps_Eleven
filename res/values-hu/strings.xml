@@ -118,6 +118,13 @@
     <string name="tab_playlists">LISTÁK</string>
     <string name="tab_genres">MŰFAJOK</string>
 
+    <!-- External file dialog -->
+    <string name="play_external_question_msg">Válasszon eseményt a következőhöz: \n\n<b><xliff:g id="name">%s</xliff:g></b></string>
+    <string name="play_external_question_button_play">Lejátszás</string>
+    <string name="play_external_question_button_queue">Sorba rendezés</string>
+    <string name="play_external_question_button_cancel">Mégse</string>
+    <string name="play_external_error">Nem sikerült lejátszani a fájlt</string>
+
     <!-- Something went wrong -->
     <string name="error">Hiba</string>
 
