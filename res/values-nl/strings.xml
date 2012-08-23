@@ -12,8 +12,12 @@
      WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
      See the License for the specific language governing permissions and
      limitations under the License.
--->
-<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+ -->
+<resources xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+
+    <!-- App name -->
+    <string name="app_name">Apollo</string>
 
     <!-- Content descriptions for the Bottom Action Bar -->
     <string name="cd_favorite">Hiervan een favoriet nummer maken</string>
@@ -29,21 +33,6 @@
     <!-- AudioPlayer title -->
     <string name="nowplaying">Nu aan het afspelen</string>
 
-    <!-- Used to indicate the number of songs for an album -->
-    <plurals name="Nsongs">
-        <!-- Number of songs is one -->
-        <item quantity="one">1 nummer</item>
-        <item quantity="other"><xliff:g id="count">%d</xliff:g> nummers</item>
-    </plurals>
-
-    <!-- Toasts after adding song(s) to playlists -->
-    <plurals name="NNNtrackstoplaylist">
-        <!-- message shown when one song was added -->
-        <item quantity="one">1 nummer toegevoegd aan afspeellijst</item>
-        <!-- message shown when zero or more than one song was added -->
-        <item quantity="other"><xliff:g id="number" example="27">%d</xliff:g> nummers toegevoegd aan afspeellijst.</item>
-    </plurals>
-
     <!-- Headers -->
     <string name="album_header">ALBUMLIJST</string>
     <string name="track_header">NUMMERLIJST</string>
@@ -52,6 +41,7 @@
     <string name="settings">Instellingen</string>
     <string name="shuffle_all">Alles willekeurig afspelen</string>
     <string name="share">Delen</string>
+    <string name="play_store">Play Store</string>
 
     <!-- Set track as ringtone -->
     <string name="set_as_ringtone">\"<xliff:g id="name" example="Alarm Bell">%s</xliff:g>\" instellen als beltoon</string>
@@ -79,6 +69,11 @@
     <string name="search">Zoeken</string>
     <string name="remove">Verwijderen uit afspeellijst</string>
 
+    <!-- App Widgets -->
+    <string name="apollo_1x1">Apollo (1x1)</string>
+    <string name="apollo_4x1">Apollo (4x1)</string>
+    <string name="apollo_4x2">Apollo (4x2)</string>
+
     <!-- Unknown genre name -->
     <string name="unknown">Onbekend</string>
 
@@ -99,7 +94,7 @@
     <string name="favorite">Favorieten</string>
     <string name="queue">Wachtrij</string>
     <string name="new_playlist">Nieuw</string>
-    <string name="new_playlist_name_template">Afspeellijst nr. <xliff:g id="number">%d</xliff:g></string>
+    <string name="new_playlist_name_template">Afspeellijst nummer <xliff:g id="number">%d</xliff:g></string>
     <string name="save">Opslaan</string>
     <string name="overwrite">Overschrijven</string>
 
@@ -110,6 +105,13 @@
     <string name="tab_songs">NUMMERS</string>
     <string name="tab_playlists">AFSPEELLIJSTEN</string>
     <string name="tab_genres">GENRES</string>
+
+    <!-- External file dialog -->
+    <string name="play_external_question_msg">Kies de toe te passen actie op: \n\n<b><xliff:g id="name">%s</xliff:g></b></string>
+    <string name="play_external_question_button_play">Afspelen</string>
+    <string name="play_external_question_button_queue">In wachtrij plaatsen</string>
+    <string name="play_external_question_button_cancel">Annuleren</string>
+    <string name="play_external_error">Kan bestand niet afspelen</string>
 
     <!-- Something went wrong -->
     <string name="error">Fout</string>
