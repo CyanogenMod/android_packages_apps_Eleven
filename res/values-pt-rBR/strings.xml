@@ -73,4 +73,10 @@
     <string name="tab_songs">MÚSICAS</string>
     <string name="tab_playlists">LISTAS</string>
     <string name="tab_genres">GÊNEROS</string>
+
+    <string name="play_external_question_msg">Selecione a ação para aplicar a: \n\n<b><xliff:g id="name" xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">%s</xliff:g></b></string>
+    <string name="play_external_question_button_play">Reproduzir</string>
+    <string name="play_external_question_button_queue">Enfileirar</string>
+    <string name="play_external_question_button_cancel">Cancelar</string>
+    <string name="play_external_error">Falha ao reproduzir o arquivo</string>
 </resources>
