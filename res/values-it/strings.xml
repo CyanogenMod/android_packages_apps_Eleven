@@ -84,5 +84,11 @@
     <string name="tab_songs">TRACCE</string>
     <string name="tab_playlists">PLAYLIST</string>
     <string name="tab_genres">GENERI</string>
+    <string name="play_external_question_msg">Selezionare l\'azione da eseguire per: \n\n<b><xliff:g id="name">%s</xliff:g></b></string>
+    <string name="play_external_question_button_play">Esegui</string>
+    <string name="play_external_question_button_queue">Metti in coda</string>
+    <string name="play_external_question_button_cancel">Annulla</string>
+    <string name="play_external_error">Impossibile riprodurre il file</string>
     <string name="error">Errore</string>
 </resources>
+
