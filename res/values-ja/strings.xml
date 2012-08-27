@@ -110,6 +110,21 @@
     <string name="save">保存</string>
     <string name="overwrite">上書き</string>
 
+    <!-- Tabs -->
+    <string name="tab_recent">新着</string>
+    <string name="tab_artists">アーティスト</string>
+    <string name="tab_albums">アルバム</string>
+    <string name="tab_songs">曲</string>
+    <string name="tab_playlists">プレイリスト</string>
+    <string name="tab_genres">ジャンル</string>
+
+    <!-- External file dialog -->
+    <string name="play_external_question_msg">次のアイテムに適用するアクションを選択: \n\n<b><xliff:g id="name">%s</xliff:g></b></string>
+    <string name="play_external_question_button_play">再生</string>
+    <string name="play_external_question_button_queue">キューに追加</string>
+    <string name="play_external_question_button_cancel">キャンセル</string>
+    <string name="play_external_error">ファイルの再生に失敗</string>
+
     <!-- Something went wrong -->
     <string name="error">エラー</string>
 
