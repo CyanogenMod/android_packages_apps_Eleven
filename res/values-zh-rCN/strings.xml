@@ -120,4 +120,11 @@
     <!-- Something went wrong -->
     <string name="error">错误</string>
 
+    <!-- External file dialog -->
+    <string name="play_external_question_msg">选择应用于: \n\n<b><xliff:g id="name">%s</xliff:g></b>的操作</string>
+    <string name="play_external_question_button_play">播放</string>
+    <string name="play_external_question_button_queue">队列</string>
+    <string name="play_external_question_button_cancel">取消</string>
+    <string name="play_external_error">无法播放文件</string>
+
 </resources>
