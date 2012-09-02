@@ -27,7 +27,7 @@
         <item quantity="other"><xliff:g id="number" example="27">%d</xliff:g> canciones añadidas a la lista de reproducción.</item>
     </plurals>
 
-    <string name="album_header">LISTA DE ALBUMES</string>
+    <string name="album_header">LISTA DE ÁLBUMES</string>
     <string name="track_header">LISTA DE CANCIONES</string>
 
     <string name="settings">Ajustes</string>
@@ -78,15 +78,25 @@
     <string name="new_playlist">Nuevo</string>
     <string name="new_playlist_name_template">Lista de reproducción <xliff:g id="number">%d</xliff:g></string>
     <string name="save">Guardar</string>
-    <string name="overwrite">Sobreescribir</string>
+    <string name="overwrite">Sobrescribir</string>
 
     <!-- Tabs -->
     <string name="tab_recent">RECIENTES</string>
     <string name="tab_artists">ARTISTAS</string>
-    <string name="tab_albums">ALBUMES</string>
+    <string name="tab_albums">ÁLBUMES</string>
     <string name="tab_songs">CANCIONES</string>
     <string name="tab_playlists">LISTAS</string>
-    <string name="tab_genres">GENEROS</string>
+    <string name="tab_genres">GÉNEROS</string>
+
+    <string name="play_external_question_msg">Seleccione la acción a aplicar a:\n\n
+        <b>
+            <xliff:g id="name">%s</xliff:g>
+        </b>
+    </string>
+    <string name="play_external_question_button_play">Reproducir</string>
+    <string name="play_external_question_button_queue">En cola</string>
+    <string name="play_external_question_button_cancel">Cancelar</string>
+    <string name="play_external_error">No se pudo reproducir el archivo</string>
 
     <string name="error">Error</string>
 
