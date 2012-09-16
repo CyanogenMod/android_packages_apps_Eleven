@@ -10,7 +10,6 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.database.Cursor;
 import android.net.Uri;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.provider.BaseColumns;
 import android.provider.MediaStore.Audio;
@@ -19,34 +18,21 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.LoaderManager.LoaderCallbacks;
 import android.support.v4.content.CursorLoader;
 import android.support.v4.content.Loader;
-import android.view.ContextMenu;
+import android.view.*;
 import android.view.ContextMenu.ContextMenuInfo;
-import android.view.LayoutInflater;
-import android.view.MenuItem;
-import android.view.View;
-import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.TextView;
-
 import com.andrew.apollo.R;
 import com.andrew.apollo.activities.TracksBrowser;
 import com.andrew.apollo.adapters.AlbumAdapter;
 import com.andrew.apollo.service.ApolloService;
-import com.andrew.apollo.tasks.GetCachedImages;
-import com.andrew.apollo.tasks.LastfmGetAlbumImages;
-import com.andrew.apollo.utils.ApolloUtils;
+import com.andrew.apollo.utils.ImageUtils;
 import com.andrew.apollo.utils.MusicUtils;
 
-import static com.andrew.apollo.Constants.ALBUM_IMAGE;
-import static com.andrew.apollo.Constants.ALBUM_KEY;
-import static com.andrew.apollo.Constants.ARTIST_KEY;
-import static com.andrew.apollo.Constants.INTENT_ADD_TO_PLAYLIST;
-import static com.andrew.apollo.Constants.INTENT_PLAYLIST_LIST;
-import static com.andrew.apollo.Constants.MIME_TYPE;
-import static com.andrew.apollo.Constants.UP_STARTS_ALBUM_ACTIVITY;
+import static com.andrew.apollo.Constants.*;
 
 /**
  * @author Andrew Neal
@@ -253,14 +239,7 @@ public class AlbumsFragment extends Fragment implements LoaderCallbacks<Cursor>,
         // Artist image
         ImageView headerImage = (ImageView)header.findViewById(R.id.header_image);
 
-        // Only download images we don't already have
-        if (ApolloUtils.getImageURL(albumName, ALBUM_IMAGE, getActivity()) == null)
-            new LastfmGetAlbumImages(getActivity(), null, 0).executeOnExecutor(
-                    AsyncTask.THREAD_POOL_EXECUTOR, artistName, albumName);
-
-        // Get and set cached image
-        new GetCachedImages(getActivity(), 1, headerImage).executeOnExecutor(
-                AsyncTask.THREAD_POOL_EXECUTOR, albumName);
+        ImageUtils.setAlbumImage(headerImage, artistName, albumName);
 
         // Set artist name
         TextView headerText = (TextView)header.findViewById(R.id.header_text);

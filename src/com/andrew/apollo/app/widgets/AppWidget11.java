@@ -13,10 +13,6 @@ import android.widget.RemoteViews;
 
 import com.andrew.apollo.R;
 import com.andrew.apollo.service.ApolloService;
-import com.andrew.apollo.utils.ApolloUtils;
-import com.androidquery.AQuery;
-
-import static com.andrew.apollo.Constants.ALBUM_IMAGE;
 
 /**
  * Simple widget to show currently playing album art along with play/pause and
@@ -105,9 +101,7 @@ public class AppWidget11 extends AppWidgetProvider {
                 R.layout.onebyone_app_widget);
 
         // Set album art
-        AQuery aq = new AQuery(service);
-        Bitmap bitmap = aq.getCachedImage(ApolloUtils.getImageURL(service.getAlbumName(),
-                ALBUM_IMAGE, service));
+        Bitmap bitmap = service.getAlbumBitmap();
         if (bitmap != null) {
             views.setViewVisibility(R.id.one_by_one_albumart, View.VISIBLE);
             views.setImageViewBitmap(R.id.one_by_one_albumart, bitmap);

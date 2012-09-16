@@ -7,7 +7,6 @@ package com.andrew.apollo.ui.widgets;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.os.AsyncTask;
 import android.os.RemoteException;
 import android.util.AttributeSet;
 import android.view.View;
@@ -21,7 +20,7 @@ import android.widget.TextView;
 import com.andrew.apollo.R;
 import com.andrew.apollo.activities.AudioPlayerHolder;
 import com.andrew.apollo.activities.QuickQueue;
-import com.andrew.apollo.tasks.GetCachedImages;
+import com.andrew.apollo.utils.ImageUtils;
 import com.andrew.apollo.utils.MusicUtils;
 import com.andrew.apollo.utils.ThemeUtils;
 
@@ -71,9 +70,7 @@ public class BottomActionBar extends LinearLayout implements OnClickListener, On
             // Album art
             ImageView mAlbumArt = (ImageView)bottomActionBar
                     .findViewById(R.id.bottom_action_bar_album_art);
-
-            new GetCachedImages(activity, 1, mAlbumArt).executeOnExecutor(
-                    AsyncTask.THREAD_POOL_EXECUTOR, MusicUtils.getAlbumName());
+            ImageUtils.setAlbumImage(mAlbumArt, MusicUtils.getArtistName(), MusicUtils.getAlbumName());
 
             // Favorite image
             ImageButton mFavorite = (ImageButton)bottomActionBar

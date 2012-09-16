@@ -1,25 +1,17 @@
 
 package com.andrew.apollo.adapters;
 
-import java.lang.ref.WeakReference;
-
 import android.content.Context;
 import android.database.Cursor;
-import android.os.AsyncTask;
 import android.support.v4.widget.SimpleCursorAdapter;
 import android.view.View;
 import android.view.ViewGroup;
-
 import com.andrew.apollo.grid.fragments.QuickQueueFragment;
-import com.andrew.apollo.tasks.LastfmGetAlbumImages;
-import com.andrew.apollo.tasks.LastfmGetArtistImages;
-import com.andrew.apollo.tasks.ViewHolderQueueTask;
-import com.andrew.apollo.utils.ApolloUtils;
+import com.andrew.apollo.utils.ImageUtils;
 import com.andrew.apollo.views.ViewHolderQueue;
 import com.androidquery.AQuery;
 
-import static com.andrew.apollo.Constants.ALBUM_IMAGE;
-import static com.andrew.apollo.Constants.ARTIST_IMAGE;
+import java.lang.ref.WeakReference;
 
 /**
  * @author Andrew Neal
@@ -62,36 +54,9 @@ public class QuickQueueAdapter extends SimpleCursorAdapter {
         String trackName = mCursor.getString(QuickQueueFragment.mTitleIndex);
         holderReference.get().mTrackName.setText(trackName);
 
-        holderReference.get().position = position;
-        // Artist Image
-        if (aq.shouldDelay(position, view, parent, "")) {
-            holderReference.get().mArtistImage.setImageDrawable(null);
-        } else {
-            // Check for missing artist images and cache them
-            if (ApolloUtils.getImageURL(artistName, ARTIST_IMAGE, mContext) == null) {
-                new LastfmGetArtistImages(mContext).executeOnExecutor(
-                        AsyncTask.THREAD_POOL_EXECUTOR, artistName);
-            } else {
-                new ViewHolderQueueTask(holderReference.get(), position, mContext, 0, 0,
-                        holderReference.get().mArtistImage).executeOnExecutor(
-                        AsyncTask.THREAD_POOL_EXECUTOR, artistName);
-            }
-        }
+        ImageUtils.setArtistImage(viewholder.mArtistImage, artistName);
+        ImageUtils.setAlbumImage(viewholder.mAlbumArt, artistName, albumName);
 
-        // Album Image
-        if (aq.shouldDelay(position, view, parent, "")) {
-            holderReference.get().mAlbumArt.setImageDrawable(null);
-        } else {
-            // Check for missing album images and cache them
-            if (ApolloUtils.getImageURL(albumName, ALBUM_IMAGE, mContext) == null) {
-                new LastfmGetAlbumImages(mContext, null, 0).executeOnExecutor(
-                        AsyncTask.THREAD_POOL_EXECUTOR, artistName, albumName);
-            } else {
-                new ViewHolderQueueTask(holderReference.get(), position, mContext, 1, 1,
-                        holderReference.get().mAlbumArt).executeOnExecutor(
-                        AsyncTask.THREAD_POOL_EXECUTOR, albumName);
-            }
-        }
         return view;
     }
 }

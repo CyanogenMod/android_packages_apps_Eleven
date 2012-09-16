@@ -24,8 +24,6 @@ public class ViewHolderList {
 
     public final TextView mViewHolderLineTwo;
 
-    public int position;
-
     public final FrameLayout mQuickContext;
 
     public ViewHolderList(View view) {

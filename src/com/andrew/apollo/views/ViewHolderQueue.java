@@ -21,8 +21,6 @@ public class ViewHolderQueue {
 
     public final TextView mTrackName;
 
-    public int position;
-
     public ViewHolderQueue(View view) {
         mArtistImage = (ImageView)view.findViewById(R.id.queue_artist_image);
         mAlbumArt = (ImageView)view.findViewById(R.id.queue_album_art);

@@ -25,8 +25,6 @@ import android.widget.Toast;
 
 import com.andrew.apollo.R;
 import com.andrew.apollo.preferences.SettingsHolder;
-import com.andrew.apollo.tasks.FetchAlbumImages;
-import com.andrew.apollo.tasks.FetchArtistImages;
 import com.andrew.apollo.utils.MusicUtils;
 
 /**
@@ -122,16 +120,12 @@ public class BottomActionBarItem extends ImageButton implements OnLongClickListe
      * something went wrong the first time around.
      */
     public void initArtistImages() {
-        FetchArtistImages getArtistImages = new FetchArtistImages(mContext, 1);
-        getArtistImages.runTask();
     }
 
     /**
      * Manually fetch all of the album art.
      */
     public void initAlbumImages() {
-        FetchAlbumImages getAlbumImages = new FetchAlbumImages(mContext, 1);
-        getAlbumImages.runTask();
     }
 
     /**

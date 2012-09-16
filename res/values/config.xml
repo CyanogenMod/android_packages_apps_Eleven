@@ -17,4 +17,7 @@
     <integer name="listview_padding_left">16</integer>
     <integer name="listview_padding_right">32</integer>
 
+    <!-- Fade in duration for newly downloaded album and artist images -->
+    <integer name="image_fade_in_duration">300</integer>
+
 </resources>

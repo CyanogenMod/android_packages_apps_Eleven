@@ -8,12 +8,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.os.AsyncTask;
-import android.os.Bundle;
-import android.os.Handler;
-import android.os.Message;
-import android.os.RemoteException;
-import android.os.SystemClock;
+import android.os.*;
 import android.provider.BaseColumns;
 import android.provider.MediaStore.Audio;
 import android.support.v4.app.Fragment;
@@ -21,27 +16,17 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
-import android.widget.ImageButton;
-import android.widget.ImageView;
-import android.widget.SeekBar;
+import android.widget.*;
 import android.widget.SeekBar.OnSeekBarChangeListener;
-import android.widget.TextView;
-import android.widget.Toast;
-
 import com.andrew.apollo.activities.TracksBrowser;
 import com.andrew.apollo.service.ApolloService;
-import com.andrew.apollo.tasks.GetCachedImages;
-import com.andrew.apollo.tasks.LastfmGetAlbumImages;
 import com.andrew.apollo.ui.widgets.RepeatingImageButton;
 import com.andrew.apollo.utils.ApolloUtils;
+import com.andrew.apollo.utils.ImageUtils;
 import com.andrew.apollo.utils.MusicUtils;
 import com.andrew.apollo.utils.ThemeUtils;
 
-import static com.andrew.apollo.Constants.ALBUM_KEY;
-import static com.andrew.apollo.Constants.ALBUM_IMAGE;
-import static com.andrew.apollo.Constants.ARTIST_ID;
-import static com.andrew.apollo.Constants.ARTIST_KEY;
-import static com.andrew.apollo.Constants.MIME_TYPE;
+import static com.andrew.apollo.Constants.*;
 
 /**
  * @author Andrew Neal
@@ -584,12 +569,7 @@ public class AudioPlayerFragment extends Fragment {
         mDuration = MusicUtils.getDuration();
         mTotalTime.setText(MusicUtils.makeTimeString(getActivity(), mDuration / 1000));
 
-        if (ApolloUtils.getImageURL(albumName, ALBUM_IMAGE, getActivity()) == null)
-            new LastfmGetAlbumImages(getActivity(), mAlbumArt, 1).executeOnExecutor(
-                    AsyncTask.THREAD_POOL_EXECUTOR, artistName, albumName);
-
-        new GetCachedImages(getActivity(), 1, mAlbumArt).executeOnExecutor(
-                AsyncTask.THREAD_POOL_EXECUTOR, albumName);
+        ImageUtils.setAlbumImage(mAlbumArt, artistName, albumName);
 
         // Theme chooser
         ThemeUtils.setTextColor(getActivity(), mTrackName, "audio_player_text_color");

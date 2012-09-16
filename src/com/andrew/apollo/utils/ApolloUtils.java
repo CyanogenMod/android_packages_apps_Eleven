@@ -4,8 +4,7 @@
 
 package com.andrew.apollo.utils;
 
-import java.io.IOException;
-import java.io.InputStream;
+import java.io.*;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
@@ -121,32 +120,6 @@ public class ApolloUtils {
     }
 
     /**
-     * Sets cached image URLs
-     * 
-     * @param artistName
-     * @param url
-     * @param key
-     * @param context
-     */
-    public static void setImageURL(String name, String url, String key, Context context) {
-        SharedPreferences settings = context.getSharedPreferences(key, 0);
-        SharedPreferences.Editor editor = settings.edit();
-        editor.putString(name, url);
-        editor.commit();
-    }
-
-    /**
-     * @param name
-     * @param key
-     * @param context
-     * @return cached image URLs
-     */
-    public static String getImageURL(String name, String key, Context context) {
-        SharedPreferences settings = context.getSharedPreferences(key, 0);
-        return settings.getString(name, null);
-    }
-
-    /**
      * @param context
      * @return if a Tablet is the device being used
      */
@@ -163,28 +136,6 @@ public class ApolloUtils {
         actionBar.setDisplayOptions(ActionBar.DISPLAY_HOME_AS_UP | ActionBar.DISPLAY_SHOW_TITLE,
                 ActionBar.DISPLAY_HOME_AS_UP | ActionBar.DISPLAY_SHOW_TITLE
                         | ActionBar.DISPLAY_SHOW_HOME);
-    }
-
-    /**
-     * @param bitmap
-     * @param newHeight
-     * @param newWidth
-     * @return a scaled Bitmap
-     */
-    public static Bitmap getResizedBitmap(Bitmap bitmap, int newHeight, int newWidth) {
-
-        if (bitmap == null) {
-            return null;
-        }
-
-        int width = bitmap.getWidth();
-        int height = bitmap.getHeight();
-        float scaleWidth = ((float)newWidth) / width;
-        float scaleHeight = ((float)newHeight) / height;
-        Matrix matrix = new Matrix();
-        matrix.postScale(scaleWidth, scaleHeight);
-        Bitmap resizedBitmap = Bitmap.createBitmap(bitmap, 0, 0, width, height, matrix, false);
-        return resizedBitmap;
     }
 
     /**
@@ -280,22 +231,55 @@ public class ApolloUtils {
     }
 
     /**
-     * @param src
-     * @return Bitmap fro URL
+     * Replace the characters not allowed in file names with underscore
+     * @param name
+     * @return
      */
-    public static Bitmap getBitmapFromURL(String src) {
+    public static String escapeForFileSystem(String name) {
+        return name.replaceAll("[\\\\/:*?\"<>|]+", "_");
+    }
+
+    /**
+     * Static utility function to download the file from the specified URL to the specified file.
+     * @param urlString
+     * @param outFile
+     * @return true if the download succeeded false otherwise
+     */
+    public static boolean downloadFile(String urlString, File outFile) {
+        HttpURLConnection urlConnection = null;
+        BufferedOutputStream out = null;
+
         try {
-            URL url = new URL(src);
-            HttpURLConnection connection = (HttpURLConnection)url.openConnection();
-            connection.setDoInput(true);
-            connection.connect();
-            InputStream input = connection.getInputStream();
-            Bitmap myBitmap = BitmapFactory.decodeStream(input);
-            return myBitmap;
-        } catch (IOException e) {
-            e.printStackTrace();
-            return null;
+            File dir = outFile.getParentFile();
+            if (!dir.exists() && !dir.mkdirs())
+                return false;
+
+            final URL url = new URL(urlString);
+            urlConnection = (HttpURLConnection) url.openConnection();
+            final InputStream in =
+                    new BufferedInputStream(urlConnection.getInputStream());
+            out = new BufferedOutputStream(new FileOutputStream(outFile));
+
+            int b;
+            while ((b = in.read()) != -1) {
+                out.write(b);
+            }
+
+        } catch (final IOException e) {
+            return false;
+        } finally {
+            if (urlConnection != null) {
+                urlConnection.disconnect();
+            }
+            if (out != null) {
+                try {
+                    out.close();
+                } catch (final IOException e) {
+                    return false;
+                }
+            }
         }
+        return true;
     }
 
     /**

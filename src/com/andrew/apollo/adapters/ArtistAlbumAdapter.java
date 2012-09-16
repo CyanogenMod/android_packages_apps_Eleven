@@ -1,27 +1,21 @@
 
 package com.andrew.apollo.adapters;
 
-import java.lang.ref.WeakReference;
-
 import android.content.Context;
 import android.database.Cursor;
 import android.graphics.drawable.AnimationDrawable;
-import android.os.AsyncTask;
 import android.os.RemoteException;
 import android.support.v4.widget.SimpleCursorAdapter;
 import android.view.View;
 import android.view.ViewGroup;
-
 import com.andrew.apollo.R;
 import com.andrew.apollo.list.fragments.ArtistAlbumsFragment;
-import com.andrew.apollo.tasks.LastfmGetAlbumImages;
-import com.andrew.apollo.tasks.ViewHolderTask;
-import com.andrew.apollo.utils.ApolloUtils;
+import com.andrew.apollo.utils.ImageUtils;
 import com.andrew.apollo.utils.MusicUtils;
 import com.andrew.apollo.views.ViewHolderList;
 import com.androidquery.AQuery;
 
-import static com.andrew.apollo.Constants.ALBUM_IMAGE;
+import java.lang.ref.WeakReference;
 
 /**
  * @author Andrew Neal
@@ -78,21 +72,7 @@ public class ArtistAlbumAdapter extends SimpleCursorAdapter {
         String numSongs = MusicUtils.makeAlbumsLabel(mContext, 0, songs_plural, true);
         holderReference.get().mViewHolderLineTwo.setText(numSongs);
 
-        // Match positions
-        holderReference.get().position = position;
-        if (aq.shouldDelay(position, view, parent, "")) {
-            holderReference.get().mViewHolderImage.setImageDrawable(null);
-        } else {
-            // Check for missing album images and cache them
-            if (ApolloUtils.getImageURL(albumName, ALBUM_IMAGE, mContext) == null) {
-                new LastfmGetAlbumImages(mContext, null, 0).executeOnExecutor(
-                        AsyncTask.THREAD_POOL_EXECUTOR, artistName, albumName);
-            } else {
-                new ViewHolderTask(holderReference.get(), null, position, mContext, 1, 0,
-                        holderReference.get().mViewHolderImage).executeOnExecutor(
-                        AsyncTask.THREAD_POOL_EXECUTOR, albumName);
-            }
-        }
+        ImageUtils.setAlbumImage(viewholder.mViewHolderImage, artistName, albumName);
 
         holderReference.get().mQuickContext.setOnClickListener(showContextMenu);
 

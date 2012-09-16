@@ -20,6 +20,7 @@ interface IApolloService
     String getTrackName();
     String getAlbumName();
     long getAlbumId();
+    Bitmap getAlbumBitmap();
     String getArtistName();
     long getArtistId();
     void enqueue(in long [] list, int action);

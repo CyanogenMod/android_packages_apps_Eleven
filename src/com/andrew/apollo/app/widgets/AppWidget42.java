@@ -30,10 +30,6 @@ import com.andrew.apollo.R;
 import com.andrew.apollo.activities.AudioPlayerHolder;
 import com.andrew.apollo.activities.MusicLibrary;
 import com.andrew.apollo.service.ApolloService;
-import com.andrew.apollo.utils.ApolloUtils;
-import com.androidquery.AQuery;
-
-import static com.andrew.apollo.Constants.ALBUM_IMAGE;
 
 /**
  * Simple widget to show currently playing album art along with play/pause and
@@ -128,9 +124,7 @@ public class AppWidget42 extends AppWidgetProvider {
         views.setTextViewText(R.id.four_by_two_trackname, trackName);
 
         // Set album art
-        AQuery aq = new AQuery(service);
-        Bitmap bitmap = aq.getCachedImage(ApolloUtils.getImageURL(service.getAlbumName(),
-                ALBUM_IMAGE, service));
+        Bitmap bitmap = service.getAlbumBitmap();
         if (bitmap != null) {
             views.setViewVisibility(R.id.four_by_two_albumart, View.VISIBLE);
             views.setImageViewBitmap(R.id.four_by_two_albumart, bitmap);

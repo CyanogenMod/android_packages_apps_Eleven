@@ -4,19 +4,13 @@
 
 package com.andrew.apollo.activities;
 
-import android.content.BroadcastReceiver;
-import android.content.ComponentName;
-import android.content.Context;
-import android.content.Intent;
-import android.content.IntentFilter;
-import android.content.ServiceConnection;
+import android.content.*;
 import android.content.pm.ActivityInfo;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.AnimationDrawable;
 import android.media.AudioManager;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.os.SystemClock;
@@ -31,7 +25,6 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-
 import com.andrew.apollo.BottomActionBarControlsFragment;
 import com.andrew.apollo.BottomActionBarFragment;
 import com.andrew.apollo.IApolloService;
@@ -41,26 +34,12 @@ import com.andrew.apollo.list.fragments.ArtistAlbumsFragment;
 import com.andrew.apollo.list.fragments.TracksFragment;
 import com.andrew.apollo.service.ApolloService;
 import com.andrew.apollo.service.ServiceToken;
-import com.andrew.apollo.tasks.GetCachedImages;
-import com.andrew.apollo.tasks.LastfmGetAlbumImages;
-import com.andrew.apollo.tasks.LastfmGetArtistImagesOriginal;
 import com.andrew.apollo.utils.ApolloUtils;
+import com.andrew.apollo.utils.ImageUtils;
 import com.andrew.apollo.utils.MusicUtils;
 import com.andrew.apollo.utils.ThemeUtils;
 
-import static com.andrew.apollo.Constants.ALBUM_KEY;
-import static com.andrew.apollo.Constants.ALBUM_IMAGE;
-import static com.andrew.apollo.Constants.ARTIST_KEY;
-import static com.andrew.apollo.Constants.ARTIST_ID;
-import static com.andrew.apollo.Constants.ARTIST_IMAGE_ORIGINAL;
-import static com.andrew.apollo.Constants.GENRE_KEY;
-import static com.andrew.apollo.Constants.INTENT_ACTION;
-import static com.andrew.apollo.Constants.MIME_TYPE;
-import static com.andrew.apollo.Constants.PLAYLIST_NAME;
-import static com.andrew.apollo.Constants.PLAYLIST_QUEUE;
-import static com.andrew.apollo.Constants.PLAYLIST_FAVORITES;
-import static com.andrew.apollo.Constants.THEME_ITEM_BACKGROUND;
-import static com.andrew.apollo.Constants.UP_STARTS_ALBUM_ACTIVITY;
+import static com.andrew.apollo.Constants.*;
 
 /**
  * @author Andrew Neal
@@ -352,19 +331,7 @@ public class TracksBrowser extends FragmentActivity implements ServiceConnection
 
         // Artist image & Genre image
         final ImageView mFirstHalfImage = (ImageView)findViewById(R.id.half_artist_image);
-
-        mFirstHalfImage.post(new Runnable() {
-            @Override
-            public void run() {
-                // Only download images we don't already have
-                if (ApolloUtils.getImageURL(getArtist(), ARTIST_IMAGE_ORIGINAL, TracksBrowser.this) == null)
-                    new LastfmGetArtistImagesOriginal(TracksBrowser.this, mFirstHalfImage)
-                            .executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, getArtist());
-                // Get and set cached image
-                new GetCachedImages(TracksBrowser.this, 0, mFirstHalfImage).executeOnExecutor(
-                        AsyncTask.THREAD_POOL_EXECUTOR, getArtist());
-            }
-        });
+        ImageUtils.setArtistImage(mFirstHalfImage, getArtist());
 
         mFirstHalfImage.setOnClickListener(new OnClickListener() {
 
@@ -388,20 +355,7 @@ public class TracksBrowser extends FragmentActivity implements ServiceConnection
 
         // Album image
         final ImageView mSecondHalfImage = (ImageView)findViewById(R.id.half_album_image);
-
-        mSecondHalfImage.post(new Runnable() {
-            @Override
-            public void run() {
-                // Only download images we don't already have
-                if (ApolloUtils.getImageURL(getAlbum(), ALBUM_IMAGE, TracksBrowser.this) == null)
-                    new LastfmGetAlbumImages(TracksBrowser.this, mSecondHalfImage, 1)
-                            .executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, getArtist(),
-                                    getAlbum());
-                // Get and set cached image
-                new GetCachedImages(TracksBrowser.this, 1, mSecondHalfImage).executeOnExecutor(
-                        AsyncTask.THREAD_POOL_EXECUTOR, getAlbum());
-            }
-        });
+        ImageUtils.setAlbumImage(mSecondHalfImage, getArtist(), getAlbum());
     }
 
     /**

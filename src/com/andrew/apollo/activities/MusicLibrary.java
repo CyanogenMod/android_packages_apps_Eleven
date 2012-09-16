@@ -33,6 +33,7 @@ import com.andrew.apollo.service.ApolloService;
 import com.andrew.apollo.service.ServiceToken;
 import com.andrew.apollo.ui.widgets.ScrollableTabView;
 import com.andrew.apollo.utils.ApolloUtils;
+import com.andrew.apollo.utils.ImageCache;
 import com.andrew.apollo.utils.MusicUtils;
 import com.andrew.apollo.utils.ThemeUtils;
 
@@ -99,6 +100,9 @@ public class MusicLibrary extends FragmentActivity implements ServiceConnection 
         // Unbind
         if (MusicUtils.mService != null)
             MusicUtils.unbindFromService(mToken);
+
+        //TODO: clear image cache
+
         super.onStop();
     }
 

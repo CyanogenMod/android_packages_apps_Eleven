@@ -22,8 +22,6 @@ public class ViewHolderGrid {
 
     public final TextView mViewHolderLineTwo;
 
-    public int position;
-
     public final LinearLayout mInfoHolder;
 
     public ViewHolderGrid(View view) {
