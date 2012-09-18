@@ -172,6 +172,8 @@ public class ApolloService extends Service {
 
     private static final int FADEUP = 6;
 
+    private static final int TRACK_WENT_TO_NEXT = 7;
+
     private static final int MAX_HISTORY_SIZE = 100;
 
     private Notification status;
@@ -197,6 +199,8 @@ public class ApolloService extends Service {
     private Cursor mCursor;
 
     private int mPlayPos = -1;
+
+    private int mNextPlayPos = -1;
 
     private static final String LOGTAG = "MediaPlaybackService";
 
@@ -282,21 +286,32 @@ public class ApolloService extends Service {
                     break;
                 case SERVER_DIED:
                     if (mIsSupposedToBePlaying) {
-                        next(true);
+                        gotoNext(true);
                     } else {
                         // the server died when we were idle, so just
                         // reopen the same song (it will start again
                         // from the beginning though when the user
                         // restarts)
-                        openCurrent();
+                        openCurrentAndNext();
                     }
+                    break;
+                case TRACK_WENT_TO_NEXT:
+                    mPlayPos = mNextPlayPos;
+                    if (mCursor != null) {
+                        mCursor.close();
+                        mCursor = null;
+                    }
+                    mCursor = getCursorForId(mPlayList[mPlayPos]);
+                    notifyChange(META_CHANGED);
+                    updateNotification();
+                    setNextTrack();
                     break;
                 case TRACK_ENDED:
                     if (mRepeatMode == REPEAT_CURRENT) {
                         seek(0);
                         play();
                     } else {
-                        next(false);
+                        gotoNext(false);
                     }
                     break;
                 case RELEASE_WAKELOCK:
@@ -355,7 +370,7 @@ public class ApolloService extends Service {
             String action = intent.getAction();
             String cmd = intent.getStringExtra("command");
             if (CMDNEXT.equals(cmd) || NEXT_ACTION.equals(action)) {
-                next(true);
+                gotoNext(true);
             } else if (CMDPREVIOUS.equals(cmd) || PREVIOUS_ACTION.equals(action)) {
                 prev();
             } else if (CMDTOGGLEPAUSE.equals(cmd) || TOGGLEPAUSE_ACTION.equals(action)) {
@@ -655,7 +670,7 @@ public class ApolloService extends Service {
             // own, potentially at some random inconvenient time.
             mOpenFailedCounter = 20;
             mQuietMode = true;
-            openCurrent();
+            openCurrentAndNext();
             mQuietMode = false;
             if (!mPlayer.isInitialized()) {
                 // couldn't restore the saved state
@@ -745,7 +760,7 @@ public class ApolloService extends Service {
             String cmd = intent.getStringExtra("command");
 
             if (CMDNEXT.equals(cmd) || NEXT_ACTION.equals(action)) {
-                next(true);
+                gotoNext(true);
             } else if (CMDPREVIOUS.equals(cmd) || PREVIOUS_ACTION.equals(action)) {
                 if (position() < 2000) {
                     prev();
@@ -1009,7 +1024,7 @@ public class ApolloService extends Service {
                 notifyChange(QUEUE_CHANGED);
                 if (action == NOW) {
                     mPlayPos = mPlayListLen - list.length;
-                    openCurrent();
+                    openCurrentAndNext();
                     play();
                     notifyChange(META_CHANGED);
                     return;
@@ -1017,7 +1032,7 @@ public class ApolloService extends Service {
             }
             if (mPlayPos < 0) {
                 mPlayPos = 0;
-                openCurrent();
+                openCurrentAndNext();
                 play();
                 notifyChange(META_CHANGED);
             }
@@ -1061,7 +1076,7 @@ public class ApolloService extends Service {
             mHistory.clear();
 
             saveBookmarkIfNeeded();
-            openCurrent();
+            openCurrentAndNext();
             if (oldId != getAudioId()) {
                 notifyChange(META_CHANGED);
             }
@@ -1085,7 +1100,17 @@ public class ApolloService extends Service {
         }
     }
 
-    private void openCurrent() {
+    private Cursor getCursorForId(long lid) {
+        String id = String.valueOf(lid);
+
+        Cursor c = getContentResolver().query(
+                MediaStore.Audio.Media.EXTERNAL_CONTENT_URI,
+                mCursorCols, "_id=" + id , null, null);
+        c.moveToFirst();
+        return c;
+    }
+
+    private void openCurrentAndNext() {
         synchronized (this) {
             if (mCursor != null) {
                 mCursor.close();
@@ -1096,22 +1121,46 @@ public class ApolloService extends Service {
                 return;
             }
             stop(false);
-
-            String id = String.valueOf(mPlayList[mPlayPos]);
-
-            mCursor = getContentResolver().query(MediaStore.Audio.Media.EXTERNAL_CONTENT_URI,
-                    mCursorCols, "_id=" + id, null, null);
-            if (mCursor != null) {
-                mCursor.moveToFirst();
-                open(MediaStore.Audio.Media.EXTERNAL_CONTENT_URI + "/" + id);
-                // go to bookmark if needed
-                if (isPodcast()) {
-                    long bookmark = getBookmark();
-                    // Start playing a little bit before the bookmark,
-                    // so it's easier to get back in to the narrative.
-                    seek(bookmark - 5000);
+            mCursor = getCursorForId(mPlayList[mPlayPos]);
+            while(!open(MediaStore.Audio.Media.EXTERNAL_CONTENT_URI + "/" + mCursor.getLong(IDCOLIDX))) {
+                if (mOpenFailedCounter++ < 10 &&  mPlayListLen > 1) {
+                    int pos = getNextPosition(false);
+                    if (pos < 0) {
+                        gotoIdleState();
+                        if (mIsSupposedToBePlaying) {
+                            mIsSupposedToBePlaying = false;
+                            notifyChange(PLAYSTATE_CHANGED);
+                        }
+                        return;
+                    }
+                    mPlayPos = pos;
+                    stop(false);
+                    mPlayPos = pos;
+                    mCursor = getCursorForId(mPlayList[mPlayPos]);
+                } else {
+                    mOpenFailedCounter = 0;
+                    Log.d(LOGTAG, "Failed to open file for playback");
+                    return;
                 }
             }
+
+            // go to bookmark if needed
+            if (isPodcast()) {
+                long bookmark = getBookmark();
+                // Start playing a little bit before the bookmark,
+                // so it's easier to get back in to the narrative.
+                seek(bookmark - 5000);
+            }
+            setNextTrack();
+
+        }
+    }
+
+    private void setNextTrack() {
+        mNextPlayPos = getNextPosition(false);
+        if (mNextPlayPos >= 0) {
+            long id = mPlayList[mNextPlayPos];
+            mPlayer.setNextDataSource(MediaStore.Audio.Media.EXTERNAL_CONTENT_URI + "/" + id);
         }
     }
 
@@ -1120,10 +1169,10 @@ public class ApolloService extends Service {
      * 
      * @param path The full path of the file to be opened.
      */
-    public void open(String path) {
+    public boolean open(String path) {
         synchronized (this) {
             if (path == null) {
-                return;
+                return false;
             }
 
             // if mCursor is null, try to associate path with a database cursor
@@ -1170,24 +1219,12 @@ public class ApolloService extends Service {
             }
             mFileToPlay = path;
             mPlayer.setDataSource(mFileToPlay);
-            if (!mPlayer.isInitialized()) {
-                stop(true);
-                if (mOpenFailedCounter++ < 10 && mPlayListLen > 1) {
-                    // beware: this ends up being recursive because next() calls
-                    // open() again.
-                    next(false);
-                }
-                if (!mPlayer.isInitialized() && mOpenFailedCounter != 0) {
-                    // need to make sure we only shows this once
-                    mOpenFailedCounter = 0;
-                    if (!mQuietMode) {
-                        Toast.makeText(this, "Error", Toast.LENGTH_SHORT).show();
-                    }
-                }
-
-            } else {
+            if (mPlayer.isInitialized()) {
                 mOpenFailedCounter = 0;
+                return true;
             }
+            stop(true);
+            return false;
         }
     }
 
@@ -1242,9 +1279,6 @@ public class ApolloService extends Service {
         mAudioManager.registerMediaButtonEventReceiver(new ComponentName(getPackageName(),
                 MediaButtonIntentReceiver.class.getName()));
 
-        AQuery aq = new AQuery(this);
-        Bitmap b = aq.getCachedImage(ApolloUtils.getImageURL(getAlbumName(), ALBUM_IMAGE, this));
-
         if (mPlayer.isInitialized()) {
             // if we are at the end of the song, go to the next song first
 
@@ -1255,51 +1289,7 @@ public class ApolloService extends Service {
             mMediaplayerHandler.removeMessages(FADEDOWN);
             mMediaplayerHandler.sendEmptyMessage(FADEUP);
 
-            RemoteViews views = new RemoteViews(getPackageName(), R.layout.status_bar);
-            if (b != null) {
-                views.setViewVisibility(R.id.status_bar_icon, View.GONE);
-                views.setViewVisibility(R.id.status_bar_album_art, View.VISIBLE);
-                views.setImageViewBitmap(R.id.status_bar_album_art, b);
-            } else {
-                views.setViewVisibility(R.id.status_bar_icon, View.VISIBLE);
-                views.setViewVisibility(R.id.status_bar_album_art, View.GONE);
-            }
-            ComponentName rec = new ComponentName(getPackageName(),
-                    MediaButtonIntentReceiver.class.getName());
-            Intent mediaButtonIntent = new Intent(Intent.ACTION_MEDIA_BUTTON);
-            mediaButtonIntent.putExtra(CMDNOTIF, 1);
-            mediaButtonIntent.setComponent(rec);
-            KeyEvent mediaKey = new KeyEvent(KeyEvent.ACTION_DOWN,
-                    KeyEvent.KEYCODE_MEDIA_PLAY_PAUSE);
-            mediaButtonIntent.putExtra(Intent.EXTRA_KEY_EVENT, mediaKey);
-            PendingIntent mediaPendingIntent = PendingIntent.getBroadcast(getApplicationContext(),
-                    1, mediaButtonIntent, PendingIntent.FLAG_UPDATE_CURRENT);
-            views.setOnClickPendingIntent(R.id.status_bar_play, mediaPendingIntent);
-            mediaButtonIntent.putExtra(CMDNOTIF, 2);
-            mediaKey = new KeyEvent(KeyEvent.ACTION_DOWN, KeyEvent.KEYCODE_MEDIA_NEXT);
-            mediaButtonIntent.putExtra(Intent.EXTRA_KEY_EVENT, mediaKey);
-            mediaPendingIntent = PendingIntent.getBroadcast(getApplicationContext(), 2,
-                    mediaButtonIntent, PendingIntent.FLAG_UPDATE_CURRENT);
-            views.setOnClickPendingIntent(R.id.status_bar_next, mediaPendingIntent);
-            mediaButtonIntent.putExtra(CMDNOTIF, 3);
-            mediaKey = new KeyEvent(KeyEvent.ACTION_DOWN, KeyEvent.KEYCODE_MEDIA_STOP);
-            mediaButtonIntent.putExtra(Intent.EXTRA_KEY_EVENT, mediaKey);
-            mediaPendingIntent = PendingIntent.getBroadcast(getApplicationContext(), 3,
-                    mediaButtonIntent, PendingIntent.FLAG_UPDATE_CURRENT);
-            views.setOnClickPendingIntent(R.id.status_bar_collapse, mediaPendingIntent);
-            views.setImageViewResource(R.id.status_bar_play, R.drawable.apollo_holo_dark_pause);
-
-            views.setTextViewText(R.id.status_bar_track_name, getTrackName());
-            views.setTextViewText(R.id.status_bar_artist_name, getArtistName());
-
-            status = new Notification();
-            status.contentView = views;
-            status.flags = Notification.FLAG_ONGOING_EVENT;
-            status.icon = R.drawable.stat_notify_music;
-            status.contentIntent = PendingIntent
-                    .getActivity(this, 0, new Intent("com.andrew.apollo.PLAYBACK_VIEWER")
-                            .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK), 0);
-            startForeground(PLAYBACKSERVICE_STATUS, status);
+            updateNotification();
             if (!mIsSupposedToBePlaying) {
                 mIsSupposedToBePlaying = true;
                 notifyChange(PLAYSTATE_CHANGED);
@@ -1312,6 +1302,56 @@ public class ApolloService extends Service {
         }
     }
 
+    private void updateNotification() {
+        AQuery aq = new AQuery(this);
+        Bitmap b = aq.getCachedImage(ApolloUtils.getImageURL(getAlbumName(), ALBUM_IMAGE, this));
+
+        RemoteViews views = new RemoteViews(getPackageName(), R.layout.status_bar);
+        if (b != null) {
+            views.setViewVisibility(R.id.status_bar_icon, View.GONE);
+            views.setViewVisibility(R.id.status_bar_album_art, View.VISIBLE);
+            views.setImageViewBitmap(R.id.status_bar_album_art, b);
+        } else {
+            views.setViewVisibility(R.id.status_bar_icon, View.VISIBLE);
+            views.setViewVisibility(R.id.status_bar_album_art, View.GONE);
+        }
+        ComponentName rec = new ComponentName(getPackageName(),
+                MediaButtonIntentReceiver.class.getName());
+        Intent mediaButtonIntent = new Intent(Intent.ACTION_MEDIA_BUTTON);
+        mediaButtonIntent.putExtra(CMDNOTIF, 1);
+        mediaButtonIntent.setComponent(rec);
+        KeyEvent mediaKey = new KeyEvent(KeyEvent.ACTION_DOWN,
+                KeyEvent.KEYCODE_MEDIA_PLAY_PAUSE);
+        mediaButtonIntent.putExtra(Intent.EXTRA_KEY_EVENT, mediaKey);
+        PendingIntent mediaPendingIntent = PendingIntent.getBroadcast(getApplicationContext(),
+                1, mediaButtonIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+        views.setOnClickPendingIntent(R.id.status_bar_play, mediaPendingIntent);
+        mediaButtonIntent.putExtra(CMDNOTIF, 2);
+        mediaKey = new KeyEvent(KeyEvent.ACTION_DOWN, KeyEvent.KEYCODE_MEDIA_NEXT);
+        mediaButtonIntent.putExtra(Intent.EXTRA_KEY_EVENT, mediaKey);
+        mediaPendingIntent = PendingIntent.getBroadcast(getApplicationContext(), 2,
+                mediaButtonIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+        views.setOnClickPendingIntent(R.id.status_bar_next, mediaPendingIntent);
+        mediaButtonIntent.putExtra(CMDNOTIF, 3);
+        mediaKey = new KeyEvent(KeyEvent.ACTION_DOWN, KeyEvent.KEYCODE_MEDIA_STOP);
+        mediaButtonIntent.putExtra(Intent.EXTRA_KEY_EVENT, mediaKey);
+        mediaPendingIntent = PendingIntent.getBroadcast(getApplicationContext(), 3,
+                mediaButtonIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+        views.setOnClickPendingIntent(R.id.status_bar_collapse, mediaPendingIntent);
+        views.setImageViewResource(R.id.status_bar_play, R.drawable.apollo_holo_dark_pause);
+
+        views.setTextViewText(R.id.status_bar_track_name, getTrackName());
+        views.setTextViewText(R.id.status_bar_artist_name, getArtistName());
+
+        status = new Notification();
+        status.contentView = views;
+        status.flags = Notification.FLAG_ONGOING_EVENT;
+        status.icon = R.drawable.stat_notify_music;
+        status.contentIntent = PendingIntent
+                .getActivity(this, 0, new Intent("com.andrew.apollo.PLAYBACK_VIEWER")
+                        .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK), 0);
+        startForeground(PLAYBACKSERVICE_STATUS, status);
+    }
     private void stop(boolean remove_status_icon) {
         if (mPlayer.isInitialized()) {
             mPlayer.stop();
@@ -1404,99 +1444,119 @@ public class ApolloService extends Service {
             }
             saveBookmarkIfNeeded();
             stop(false);
-            openCurrent();
+            openCurrentAndNext();
             play();
 
             notifyChange(META_CHANGED);
         }
     }
 
-    public void next(boolean force) {
+    /**
+     * Get the next position to play. Note that this may actually modify mPlayPos
+     * if playback is in SHUFFLE_AUTO mode and the shuffle list window needed to
+     * be adjusted. Either way, the return value is the next value that should be
+     * assigned to mPlayPos;
+     */
+    private int getNextPosition(boolean force) {
+        if (mRepeatMode == REPEAT_CURRENT) {
+            if (mPlayPos < 0) return 0;
+            return mPlayPos;
+        } else if (mShuffleMode == SHUFFLE_NORMAL) {
+            // Pick random next track from the not-yet-played ones
+            // TODO: make it work right after adding/removing items in the queue.
+
+            // Store the current file in the history, but keep the history at a
+            // reasonable size
+            if (mPlayPos >= 0) {
+                mHistory.add(mPlayPos);
+            }
+            if (mHistory.size() > MAX_HISTORY_SIZE) {
+                mHistory.removeElementAt(0);
+            }
+
+            int numTracks = mPlayListLen;
+            int[] tracks = new int[numTracks];
+            for (int i=0;i < numTracks; i++) {
+                tracks[i] = i;
+            }
+
+            int numHistory = mHistory.size();
+            int numUnplayed = numTracks;
+            for (int i=0;i < numHistory; i++) {
+                int idx = mHistory.get(i).intValue();
+                if (idx < numTracks && tracks[idx] >= 0) {
+                    numUnplayed--;
+                    tracks[idx] = -1;
+                }
+            }
+
+            // 'numUnplayed' now indicates how many tracks have not yet
+            // been played, and 'tracks' contains the indices of those
+            // tracks.
+            if (numUnplayed <=0) {
+                // everything's already been played
+                if (mRepeatMode == REPEAT_ALL || force) {
+                    //pick from full set
+                    numUnplayed = numTracks;
+                    for (int i=0;i < numTracks; i++) {
+                        tracks[i] = i;
+                    }
+                } else {
+                    // all done
+                    return -1;
+                }
+            }
+            int skip = mRand.nextInt(numUnplayed);
+            int cnt = -1;
+            while (true) {
+                while (tracks[++cnt] < 0)
+                    ;
+                skip--;
+                if (skip < 0) {
+                    break;
+                }
+            }
+            return cnt;
+        } else if (mShuffleMode == SHUFFLE_AUTO) {
+            doAutoShuffleUpdate();
+            return mPlayPos + 1;
+        } else {
+            if (mPlayPos >= mPlayListLen - 1) {
+                // we're at the end of the list
+                if (mRepeatMode == REPEAT_NONE && !force) {
+                    // all done
+                    return -1;
+                } else if (mRepeatMode == REPEAT_ALL || force) {
+                    return 0;
+                }
+                return -1;
+            } else {
+                return mPlayPos + 1;
+            }
+        }
+    }
+
+    public void gotoNext(boolean force) {
         synchronized (this) {
             if (mPlayListLen <= 0) {
                 Log.d(LOGTAG, "No play queue");
                 return;
             }
 
-            if (mShuffleMode == SHUFFLE_NORMAL) {
-
-                if (mPlayPos >= 0) {
-                    mHistory.add(mPlayPos);
+            int pos = getNextPosition(force);
+            if (pos < 0) {
+                gotoIdleState();
+                if (mIsSupposedToBePlaying) {
+                    mIsSupposedToBePlaying = false;
+                    notifyChange(PLAYSTATE_CHANGED);
                 }
-                if (mHistory.size() > MAX_HISTORY_SIZE) {
-                    mHistory.removeElementAt(0);
-                }
-
-                int numTracks = mPlayListLen;
-                int[] tracks = new int[numTracks];
-                for (int i = 0; i < numTracks; i++) {
-                    tracks[i] = i;
-                }
-
-                int numHistory = mHistory.size();
-                int numUnplayed = numTracks;
-                for (int i = 0; i < numHistory; i++) {
-                    int idx = mHistory.get(i).intValue();
-                    if (idx < numTracks && tracks[idx] >= 0) {
-                        numUnplayed--;
-                        tracks[idx] = -1;
-                    }
-                }
-
-                // 'numUnplayed' now indicates how many tracks have not yet
-                // been played, and 'tracks' contains the indices of those
-                // tracks.
-                if (numUnplayed <= 0) {
-                    // everything's already been played
-                    if (mRepeatMode == REPEAT_ALL || force) {
-                        // pick from full set
-                        numUnplayed = numTracks;
-                        for (int i = 0; i < numTracks; i++) {
-                            tracks[i] = i;
-                        }
-                    } else {
-                        // all done
-                        gotoIdleState();
-                        if (mIsSupposedToBePlaying) {
-                            mIsSupposedToBePlaying = false;
-                            notifyChange(PLAYSTATE_CHANGED);
-                        }
-                        return;
-                    }
-                }
-                int skip = mRand.nextInt(numUnplayed);
-                int cnt = -1;
-                while (true) {
-                    while (tracks[++cnt] < 0)
-                        ;
-                    skip--;
-                    if (skip < 0) {
-                        break;
-                    }
-                }
-                mPlayPos = cnt;
-            } else if (mShuffleMode == SHUFFLE_AUTO) {
-                doAutoShuffleUpdate();
-                mPlayPos++;
-            } else {
-                if (mPlayPos >= mPlayListLen - 1) {
-                    // we're at the end of the list
-                    if (mRepeatMode == REPEAT_NONE && !force) {
-                        // all done
-                        gotoIdleState();
-                        mIsSupposedToBePlaying = false;
-                        notifyChange(PLAYSTATE_CHANGED);
-                        return;
-                    } else if (mRepeatMode == REPEAT_ALL || force) {
-                        mPlayPos = 0;
-                    }
-                } else {
-                    mPlayPos++;
-                }
+                return;
             }
+            mPlayPos = pos;
             saveBookmarkIfNeeded();
             stop(false);
-            openCurrent();
+            mPlayPos = pos;
+            openCurrentAndNext();
             play();
             notifyChange(META_CHANGED);
         }
@@ -1726,7 +1786,7 @@ public class ApolloService extends Service {
                     }
                     boolean wasPlaying = mIsSupposedToBePlaying;
                     stop(false);
-                    openCurrent();
+                    openCurrentAndNext();
                     if (wasPlaying) {
                         play();
                     }
@@ -1771,7 +1831,7 @@ public class ApolloService extends Service {
                     mPlayListLen = 0;
                     doAutoShuffleUpdate();
                     mPlayPos = 0;
-                    openCurrent();
+                    openCurrentAndNext();
                     play();
                     notifyChange(META_CHANGED);
                     return;
@@ -1791,6 +1851,7 @@ public class ApolloService extends Service {
     public void setRepeatMode(int repeatmode) {
         synchronized (this) {
             mRepeatMode = repeatmode;
+            setNextTrack();
             notifyChange(REPEATMODE_CHANGED);
             saveQueue(false);
         }
@@ -1845,7 +1906,7 @@ public class ApolloService extends Service {
         synchronized (this) {
             stop(false);
             mPlayPos = pos;
-            openCurrent();
+            openCurrentAndNext();
             play();
             notifyChange(META_CHANGED);
             if (mShuffleMode == SHUFFLE_AUTO) {
@@ -2019,41 +2080,70 @@ public class ApolloService extends Service {
      * files.
      */
     private class MultiPlayer {
-        private MediaPlayer mMediaPlayer = new MediaPlayer();
+        private MediaPlayer mCurrentMediaPlayer = new MediaPlayer();
+        
+        private MediaPlayer mNextMediaPlayer;
 
         private Handler mHandler;
 
         private boolean mIsInitialized = false;
 
         public MultiPlayer() {
-            mMediaPlayer.setWakeMode(ApolloService.this, PowerManager.PARTIAL_WAKE_LOCK);
+            mCurrentMediaPlayer.setWakeMode(ApolloService.this, PowerManager.PARTIAL_WAKE_LOCK);
         }
 
         public void setDataSource(String path) {
-            try {
-                mMediaPlayer.reset();
-                mMediaPlayer.setOnPreparedListener(null);
-                if (path.startsWith("content://")) {
-                    mMediaPlayer.setDataSource(ApolloService.this, Uri.parse(path));
-                } else {
-                    mMediaPlayer.setDataSource(path);
-                }
-                mMediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
-                mMediaPlayer.prepare();
-            } catch (IOException ex) {
-                mIsInitialized = false;
-                return;
-            } catch (IllegalArgumentException ex) {
-                mIsInitialized = false;
-                return;
+            mIsInitialized = setDataSourceImpl(mCurrentMediaPlayer, path);
+            if (mIsInitialized) {
+                setNextDataSource(null);
             }
-            mMediaPlayer.setOnCompletionListener(listener);
-            mMediaPlayer.setOnErrorListener(errorListener);
+        }
+
+        private boolean setDataSourceImpl(MediaPlayer player, String path) {
+            try {
+                player.reset();
+                player.setOnPreparedListener(null);
+                if (path.startsWith("content://")) {
+                    player.setDataSource(ApolloService.this, Uri.parse(path));
+                } else {
+                    player.setDataSource(path);
+                }
+                player.setAudioStreamType(AudioManager.STREAM_MUSIC);
+                player.prepare();
+            } catch (IOException ex) {
+                return false;
+            } catch (IllegalArgumentException ex) {
+                return false;
+            }
+            player.setOnCompletionListener(listener);
+            player.setOnErrorListener(errorListener);
             Intent i = new Intent(AudioEffect.ACTION_OPEN_AUDIO_EFFECT_CONTROL_SESSION);
             i.putExtra(AudioEffect.EXTRA_AUDIO_SESSION, getAudioSessionId());
             i.putExtra(AudioEffect.EXTRA_PACKAGE_NAME, getPackageName());
             sendBroadcast(i);
-            mIsInitialized = true;
+            return true;
+        }
+
+        public void setNextDataSource(String path) {
+            mCurrentMediaPlayer.setNextMediaPlayer(null);
+            if (mNextMediaPlayer != null) {
+                mNextMediaPlayer.release();
+                mNextMediaPlayer = null;
+            }
+            if (path == null) {
+                return;
+            }
+            mNextMediaPlayer = new MediaPlayer();
+            mNextMediaPlayer.setWakeMode(ApolloService.this, PowerManager.PARTIAL_WAKE_LOCK);
+            mNextMediaPlayer.setAudioSessionId(getAudioSessionId());
+            if (setDataSourceImpl(mNextMediaPlayer, path)) {
+                mCurrentMediaPlayer.setNextMediaPlayer(mNextMediaPlayer);
+            } else {
+                // failed to open next, we'll transition the old fashioned way,
+                // which will skip over the faulty file
+                mNextMediaPlayer.release();
+                mNextMediaPlayer = null;
+            }
         }
 
         public boolean isInitialized() {
@@ -2061,11 +2151,11 @@ public class ApolloService extends Service {
         }
 
         public void start() {
-            mMediaPlayer.start();
+            mCurrentMediaPlayer.start();
         }
 
         public void stop() {
-            mMediaPlayer.reset();
+            mCurrentMediaPlayer.reset();
             mIsInitialized = false;
         }
 
@@ -2074,11 +2164,11 @@ public class ApolloService extends Service {
          */
         public void release() {
             stop();
-            mMediaPlayer.release();
+            mCurrentMediaPlayer.release();
         }
 
         public void pause() {
-            mMediaPlayer.pause();
+            mCurrentMediaPlayer.pause();
         }
 
         public void setHandler(Handler handler) {
@@ -2088,14 +2178,22 @@ public class ApolloService extends Service {
         MediaPlayer.OnCompletionListener listener = new MediaPlayer.OnCompletionListener() {
             @Override
             public void onCompletion(MediaPlayer mp) {
-                // Acquire a temporary wakelock, since when we return from
-                // this callback the MediaPlayer will release its wakelock
-                // and allow the device to go to sleep.
-                // This temporary wakelock is released when the RELEASE_WAKELOCK
-                // message is processed, but just in case, put a timeout on it.
-                mWakeLock.acquire(30000);
-                mHandler.sendEmptyMessage(TRACK_ENDED);
-                mHandler.sendEmptyMessage(RELEASE_WAKELOCK);
+                if (mp == mCurrentMediaPlayer && mNextMediaPlayer != null) {
+                    mCurrentMediaPlayer.release();
+                    mCurrentMediaPlayer = mNextMediaPlayer;
+                    mNextMediaPlayer = null;
+                    mHandler.sendEmptyMessage(TRACK_WENT_TO_NEXT);
+                } else {
+                    // Acquire a temporary wakelock, since when we return from
+                    // this callback the MediaPlayer will release its wakelock
+                    // and allow the device to go to sleep.
+                    // This temporary wakelock is released when the RELEASE_WAKELOCK
+                    // message is processed, but just in case, put a timeout on it.
+                    mWakeLock.acquire(30000);
+                    mHandler.sendEmptyMessage(TRACK_ENDED);
+                    mHandler.sendEmptyMessage(RELEASE_WAKELOCK);
+                }
+
             }
         };
 
@@ -2105,14 +2203,14 @@ public class ApolloService extends Service {
                 switch (what) {
                     case MediaPlayer.MEDIA_ERROR_SERVER_DIED:
                         mIsInitialized = false;
-                        mMediaPlayer.release();
+                        mCurrentMediaPlayer.release();
                         // Creating a new MediaPlayer and settings its wakemode
                         // does not
                         // require the media service, so it's OK to do this now,
                         // while the
                         // service is still being restarted
-                        mMediaPlayer = new MediaPlayer();
-                        mMediaPlayer
+                        mCurrentMediaPlayer = new MediaPlayer();
+                        mCurrentMediaPlayer
                                 .setWakeMode(ApolloService.this, PowerManager.PARTIAL_WAKE_LOCK);
                         mHandler.sendMessageDelayed(mHandler.obtainMessage(SERVER_DIED), 2000);
                         return true;
@@ -2125,28 +2223,28 @@ public class ApolloService extends Service {
         };
 
         public long duration() {
-            return mMediaPlayer.getDuration();
+            return mCurrentMediaPlayer.getDuration();
         }
 
         public long position() {
-            return mMediaPlayer.getCurrentPosition();
+            return mCurrentMediaPlayer.getCurrentPosition();
         }
 
         public long seek(long whereto) {
-            mMediaPlayer.seekTo((int)whereto);
+            mCurrentMediaPlayer.seekTo((int)whereto);
             return whereto;
         }
 
         public void setVolume(float vol) {
-            mMediaPlayer.setVolume(vol, vol);
+            mCurrentMediaPlayer.setVolume(vol, vol);
         }
 
         public void setAudioSessionId(int sessionId) {
-            mMediaPlayer.setAudioSessionId(sessionId);
+            mCurrentMediaPlayer.setAudioSessionId(sessionId);
         }
 
         public int getAudioSessionId() {
-            return mMediaPlayer.getAudioSessionId();
+            return mCurrentMediaPlayer.getAudioSessionId();
         }
     }
 
@@ -2214,7 +2312,7 @@ public class ApolloService extends Service {
 
         @Override
         public void next() {
-            mService.get().next(true);
+            mService.get().gotoNext(true);
         }
 
         @Override
