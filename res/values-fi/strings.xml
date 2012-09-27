@@ -5,13 +5,13 @@
     <string name="app_name">Apollo</string>
 
     <!-- Content descriptions for the Bottom Action Bar -->
-    <string name="cd_favorite">Tee tästä suosikkokappale</string>
+    <string name="cd_favorite">Tee tästä suosikkikappale</string>
     <string name="cd_search">Etsi musiikeistasi</string>
     <string name="cd_overflow">Lisää asetuksia</string>
     <string name="cd_bottom_action_bar_album_art">Albumin kuvitus tälle kappaleelle</string>
     <string name="cd_repeat">Toista yksi tai kaikki</string>
-    <string name="cd_previous">Takaisinpäin</string>
-    <string name="cd_play">Toisto ja pause</string>
+    <string name="cd_previous">Taaksepäin</string>
+    <string name="cd_play">Soita ja pysäytä</string>
     <string name="cd_next">Eteenpäin</string>
     <string name="cd_shuffle">Sekoita kappaleet</string>
 
@@ -56,7 +56,7 @@
     <string name="play_store">Play-kauppa</string>
 
     <!-- Set track as ringtone -->
-    <string name="set_as_ringtone">\"<xliff:g id="name" example="Alarm Bell">%s</xliff:g>\" aseta soittoääneksi</string>
+    <string name="set_as_ringtone">\"<xliff:g id="name" example="Alarm Bell">%s</xliff:g>\" asetettu soittoääneksi</string>
 
     <!-- Transient popup message shown after renaming a playlist -->
     <string name="rename_playlist">Uudelleennimeä soittolista</string>
@@ -66,12 +66,12 @@
     <string name="repeat_all">Toista kaikki</string>
     <string name="repeat_off">Älä toista</string>
     <string name="shuffle_off">Sekoitus pois</string>
-    <string name="shuffle_on">Sekoitus päälle</string>
+    <string name="shuffle_on">Sekoitus päällä</string>
 
     <!-- Share Intent -->
     <string name="now_listening_to">Nyt soi:</string>
-    <string name="by">by</string>
-    <string name="share_track_using">Jaa kappale käyttämällä</string>
+    <string name="by">sovelluksella</string>
+    <string name="share_track_using">Jaa kappale käyttämällä palvelua</string>
 
     <!-- ContextMenu items -->
     <string name="play_all">Soita kaikki</string>
@@ -92,7 +92,7 @@
     <!-- Settings -->
     <string name="about">Tietoja Apollosta</string>
     <string name="eqalizer">Taajuuskorjain</string>
-    <string name="header_interface">Ulkoasu</string>
+    <string name="header_interface">Käyttöliittymä</string>
     <string name="themes">Teemat</string>
     <string name="apollo_themes">Valitse Apollon teema</string>
     <string name="select_theme">Valitse teemasi</string>
