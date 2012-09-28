@@ -56,7 +56,7 @@
     <string name="play_store">Play Trgovina</string>
 
     <!-- Set track as ringtone -->
-    <string name="set_as_ringtone">\"<xliff:g id="name" example="Alarm Bell">%s</xliff:g>\" postavi kao zvono</string>
+    <string name="set_as_ringtone">\"<xliff:g id="name" example="Alarm Bell">%s</xliff:g>\" postavljena kao Melodija zvona telefona</string>
 
     <!-- Transient popup message shown after renaming a playlist -->
     <string name="rename_playlist">Preimenuj popis</string>
@@ -74,7 +74,7 @@
     <string name="share_track_using">Podjeli pjesmu koristeći</string>
 
     <!-- ContextMenu items -->
-    <string name="play_all">Sve sviraj</string>
+    <string name="play_all">Sviraj</string>
     <string name="add_to_playlist">Dodaj u popis</string>
     <string name="use_as_ringtone">Koristi kao zvono</string>
     <string name="delete_playlist">Izbriši popis</string>
@@ -105,7 +105,7 @@
     <!-- Playlists menu -->
     <string name="favorite">Favoriti</string>
     <string name="queue">Queue</string>
-    <string name="new_playlist">Nova</string>
+    <string name="new_playlist">Novi popis</string>
     <string name="new_playlist_name_template">Popis <xliff:g id="number">%d</xliff:g></string>
     <string name="save">Spremi</string>
     <string name="overwrite">Prebriši</string>
