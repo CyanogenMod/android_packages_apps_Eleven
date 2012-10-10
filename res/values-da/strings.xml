@@ -117,6 +117,13 @@
     <string name="tab_playlists">AFSPILNINGSLISTER</string>
     <string name="tab_genres">GENRER</string>
 
+    <!-- External file dialog -->
+    <string name="play_external_question_msg">Vælg den handling, der skal anvendes på: \n\n<b><xliff:g id="name">%s</xliff:g></b></string>
+    <string name="play_external_question_button_play">Afspil</string>
+    <string name="play_external_question_button_queue">Sæt i kø</string>
+    <string name="play_external_question_button_cancel">Annuller</string>
+    <string name="play_external_error">Kunne ikke afspille filen</string>
+
     <!-- Something went wrong -->
     <string name="error">Fejl</string>
 
