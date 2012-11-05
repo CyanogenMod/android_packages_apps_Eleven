@@ -23,8 +23,10 @@
 
         <!-- Number of albums is one -->
         <item quantity="one">1 album</item>
-        <!-- Number of albums is more than one -->
-        <item quantity="other"><xliff:g id="count">%d</xliff:g> alb(a)</item>
+        <!-- Number of albums is between 2-4 -->
+        <item quantity="few"><xliff:g id="count">%d</xliff:g> alba</item>
+        <!-- Number of albums is more than 4 -->
+        <item quantity="other"><xliff:g id="count">%d</xliff:g> alb</item>
     </plurals>
 
     <!-- Used to indicate the number of songs for an album -->
@@ -33,6 +35,7 @@
 
         <!-- Number of songs is one -->
         <item quantity="one">1 skladba</item>
+        <item quantity="few"><xliff:g id="count">%d</xliff:g> skladby</item>
         <item quantity="other"><xliff:g id="count">%d</xliff:g> skladeb</item>
     </plurals>
 
@@ -41,7 +44,8 @@
         <!-- message shown when one song was added -->
         <item quantity="one">Jedna skladba přidána do playlistu</item>
         <!-- message shown when zero or more than one song was added -->
-        <item quantity="other"><xliff:g id="number" example="27">%d</xliff:g> skladeb přidány do playlistu</item>
+        <item quantity="few"><xliff:g id="number" example="27">%d</xliff:g> skladby přidány do playlistu</item>
+        <item quantity="other"><xliff:g id="number" example="27">%d</xliff:g> skladeb přidáno do playlistu</item>
     </plurals>
 
     <!-- Headers -->
