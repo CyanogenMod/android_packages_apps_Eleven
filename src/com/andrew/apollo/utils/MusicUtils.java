@@ -969,6 +969,9 @@ public class MusicUtils {
         };
         Uri uri = Audio.Artists.EXTERNAL_CONTENT_URI;
         Cursor cursor = mContext.getContentResolver().query(uri, cols, where, null, null);
+        if (cursor == null){
+            return MediaStore.UNKNOWN_STRING;
+        }
         if (cursor.getCount() <= 0) {
             if (default_name)
                 return mContext.getString(R.string.unknown);
@@ -1001,6 +1004,9 @@ public class MusicUtils {
         };
         Uri uri = Audio.Albums.EXTERNAL_CONTENT_URI;
         Cursor cursor = mContext.getContentResolver().query(uri, cols, where, null, null);
+        if (cursor == null){
+            return MediaStore.UNKNOWN_STRING;
+        }
         if (cursor.getCount() <= 0) {
             if (default_name)
                 return mContext.getString(R.string.unknown);
@@ -1031,6 +1037,9 @@ public class MusicUtils {
         };
         Uri uri = Audio.Playlists.EXTERNAL_CONTENT_URI;
         Cursor cursor = mContext.getContentResolver().query(uri, cols, where, null, null);
+        if (cursor == null){
+            return "";
+        }
         if (cursor.getCount() <= 0)
             return "";
         cursor.moveToFirst();
@@ -1052,6 +1061,9 @@ public class MusicUtils {
         };
         Uri uri = Audio.Genres.EXTERNAL_CONTENT_URI;
         Cursor cursor = mContext.getContentResolver().query(uri, cols, where, null, null);
+        if (cursor == null){
+            return MediaStore.UNKNOWN_STRING;
+        }
         if (cursor.getCount() <= 0) {
             if (default_name)
                 return mContext.getString(R.string.unknown);

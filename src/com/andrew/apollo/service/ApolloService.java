@@ -296,15 +296,17 @@ public class ApolloService extends Service {
                     }
                     break;
                 case TRACK_WENT_TO_NEXT:
-                    mPlayPos = mNextPlayPos;
-                    if (mCursor != null) {
-                        mCursor.close();
-                        mCursor = null;
+                    if (mNextPlayPos >= 0 && mPlayList != null) {
+                        mPlayPos = mNextPlayPos;
+                        if (mCursor != null) {
+                            mCursor.close();
+                            mCursor = null;
+                        }
+                        mCursor = getCursorForId(mPlayList[mPlayPos]);
+                        notifyChange(META_CHANGED);
+                        updateNotification();
+                        setNextTrack();
                     }
-                    mCursor = getCursorForId(mPlayList[mPlayPos]);
-                    notifyChange(META_CHANGED);
-                    updateNotification();
-                    setNextTrack();
                     break;
                 case TRACK_ENDED:
                     if (mRepeatMode == REPEAT_CURRENT) {
@@ -1106,7 +1108,9 @@ public class ApolloService extends Service {
         Cursor c = getContentResolver().query(
                 MediaStore.Audio.Media.EXTERNAL_CONTENT_URI,
                 mCursorCols, "_id=" + id , null, null);
-        c.moveToFirst();
+        if (c != null) {
+            c.moveToFirst();
+        }
         return c;
     }
 
@@ -1122,6 +1126,9 @@ public class ApolloService extends Service {
             }
             stop(false);
             mCursor = getCursorForId(mPlayList[mPlayPos]);
+            if (mCursor == null ) {
+                return;
+            }
             while(!open(MediaStore.Audio.Media.EXTERNAL_CONTENT_URI + "/" + mCursor.getLong(IDCOLIDX))) {
                 if (mOpenFailedCounter++ < 10 &&  mPlayListLen > 1) {
                     int pos = getNextPosition(false);
