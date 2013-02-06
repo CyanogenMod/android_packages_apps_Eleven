@@ -68,7 +68,7 @@
     <string name="header_interface">Interfaccia</string>
     <string name="themes">Temi</string>
     <string name="apollo_themes">Seleziona un tema per Apollo</string>
-    <string name="select_theme">Seleziona il tema</string>
+    <string name="select_theme">Seleziona tema</string>
     <string name="version">Versione Apollo</string>
     <string name="apply_theme">Applica tema</string>
     <string name="get_more_themes">Ottieni altri temi</string>
