@@ -70,7 +70,7 @@
 
     <!-- Share Intent -->
     <string name="now_listening_to">Nyt soi:</string>
-    <string name="by">sovelluksella</string>
+    <string name="by">esittäjältä</string>
     <string name="share_track_using">Jaa kappale käyttämällä palvelua</string>
 
     <!-- ContextMenu items -->
@@ -78,7 +78,7 @@
     <string name="add_to_playlist">Lisää soittolistalle</string>
     <string name="use_as_ringtone">Aseta soittoääneksi</string>
     <string name="delete_playlist">Poista soittolista</string>
-    <string name="search">Haku</string>
+    <string name="search">Hae</string>
     <string name="remove">Poista soittolistalta</string>
 
     <!-- App Widgets -->
@@ -95,7 +95,7 @@
     <string name="header_interface">Käyttöliittymä</string>
     <string name="themes">Teemat</string>
     <string name="apollo_themes">Valitse Apollon teema</string>
-    <string name="select_theme">Valitse teemasi</string>
+    <string name="select_theme">Valitse teema</string>
     <string name="version">Apollon versio</string>
 
     <!-- Theme layout Buttons -->
@@ -117,6 +117,13 @@
     <string name="tab_songs">KAPPALEET</string>
     <string name="tab_playlists">SOITTOLISTAT</string>
     <string name="tab_genres">TYYLILAJIT</string>
+
+    <!-- External file dialog -->
+    <string name="play_external_question_msg">Valitse toiminto, joka suoritetaan kohteelle: \n\n<b><xliff:g id="name">%s</xliff:g></b></string>
+    <string name="play_external_question_button_play">Toista</string>
+    <string name="play_external_question_button_queue">Lisää jonoon</string>
+    <string name="play_external_question_button_cancel">Peruuta</string>
+    <string name="play_external_error">Tiedoston toistaminen epäonnistui</string>
 
     <!-- Something went wrong -->
     <string name="error">Virhe</string>
