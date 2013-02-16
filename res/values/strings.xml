@@ -16,7 +16,7 @@
     <string name="cd_shuffle">Shuffle tracks</string>
 
     <!-- AudioPlayer title -->
-    <string name="nowplaying">Now Playing</string>
+    <string name="nowplaying">Now playing</string>
 
     <!-- Used to indicate the number of albums for an artist -->
     <plurals name="Nalbums">
