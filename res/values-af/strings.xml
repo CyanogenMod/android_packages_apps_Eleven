@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+
+    <string name="app_name">Apollo</string>
+
+    <!-- Content descriptions for the Bottom Action Bar -->
+    <string name="cd_favorite">Maak dit \'n gunsteling liedjie</string>
+    <string name="cd_search">Soek deur jou musiek</string>
+    <string name="cd_overflow">Wys meer opsies</string>
+    <string name="cd_bottom_action_bar_album_art">Album kuns vir hierdie lied</string>
+    <string name="cd_repeat">Herhaal een of almal</string>
+    <string name="cd_previous">Beweeg terugwaarts</string>
+    <string name="cd_play">Speel en pouse</string>
+    <string name="cd_next">Beweeg vorentoe</string>
+    <string name="cd_shuffle">Skommel liedjies</string>
+
+    <!-- AudioPlayer title -->
+    <string name="nowplaying">Speel tans</string>
+
+    <!-- Used to indicate the number of albums for an artist -->
+    <plurals name="Nalbums">
+
+        <!-- Number of albums is one -->
+        <item quantity="one">1 album</item>
+        <!-- Number of albums is more than one -->
+        <item quantity="other"><xliff:g id="count">%d</xliff:g> albums</item>
+    </plurals>
+
+    <!-- Used to indicate the number of songs for an album -->
+
+    <plurals name="Nsongs">
+
+        <!-- Number of songs is one -->
+        <item quantity="one">1 Lied</item>
+        <item quantity="other"><xliff:g id="count">%d</xliff:g> liedjies</item>
+    </plurals>
+
+    <!-- Toasts after adding song(s) to playlists -->
+    <plurals name="NNNtrackstoplaylist">
+        <!-- message shown when one song was added -->
+        <item quantity="one">1 liedjie by snitlys gevoeg</item>
+        <!-- message shown when zero or more than one song was added -->
+        <item quantity="other"><xliff:g id="number" example="27">%d</xliff:g> liedjies by snitlys gevoeg</item>
+    </plurals>
+
+    <!-- Headers -->
+    <string name="album_header">ALBUM LYS</string>
+    <string name="track_header">SNIT LYS</string>
+
+    <!-- Options MenuItems -->
+    <string name="settings">Instellings</string>
+    <string name="shuffle_all">Skommel almal</string>
+    <string name="share">Deel</string>
+    <string name="play_store">Play Winkel</string>
+
+    <!-- Set track as ringtone -->
+    <string name="set_as_ringtone">\"<xliff:g id="name" example="Alarm Bell">%s</xliff:g>\" stel as luitoon</string>
+
+    <!-- Transient popup message shown after renaming a playlist -->
+    <string name="rename_playlist">Hernoem snitlys</string>
+
+    <!-- Shuffle and repeat messages -->
+    <string name="repeat_one">Herhaal een</string>
+    <string name="repeat_all">Herhaal almal</string>
+    <string name="repeat_off">Herhaling af</string>
+    <string name="shuffle_off">Skommel af</string>
+    <string name="shuffle_on">Skommel aan</string>
+
+    <!-- Share Intent -->
+    <string name="now_listening_to">Ek luister na:</string>
+    <string name="by">by</string>
+    <string name="share_track_using">Deel lied met behulp van</string>
+
+    <!-- ContextMenu items -->
+    <string name="play_all">Speel alles</string>
+    <string name="add_to_playlist">Voeg by snitlys</string>
+    <string name="use_as_ringtone">Gebruik as luitoon</string>
+    <string name="delete_playlist">Verwyder snitlys</string>
+    <string name="search">Soek</string>
+    <string name="remove">Verwyder van snitlys</string>
+
+    <!-- App Widgets -->
+    <string name="apollo_1x1">Apollo (1x1)</string>
+    <string name="apollo_4x1">Apollo (4x1)</string>
+    <string name="apollo_4x2">Apollo (4x2)</string>
+
+    <!-- Unknown genre name -->
+    <string name="unknown">Onbekend</string>
+
+    <!-- Settings -->
+    <string name="about">Oor Apollo</string>
+    <string name="eqalizer">Equalizer</string>
+    <string name="header_interface">Intervlak</string>
+    <string name="themes">Temas</string>
+    <string name="apollo_themes">Kies tema vir Apollo</string>
+    <string name="select_theme">Kies tema</string>
+    <string name="version">Apollo weergawe</string>
+
+    <!-- Theme layout Buttons -->
+    <string name="apply_theme">Pas tema toe</string>
+    <string name="get_more_themes">Kry nog temas</string>
+
+    <!-- Playlists menu -->
+    <string name="favorite">Gunstelinge</string>
+    <string name="queue">Voeg in tou</string>
+    <string name="new_playlist">Nuut</string>
+    <string name="new_playlist_name_template">Snitlys <xliff:g id="number">%d</xliff:g></string>
+    <string name="save">Stoor</string>
+    <string name="overwrite">Oorskryf</string>
+
+    <!-- Tabs -->
+    <string name="tab_recent">ONLANGS</string>
+    <string name="tab_artists">KUNSTENAAR</string>
+    <string name="tab_albums">ALBUMS</string>
+    <string name="tab_songs">LIEDJIES</string>
+    <string name="tab_playlists">SNITLYSTE</string>
+    <string name="tab_genres">GENRES</string>
+
+    <!-- External file dialog -->
+    <string name="play_external_question_msg">Kies die aksie om toe te pas: \n\n<b><xliff:g id="name">%s</xliff:g></b></string>
+    <string name="play_external_question_button_play">Speel</string>
+    <string name="play_external_question_button_queue">Staan tou</string>
+    <string name="play_external_question_button_cancel">Kanselleer</string>
+    <string name="play_external_error">Lêer kan nie gespeel word nie</string>
+
+    <!-- Something went wrong -->
+    <string name="error">Fout</string>
+
+</resources>
