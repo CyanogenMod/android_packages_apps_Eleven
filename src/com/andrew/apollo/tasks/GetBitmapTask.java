@@ -44,11 +44,11 @@ public abstract class GetBitmapTask extends AsyncTask<String, Integer, Bitmap> {
 
         File file = findCachedFile(context);
 
-        if (file == null) {
+        if (file == null && !isCancelled()) {
             file = downloadImage(context);
         }
 
-        if (file == null) {
+        if (file == null || isCancelled()) {
             return null;
         }
 
@@ -109,8 +109,8 @@ public abstract class GetBitmapTask extends AsyncTask<String, Integer, Bitmap> {
     @Override
     protected void onPostExecute(Bitmap bitmap) {
         super.onPostExecute(bitmap);
-        OnBitmapReadyListener listener = mListenerReference.get();
-        if (bitmap != null) {
+        if (bitmap != null && !isCancelled()) {
+            OnBitmapReadyListener listener = mListenerReference.get();
             if (listener != null) {
                 listener.bitmapReady(bitmap, mTag);
             }

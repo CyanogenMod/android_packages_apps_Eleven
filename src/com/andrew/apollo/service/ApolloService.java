@@ -254,8 +254,8 @@ public class ApolloService extends Service implements GetBitmapTask.OnBitmapRead
     private final AppWidget41 mAppWidgetProvider4x1 = AppWidget41.getInstance();
 
     private String mAlbumBitmapTag;
-
     private Bitmap mAlbumBitmap;
+    private GetAlbumImageTask mAlbumBitmapTask;
 
     // interval after which we stop the service when idle
     private static final int IDLE_DELAY = 60000;
@@ -512,6 +512,7 @@ public class ApolloService extends Service implements GetBitmapTask.OnBitmapRead
             mCursor.close();
             mCursor = null;
         }
+        // make sure a bitmap fetch that may be pending is killed
         updateAlbumBitmap();
 
         unregisterReceiver(mIntentReceiver);
@@ -1813,18 +1814,25 @@ public class ApolloService extends Service implements GetBitmapTask.OnBitmapRead
         }
     }
 
-    private synchronized void updateAlbumBitmap()
-    {
-        if (mCursor == null)
+    private synchronized void updateAlbumBitmap() {
+        if (mAlbumBitmapTask != null) {
+            mAlbumBitmapTask.cancel(true);
+            mAlbumBitmapTask = null;
+        }
+
+        if (mCursor == null) {
             return;
+        }
 
         String tag = getArtistName() + " - " + getAlbumName();
-        if (tag == mAlbumBitmapTag)
+        if (tag == mAlbumBitmapTag) {
             return;
+        }
 
         mAlbumBitmapTag = tag;
         mAlbumBitmap = null;
-        new GetAlbumImageTask(getArtistName(), getAlbumName(), this, tag, this).execute();
+        mAlbumBitmapTask = new GetAlbumImageTask(getArtistName(), getAlbumName(), this, tag, this);
+        mAlbumBitmapTask.execute();
     }
 
     @Override
@@ -1835,7 +1843,10 @@ public class ApolloService extends Service implements GetBitmapTask.OnBitmapRead
             }
         }
         notifyChange(META_CHANGED);
-        updateNotification();
+        if (status != null) {
+            updateNotification();
+        }
+        mAlbumBitmapTask = null;
     }
 
     /**
