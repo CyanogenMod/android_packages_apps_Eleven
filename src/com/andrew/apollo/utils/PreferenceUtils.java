@@ -171,46 +171,11 @@ public final class PreferenceUtils {
     }
 
     /**
-     * @param value True if the user only wants to download images on Wi-Fi,
-     *            false otherwise
-     */
-    public void setOnlyOnWifi(final boolean value) {
-        ApolloUtils.execute(false, new AsyncTask<Void, Void, Void>() {
-            @Override
-            protected Void doInBackground(final Void... unused) {
-                final SharedPreferences.Editor editor = mPreferences.edit();
-                editor.putBoolean(ONLY_ON_WIFI, value);
-                editor.apply();
-
-                return null;
-            }
-        }, (Void[])null);
-    }
-
-    /**
      * @return True if the user has checked to download missing album covers,
      *         false otherwise.
      */
     public final boolean downloadMissingArtwork() {
         return mPreferences.getBoolean(DOWNLOAD_MISSING_ARTWORK, true);
-    }
-
-    /**
-     * @param context The {@link Context} to use
-     * @param value True if the user only wants to download missing album
-     *            covers, false otherwise.
-     */
-    public void setDownloadMissingArtwork(final boolean value) {
-        ApolloUtils.execute(false, new AsyncTask<Void, Void, Void>() {
-            @Override
-            protected Void doInBackground(final Void... unused) {
-                final SharedPreferences.Editor editor = mPreferences.edit();
-                editor.putBoolean(DOWNLOAD_MISSING_ARTWORK, value);
-                editor.apply();
-
-                return null;
-            }
-        }, (Void[])null);
     }
 
     /**
@@ -222,46 +187,11 @@ public final class PreferenceUtils {
     }
 
     /**
-     * @param context The {@link Context} to use
-     * @param value True if the user only wants to download missing artist
-     *            images , false otherwise.
-     */
-    public void setDownloadMissingArtistImages(final boolean value) {
-        ApolloUtils.execute(false, new AsyncTask<Void, Void, Void>() {
-            @Override
-            protected Void doInBackground(final Void... unused) {
-                final SharedPreferences.Editor editor = mPreferences.edit();
-                editor.putBoolean(DOWNLOAD_MISSING_ARTIST_IMAGES, value);
-                editor.apply();
-
-                return null;
-            }
-        }, (Void[])null);
-    }
-
-    /**
      * @return True if the user has checked to use lockscreen controls, false
      *         otherwise.
      */
     public final boolean enableLockscreenControls() {
         return mPreferences.getBoolean(USE_LOCKSREEN_CONTROLS, true);
-    }
-
-    /**
-     * @param value True if the user has checked to use lockscreen controls,
-     *            false otherwise.
-     */
-    public void setLockscreenControls(final boolean value) {
-        ApolloUtils.execute(false, new AsyncTask<Void, Void, Void>() {
-            @Override
-            protected Void doInBackground(final Void... unused) {
-                final SharedPreferences.Editor editor = mPreferences.edit();
-                editor.putBoolean(USE_LOCKSREEN_CONTROLS, value);
-                editor.apply();
-
-                return null;
-            }
-        }, (Void[])null);
     }
 
     /**

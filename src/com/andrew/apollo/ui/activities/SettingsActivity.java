@@ -137,12 +137,6 @@ public class SettingsActivity extends PreferenceActivity {
      * Initializes the preferences under the "Data" category
      */
     private void initData() {
-        // Only on Wi-Fi preference
-        onlyOnWiFi();
-        // Missing album art
-        downloadMissingArtwork();
-        // Missing artist images
-        downloadMissingArtistImages();
         // Lockscreen controls
         toggleLockscreenControls();
     }
@@ -178,51 +172,6 @@ public class SettingsActivity extends PreferenceActivity {
     }
 
     /**
-     * Toggles the only on Wi-Fi preference
-     */
-    private void onlyOnWiFi() {
-        final CheckBoxPreference onlyOnWiFi = (CheckBoxPreference)findPreference("only_on_wifi");
-        onlyOnWiFi.setOnPreferenceChangeListener(new OnPreferenceChangeListener() {
-
-            @Override
-            public boolean onPreferenceChange(final Preference preference, final Object newValue) {
-                mPreferences.setOnlyOnWifi((Boolean)newValue);
-                return true;
-            }
-        });
-    }
-
-    /**
-     * Toggles the download missing album art preference
-     */
-    private void downloadMissingArtwork() {
-        final CheckBoxPreference missingArtwork = (CheckBoxPreference)findPreference("album_images");
-        missingArtwork.setOnPreferenceChangeListener(new OnPreferenceChangeListener() {
-
-            @Override
-            public boolean onPreferenceChange(final Preference preference, final Object newValue) {
-                mPreferences.setDownloadMissingArtwork((Boolean)newValue);
-                return true;
-            }
-        });
-    }
-
-    /**
-     * Toggles the download missing artist imagages preference
-     */
-    private void downloadMissingArtistImages() {
-        final CheckBoxPreference missingArtistImages = (CheckBoxPreference)findPreference("artist_images");
-        missingArtistImages.setOnPreferenceChangeListener(new OnPreferenceChangeListener() {
-
-            @Override
-            public boolean onPreferenceChange(final Preference preference, final Object newValue) {
-                mPreferences.setDownloadMissingArtistImages((Boolean)newValue);
-                return true;
-            }
-        });
-    }
-
-    /**
      * Toggles the lock screen controls
      */
     private void toggleLockscreenControls() {
@@ -231,8 +180,6 @@ public class SettingsActivity extends PreferenceActivity {
 
             @Override
             public boolean onPreferenceChange(final Preference preference, final Object newValue) {
-                mPreferences.setLockscreenControls((Boolean)newValue);
-
                 // Let the service know
                 final Intent updateLockscreen = new Intent(SettingsActivity.this,
                         MusicPlaybackService.class);
