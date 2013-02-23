@@ -172,11 +172,7 @@ public class RecentWidgetProvider extends AppWidgetProvider {
     @TargetApi(Build.VERSION_CODES.ICE_CREAM_SANDWICH)
     private void compatSetRemoteAdapter(final RemoteViews rv, final int appWidgetId,
             final Intent intent) {
-        if (ApolloUtils.hasICS()) {
-            rv.setRemoteAdapter(R.id.app_widget_recents_list, intent);
-        } else {
-            rv.setRemoteAdapter(appWidgetId, R.id.app_widget_recents_list, intent);
-        }
+        rv.setRemoteAdapter(R.id.app_widget_recents_list, intent);
     }
 
     /**

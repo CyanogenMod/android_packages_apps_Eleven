@@ -80,7 +80,7 @@ public class RenamePlaylist extends BasePlaylistDialog {
     public void onSaveClick() {
         final String playlistName = mPlaylist.getText().toString();
         if (playlistName != null && playlistName.length() > 0) {
-            final ContentResolver resolver = getSherlockActivity().getContentResolver();
+            final ContentResolver resolver = getActivity().getContentResolver();
             final ContentValues values = new ContentValues(1);
             values.put(Audio.Playlists.NAME, Capitalize.capitalize(playlistName));
             resolver.update(Audio.Playlists.EXTERNAL_CONTENT_URI, values,
@@ -103,7 +103,7 @@ public class RenamePlaylist extends BasePlaylistDialog {
             mSaveButton.setEnabled(false);
         } else {
             mSaveButton.setEnabled(true);
-            if (MusicUtils.getIdForPlaylist(getSherlockActivity(), playlistName) >= 0) {
+            if (MusicUtils.getIdForPlaylist(getActivity(), playlistName) >= 0) {
                 mSaveButton.setText(R.string.overwrite);
             } else {
                 mSaveButton.setText(R.string.save);
@@ -116,7 +116,7 @@ public class RenamePlaylist extends BasePlaylistDialog {
      * @return The name of the playlist
      */
     private String getPlaylistNameFromId(final long id) {
-        Cursor cursor = getSherlockActivity().getContentResolver().query(
+        Cursor cursor = getActivity().getContentResolver().query(
                 MediaStore.Audio.Playlists.EXTERNAL_CONTENT_URI, new String[] {
                     MediaStore.Audio.Playlists.NAME
                 }, MediaStore.Audio.Playlists._ID + "=?", new String[] {

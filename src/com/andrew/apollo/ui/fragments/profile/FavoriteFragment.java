@@ -31,7 +31,6 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import com.actionbarsherlock.app.SherlockFragment;
 import com.andrew.apollo.R;
 import com.andrew.apollo.adapters.ProfileSongAdapter;
 import com.andrew.apollo.loaders.FavoritesLoader;
@@ -54,7 +53,7 @@ import java.util.List;
  * 
  * @author Andrew Neal (andrewdneal@gmail.com)
  */
-public class FavoriteFragment extends SherlockFragment implements LoaderCallbacks<List<Song>>,
+public class FavoriteFragment extends Fragment implements LoaderCallbacks<List<Song>>,
         OnItemClickListener {
 
     /**
@@ -130,7 +129,7 @@ public class FavoriteFragment extends SherlockFragment implements LoaderCallback
     public void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         // Create the adpater
-        mAdapter = new ProfileSongAdapter(getSherlockActivity(), R.layout.list_item_simple);
+        mAdapter = new ProfileSongAdapter(getActivity(), R.layout.list_item_simple);
     }
 
     /**
@@ -198,7 +197,7 @@ public class FavoriteFragment extends SherlockFragment implements LoaderCallback
         // Add the song to a playlist
         final SubMenu subMenu = menu.addSubMenu(GROUP_ID, FragmentMenuItems.ADD_TO_PLAYLIST,
                 Menu.NONE, R.string.add_to_playlist);
-        MusicUtils.makePlaylistMenu(getSherlockActivity(), GROUP_ID, subMenu, false);
+        MusicUtils.makePlaylistMenu(getActivity(), GROUP_ID, subMenu, false);
 
         // View more content by the song artist
         menu.add(GROUP_ID, FragmentMenuItems.MORE_BY_ARTIST, Menu.NONE,
@@ -222,12 +221,12 @@ public class FavoriteFragment extends SherlockFragment implements LoaderCallback
         if (item.getGroupId() == GROUP_ID) {
             switch (item.getItemId()) {
                 case FragmentMenuItems.PLAY_SELECTION:
-                    MusicUtils.playAll(getSherlockActivity(), new long[] {
+                    MusicUtils.playAll(getActivity(), new long[] {
                         mSelectedId
                     }, 0, false);
                     return true;
                 case FragmentMenuItems.ADD_TO_QUEUE:
-                    MusicUtils.addToQueue(getSherlockActivity(), new long[] {
+                    MusicUtils.addToQueue(getActivity(), new long[] {
                         mSelectedId
                     });
                     return true;
@@ -238,18 +237,18 @@ public class FavoriteFragment extends SherlockFragment implements LoaderCallback
                     return true;
                 case FragmentMenuItems.PLAYLIST_SELECTED:
                     final long mPlaylistId = item.getIntent().getLongExtra("playlist", 0);
-                    MusicUtils.addToPlaylist(getSherlockActivity(), new long[] {
+                    MusicUtils.addToPlaylist(getActivity(), new long[] {
                         mSelectedId
                     }, mPlaylistId);
                     return true;
                 case FragmentMenuItems.MORE_BY_ARTIST:
-                    NavUtils.openArtistProfile(getSherlockActivity(), mArtistName);
+                    NavUtils.openArtistProfile(getActivity(), mArtistName);
                     return true;
                 case FragmentMenuItems.USE_AS_RINGTONE:
-                    MusicUtils.setRingtone(getSherlockActivity(), mSelectedId);
+                    MusicUtils.setRingtone(getActivity(), mSelectedId);
                     return true;
                 case FragmentMenuItems.REMOVE_FROM_FAVORITES:
-                    FavoritesStore.getInstance(getSherlockActivity()).removeItem(
+                    FavoritesStore.getInstance(getActivity()).removeItem(
                             Long.valueOf(mSelectedId));
                     getLoaderManager().restartLoader(LOADER, null, this);
                     return true;
@@ -277,9 +276,9 @@ public class FavoriteFragment extends SherlockFragment implements LoaderCallback
         if (position == 0) {
             return;
         }
-        Cursor cursor = FavoritesLoader.makeFavoritesCursor(getSherlockActivity());
+        Cursor cursor = FavoritesLoader.makeFavoritesCursor(getActivity());
         final long[] list = MusicUtils.getSongListForCursor(cursor);
-        MusicUtils.playAll(getSherlockActivity(), list, position - 1, false);
+        MusicUtils.playAll(getActivity(), list, position - 1, false);
         cursor.close();
         cursor = null;
     }
@@ -289,7 +288,7 @@ public class FavoriteFragment extends SherlockFragment implements LoaderCallback
      */
     @Override
     public Loader<List<Song>> onCreateLoader(final int id, final Bundle args) {
-        return new FavoritesLoader(getSherlockActivity());
+        return new FavoritesLoader(getActivity());
     }
 
     /**

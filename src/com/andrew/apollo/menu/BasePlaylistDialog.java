@@ -17,6 +17,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
 import android.os.Bundle;
+import android.support.v4.app.DialogFragment;
 import android.text.Editable;
 import android.text.InputType;
 import android.text.TextWatcher;
@@ -24,7 +25,6 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 
-import com.actionbarsherlock.app.SherlockDialogFragment;
 import com.andrew.apollo.R;
 import com.andrew.apollo.utils.MusicUtils;
 
@@ -33,7 +33,7 @@ import com.andrew.apollo.utils.MusicUtils;
  * 
  * @author Andrew Neal (andrewdneal@gmail.com)
  */
-public abstract class BasePlaylistDialog extends SherlockDialogFragment {
+public abstract class BasePlaylistDialog extends DialogFragment {
 
     /* The actual dialog */
     protected AlertDialog mPlaylistDialog;
@@ -56,9 +56,9 @@ public abstract class BasePlaylistDialog extends SherlockDialogFragment {
     @Override
     public Dialog onCreateDialog(final Bundle savedInstanceState) {
         // Initialize the alert dialog
-        mPlaylistDialog = new AlertDialog.Builder(getSherlockActivity()).create();
+        mPlaylistDialog = new AlertDialog.Builder(getActivity()).create();
         // Initialize the edit text
-        mPlaylist = new EditText(getSherlockActivity());
+        mPlaylist = new EditText(getActivity());
         // To show the "done" button on the soft keyboard
         mPlaylist.setSingleLine(true);
         // All caps
@@ -114,7 +114,7 @@ public abstract class BasePlaylistDialog extends SherlockDialogFragment {
      * Opens the soft keyboard
      */
     protected void openKeyboard() {
-        final InputMethodManager mInputMethodManager = (InputMethodManager)getSherlockActivity()
+        final InputMethodManager mInputMethodManager = (InputMethodManager)getActivity()
                 .getSystemService(Context.INPUT_METHOD_SERVICE);
         mInputMethodManager.toggleSoftInputFromWindow(mPlaylist.getApplicationWindowToken(),
                 InputMethodManager.SHOW_FORCED, 0);
@@ -124,7 +124,7 @@ public abstract class BasePlaylistDialog extends SherlockDialogFragment {
      * Closes the soft keyboard
      */
     protected void closeKeyboard() {
-        final InputMethodManager mInputMethodManager = (InputMethodManager)getSherlockActivity()
+        final InputMethodManager mInputMethodManager = (InputMethodManager)getActivity()
                 .getSystemService(Context.INPUT_METHOD_SERVICE);
         mInputMethodManager.hideSoftInputFromWindow(mPlaylist.getWindowToken(), 0);
     }

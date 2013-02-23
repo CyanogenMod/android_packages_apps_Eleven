@@ -11,8 +11,6 @@
 
 package com.andrew.apollo;
 
-import android.annotation.SuppressLint;
-import android.annotation.TargetApi;
 import android.app.Application;
 import android.os.StrictMode;
 
@@ -29,8 +27,8 @@ import java.util.logging.Logger;
  * 
  * @author Andrew Neal (andrewdneal@gmail.com)
  */
-@SuppressLint("NewApi")
 public class ApolloApplication extends Application {
+    private static final boolean DEBUG = false;
 
     /**
      * {@inheritDoc}
@@ -52,17 +50,14 @@ public class ApolloApplication extends Application {
         super.onLowMemory();
     }
 
-    @TargetApi(11)
     private void enableStrictMode() {
-        if (ApolloUtils.hasGingerbread() && BuildConfig.DEBUG) {
+        if (DEBUG) {
             final StrictMode.ThreadPolicy.Builder threadPolicyBuilder = new StrictMode.ThreadPolicy.Builder()
                     .detectAll().penaltyLog();
             final StrictMode.VmPolicy.Builder vmPolicyBuilder = new StrictMode.VmPolicy.Builder()
                     .detectAll().penaltyLog();
 
-            if (ApolloUtils.hasHoneycomb()) {
-                threadPolicyBuilder.penaltyFlashScreen();
-            }
+            threadPolicyBuilder.penaltyFlashScreen();
             StrictMode.setThreadPolicy(threadPolicyBuilder.build());
             StrictMode.setVmPolicy(vmPolicyBuilder.build());
         }

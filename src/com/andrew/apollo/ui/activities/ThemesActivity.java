@@ -11,11 +11,11 @@
 
 package com.andrew.apollo.ui.activities;
 
+import android.app.ActionBar;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 
-import com.actionbarsherlock.app.ActionBar;
-import com.actionbarsherlock.view.Menu;
-import com.actionbarsherlock.view.MenuItem;
 import com.andrew.apollo.R;
 import com.andrew.apollo.ui.fragments.ThemeFragment;
 
@@ -34,7 +34,7 @@ public class ThemesActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
 
         // Set up the action bar
-        final ActionBar actionBar = getSupportActionBar();
+        final ActionBar actionBar = getActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
         actionBar.setTitle(getString(R.string.settings_theme_chooser_title));
 
@@ -59,7 +59,7 @@ public class ThemesActivity extends BaseActivity {
      */
     @Override
     public boolean onCreateOptionsMenu(final Menu menu) {
-        getSupportMenuInflater().inflate(R.menu.theme_shop, menu);
+        getMenuInflater().inflate(R.menu.theme_shop, menu);
         return super.onCreateOptionsMenu(menu);
     }
 

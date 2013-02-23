@@ -35,7 +35,6 @@ import android.widget.AdapterView.AdapterContextMenuInfo;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 
-import com.actionbarsherlock.app.SherlockFragment;
 import com.andrew.apollo.Config;
 import com.andrew.apollo.MusicStateListener;
 import com.andrew.apollo.R;
@@ -56,7 +55,7 @@ import java.util.List;
  * 
  * @author Andrew Neal (andrewdneal@gmail.com)
  */
-public class PlaylistFragment extends SherlockFragment implements LoaderCallbacks<List<Playlist>>,
+public class PlaylistFragment extends Fragment implements LoaderCallbacks<List<Playlist>>,
         OnItemClickListener, MusicStateListener {
 
     /**
@@ -107,7 +106,7 @@ public class PlaylistFragment extends SherlockFragment implements LoaderCallback
     public void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         // Create the adpater
-        mAdapter = new PlaylistAdapter(getSherlockActivity(), R.layout.list_item_simple);
+        mAdapter = new PlaylistAdapter(getActivity(), R.layout.list_item_simple);
     }
 
     /**
@@ -184,24 +183,24 @@ public class PlaylistFragment extends SherlockFragment implements LoaderCallback
             switch (item.getItemId()) {
                 case FragmentMenuItems.PLAY_SELECTION:
                     if (info.position == 0) {
-                        MusicUtils.playFavorites(getSherlockActivity());
+                        MusicUtils.playFavorites(getActivity());
                     } else if (info.position == 1) {
-                        MusicUtils.playLastAdded(getSherlockActivity());
+                        MusicUtils.playLastAdded(getActivity());
                     } else {
-                        MusicUtils.playPlaylist(getSherlockActivity(), mPlaylist.mPlaylistId);
+                        MusicUtils.playPlaylist(getActivity(), mPlaylist.mPlaylistId);
                     }
                     return true;
                 case FragmentMenuItems.ADD_TO_QUEUE:
                     long[] list = null;
                     if (info.position == 0) {
-                        list = MusicUtils.getSongListForFavorites(getSherlockActivity());
+                        list = MusicUtils.getSongListForFavorites(getActivity());
                     } else if (info.position == 1) {
-                        list = MusicUtils.getSongListForLastAdded(getSherlockActivity());
+                        list = MusicUtils.getSongListForLastAdded(getActivity());
                     } else {
-                        list = MusicUtils.getSongListForPlaylist(getSherlockActivity(),
+                        list = MusicUtils.getSongListForPlaylist(getActivity(),
                                 mPlaylist.mPlaylistId);
                     }
-                    MusicUtils.addToQueue(getSherlockActivity(), list);
+                    MusicUtils.addToQueue(getActivity(), list);
                     return true;
                 case FragmentMenuItems.RENAME_PLAYLIST:
                     RenamePlaylist.getInstance(Long.valueOf(mPlaylist.mPlaylistId)).show(
@@ -244,7 +243,7 @@ public class PlaylistFragment extends SherlockFragment implements LoaderCallback
         bundle.putString(Config.NAME, playlistName);
 
         // Create the intent to launch the profile activity
-        final Intent intent = new Intent(getSherlockActivity(), ProfileActivity.class);
+        final Intent intent = new Intent(getActivity(), ProfileActivity.class);
         intent.putExtras(bundle);
         startActivity(intent);
     }
@@ -254,7 +253,7 @@ public class PlaylistFragment extends SherlockFragment implements LoaderCallback
      */
     @Override
     public Loader<List<Playlist>> onCreateLoader(final int id, final Bundle args) {
-        return new PlaylistLoader(getSherlockActivity());
+        return new PlaylistLoader(getActivity());
     }
 
     /**
@@ -312,7 +311,7 @@ public class PlaylistFragment extends SherlockFragment implements LoaderCallback
      * @return A new {@link AlertDialog} used to delete playlists
      */
     private final AlertDialog buildDeleteDialog() {
-        return new AlertDialog.Builder(getSherlockActivity())
+        return new AlertDialog.Builder(getActivity())
                 .setTitle(getString(R.string.context_menu_delete) + " " + mPlaylist.mPlaylistName)
                 .setPositiveButton(R.string.context_menu_delete, new OnClickListener() {
 
@@ -321,7 +320,7 @@ public class PlaylistFragment extends SherlockFragment implements LoaderCallback
                         final Uri mUri = ContentUris.withAppendedId(
                                 MediaStore.Audio.Playlists.EXTERNAL_CONTENT_URI,
                                 Long.valueOf(mPlaylist.mPlaylistId));
-                        getSherlockActivity().getContentResolver().delete(mUri, null, null);
+                        getActivity().getContentResolver().delete(mUri, null, null);
                         MusicUtils.refresh();
                     }
                 }).setNegativeButton(R.string.cancel, new OnClickListener() {

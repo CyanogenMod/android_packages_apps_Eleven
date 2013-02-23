@@ -72,15 +72,15 @@ public class CreateNewPlaylist extends BasePlaylistDialog {
     public void onSaveClick() {
         final String playlistName = mPlaylist.getText().toString();
         if (playlistName != null && playlistName.length() > 0) {
-            final int playlistId = (int)MusicUtils.getIdForPlaylist(getSherlockActivity(),
+            final int playlistId = (int)MusicUtils.getIdForPlaylist(getActivity(),
                     playlistName);
             if (playlistId >= 0) {
-                MusicUtils.clearPlaylist(getSherlockActivity(), playlistId);
-                MusicUtils.addToPlaylist(getSherlockActivity(), mPlaylistList, playlistId);
+                MusicUtils.clearPlaylist(getActivity(), playlistId);
+                MusicUtils.addToPlaylist(getActivity(), mPlaylistList, playlistId);
             } else {
-                final long newId = MusicUtils.createPlaylist(getSherlockActivity(),
+                final long newId = MusicUtils.createPlaylist(getActivity(),
                         Capitalize.capitalize(playlistName));
-                MusicUtils.addToPlaylist(getSherlockActivity(), mPlaylistList, newId);
+                MusicUtils.addToPlaylist(getActivity(), mPlaylistList, newId);
             }
             closeKeyboard();
             getDialog().dismiss();
@@ -101,7 +101,7 @@ public class CreateNewPlaylist extends BasePlaylistDialog {
             mSaveButton.setEnabled(false);
         } else {
             mSaveButton.setEnabled(true);
-            if (MusicUtils.getIdForPlaylist(getSherlockActivity(), playlistName) >= 0) {
+            if (MusicUtils.getIdForPlaylist(getActivity(), playlistName) >= 0) {
                 mSaveButton.setText(R.string.overwrite);
             } else {
                 mSaveButton.setText(R.string.save);
@@ -115,7 +115,7 @@ public class CreateNewPlaylist extends BasePlaylistDialog {
         final String[] projection = new String[] {
             MediaStore.Audio.Playlists.NAME
         };
-        final ContentResolver resolver = getSherlockActivity().getContentResolver();
+        final ContentResolver resolver = getActivity().getContentResolver();
         final String selection = MediaStore.Audio.Playlists.NAME + " != ''";
         Cursor cursor = resolver.query(MediaStore.Audio.Playlists.EXTERNAL_CONTENT_URI, projection,
                 selection, null, MediaStore.Audio.Playlists.NAME);

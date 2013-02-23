@@ -153,10 +153,7 @@ public class NowPlayingCursor extends AbstractCursor {
      */
     @Override
     public int getType(final int column) {
-        if (ApolloUtils.hasHoneycomb()) {
-            return mQueueCursor.getType(column);
-        }
-        return 0;
+        return mQueueCursor.getType(column);
     }
 
     /**

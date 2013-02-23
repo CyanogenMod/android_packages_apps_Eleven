@@ -15,11 +15,10 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
+import android.support.v4.app.DialogFragment;
 import android.widget.ArrayAdapter;
 import android.widget.ListAdapter;
 
-import com.actionbarsherlock.app.SherlockDialogFragment;
 import com.andrew.apollo.Config;
 import com.andrew.apollo.R;
 import com.andrew.apollo.ui.activities.ProfileActivity;
@@ -35,7 +34,7 @@ import java.util.ArrayList;
  * 
  * @author Andrew Neal (andrewdneal@gmail.com)
  */
-public class PhotoSelectionDialog extends SherlockDialogFragment {
+public class PhotoSelectionDialog extends DialogFragment {
 
     private static final int NEW_PHOTO = 0;
 
@@ -89,25 +88,26 @@ public class PhotoSelectionDialog extends SherlockDialogFragment {
                 break;
         }
         // Dialog item Adapter
-        final ListAdapter adapter = new ArrayAdapter<String>(getSherlockActivity(),
+        final ProfileActivity activity = (ProfileActivity) getActivity();
+        final ListAdapter adapter = new ArrayAdapter<String>(activity,
                 android.R.layout.select_dialog_item, mChoices);
-        return new AlertDialog.Builder(getSherlockActivity()).setTitle(title)
+        return new AlertDialog.Builder(activity).setTitle(title)
                 .setAdapter(adapter, new DialogInterface.OnClickListener() {
 
                     @Override
                     public void onClick(final DialogInterface dialog, final int which) {
                         switch (which) {
                             case NEW_PHOTO:
-                                ((ProfileActivity)getSherlockActivity()).selectNewPhoto();
+                                activity.selectNewPhoto();
                                 break;
                             case OLD_PHOTO:
-                                ((ProfileActivity)getSherlockActivity()).selectOldPhoto();
+                                activity.selectOldPhoto();
                                 break;
                             case FETCH_IMAGE:
-                                ((ProfileActivity)getSherlockActivity()).fetchAlbumArt();
+                                activity.fetchAlbumArt();
                                 break;
                             case GOOGLE_SEARCH:
-                                ((ProfileActivity)getSherlockActivity()).googleSearch();
+                                activity.googleSearch();
                                 break;
                             default:
                                 break;
@@ -122,7 +122,7 @@ public class PhotoSelectionDialog extends SherlockDialogFragment {
     private void setArtistChoices() {
         // Select a photo from the gallery
         mChoices.add(NEW_PHOTO, getString(R.string.new_photo));
-        if (ApolloUtils.isOnline(getSherlockActivity())) {
+        if (ApolloUtils.isOnline(getActivity())) {
             // Option to fetch the old artist image
             mChoices.add(OLD_PHOTO, getString(R.string.context_menu_fetch_artist_image));
             // Search Google for the artist name
@@ -138,7 +138,7 @@ public class PhotoSelectionDialog extends SherlockDialogFragment {
         mChoices.add(NEW_PHOTO, getString(R.string.new_photo));
         // Option to fetch the old album image
         mChoices.add(OLD_PHOTO, getString(R.string.old_photo));
-        if (ApolloUtils.isOnline(getSherlockActivity())) {
+        if (ApolloUtils.isOnline(getActivity())) {
             // Search Google for the album name
             mChoices.add(GOOGLE_SEARCH, getString(R.string.google_search));
             // Option to fetch the album image

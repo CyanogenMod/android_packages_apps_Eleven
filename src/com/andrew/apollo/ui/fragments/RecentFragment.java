@@ -15,6 +15,7 @@ import static com.andrew.apollo.utils.PreferenceUtils.RECENT_LAYOUT;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.LoaderManager.LoaderCallbacks;
 import android.support.v4.content.Loader;
 import android.view.ContextMenu;
@@ -34,7 +35,6 @@ import android.widget.GridView;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import com.actionbarsherlock.app.SherlockFragment;
 import com.andrew.apollo.Config;
 import com.andrew.apollo.MusicStateListener;
 import com.andrew.apollo.R;
@@ -60,7 +60,7 @@ import java.util.List;
  * 
  * @author Andrew Neal (andrewdneal@gmail.com)
  */
-public class RecentFragment extends SherlockFragment implements LoaderCallbacks<List<Album>>,
+public class RecentFragment extends Fragment implements LoaderCallbacks<List<Album>>,
         OnScrollListener, OnItemClickListener, MusicStateListener {
 
     /**
@@ -137,7 +137,7 @@ public class RecentFragment extends SherlockFragment implements LoaderCallbacks<
         } else {
             layout = R.layout.grid_items_normal;
         }
-        mAdapter = new AlbumAdapter(getSherlockActivity(), layout);
+        mAdapter = new AlbumAdapter(getActivity(), layout);
     }
 
     /**
@@ -191,7 +191,7 @@ public class RecentFragment extends SherlockFragment implements LoaderCallbacks<
         // Create a new album
         mAlbum = mAdapter.getItem(info.position);
         // Create a list of the album's songs
-        mAlbumList = MusicUtils.getSongListForAlbum(getSherlockActivity(), mAlbum.mAlbumId);
+        mAlbumList = MusicUtils.getSongListForAlbum(getActivity(), mAlbum.mAlbumId);
 
         // Play the album
         menu.add(GROUP_ID, FragmentMenuItems.PLAY_SELECTION, Menu.NONE,
@@ -204,7 +204,7 @@ public class RecentFragment extends SherlockFragment implements LoaderCallbacks<
         // Add the album to a playlist
         final SubMenu subMenu = menu.addSubMenu(GROUP_ID, FragmentMenuItems.ADD_TO_PLAYLIST,
                 Menu.NONE, R.string.add_to_playlist);
-        MusicUtils.makePlaylistMenu(getSherlockActivity(), GROUP_ID, subMenu, false);
+        MusicUtils.makePlaylistMenu(getActivity(), GROUP_ID, subMenu, false);
 
         // View more content by the album artist
         menu.add(GROUP_ID, FragmentMenuItems.MORE_BY_ARTIST, Menu.NONE,
@@ -228,25 +228,25 @@ public class RecentFragment extends SherlockFragment implements LoaderCallbacks<
         if (item.getGroupId() == GROUP_ID) {
             switch (item.getItemId()) {
                 case FragmentMenuItems.PLAY_SELECTION:
-                    MusicUtils.playAll(getSherlockActivity(), mAlbumList, 0, false);
+                    MusicUtils.playAll(getActivity(), mAlbumList, 0, false);
                     return true;
                 case FragmentMenuItems.ADD_TO_QUEUE:
-                    MusicUtils.addToQueue(getSherlockActivity(), mAlbumList);
+                    MusicUtils.addToQueue(getActivity(), mAlbumList);
                     return true;
                 case FragmentMenuItems.NEW_PLAYLIST:
                     CreateNewPlaylist.getInstance(mAlbumList).show(getFragmentManager(),
                             "CreatePlaylist");
                     return true;
                 case FragmentMenuItems.MORE_BY_ARTIST:
-                    NavUtils.openArtistProfile(getSherlockActivity(), mAlbum.mArtistName);
+                    NavUtils.openArtistProfile(getActivity(), mAlbum.mArtistName);
                     return true;
                 case FragmentMenuItems.PLAYLIST_SELECTED:
                     final long id = item.getIntent().getLongExtra("playlist", 0);
-                    MusicUtils.addToPlaylist(getSherlockActivity(), mAlbumList, id);
+                    MusicUtils.addToPlaylist(getActivity(), mAlbumList, id);
                     return true;
                 case FragmentMenuItems.REMOVE_FROM_RECENT:
                     mShouldRefresh = true;
-                    RecentStore.getInstance(getSherlockActivity()).removeItem(mAlbum.mAlbumId);
+                    RecentStore.getInstance(getActivity()).removeItem(mAlbum.mAlbumId);
                     MusicUtils.refresh();
                     return true;
                 case FragmentMenuItems.DELETE:
@@ -284,7 +284,7 @@ public class RecentFragment extends SherlockFragment implements LoaderCallbacks<
     public void onItemClick(final AdapterView<?> parent, final View view, final int position,
             final long id) {
         mAlbum = mAdapter.getItem(position);
-        NavUtils.openAlbumProfile(getSherlockActivity(), mAlbum.mAlbumName, mAlbum.mArtistName);
+        NavUtils.openAlbumProfile(getActivity(), mAlbum.mAlbumName, mAlbum.mArtistName);
     }
 
     /**
@@ -292,7 +292,7 @@ public class RecentFragment extends SherlockFragment implements LoaderCallbacks<
      */
     @Override
     public Loader<List<Album>> onCreateLoader(final int id, final Bundle args) {
-        return new RecentLoader(getSherlockActivity());
+        return new RecentLoader(getActivity());
     }
 
     /**
@@ -400,7 +400,7 @@ public class RecentFragment extends SherlockFragment implements LoaderCallbacks<
         mGridView.setAdapter(mAdapter);
         // Set up the helpers
         initAbsListView(mGridView);
-        if (ApolloUtils.isLandscape(getSherlockActivity())) {
+        if (ApolloUtils.isLandscape(getActivity())) {
             if (isDetailedLayout()) {
                 mAdapter.setLoadExtraData(true);
                 mGridView.setNumColumns(TWO);
@@ -418,12 +418,12 @@ public class RecentFragment extends SherlockFragment implements LoaderCallbacks<
     }
 
     private boolean isSimpleLayout() {
-        return PreferenceUtils.getInstace(getSherlockActivity()).isSimpleLayout(RECENT_LAYOUT,
-                getSherlockActivity());
+        return PreferenceUtils.getInstace(getActivity()).isSimpleLayout(RECENT_LAYOUT,
+                getActivity());
     }
 
     private boolean isDetailedLayout() {
-        return PreferenceUtils.getInstace(getSherlockActivity()).isDetailedLayout(RECENT_LAYOUT,
-                getSherlockActivity());
+        return PreferenceUtils.getInstace(getActivity()).isDetailedLayout(RECENT_LAYOUT,
+                getActivity());
     }
 }

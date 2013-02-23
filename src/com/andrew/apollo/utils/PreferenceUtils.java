@@ -117,7 +117,7 @@ public final class PreferenceUtils {
             protected Void doInBackground(final Void... unused) {
                 final SharedPreferences.Editor editor = mPreferences.edit();
                 editor.putInt(START_PAGE, value);
-                SharedPreferencesCompat.apply(editor);
+                editor.apply();
 
                 return null;
             }
@@ -144,7 +144,7 @@ public final class PreferenceUtils {
             protected Void doInBackground(final Void... unused) {
                 final SharedPreferences.Editor editor = mPreferences.edit();
                 editor.putInt(DEFAULT_THEME_COLOR, value);
-                SharedPreferencesCompat.apply(editor);
+                editor.apply();
 
                 return null;
             }
@@ -180,7 +180,7 @@ public final class PreferenceUtils {
             protected Void doInBackground(final Void... unused) {
                 final SharedPreferences.Editor editor = mPreferences.edit();
                 editor.putBoolean(ONLY_ON_WIFI, value);
-                SharedPreferencesCompat.apply(editor);
+                editor.apply();
 
                 return null;
             }
@@ -206,7 +206,7 @@ public final class PreferenceUtils {
             protected Void doInBackground(final Void... unused) {
                 final SharedPreferences.Editor editor = mPreferences.edit();
                 editor.putBoolean(DOWNLOAD_MISSING_ARTWORK, value);
-                SharedPreferencesCompat.apply(editor);
+                editor.apply();
 
                 return null;
             }
@@ -232,7 +232,7 @@ public final class PreferenceUtils {
             protected Void doInBackground(final Void... unused) {
                 final SharedPreferences.Editor editor = mPreferences.edit();
                 editor.putBoolean(DOWNLOAD_MISSING_ARTIST_IMAGES, value);
-                SharedPreferencesCompat.apply(editor);
+                editor.apply();
 
                 return null;
             }
@@ -257,7 +257,7 @@ public final class PreferenceUtils {
             protected Void doInBackground(final Void... unused) {
                 final SharedPreferences.Editor editor = mPreferences.edit();
                 editor.putBoolean(USE_LOCKSREEN_CONTROLS, value);
-                SharedPreferencesCompat.apply(editor);
+                editor.apply();
 
                 return null;
             }
@@ -276,7 +276,7 @@ public final class PreferenceUtils {
             protected Void doInBackground(final Void... unused) {
                 final SharedPreferences.Editor editor = mPreferences.edit();
                 editor.putString(key, value);
-                SharedPreferencesCompat.apply(editor);
+                editor.apply();
 
                 return null;
             }
@@ -397,7 +397,7 @@ public final class PreferenceUtils {
             protected Void doInBackground(final Void... unused) {
                 final SharedPreferences.Editor editor = mPreferences.edit();
                 editor.putString(key, value);
-                SharedPreferencesCompat.apply(editor);
+                editor.apply();
 
                 return null;
             }

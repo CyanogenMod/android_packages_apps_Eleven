@@ -15,13 +15,12 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.actionbarsherlock.app.SherlockFragment;
-import com.actionbarsherlock.view.Menu;
-import com.actionbarsherlock.view.MenuInflater;
-import com.actionbarsherlock.view.MenuItem;
 import com.andrew.apollo.R;
 import com.andrew.apollo.adapters.PagerAdapter;
 import com.andrew.apollo.adapters.PagerAdapter.MusicFragments;
@@ -38,7 +37,7 @@ import com.viewpagerindicator.TitlePageIndicator.OnCenterItemClickListener;
 
 /**
  * This class is used to hold the {@link ViewPager} used for swiping between the
- * playlists, recent, artists, albums, songs, and genre {@link SherlockFragment}
+ * playlists, recent, artists, albums, songs, and genre {@link Fragment}
  * s for phones.
  * 
  * @NOTE: The reason the sort orders are taken care of in this fragment rather
@@ -48,7 +47,7 @@ import com.viewpagerindicator.TitlePageIndicator.OnCenterItemClickListener;
  *        Apollo for a couple of weeks or so before merging it with CM.
  * @author Andrew Neal (andrewdneal@gmail.com)
  */
-public class MusicBrowserPhoneFragment extends SherlockFragment implements
+public class MusicBrowserPhoneFragment extends Fragment implements
         OnCenterItemClickListener {
 
     /**
@@ -81,7 +80,7 @@ public class MusicBrowserPhoneFragment extends SherlockFragment implements
     public void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         // Get the preferences
-        mPreferences = PreferenceUtils.getInstace(getSherlockActivity());
+        mPreferences = PreferenceUtils.getInstace(getActivity());
     }
 
     /**
@@ -95,7 +94,7 @@ public class MusicBrowserPhoneFragment extends SherlockFragment implements
                 R.layout.fragment_music_browser_phone, container, false);
 
         // Initialize the adapter
-        mPagerAdapter = new PagerAdapter(getSherlockActivity());
+        mPagerAdapter = new PagerAdapter(getActivity());
         final MusicFragments[] mFragments = MusicFragments.values();
         for (final MusicFragments mFragment : mFragments) {
             mPagerAdapter.add(mFragment.getFragmentClass(), null);
@@ -127,7 +126,7 @@ public class MusicBrowserPhoneFragment extends SherlockFragment implements
     public void onActivityCreated(final Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         // Initialze the theme resources
-        mResources = new ThemeUtils(getSherlockActivity());
+        mResources = new ThemeUtils(getActivity());
         // Enable the options menu
         setHasOptionsMenu(true);
     }
@@ -183,13 +182,13 @@ public class MusicBrowserPhoneFragment extends SherlockFragment implements
         switch (item.getItemId()) {
             case R.id.menu_shuffle:
                 // Shuffle all the songs
-                MusicUtils.shuffleAll(getSherlockActivity());
+                MusicUtils.shuffleAll(getActivity());
                 return true;
             case R.id.menu_favorite:
                 // Toggle the current track as a favorite and update the menu
                 // item
                 MusicUtils.toggleFavorite();
-                getSherlockActivity().invalidateOptionsMenu();
+                getActivity().invalidateOptionsMenu();
                 return true;
             case R.id.menu_sort_by_az:
                 if (isArtistPage()) {
@@ -270,7 +269,7 @@ public class MusicBrowserPhoneFragment extends SherlockFragment implements
                 } else if (isAlbumPage()) {
                     mPreferences.setAlbumLayout("simple");
                 }
-                NavUtils.goHome(getSherlockActivity());
+                NavUtils.goHome(getActivity());
                 return true;
             case R.id.menu_view_as_detailed:
                 if (isRecentPage()) {
@@ -280,7 +279,7 @@ public class MusicBrowserPhoneFragment extends SherlockFragment implements
                 } else if (isAlbumPage()) {
                     mPreferences.setAlbumLayout("detailed");
                 }
-                NavUtils.goHome(getSherlockActivity());
+                NavUtils.goHome(getActivity());
                 return true;
             case R.id.menu_view_as_grid:
                 if (isRecentPage()) {
@@ -290,7 +289,7 @@ public class MusicBrowserPhoneFragment extends SherlockFragment implements
                 } else if (isAlbumPage()) {
                     mPreferences.setAlbumLayout("grid");
                 }
-                NavUtils.goHome(getSherlockActivity());
+                NavUtils.goHome(getActivity());
                 return true;
             default:
                 break;

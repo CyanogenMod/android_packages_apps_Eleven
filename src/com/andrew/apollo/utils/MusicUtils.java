@@ -48,7 +48,7 @@ import com.andrew.apollo.menu.FragmentMenuItems;
 import com.andrew.apollo.provider.FavoritesStore;
 import com.andrew.apollo.provider.FavoritesStore.FavoriteColumns;
 import com.andrew.apollo.provider.RecentStore;
-import com.devspark.appmsg.Crouton;
+import com.devspark.appmsg.AppMsg;
 
 import java.io.File;
 import java.util.Arrays;
@@ -831,7 +831,7 @@ public final class MusicUtils {
         }
         final String message = context.getResources().getQuantityString(
                 R.plurals.NNNtrackstoplaylist, numinserted, numinserted);
-        Crouton.makeText((Activity)context, message, Crouton.STYLE_CONFIRM).show();
+        AppMsg.makeText((Activity)context, message, AppMsg.STYLE_CONFIRM).show();
     }
 
     /**
@@ -846,7 +846,7 @@ public final class MusicUtils {
             mService.enqueue(list, MusicPlaybackService.LAST);
             final String message = context.getResources().getQuantityString(
                     R.plurals.NNNtrackstoqueue, list.length, Integer.valueOf(list.length));
-            Crouton.makeText((Activity)context, message, Crouton.STYLE_CONFIRM).show();
+            AppMsg.makeText((Activity)context, message, AppMsg.STYLE_CONFIRM).show();
         } catch (final RemoteException ignored) {
         }
     }
@@ -880,7 +880,7 @@ public final class MusicUtils {
                 Settings.System.putString(resolver, Settings.System.RINGTONE, uri.toString());
                 final String message = context.getString(R.string.set_as_ringtone,
                         cursor.getString(2));
-                Crouton.makeText((Activity)context, message, Crouton.STYLE_CONFIRM).show();
+                AppMsg.makeText((Activity)context, message, AppMsg.STYLE_CONFIRM).show();
             }
         } finally {
             if (cursor != null) {
@@ -1334,7 +1334,7 @@ public final class MusicUtils {
         final String message = context.getResources().getQuantityString(R.plurals.NNNtracksdeleted,
                 list.length, Integer.valueOf(list.length));
 
-        Crouton.makeText((Activity)context, message, Crouton.STYLE_CONFIRM).show();
+        AppMsg.makeText((Activity)context, message, AppMsg.STYLE_CONFIRM).show();
         // We deleted a number of tracks, which could affect any number of
         // things
         // in the media content domain, so update everything.

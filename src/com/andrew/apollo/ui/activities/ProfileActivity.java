@@ -11,6 +11,8 @@
 
 package com.andrew.apollo.ui.activities;
 
+import android.app.ActionBar;
+import android.app.Activity;
 import android.app.SearchManager;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
@@ -22,12 +24,10 @@ import android.os.SystemClock;
 import android.provider.MediaStore;
 import android.support.v4.view.ViewPager;
 import android.support.v4.view.ViewPager.OnPageChangeListener;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 
-import com.actionbarsherlock.app.ActionBar;
-import com.actionbarsherlock.app.SherlockFragmentActivity;
-import com.actionbarsherlock.view.Menu;
-import com.actionbarsherlock.view.MenuItem;
 import com.andrew.apollo.Config;
 import com.andrew.apollo.R;
 import com.andrew.apollo.adapters.PagerAdapter;
@@ -50,7 +50,7 @@ import com.andrew.apollo.widgets.ProfileTabCarousel;
 import com.andrew.apollo.widgets.ProfileTabCarousel.Listener;
 
 /**
- * The {@link SherlockFragmentActivity} is used to display the data for specific
+ * The {@link Activity} is used to display the data for specific
  * artists, albums, playlists, and genres. This class is only used on phones.
  * 
  * @author Andrew Neal (andrewdneal@gmail.com)
@@ -150,7 +150,7 @@ public class ProfileActivity extends BaseActivity implements OnPageChangeListene
             }
         });
         // Set up the action bar
-        final ActionBar actionBar = getSupportActionBar();
+        final ActionBar actionBar = getActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
 
         /* Set up the artist profile */
@@ -278,16 +278,16 @@ public class ProfileActivity extends BaseActivity implements OnPageChangeListene
     @Override
     public boolean onCreateOptionsMenu(final Menu menu) {
         // Pin to Home screen
-        getSupportMenuInflater().inflate(R.menu.add_to_homescreen, menu);
+        getMenuInflater().inflate(R.menu.add_to_homescreen, menu);
         // Shuffle
-        getSupportMenuInflater().inflate(R.menu.shuffle, menu);
+        getMenuInflater().inflate(R.menu.shuffle, menu);
         // Sort orders
         if (isArtistSongPage()) {
-            getSupportMenuInflater().inflate(R.menu.artist_song_sort_by, menu);
+            getMenuInflater().inflate(R.menu.artist_song_sort_by, menu);
         } else if (isArtistAlbumPage()) {
-            getSupportMenuInflater().inflate(R.menu.artist_album_sort_by, menu);
+            getMenuInflater().inflate(R.menu.artist_album_sort_by, menu);
         } else if (isAlbum()) {
-            getSupportMenuInflater().inflate(R.menu.album_song_sort_by, menu);
+            getMenuInflater().inflate(R.menu.album_song_sort_by, menu);
         }
         return super.onCreateOptionsMenu(menu);
     }

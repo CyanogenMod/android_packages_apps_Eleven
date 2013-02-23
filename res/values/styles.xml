@@ -17,19 +17,17 @@
 <resources xmlns:android="http://schemas.android.com/apk/res/android">
 
     <!-- Main Holo -->
-    <style name="Apollo.Theme.Dark" parent="Theme.Sherlock">
+    <style name="Apollo.Theme.Dark" parent="@android:style/Theme.Holo">
         <item name="android:windowContentOverlay">@null</item>
-        <item name="windowContentOverlay">@null</item>
     </style>
 
     <!-- Main Holo light -->
-    <style name="Apollo.Theme.Light" parent="Theme.Sherlock.Light">
+    <style name="Apollo.Theme.Light" parent="@android:style/Theme.Holo.Light">
         <item name="android:windowContentOverlay">@null</item>
-        <item name="windowContentOverlay">@null</item>
     </style>
 
     <!-- Shortcut Activity theme -->
-    <style name="Theme.Transparent" parent="Theme.Sherlock.NoActionBar">
+    <style name="Theme.Transparent" parent="@android:style/Theme.Holo.NoActionBar">
         <item name="android:windowIsTranslucent">true</item>
         <item name="android:windowBackground">@color/transparent</item>
         <item name="android:windowContentOverlay">@null</item>

@@ -11,14 +11,14 @@
 
 package com.andrew.apollo.adapters;
 
+import android.app.Activity;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.util.SparseArray;
 import android.view.ViewGroup;
 
-import com.actionbarsherlock.app.SherlockFragment;
-import com.actionbarsherlock.app.SherlockFragmentActivity;
 import com.andrew.apollo.R;
 import com.andrew.apollo.ui.fragments.AlbumFragment;
 import com.andrew.apollo.ui.fragments.ArtistFragment;
@@ -34,7 +34,7 @@ import java.util.Locale;
 
 /**
  * A {@link FragmentPagerAdapter} class for swiping between playlists, recent,
- * artists, albums, songs, and genre {@link SherlockFragment}s on phones.<br/>
+ * artists, albums, songs, and genre {@link Fragment}s on phones.<br/>
  */
 public class PagerAdapter extends FragmentPagerAdapter {
 
@@ -42,17 +42,17 @@ public class PagerAdapter extends FragmentPagerAdapter {
 
     private final List<Holder> mHolderList = Lists.newArrayList();
 
-    private final SherlockFragmentActivity mFragmentActivity;
+    private final FragmentActivity mFragmentActivity;
 
     private int mCurrentPage;
 
     /**
      * Constructor of <code>PagerAdatper<code>
      * 
-     * @param fragmentActivity The {@link SherlockFragmentActivity} of the
-     *            {@link SherlockFragment}.
+     * @param fragmentActivity The {@link Activity} of the
+     *            {@link Fragment}.
      */
-    public PagerAdapter(final SherlockFragmentActivity fragmentActivity) {
+    public PagerAdapter(final FragmentActivity fragmentActivity) {
         super(fragmentActivity.getSupportFragmentManager());
         mFragmentActivity = fragmentActivity;
     }
@@ -76,11 +76,11 @@ public class PagerAdapter extends FragmentPagerAdapter {
     }
 
     /**
-     * Method that returns the {@link SherlockFragment} in the argument
+     * Method that returns the {@link Fragment} in the argument
      * position.
      * 
      * @param position The position of the fragment to return.
-     * @return Fragment The {@link SherlockFragment} in the argument position.
+     * @return Fragment The {@link Fragment} in the argument position.
      */
     public Fragment getFragment(final int position) {
         final WeakReference<Fragment> mWeakFragment = mFragmentArray.get(position);

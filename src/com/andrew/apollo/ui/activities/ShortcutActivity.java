@@ -22,10 +22,10 @@ import android.database.Cursor;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.provider.MediaStore;
+import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.LoaderManager.LoaderCallbacks;
 import android.support.v4.content.Loader;
 
-import com.actionbarsherlock.app.SherlockFragmentActivity;
 import com.andrew.apollo.Config;
 import com.andrew.apollo.IApolloService;
 import com.andrew.apollo.R;
@@ -49,7 +49,7 @@ import java.util.List;
  * 
  * @author Andrew Neal (andrewdneal@gmail.com)
  */
-public class ShortcutActivity extends SherlockFragmentActivity implements ServiceConnection {
+public class ShortcutActivity extends FragmentActivity implements ServiceConnection {
 
     /**
      * If true, this class will begin playback and open

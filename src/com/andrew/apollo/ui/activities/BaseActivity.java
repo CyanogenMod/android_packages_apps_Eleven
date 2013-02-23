@@ -24,17 +24,17 @@ import android.content.ServiceConnection;
 import android.media.AudioManager;
 import android.os.Bundle;
 import android.os.IBinder;
+import android.support.v4.app.FragmentActivity;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.SearchView;
+import android.widget.SearchView.OnQueryTextListener;
 import android.widget.TextView;
 
-import com.actionbarsherlock.app.SherlockFragmentActivity;
-import com.actionbarsherlock.view.Menu;
-import com.actionbarsherlock.view.MenuItem;
-import com.actionbarsherlock.widget.SearchView;
-import com.actionbarsherlock.widget.SearchView.OnQueryTextListener;
 import com.andrew.apollo.IApolloService;
 import com.andrew.apollo.MusicPlaybackService;
 import com.andrew.apollo.MusicStateListener;
@@ -53,14 +53,14 @@ import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 
 /**
- * A base {@link SherlockFragmentActivity} used to update the bottom bar and
+ * A base {@link FragmentActivity} used to update the bottom bar and
  * bind to Apollo's service.
  * <p>
  * {@link HomeActivity} extends from this skeleton.
  * 
  * @author Andrew Neal (andrewdneal@gmail.com)
  */
-public abstract class BaseActivity extends SherlockFragmentActivity implements ServiceConnection {
+public abstract class BaseActivity extends FragmentActivity implements ServiceConnection {
 
     /**
      * Playstate and meta change listener
@@ -123,10 +123,6 @@ public abstract class BaseActivity extends SherlockFragmentActivity implements S
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        // Title bar shows up in gingerbread, I'm too tired to figure out why.
-        if (!ApolloUtils.hasHoneycomb()) {
-            requestWindowFeature(Window.FEATURE_NO_TITLE);
-        }
 
         // Initialze the theme resources
         mResources = new ThemeUtils(this);
@@ -147,7 +143,7 @@ public abstract class BaseActivity extends SherlockFragmentActivity implements S
         mPlaybackStatus = new PlaybackStatus(this);
 
         // Theme the action bar
-        mResources.themeActionBar(getSupportActionBar(), getString(R.string.app_name));
+        mResources.themeActionBar(getActionBar(), getString(R.string.app_name));
 
         // Set the layout
         setContentView(setContentView());
@@ -184,9 +180,9 @@ public abstract class BaseActivity extends SherlockFragmentActivity implements S
     @Override
     public boolean onCreateOptionsMenu(final Menu menu) {
         // Search view
-        getSupportMenuInflater().inflate(R.menu.search, menu);
+        getMenuInflater().inflate(R.menu.search, menu);
         // Settings
-        getSupportMenuInflater().inflate(R.menu.activity_base, menu);
+        getMenuInflater().inflate(R.menu.activity_base, menu);
         // Theme the search icon
         mResources.setSearchIcon(menu);
 

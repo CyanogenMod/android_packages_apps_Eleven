@@ -56,7 +56,6 @@ import com.andrew.apollo.utils.ApolloUtils;
 import com.andrew.apollo.utils.Lists;
 import com.andrew.apollo.utils.MusicUtils;
 import com.andrew.apollo.utils.PreferenceUtils;
-import com.andrew.apollo.utils.SharedPreferencesCompat;
 
 import java.io.IOException;
 import java.lang.ref.WeakReference;
@@ -381,7 +380,7 @@ public class MusicPlaybackService extends Service {
     /**
      * Lock screen controls ICS+
      */
-    private RemoteControlClientCompat mRemoteControlClientCompat;
+    private RemoteControlClient mRemoteControlClient;
 
     /**
      * Enables the remote control client
@@ -575,14 +574,13 @@ public class MusicPlaybackService extends Service {
      */
     private void setUpRemoteControlClient() {
         if (mEnableLockscreenControls) {
-            if (mRemoteControlClientCompat == null) {
+            if (mRemoteControlClient == null) {
                 final Intent mediaButtonIntent = new Intent(Intent.ACTION_MEDIA_BUTTON);
                 mediaButtonIntent.setComponent(mMediaButtonReceiverComponent);
-                mRemoteControlClientCompat = new RemoteControlClientCompat(
+                mRemoteControlClient = new RemoteControlClient(
                         PendingIntent.getBroadcast(getApplicationContext(), 0, mediaButtonIntent,
                                 PendingIntent.FLAG_UPDATE_CURRENT));
-                RemoteControlHelper.registerRemoteControlClient(mAudioManager,
-                        mRemoteControlClientCompat);
+                mAudioManager.registerRemoteControlClient(mRemoteControlClient);
             }
             // Flags for the media transport control that this client supports.
             final int flags = RemoteControlClient.FLAG_KEY_MEDIA_PREVIOUS
@@ -591,7 +589,7 @@ public class MusicPlaybackService extends Service {
                     | RemoteControlClient.FLAG_KEY_MEDIA_PAUSE
                     | RemoteControlClient.FLAG_KEY_MEDIA_PLAY_PAUSE
                     | RemoteControlClient.FLAG_KEY_MEDIA_STOP;
-            mRemoteControlClientCompat.setTransportControlFlags(flags);
+            mRemoteControlClient.setTransportControlFlags(flags);
         }
     }
 
@@ -602,13 +600,11 @@ public class MusicPlaybackService extends Service {
     public void onDestroy() {
         super.onDestroy();
         // Remove any sound effects
-        if (ApolloUtils.hasGingerbread()) {
-            final Intent audioEffectsIntent = new Intent(
-                    AudioEffect.ACTION_CLOSE_AUDIO_EFFECT_CONTROL_SESSION);
-            audioEffectsIntent.putExtra(AudioEffect.EXTRA_AUDIO_SESSION, getAudioSessionId());
-            audioEffectsIntent.putExtra(AudioEffect.EXTRA_PACKAGE_NAME, getPackageName());
-            sendBroadcast(audioEffectsIntent);
-        }
+        final Intent audioEffectsIntent = new Intent(
+                AudioEffect.ACTION_CLOSE_AUDIO_EFFECT_CONTROL_SESSION);
+        audioEffectsIntent.putExtra(AudioEffect.EXTRA_AUDIO_SESSION, getAudioSessionId());
+        audioEffectsIntent.putExtra(AudioEffect.EXTRA_PACKAGE_NAME, getPackageName());
+        sendBroadcast(audioEffectsIntent);
 
         // Release the player
         mPlayer.release();
@@ -616,8 +612,7 @@ public class MusicPlaybackService extends Service {
 
         // Remove the audio focus listener and lock screen controls
         mAudioManager.abandonAudioFocus(mAudioFocusListener);
-        RemoteControlHelper
-                .unregisterRemoteControlClient(mAudioManager, mRemoteControlClientCompat);
+        mAudioManager.unregisterRemoteControlClient(mRemoteControlClient);
 
         // Remove any callbacks from the handlers
         mDelayedStopHandler.removeCallbacksAndMessages(null);
@@ -695,11 +690,10 @@ public class MusicPlaybackService extends Service {
                     notifyChange(PLAYSTATE_CHANGED);
                     notifyChange(META_CHANGED);
                 } else {
-                    // Remove then unregister the conrols
-                    mRemoteControlClientCompat
+                    // Remove then unregister the controls
+                    mRemoteControlClient
                             .setPlaybackState(RemoteControlClient.PLAYSTATE_STOPPED);
-                    RemoteControlHelper.unregisterRemoteControlClient(mAudioManager,
-                            mRemoteControlClientCompat);
+                    mAudioManager.unregisterRemoteControlClient(mRemoteControlClient);
                 }
             }
         }
@@ -1241,9 +1235,7 @@ public class MusicPlaybackService extends Service {
         mAppWidgetSmall.notifyChange(this, what);
         mAppWidgetLarge.notifyChange(this, what);
         mAppWidgetLargeAlternate.notifyChange(this, what);
-        if (ApolloUtils.hasHoneycomb()) {
-            mRecentWidgetProvider.notifyChange(this, what);
-        }
+        mRecentWidgetProvider.notifyChange(this, what);
     }
 
     /**
@@ -1252,23 +1244,23 @@ public class MusicPlaybackService extends Service {
      * @param what The broadcast
      */
     private void updateRemoteControlClient(final String what) {
-        if (mEnableLockscreenControls && mRemoteControlClientCompat != null) {
+        if (mEnableLockscreenControls && mRemoteControlClient != null) {
             if (what.equals(PLAYSTATE_CHANGED)) {
                 // If the playstate change notify the lock screen
                 // controls
-                mRemoteControlClientCompat
-                        .setPlaybackState(mIsSupposedToBePlaying ? RemoteControlClient.PLAYSTATE_PLAYING
-                                : RemoteControlClient.PLAYSTATE_PAUSED);
+                mRemoteControlClient.setPlaybackState(mIsSupposedToBePlaying
+                        ? RemoteControlClient.PLAYSTATE_PLAYING
+                        : RemoteControlClient.PLAYSTATE_PAUSED);
             } else if (what.equals(META_CHANGED)) {
                 // Update the ockscreen controls
-                mRemoteControlClientCompat
+                mRemoteControlClient
                         .editMetadata(true)
                         .putString(MediaMetadataRetriever.METADATA_KEY_ARTIST, getArtistName())
                         .putString(MediaMetadataRetriever.METADATA_KEY_ALBUM, getAlbumName())
                         .putString(MediaMetadataRetriever.METADATA_KEY_TITLE, getTrackName())
                         .putLong(MediaMetadataRetriever.METADATA_KEY_DURATION, duration())
                         .putBitmap(
-                                RemoteControlClientCompat.MetadataEditorCompat.METADATA_KEY_ARTWORK,
+                                RemoteControlClient.MetadataEditor.BITMAP_KEY_ARTWORK,
                                 getAlbumArt()).apply();
             }
         }
@@ -1330,7 +1322,7 @@ public class MusicPlaybackService extends Service {
         }
         editor.putInt("repeatmode", mRepeatMode);
         editor.putInt("shufflemode", mShuffleMode);
-        SharedPreferencesCompat.apply(editor);
+        editor.apply();
     }
 
     /**
@@ -2185,11 +2177,10 @@ public class MusicPlaybackService extends Service {
                     notifyChange(PLAYSTATE_CHANGED);
                     notifyChange(META_CHANGED);
                 } else {
-                    // Remove then unregister the conrols
-                    mRemoteControlClientCompat
+                    // Remove then unregister the controls
+                    mRemoteControlClient
                             .setPlaybackState(RemoteControlClient.PLAYSTATE_STOPPED);
-                    RemoteControlHelper.unregisterRemoteControlClient(mAudioManager,
-                            mRemoteControlClientCompat);
+                    mAudioManager.unregisterRemoteControlClient(mRemoteControlClient);
                 }
             } else if (AppWidgetSmall.CMDAPPWIDGETUPDATE.equals(command)) {
                 final int[] small = intent.getIntArrayExtra(AppWidgetManager.EXTRA_APPWIDGET_IDS);
@@ -2409,9 +2400,9 @@ public class MusicPlaybackService extends Service {
 
         private final WeakReference<MusicPlaybackService> mService;
 
-        private CompatMediaPlayer mCurrentMediaPlayer = new CompatMediaPlayer();
+        private MediaPlayer mCurrentMediaPlayer = new MediaPlayer();
 
-        private CompatMediaPlayer mNextMediaPlayer;
+        private MediaPlayer mNextMediaPlayer;
 
         private Handler mHandler;
 
@@ -2463,7 +2454,7 @@ public class MusicPlaybackService extends Service {
             }
             player.setOnCompletionListener(this);
             player.setOnErrorListener(this);
-            final Intent iIntent = new Intent(AudioEffect.ACTION_OPEN_AUDIO_EFFECT_CONTROL_SESSION);
+            final Intent intent = new Intent(AudioEffect.ACTION_OPEN_AUDIO_EFFECT_CONTROL_SESSION);
             intent.putExtra(AudioEffect.EXTRA_AUDIO_SESSION, getAudioSessionId());
             intent.putExtra(AudioEffect.EXTRA_PACKAGE_NAME, mService.get().getPackageName());
             mService.get().sendBroadcast(intent);
@@ -2485,7 +2476,7 @@ public class MusicPlaybackService extends Service {
             if (path == null) {
                 return;
             }
-            mNextMediaPlayer = new CompatMediaPlayer();
+            mNextMediaPlayer = new MediaPlayer();
             mNextMediaPlayer.setWakeMode(mService.get(), PowerManager.PARTIAL_WAKE_LOCK);
             mNextMediaPlayer.setAudioSessionId(getAudioSessionId());
             if (setDataSourceImpl(mNextMediaPlayer, path)) {
@@ -2609,7 +2600,7 @@ public class MusicPlaybackService extends Service {
                 case MediaPlayer.MEDIA_ERROR_SERVER_DIED:
                     mIsInitialized = false;
                     mCurrentMediaPlayer.release();
-                    mCurrentMediaPlayer = new CompatMediaPlayer();
+                    mCurrentMediaPlayer = new MediaPlayer();
                     mCurrentMediaPlayer.setWakeMode(mService.get(), PowerManager.PARTIAL_WAKE_LOCK);
                     mHandler.sendMessageDelayed(mHandler.obtainMessage(SERVER_DIED), 2000);
                     return true;
@@ -2634,65 +2625,6 @@ public class MusicPlaybackService extends Service {
                 mHandler.sendEmptyMessage(TRACK_ENDED);
                 mHandler.sendEmptyMessage(RELEASE_WAKELOCK);
             }
-        }
-    }
-
-    private static final class CompatMediaPlayer extends MediaPlayer implements
-            OnCompletionListener {
-
-        private boolean mCompatMode = true;
-
-        private MediaPlayer mNextPlayer;
-
-        private OnCompletionListener mCompletion;
-
-        /**
-         * Constructor of <code>CompatMediaPlayer</code>
-         */
-        public CompatMediaPlayer() {
-            try {
-                MediaPlayer.class.getMethod("setNextMediaPlayer", MediaPlayer.class);
-                mCompatMode = false;
-            } catch (final NoSuchMethodException e) {
-                mCompatMode = true;
-                super.setOnCompletionListener(this);
-            }
-        }
-
-        /**
-         * {@inheritDoc}
-         */
-        @Override
-        public void setNextMediaPlayer(final MediaPlayer next) {
-            if (mCompatMode) {
-                mNextPlayer = next;
-            } else {
-                super.setNextMediaPlayer(next);
-            }
-        }
-
-        /**
-         * {@inheritDoc}
-         */
-        @Override
-        public void setOnCompletionListener(final OnCompletionListener listener) {
-            if (mCompatMode) {
-                mCompletion = listener;
-            } else {
-                super.setOnCompletionListener(listener);
-            }
-        }
-
-        /**
-         * {@inheritDoc}
-         */
-        @Override
-        public void onCompletion(final MediaPlayer mp) {
-            if (mNextPlayer != null) {
-                // SystemClock.sleep(25);
-                mNextPlayer.start();
-            }
-            mCompletion.onCompletion(this);
         }
     }
 

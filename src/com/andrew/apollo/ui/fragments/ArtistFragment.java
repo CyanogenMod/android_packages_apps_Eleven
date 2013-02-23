@@ -36,7 +36,6 @@ import android.widget.GridView;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import com.actionbarsherlock.app.SherlockFragment;
 import com.andrew.apollo.MusicStateListener;
 import com.andrew.apollo.R;
 import com.andrew.apollo.adapters.ArtistAdapter;
@@ -60,7 +59,7 @@ import java.util.List;
  * 
  * @author Andrew Neal (andrewdneal@gmail.com)
  */
-public class ArtistFragment extends SherlockFragment implements LoaderCallbacks<List<Artist>>,
+public class ArtistFragment extends Fragment implements LoaderCallbacks<List<Artist>>,
         OnScrollListener, OnItemClickListener, MusicStateListener {
 
     /**
@@ -144,7 +143,7 @@ public class ArtistFragment extends SherlockFragment implements LoaderCallbacks<
         } else {
             layout = R.layout.grid_items_normal;
         }
-        mAdapter = new ArtistAdapter(getSherlockActivity(), layout);
+        mAdapter = new ArtistAdapter(getActivity(), layout);
     }
 
     /**
@@ -198,7 +197,7 @@ public class ArtistFragment extends SherlockFragment implements LoaderCallbacks<
         // Creat a new model
         mArtist = mAdapter.getItem(info.position);
         // Create a list of the artist's songs
-        mArtistList = MusicUtils.getSongListForArtist(getSherlockActivity(), mArtist.mArtistId);
+        mArtistList = MusicUtils.getSongListForArtist(getActivity(), mArtist.mArtistId);
 
         // Play the artist
         menu.add(GROUP_ID, FragmentMenuItems.PLAY_SELECTION, Menu.NONE,
@@ -211,7 +210,7 @@ public class ArtistFragment extends SherlockFragment implements LoaderCallbacks<
         // Add the artist to a playlist
         final SubMenu subMenu = menu.addSubMenu(GROUP_ID, FragmentMenuItems.ADD_TO_PLAYLIST,
                 Menu.NONE, R.string.add_to_playlist);
-        MusicUtils.makePlaylistMenu(getSherlockActivity(), GROUP_ID, subMenu, false);
+        MusicUtils.makePlaylistMenu(getActivity(), GROUP_ID, subMenu, false);
 
         // Delete the artist
         menu.add(GROUP_ID, FragmentMenuItems.DELETE, Menu.NONE,
@@ -227,10 +226,10 @@ public class ArtistFragment extends SherlockFragment implements LoaderCallbacks<
         if (item.getGroupId() == GROUP_ID) {
             switch (item.getItemId()) {
                 case FragmentMenuItems.PLAY_SELECTION:
-                    MusicUtils.playAll(getSherlockActivity(), mArtistList, 0, true);
+                    MusicUtils.playAll(getActivity(), mArtistList, 0, true);
                     return true;
                 case FragmentMenuItems.ADD_TO_QUEUE:
-                    MusicUtils.addToQueue(getSherlockActivity(), mArtistList);
+                    MusicUtils.addToQueue(getActivity(), mArtistList);
                     return true;
                 case FragmentMenuItems.NEW_PLAYLIST:
                     CreateNewPlaylist.getInstance(mArtistList).show(getFragmentManager(),
@@ -238,7 +237,7 @@ public class ArtistFragment extends SherlockFragment implements LoaderCallbacks<
                     return true;
                 case FragmentMenuItems.PLAYLIST_SELECTED:
                     final long id = item.getIntent().getLongExtra("playlist", 0);
-                    MusicUtils.addToPlaylist(getSherlockActivity(), mArtistList, id);
+                    MusicUtils.addToPlaylist(getActivity(), mArtistList, id);
                     return true;
                 case FragmentMenuItems.DELETE:
                     mShouldRefresh = true;
@@ -275,7 +274,7 @@ public class ArtistFragment extends SherlockFragment implements LoaderCallbacks<
     public void onItemClick(final AdapterView<?> parent, final View view, final int position,
             final long id) {
         mArtist = mAdapter.getItem(position);
-        NavUtils.openArtistProfile(getSherlockActivity(), mArtist.mArtistName);
+        NavUtils.openArtistProfile(getActivity(), mArtist.mArtistName);
     }
 
     /**
@@ -283,7 +282,7 @@ public class ArtistFragment extends SherlockFragment implements LoaderCallbacks<
      */
     @Override
     public Loader<List<Artist>> onCreateLoader(final int id, final Bundle args) {
-        return new ArtistLoader(getSherlockActivity());
+        return new ArtistLoader(getActivity());
     }
 
     /**
@@ -432,7 +431,7 @@ public class ArtistFragment extends SherlockFragment implements LoaderCallbacks<
         mGridView.setAdapter(mAdapter);
         // Set up the helpers
         initAbsListView(mGridView);
-        if (ApolloUtils.isLandscape(getSherlockActivity())) {
+        if (ApolloUtils.isLandscape(getActivity())) {
             if (isDetailedLayout()) {
                 mAdapter.setLoadExtraData(true);
                 mGridView.setNumColumns(TWO);
@@ -450,12 +449,12 @@ public class ArtistFragment extends SherlockFragment implements LoaderCallbacks<
     }
 
     private boolean isSimpleLayout() {
-        return PreferenceUtils.getInstace(getSherlockActivity()).isSimpleLayout(ARTIST_LAYOUT,
-                getSherlockActivity());
+        return PreferenceUtils.getInstace(getActivity()).isSimpleLayout(ARTIST_LAYOUT,
+                getActivity());
     }
 
     private boolean isDetailedLayout() {
-        return PreferenceUtils.getInstace(getSherlockActivity()).isDetailedLayout(ARTIST_LAYOUT,
-                getSherlockActivity());
+        return PreferenceUtils.getInstace(getActivity()).isDetailedLayout(ARTIST_LAYOUT,
+                getActivity());
     }
 }

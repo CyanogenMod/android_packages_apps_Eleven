@@ -31,7 +31,6 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.AdapterContextMenuInfo;
 import android.widget.AdapterView.OnItemClickListener;
 
-import com.actionbarsherlock.app.SherlockFragment;
 import com.andrew.apollo.Config;
 import com.andrew.apollo.R;
 import com.andrew.apollo.adapters.ProfileSongAdapter;
@@ -58,7 +57,7 @@ import java.util.List;
  * 
  * @author Andrew Neal (andrewdneal@gmail.com)
  */
-public class PlaylistSongFragment extends SherlockFragment implements LoaderCallbacks<List<Song>>,
+public class PlaylistSongFragment extends Fragment implements LoaderCallbacks<List<Song>>,
         OnItemClickListener, DropListener, RemoveListener, DragScrollProfile {
 
     /**
@@ -134,7 +133,7 @@ public class PlaylistSongFragment extends SherlockFragment implements LoaderCall
     public void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         // Create the adpater
-        mAdapter = new ProfileSongAdapter(getSherlockActivity(), R.layout.edit_track_list_item);
+        mAdapter = new ProfileSongAdapter(getActivity(), R.layout.edit_track_list_item);
     }
 
     /**
@@ -223,7 +222,7 @@ public class PlaylistSongFragment extends SherlockFragment implements LoaderCall
         // Add the song to a playlist
         final SubMenu subMenu = menu.addSubMenu(GROUP_ID, FragmentMenuItems.ADD_TO_PLAYLIST,
                 Menu.NONE, R.string.add_to_playlist);
-        MusicUtils.makePlaylistMenu(getSherlockActivity(), GROUP_ID, subMenu, true);
+        MusicUtils.makePlaylistMenu(getActivity(), GROUP_ID, subMenu, true);
 
         // View more content by the song artist
         menu.add(GROUP_ID, FragmentMenuItems.MORE_BY_ARTIST, Menu.NONE,
@@ -243,17 +242,17 @@ public class PlaylistSongFragment extends SherlockFragment implements LoaderCall
         if (item.getGroupId() == GROUP_ID) {
             switch (item.getItemId()) {
                 case FragmentMenuItems.PLAY_SELECTION:
-                    MusicUtils.playAll(getSherlockActivity(), new long[] {
+                    MusicUtils.playAll(getActivity(), new long[] {
                         mSelectedId
                     }, 0, false);
                     return true;
                 case FragmentMenuItems.ADD_TO_QUEUE:
-                    MusicUtils.addToQueue(getSherlockActivity(), new long[] {
+                    MusicUtils.addToQueue(getActivity(), new long[] {
                         mSelectedId
                     });
                     return true;
                 case FragmentMenuItems.ADD_TO_FAVORITES:
-                    FavoritesStore.getInstance(getSherlockActivity()).addSongId(
+                    FavoritesStore.getInstance(getActivity()).addSongId(
                             Long.valueOf(mSelectedId), mSongName, mAlbumName, mArtistName);
                     return true;
                 case FragmentMenuItems.NEW_PLAYLIST:
@@ -263,15 +262,15 @@ public class PlaylistSongFragment extends SherlockFragment implements LoaderCall
                     return true;
                 case FragmentMenuItems.PLAYLIST_SELECTED:
                     final long mPlaylistId = item.getIntent().getLongExtra("playlist", 0);
-                    MusicUtils.addToPlaylist(getSherlockActivity(), new long[] {
+                    MusicUtils.addToPlaylist(getActivity(), new long[] {
                         mSelectedId
                     }, mPlaylistId);
                     return true;
                 case FragmentMenuItems.MORE_BY_ARTIST:
-                    NavUtils.openArtistProfile(getSherlockActivity(), mArtistName);
+                    NavUtils.openArtistProfile(getActivity(), mArtistName);
                     return true;
                 case FragmentMenuItems.USE_AS_RINGTONE:
-                    MusicUtils.setRingtone(getSherlockActivity(), mSelectedId);
+                    MusicUtils.setRingtone(getActivity(), mSelectedId);
                     return true;
                 case FragmentMenuItems.DELETE:
                     DeleteDialog.newInstance(mSong.mSongName, new long[] {
@@ -297,10 +296,10 @@ public class PlaylistSongFragment extends SherlockFragment implements LoaderCall
         if (position == 0) {
             return;
         }
-        Cursor cursor = PlaylistSongLoader.makePlaylistSongCursor(getSherlockActivity(),
+        Cursor cursor = PlaylistSongLoader.makePlaylistSongCursor(getActivity(),
                 getArguments().getLong(Config.ID));
         final long[] list = MusicUtils.getSongListForCursor(cursor);
-        MusicUtils.playAll(getSherlockActivity(), list, position - 1, false);
+        MusicUtils.playAll(getActivity(), list, position - 1, false);
         cursor.close();
         cursor = null;
     }
@@ -310,7 +309,7 @@ public class PlaylistSongFragment extends SherlockFragment implements LoaderCall
      */
     @Override
     public Loader<List<Song>> onCreateLoader(final int id, final Bundle args) {
-        return new PlaylistSongLoader(getSherlockActivity(), mPlaylistId);
+        return new PlaylistSongLoader(getActivity(), mPlaylistId);
     }
 
     /**
@@ -363,7 +362,7 @@ public class PlaylistSongFragment extends SherlockFragment implements LoaderCall
         mAdapter.remove(mSong);
         mAdapter.notifyDataSetChanged();
         final Uri uri = MediaStore.Audio.Playlists.Members.getContentUri("external", mPlaylistId);
-        getSherlockActivity().getContentResolver().delete(uri,
+        getActivity().getContentResolver().delete(uri,
                 MediaStore.Audio.Playlists.Members.AUDIO_ID + "=" + Long.valueOf(mSong.mSongId),
                 null);
     }
@@ -383,7 +382,7 @@ public class PlaylistSongFragment extends SherlockFragment implements LoaderCall
         mAdapter.remove(mSong);
         mAdapter.insert(mSong, realTo);
         mAdapter.notifyDataSetChanged();
-        MediaStore.Audio.Playlists.Members.moveItem(getSherlockActivity().getContentResolver(),
+        MediaStore.Audio.Playlists.Members.moveItem(getActivity().getContentResolver(),
                 mPlaylistId, realFrom, realTo);
     }
 }

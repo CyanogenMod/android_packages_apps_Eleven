@@ -11,6 +11,7 @@
 
 package com.andrew.apollo.adapters;
 
+import android.app.Activity;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,7 +20,6 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 
-import com.actionbarsherlock.app.SherlockFragmentActivity;
 import com.andrew.apollo.Config;
 import com.andrew.apollo.R;
 import com.andrew.apollo.cache.ImageFetcher;
@@ -81,12 +81,12 @@ public class AlbumAdapter extends ArrayAdapter<Album> {
      * @param style Determines which layout to use and therefore which items to
      *            load.
      */
-    public AlbumAdapter(final Context context, final int layoutId) {
+    public AlbumAdapter(final Activity context, final int layoutId) {
         super(context, 0);
         // Get the layout Id
         mLayoutId = layoutId;
         // Initialize the cache & image fetcher
-        mImageFetcher = ApolloUtils.getImageFetcher((SherlockFragmentActivity)context);
+        mImageFetcher = ApolloUtils.getImageFetcher(context);
         // Cache the transparent overlay
         mOverlay = context.getResources().getColor(R.color.list_item_background);
     }

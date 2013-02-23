@@ -29,7 +29,6 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import com.actionbarsherlock.app.SherlockFragment;
 import com.andrew.apollo.Config;
 import com.andrew.apollo.R;
 import com.andrew.apollo.adapters.GenreAdapter;
@@ -47,7 +46,7 @@ import java.util.List;
  * 
  * @author Andrew Neal (andrewdneal@gmail.com)
  */
-public class GenreFragment extends SherlockFragment implements LoaderCallbacks<List<Genre>>,
+public class GenreFragment extends Fragment implements LoaderCallbacks<List<Genre>>,
         OnItemClickListener {
 
     /**
@@ -98,7 +97,7 @@ public class GenreFragment extends SherlockFragment implements LoaderCallbacks<L
     public void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         // Create the adpater
-        mAdapter = new GenreAdapter(getSherlockActivity(), R.layout.list_item_simple);
+        mAdapter = new GenreAdapter(getActivity(), R.layout.list_item_simple);
     }
 
     /**
@@ -146,7 +145,7 @@ public class GenreFragment extends SherlockFragment implements LoaderCallbacks<L
         // Create a new genre
         mGenre = mAdapter.getItem(info.position);
         // Create a list of the genre's songs
-        mGenreList = MusicUtils.getSongListForGenre(getSherlockActivity(), mGenre.mGenreId);
+        mGenreList = MusicUtils.getSongListForGenre(getActivity(), mGenre.mGenreId);
 
         // Play the genre
         menu.add(GROUP_ID, FragmentMenuItems.PLAY_SELECTION, Menu.NONE,
@@ -163,10 +162,10 @@ public class GenreFragment extends SherlockFragment implements LoaderCallbacks<L
         if (item.getGroupId() == GROUP_ID) {
             switch (item.getItemId()) {
                 case FragmentMenuItems.PLAY_SELECTION:
-                    MusicUtils.playAll(getSherlockActivity(), mGenreList, 0, false);
+                    MusicUtils.playAll(getActivity(), mGenreList, 0, false);
                     return true;
                 case FragmentMenuItems.ADD_TO_QUEUE:
-                    MusicUtils.addToQueue(getSherlockActivity(), mGenreList);
+                    MusicUtils.addToQueue(getActivity(), mGenreList);
                     return true;
                 default:
                     break;
@@ -189,7 +188,7 @@ public class GenreFragment extends SherlockFragment implements LoaderCallbacks<L
         bundle.putString(Config.NAME, mGenre.mGenreName);
 
         // Create the intent to launch the profile activity
-        final Intent intent = new Intent(getSherlockActivity(), ProfileActivity.class);
+        final Intent intent = new Intent(getActivity(), ProfileActivity.class);
         intent.putExtras(bundle);
         startActivity(intent);
     }
@@ -199,7 +198,7 @@ public class GenreFragment extends SherlockFragment implements LoaderCallbacks<L
      */
     @Override
     public Loader<List<Genre>> onCreateLoader(final int id, final Bundle args) {
-        return new GenreLoader(getSherlockActivity());
+        return new GenreLoader(getActivity());
     }
 
     /**

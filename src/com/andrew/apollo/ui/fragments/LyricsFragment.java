@@ -22,7 +22,6 @@ import android.view.ViewGroup;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-import com.actionbarsherlock.app.SherlockFragment;
 import com.andrew.apollo.R;
 import com.andrew.apollo.lyrics.LyricsProvider;
 import com.andrew.apollo.lyrics.LyricsProviderFactory;
@@ -31,13 +30,13 @@ import com.andrew.apollo.utils.ApolloUtils;
 import com.andrew.apollo.utils.MusicUtils;
 
 /**
- * This {@link SherlockFragment} is used to display lyrics for the currently
+ * This {@link Fragment} is used to display lyrics for the currently
  * playing song.
  * 
  * @author Andrew Neal (andrewdneal@gmail.com)
  */
 @SuppressLint("NewApi")
-public class LyricsFragment extends SherlockFragment {
+public class LyricsFragment extends Fragment {
 
     // Lyrics
     private TextView mLyrics;
@@ -64,9 +63,7 @@ public class LyricsFragment extends SherlockFragment {
         // Initialize the lyrics text view
         mLyrics = (TextView)rootView.findViewById(R.id.audio_player_lyrics);
         // Enable text selection
-        if (ApolloUtils.hasHoneycomb()) {
-            mLyrics.setTextIsSelectable(true);
-        }
+        mLyrics.setTextIsSelectable(true);
         // Initialze the progess bar
         mProgressBar = (ProgressBar)rootView.findViewById(R.id.audio_player_lyrics_progess);
         return rootView;
@@ -151,7 +148,7 @@ public class LyricsFragment extends SherlockFragment {
             }
 
             // Now try to fetch for them
-            if (lyrics == null && ApolloUtils.isOnline(getSherlockActivity())) {
+            if (lyrics == null && ApolloUtils.isOnline(getActivity())) {
                 mTryOnline = true;
                 provider = LyricsProviderFactory.getMainOnlineProvider();
                 lyrics = provider.getLyrics(mArtist, mSong);

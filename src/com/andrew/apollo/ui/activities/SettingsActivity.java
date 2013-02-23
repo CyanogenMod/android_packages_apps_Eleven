@@ -22,9 +22,9 @@ import android.preference.CheckBoxPreference;
 import android.preference.Preference;
 import android.preference.Preference.OnPreferenceChangeListener;
 import android.preference.Preference.OnPreferenceClickListener;
+import android.preference.PreferenceActivity;
+import android.view.MenuItem;
 
-import com.actionbarsherlock.app.SherlockPreferenceActivity;
-import com.actionbarsherlock.view.MenuItem;
 import com.andrew.apollo.MusicPlaybackService;
 import com.andrew.apollo.R;
 import com.andrew.apollo.cache.ImageCache;
@@ -40,7 +40,7 @@ import com.andrew.apollo.widgets.ColorSchemeDialog;
  * @author Andrew Neal (andrewdneal@gmail.com)
  */
 @SuppressWarnings("deprecation")
-public class SettingsActivity extends SherlockPreferenceActivity {
+public class SettingsActivity extends PreferenceActivity {
 
     /**
      * Image cache
@@ -65,7 +65,7 @@ public class SettingsActivity extends SherlockPreferenceActivity {
         mImageCache = ImageCache.getInstance(this);
 
         // UP
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getActionBar().setDisplayHomeAsUpEnabled(true);
 
         // Add the preferences
         addPreferencesFromResource(R.xml.settings);
@@ -143,10 +143,8 @@ public class SettingsActivity extends SherlockPreferenceActivity {
         downloadMissingArtwork();
         // Missing artist images
         downloadMissingArtistImages();
-        if (ApolloUtils.hasICS()) {
-            // Lockscreen controls
-            toggleLockscreenControls();
-        }
+        // Lockscreen controls
+        toggleLockscreenControls();
     }
 
     /**

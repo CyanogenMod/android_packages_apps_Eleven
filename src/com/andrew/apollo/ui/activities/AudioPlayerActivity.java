@@ -13,6 +13,8 @@ package com.andrew.apollo.ui.activities;
 
 import static com.andrew.apollo.utils.MusicUtils.mService;
 
+import android.animation.ObjectAnimator;
+import android.app.ActionBar;
 import android.app.SearchManager;
 import android.app.SearchableInfo;
 import android.content.BroadcastReceiver;
@@ -28,7 +30,10 @@ import android.os.Handler;
 import android.os.IBinder;
 import android.os.Message;
 import android.os.SystemClock;
+import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewPager;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.Window;
@@ -36,16 +41,12 @@ import android.view.animation.AnimationUtils;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.SearchView;
+import android.widget.SearchView.OnQueryTextListener;
 import android.widget.SeekBar;
 import android.widget.SeekBar.OnSeekBarChangeListener;
 import android.widget.TextView;
 
-import com.actionbarsherlock.app.ActionBar;
-import com.actionbarsherlock.app.SherlockFragmentActivity;
-import com.actionbarsherlock.view.Menu;
-import com.actionbarsherlock.view.MenuItem;
-import com.actionbarsherlock.widget.SearchView;
-import com.actionbarsherlock.widget.SearchView.OnQueryTextListener;
 import com.andrew.apollo.IApolloService;
 import com.andrew.apollo.MusicPlaybackService;
 import com.andrew.apollo.R;
@@ -62,7 +63,6 @@ import com.andrew.apollo.widgets.PlayPauseButton;
 import com.andrew.apollo.widgets.RepeatButton;
 import com.andrew.apollo.widgets.RepeatingImageButton;
 import com.andrew.apollo.widgets.ShuffleButton;
-import com.nineoldandroids.animation.ObjectAnimator;
 
 import java.lang.ref.WeakReference;
 
@@ -71,7 +71,7 @@ import java.lang.ref.WeakReference;
  * 
  * @author Andrew Neal (andrewdneal@gmail.com)
  */
-public class AudioPlayerActivity extends SherlockFragmentActivity implements ServiceConnection,
+public class AudioPlayerActivity extends FragmentActivity implements ServiceConnection,
         OnSeekBarChangeListener {
 
     // Message to refresh the time
@@ -159,10 +159,6 @@ public class AudioPlayerActivity extends SherlockFragmentActivity implements Ser
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        // Title bar shows up in gingerbread, I'm too tired to figure out why.
-        if (!ApolloUtils.hasHoneycomb()) {
-            requestWindowFeature(Window.FEATURE_NO_TITLE);
-        }
 
         // Initialze the theme resources
         mResources = new ThemeUtils(this);
@@ -188,7 +184,7 @@ public class AudioPlayerActivity extends SherlockFragmentActivity implements Ser
         mPlaybackStatus = new PlaybackStatus(this);
 
         // Theme the action bar
-        final ActionBar actionBar = getSupportActionBar();
+        final ActionBar actionBar = getActionBar();
         mResources.themeActionBar(actionBar, getString(R.string.app_name));
         actionBar.setDisplayHomeAsUpEnabled(true);
 
@@ -280,7 +276,7 @@ public class AudioPlayerActivity extends SherlockFragmentActivity implements Ser
     @Override
     public boolean onCreateOptionsMenu(final Menu menu) {
         // Search view
-        getSupportMenuInflater().inflate(R.menu.search, menu);
+        getMenuInflater().inflate(R.menu.search, menu);
         // Theme the search icon
         mResources.setSearchIcon(menu);
 
@@ -307,13 +303,13 @@ public class AudioPlayerActivity extends SherlockFragmentActivity implements Ser
         });
 
         // Favorite action
-        getSupportMenuInflater().inflate(R.menu.favorite, menu);
+        getMenuInflater().inflate(R.menu.favorite, menu);
         // Shuffle all
-        getSupportMenuInflater().inflate(R.menu.shuffle, menu);
+        getMenuInflater().inflate(R.menu.shuffle, menu);
         // Share, ringtone, and equalizer
-        getSupportMenuInflater().inflate(R.menu.audio_player, menu);
+        getMenuInflater().inflate(R.menu.audio_player, menu);
         // Settings
-        getSupportMenuInflater().inflate(R.menu.activity_base, menu);
+        getMenuInflater().inflate(R.menu.activity_base, menu);
         return true;
     }
 

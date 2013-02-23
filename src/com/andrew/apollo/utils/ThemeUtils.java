@@ -11,6 +11,7 @@
 
 package com.andrew.apollo.utils;
 
+import android.app.ActionBar;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -29,12 +30,11 @@ import android.os.AsyncTask;
 import android.preference.PreferenceManager;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
-import com.actionbarsherlock.app.ActionBar;
-import com.actionbarsherlock.view.Menu;
-import com.actionbarsherlock.view.MenuItem;
 import com.andrew.apollo.R;
 
 /**
@@ -143,7 +143,7 @@ public class ThemeUtils {
             protected Void doInBackground(final Void... unused) {
                 final SharedPreferences.Editor editor = mPreferences.edit();
                 editor.putString(PACKAGE_NAME, packageName);
-                SharedPreferencesCompat.apply(editor);
+                editor.apply();
                 return null;
             }
         }, (Void[])null);

@@ -19,7 +19,6 @@ import android.media.audiofx.AudioEffect;
 import android.os.Bundle;
 import android.provider.MediaStore;
 
-import com.actionbarsherlock.app.SherlockFragmentActivity;
 import com.andrew.apollo.Config;
 import com.andrew.apollo.R;
 import com.andrew.apollo.ui.activities.AudioPlayerActivity;
@@ -27,7 +26,7 @@ import com.andrew.apollo.ui.activities.HomeActivity;
 import com.andrew.apollo.ui.activities.ProfileActivity;
 import com.andrew.apollo.ui.activities.SearchActivity;
 import com.andrew.apollo.ui.activities.SettingsActivity;
-import com.devspark.appmsg.Crouton;
+import com.devspark.appmsg.AppMsg;
 
 /**
  * Various navigation helpers.
@@ -39,10 +38,10 @@ public final class NavUtils {
     /**
      * Opens the profile of an artist.
      * 
-     * @param context The {@link SherlockFragmentActivity} to use.
+     * @param context The {@link Activity} to use.
      * @param artistName The name of the artist
      */
-    public static void openArtistProfile(final SherlockFragmentActivity context,
+    public static void openArtistProfile(final Activity context,
             final String artistName) {
 
         // Create a new bundle to transfer the artist info
@@ -60,11 +59,11 @@ public final class NavUtils {
     /**
      * Opens the profile of an album.
      * 
-     * @param context The {@link SherlockFragmentActivity} to use.
+     * @param context The {@link Activity} to use.
      * @param albumName The name of the album
      * @param artistName The name of the album artist
      */
-    public static void openAlbumProfile(final SherlockFragmentActivity context,
+    public static void openAlbumProfile(final Activity context,
             final String albumName, final String artistName) {
 
         // Create a new bundle to transfer the album info
@@ -84,9 +83,9 @@ public final class NavUtils {
     /**
      * Opens the sound effects panel or DSP manager in CM
      * 
-     * @param context The {@link SherlockFragmentActivity} to use.
+     * @param context The {@link Activity} to use.
      */
-    public static void openEffectsPanel(final SherlockFragmentActivity context) {
+    public static void openEffectsPanel(final Activity context) {
         try {
             final Intent effects = new Intent(AudioEffect.ACTION_DISPLAY_AUDIO_EFFECT_CONTROL_PANEL);
             effects.putExtra(AudioEffect.EXTRA_AUDIO_SESSION, MusicUtils.getCurrentAudioId());
@@ -94,17 +93,17 @@ public final class NavUtils {
             // Make sure the notification starts
             MusicUtils.startBackgroundService(context);
         } catch (final ActivityNotFoundException notFound) {
-            Crouton.makeText(context, context.getString(R.string.no_effects_for_you),
-                    Crouton.STYLE_ALERT);
+            AppMsg.makeText(context, context.getString(R.string.no_effects_for_you),
+                    AppMsg.STYLE_ALERT);
         }
     }
 
     /**
      * Opens to {@link SettingsActivity}.
      * 
-     * @param activity The {@link SherlockFragmentActivity} to use.
+     * @param activity The {@link Activity} to use.
      */
-    public static void openSettings(final SherlockFragmentActivity activity) {
+    public static void openSettings(final Activity activity) {
         final Intent intent = new Intent(activity, SettingsActivity.class);
         activity.startActivity(intent);
     }

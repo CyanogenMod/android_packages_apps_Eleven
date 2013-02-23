@@ -25,6 +25,8 @@ import android.view.ViewGroup.LayoutParams;
 import android.widget.FrameLayout;
 import android.widget.TextView;
 
+import com.andrew.apollo.R;
+
 /**
  * In-layout notifications. Based on {@link android.widget.Toast} notifications 
  * and article by Cyril Mottier (http://android.cyrilmottier.com/?p=773).

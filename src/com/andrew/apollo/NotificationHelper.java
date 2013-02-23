@@ -88,40 +88,26 @@ public class NotificationHelper {
         // Set up the content view
         initCollapsedLayout(trackName, artistName, albumArt);
 
-        if (ApolloUtils.hasHoneycomb()) {
-            // Notification Builder
-            mNotification = new NotificationCompat.Builder(mService)
-                    .setSmallIcon(R.drawable.stat_notify_music)
-                    .setContentIntent(getPendingIntent())
-                    .setPriority(Notification.PRIORITY_DEFAULT).setContent(mNotificationTemplate)
-                    .build();
+        // Notification Builder
+        mNotification = new NotificationCompat.Builder(mService)
+                .setSmallIcon(R.drawable.stat_notify_music)
+                .setContentIntent(getPendingIntent())
+                .setPriority(Notification.PRIORITY_DEFAULT)
+                .setContent(mNotificationTemplate)
+                .build();
+        // Control playback from the notification
+        initPlaybackActions();
+        if (ApolloUtils.hasJellyBean()) {
+            // Expanded notifiction style
+            mExpandedView = new RemoteViews(mService.getPackageName(),
+                    R.layout.notification_template_expanded_base);
+            mNotification.bigContentView = mExpandedView;
             // Control playback from the notification
-            initPlaybackActions();
-            if (ApolloUtils.hasJellyBean()) {
-                // Expanded notifiction style
-                mExpandedView = new RemoteViews(mService.getPackageName(),
-                        R.layout.notification_template_expanded_base);
-                mNotification.bigContentView = mExpandedView;
-                // Control playback from the notification
-                initExpandedPlaybackActions();
-                // Set up the expanded content view
-                initExpandedLayout(trackName, albumName, artistName, albumArt);
-            }
-            mService.startForeground(APOLLO_MUSIC_SERVICE, mNotification);
-        } else {
-            // FIXME: I do not understand why this happens, but the
-            // NotificationCompat
-            // API does not work on Gingerbread. Specifically, {@code
-            // #mBuilder.setContent()} won't apply the custom RV in Gingerbread.
-            // So,
-            // until this is fixed I'll just use the old way.
-            mNotification = new Notification();
-            mNotification.contentView = mNotificationTemplate;
-            mNotification.flags |= Notification.FLAG_ONGOING_EVENT;
-            mNotification.icon = R.drawable.stat_notify_music;
-            mNotification.contentIntent = getPendingIntent();
-            mService.startForeground(APOLLO_MUSIC_SERVICE, mNotification);
+            initExpandedPlaybackActions();
+            // Set up the expanded content view
+            initExpandedLayout(trackName, albumName, artistName, albumArt);
         }
+        mService.startForeground(APOLLO_MUSIC_SERVICE, mNotification);
     }
 
     /**
@@ -133,12 +119,12 @@ public class NotificationHelper {
         if (mNotification == null || mNotificationManager == null) {
             return;
         }
-        if (ApolloUtils.hasHoneycomb() && mNotificationTemplate != null) {
+        if (mNotificationTemplate != null) {
             mNotificationTemplate.setImageViewResource(R.id.notification_base_play,
                     isPlaying ? R.drawable.btn_playback_play : R.drawable.btn_playback_pause);
         }
 
-        if (ApolloUtils.hasJellyBean() && mExpandedView != null && ApolloUtils.hasJellyBean()) {
+        if (ApolloUtils.hasJellyBean() && mExpandedView != null) {
             mExpandedView.setImageViewResource(R.id.notification_expanded_base_play,
                     isPlaying ? R.drawable.btn_playback_play : R.drawable.btn_playback_pause);
         }

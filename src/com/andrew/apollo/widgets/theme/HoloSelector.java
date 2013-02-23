@@ -63,9 +63,7 @@ public class HoloSelector extends StateListDrawable {
         }, makeColorDrawable(themeColor));
         // Default
         addState(new int[] {}, makeColorDrawable(Color.TRANSPARENT));
-        if (ApolloUtils.hasHoneycomb()) {
-            setExitFadeDuration(400);
-        }
+        setExitFadeDuration(400);
     }
 
     /**

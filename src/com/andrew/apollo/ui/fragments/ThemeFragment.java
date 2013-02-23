@@ -24,6 +24,7 @@ import android.support.v4.app.Fragment;
 import android.view.ContextMenu;
 import android.view.ContextMenu.ContextMenuInfo;
 import android.view.LayoutInflater;
+import android.view.Menu;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -32,13 +33,11 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.GridView;
 
-import com.actionbarsherlock.app.SherlockFragment;
-import com.actionbarsherlock.view.Menu;
 import com.andrew.apollo.R;
 import com.andrew.apollo.recycler.RecycleHolder;
 import com.andrew.apollo.ui.MusicHolder;
 import com.andrew.apollo.utils.ThemeUtils;
-import com.devspark.appmsg.Crouton;
+import com.devspark.appmsg.AppMsg;
 
 import java.util.List;
 
@@ -47,7 +46,7 @@ import java.util.List;
  * 
  * @author Andrew Neal (andrewdneal@gmail.com)
  */
-public class ThemeFragment extends SherlockFragment implements OnItemClickListener {
+public class ThemeFragment extends Fragment implements OnItemClickListener {
 
     private static final int OPEN_IN_PLAY_STORE = 0;
 
@@ -114,7 +113,7 @@ public class ThemeFragment extends SherlockFragment implements OnItemClickListen
         final Intent apolloThemeIntent = new Intent("com.andrew.apollo.THEMES");
         apolloThemeIntent.addCategory("android.intent.category.DEFAULT");
 
-        mPackageManager = getSherlockActivity().getPackageManager();
+        mPackageManager = getActivity().getPackageManager();
         mThemes = mPackageManager.queryIntentActivities(apolloThemeIntent, 0);
         mEntries = new String[mThemes.size() + 1];
         mValues = new String[mThemes.size() + 1];
@@ -147,12 +146,12 @@ public class ThemeFragment extends SherlockFragment implements OnItemClickListen
         }
 
         // Initialize the Adapter
-        mAdapter = new ThemesAdapter(getSherlockActivity(), R.layout.fragment_themes_base);
+        mAdapter = new ThemesAdapter(getActivity(), R.layout.fragment_themes_base);
         // Bind the data
         mGridView.setAdapter(mAdapter);
 
         // Get the theme utils
-        mTheme = new ThemeUtils(getSherlockActivity());
+        mTheme = new ThemeUtils(getActivity());
     }
 
     /**
@@ -178,7 +177,7 @@ public class ThemeFragment extends SherlockFragment implements OnItemClickListen
         final AdapterContextMenuInfo info = (AdapterContextMenuInfo)item.getMenuInfo();
         switch (item.getItemId()) {
             case OPEN_IN_PLAY_STORE:
-                ThemeUtils.openAppPage(getSherlockActivity(), mValues[info.position]);
+                ThemeUtils.openAppPage(getActivity(), mValues[info.position]);
                 return true;
             default:
                 break;
@@ -193,8 +192,8 @@ public class ThemeFragment extends SherlockFragment implements OnItemClickListen
     public void onItemClick(final AdapterView<?> parent, final View view, final int position,
             final long id) {
         mTheme.setThemePackageName(mValues[position]);
-        Crouton.makeText(getSherlockActivity(),
-                mEntries[position] + " " + getString(R.string.theme_set), Crouton.STYLE_CONFIRM)
+        AppMsg.makeText(getActivity(),
+                mEntries[position] + " " + getString(R.string.theme_set), AppMsg.STYLE_CONFIRM)
                 .show();
     }
 

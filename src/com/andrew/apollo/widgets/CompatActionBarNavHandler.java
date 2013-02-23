@@ -11,11 +11,10 @@
 
 package com.andrew.apollo.widgets;
 
-import android.support.v4.app.FragmentTransaction;
-
-import com.actionbarsherlock.app.ActionBar.OnNavigationListener;
-import com.actionbarsherlock.app.ActionBar.Tab;
-import com.actionbarsherlock.app.ActionBar.TabListener;
+import android.app.ActionBar.OnNavigationListener;
+import android.app.ActionBar.Tab;
+import android.app.ActionBar.TabListener;
+import android.app.FragmentTransaction;
 
 /**
  * Adapter for action bar navigation events. This class implements an adapter

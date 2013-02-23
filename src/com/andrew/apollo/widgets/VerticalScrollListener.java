@@ -57,12 +57,7 @@ public class VerticalScrollListener implements OnScrollListener {
             return;
         }
 
-        float y;
-        if (ApolloUtils.hasHoneycomb()) {
-            y = view.getChildAt(firstVisibleItem).getY();
-        } else {
-            y = view.getChildAt(firstVisibleItem).getTop();
-        }
+        float y = view.getChildAt(firstVisibleItem).getY();
         final float amtToScroll = Math.max(y, -mTabCarousel.getAllowedVerticalScrollLength());
         mTabCarousel.moveToYCoordinate(mPageIndex, amtToScroll);
     }

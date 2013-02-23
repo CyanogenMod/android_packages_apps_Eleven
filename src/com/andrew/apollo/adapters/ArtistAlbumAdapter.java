@@ -11,6 +11,7 @@
 
 package com.andrew.apollo.adapters;
 
+import android.app.Activity;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,7 +20,6 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 
-import com.actionbarsherlock.app.SherlockFragmentActivity;
 import com.andrew.apollo.Config;
 import com.andrew.apollo.R;
 import com.andrew.apollo.cache.ImageFetcher;
@@ -86,7 +86,7 @@ public class ArtistAlbumAdapter extends ArrayAdapter<Album> {
      * @param context The {@link Context} to use
      * @param layoutId The resource Id of the view to inflate.
      */
-    public ArtistAlbumAdapter(final Context context, final int layoutId) {
+    public ArtistAlbumAdapter(final Activity context, final int layoutId) {
         super(context, 0);
         // Used to create the custom layout
         mInflater = LayoutInflater.from(context);
@@ -95,7 +95,7 @@ public class ArtistAlbumAdapter extends ArrayAdapter<Album> {
         // Get the layout Id
         mLayoutId = layoutId;
         // Initialize the cache & image fetcher
-        mImageFetcher = ApolloUtils.getImageFetcher((SherlockFragmentActivity)context);
+        mImageFetcher = ApolloUtils.getImageFetcher(context);
     }
 
     /**

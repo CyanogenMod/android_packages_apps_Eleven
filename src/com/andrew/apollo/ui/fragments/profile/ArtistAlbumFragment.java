@@ -31,7 +31,6 @@ import android.widget.AdapterView.AdapterContextMenuInfo;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 
-import com.actionbarsherlock.app.SherlockFragment;
 import com.andrew.apollo.Config;
 import com.andrew.apollo.R;
 import com.andrew.apollo.adapters.ArtistAlbumAdapter;
@@ -54,7 +53,7 @@ import java.util.List;
  * 
  * @author Andrew Neal (andrewdneal@gmail.com)
  */
-public class ArtistAlbumFragment extends SherlockFragment implements LoaderCallbacks<List<Album>>,
+public class ArtistAlbumFragment extends Fragment implements LoaderCallbacks<List<Album>>,
         OnItemClickListener {
 
     /**
@@ -115,7 +114,7 @@ public class ArtistAlbumFragment extends SherlockFragment implements LoaderCallb
     public void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         // Create the adpater
-        mAdapter = new ArtistAlbumAdapter(getSherlockActivity(),
+        mAdapter = new ArtistAlbumAdapter(getActivity(),
                 R.layout.list_item_detailed_no_background);
     }
 
@@ -193,7 +192,7 @@ public class ArtistAlbumFragment extends SherlockFragment implements LoaderCallb
         // Create a new album
         mAlbum = mAdapter.getItem(info.position - 1);
         // Create a list of the album's songs
-        mAlbumList = MusicUtils.getSongListForAlbum(getSherlockActivity(), mAlbum.mAlbumId);
+        mAlbumList = MusicUtils.getSongListForAlbum(getActivity(), mAlbum.mAlbumId);
 
         // Play the album
         menu.add(GROUP_ID, FragmentMenuItems.PLAY_SELECTION, Menu.NONE,
@@ -206,7 +205,7 @@ public class ArtistAlbumFragment extends SherlockFragment implements LoaderCallb
         // Add the album to a playlist
         final SubMenu subMenu = menu.addSubMenu(GROUP_ID, FragmentMenuItems.ADD_TO_PLAYLIST,
                 Menu.NONE, R.string.add_to_playlist);
-        MusicUtils.makePlaylistMenu(getSherlockActivity(), GROUP_ID, subMenu, false);
+        MusicUtils.makePlaylistMenu(getActivity(), GROUP_ID, subMenu, false);
 
         // Delete the album
         menu.add(GROUP_ID, FragmentMenuItems.DELETE, Menu.NONE,
@@ -222,10 +221,10 @@ public class ArtistAlbumFragment extends SherlockFragment implements LoaderCallb
         if (item.getGroupId() == GROUP_ID) {
             switch (item.getItemId()) {
                 case FragmentMenuItems.PLAY_SELECTION:
-                    MusicUtils.playAll(getSherlockActivity(), mAlbumList, 0, false);
+                    MusicUtils.playAll(getActivity(), mAlbumList, 0, false);
                     return true;
                 case FragmentMenuItems.ADD_TO_QUEUE:
-                    MusicUtils.addToQueue(getSherlockActivity(), mAlbumList);
+                    MusicUtils.addToQueue(getActivity(), mAlbumList);
                     return true;
                 case FragmentMenuItems.NEW_PLAYLIST:
                     CreateNewPlaylist.getInstance(mAlbumList).show(getFragmentManager(),
@@ -233,7 +232,7 @@ public class ArtistAlbumFragment extends SherlockFragment implements LoaderCallb
                     return true;
                 case FragmentMenuItems.PLAYLIST_SELECTED:
                     final long id = item.getIntent().getLongExtra("playlist", 0);
-                    MusicUtils.addToPlaylist(getSherlockActivity(), mAlbumList, id);
+                    MusicUtils.addToPlaylist(getActivity(), mAlbumList, id);
                     return true;
                 case FragmentMenuItems.DELETE:
                     DeleteDialog.newInstance(mAlbum.mAlbumName, mAlbumList, null).show(
@@ -257,8 +256,8 @@ public class ArtistAlbumFragment extends SherlockFragment implements LoaderCallb
             return;
         }
         mAlbum = mAdapter.getItem(position - 1);
-        NavUtils.openAlbumProfile(getSherlockActivity(), mAlbum.mAlbumName, mAlbum.mArtistName);
-        getSherlockActivity().finish();
+        NavUtils.openAlbumProfile(getActivity(), mAlbum.mAlbumName, mAlbum.mArtistName);
+        getActivity().finish();
     }
 
     /**
@@ -266,7 +265,7 @@ public class ArtistAlbumFragment extends SherlockFragment implements LoaderCallb
      */
     @Override
     public Loader<List<Album>> onCreateLoader(final int id, final Bundle args) {
-        return new ArtistAlbumLoader(getSherlockActivity(), args.getLong(Config.ID));
+        return new ArtistAlbumLoader(getActivity(), args.getLong(Config.ID));
     }
 
     /**

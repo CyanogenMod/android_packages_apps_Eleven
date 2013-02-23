@@ -12,8 +12,10 @@
 package com.andrew.apollo.cache;
 
 import android.annotation.SuppressLint;
-import android.annotation.TargetApi;
+import android.app.Activity;
 import android.app.ActivityManager;
+import android.app.Fragment;
+import android.app.FragmentManager;
 import android.content.ComponentCallbacks2;
 import android.content.ContentUris;
 import android.content.Context;
@@ -27,15 +29,9 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.ParcelFileDescriptor;
-import android.os.StatFs;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentActivity;
-import android.support.v4.app.FragmentManager;
 import android.text.TextUtils;
 import android.util.Log;
 
-import com.actionbarsherlock.app.SherlockFragment;
-import com.actionbarsherlock.app.SherlockFragmentActivity;
 import com.andrew.apollo.utils.ApolloUtils;
 
 import java.io.File;
@@ -188,38 +184,36 @@ public final class ImageCache {
         mLruCache = new MemoryCache(lruCacheSize);
 
         // Release some memory as needed
-        if (ApolloUtils.hasICS()) {
-            context.registerComponentCallbacks(new ComponentCallbacks2() {
+        context.registerComponentCallbacks(new ComponentCallbacks2() {
 
-                /**
-                 * {@inheritDoc}
-                 */
-                @Override
-                public void onTrimMemory(final int level) {
-                    if (level >= TRIM_MEMORY_MODERATE) {
-                        evictAll();
-                    } else if (level >= TRIM_MEMORY_BACKGROUND) {
-                        mLruCache.trimToSize(mLruCache.size() / 2);
-                    }
+            /**
+             * {@inheritDoc}
+             */
+            @Override
+            public void onTrimMemory(final int level) {
+                if (level >= TRIM_MEMORY_MODERATE) {
+                    evictAll();
+                } else if (level >= TRIM_MEMORY_BACKGROUND) {
+                    mLruCache.trimToSize(mLruCache.size() / 2);
                 }
+            }
 
-                /**
-                 * {@inheritDoc}
-                 */
-                @Override
-                public void onLowMemory() {
-                    // Nothing to do
-                }
+            /**
+             * {@inheritDoc}
+             */
+            @Override
+            public void onLowMemory() {
+                // Nothing to do
+            }
 
-                /**
-                 * {@inheritDoc}
-                 */
-                @Override
-                public void onConfigurationChanged(final Configuration newConfig) {
-                    // Nothing to do
-                }
-            });
-        }
+            /**
+             * {@inheritDoc}
+             */
+            @Override
+            public void onConfigurationChanged(final Configuration newConfig) {
+                // Nothing to do
+            }
+        });
     }
 
     /**
@@ -231,11 +225,11 @@ public final class ImageCache {
      * @return An existing retained ImageCache object or a new one if one did
      *         not exist
      */
-    public static final ImageCache findOrCreateCache(final SherlockFragmentActivity activity) {
+    public static final ImageCache findOrCreateCache(final Activity activity) {
 
         // Search for, or create an instance of the non-UI RetainFragment
-        final RetainFragment retainFragment = findOrCreateRetainFragment(activity
-                .getSupportFragmentManager());
+        final RetainFragment retainFragment = findOrCreateRetainFragment(
+                activity.getFragmentManager());
 
         // See if we already have an ImageCache stored in RetainFragment
         ImageCache cache = (ImageCache)retainFragment.getObject();
@@ -625,12 +619,8 @@ public final class ImageCache {
      * @return True if external storage is removable (like an SD card), false
      *         otherwise
      */
-    @TargetApi(Build.VERSION_CODES.GINGERBREAD)
     public static final boolean isExternalStorageRemovable() {
-        if (ApolloUtils.hasGingerbread()) {
-            return Environment.isExternalStorageRemovable();
-        }
-        return true;
+        return Environment.isExternalStorageRemovable();
     }
 
     /**
@@ -640,16 +630,7 @@ public final class ImageCache {
      * @return The external cache directory
      */
     public static final File getExternalCacheDir(final Context context) {
-        if (ApolloUtils.hasFroyo()) {
-            final File mCacheDir = context.getExternalCacheDir();
-            if (mCacheDir != null) {
-                return mCacheDir;
-            }
-        }
-
-        /* Before Froyo we need to construct the external cache dir ourselves */
-        final String mCacheDir = "/Android/data/" + context.getPackageName() + "/cache/";
-        return new File(Environment.getExternalStorageDirectory().getPath() + mCacheDir);
+        return context.getExternalCacheDir();
     }
 
     /**
@@ -658,13 +639,8 @@ public final class ImageCache {
      * @param path The path to check
      * @return The space available in bytes
      */
-    @TargetApi(Build.VERSION_CODES.GINGERBREAD)
     public static final long getUsableSpace(final File path) {
-        if (ApolloUtils.hasGingerbread()) {
-            return path.getUsableSpace();
-        }
-        final StatFs stats = new StatFs(path.getPath());
-        return (long)stats.getBlockSize() * (long)stats.getAvailableBlocks();
+        return path.getUsableSpace();
     }
 
     /**
@@ -709,7 +685,7 @@ public final class ImageCache {
      * configuration changes. In this sample it will be used to retain an
      * {@link ImageCache} object.
      */
-    public static final class RetainFragment extends SherlockFragment {
+    public static final class RetainFragment extends Fragment {
 
         /**
          * The object to be stored
@@ -768,13 +744,8 @@ public final class ImageCache {
         /**
          * Get the size in bytes of a bitmap.
          */
-        @TargetApi(Build.VERSION_CODES.HONEYCOMB_MR1)
         public static final int getBitmapSize(final Bitmap bitmap) {
-            if (ApolloUtils.hasHoneycombMR1()) {
-                return bitmap.getByteCount();
-            }
-            /* Pre HC-MR1 */
-            return bitmap.getRowBytes() * bitmap.getHeight();
+            return bitmap.getByteCount();
         }
 
         /**

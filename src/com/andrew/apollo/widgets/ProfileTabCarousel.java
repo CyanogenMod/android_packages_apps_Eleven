@@ -11,7 +11,11 @@
 
 package com.andrew.apollo.widgets;
 
+import android.animation.Animator;
+import android.animation.Animator.AnimatorListener;
+import android.animation.ObjectAnimator;
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.content.Context;
 import android.content.res.Resources;
 import android.util.AttributeSet;
@@ -23,13 +27,9 @@ import android.view.animation.AnimationUtils;
 import android.widget.HorizontalScrollView;
 import android.widget.ImageView;
 
-import com.actionbarsherlock.app.SherlockFragmentActivity;
 import com.andrew.apollo.R;
 import com.andrew.apollo.ui.activities.ProfileActivity;
 import com.andrew.apollo.utils.ApolloUtils;
-import com.nineoldandroids.animation.Animator;
-import com.nineoldandroids.animation.Animator.AnimatorListener;
-import com.nineoldandroids.animation.ObjectAnimator;
 
 /**
  * A custom {@link HorizontalScrollView} that displays up to two "tabs" in the
@@ -439,11 +439,11 @@ public class ProfileTabCarousel extends HorizontalScrollView implements OnTouchL
     /**
      * Sets the artist image header
      * 
-     * @param context The {@link SherlockFragmentActivity} to use
+     * @param context The {@link Activity} to use
      * @param artistName The artist name used to find the cached artist image
      *            and used to find the last album played by the artist
      */
-    public void setArtistProfileHeader(final SherlockFragmentActivity context,
+    public void setArtistProfileHeader(final Activity context,
             final String artistName) {
         mFirstTab.setLabel(getResources().getString(R.string.page_songs));
         mSecondTab.setLabel(getResources().getString(R.string.page_albums));
@@ -455,11 +455,11 @@ public class ProfileTabCarousel extends HorizontalScrollView implements OnTouchL
     /**
      * Sets the album image header
      * 
-     * @param context The {@link SherlockFragmentActivity} to use
+     * @param context The {@link Activity} to use
      * @param albumName The key used to find the cached album art
      * @param artistName The artist name used to find the cached artist image
      */
-    public void setAlbumProfileHeader(final SherlockFragmentActivity context,
+    public void setAlbumProfileHeader(final Activity context,
             final String albumName, final String artistName) {
         mFirstTab.setLabel(getResources().getString(R.string.page_songs));
         mFirstTab.setAlbumPhoto(context, albumName);
@@ -471,11 +471,11 @@ public class ProfileTabCarousel extends HorizontalScrollView implements OnTouchL
     /**
      * Sets the playlist or genre image header
      * 
-     * @param context The {@link SherlockFragmentActivity} to use
+     * @param context The {@link Activity} to use
      * @param profileName The key used to find the cached image for a playlist
      *            or genre
      */
-    public void setPlaylistOrGenreProfileHeader(final SherlockFragmentActivity context,
+    public void setPlaylistOrGenreProfileHeader(final Activity context,
             final String profileName) {
         mFirstTab.setDefault(context);
         mFirstTab.setLabel(getResources().getString(R.string.page_songs));
@@ -490,7 +490,7 @@ public class ProfileTabCarousel extends HorizontalScrollView implements OnTouchL
      * @param context The {@link Context} to use.
      * @param album The name of the album in the profile the user is viewing.
      */
-    public void fetchAlbumPhoto(final SherlockFragmentActivity context, final String albumName) {
+    public void fetchAlbumPhoto(final Activity context, final String albumName) {
         mFirstTab.fetchAlbumPhoto(context, albumName);
     }
 

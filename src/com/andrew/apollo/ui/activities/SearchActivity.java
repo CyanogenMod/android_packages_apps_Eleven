@@ -13,11 +13,16 @@ package com.andrew.apollo.ui.activities;
 
 import static com.andrew.apollo.utils.MusicUtils.mService;
 
+import android.app.Activity;
+import android.app.ActionBar;
+import android.app.LoaderManager.LoaderCallbacks;
 import android.app.SearchManager;
 import android.app.SearchableInfo;
 import android.content.ComponentName;
+import android.content.CursorLoader;
 import android.content.Context;
 import android.content.Intent;
+import android.content.Loader;
 import android.content.ServiceConnection;
 import android.database.Cursor;
 import android.media.AudioManager;
@@ -26,11 +31,9 @@ import android.os.Bundle;
 import android.os.IBinder;
 import android.provider.BaseColumns;
 import android.provider.MediaStore;
-import android.support.v4.app.LoaderManager.LoaderCallbacks;
-import android.support.v4.content.CursorLoader;
-import android.support.v4.content.Loader;
-import android.support.v4.widget.CursorAdapter;
 import android.text.TextUtils;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
@@ -39,17 +42,14 @@ import android.widget.AbsListView;
 import android.widget.AbsListView.OnScrollListener;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.CursorAdapter;
 import android.widget.FrameLayout;
 import android.widget.GridView;
 import android.widget.ImageView.ScaleType;
+import android.widget.SearchView;
+import android.widget.SearchView.OnQueryTextListener;
 import android.widget.TextView;
 
-import com.actionbarsherlock.app.ActionBar;
-import com.actionbarsherlock.app.SherlockFragmentActivity;
-import com.actionbarsherlock.view.Menu;
-import com.actionbarsherlock.view.MenuItem;
-import com.actionbarsherlock.widget.SearchView;
-import com.actionbarsherlock.widget.SearchView.OnQueryTextListener;
 import com.andrew.apollo.IApolloService;
 import com.andrew.apollo.R;
 import com.andrew.apollo.cache.ImageFetcher;
@@ -69,7 +69,7 @@ import java.util.Locale;
  * 
  * @author Andrew Neal (andrewdneal@gmail.com)
  */
-public class SearchActivity extends SherlockFragmentActivity implements LoaderCallbacks<Cursor>,
+public class SearchActivity extends Activity implements LoaderCallbacks<Cursor>,
         OnScrollListener, OnQueryTextListener, OnItemClickListener, ServiceConnection {
     /**
      * Grid view column count. ONE - list, TWO - normal grid
@@ -111,10 +111,7 @@ public class SearchActivity extends SherlockFragmentActivity implements LoaderCa
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        // Title bar shows up in gingerbread, I'm too tired to figure out why.
-        if (!ApolloUtils.hasHoneycomb()) {
-            requestWindowFeature(Window.FEATURE_NO_TITLE);
-        }
+
         // Initialze the theme resources
         mResources = new ThemeUtils(this);
         // Set the overflow style
@@ -130,7 +127,7 @@ public class SearchActivity extends SherlockFragmentActivity implements LoaderCa
         mToken = MusicUtils.bindToService(this, this);
 
         // Theme the action bar
-        final ActionBar actionBar = getSupportActionBar();
+        final ActionBar actionBar = getActionBar();
         mResources.themeActionBar(actionBar, getString(R.string.app_name));
         actionBar.setDisplayHomeAsUpEnabled(true);
 
@@ -168,7 +165,7 @@ public class SearchActivity extends SherlockFragmentActivity implements LoaderCa
         }
         // Prepare the loader. Either re-connect with an existing one,
         // or start a new one.
-        getSupportLoaderManager().initLoader(0, null, this);
+        getLoaderManager().initLoader(0, null, this);
     }
 
     /**
@@ -181,7 +178,7 @@ public class SearchActivity extends SherlockFragmentActivity implements LoaderCa
         mFilterString = !TextUtils.isEmpty(query) ? query : null;
         // Set the prefix
         mAdapter.setPrefix(mFilterString);
-        getSupportLoaderManager().restartLoader(0, null, this);
+        getLoaderManager().restartLoader(0, null, this);
     }
 
     /**
@@ -190,7 +187,7 @@ public class SearchActivity extends SherlockFragmentActivity implements LoaderCa
     @Override
     public boolean onCreateOptionsMenu(final Menu menu) {
         // Search view
-        getSupportMenuInflater().inflate(R.menu.search, menu);
+        getMenuInflater().inflate(R.menu.search, menu);
         // Theme the search icon
         mResources.setSearchIcon(menu);
 
@@ -347,7 +344,7 @@ public class SearchActivity extends SherlockFragmentActivity implements LoaderCa
         mFilterString = !TextUtils.isEmpty(newText) ? newText : null;
         // Set the prefix
         mAdapter.setPrefix(mFilterString);
-        getSupportLoaderManager().restartLoader(0, null, this);
+        getLoaderManager().restartLoader(0, null, this);
         return true;
     }
 
@@ -436,10 +433,10 @@ public class SearchActivity extends SherlockFragmentActivity implements LoaderCa
          * 
          * @param context The {@link Context} to use.
          */
-        public SearchAdapter(final Context context) {
+        public SearchAdapter(final Activity context) {
             super(context, null, false);
             // Initialize the cache & image fetcher
-            mImageFetcher = ApolloUtils.getImageFetcher((SherlockFragmentActivity)context);
+            mImageFetcher = ApolloUtils.getImageFetcher(context);
             // Create the prefix highlighter
             mHighlighter = new PrefixHighlighter(context);
         }
@@ -539,7 +536,7 @@ public class SearchActivity extends SherlockFragmentActivity implements LoaderCa
          */
         @Override
         public View newView(final Context context, final Cursor cursor, final ViewGroup parent) {
-            return ((SherlockFragmentActivity)context).getLayoutInflater().inflate(
+            return ((Activity)context).getLayoutInflater().inflate(
                     R.layout.list_item_detailed, parent, false);
         }
 

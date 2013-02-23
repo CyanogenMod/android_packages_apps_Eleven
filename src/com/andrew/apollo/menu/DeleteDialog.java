@@ -16,9 +16,8 @@ import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
+import android.support.v4.app.DialogFragment;
 
-import com.actionbarsherlock.app.SherlockDialogFragment;
 import com.andrew.apollo.Config;
 import com.andrew.apollo.R;
 import com.andrew.apollo.cache.ImageFetcher;
@@ -32,7 +31,7 @@ import com.andrew.apollo.utils.MusicUtils;
  * 
  * @author Andrew Neal (andrewdneal@gmail.com)
  */
-public class DeleteDialog extends SherlockDialogFragment {
+public class DeleteDialog extends DialogFragment {
 
     /**
      * The item(s) to delete
@@ -80,9 +79,9 @@ public class DeleteDialog extends SherlockDialogFragment {
         // Get the dialog title
         final String title = arguments.getString(Config.NAME);
         // Initialize the image cache
-        mFetcher = ApolloUtils.getImageFetcher(getSherlockActivity());
+        mFetcher = ApolloUtils.getImageFetcher(getActivity());
         // Build the dialog
-        return new AlertDialog.Builder(getSherlockActivity()).setTitle(delete + " " + title)
+        return new AlertDialog.Builder(getActivity()).setTitle(delete + " " + title)
                 .setMessage(R.string.cannot_be_undone)
                 .setPositiveButton(delete, new OnClickListener() {
 
@@ -91,7 +90,7 @@ public class DeleteDialog extends SherlockDialogFragment {
                         // Remove the items from the image cache
                         mFetcher.removeFromCache(key);
                         // Delete the selected item(s)
-                        MusicUtils.deleteTracks(getSherlockActivity(), mItemList);
+                        MusicUtils.deleteTracks(getActivity(), mItemList);
                         dialog.dismiss();
                     }
                 }).setNegativeButton(R.string.cancel, new OnClickListener() {

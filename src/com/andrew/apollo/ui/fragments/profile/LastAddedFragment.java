@@ -31,7 +31,6 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import com.actionbarsherlock.app.SherlockFragment;
 import com.andrew.apollo.R;
 import com.andrew.apollo.adapters.ProfileSongAdapter;
 import com.andrew.apollo.loaders.LastAddedLoader;
@@ -54,7 +53,7 @@ import java.util.List;
  * 
  * @author Andrew Neal (andrewdneal@gmail.com)
  */
-public class LastAddedFragment extends SherlockFragment implements LoaderCallbacks<List<Song>>,
+public class LastAddedFragment extends Fragment implements LoaderCallbacks<List<Song>>,
         OnItemClickListener {
 
     /**
@@ -130,7 +129,7 @@ public class LastAddedFragment extends SherlockFragment implements LoaderCallbac
     public void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         // Create the adpater
-        mAdapter = new ProfileSongAdapter(getSherlockActivity(), R.layout.list_item_simple);
+        mAdapter = new ProfileSongAdapter(getActivity(), R.layout.list_item_simple);
     }
 
     /**
@@ -200,7 +199,7 @@ public class LastAddedFragment extends SherlockFragment implements LoaderCallbac
         // Add the song to a playlist
         final SubMenu subMenu = menu.addSubMenu(GROUP_ID, FragmentMenuItems.ADD_TO_PLAYLIST,
                 Menu.NONE, R.string.add_to_playlist);
-        MusicUtils.makePlaylistMenu(getSherlockActivity(), GROUP_ID, subMenu, false);
+        MusicUtils.makePlaylistMenu(getActivity(), GROUP_ID, subMenu, false);
 
         // View more content by the song artist
         menu.add(GROUP_ID, FragmentMenuItems.MORE_BY_ARTIST, Menu.NONE,
@@ -220,17 +219,17 @@ public class LastAddedFragment extends SherlockFragment implements LoaderCallbac
         if (item.getGroupId() == GROUP_ID) {
             switch (item.getItemId()) {
                 case FragmentMenuItems.PLAY_SELECTION:
-                    MusicUtils.playAll(getSherlockActivity(), new long[] {
+                    MusicUtils.playAll(getActivity(), new long[] {
                         mSelectedId
                     }, 0, false);
                     return true;
                 case FragmentMenuItems.ADD_TO_QUEUE:
-                    MusicUtils.addToQueue(getSherlockActivity(), new long[] {
+                    MusicUtils.addToQueue(getActivity(), new long[] {
                         mSelectedId
                     });
                     return true;
                 case FragmentMenuItems.ADD_TO_FAVORITES:
-                    FavoritesStore.getInstance(getSherlockActivity()).addSongId(
+                    FavoritesStore.getInstance(getActivity()).addSongId(
                             Long.valueOf(mSelectedId), mSongName, mAlbumName, mArtistName);
                     return true;
                 case FragmentMenuItems.NEW_PLAYLIST:
@@ -240,15 +239,15 @@ public class LastAddedFragment extends SherlockFragment implements LoaderCallbac
                     return true;
                 case FragmentMenuItems.PLAYLIST_SELECTED:
                     final long mPlaylistId = item.getIntent().getLongExtra("playlist", 0);
-                    MusicUtils.addToPlaylist(getSherlockActivity(), new long[] {
+                    MusicUtils.addToPlaylist(getActivity(), new long[] {
                         mSelectedId
                     }, mPlaylistId);
                     return true;
                 case FragmentMenuItems.MORE_BY_ARTIST:
-                    NavUtils.openArtistProfile(getSherlockActivity(), mArtistName);
+                    NavUtils.openArtistProfile(getActivity(), mArtistName);
                     return true;
                 case FragmentMenuItems.USE_AS_RINGTONE:
-                    MusicUtils.setRingtone(getSherlockActivity(), mSelectedId);
+                    MusicUtils.setRingtone(getActivity(), mSelectedId);
                     return true;
                 case FragmentMenuItems.DELETE:
                     DeleteDialog.newInstance(mSong.mSongName, new long[] {
@@ -274,9 +273,9 @@ public class LastAddedFragment extends SherlockFragment implements LoaderCallbac
         if (position == 0) {
             return;
         }
-        Cursor cursor = LastAddedLoader.makeLastAddedCursor(getSherlockActivity());
+        Cursor cursor = LastAddedLoader.makeLastAddedCursor(getActivity());
         final long[] list = MusicUtils.getSongListForCursor(cursor);
-        MusicUtils.playAll(getSherlockActivity(), list, position - 1, false);
+        MusicUtils.playAll(getActivity(), list, position - 1, false);
         cursor.close();
         cursor = null;
     }
@@ -286,7 +285,7 @@ public class LastAddedFragment extends SherlockFragment implements LoaderCallbac
      */
     @Override
     public Loader<List<Song>> onCreateLoader(final int id, final Bundle args) {
-        return new LastAddedLoader(getSherlockActivity());
+        return new LastAddedLoader(getActivity());
     }
 
     /**
