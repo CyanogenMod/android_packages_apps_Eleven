@@ -108,6 +108,8 @@ public class CarouselTab extends FrameLayoutWithOverlay {
      */
     public void blurPhoto(final Activity context, final String artist,
             final String album) {
+        //FIXME: this should go into an AsyncTask
+
         // First check for the artist image
         Bitmap artistImage = mFetcher.getCachedBitmap(artist);
         // Second check for cached artwork

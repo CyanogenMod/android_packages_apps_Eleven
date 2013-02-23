@@ -28,6 +28,7 @@ import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
+import android.os.Looper;
 import android.os.ParcelFileDescriptor;
 import android.text.TextUtils;
 import android.util.Log;
@@ -96,6 +97,7 @@ public final class ImageCache {
      * Used to temporarily pause the disk cache while scrolling
      */
     public boolean mPauseDiskAccess = false;
+    private Object mPauseLock = new Object();
 
     static {
         mArtworkUri = Uri.parse("content://media/external/audio/albumart");
@@ -363,9 +365,7 @@ public final class ImageCache {
             return getBitmapFromMemCache(data);
         }
 
-        while (mPauseDiskAccess) {
-            // Pause for moment
-        }
+        waitUntilUnpaused();
         final String key = hashKeyForDisk(data);
         if (mDiskCache != null) {
             InputStream inputStream = null;
@@ -452,9 +452,7 @@ public final class ImageCache {
             return null;
         }
         Bitmap artwork = null;
-        while (mPauseDiskAccess) {
-            // Pause for a moment
-        }
+        waitUntilUnpaused();
         try {
             final Uri uri = ContentUris.withAppendedId(mArtworkUri, albumId);
             final ParcelFileDescriptor parcelFileDescriptor = context.getContentResolver()
@@ -587,13 +585,34 @@ public final class ImageCache {
      * @param pause True to temporarily pause the disk cache, false otherwise.
      */
     public void setPauseDiskCache(final boolean pause) {
-        mPauseDiskAccess = pause;
+        synchronized (mPauseLock) {
+            if (mPauseDiskAccess != pause) {
+                mPauseDiskAccess = pause;
+                if (pause) {
+                    mPauseLock.notify();
+                }
+            }
+        }
+    }
+
+    private void waitUntilUnpaused() {
+        synchronized (mPauseLock) {
+            if (Looper.myLooper() != Looper.getMainLooper()) {
+                while (mPauseDiskAccess) {
+                    try {
+                        mPauseLock.wait();
+                    } catch (InterruptedException e) {
+                        // ignored, we'll start waiting again
+                    }
+                }
+            }
+        }
     }
 
     /**
      * @return True if the user is scrolling, false otherwise.
      */
-    public boolean isScrolling() {
+    public boolean isDiskCachePaused() {
         return mPauseDiskAccess;
     }
 

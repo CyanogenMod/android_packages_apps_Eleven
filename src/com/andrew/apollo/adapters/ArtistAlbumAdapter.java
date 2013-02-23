@@ -194,18 +194,15 @@ public class ArtistAlbumAdapter extends ArrayAdapter<Album> {
      * @param position The position of the album to play.
      */
     private void playAlbum(final ImageView album, final int position) {
-        // Prevent accidental touches
-        if (!mImageFetcher.isScrolling()) {
-            album.setOnClickListener(new OnClickListener() {
+        album.setOnClickListener(new OnClickListener() {
 
-                @Override
-                public void onClick(final View v) {
-                    final long id = getItem(position - 1).mAlbumId;
-                    final long[] list = MusicUtils.getSongListForAlbum(getContext(), id);
-                    MusicUtils.playAll(getContext(), list, 0, false);
-                }
-            });
-        }
+            @Override
+            public void onClick(final View v) {
+                final long id = getItem(position - 1).mAlbumId;
+                final long[] list = MusicUtils.getSongListForAlbum(getContext(), id);
+                MusicUtils.playAll(getContext(), list, 0, false);
+            }
+        });
     }
 
     /**

@@ -109,16 +109,6 @@ public abstract class ImageWorker {
     }
 
     /**
-     * @return True if the user is scrolling, false otherwise
-     */
-    public boolean isScrolling() {
-        if (mImageCache != null) {
-            return mImageCache.isScrolling();
-        }
-        return true;
-    }
-
-    /**
      * Closes the disk cache associated with this ImageCache object. Note that
      * this includes disk access so this should not be executed on the main/UI
      * thread.
@@ -221,13 +211,6 @@ public abstract class ImageWorker {
 
             // The result
             Bitmap bitmap = null;
-
-            // Wait here if work is paused and the task is not cancelled. This
-            // shouldn't even occur because this isn't executing while the user
-            // is scrolling, but just in case.
-            while (isScrolling() && !isCancelled()) {
-                cancel(true);
-            }
 
             // First, check the disk cache for the image
             if (mKey != null && mImageCache != null && !isCancelled()
@@ -406,19 +389,14 @@ public abstract class ImageWorker {
         if (lruBitmap != null && imageView != null) {
             // Bitmap found in memory cache
             imageView.setImageBitmap(lruBitmap);
-        } else if (executePotentialWork(key, imageView) && imageView != null && !isScrolling()) {
+        } else if (executePotentialWork(key, imageView) && imageView != null) {
             // Otherwise run the worker task
             final BitmapWorkerTask bitmapWorkerTask = new BitmapWorkerTask(imageView, imageType);
             final AsyncDrawable asyncDrawable = new AsyncDrawable(mResources, mDefault,
                     bitmapWorkerTask);
             imageView.setImageDrawable(asyncDrawable);
-            // Don't execute the BitmapWorkerTask while scrolling
-            if (isScrolling()) {
-                cancelWork(imageView);
-            } else {
-                ApolloUtils.execute(false, bitmapWorkerTask, key,
-                        artistName, albumName, String.valueOf(albumId));
-            }
+            ApolloUtils.execute(false, bitmapWorkerTask, key,
+                    artistName, albumName, String.valueOf(albumId));
         }
     }
 

@@ -172,18 +172,15 @@ public class ArtistAdapter extends ArrayAdapter<Artist> {
      * @param position The position of the artist to play.
      */
     private void playArtist(final ImageView artist, final int position) {
-        // Prevent accidental touches
-        if (!mImageFetcher.isScrolling()) {
-            artist.setOnClickListener(new OnClickListener() {
+        artist.setOnClickListener(new OnClickListener() {
 
-                @Override
-                public void onClick(final View v) {
-                    final long id = getItem(position).mArtistId;
-                    final long[] list = MusicUtils.getSongListForArtist(getContext(), id);
-                    MusicUtils.playAll(getContext(), list, 0, false);
-                }
-            });
-        }
+            @Override
+            public void onClick(final View v) {
+                final long id = getItem(position).mArtistId;
+                final long[] list = MusicUtils.getSongListForArtist(getContext(), id);
+                MusicUtils.playAll(getContext(), list, 0, false);
+            }
+        });
     }
 
     /**
