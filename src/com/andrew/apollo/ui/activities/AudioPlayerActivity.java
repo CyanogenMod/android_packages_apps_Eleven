@@ -52,7 +52,6 @@ import com.andrew.apollo.MusicPlaybackService;
 import com.andrew.apollo.R;
 import com.andrew.apollo.adapters.PagerAdapter;
 import com.andrew.apollo.cache.ImageFetcher;
-import com.andrew.apollo.ui.fragments.LyricsFragment;
 import com.andrew.apollo.ui.fragments.QueueFragment;
 import com.andrew.apollo.utils.ApolloUtils;
 import com.andrew.apollo.utils.MusicUtils;
@@ -347,10 +346,6 @@ public class AudioPlayerActivity extends FragmentActivity implements ServiceConn
                 // Sound effects
                 NavUtils.openEffectsPanel(this);
                 return true;
-            case R.id.menu_download_lyrics:
-                updateLyrics(true);
-                hideAlbumArt();
-                return true;
             case R.id.menu_settings:
                 // Settings
                 NavUtils.openSettings(this);
@@ -459,7 +454,7 @@ public class AudioPlayerActivity extends FragmentActivity implements ServiceConn
         // Opens the currently playing album profile
         mAudioPlayerHeader.setOnClickListener(mOpenAlbumProfile);
 
-        // Used to hide the artwork and show the queue/lyrics
+        // Used to hide the artwork and show the queue
         final FrameLayout mSwitch = (FrameLayout)findViewById(R.id.audio_player_switch);
         mSwitch.setOnClickListener(mToggleHiddenPanel);
 
@@ -467,8 +462,6 @@ public class AudioPlayerActivity extends FragmentActivity implements ServiceConn
         mPagerAdapter = new PagerAdapter(this);
         // Queue
         mPagerAdapter.add(QueueFragment.class, null);
-        // Lyrics
-        mPagerAdapter.add(LyricsFragment.class, null);
 
         // Initialize the ViewPager
         mViewPager = (ViewPager)findViewById(R.id.audio_player_pager);
@@ -498,7 +491,7 @@ public class AudioPlayerActivity extends FragmentActivity implements ServiceConn
         mCurrentTime = (TextView)findViewById(R.id.audio_player_current_time);
         // Total time
         mTotalTime = (TextView)findViewById(R.id.audio_player_total_time);
-        // Used to show and hide the queue and lyrics fragments
+        // Used to show and hide the queue fragment
         mQueueSwitch = (ImageView)findViewById(R.id.audio_player_switch_queue);
         // Theme the queue switch icon
         mQueueSwitch.setImageDrawable(mResources.getDrawable("btn_switch_queue"));
@@ -542,16 +535,6 @@ public class AudioPlayerActivity extends FragmentActivity implements ServiceConn
         mShuffleButton.updateShuffleState();
         // Set the repeat image
         mRepeatButton.updateRepeatState();
-    }
-
-    /**
-     * Refreshes the lyrics and moves the view pager to the lyrics fragment.
-     */
-    public void updateLyrics(final boolean force) {
-        ((LyricsFragment)mPagerAdapter.getFragment(1)).fetchLyrics(force);
-        if (force && mViewPager.getCurrentItem() != 1) {
-            mViewPager.setCurrentItem(1, true);
-        }
     }
 
     /**
@@ -711,7 +694,7 @@ public class AudioPlayerActivity extends FragmentActivity implements ServiceConn
     }
 
     /**
-     * Called to show the album art and hide the queue/lyrics
+     * Called to show the album art and hide the queue
      */
     private void showAlbumArt() {
         mPageContainer.setVisibility(View.INVISIBLE);
@@ -724,7 +707,7 @@ public class AudioPlayerActivity extends FragmentActivity implements ServiceConn
     }
 
     /**
-     * Called to hide the album art and show the queue/lyrics
+     * Called to hide the album art and show the queue
      */
     public void hideAlbumArt() {
         mPageContainer.setVisibility(View.VISIBLE);
@@ -794,12 +777,12 @@ public class AudioPlayerActivity extends FragmentActivity implements ServiceConn
             if (mPageContainer.getVisibility() == View.VISIBLE) {
                 // Open the current album profile
                 mAudioPlayerHeader.setOnClickListener(mOpenAlbumProfile);
-                // Show the artwork, hide the queue and lyrics
+                // Show the artwork, hide the queue
                 showAlbumArt();
             } else {
                 // Scroll to the current track
                 mAudioPlayerHeader.setOnClickListener(mScrollToCurrentSong);
-                // Show the queue and lyrics, hide the artwork
+                // Show the queue, hide the artwork
                 hideAlbumArt();
             }
         }
@@ -880,8 +863,6 @@ public class AudioPlayerActivity extends FragmentActivity implements ServiceConn
                 mReference.get().updateNowPlayingInfo();
                 // Update the favorites icon
                 mReference.get().invalidateOptionsMenu();
-                // Update the lyrics
-                mReference.get().updateLyrics(false);
             } else if (action.equals(MusicPlaybackService.PLAYSTATE_CHANGED)) {
                 // Set the play and pause image
                 mReference.get().mPlayPauseButton.updateState();

@@ -25,9 +25,6 @@
     <!-- The action bar sub title color -->
     <color name="action_bar_subtitle">@color/transparent_white</color>
 
-    <!-- Lyrics color -->
-    <color name="lyrics">@color/white</color>
-
     <!-- Adpater lines -->
     <color name="line_one">@color/white</color>
     <color name="line_two">@color/transparent_white</color>
