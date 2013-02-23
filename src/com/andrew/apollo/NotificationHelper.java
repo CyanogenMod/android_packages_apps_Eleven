@@ -79,7 +79,8 @@ public class NotificationHelper {
      * Call this to build the {@link Notification}.
      */
     public void buildNotification(final String albumName, final String artistName,
-            final String trackName, final Long albumId, final Bitmap albumArt) {
+            final String trackName, final Long albumId, final Bitmap albumArt,
+            final boolean isPlaying) {
 
         // Default notfication layout
         mNotificationTemplate = new RemoteViews(mService.getPackageName(),
@@ -96,14 +97,14 @@ public class NotificationHelper {
                 .setContent(mNotificationTemplate)
                 .build();
         // Control playback from the notification
-        initPlaybackActions();
+        initPlaybackActions(isPlaying);
         if (ApolloUtils.hasJellyBean()) {
             // Expanded notifiction style
             mExpandedView = new RemoteViews(mService.getPackageName(),
                     R.layout.notification_template_expanded_base);
             mNotification.bigContentView = mExpandedView;
             // Control playback from the notification
-            initExpandedPlaybackActions();
+            initExpandedPlaybackActions(isPlaying);
             // Set up the expanded content view
             initExpandedLayout(trackName, albumName, artistName, albumArt);
         }
@@ -115,7 +116,7 @@ public class NotificationHelper {
      * 
      * @param isPlaying True if music is playing, false otherwise
      */
-    public void goToIdleState(final boolean isPlaying) {
+    public void updatePlayState(final boolean isPlaying) {
         if (mNotification == null || mNotificationManager == null) {
             return;
         }
@@ -131,7 +132,7 @@ public class NotificationHelper {
         try {
             mNotificationManager.notify(APOLLO_MUSIC_SERVICE, mNotification);
         } catch (final IllegalStateException e) {
-            Log.e("NotificationHelper", "goToIdleState - " + e);
+            Log.e("NotificationHelper", "updatePlayState - " + e);
             // FIXME Every so often an ISE is throw reading
             // "can't parcel recycled Bitmap". Figure out and understand why
             // this is happening, then prevent it.
@@ -150,7 +151,7 @@ public class NotificationHelper {
      * Lets the buttons in the remote view control playback in the expanded
      * layout
      */
-    private void initExpandedPlaybackActions() {
+    private void initExpandedPlaybackActions(boolean isPlaying) {
         // Play and pause
         mExpandedView.setOnClickPendingIntent(R.id.notification_expanded_base_play,
                 retreivePlaybackActions(1));
@@ -169,13 +170,13 @@ public class NotificationHelper {
 
         // Update the play button image
         mExpandedView.setImageViewResource(R.id.notification_expanded_base_play,
-                R.drawable.btn_playback_pause);
+                isPlaying ? R.drawable.btn_playback_play : R.drawable.btn_playback_pause);
     }
 
     /**
      * Lets the buttons in the remote view control playback in the normal layout
      */
-    private void initPlaybackActions() {
+    private void initPlaybackActions(boolean isPlaying) {
         // Play and pause
         mNotificationTemplate.setOnClickPendingIntent(R.id.notification_base_play,
                 retreivePlaybackActions(1));
@@ -194,7 +195,7 @@ public class NotificationHelper {
 
         // Update the play button image
         mNotificationTemplate.setImageViewResource(R.id.notification_base_play,
-                R.drawable.btn_playback_pause);
+                isPlaying ? R.drawable.btn_playback_play : R.drawable.btn_playback_pause);
     }
 
     /**

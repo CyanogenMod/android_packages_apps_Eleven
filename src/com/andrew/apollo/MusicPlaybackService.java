@@ -712,7 +712,7 @@ public class MusicPlaybackService extends Service {
     public void buildNotification() {
         if (mBuildNotification) {
             mNotificationHelper.buildNotification(getAlbumName(), getArtistName(),
-                    getTrackName(), getAlbumId(), getAlbumArt());
+                    getTrackName(), getAlbumId(), getAlbumArt(), isPlaying());
         }
     }
 
@@ -796,9 +796,6 @@ public class MusicPlaybackService extends Service {
         mDelayedStopHandler.removeCallbacksAndMessages(null);
         final Message msg = mDelayedStopHandler.obtainMessage();
         mDelayedStopHandler.sendMessageDelayed(msg, IDLE_DELAY);
-        if (mBuildNotification) {
-            mNotificationHelper.goToIdleState(mIsSupposedToBePlaying);
-        }
         mDelayedStopHandler.postDelayed(new Runnable() {
 
             /**
@@ -1224,6 +1221,10 @@ public class MusicPlaybackService extends Service {
             saveQueue(true);
         } else {
             saveQueue(false);
+        }
+
+        if (mBuildNotification && what.equals(PLAYSTATE_CHANGED)) {
+            mNotificationHelper.updatePlayState(isPlaying());
         }
 
         // Update the app-widgets
