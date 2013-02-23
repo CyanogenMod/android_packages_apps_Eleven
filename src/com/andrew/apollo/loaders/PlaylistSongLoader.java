@@ -67,7 +67,7 @@ public class PlaylistSongLoader extends WrappedAsyncTaskLoader<List<Song>> {
         if (mCursor != null && mCursor.moveToFirst()) {
             do {
                 // Copy the song Id
-                final String id = mCursor.getString(mCursor
+                final long id = mCursor.getLong(mCursor
                         .getColumnIndexOrThrow(MediaStore.Audio.Playlists.Members.AUDIO_ID));
 
                 // Copy the song name
@@ -83,7 +83,7 @@ public class PlaylistSongLoader extends WrappedAsyncTaskLoader<List<Song>> {
                         .getColumnIndexOrThrow(AudioColumns.ALBUM));
 
                 // Create a new song
-                final Song song = new Song(id, songName, artist, album, null);
+                final Song song = new Song(id, songName, artist, album, -1);
 
                 // Add everything up
                 mSongList.add(song);

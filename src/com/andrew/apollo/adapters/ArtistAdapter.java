@@ -156,9 +156,11 @@ public class ArtistAdapter extends ArrayAdapter<Artist> {
             // Artist names (line one)
             mData[i].mLineOne = artist.mArtistName;
             // Number of albums (line two)
-            mData[i].mLineTwo = artist.mAlbumNumber;
+            mData[i].mLineTwo = MusicUtils.makeLabel(getContext(),
+                    R.plurals.Nalbums, artist.mAlbumNumber);
             // Number of songs (line three)
-            mData[i].mLineThree = artist.mSongNumber;
+            mData[i].mLineThree = MusicUtils.makeLabel(getContext(),
+                    R.plurals.Nsongs, artist.mSongNumber);
         }
     }
 
@@ -176,7 +178,7 @@ public class ArtistAdapter extends ArrayAdapter<Artist> {
 
                 @Override
                 public void onClick(final View v) {
-                    final String id = getItem(position).mArtistId;
+                    final long id = getItem(position).mArtistId;
                     final long[] list = MusicUtils.getSongListForArtist(getContext(), id);
                     MusicUtils.playAll(getContext(), list, 0, false);
                 }

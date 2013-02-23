@@ -11,6 +11,8 @@
 
 package com.andrew.apollo.model;
 
+import android.text.TextUtils;
+
 /**
  * A class that represents a playlist.
  * 
@@ -21,7 +23,7 @@ public class Playlist {
     /**
      * The unique Id of the playlist
      */
-    public String mPlaylistId;
+    public long mPlaylistId;
 
     /**
      * The playlist name
@@ -34,7 +36,7 @@ public class Playlist {
      * @param playlistId The Id of the playlist
      * @param playlistName The playlist name
      */
-    public Playlist(final String playlistId, final String playlistName) {
+    public Playlist(final long playlistId, final String playlistName) {
         super();
         mPlaylistId = playlistId;
         mPlaylistName = playlistName;
@@ -47,7 +49,7 @@ public class Playlist {
     public int hashCode() {
         final int prime = 31;
         int result = 1;
-        result = prime * result + (mPlaylistId == null ? 0 : mPlaylistId.hashCode());
+        result = prime * result + (int) mPlaylistId;
         result = prime * result + (mPlaylistName == null ? 0 : mPlaylistName.hashCode());
         return result;
     }
@@ -67,21 +69,10 @@ public class Playlist {
             return false;
         }
         final Playlist other = (Playlist)obj;
-        if (mPlaylistId == null) {
-            if (other.mPlaylistId != null) {
-                return false;
-            }
-        } else if (!mPlaylistId.equals(other.mPlaylistId)) {
+        if (mPlaylistId != other.mPlaylistId) {
             return false;
         }
-        if (mPlaylistName == null) {
-            if (other.mPlaylistName != null) {
-                return false;
-            }
-        } else if (!mPlaylistName.equals(other.mPlaylistName)) {
-            return false;
-        }
-        return true;
+        return TextUtils.equals(mPlaylistName, other.mPlaylistName);
     }
 
     /**

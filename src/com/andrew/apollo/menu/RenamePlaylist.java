@@ -85,7 +85,7 @@ public class RenamePlaylist extends BasePlaylistDialog {
             values.put(Audio.Playlists.NAME, Capitalize.capitalize(playlistName));
             resolver.update(Audio.Playlists.EXTERNAL_CONTENT_URI, values,
                     MediaStore.Audio.Playlists._ID + "=?", new String[] {
-                        Long.valueOf(mRenameId).toString()
+                        String.valueOf(mRenameId)
                     });
             closeKeyboard();
             getDialog().dismiss();
@@ -120,7 +120,7 @@ public class RenamePlaylist extends BasePlaylistDialog {
                 MediaStore.Audio.Playlists.EXTERNAL_CONTENT_URI, new String[] {
                     MediaStore.Audio.Playlists.NAME
                 }, MediaStore.Audio.Playlists._ID + "=?", new String[] {
-                    Long.valueOf(id).toString()
+                    String.valueOf(id)
                 }, MediaStore.Audio.Playlists.NAME);
         String playlistName = null;
         if (cursor != null) {

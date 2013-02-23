@@ -132,7 +132,7 @@ public class CarouselTab extends FrameLayoutWithOverlay {
         if (!TextUtils.isEmpty(album)) {
             mAlbumArt.setVisibility(View.VISIBLE);
             mFetcher.loadAlbumImage(MusicUtils.getAlbumArtist(context, album), album,
-                    String.valueOf(MusicUtils.getIdForAlbum(context, album)), mAlbumArt);
+                    MusicUtils.getIdForAlbum(context, album), mAlbumArt);
         } else {
             setDefault(context);
         }
@@ -147,7 +147,7 @@ public class CarouselTab extends FrameLayoutWithOverlay {
     public void fetchAlbumPhoto(final Activity context, final String album) {
         if (!TextUtils.isEmpty(album)) {
             mFetcher.removeFromCache(album + Config.ALBUM_ART_SUFFIX);
-            mFetcher.loadAlbumImage(MusicUtils.getAlbumArtist(context, album), album, null,
+            mFetcher.loadAlbumImage(MusicUtils.getAlbumArtist(context, album), album, -1,
                     mAlbumArt);
         } else {
             setDefault(context);
@@ -165,14 +165,14 @@ public class CarouselTab extends FrameLayoutWithOverlay {
         if (!TextUtils.isEmpty(lastAlbum)) {
             // Set the last album the artist played
             mFetcher.loadAlbumImage(artist, lastAlbum,
-                    String.valueOf(MusicUtils.getIdForAlbum(context, lastAlbum)), mPhoto);
+                    MusicUtils.getIdForAlbum(context, lastAlbum), mPhoto);
             // Play the album
             mPhoto.setOnClickListener(new OnClickListener() {
 
                 @Override
                 public void onClick(final View v) {
                     final long[] albumList = MusicUtils.getSongListForAlbum(getContext(),
-                            String.valueOf(MusicUtils.getIdForAlbum(context, lastAlbum)));
+                            MusicUtils.getIdForAlbum(context, lastAlbum));
                     MusicUtils.playAll(getContext(), albumList, 0, false);
                 }
             });

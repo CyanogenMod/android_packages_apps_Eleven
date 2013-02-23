@@ -183,7 +183,7 @@ public class GenreFragment extends Fragment implements LoaderCallbacks<List<Genr
         mGenre = mAdapter.getItem(position);
         // Create a new bundle to transfer the artist info
         final Bundle bundle = new Bundle();
-        bundle.putLong(Config.ID, Long.valueOf(mGenre.mGenreId));
+        bundle.putLong(Config.ID, mGenre.mGenreId);
         bundle.putString(Config.MIME_TYPE, MediaStore.Audio.Genres.CONTENT_TYPE);
         bundle.putString(Config.NAME, mGenre.mGenreName);
 

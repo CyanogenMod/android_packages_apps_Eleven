@@ -58,14 +58,14 @@ public class LyricsWikiProvider implements LyricsProvider {
             final String[] htmlChars = html.split(";");
             final StringBuilder builder = new StringBuilder();
             String code = null;
-            char caracter;
+            char character;
             for (final String s : htmlChars) {
                 if (s.equals("\n")) {
                     builder.append(s);
                 } else {
                     code = s.replaceAll("&#", "");
-                    caracter = (char)Integer.valueOf(code).intValue();
-                    builder.append(caracter);
+                    character = (char)Integer.valueOf(code).intValue();
+                    builder.append(character);
                 }
             }
             // And that's it

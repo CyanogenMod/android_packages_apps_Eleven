@@ -183,7 +183,7 @@ public class FavoriteFragment extends Fragment implements LoaderCallbacks<List<S
         mSelectedPosition = info.position - 1;
         // Creat a new song
         mSong = mAdapter.getItem(mSelectedPosition);
-        mSelectedId = Long.valueOf(mSong.mSongId);
+        mSelectedId = mSong.mSongId;
         mArtistName = mSong.mArtistName;
 
         // Play the song
@@ -248,8 +248,7 @@ public class FavoriteFragment extends Fragment implements LoaderCallbacks<List<S
                     MusicUtils.setRingtone(getActivity(), mSelectedId);
                     return true;
                 case FragmentMenuItems.REMOVE_FROM_FAVORITES:
-                    FavoritesStore.getInstance(getActivity()).removeItem(
-                            Long.valueOf(mSelectedId));
+                    FavoritesStore.getInstance(getActivity()).removeItem(mSelectedId);
                     getLoaderManager().restartLoader(LOADER, null, this);
                     return true;
                 case FragmentMenuItems.DELETE:

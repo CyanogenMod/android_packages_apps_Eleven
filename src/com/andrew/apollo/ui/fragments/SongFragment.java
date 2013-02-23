@@ -178,7 +178,7 @@ public class SongFragment extends Fragment implements LoaderCallbacks<List<Song>
         mSelectedPosition = info.position;
         // Creat a new song
         mSong = mAdapter.getItem(mSelectedPosition);
-        mSelectedId = Long.valueOf(mSong.mSongId);
+        mSelectedId = mSong.mSongId;
         mSongName = mSong.mSongName;
         mAlbumName = mSong.mAlbumName;
         mArtistName = mSong.mArtistName;
@@ -225,7 +225,7 @@ public class SongFragment extends Fragment implements LoaderCallbacks<List<Song>
                     return true;
                 case FragmentMenuItems.ADD_TO_FAVORITES:
                     FavoritesStore.getInstance(getActivity()).addSongId(
-                            Long.valueOf(mSelectedId), mSongName, mAlbumName, mArtistName);
+                            mSelectedId, mSongName, mAlbumName, mArtistName);
                     return true;
                 case FragmentMenuItems.NEW_PLAYLIST:
                     CreateNewPlaylist.getInstance(new long[] {
@@ -328,12 +328,12 @@ public class SongFragment extends Fragment implements LoaderCallbacks<List<Song>
      *         currently playing song.
      */
     private int getItemPositionBySong() {
-        final String trackName = String.valueOf(MusicUtils.getCurrentAudioId());
-        if (mAdapter == null || TextUtils.isEmpty(trackName)) {
+        final long trackId = MusicUtils.getCurrentAudioId();
+        if (mAdapter == null) {
             return 0;
         }
         for (int i = 0; i < mAdapter.getCount(); i++) {
-            if (mAdapter.getItem(i).mSongId.equals(trackName)) {
+            if (mAdapter.getItem(i).mSongId == trackId) {
                 return i;
             }
         }

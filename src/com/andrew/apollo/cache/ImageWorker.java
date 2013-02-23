@@ -191,7 +191,7 @@ public abstract class ImageWorker {
         /**
          * The album ID used to find the corresponding artwork
          */
-        private String mAlbumId;
+        private long mAlbumId;
 
         /**
          * The URL of an image to download
@@ -236,10 +236,10 @@ public abstract class ImageWorker {
             }
 
             // Define the album id now
-            mAlbumId = params[3];
+            mAlbumId = Long.valueOf(params[3]);
 
             // Second, if we're fetching artwork, check the device for the image
-            if (bitmap == null && mImageType.equals(ImageType.ALBUM) && mAlbumId != null
+            if (bitmap == null && mImageType.equals(ImageType.ALBUM) && mAlbumId >= 0
                     && mKey != null && !isCancelled() && getAttachedImageView() != null
                     && mImageCache != null) {
                 bitmap = mImageCache.getCachedArtwork(mContext, mKey, mAlbumId);
@@ -397,7 +397,7 @@ public abstract class ImageWorker {
      * @param imageType The type of image URL to fetch for.
      */
     protected void loadImage(final String key, final String artistName, final String albumName,
-            final String albumId, final ImageView imageView, final ImageType imageType) {
+            final long albumId, final ImageView imageView, final ImageType imageType) {
         if (key == null || mImageCache == null || imageView == null) {
             return;
         }
@@ -416,7 +416,8 @@ public abstract class ImageWorker {
             if (isScrolling()) {
                 cancelWork(imageView);
             } else {
-                ApolloUtils.execute(false, bitmapWorkerTask, key, artistName, albumName, albumId);
+                ApolloUtils.execute(false, bitmapWorkerTask, key,
+                        artistName, albumName, String.valueOf(albumId));
             }
         }
     }

@@ -173,21 +173,8 @@ public final class MusicUtils {
      *         albums, songs, genres, and playlists.
      */
     public static final String makeLabel(final Context context, final int pluralInt,
-            final String number) {
-        try {
-            final StringBuilder formatBuilder = new StringBuilder();
-            final Formatter formatter = new Formatter(formatBuilder, Locale.getDefault());
-            final StringBuilder builder = new StringBuilder();
-            final String quantity = context.getResources()
-                    .getQuantityText(pluralInt, Integer.valueOf(number)).toString();
-            formatBuilder.setLength(0);
-            formatter.format(quantity, Integer.valueOf(number));
-            builder.append(formatBuilder);
-            final String label = builder.toString();
-            return label != null ? label : null;
-        } catch (final IndexOutOfBoundsException fixme) {
-            return null;
-        }
+            final int number) {
+        return context.getResources().getQuantityString(pluralInt, number, number);
     }
 
     /**
@@ -502,7 +489,7 @@ public final class MusicUtils {
      * @param id The ID of the artist.
      * @return The song list for an artist.
      */
-    public static final long[] getSongListForArtist(final Context context, final String id) {
+    public static final long[] getSongListForArtist(final Context context, final long id) {
         final String[] projection = new String[] {
             BaseColumns._ID
         };
@@ -525,7 +512,7 @@ public final class MusicUtils {
      * @param id The ID of the album.
      * @return The song list for an album.
      */
-    public static final long[] getSongListForAlbum(final Context context, final String id) {
+    public static final long[] getSongListForAlbum(final Context context, final long id) {
         final String[] projection = new String[] {
             BaseColumns._ID
         };
@@ -548,7 +535,7 @@ public final class MusicUtils {
      * @param id The ID of the genre.
      * @return The song list for an genre.
      */
-    public static final long[] getSongListForGenre(final Context context, final String id) {
+    public static final long[] getSongListForGenre(final Context context, final long id) {
         final String[] projection = new String[] {
             BaseColumns._ID
         };
@@ -844,8 +831,7 @@ public final class MusicUtils {
         }
         try {
             mService.enqueue(list, MusicPlaybackService.LAST);
-            final String message = context.getResources().getQuantityString(
-                    R.plurals.NNNtrackstoqueue, list.length, Integer.valueOf(list.length));
+            final String message = makeLabel(context, R.plurals.NNNtrackstoqueue, list.length);
             AppMsg.makeText((Activity)context, message, AppMsg.STYLE_CONFIRM).show();
         } catch (final RemoteException ignored) {
         }
@@ -1001,7 +987,7 @@ public final class MusicUtils {
      * @param playlistId The playlist Id
      * @return The track list for a playlist
      */
-    public static final long[] getSongListForPlaylist(final Context context, final String playlistId) {
+    public static final long[] getSongListForPlaylist(final Context context, final long playlistId) {
         final String[] projection = new String[] {
             MediaStore.Audio.Playlists.Members.AUDIO_ID
         };
@@ -1025,7 +1011,7 @@ public final class MusicUtils {
      * @param context The {@link Context} to use.
      * @param playlistId The playlist Id.
      */
-    public static void playPlaylist(final Context context, final String playlistId) {
+    public static void playPlaylist(final Context context, final long playlistId) {
         final long[] playlistList = getSongListForPlaylist(context, playlistId);
         if (playlistList != null) {
             playAll(context, playlistList, -1, false);
@@ -1304,7 +1290,7 @@ public final class MusicUtils {
                 // Remove from the favorites playlist
                 FavoritesStore.getInstance(context).removeItem(id);
                 // Remove any items in the recents database
-                RecentStore.getInstance(context).removeItem(String.valueOf(c.getLong(2)));
+                RecentStore.getInstance(context).removeItem(c.getLong(2));
                 c.moveToNext();
             }
 
@@ -1331,8 +1317,7 @@ public final class MusicUtils {
             c.close();
         }
 
-        final String message = context.getResources().getQuantityString(R.plurals.NNNtracksdeleted,
-                list.length, Integer.valueOf(list.length));
+        final String message = makeLabel(context, R.plurals.NNNtracksdeleted, list.length);
 
         AppMsg.makeText((Activity)context, message, AppMsg.STYLE_CONFIRM).show();
         // We deleted a number of tracks, which could affect any number of

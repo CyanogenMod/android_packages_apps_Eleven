@@ -308,25 +308,26 @@ public class ProfileActivity extends BaseActivity implements OnPageChangeListene
                     goBack();
                 }
                 return true;
-            case R.id.menu_add_to_homescreen:
+            case R.id.menu_add_to_homescreen: {
                 // Place the artist, album, genre, or playlist onto the Home
                 // screen. Definitely one of my favorite features.
                 final String name = isArtist() ? mArtistName : mProfileName;
                 final Long id = mArguments.getLong(Config.ID);
                 ApolloUtils.createShortcutIntent(name, id, mType, this);
                 return true;
-            case R.id.menu_shuffle:
-                final String stringId = String.valueOf(mArguments.getLong(Config.ID));
+            }
+            case R.id.menu_shuffle: {
+                final long id = mArguments.getLong(Config.ID);
                 long[] list = null;
                 if (isArtist()) {
-                    list = MusicUtils.getSongListForArtist(this, stringId);
+                    list = MusicUtils.getSongListForArtist(this, id);
                 } else if (isAlbum()) {
-                    list = MusicUtils.getSongListForAlbum(this, stringId);
+                    list = MusicUtils.getSongListForAlbum(this, id);
                 } else if (isGenre()) {
-                    list = MusicUtils.getSongListForGenre(this, stringId);
+                    list = MusicUtils.getSongListForGenre(this, id);
                 }
                 if (isPlaylist()) {
-                    MusicUtils.playPlaylist(this, stringId);
+                    MusicUtils.playPlaylist(this, id);
                 } else if (isFavorites()) {
                     MusicUtils.playFavorites(this);
                 } else if (isLastAdded()) {
@@ -337,6 +338,7 @@ public class ProfileActivity extends BaseActivity implements OnPageChangeListene
                     }
                 }
                 return true;
+            }
             case R.id.menu_sort_by_az:
                 if (isArtistSongPage()) {
                     mPreferences.setArtistSongSortOrder(SortOrder.ArtistSongSortOrder.SONG_A_Z);

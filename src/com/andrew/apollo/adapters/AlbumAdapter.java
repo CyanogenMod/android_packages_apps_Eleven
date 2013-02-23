@@ -168,7 +168,8 @@ public class AlbumAdapter extends ArrayAdapter<Album> {
             // Album artist names (line two)
             mData[i].mLineTwo = album.mArtistName;
             // Number of songs for each album (line three)
-            mData[i].mLineThree = album.mSongNumber;
+            mData[i].mLineThree = MusicUtils.makeLabel(getContext(),
+                    R.plurals.Nsongs, album.mSongNumber);
         }
     }
 
@@ -185,7 +186,7 @@ public class AlbumAdapter extends ArrayAdapter<Album> {
 
                 @Override
                 public void onClick(final View v) {
-                    final String id = getItem(position).mAlbumId;
+                    final long id = getItem(position).mAlbumId;
                     final long[] list = MusicUtils.getSongListForAlbum(getContext(), id);
                     MusicUtils.playAll(getContext(), list, 0, false);
                 }

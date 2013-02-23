@@ -11,6 +11,8 @@
 
 package com.andrew.apollo.model;
 
+import android.text.TextUtils;
+
 /**
  * A class that represents a genre.
  * 
@@ -21,7 +23,7 @@ public class Genre {
     /**
      * The unique Id of the genre
      */
-    public String mGenreId;
+    public long mGenreId;
 
     /**
      * The genre name
@@ -34,7 +36,7 @@ public class Genre {
      * @param genreId The Id of the genre
      * @param genreName The genre name
      */
-    public Genre(final String genreId, final String genreName) {
+    public Genre(final long genreId, final String genreName) {
         super();
         mGenreId = genreId;
         mGenreName = genreName;
@@ -47,7 +49,7 @@ public class Genre {
     public int hashCode() {
         final int prime = 31;
         int result = 1;
-        result = prime * result + (mGenreId == null ? 0 : mGenreId.hashCode());
+        result = prime * result + (int) mGenreId;
         result = prime * result + (mGenreName == null ? 0 : mGenreName.hashCode());
         return result;
     }
@@ -67,21 +69,10 @@ public class Genre {
             return false;
         }
         final Genre other = (Genre)obj;
-        if (mGenreId == null) {
-            if (other.mGenreId != null) {
-                return false;
-            }
-        } else if (!mGenreId.equals(other.mGenreId)) {
+        if (mGenreId != other.mGenreId) {
             return false;
         }
-        if (mGenreName == null) {
-            if (other.mGenreName != null) {
-                return false;
-            }
-        } else if (!mGenreName.equals(other.mGenreName)) {
-            return false;
-        }
-        return true;
+        return TextUtils.equals(mGenreName, other.mGenreName);
     }
 
     /**

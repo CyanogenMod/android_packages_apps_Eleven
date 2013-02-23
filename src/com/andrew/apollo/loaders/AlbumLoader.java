@@ -20,7 +20,6 @@ import android.provider.MediaStore.Audio.AlbumColumns;
 import com.andrew.apollo.R;
 import com.andrew.apollo.model.Album;
 import com.andrew.apollo.utils.Lists;
-import com.andrew.apollo.utils.MusicUtils;
 import com.andrew.apollo.utils.PreferenceUtils;
 
 import java.util.ArrayList;
@@ -64,7 +63,7 @@ public class AlbumLoader extends WrappedAsyncTaskLoader<List<Album>> {
         if (mCursor != null && mCursor.moveToFirst()) {
             do {
                 // Copy the album id
-                final String id = mCursor.getString(0);
+                final long id = mCursor.getLong(0);
 
                 // Copy the album name
                 final String albumName = mCursor.getString(1);
@@ -73,17 +72,13 @@ public class AlbumLoader extends WrappedAsyncTaskLoader<List<Album>> {
                 final String artist = mCursor.getString(2);
 
                 // Copy the number of songs
-                final String songCount = mCursor.getString(3);
+                final int songCount = mCursor.getInt(3);
 
                 // Copy the release year
                 final String year = mCursor.getString(4);
 
-                // Make the song label
-                final String songCountFormatted = MusicUtils.makeLabel(getContext(),
-                        R.plurals.Nsongs, songCount);
-
                 // Create a new album
-                final Album album = new Album(id, albumName, artist, songCountFormatted, year);
+                final Album album = new Album(id, albumName, artist, songCount, year);
 
                 // Add everything up
                 mAlbumsList.add(album);

@@ -19,7 +19,6 @@ import com.andrew.apollo.model.Album;
 import com.andrew.apollo.provider.RecentStore;
 import com.andrew.apollo.provider.RecentStore.RecentStoreColumns;
 import com.andrew.apollo.utils.Lists;
-import com.andrew.apollo.utils.MusicUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -61,7 +60,7 @@ public class RecentLoader extends WrappedAsyncTaskLoader<List<Album>> {
         if (mCursor != null && mCursor.moveToFirst()) {
             do {
                 // Copy the album id
-                final String id = mCursor.getString(mCursor
+                final long id = mCursor.getLong(mCursor
                         .getColumnIndexOrThrow(RecentStoreColumns.ID));
 
                 // Copy the album name
@@ -73,19 +72,15 @@ public class RecentLoader extends WrappedAsyncTaskLoader<List<Album>> {
                         .getColumnIndexOrThrow(RecentStoreColumns.ARTISTNAME));
 
                 // Copy the number of songs
-                final String songCount = mCursor.getString(mCursor
+                final int songCount = mCursor.getInt(mCursor
                         .getColumnIndexOrThrow(RecentStoreColumns.ALBUMSONGCOUNT));
 
                 // Copy the release year
                 final String year = mCursor.getString(mCursor
                         .getColumnIndexOrThrow(RecentStoreColumns.ALBUMYEAR));
 
-                // Make the song lable
-                final String songCountFormatted = MusicUtils.makeLabel(getContext(),
-                        R.plurals.Nsongs, songCount);
-
                 // Create a new album
-                final Album album = new Album(id, albumName, artist, songCountFormatted, year);
+                final Album album = new Album(id, albumName, artist, songCount, year);
 
                 // Add everything up
                 mAlbumsList.add(album);

@@ -933,8 +933,7 @@ public class MusicPlaybackService extends Service {
      * @param lid The list ID
      * @return The cursor used for a specific ID
      */
-    private Cursor getCursorForId(final long lid) {
-        final String id = String.valueOf(lid);
+    private Cursor getCursorForId(final long id) {
         final Cursor c = getContentResolver().query(MediaStore.Audio.Media.EXTERNAL_CONTENT_URI,
                 PROJECTION, "_id=" + id, null, null);
         if (c != null) {
@@ -2112,7 +2111,7 @@ public class MusicPlaybackService extends Service {
     public Bitmap getAlbumArt() {
         // Return the cached artwork
         final Bitmap bitmap = mImageFetcher.getArtwork(getAlbumName(),
-                String.valueOf(getAlbumId()), getArtistName());
+                getAlbumId(), getArtistName());
         return bitmap;
     }
 

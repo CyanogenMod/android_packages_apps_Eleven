@@ -128,7 +128,8 @@ public class ArtistAlbumAdapter extends ArrayAdapter<Album> {
         // Set each album name (line one)
         holder.mLineOne.get().setText(albumName);
         // Set the number of songs (line two)
-        holder.mLineTwo.get().setText(album.mSongNumber);
+        holder.mLineTwo.get().setText(MusicUtils.makeLabel(getContext(),
+                R.plurals.Nsongs, album.mSongNumber));
         // Set the album year (line three)
         holder.mLineThree.get().setText(album.mYear);
         // Asynchronously load the album images into the adapter
@@ -199,7 +200,7 @@ public class ArtistAlbumAdapter extends ArrayAdapter<Album> {
 
                 @Override
                 public void onClick(final View v) {
-                    final String id = getItem(position - 1).mAlbumId;
+                    final long id = getItem(position - 1).mAlbumId;
                     final long[] list = MusicUtils.getSongListForAlbum(getContext(), id);
                     MusicUtils.playAll(getContext(), list, 0, false);
                 }

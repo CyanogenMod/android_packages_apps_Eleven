@@ -104,7 +104,7 @@ public class MusicHolder {
         /**
          * This is the ID of the item being loaded in the adapter
          */
-        public String mItemId;
+        public long mItemId;
 
         /**
          * This is the first line displayed in the list or grid

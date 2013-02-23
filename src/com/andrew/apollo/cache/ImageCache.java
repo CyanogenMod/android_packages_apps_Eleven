@@ -425,12 +425,12 @@ public final class ImageCache {
      * @param id The ID of the album to find artwork for
      * @return The artwork for an album
      */
-    public final Bitmap getCachedArtwork(final Context context, final String data, final String id) {
+    public final Bitmap getCachedArtwork(final Context context, final String data, final long id) {
         if (context == null || data == null) {
             return null;
         }
         Bitmap cachedImage = getCachedBitmap(data);
-        if (cachedImage == null && id != null) {
+        if (cachedImage == null && id >= 0) {
             cachedImage = getArtworkFromFile(context, id);
         }
         if (cachedImage != null) {
@@ -447,8 +447,8 @@ public final class ImageCache {
      * @param albumID The ID of the album to find artwork for
      * @return The artwork for an album
      */
-    public final Bitmap getArtworkFromFile(final Context context, final String albumId) {
-        if (TextUtils.isEmpty(albumId)) {
+    public final Bitmap getArtworkFromFile(final Context context, final long albumId) {
+        if (albumId < 0) {
             return null;
         }
         Bitmap artwork = null;
@@ -456,7 +456,7 @@ public final class ImageCache {
             // Pause for a moment
         }
         try {
-            final Uri uri = ContentUris.withAppendedId(mArtworkUri, Long.valueOf(albumId));
+            final Uri uri = ContentUris.withAppendedId(mArtworkUri, albumId);
             final ParcelFileDescriptor parcelFileDescriptor = context.getContentResolver()
                     .openFileDescriptor(uri, "r");
             if (parcelFileDescriptor != null) {

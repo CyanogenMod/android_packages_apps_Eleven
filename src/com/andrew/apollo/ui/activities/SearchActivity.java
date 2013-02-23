@@ -466,12 +466,12 @@ public class SearchActivity extends Activity implements LoaderCallbacks<Cursor>,
                 holder.mLineOne.get().setText(artist);
 
                 // Get the album count
-                final String albumCount = cursor.getString(cursor.getColumnIndexOrThrow("data1"));
+                final int albumCount = cursor.getInt(cursor.getColumnIndexOrThrow("data1"));
                 holder.mLineTwo.get().setText(
                         MusicUtils.makeLabel(context, R.plurals.Nalbums, albumCount));
 
                 // Get the song count
-                final String songCount = cursor.getString(cursor.getColumnIndexOrThrow("data2"));
+                final int songCount = cursor.getInt(cursor.getColumnIndexOrThrow("data2"));
                 holder.mLineThree.get().setText(
                         MusicUtils.makeLabel(context, R.plurals.Nsongs, songCount));
 
@@ -484,7 +484,7 @@ public class SearchActivity extends Activity implements LoaderCallbacks<Cursor>,
                 holder.mImage.get().setScaleType(ScaleType.FIT_XY);
 
                 // Get the Id of the album
-                final String id = cursor.getString(cursor
+                final long id = cursor.getLong(cursor
                         .getColumnIndexOrThrow(MediaStore.Audio.Albums._ID));
 
                 // Get the album name

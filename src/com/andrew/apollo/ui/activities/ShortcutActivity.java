@@ -268,19 +268,19 @@ public class ShortcutActivity extends FragmentActivity implements ServiceConnect
             final String album = mSong.get(0).mAlbumName;
             final String artist = mSong.get(0).mArtistName;
             // This tripes as the song, album, and artist Id
-            final String id = mSong.get(0).mSongId;
+            final long id = mSong.get(0).mSongId;
             // First, try to play a song
-            if (mList == null && id != null && song != null) {
+            if (mList == null && song != null) {
                 mList = new long[] {
-                    Long.valueOf(id)
+                    id
                 };
             } else
             // Second, try to play an album
-            if (mList == null && id != null && album != null) {
+            if (mList == null && album != null) {
                 mList = MusicUtils.getSongListForAlbum(ShortcutActivity.this, id);
             } else
             // Third, try to play an artist
-            if (mList == null && id != null && artist != null) {
+            if (mList == null && artist != null) {
                 mList = MusicUtils.getSongListForArtist(ShortcutActivity.this, id);
             }
             // Finish up
@@ -312,8 +312,8 @@ public class ShortcutActivity extends FragmentActivity implements ServiceConnect
      * 
      * @return The Id passed into the activity
      */
-    private String getId() {
-        return String.valueOf(mIntent.getExtras().getLong(Config.ID));
+    private long getId() {
+        return mIntent.getExtras().getLong(Config.ID);
     }
 
     /**

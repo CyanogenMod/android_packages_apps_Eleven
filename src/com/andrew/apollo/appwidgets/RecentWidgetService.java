@@ -125,7 +125,7 @@ public class RecentWidgetService extends RemoteViewsService {
             mViews = new RemoteViews(mContext.getPackageName(), R.layout.app_widget_recents_items);
 
             // Copy the album id
-            final String id = mCursor.getString(mCursor
+            final long id = mCursor.getLong(mCursor
                     .getColumnIndexOrThrow(RecentStoreColumns.ID));
 
             // Copy the album name
@@ -156,7 +156,7 @@ public class RecentWidgetService extends RemoteViewsService {
             // Open the profile of the touched album
             final Intent profileIntent = new Intent();
             final Bundle profileExtras = new Bundle();
-            profileExtras.putLong(Config.ID, Long.valueOf(id));
+            profileExtras.putLong(Config.ID, id);
             profileExtras.putString(Config.NAME, albumName);
             profileExtras.putString(Config.ARTIST_NAME, artist);
             profileExtras.putString(RecentWidgetProvider.SET_ACTION,
@@ -167,7 +167,7 @@ public class RecentWidgetService extends RemoteViewsService {
             // Play the album when the artwork is touched
             final Intent playAlbum = new Intent();
             final Bundle playAlbumExtras = new Bundle();
-            playAlbumExtras.putLong(Config.ID, Long.valueOf(id));
+            playAlbumExtras.putLong(Config.ID, id);
             playAlbumExtras.putString(RecentWidgetProvider.SET_ACTION,
                     RecentWidgetProvider.PLAY_ALBUM);
             playAlbum.putExtras(playAlbumExtras);

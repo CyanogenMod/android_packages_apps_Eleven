@@ -146,9 +146,9 @@ public class ImageFetcher extends ImageWorker {
     /**
      * Used to fetch album images.
      */
-    public void loadAlbumImage(final String artistName, final String albumName, final String index,
+    public void loadAlbumImage(final String artistName, final String albumName, final long albumId,
             final ImageView imageView) {
-        loadImage(albumName + Config.ALBUM_ART_SUFFIX, artistName, albumName, index, imageView,
+        loadImage(albumName + Config.ALBUM_ART_SUFFIX, artistName, albumName, albumId, imageView,
                 ImageType.ALBUM);
     }
 
@@ -157,7 +157,7 @@ public class ImageFetcher extends ImageWorker {
      */
     public void loadCurrentArtwork(final ImageView imageView) {
         loadImage(MusicUtils.getAlbumName() + Config.ALBUM_ART_SUFFIX, MusicUtils.getArtistName(),
-                MusicUtils.getAlbumName(), String.valueOf(MusicUtils.getCurrentAlbumId()),
+                MusicUtils.getAlbumName(), MusicUtils.getCurrentAlbumId(),
                 imageView, ImageType.ALBUM);
     }
 
@@ -165,14 +165,14 @@ public class ImageFetcher extends ImageWorker {
      * Used to fetch artist images.
      */
     public void loadArtistImage(final String key, final ImageView imageView) {
-        loadImage(key, key, null, null, imageView, ImageType.ARTIST);
+        loadImage(key, key, null, -1, imageView, ImageType.ARTIST);
     }
 
     /**
      * Used to fetch the current artist image.
      */
     public void loadCurrentArtistImage(final ImageView imageView) {
-        loadImage(MusicUtils.getArtistName(), MusicUtils.getArtistName(), null, null, imageView,
+        loadImage(MusicUtils.getArtistName(), MusicUtils.getArtistName(), null, -1, imageView,
                 ImageType.ARTIST);
     }
 
@@ -219,7 +219,7 @@ public class ImageFetcher extends ImageWorker {
     public Bitmap getCachedArtwork(final String key) {
         if (mImageCache != null) {
             return mImageCache.getCachedArtwork(mContext, key + Config.ALBUM_ART_SUFFIX,
-                    String.valueOf(MusicUtils.getIdForAlbum(mContext, key)));
+                    MusicUtils.getIdForAlbum(mContext, key));
         }
         return getDefaultArtwork();
     }
@@ -234,14 +234,14 @@ public class ImageFetcher extends ImageWorker {
      *            missing artwork
      * @return The album art as an {@link Bitmap}
      */
-    public Bitmap getArtwork(final String albumName, final String albumId, final String artistName) {
+    public Bitmap getArtwork(final String albumName, final long albumId, final String artistName) {
         // Check the disk cache
         Bitmap artwork = null;
 
         if (artwork == null && albumName != null && mImageCache != null) {
             artwork = mImageCache.getBitmapFromDiskCache(albumName + Config.ALBUM_ART_SUFFIX);
         }
-        if (artwork == null && albumId != null && mImageCache != null) {
+        if (artwork == null && albumId >= 0 && mImageCache != null) {
             // Check for local artwork
             artwork = mImageCache.getArtworkFromFile(mContext, albumId);
         }

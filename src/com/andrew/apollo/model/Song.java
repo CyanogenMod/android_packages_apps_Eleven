@@ -11,6 +11,8 @@
 
 package com.andrew.apollo.model;
 
+import android.text.TextUtils;
+
 /**
  * A class that represents a song.
  * 
@@ -21,7 +23,7 @@ public class Song {
     /**
      * The unique Id of the song
      */
-    public String mSongId;
+    public long mSongId;
 
     /**
      * The song name
@@ -39,9 +41,9 @@ public class Song {
     public String mAlbumName;
 
     /**
-     * The song duration
+     * The song duration in seconds
      */
-    public String mDuration;
+    public int mDuration;
 
     /**
      * Constructor of <code>Song</code>
@@ -50,11 +52,11 @@ public class Song {
      * @param songName The name of the song
      * @param artistName The song artist
      * @param albumName The song album
-     * @param duration The duration of a song
+     * @param duration The duration of a song in seconds
      */
-    public Song(final String songId, final String songName, final String artistName,
-            final String albumName, final String duration) {
-        mSongId = new String(songId);
+    public Song(final long songId, final String songName, final String artistName,
+            final String albumName, final int duration) {
+        mSongId = songId;
         mSongName = songName;
         mArtistName = artistName;
         mAlbumName = albumName;
@@ -70,8 +72,8 @@ public class Song {
         int result = 1;
         result = prime * result + (mAlbumName == null ? 0 : mAlbumName.hashCode());
         result = prime * result + (mArtistName == null ? 0 : mArtistName.hashCode());
-        result = prime * result + (mDuration == null ? 0 : mDuration.hashCode());
-        result = prime * result + (mSongId == null ? 0 : mSongId.hashCode());
+        result = prime * result + mDuration;
+        result = prime * result + (int) mSongId;
         result = prime * result + (mSongName == null ? 0 : mSongName.hashCode());
         return result;
     }
@@ -91,39 +93,19 @@ public class Song {
             return false;
         }
         final Song other = (Song)obj;
-        if (mAlbumName == null) {
-            if (other.mAlbumName != null) {
-                return false;
-            }
-        } else if (!mAlbumName.equals(other.mAlbumName)) {
+        if (mSongId != other.mSongId) {
             return false;
         }
-        if (mArtistName == null) {
-            if (other.mArtistName != null) {
-                return false;
-            }
-        } else if (!mArtistName.equals(other.mArtistName)) {
+        if (!TextUtils.equals(mAlbumName, other.mAlbumName)) {
             return false;
         }
-        if (mDuration == null) {
-            if (other.mDuration != null) {
-                return false;
-            }
-        } else if (!mDuration.equals(other.mDuration)) {
+        if (!TextUtils.equals(mArtistName, other.mArtistName)) {
             return false;
         }
-        if (mSongId == null) {
-            if (other.mSongId != null) {
-                return false;
-            }
-        } else if (!mSongId.equals(other.mSongId)) {
+        if (mDuration != other.mDuration) {
             return false;
         }
-        if (mSongName == null) {
-            if (other.mSongName != null) {
-                return false;
-            }
-        } else if (!mSongName.equals(other.mSongName)) {
+        if (!TextUtils.equals(mSongName, other.mSongName)) {
             return false;
         }
         return true;

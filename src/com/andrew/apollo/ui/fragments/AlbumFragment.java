@@ -345,12 +345,12 @@ public class AlbumFragment extends Fragment implements LoaderCallbacks<List<Albu
      *         the currently playing album.
      */
     private int getItemPositionByAlbum() {
-        final String albumName = String.valueOf(MusicUtils.getCurrentAlbumId());
-        if (mAdapter == null || TextUtils.isEmpty(albumName)) {
+        final long albumId = MusicUtils.getCurrentAlbumId();
+        if (mAdapter == null) {
             return 0;
         }
         for (int i = 0; i < mAdapter.getCount(); i++) {
-            if (mAdapter.getItem(i).mAlbumId.equals(albumName)) {
+            if (mAdapter.getItem(i).mAlbumId == albumId) {
                 return i;
             }
         }

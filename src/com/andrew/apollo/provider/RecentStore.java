@@ -169,10 +169,10 @@ public class RecentStore extends SQLiteOpenHelper {
     /**
      * @param item The album Id to remove.
      */
-    public void removeItem(final String albumId) {
+    public void removeItem(final long albumId) {
         final SQLiteDatabase database = getReadableDatabase();
         database.delete(RecentStoreColumns.NAME, RecentStoreColumns.ID + " = ?", new String[] {
-            albumId
+            String.valueOf(albumId)
         });
 
     }

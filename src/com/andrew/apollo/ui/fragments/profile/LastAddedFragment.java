@@ -183,7 +183,7 @@ public class LastAddedFragment extends Fragment implements LoaderCallbacks<List<
         mSelectedPosition = info.position - 1;
         // Creat a new song
         mSong = mAdapter.getItem(mSelectedPosition);
-        mSelectedId = Long.valueOf(mSong.mSongId);
+        mSelectedId = mSong.mSongId;
         mSongName = mSong.mSongName;
         mAlbumName = mSong.mAlbumName;
         mArtistName = mSong.mArtistName;
@@ -230,7 +230,7 @@ public class LastAddedFragment extends Fragment implements LoaderCallbacks<List<
                     return true;
                 case FragmentMenuItems.ADD_TO_FAVORITES:
                     FavoritesStore.getInstance(getActivity()).addSongId(
-                            Long.valueOf(mSelectedId), mSongName, mAlbumName, mArtistName);
+                            mSelectedId, mSongName, mAlbumName, mArtistName);
                     return true;
                 case FragmentMenuItems.NEW_PLAYLIST:
                     CreateNewPlaylist.getInstance(new long[] {

@@ -203,7 +203,7 @@ public class PlaylistFragment extends Fragment implements LoaderCallbacks<List<P
                     MusicUtils.addToQueue(getActivity(), list);
                     return true;
                 case FragmentMenuItems.RENAME_PLAYLIST:
-                    RenamePlaylist.getInstance(Long.valueOf(mPlaylist.mPlaylistId)).show(
+                    RenamePlaylist.getInstance(mPlaylist.mPlaylistId).show(
                             getFragmentManager(), "RenameDialog");
                     return true;
                 case FragmentMenuItems.DELETE:
@@ -237,7 +237,7 @@ public class PlaylistFragment extends Fragment implements LoaderCallbacks<List<P
             // User created
             playlistName = mPlaylist.mPlaylistName;
             bundle.putString(Config.MIME_TYPE, MediaStore.Audio.Playlists.CONTENT_TYPE);
-            bundle.putLong(Config.ID, Long.valueOf(mPlaylist.mPlaylistId));
+            bundle.putLong(Config.ID, mPlaylist.mPlaylistId);
         }
 
         bundle.putString(Config.NAME, playlistName);
@@ -319,7 +319,7 @@ public class PlaylistFragment extends Fragment implements LoaderCallbacks<List<P
                     public void onClick(final DialogInterface dialog, final int which) {
                         final Uri mUri = ContentUris.withAppendedId(
                                 MediaStore.Audio.Playlists.EXTERNAL_CONTENT_URI,
-                                Long.valueOf(mPlaylist.mPlaylistId));
+                                mPlaylist.mPlaylistId);
                         getActivity().getContentResolver().delete(mUri, null, null);
                         MusicUtils.refresh();
                     }

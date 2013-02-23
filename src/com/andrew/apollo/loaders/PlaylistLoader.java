@@ -66,7 +66,7 @@ public class PlaylistLoader extends WrappedAsyncTaskLoader<List<Playlist>> {
         if (mCursor != null && mCursor.moveToFirst()) {
             do {
                 // Copy the playlist id
-                final String id = mCursor.getString(0);
+                final long id = mCursor.getLong(0);
 
                 // Copy the playlist name
                 final String name = mCursor.getString(1);
@@ -91,12 +91,12 @@ public class PlaylistLoader extends WrappedAsyncTaskLoader<List<Playlist>> {
         final Resources resources = getContext().getResources();
 
         /* Favorites list */
-        final Playlist favorites = new Playlist("-1",
+        final Playlist favorites = new Playlist(-1,
                 resources.getString(R.string.playlist_favorites));
         mPlaylistList.add(favorites);
 
         /* Last added list */
-        final Playlist lastAdded = new Playlist("-2",
+        final Playlist lastAdded = new Playlist(-2,
                 resources.getString(R.string.playlist_last_added));
         mPlaylistList.add(lastAdded);
     }

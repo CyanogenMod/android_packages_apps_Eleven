@@ -343,12 +343,12 @@ public class ArtistFragment extends Fragment implements LoaderCallbacks<List<Art
      *         the currently playing artist.
      */
     private int getItemPositionByArtist() {
-        final String artistName = String.valueOf(MusicUtils.getCurrentArtistId());
-        if (mAdapter == null || TextUtils.isEmpty(artistName)) {
+        final long artistId = MusicUtils.getCurrentArtistId();
+        if (mAdapter == null) {
             return 0;
         }
         for (int i = 0; i < mAdapter.getCount(); i++) {
-            if (mAdapter.getItem(i).mArtistId.equals(artistName)) {
+            if (mAdapter.getItem(i).mArtistId == artistId) {
                 return i;
             }
         }

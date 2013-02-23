@@ -19,7 +19,6 @@ import android.provider.MediaStore.Audio.AudioColumns;
 
 import com.andrew.apollo.model.Song;
 import com.andrew.apollo.utils.Lists;
-import com.andrew.apollo.utils.MusicUtils;
 import com.andrew.apollo.utils.PreferenceUtils;
 
 import java.util.ArrayList;
@@ -70,7 +69,7 @@ public class AlbumSongLoader extends WrappedAsyncTaskLoader<List<Song>> {
         if (mCursor != null && mCursor.moveToFirst()) {
             do {
                 // Copy the song Id
-                final String id = mCursor.getString(0);
+                final long id = mCursor.getLong(0);
 
                 // Copy the song name
                 final String songName = mCursor.getString(1);
@@ -82,14 +81,13 @@ public class AlbumSongLoader extends WrappedAsyncTaskLoader<List<Song>> {
                 final String album = mCursor.getString(3);
 
                 // Copy the duration
-                final String duration = mCursor.getString(4);
+                final long duration = mCursor.getLong(4);
 
                 // Make the duration label
-                final int seconds = Integer.valueOf(duration != null ? duration : "0") / 1000;
-                final String durationFormatted = MusicUtils.makeTimeString(getContext(), seconds);
+                final int seconds = (int) (duration / 1000);
 
                 // Create a new song
-                final Song song = new Song(id, songName, artist, album, durationFormatted);
+                final Song song = new Song(id, songName, artist, album, seconds);
 
                 // Add everything up
                 mSongList.add(song);

@@ -60,7 +60,7 @@ public class SearchLoader extends WrappedAsyncTaskLoader<List<Song>> {
         if (mCursor != null && mCursor.moveToFirst()) {
             do {
                 // Copy the song Id
-                String id = null;
+                long id = -1;
 
                 // Copy the song name
                 final String songName = mCursor.getString(mCursor
@@ -68,7 +68,7 @@ public class SearchLoader extends WrappedAsyncTaskLoader<List<Song>> {
 
                 // Check for a song Id
                 if (!TextUtils.isEmpty(songName)) {
-                    id = mCursor.getString(mCursor
+                    id = mCursor.getLong(mCursor
                             .getColumnIndexOrThrow(MediaStore.Audio.Media._ID));
                 }
 
@@ -77,8 +77,8 @@ public class SearchLoader extends WrappedAsyncTaskLoader<List<Song>> {
                         .getColumnIndexOrThrow(MediaStore.Audio.Albums.ALBUM));
 
                 // Check for a album Id
-                if (TextUtils.isEmpty(id) && !TextUtils.isEmpty(album)) {
-                    id = mCursor.getString(mCursor
+                if (id < 0 && !TextUtils.isEmpty(album)) {
+                    id = mCursor.getLong(mCursor
                             .getColumnIndexOrThrow(MediaStore.Audio.Albums._ID));
                 }
 
@@ -87,13 +87,13 @@ public class SearchLoader extends WrappedAsyncTaskLoader<List<Song>> {
                         .getColumnIndexOrThrow(MediaStore.Audio.Artists.ARTIST));
 
                 // Check for a artist Id
-                if (TextUtils.isEmpty(id) && !TextUtils.isEmpty(artist)) {
-                    id = mCursor.getString(mCursor
+                if (id < 0 && !TextUtils.isEmpty(artist)) {
+                    id = mCursor.getLong(mCursor
                             .getColumnIndexOrThrow(MediaStore.Audio.Artists._ID));
                 }
 
                 // Create a new song
-                final Song song = new Song(id, songName, artist, album, null);
+                final Song song = new Song(id, songName, artist, album, -1);
 
                 // Add everything up
                 mSongList.add(song);

@@ -61,7 +61,7 @@ public class GenreLoader extends WrappedAsyncTaskLoader<List<Genre>> {
         if (mCursor != null && mCursor.moveToFirst()) {
             do {
                 // Copy the genre id
-                final String id = mCursor.getString(0);
+                final long id = mCursor.getLong(0);
 
                 // Copy the genre name
                 final String name = mCursor.getString(1);
