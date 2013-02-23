@@ -22,7 +22,4 @@
     <!-- Configures a larger heap size -->
     <bool name="config_largeHeap">true</bool>
 
-    <!-- Running Honeycomb or above -->
-    <bool name="has_honeycomb">false</bool>
-
 </resources>

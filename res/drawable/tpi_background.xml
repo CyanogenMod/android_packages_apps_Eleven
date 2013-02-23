@@ -14,5 +14,6 @@
   See the License for the specific language governing permissions and
   limitations under the License.
 -->
-<color xmlns:android="http://schemas.android.com/apk/res/android"
-    android:color="@color/action_bar_color" />
+<bitmap xmlns:android="http://schemas.android.com/apk/res/android"
+    android:src="@drawable/bg_stripes_dark"
+    android:tileMode="repeat" />

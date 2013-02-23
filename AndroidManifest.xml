@@ -175,7 +175,6 @@
         <!-- 4x2  App Widget -->
         <receiver
             android:name="com.andrew.apollo.appwidgets.AppWidgetLarge"
-            android:enabled="@bool/has_honeycomb"
             android:exported="false"
             android:label="@string/app_widget_large" >
             <intent-filter>
@@ -189,7 +188,6 @@
         <!-- 4x2 alternate App Widget -->
         <receiver
             android:name="com.andrew.apollo.appwidgets.AppWidgetLargeAlternate"
-            android:enabled="@bool/has_honeycomb"
             android:exported="false"
             android:label="@string/app_widget_large_alt" >
             <intent-filter>
@@ -203,7 +201,6 @@
         <!-- Resizable recently listened App Widget -->
         <receiver
             android:name="com.andrew.apollo.appwidgets.RecentWidgetProvider"
-            android:enabled="@bool/has_honeycomb"
             android:exported="false"
             android:label="@string/app_widget_recent" >
             <intent-filter>
@@ -217,7 +214,6 @@
         <!-- The service serving the RemoteViews to the recently listened App Widget -->
         <service
             android:name="com.andrew.apollo.appwidgets.RecentWidgetService"
-            android:enabled="@bool/has_honeycomb"
             android:permission="android.permission.BIND_REMOTEVIEWS" />
         <!-- Media button receiver -->
         <receiver android:name=".MediaButtonIntentReceiver" >
