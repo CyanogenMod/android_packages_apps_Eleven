@@ -22,6 +22,7 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.ServiceConnection;
 import android.media.AudioManager;
+import android.media.audiofx.AudioEffect;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.IBinder;
@@ -263,6 +264,12 @@ public class AudioPlayerActivity extends SherlockFragmentActivity implements Ser
      */
     @Override
     public boolean onPrepareOptionsMenu(final Menu menu) {
+        // Hide the EQ option if it can't be opened
+        final Intent intent = new Intent(AudioEffect.ACTION_DISPLAY_AUDIO_EFFECT_CONTROL_PANEL);
+        if (getPackageManager().resolveActivity(intent, 0) == null) {
+            final MenuItem effects = menu.findItem(R.id.menu_audio_player_equalizer);
+            effects.setVisible(false);
+        }
         mResources.setFavoriteIcon(menu);
         return true;
     }
