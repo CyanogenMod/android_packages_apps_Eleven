@@ -233,8 +233,6 @@ public abstract class BaseActivity extends FragmentActivity implements ServiceCo
     @Override
     protected void onResume() {
         super.onResume();
-        // Hide Apollo's notification
-        MusicUtils.killForegroundService(this);
         // Set the playback drawables
         updatePlaybackControls();
         // Current info
@@ -258,21 +256,16 @@ public abstract class BaseActivity extends FragmentActivity implements ServiceCo
         // Update a list, probably the playlist fragment's
         filter.addAction(MusicPlaybackService.REFRESH);
         registerReceiver(mPlaybackStatus, filter);
+        MusicUtils.notifyForegroundStateChanged(this, true);
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    protected void onPause() {
-        super.onPause();
-        // Show Apollo's notification
-        if (MusicUtils.isPlaying()) {
-            if (ApolloUtils.isApplicationSentToBackground(this) || mIsBackPressed
-                    && this instanceof HomeActivity) {
-                MusicUtils.startBackgroundService(this);
-            }
-        }
+    protected void onStop() {
+        super.onStop();
+        MusicUtils.notifyForegroundStateChanged(this, false);
     }
 
     /**

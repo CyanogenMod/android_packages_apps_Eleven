@@ -545,10 +545,6 @@ public class ProfileActivity extends BaseActivity implements OnPageChangeListene
         final Intent intent = new Intent(Intent.ACTION_GET_CONTENT, null);
         intent.setType("image/*");
         startActivityForResult(intent, NEW_PHOTO);
-        // Make sure the notfication starts
-        if (MusicUtils.isPlaying()) {
-            MusicUtils.startBackgroundService(this);
-        }
     }
 
     /**
@@ -593,8 +589,6 @@ public class ProfileActivity extends BaseActivity implements OnPageChangeListene
         final Intent googleSearch = new Intent(Intent.ACTION_WEB_SEARCH);
         googleSearch.putExtra(SearchManager.QUERY, query);
         startActivity(googleSearch);
-        // Make sure the notification starts.
-        MusicUtils.startBackgroundService(this);
     }
 
     /**

@@ -65,6 +65,8 @@ public final class MusicUtils {
 
     public static IApolloService mService = null;
 
+    private static int sForegroundActivities = 0;
+
     private static final WeakHashMap<Context, ServiceBinder> mConnectionMap;
 
     private static final long[] sEmptyList;
@@ -1220,21 +1222,20 @@ public final class MusicUtils {
      * 
      * @param context The {@link Context} to use.
      */
-    public static void startBackgroundService(final Context context) {
-        final Intent startBackground = new Intent(context, MusicPlaybackService.class);
-        startBackground.setAction(MusicPlaybackService.START_BACKGROUND);
-        context.startService(startBackground);
-    }
+    public static void notifyForegroundStateChanged(final Context context, boolean inForeground) {
+        int old = sForegroundActivities;
+        if (inForeground) {
+            sForegroundActivities++;
+        } else {
+            sForegroundActivities--;
+        }
 
-    /**
-     * Used to kill the current foreground notification
-     * 
-     * @param context The {@link Cotext} to use.
-     */
-    public static void killForegroundService(final Context context) {
-        final Intent killForeground = new Intent(context, MusicPlaybackService.class);
-        killForeground.setAction(MusicPlaybackService.KILL_FOREGROUND);
-        context.startService(killForeground);
+        if (old == 0 || sForegroundActivities == 0) {
+            final Intent intent = new Intent(context, MusicPlaybackService.class);
+            intent.setAction(MusicPlaybackService.FOREGROUND_STATE_CHANGED);
+            intent.putExtra(MusicPlaybackService.NOW_IN_FOREGROUND, sForegroundActivities != 0);
+            context.startService(intent);
+        }
     }
 
     /**

@@ -13,8 +13,6 @@ package com.andrew.apollo.utils;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
-import android.app.ActivityManager;
-import android.app.ActivityManager.RunningTaskInfo;
 import android.app.AlertDialog;
 import android.content.ComponentName;
 import android.content.Context;
@@ -49,7 +47,6 @@ import com.andrew.apollo.widgets.ColorSchemeDialog;
 import com.devspark.appmsg.AppMsg;
 
 import java.lang.ref.WeakReference;
-import java.util.List;
 
 /**
  * Mostly general and UI helpers.
@@ -360,23 +357,4 @@ public final class ApolloUtils {
                 (DialogInterface.OnClickListener)null);
         colorPickerView.show();
     }
-
-    /**
-     * Used to know if Apollo was sent into the background
-     * 
-     * @param context The {@link Context} to use
-     */
-    public static final boolean isApplicationSentToBackground(final Context context) {
-        final ActivityManager activityManager = (ActivityManager)context
-                .getSystemService(Context.ACTIVITY_SERVICE);
-        final List<RunningTaskInfo> tasks = activityManager.getRunningTasks(1);
-        if (!tasks.isEmpty()) {
-            final ComponentName topActivity = tasks.get(0).topActivity;
-            if (!topActivity.getPackageName().equals(context.getPackageName())) {
-                return true;
-            }
-        }
-        return false;
-    }
-
 }

@@ -143,11 +143,6 @@ public class AppWidgetSmall extends AppWidgetProvider {
 
         // Update the app-widget
         pushUpdate(service, appWidgetIds, appWidgetView);
-
-        // Build the notification
-        if (ApolloUtils.isApplicationSentToBackground(service)) {
-            service.mBuildNotification = true;
-        }
     }
 
     /**

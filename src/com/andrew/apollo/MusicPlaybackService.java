@@ -137,9 +137,11 @@ public class MusicPlaybackService extends Service {
     public static final String SHUFFLE_ACTION = "com.andrew.apollo.shuffle";
 
     /**
-     * Called to kill the notification while Apollo is in the foreground
+     * Called to update the service about the foreground state of Apollo's activities
      */
-    public static final String KILL_FOREGROUND = "com.andrew.apollo.killforeground";
+    public static final String FOREGROUND_STATE_CHANGED = "com.andrew.apollo.fgstatechanged";
+
+    public static final String NOW_IN_FOREGROUND = "nowinforeground";
 
     /**
      * Used to easily notify a list that it should refresh. i.e. A playlist
@@ -375,7 +377,7 @@ public class MusicPlaybackService extends Service {
     /**
      * Returns true if the Apollo is sent to the background, false otherwise
      */
-    public boolean mBuildNotification = false;
+    private boolean mBuildNotification = false;
 
     /**
      * Lock screen controls ICS+
@@ -548,8 +550,6 @@ public class MusicPlaybackService extends Service {
         filter.addAction(PREVIOUS_ACTION);
         filter.addAction(REPEAT_ACTION);
         filter.addAction(SHUFFLE_ACTION);
-        filter.addAction(KILL_FOREGROUND);
-        filter.addAction(START_BACKGROUND);
         filter.addAction(UPDATE_LOCKSCREEN);
         // Attach the broadcast listener
         registerReceiver(mIntentReceiver, filter);
@@ -671,17 +671,17 @@ public class MusicPlaybackService extends Service {
                 mPausedByTransientLossOfFocus = false;
                 seek(0);
                 killNotification();
-                mBuildNotification = false;
             } else if (REPEAT_ACTION.equals(action)) {
                 cycleRepeat();
             } else if (SHUFFLE_ACTION.equals(action)) {
                 cycleShuffle();
-            } else if (KILL_FOREGROUND.equals(action)) {
-                mBuildNotification = false;
-                killNotification();
-            } else if (START_BACKGROUND.equals(action)) {
-                mBuildNotification = true;
-                buildNotification();
+            } else if (FOREGROUND_STATE_CHANGED.equals(action)) {
+                mBuildNotification = !intent.getBooleanExtra(NOW_IN_FOREGROUND, false);
+                if (mBuildNotification && isPlaying()) {
+                    buildNotification();
+                } else if (!mBuildNotification) {
+                    killNotification();
+                }
             } else if (UPDATE_LOCKSCREEN.equals(action)) {
                 mEnableLockscreenControls = intent.getBooleanExtra(UPDATE_LOCKSCREEN, true);
                 if (mEnableLockscreenControls) {
@@ -710,13 +710,9 @@ public class MusicPlaybackService extends Service {
      * Builds the notification for Apollo
      */
     public void buildNotification() {
-        if (mBuildNotification || ApolloUtils.isApplicationSentToBackground(this)) {
-            try {
-                mNotificationHelper.buildNotification(getAlbumName(), getArtistName(),
-                        getTrackName(), getAlbumId(), getAlbumArt());
-            } catch (final IllegalStateException parcelBitmap) {
-                parcelBitmap.printStackTrace();
-            }
+        if (mBuildNotification) {
+            mNotificationHelper.buildNotification(getAlbumName(), getArtistName(),
+                    getTrackName(), getAlbumId(), getAlbumArt());
         }
     }
 
@@ -2157,17 +2153,10 @@ public class MusicPlaybackService extends Service {
                 mPausedByTransientLossOfFocus = false;
                 seek(0);
                 killNotification();
-                mBuildNotification = false;
             } else if (REPEAT_ACTION.equals(action)) {
                 cycleRepeat();
             } else if (SHUFFLE_ACTION.equals(action)) {
                 cycleShuffle();
-            } else if (KILL_FOREGROUND.equals(action)) {
-                mBuildNotification = false;
-                killNotification();
-            } else if (START_BACKGROUND.equals(action)) {
-                mBuildNotification = true;
-                buildNotification();
             } else if (UPDATE_LOCKSCREEN.equals(action)) {
                 mEnableLockscreenControls = intent.getBooleanExtra(UPDATE_LOCKSCREEN, true);
                 if (mEnableLockscreenControls) {

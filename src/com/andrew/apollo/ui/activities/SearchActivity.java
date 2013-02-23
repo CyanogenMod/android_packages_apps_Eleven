@@ -206,20 +206,18 @@ public class SearchActivity extends Activity implements LoaderCallbacks<Cursor>,
      * {@inheritDoc}
      */
     @Override
-    protected void onResume() {
-        super.onResume();
-        MusicUtils.killForegroundService(this);
+    protected void onStart() {
+        super.onStart();
+        MusicUtils.notifyForegroundStateChanged(this, true);
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    protected void onPause() {
-        super.onPause();
-        if (MusicUtils.isPlaying() && ApolloUtils.isApplicationSentToBackground(this)) {
-            MusicUtils.startBackgroundService(this);
-        }
+    protected void onStop() {
+        super.onStop();
+        MusicUtils.notifyForegroundStateChanged(this, false);
     }
 
     /**

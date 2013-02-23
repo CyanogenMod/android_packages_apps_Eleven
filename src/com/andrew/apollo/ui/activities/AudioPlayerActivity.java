@@ -371,8 +371,6 @@ public class AudioPlayerActivity extends FragmentActivity implements ServiceConn
     @Override
     protected void onResume() {
         super.onResume();
-        // Hide Apollo's notification
-        MusicUtils.killForegroundService(this);
         // Set the playback drawables
         updatePlaybackControls();
         // Current info
@@ -401,18 +399,16 @@ public class AudioPlayerActivity extends FragmentActivity implements ServiceConn
         // Refresh the current time
         final long next = refreshCurrentTime();
         queueNextRefresh(next);
+        MusicUtils.notifyForegroundStateChanged(this, true);
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    protected void onPause() {
-        super.onPause();
-        // Show Apollo's notification
-        if (MusicUtils.isPlaying() && ApolloUtils.isApplicationSentToBackground(this)) {
-            MusicUtils.startBackgroundService(this);
-        }
+    protected void onStop() {
+        super.onStop();
+        MusicUtils.notifyForegroundStateChanged(this, false);
         mImageFetcher.flush();
     }
 

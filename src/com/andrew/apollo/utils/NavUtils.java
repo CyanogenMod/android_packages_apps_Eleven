@@ -90,8 +90,6 @@ public final class NavUtils {
             final Intent effects = new Intent(AudioEffect.ACTION_DISPLAY_AUDIO_EFFECT_CONTROL_PANEL);
             effects.putExtra(AudioEffect.EXTRA_AUDIO_SESSION, MusicUtils.getCurrentAudioId());
             context.startActivity(effects);
-            // Make sure the notification starts
-            MusicUtils.startBackgroundService(context);
         } catch (final ActivityNotFoundException notFound) {
             AppMsg.makeText(context, context.getString(R.string.no_effects_for_you),
                     AppMsg.STYLE_ALERT);

@@ -33,7 +33,6 @@ import com.andrew.apollo.ui.activities.AudioPlayerActivity;
 import com.andrew.apollo.ui.activities.HomeActivity;
 import com.andrew.apollo.ui.activities.ProfileActivity;
 import com.andrew.apollo.ui.activities.ShortcutActivity;
-import com.andrew.apollo.utils.ApolloUtils;
 import com.andrew.apollo.utils.MusicUtils;
 
 /**
@@ -241,11 +240,6 @@ public class RecentWidgetProvider extends AppWidgetProvider {
 
         // Update the app-widget
         pushUpdate(service, appWidgetIds, mViews);
-
-        // Build the notification
-        if (ApolloUtils.isApplicationSentToBackground(service)) {
-            service.mBuildNotification = true;
-        }
     }
 
     /**
