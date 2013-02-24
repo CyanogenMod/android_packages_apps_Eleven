@@ -550,7 +550,6 @@ public class MusicPlaybackService extends Service {
         filter.addAction(PREVIOUS_ACTION);
         filter.addAction(REPEAT_ACTION);
         filter.addAction(SHUFFLE_ACTION);
-        filter.addAction(UPDATE_LOCKSCREEN);
         // Attach the broadcast listener
         registerReceiver(mIntentReceiver, filter);
 
@@ -644,38 +643,8 @@ public class MusicPlaybackService extends Service {
         mDelayedStopHandler.removeCallbacksAndMessages(null);
         if (intent != null) {
             final String action = intent.getAction();
-            final String command = intent.getStringExtra("command");
-            if (CMDNEXT.equals(command) || NEXT_ACTION.equals(action)) {
-                gotoNext(true);
-            } else if (CMDPREVIOUS.equals(command) || PREVIOUS_ACTION.equals(action)) {
-                if (position() < 2000) {
-                    prev();
-                } else {
-                    seek(0);
-                    play();
-                }
-            } else if (CMDTOGGLEPAUSE.equals(command) || TOGGLEPAUSE_ACTION.equals(action)) {
-                if (mIsSupposedToBePlaying) {
-                    pause();
-                    mPausedByTransientLossOfFocus = false;
-                } else {
-                    play();
-                }
-            } else if (CMDPAUSE.equals(command) || PAUSE_ACTION.equals(action)) {
-                pause();
-                mPausedByTransientLossOfFocus = false;
-            } else if (CMDPLAY.equals(command)) {
-                play();
-            } else if (CMDSTOP.equals(command) || STOP_ACTION.equals(action)) {
-                pause();
-                mPausedByTransientLossOfFocus = false;
-                seek(0);
-                killNotification();
-            } else if (REPEAT_ACTION.equals(action)) {
-                cycleRepeat();
-            } else if (SHUFFLE_ACTION.equals(action)) {
-                cycleShuffle();
-            } else if (FOREGROUND_STATE_CHANGED.equals(action)) {
+
+            if (FOREGROUND_STATE_CHANGED.equals(action)) {
                 mBuildNotification = !intent.getBooleanExtra(NOW_IN_FOREGROUND, false);
                 if (mBuildNotification && isPlaying()) {
                     buildNotification();
@@ -695,6 +664,8 @@ public class MusicPlaybackService extends Service {
                             .setPlaybackState(RemoteControlClient.PLAYSTATE_STOPPED);
                     mAudioManager.unregisterRemoteControlClient(mRemoteControlClient);
                 }
+            } else {
+                handleCommandIntent(intent);
             }
         }
 
@@ -704,6 +675,43 @@ public class MusicPlaybackService extends Service {
         final Message msg = mDelayedStopHandler.obtainMessage();
         mDelayedStopHandler.sendMessageDelayed(msg, IDLE_DELAY);
         return START_STICKY;
+    }
+
+    private void handleCommandIntent(Intent intent) {
+        final String action = intent.getAction();
+        final String command = intent.getStringExtra(CMDNAME);
+
+        if (CMDNEXT.equals(command) || NEXT_ACTION.equals(action)) {
+            gotoNext(true);
+        } else if (CMDPREVIOUS.equals(command) || PREVIOUS_ACTION.equals(action)) {
+            if (position() < 2000) {
+                prev();
+            } else {
+                seek(0);
+                play();
+            }
+        } else if (CMDTOGGLEPAUSE.equals(command) || TOGGLEPAUSE_ACTION.equals(action)) {
+            if (isPlaying()) {
+                pause();
+                mPausedByTransientLossOfFocus = false;
+            } else {
+                play();
+            }
+        } else if (CMDPAUSE.equals(command) || PAUSE_ACTION.equals(action)) {
+            pause();
+            mPausedByTransientLossOfFocus = false;
+        } else if (CMDPLAY.equals(command)) {
+            play();
+        } else if (CMDSTOP.equals(command) || STOP_ACTION.equals(action)) {
+            pause();
+            mPausedByTransientLossOfFocus = false;
+            seek(0);
+            killNotification();
+        } else if (REPEAT_ACTION.equals(action)) {
+            cycleRepeat();
+        } else if (SHUFFLE_ACTION.equals(action)) {
+            cycleShuffle();
+        }
     }
 
     /**
@@ -2120,58 +2128,14 @@ public class MusicPlaybackService extends Service {
     }
 
     private final BroadcastReceiver mIntentReceiver = new BroadcastReceiver() {
-
         /**
          * {@inheritDoc}
          */
         @Override
         public void onReceive(final Context context, final Intent intent) {
-            final String action = intent.getAction();
-            final String command = intent.getStringExtra("command");
-            if (CMDNEXT.equals(command) || NEXT_ACTION.equals(action)) {
-                gotoNext(true);
-            } else if (CMDPREVIOUS.equals(command) || PREVIOUS_ACTION.equals(action)) {
-                if (position() < 2000) {
-                    prev();
-                } else {
-                    seek(0);
-                    play();
-                }
-            } else if (CMDTOGGLEPAUSE.equals(command) || TOGGLEPAUSE_ACTION.equals(action)) {
-                if (mIsSupposedToBePlaying) {
-                    pause();
-                    mPausedByTransientLossOfFocus = false;
-                } else {
-                    play();
-                }
-            } else if (CMDPAUSE.equals(command) || PAUSE_ACTION.equals(action)) {
-                pause();
-                mPausedByTransientLossOfFocus = false;
-            } else if (CMDPLAY.equals(command)) {
-                play();
-            } else if (CMDSTOP.equals(command) || STOP_ACTION.equals(action)) {
-                pause();
-                mPausedByTransientLossOfFocus = false;
-                seek(0);
-                killNotification();
-            } else if (REPEAT_ACTION.equals(action)) {
-                cycleRepeat();
-            } else if (SHUFFLE_ACTION.equals(action)) {
-                cycleShuffle();
-            } else if (UPDATE_LOCKSCREEN.equals(action)) {
-                mEnableLockscreenControls = intent.getBooleanExtra(UPDATE_LOCKSCREEN, true);
-                if (mEnableLockscreenControls) {
-                    setUpRemoteControlClient();
-                    // Update the controls according to the current playback
-                    notifyChange(PLAYSTATE_CHANGED);
-                    notifyChange(META_CHANGED);
-                } else {
-                    // Remove then unregister the controls
-                    mRemoteControlClient
-                            .setPlaybackState(RemoteControlClient.PLAYSTATE_STOPPED);
-                    mAudioManager.unregisterRemoteControlClient(mRemoteControlClient);
-                }
-            } else if (AppWidgetSmall.CMDAPPWIDGETUPDATE.equals(command)) {
+            final String command = intent.getStringExtra(CMDNAME);
+
+            if (AppWidgetSmall.CMDAPPWIDGETUPDATE.equals(command)) {
                 final int[] small = intent.getIntArrayExtra(AppWidgetManager.EXTRA_APPWIDGET_IDS);
                 mAppWidgetSmall.performUpdate(MusicPlaybackService.this, small);
             } else if (AppWidgetLarge.CMDAPPWIDGETUPDATE.equals(command)) {
@@ -2184,12 +2148,13 @@ public class MusicPlaybackService extends Service {
             } else if (RecentWidgetProvider.CMDAPPWIDGETUPDATE.equals(command)) {
                 final int[] recent = intent.getIntArrayExtra(AppWidgetManager.EXTRA_APPWIDGET_IDS);
                 mRecentWidgetProvider.performUpdate(MusicPlaybackService.this, recent);
+            } else {
+                handleCommandIntent(intent);
             }
         }
     };
 
     private final OnAudioFocusChangeListener mAudioFocusListener = new OnAudioFocusChangeListener() {
-
         /**
          * {@inheritDoc}
          */
@@ -2200,7 +2165,6 @@ public class MusicPlaybackService extends Service {
     };
 
     private static final class DelayedHandler extends Handler {
-
         private final WeakReference<MusicPlaybackService> mService;
 
         /**
@@ -2217,20 +2181,23 @@ public class MusicPlaybackService extends Service {
          */
         @Override
         public void handleMessage(final Message msg) {
-            if (mService.get().isPlaying() || mService.get().mPausedByTransientLossOfFocus
-                    || mService.get().mServiceInUse
-                    || mService.get().mPlayerHandler.hasMessages(TRACK_ENDED)) {
+            final MusicPlaybackService service = mService.get();
+            if (service == null) {
                 return;
             }
-            mService.get().saveQueue(true);
-            mService.get().stopSelf(mService.get().mServiceStartId);
+            if (service.isPlaying()
+                    || service.mPausedByTransientLossOfFocus
+                    || service.mServiceInUse
+                    || service.mPlayerHandler.hasMessages(TRACK_ENDED)) {
+                return;
+            }
+            service.saveQueue(true);
+            service.stopSelf(service.mServiceStartId);
         }
     }
 
     private static final class MusicPlayerHandler extends Handler {
-
         private final WeakReference<MusicPlaybackService> mService;
-
         private float mCurrentVolume = 1.0f;
 
         /**
@@ -2249,6 +2216,11 @@ public class MusicPlaybackService extends Service {
          */
         @Override
         public void handleMessage(final Message msg) {
+            final MusicPlaybackService service = mService.get();
+            if (service == null) {
+                return;
+            }
+
             switch (msg.what) {
                 case FADEDOWN:
                     mCurrentVolume -= .05f;
@@ -2257,7 +2229,7 @@ public class MusicPlaybackService extends Service {
                     } else {
                         mCurrentVolume = .2f;
                     }
-                    mService.get().mPlayer.setVolume(mCurrentVolume);
+                    service.mPlayer.setVolume(mCurrentVolume);
                     break;
                 case FADEUP:
                     mCurrentVolume += .01f;
@@ -2266,63 +2238,57 @@ public class MusicPlaybackService extends Service {
                     } else {
                         mCurrentVolume = 1.0f;
                     }
-                    mService.get().mPlayer.setVolume(mCurrentVolume);
+                    service.mPlayer.setVolume(mCurrentVolume);
                     break;
                 case SERVER_DIED:
-                    if (mService.get().mIsSupposedToBePlaying) {
-                        mService.get().gotoNext(true);
+                    if (service.isPlaying()) {
+                        service.gotoNext(true);
                     } else {
-                        mService.get().openCurrentAndNext();
+                        service.openCurrentAndNext();
                     }
                     break;
                 case TRACK_WENT_TO_NEXT:
-                    mService.get().mPlayPos = mService.get().mNextPlayPos;
-                    if (mService.get().mCursor != null) {
-                        mService.get().mCursor.close();
-                        mService.get().mCursor = null;
+                    service.mPlayPos = service.mNextPlayPos;
+                    if (service.mCursor != null) {
+                        service.mCursor.close();
                     }
-                    mService.get().mCursor = mService.get().getCursorForId(
-                            mService.get().mPlayList[mService.get().mPlayPos]);
-                    mService.get().notifyChange(META_CHANGED);
-                    mService.get().buildNotification();
-                    mService.get().setNextTrack();
+                    service.mCursor = service.getCursorForId(service.mPlayList[service.mPlayPos]);
+                    service.notifyChange(META_CHANGED);
+                    service.buildNotification();
+                    service.setNextTrack();
                     break;
                 case TRACK_ENDED:
-                    if (mService.get().mRepeatMode == REPEAT_CURRENT) {
-                        mService.get().seek(0);
-                        mService.get().play();
+                    if (service.mRepeatMode == REPEAT_CURRENT) {
+                        service.seek(0);
+                        service.play();
                     } else {
-                        mService.get().gotoNext(false);
+                        service.gotoNext(false);
                     }
                     break;
                 case RELEASE_WAKELOCK:
-                    mService.get().mWakeLock.release();
+                    service.mWakeLock.release();
                     break;
                 case FOCUSCHANGE:
                     switch (msg.arg1) {
                         case AudioManager.AUDIOFOCUS_LOSS:
-                            if (mService.get().isPlaying()) {
-                                mService.get().mPausedByTransientLossOfFocus = false;
+                        case AudioManager.AUDIOFOCUS_LOSS_TRANSIENT:
+                            if (service.isPlaying()) {
+                                service.mPausedByTransientLossOfFocus =
+                                    msg.arg1 == AudioManager.AUDIOFOCUS_LOSS_TRANSIENT;
                             }
-                            mService.get().pause();
+                            service.pause();
                             break;
                         case AudioManager.AUDIOFOCUS_LOSS_TRANSIENT_CAN_DUCK:
                             removeMessages(FADEUP);
                             sendEmptyMessage(FADEDOWN);
                             break;
-                        case AudioManager.AUDIOFOCUS_LOSS_TRANSIENT:
-                            if (mService.get().isPlaying()) {
-                                mService.get().mPausedByTransientLossOfFocus = true;
-                            }
-                            mService.get().pause();
-                            break;
                         case AudioManager.AUDIOFOCUS_GAIN:
-                            if (!mService.get().isPlaying()
-                                    && mService.get().mPausedByTransientLossOfFocus) {
-                                mService.get().mPausedByTransientLossOfFocus = false;
+                            if (!service.isPlaying()
+                                    && service.mPausedByTransientLossOfFocus) {
+                                service.mPausedByTransientLossOfFocus = false;
                                 mCurrentVolume = 0f;
-                                mService.get().mPlayer.setVolume(mCurrentVolume);
-                                mService.get().play();
+                                service.mPlayer.setVolume(mCurrentVolume);
+                                service.play();
                             } else {
                                 removeMessages(FADEDOWN);
                                 sendEmptyMessage(FADEUP);

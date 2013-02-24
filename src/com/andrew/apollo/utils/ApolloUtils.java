@@ -14,7 +14,6 @@ package com.andrew.apollo.utils;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.content.ComponentName;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
@@ -29,7 +28,6 @@ import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.provider.MediaStore;
-import android.support.v4.app.FragmentActivity;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
@@ -46,8 +44,6 @@ import com.andrew.apollo.widgets.ColorPickerView;
 import com.andrew.apollo.widgets.ColorSchemeDialog;
 import com.devspark.appmsg.AppMsg;
 
-import java.lang.ref.WeakReference;
-
 /**
  * Mostly general and UI helpers.
  * 
@@ -62,16 +58,6 @@ public final class ApolloUtils {
 
     /* This class is never initiated */
     public ApolloUtils() {
-    }
-
-    /**
-     * Used to determine if the current device is a Google TV
-     * 
-     * @param context The {@link Context} to use
-     * @return True if the device has Google TV, false otherwise
-     */
-    public static final boolean isGoogleTV(final Context context) {
-        return context.getPackageManager().hasSystemFeature("com.google.android.tv");
     }
 
     /**
@@ -91,7 +77,8 @@ public final class ApolloUtils {
      * @return True if the device is a tablet, false otherwise.
      */
     public static final boolean isTablet(final Context context) {
-        return (context.getResources().getConfiguration().screenLayout & Configuration.SCREENLAYOUT_SIZE_MASK) >= Configuration.SCREENLAYOUT_SIZE_LARGE;
+        final int layout = context.getResources().getConfiguration().screenLayout;
+        return (layout & Configuration.SCREENLAYOUT_SIZE_MASK) >= Configuration.SCREENLAYOUT_SIZE_LARGE;
     }
 
     /**
@@ -101,7 +88,8 @@ public final class ApolloUtils {
      * @return True if the device is in landscape mode, false otherwise.
      */
     public static final boolean isLandscape(final Context context) {
-        return context.getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE;
+        final int orientation = context.getResources().getConfiguration().orientation;
+        return orientation == Configuration.ORIENTATION_LANDSCAPE;
     }
 
     /**
@@ -116,16 +104,14 @@ public final class ApolloUtils {
     @SuppressLint("NewApi")
     public static <T> void execute(final boolean forceSerial, final AsyncTask<T, ?, ?> task,
             final T... args) {
-        final WeakReference<AsyncTask<T, ?, ?>> taskReference = new WeakReference<AsyncTask<T, ?, ?>>(
-                task);
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.DONUT) {
             throw new UnsupportedOperationException(
                     "This class can only be used on API 4 and newer.");
         }
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.HONEYCOMB || forceSerial) {
-            taskReference.get().execute(args);
+            task.execute(args);
         } else {
-            taskReference.get().executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, args);
+            task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, args);
         }
     }
 
@@ -228,14 +214,11 @@ public final class ApolloUtils {
     public static final AlertDialog createOpenSourceDialog(final Context context) {
         final WebView webView = new WebView(context);
         webView.loadUrl("file:///android_asset/licenses.html");
-        return new AlertDialog.Builder(context).setTitle(R.string.settings_open_source_licenses)
+        return new AlertDialog.Builder(context)
+                .setTitle(R.string.settings_open_source_licenses)
                 .setView(webView)
-                .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(final DialogInterface dialog, final int whichButton) {
-                        dialog.dismiss();
-                    }
-                }).create();
+                .setPositiveButton(android.R.string.ok, null)
+                .create();
     }
 
     /**
@@ -275,7 +258,7 @@ public final class ApolloUtils {
     /**
      * Creates a new instance of the {@link ImageCache} and {@link ImageFetcher}
      * 
-     * @param activity The {@link FragmentActivity} to use.
+     * @param activity The {@link Activity} to use.
      * @return A new {@link ImageFetcher} used to fetch images asynchronously.
      */
     public static final ImageFetcher getImageFetcher(final Activity activity) {
@@ -328,7 +311,7 @@ public final class ApolloUtils {
                     displayName + " " + context.getString(R.string.pinned_to_home_screen),
                     AppMsg.STYLE_CONFIRM).show();
         } catch (final Exception e) {
-            Log.e("ApolloUtils", "createShortcutIntent - " + e);
+            Log.e("ApolloUtils", "createShortcutIntent", e);
             AppMsg.makeText(
                     context,
                     displayName + " "
@@ -353,8 +336,8 @@ public final class ApolloUtils {
                                 colorPickerView.getColor());
                     }
                 });
-        colorPickerView.setButton(AlertDialog.BUTTON_NEGATIVE, context.getString(R.string.cancel),
-                (DialogInterface.OnClickListener)null);
+        colorPickerView.setButton(AlertDialog.BUTTON_NEGATIVE,
+                context.getString(R.string.cancel), (OnClickListener) null);
         colorPickerView.show();
     }
 }

@@ -186,20 +186,17 @@ public final class MusicUtils {
      * @param secs The track in seconds.
      * @return Duration of a track that's properly formatted.
      */
-    public static final String makeTimeString(final Context context, final long secs) {
-        final StringBuilder formatBuilder = new StringBuilder();
-        final Formatter formatter = new Formatter(formatBuilder, Locale.getDefault());
+    public static final String makeTimeString(final Context context, long secs) {
+        long hours, mins;
+
+        hours = secs / 3600;
+        secs -= hours * 3600;
+        mins = secs / 60;
+        secs -= mins * 60;
+
         final String durationFormat = context.getResources().getString(
-                secs < 3600 ? R.string.durationformatshort : R.string.durationformatlong);
-        final Object[] mTimeArgs = new Object[5];
-        formatBuilder.setLength(0);
-        mTimeArgs[0] = secs / 3600;
-        mTimeArgs[1] = secs / 60;
-        mTimeArgs[2] = secs / 60 % 60;
-        mTimeArgs[3] = secs;
-        mTimeArgs[4] = secs % 60;
-        final String mTime = formatter.format(durationFormat, mTimeArgs).toString();
-        return mTime;
+                hours == 0 ? R.string.durationformatshort : R.string.durationformatlong);
+        return String.format(durationFormat, hours, mins, secs);
     }
 
     /**
@@ -1236,26 +1233,6 @@ public final class MusicUtils {
             intent.putExtra(MusicPlaybackService.NOW_IN_FOREGROUND, sForegroundActivities != 0);
             context.startService(intent);
         }
-    }
-
-    /**
-     * @param context The {@link Cotext} to use.
-     * @return True if the mediascanner is running, false otherwise.
-     */
-    public static boolean isMediaScannerScanning(final Context context) {
-        boolean result = false;
-        final Cursor cursor = context.getContentResolver().query(MediaStore.getMediaScannerUri(),
-                new String[] {
-                    MediaStore.MEDIA_SCANNER_VOLUME
-                }, null, null, null);
-        if (cursor != null) {
-            if (cursor.getCount() == 1) {
-                cursor.moveToFirst();
-                result = "external".equals(cursor.getString(0));
-            }
-            cursor.close();
-        }
-        return result;
     }
 
     /**

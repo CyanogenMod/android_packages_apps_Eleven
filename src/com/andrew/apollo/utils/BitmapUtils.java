@@ -292,31 +292,4 @@ public final class BitmapUtils {
         mCanvas.drawBitmap(bitmap, 0, 0, paint);
         return mTarget;
     }
-
-    /**
-     * Used to remove the saturation (if saturate) and slightly enlarge a
-     * {@link Bitmap}.
-     * 
-     * @param bitmap The {@link Bitmap} to filer.
-     */
-    public static final Bitmap createSaturatedBitmap(final Bitmap bitmap) {
-        if (bitmap == null) {
-            return null;
-        }
-
-        final Bitmap mBitmap = Bitmap.createBitmap(bitmap.getWidth(), bitmap.getHeight(),
-                Bitmap.Config.RGB_565);
-        final Canvas mCanvas = new Canvas(mBitmap);
-        final Paint mPaint = new Paint();
-        final ColorMatrix mColorMatrix = new ColorMatrix();
-        mColorMatrix.setSaturation(0);
-        final ColorMatrix mDarkMatrix = new ColorMatrix();
-        mDarkMatrix.setScale(0.3f, 0.3f, 0.3f, 1.0f);
-        mColorMatrix.postConcat(mDarkMatrix);
-        final ColorMatrixColorFilter mFilter = new ColorMatrixColorFilter(mColorMatrix);
-        mPaint.setColorFilter(mFilter);
-        mCanvas.drawBitmap(bitmap, 0, 0, mPaint);
-        return mBitmap;
-    }
-
 }
