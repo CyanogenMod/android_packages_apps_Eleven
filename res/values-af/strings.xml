@@ -8,10 +8,10 @@
     <string name="cd_search">Soek deur jou musiek</string>
     <string name="cd_overflow">Wys meer opsies</string>
     <string name="cd_bottom_action_bar_album_art">Album kuns vir hierdie lied</string>
-    <string name="cd_repeat">Herhaal een of almal</string>
-    <string name="cd_previous">Beweeg terugwaarts</string>
-    <string name="cd_play">Speel en pouse</string>
-    <string name="cd_next">Beweeg vorentoe</string>
+    <string name="cd_repeat">Herhaling</string>
+    <string name="cd_previous">Vorige liedjie</string>
+    <string name="cd_play">Speel/Stop</string>
+    <string name="cd_next">Volgende liedjie</string>
     <string name="cd_shuffle">Skommel liedjies</string>
 
     <!-- AudioPlayer title -->
@@ -31,7 +31,7 @@
     <plurals name="Nsongs">
 
         <!-- Number of songs is one -->
-        <item quantity="one">1 Lied</item>
+        <item quantity="one">1 liedjie</item>
         <item quantity="other"><xliff:g id="count">%d</xliff:g> liedjies</item>
     </plurals>
 
@@ -44,14 +44,14 @@
     </plurals>
 
     <!-- Headers -->
-    <string name="album_header">ALBUM LYS</string>
-    <string name="track_header">SNIT LYS</string>
+    <string name="album_header">ALBUMLYS</string>
+    <string name="track_header">SNITLYS</string>
 
     <!-- Options MenuItems -->
     <string name="settings">Instellings</string>
     <string name="shuffle_all">Skommel almal</string>
     <string name="share">Deel</string>
-    <string name="play_store">Play Winkel</string>
+    <string name="play_store">Play-winkel</string>
 
     <!-- Set track as ringtone -->
     <string name="set_as_ringtone">\"<xliff:g id="name" example="Alarm Bell">%s</xliff:g>\" stel as luitoon</string>
@@ -68,8 +68,8 @@
 
     <!-- Share Intent -->
     <string name="now_listening_to">Ek luister na:</string>
-    <string name="by">by</string>
-    <string name="share_track_using">Deel lied met behulp van</string>
+    <string name="by">deur</string>
+    <string name="share_track_using">Deel liedjie met behulp van</string>
 
     <!-- ContextMenu items -->
     <string name="play_all">Speel alles</string>
@@ -94,7 +94,7 @@
     <string name="themes">Temas</string>
     <string name="apollo_themes">Kies tema vir Apollo</string>
     <string name="select_theme">Kies tema</string>
-    <string name="version">Apollo weergawe</string>
+    <string name="version">Apollo-inligting</string>
 
     <!-- Theme layout Buttons -->
     <string name="apply_theme">Pas tema toe</string>
