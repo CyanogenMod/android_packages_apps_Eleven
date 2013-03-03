@@ -588,7 +588,7 @@ public final class ImageCache {
         synchronized (mPauseLock) {
             if (mPauseDiskAccess != pause) {
                 mPauseDiskAccess = pause;
-                if (pause) {
+                if (!pause) {
                     mPauseLock.notify();
                 }
             }
