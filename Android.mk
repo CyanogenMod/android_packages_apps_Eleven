@@ -10,6 +10,7 @@ LOCAL_STATIC_JAVA_LIBRARIES := \
     android-support-v4
 
 LOCAL_PACKAGE_NAME := Apollo
+LOCAL_OVERRIDES_PACKAGES := Music
 
 LOCAL_SDK_VERSION := current
 LOCAL_PROGUARD_FLAG_FILES := proguard.flags
