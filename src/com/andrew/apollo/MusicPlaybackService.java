@@ -1210,6 +1210,12 @@ public class MusicPlaybackService extends Service {
      */
     private void notifyChange(final String what) {
         final Intent intent = new Intent(what);
+        intent.putExtra("id", getAudioId());
+        intent.putExtra("artist", getArtistName());
+        intent.putExtra("album", getAlbumName());
+        intent.putExtra("track", getTrackName());
+        intent.putExtra("playing", isPlaying());
+        intent.putExtra("isfavorite", isFavorite());
         sendStickyBroadcast(intent);
 
         // Update the lockscreen controls
