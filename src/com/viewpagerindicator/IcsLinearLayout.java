@@ -163,7 +163,7 @@ class IcsLinearLayout extends LinearLayout {
         mDivider.draw(canvas);
     }
 
-    private boolean hasDividerBeforeChildAt(int childIndex) {
+    protected boolean hasDividerBeforeChildAt(int childIndex) {
         if (childIndex == 0 || childIndex == getChildCount()) {
           return false;
         }
