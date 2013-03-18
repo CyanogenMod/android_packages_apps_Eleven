@@ -35,7 +35,6 @@
     <string name="menu_clear_recents">Clear recent</string>
     <string name="menu_clear_queue">Clear queue</string>
     <string name="menu_save_queue">Save queue</string>
-    <string name="menu_clear_favorites">Clear Favorites</string>
     <string name="menu_share">Share</string>
     <string name="menu_add_to_homescreen">Place on Home screen</string>
     <string name="menu_equalizer">Equalizer</string>
@@ -48,12 +47,9 @@
     <string name="add_to_playlist">Add to playlist</string>
     <string name="add_to_favorites">Add to Favorites</string>
     <string name="add_to_queue">Add to queue</string>
-    <string name="add_to_quickplay">Pin to Quickplay</string>
     <string name="remove_from_favorites">Remove from Favorites</string>
-    <string name="remove_from_playlist">Remove from playlist</string>
     <string name="remove_from_recent">Remove from recent</string>
     <string name="remove_from_queue">Remove from queue</string>
-    <string name="remove_from_quickplay">Remove from Quickplay</string>
 
     <!-- Sort orders -->
     <string name="sort_order_entry_az">A-Z</string>
@@ -72,7 +68,6 @@
     <string name="playlist_last_added">Last added</string>
 
     <!-- AlertDialog items -->
-    <string name="sort_order_title">Sort by</string>
     <string name="new_playlist">New playlist</string>
     <string name="save">Save</string>
     <string name="cancel">Cancel</string>
@@ -96,7 +91,6 @@
     <string name="context_menu_fetch_artist_image">Fetch artist image</string>
     <string name="context_menu_open_in_play_store">Open in Play Store</string>
     <string name="context_menu_remove_from_recent">Remove from recent</string>
-    <string name="context_menu_remove_from_queue">Remove from queue</string>
     <string name="context_menu_use_as_ringtone">Use as ringtone</string>
 
     <!-- Content descriptions -->
@@ -109,14 +103,8 @@
     <string name="accessibility_repeat">Repeat</string>
     <string name="accessibility_repeat_all">Repeat all</string>
     <string name="accessibility_repeat_one">Repeat one</string>
-    <string name="accessibility_add_to_favorites">Add to favorites</string>
-    <string name="accessibility_remove_from_favorites">Remove from favorites</string>
 
     <!-- Toast messages -->
-    <string name="removed_from_favorites">removed from Favorites</string>
-    <string name="removed_from_recent">removed from recent</string>
-    <string name="removed_from_playlist">removed from playlist</string>
-    <string name="added_to_favorites">added to Favorites</string>
     <string name="pinned_to_home_screen">pinned to your Home screen</string>
     <string name="could_not_be_pinned_to_home_screen">could not be pinned to your Home screen</string>
     <string name="set_as_ringtone">\"<xliff:g id="name" example="Alarm Bell">%s</xliff:g>\" set as ringtone</string>
@@ -168,7 +156,7 @@
     <string name="app_widget_text_separator">-</string>
 
     <!-- What keywords to use when shopping for Apollo themes -->
-    <string name="apollo_themes_shop_key">Apollo Themes</string>
+    <string name="apollo_themes_shop_key" translatable="false">Apollo Themes</string>
 
     <!-- Empty list / error messages -->
     <string name="no_effects_for_you">The equalizer could not be opened.</string>

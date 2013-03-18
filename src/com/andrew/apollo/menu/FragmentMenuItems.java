@@ -58,22 +58,16 @@ public class FragmentMenuItems {
     /* Used to set a track as a ringtone */
     public static final int USE_AS_RINGTONE = 12;
 
-    /* Used to add an artist to the quickplay */
-    public static final int PINN_TO_QUICKPLAY = 13;
-
     /* Used to remove a track from the favorites cache */
-    public static final int REMOVE_FROM_FAVORITES = 14;
+    public static final int REMOVE_FROM_FAVORITES = 13;
 
     /* Used to remove a track from a playlist */
-    public static final int REMOVE_FROM_PLAYLIST = 15;
+    public static final int REMOVE_FROM_PLAYLIST = 14;
 
     /* Used to remove a track from the queue */
-    public static final int REMOVE_FROM_QUEUE = 16;
-
-    /* Used to remove a track from the Quickplay menu */
-    public static final int REMOVE_FROM_QUICKPLAY = 17;
+    public static final int REMOVE_FROM_QUEUE = 15;
 
     /* Used to queue a track to be played next */
-    public static final int PLAY_NEXT = 18;
+    public static final int PLAY_NEXT = 16;
 
 }
