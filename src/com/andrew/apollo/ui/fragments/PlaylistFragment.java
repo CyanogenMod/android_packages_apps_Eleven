@@ -312,7 +312,7 @@ public class PlaylistFragment extends Fragment implements LoaderCallbacks<List<P
      */
     private final AlertDialog buildDeleteDialog() {
         return new AlertDialog.Builder(getActivity())
-                .setTitle(getString(R.string.context_menu_delete) + " " + mPlaylist.mPlaylistName)
+                .setTitle(getString(R.string.delete_dialog_title, mPlaylist.mPlaylistName))
                 .setPositiveButton(R.string.context_menu_delete, new OnClickListener() {
 
                     @Override

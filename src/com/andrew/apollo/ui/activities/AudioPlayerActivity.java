@@ -723,9 +723,8 @@ public class AudioPlayerActivity extends FragmentActivity implements ServiceConn
             return;
         }
         final Intent shareIntent = new Intent();
-        final String shareMessage = getString(R.string.now_listening_to) + " "
-                + MusicUtils.getTrackName() + " " + getString(R.string.by) + " "
-                + MusicUtils.getArtistName() + " " + getString(R.string.hash_apollo);
+        final String shareMessage = getString(R.string.now_listening_to,
+                MusicUtils.getTrackName(), MusicUtils.getArtistName());
 
         shareIntent.setAction(Intent.ACTION_SEND);
         shareIntent.setType("text/plain");

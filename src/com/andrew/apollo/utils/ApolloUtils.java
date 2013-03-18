@@ -308,14 +308,13 @@ public final class ApolloUtils {
             intent.setAction("com.android.launcher.action.INSTALL_SHORTCUT");
             context.sendBroadcast(intent);
             AppMsg.makeText(context,
-                    displayName + " " + context.getString(R.string.pinned_to_home_screen),
+                    context.getString(R.string.pinned_to_home_screen, displayName),
                     AppMsg.STYLE_CONFIRM).show();
         } catch (final Exception e) {
             Log.e("ApolloUtils", "createShortcutIntent", e);
             AppMsg.makeText(
                     context,
-                    displayName + " "
-                            + context.getString(R.string.could_not_be_pinned_to_home_screen),
+                    context.getString(R.string.could_not_be_pinned_to_home_screen, displayName),
                     AppMsg.STYLE_ALERT).show();
         }
     }

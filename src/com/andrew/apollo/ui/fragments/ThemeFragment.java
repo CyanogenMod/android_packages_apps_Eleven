@@ -193,7 +193,7 @@ public class ThemeFragment extends Fragment implements OnItemClickListener {
             final long id) {
         mTheme.setThemePackageName(mValues[position]);
         AppMsg.makeText(getActivity(),
-                mEntries[position] + " " + getString(R.string.theme_set), AppMsg.STYLE_CONFIRM)
+                getString(R.string.theme_set, mEntries[position]), AppMsg.STYLE_CONFIRM)
                 .show();
     }
 

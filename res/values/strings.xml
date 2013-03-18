@@ -74,6 +74,7 @@
     <string name="overwrite">Overwrite</string>
     <string name="new_playlist_name_template">Playlist <xliff:g id="number">%d</xliff:g></string>
     <string name="create_playlist_prompt" msgid="942607395076646686">"Playlist name"</string>
+    <string name="delete_dialog_title">Delete <xliff:g id="item" example="album">%s</xliff:g>?</string>
     <string name="cannot_be_undone">This cannot be undone</string>
     <string name="delete_warning">This will permanently delete the cached image entries</string>
     <string name="new_photo">Choose photo from Gallery</string>
@@ -105,11 +106,11 @@
     <string name="accessibility_repeat_one">Repeat one</string>
 
     <!-- Toast messages -->
-    <string name="pinned_to_home_screen">pinned to your Home screen</string>
-    <string name="could_not_be_pinned_to_home_screen">could not be pinned to your Home screen</string>
+    <string name="pinned_to_home_screen"><xliff:g id="name">%s</xliff:g> pinned to your home screen</string>
+    <string name="could_not_be_pinned_to_home_screen"><xliff:g id="name">%s</xliff:g> could not be pinned to your home screen</string>
     <string name="set_as_ringtone">\"<xliff:g id="name" example="Alarm Bell">%s</xliff:g>\" set as ringtone</string>
     <string name="playlist_renamed">Playlist renamed</string>
-    <string name="theme_set">set as the theme</string>
+    <string name="theme_set"><xliff:g id="name">%s</xliff:g> set as the theme</string>
 
     <!-- Settings -->
     <string name="settings_ui_category">Interface</string>
@@ -137,10 +138,8 @@
     <string name="settings_version_title">Version number</string>
 
     <!-- Share Intent -->
-    <string name="now_listening_to">#NowPlaying</string>
-    <string name="by">by</string>
+    <string name="now_listening_to">#NowPlaying <xliff:g id="title">%1$s</xliff:g> by <xliff:g id="artist">%2$s</xliff:g> #Apollo</string>
     <string name="share_track_using">Share track using:</string>
-    <string name="hash_apollo">#Apollo</string>
 
     <!-- ColorPicker -->
     <string name="color_picker_title">Color scheme</string>
