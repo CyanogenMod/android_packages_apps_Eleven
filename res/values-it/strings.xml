@@ -30,9 +30,8 @@
     <string name="menu_clear_recents">Cancella recenti</string>
     <string name="menu_clear_queue">Cancella coda</string>
     <string name="menu_save_queue">Salva coda</string>
-    <string name="menu_clear_favorites">Cancella Preferiti</string>
     <string name="menu_share">Condividi</string>
-    <string name="menu_add_to_homescreen">Aggiungi alla Home</string>
+    <string name="menu_add_to_homescreen">Aggiungi alla home</string>
     <string name="menu_equalizer">Equalizzatore</string>
     <string name="menu_simple">Semplice</string>
     <string name="menu_detailed">Dettagliato</string>
@@ -41,12 +40,9 @@
     <string name="add_to_playlist">Aggiungi alla playlist</string>
     <string name="add_to_favorites">Aggiungi ai preferiti</string>
     <string name="add_to_queue">Aggiungi alla coda</string>
-    <string name="add_to_quickplay">Aggiungi al Quickplay</string>
     <string name="remove_from_favorites">Rimuovi dai Preferiti</string>
-    <string name="remove_from_playlist">Rimuovi dalla playlist</string>
     <string name="remove_from_recent">Rimuovi da recenti</string>
     <string name="remove_from_queue">Rimuovi dalla coda</string>
-    <string name="remove_from_quickplay">Rimuovi dal Quickplay</string>
     <string name="sort_order_entry_az">A-Z</string>
     <string name="sort_order_entry_za">Z-A</string>
     <string name="sort_order_entry_artist">Artisti</string>
@@ -59,13 +55,13 @@
     <string name="sort_order_entry_number_of_albums">Numero album</string>
     <string name="playlist_favorites">Preferiti</string>
     <string name="playlist_last_added">Aggiunti recentemente</string>
-    <string name="sort_order_title">Ordina per</string>
     <string name="new_playlist">Nuova playlist</string>
     <string name="save">Salva</string>
     <string name="cancel">Annulla</string>
     <string name="overwrite">Sovrascrivi</string>
     <string name="new_playlist_name_template">Playlist <xliff:g id="number">%d</xliff:g></string>
     <string name="create_playlist_prompt">"Nome playlist"</string>
+    <string name="delete_dialog_title">Eliminare <xliff:g id="item" example="album">%s</xliff:g>?</string>
     <string name="cannot_be_undone">Questa azione non può essere annullata</string>
     <string name="delete_warning">Eliminare definitivamente le immagini memorizzate nella cache?</string>
     <string name="new_photo">Scegli foto dalla Galleria</string>
@@ -76,12 +72,11 @@
     <string name="context_menu_play_next">Riproduci successivo</string>
     <string name="context_menu_more_by_artist">Altri dell\'artista</string>
     <string name="context_menu_rename_playlist">Rinomina</string>
-    <string name="context_menu_delete">Cancella</string>
+    <string name="context_menu_delete">Elimina</string>
     <string name="context_menu_fetch_album_art">Recupera copertina album</string>
     <string name="context_menu_fetch_artist_image">Recupera immagine artista</string>
     <string name="context_menu_open_in_play_store">Apri in Play Store</string>
     <string name="context_menu_remove_from_recent">Rimuovi dai recenti</string>
-    <string name="context_menu_remove_from_queue">Rimuovi dalla coda</string>
     <string name="context_menu_use_as_ringtone">Usa come suoneria</string>
     <string name="accessibility_play">Riproduci</string>
     <string name="accessibility_pause">Pausa</string>
@@ -92,17 +87,11 @@
     <string name="accessibility_repeat">Ripeti</string>
     <string name="accessibility_repeat_all">Ripeti tutto</string>
     <string name="accessibility_repeat_one">Ripeti singolo</string>
-    <string name="accessibility_add_to_favorites">Aggiungi ai Preferiti</string>
-    <string name="accessibility_remove_from_favorites">Rimuovi dai Preferiti</string>
-    <string name="removed_from_favorites">rimosso dai Preferiti</string>
-    <string name="removed_from_recent">rimosso da recenti</string>
-    <string name="removed_from_playlist">rimosso dalla playlist</string>
-    <string name="added_to_favorites">aggiunto ai preferiti</string>
-    <string name="pinned_to_home_screen">aggiunto alla schermata Home</string>
-    <string name="could_not_be_pinned_to_home_screen">impossibile aggiungere alla schermata Home</string>
+    <string name="pinned_to_home_screen"><xliff:g id="name">%s</xliff:g> aggiunto alla schermata home</string>
+    <string name="could_not_be_pinned_to_home_screen">impossibile aggiungere alla schermata home <xliff:g id="name">%s</xliff:g></string>
     <string name="set_as_ringtone">\"<xliff:g id="name" example="Alarm Bell">%s</xliff:g>\" impostata come suoneria</string>
     <string name="playlist_renamed">playlist rinominata</string>
-    <string name="theme_set">impostato come tema</string>
+    <string name="theme_set"><xliff:g id="name">%s</xliff:g> impostato come tema</string>
     <string name="settings_ui_category">Interfaccia</string>
     <string name="settings_storage_category">Memoria</string>
     <string name="settings_data_category">Dati</string>
@@ -126,10 +115,8 @@
     <string name="settings_open_source_licenses">Licenze open source</string>
     <string name="settings_use_lockscreen_controls">Controlli schermata sblocco</string>
     <string name="settings_version_title">Versione numero</string>
-    <string name="now_listening_to">#Ascoltando</string>
-    <string name="by">di</string>
+    <string name="now_listening_to">#Ascoltando <xliff:g id="title">%1$s</xliff:g> di <xliff:g id="artist">%2$s</xliff:g> #Apollo</string>
     <string name="share_track_using">Condividi canzone:</string>
-    <string name="hash_apollo">#Apollo</string>
     <string name="color_picker_title">Schema colori</string>
     <string name="hex">#</string>
     <string name="current_color">Corrente</string>
@@ -139,12 +126,10 @@
     <string name="app_widget_large_alt">Apollo: 4x2 (Alternativo)</string>
     <string name="app_widget_recent">Apollo: Ascoltato recentemente</string>
     <string name="app_widget_text_separator">-</string>
-    <string name="apollo_themes_shop_key">Temi Apollo</string>
     <string name="no_effects_for_you">L\'equalizzatore non può essere aperto.</string>
     <string name="empty_music">Per copiare musica dal tuo computer al dispositivo, utilizzare un cavo USB.</string>
     <string name="empty_last_added">Le canzoni che hai aggiunto nel corso dell\'ultimo mese saranno indicate qui.</string>
     <string name="empty_search">La ricerca non ha prodotto risultati</string>
     <string name="empty_favorite">Le canzoni contrassegnate come preferite verranno mostrate qui.</string>
     <string name="empty_recent">Gli album che hai ascoltato verranno mostrati qui. Provate a sentire un po\' di musica.</string>
-
 </resources>
