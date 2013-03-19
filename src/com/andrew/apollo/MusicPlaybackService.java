@@ -755,7 +755,7 @@ public class MusicPlaybackService extends Service {
 
     /**
      * Called when we receive a ACTION_MEDIA_EJECT notification.
-     * 
+     *
      * @param storagePath The path to mount point for the removed media
      */
     public void closeExternalStorageFiles(final String storagePath) {
@@ -824,7 +824,7 @@ public class MusicPlaybackService extends Service {
 
     /**
      * Stops playback
-     * 
+     *
      * @param remove_status_icon True to go to the idle state, false otherwise
      */
     private void stop(final boolean remove_status_icon) {
@@ -850,7 +850,7 @@ public class MusicPlaybackService extends Service {
      * Removes the range of tracks specified from the play list. If a file
      * within the range is the file currently being played, playback will move
      * to the next file after the range.
-     * 
+     *
      * @param first The first file to be removed
      * @param last The last file to be removed
      * @return the number of tracks deleted
@@ -905,7 +905,7 @@ public class MusicPlaybackService extends Service {
 
     /**
      * Adds a list to the playlist
-     * 
+     *
      * @param list The list to add
      * @param position The position to place the tracks
      */
@@ -960,7 +960,7 @@ public class MusicPlaybackService extends Service {
     /**
      * Called to open a new file as the current track and prepare the next for
      * playback
-     * 
+     *
      * @param openNext True to prepare the next track for playback, false
      *            otherwise.
      */
@@ -1192,7 +1192,7 @@ public class MusicPlaybackService extends Service {
 
     /**
      * Makes sure the playlist has enough space to hold all of the songs
-     * 
+     *
      * @param size The size of the playlist
      */
     private void ensurePlayListCapacity(final int size) {
@@ -1260,7 +1260,7 @@ public class MusicPlaybackService extends Service {
 
     /**
      * Updates the lockscreen controls, if enabled.
-     * 
+     *
      * @param what The broadcast
      */
     private void updateRemoteControlClient(final String what) {
@@ -1288,7 +1288,7 @@ public class MusicPlaybackService extends Service {
 
     /**
      * Saves the queue
-     * 
+     *
      * @param full True if the queue is full
      */
     private void saveQueue(final boolean full) {
@@ -1466,7 +1466,7 @@ public class MusicPlaybackService extends Service {
 
     /**
      * Opens a file and prepares it for playback
-     * 
+     *
      * @param path The path of the file to open
      */
     public boolean openFile(final String path) {
@@ -1522,7 +1522,7 @@ public class MusicPlaybackService extends Service {
 
     /**
      * Returns the audio session ID
-     * 
+     *
      * @return The current media player audio session ID
      */
     public int getAudioSessionId() {
@@ -1533,7 +1533,7 @@ public class MusicPlaybackService extends Service {
 
     /**
      * Sets the audio session ID.
-     * 
+     *
      * @param sessionId: the audio session ID.
      */
     public void setAudioSessionId(final int sessionId) {
@@ -1544,7 +1544,7 @@ public class MusicPlaybackService extends Service {
 
     /**
      * Indicates if the media storeage device has been mounted or not
-     * 
+     *
      * @return 1 if Intent.ACTION_MEDIA_MOUNTED is called, 0 otherwise
      */
     public int getMediaMountedCount() {
@@ -1553,7 +1553,7 @@ public class MusicPlaybackService extends Service {
 
     /**
      * Returns the shuffle mode
-     * 
+     *
      * @return The current shuffle mode (all, party, none)
      */
     public int getShuffleMode() {
@@ -1562,7 +1562,7 @@ public class MusicPlaybackService extends Service {
 
     /**
      * Returns the repeat mode
-     * 
+     *
      * @return The current repeat mode (all, one, none)
      */
     public int getRepeatMode() {
@@ -1571,7 +1571,7 @@ public class MusicPlaybackService extends Service {
 
     /**
      * Removes all instances of the track with the given ID from the playlist.
-     * 
+     *
      * @param id The id to be removed
      * @return how many instances of the track were removed
      */
@@ -1595,7 +1595,7 @@ public class MusicPlaybackService extends Service {
      * Removes the range of tracks specified from the play list. If a file
      * within the range is the file currently being played, playback will move
      * to the next file after the range.
-     * 
+     *
      * @param first The first file to be removed
      * @param last The last file to be removed
      * @return the number of tracks deleted
@@ -1610,7 +1610,7 @@ public class MusicPlaybackService extends Service {
 
     /**
      * Returns the position in the queue
-     * 
+     *
      * @return the current position in the queue
      */
     public int getQueuePosition() {
@@ -1621,7 +1621,7 @@ public class MusicPlaybackService extends Service {
 
     /**
      * Returns the path to current song
-     * 
+     *
      * @return The path to the current song
      */
     public String getPath() {
@@ -1635,7 +1635,7 @@ public class MusicPlaybackService extends Service {
 
     /**
      * Returns the album name
-     * 
+     *
      * @return The current song album Name
      */
     public String getAlbumName() {
@@ -1649,7 +1649,7 @@ public class MusicPlaybackService extends Service {
 
     /**
      * Returns the song name
-     * 
+     *
      * @return The current song name
      */
     public String getTrackName() {
@@ -1663,7 +1663,7 @@ public class MusicPlaybackService extends Service {
 
     /**
      * Returns the artist name
-     * 
+     *
      * @return The current song artist name
      */
     public String getArtistName() {
@@ -1677,7 +1677,7 @@ public class MusicPlaybackService extends Service {
 
     /**
      * Returns the album ID
-     * 
+     *
      * @return The current song album ID
      */
     public long getAlbumId() {
@@ -1691,7 +1691,7 @@ public class MusicPlaybackService extends Service {
 
     /**
      * Returns the artist ID
-     * 
+     *
      * @return The current song artist ID
      */
     public long getArtistId() {
@@ -1705,7 +1705,7 @@ public class MusicPlaybackService extends Service {
 
     /**
      * Returns the current audio ID
-     * 
+     *
      * @return The current track ID
      */
     public long getAudioId() {
@@ -1719,7 +1719,7 @@ public class MusicPlaybackService extends Service {
 
     /**
      * Seeks the current track to a specific time
-     * 
+     *
      * @param position The time to seek to
      * @return The time to play the track at
      */
@@ -1737,7 +1737,7 @@ public class MusicPlaybackService extends Service {
 
     /**
      * Returns the current position in time of the currenttrack
-     * 
+     *
      * @return The current playback position in miliseconds
      */
     public long position() {
@@ -1749,7 +1749,7 @@ public class MusicPlaybackService extends Service {
 
     /**
      * Returns the full duration of the current track
-     * 
+     *
      * @return The duration of the current track in miliseconds
      */
     public long duration() {
@@ -1761,7 +1761,7 @@ public class MusicPlaybackService extends Service {
 
     /**
      * Returns the queue
-     * 
+     *
      * @return The queue as a long[]
      */
     public long[] getQueue() {
@@ -1797,7 +1797,7 @@ public class MusicPlaybackService extends Service {
 
     /**
      * Opens a list for playback
-     * 
+     *
      * @param list The list of tracks to open
      * @param position The position to start playback at
      */
@@ -1965,7 +1965,7 @@ public class MusicPlaybackService extends Service {
 
     /**
      * Moves an item in the queue from one position to another
-     * 
+     *
      * @param from The position the item is currently at
      * @param to The position the item is being moved to
      */
@@ -2006,7 +2006,7 @@ public class MusicPlaybackService extends Service {
 
     /**
      * Sets the repeat mode
-     * 
+     *
      * @param repeatmode The repeat mode to use
      */
     public void setRepeatMode(final int repeatmode) {
@@ -2020,7 +2020,7 @@ public class MusicPlaybackService extends Service {
 
     /**
      * Sets the shuffle mode
-     * 
+     *
      * @param shufflemode The shuffle mode to use
      */
     public void setShuffleMode(final int shufflemode) {
@@ -2049,7 +2049,7 @@ public class MusicPlaybackService extends Service {
 
     /**
      * Sets the position of a track in the queue
-     * 
+     *
      * @param index The position to place the track
      */
     public void setQueuePosition(final int index) {
@@ -2067,7 +2067,7 @@ public class MusicPlaybackService extends Service {
 
     /**
      * Queues a new list for playback
-     * 
+     *
      * @param list The list to queue
      * @param action The action to take
      */
@@ -2185,7 +2185,7 @@ public class MusicPlaybackService extends Service {
 
         /**
          * Constructor of <code>DelayedHandler</code>
-         * 
+         *
          * @param service The service to use.
          */
         public DelayedHandler(final MusicPlaybackService service) {
@@ -2218,7 +2218,7 @@ public class MusicPlaybackService extends Service {
 
         /**
          * Constructor of <code>MusicPlayerHandler</code>
-         * 
+         *
          * @param service The service to use.
          * @param looper The thread to run on.
          */
@@ -2434,7 +2434,7 @@ public class MusicPlaybackService extends Service {
 
         /**
          * Set the MediaPlayer to start when this MediaPlayer finishes playback.
-         * 
+         *
          * @param path The path of the file, or the http/rtsp URL of the stream
          *            you want to play
          */
@@ -2462,7 +2462,7 @@ public class MusicPlaybackService extends Service {
 
         /**
          * Sets the handler
-         * 
+         *
          * @param handler The handler to use
          */
         public void setHandler(final Handler handler) {
@@ -2508,7 +2508,7 @@ public class MusicPlaybackService extends Service {
 
         /**
          * Gets the duration of the file.
-         * 
+         *
          * @return The duration in milliseconds
          */
         public long duration() {
@@ -2517,7 +2517,7 @@ public class MusicPlaybackService extends Service {
 
         /**
          * Gets the current playback position.
-         * 
+         *
          * @return The current position in milliseconds
          */
         public long position() {
@@ -2526,7 +2526,7 @@ public class MusicPlaybackService extends Service {
 
         /**
          * Gets the current playback position.
-         * 
+         *
          * @param whereto The offset in milliseconds from the start to seek to
          * @return The offset in milliseconds from the start to seek to
          */
@@ -2537,7 +2537,7 @@ public class MusicPlaybackService extends Service {
 
         /**
          * Sets the volume on this player.
-         * 
+         *
          * @param vol Left and right volume scalar
          */
         public void setVolume(final float vol) {
@@ -2546,7 +2546,7 @@ public class MusicPlaybackService extends Service {
 
         /**
          * Sets the audio session ID.
-         * 
+         *
          * @param sessionId The audio session ID
          */
         public void setAudioSessionId(final int sessionId) {
@@ -2555,7 +2555,7 @@ public class MusicPlaybackService extends Service {
 
         /**
          * Returns the audio session ID.
-         * 
+         *
          * @return The current audio session ID.
          */
         public int getAudioSessionId() {

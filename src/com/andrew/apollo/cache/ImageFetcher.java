@@ -55,7 +55,7 @@ public class ImageFetcher extends ImageWorker {
 
     /**
      * Creates a new instance of {@link ImageFetcher}.
-     * 
+     *
      * @param context The {@link Context} to use.
      */
     public ImageFetcher(final Context context) {
@@ -64,7 +64,7 @@ public class ImageFetcher extends ImageWorker {
 
     /**
      * Used to create a singleton of the image fetcher
-     * 
+     *
      * @param context The {@link Context} to use
      * @return A new instance of this class.
      */
@@ -227,7 +227,7 @@ public class ImageFetcher extends ImageWorker {
     /**
      * Finds cached or downloads album art. Used in {@link MusicPlaybackService}
      * to set the current album art in the notification and lock screen
-     * 
+     *
      * @param albumName The name of the current album
      * @param albumId The ID of the current album
      * @param artistName The album artist in case we should have to download
@@ -259,7 +259,7 @@ public class ImageFetcher extends ImageWorker {
     /**
      * Download a {@link Bitmap} from a URL, write it to a disk and return the
      * File pointer. This implementation uses a simple disk cache.
-     * 
+     *
      * @param context The context to use
      * @param urlString The URL to fetch
      * @return A {@link File} pointing to the fetched bitmap
@@ -310,7 +310,7 @@ public class ImageFetcher extends ImageWorker {
     /**
      * Decode and sample down a {@link Bitmap} from a file to the requested
      * width and height.
-     * 
+     *
      * @param filename The full path of the file to decode
      * @param reqWidth The requested width of the resulting bitmap
      * @param reqHeight The requested height of the resulting bitmap
@@ -344,7 +344,7 @@ public class ImageFetcher extends ImageWorker {
      * a power of 2 is returned for inSampleSize which can be faster when
      * decoding but results in a larger bitmap which isn't as useful for caching
      * purposes.
-     * 
+     *
      * @param options An options object with out* params already populated (run
      *            through a decode* method with inJustDecodeBounds==true
      * @param reqWidth The requested width of the resulting bitmap

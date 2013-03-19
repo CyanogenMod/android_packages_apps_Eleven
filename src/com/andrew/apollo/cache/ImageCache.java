@@ -105,7 +105,7 @@ public final class ImageCache {
 
     /**
      * Constructor of <code>ImageCache</code>
-     * 
+     *
      * @param context The {@link Context} to use
      */
     public ImageCache(final Context context) {
@@ -114,7 +114,7 @@ public final class ImageCache {
 
     /**
      * Used to create a singleton of {@link ImageCache}
-     * 
+     *
      * @param context The {@link Context} to use
      * @return A new instance of this class.
      */
@@ -127,7 +127,7 @@ public final class ImageCache {
 
     /**
      * Initialize the cache, providing all parameters.
-     * 
+     *
      * @param context The {@link Context} to use
      * @param cacheParams The cache parameters to initialize the cache
      */
@@ -150,7 +150,7 @@ public final class ImageCache {
      * should not be executed on the main/UI thread. By default an ImageCache
      * does not initialize the disk cache when it is created, instead you should
      * call initDiskCache() to initialize it on a background thread.
-     * 
+     *
      * @param context The {@link Context} to use
      */
     public void initDiskCache(final Context context) {
@@ -174,7 +174,7 @@ public final class ImageCache {
 
     /**
      * Sets up the Lru cache
-     * 
+     *
      * @param context The {@link Context} to use
      */
     @SuppressLint("NewApi")
@@ -222,7 +222,7 @@ public final class ImageCache {
      * Find and return an existing ImageCache stored in a {@link RetainFragment}
      * , if not found a new one is created using the supplied params and saved
      * to a {@link RetainFragment}
-     * 
+     *
      * @param activity The calling {@link FragmentActivity}
      * @return An existing retained ImageCache object or a new one if one did
      *         not exist
@@ -247,7 +247,7 @@ public final class ImageCache {
     /**
      * Locate an existing instance of this {@link Fragment} or if not found,
      * create and add it using {@link FragmentManager}
-     * 
+     *
      * @param fm The {@link FragmentManager} to use
      * @return The existing instance of the {@link Fragment} or the new instance
      *         if just created
@@ -266,7 +266,7 @@ public final class ImageCache {
 
     /**
      * Adds a new image to the memory and disk caches
-     * 
+     *
      * @param data The key used to store the image
      * @param bitmap The {@link Bitmap} to cache
      */
@@ -315,7 +315,7 @@ public final class ImageCache {
 
     /**
      * Called to add a new image to the memory cache
-     * 
+     *
      * @param data The key identifier
      * @param bitmap The {@link Bitmap} to cache
      */
@@ -331,7 +331,7 @@ public final class ImageCache {
 
     /**
      * Fetches a cached image from the memory cache
-     * 
+     *
      * @param data Unique identifier for which item to get
      * @return The {@link Bitmap} if found in cache, null otherwise
      */
@@ -350,7 +350,7 @@ public final class ImageCache {
 
     /**
      * Fetches a cached image from the disk cache
-     * 
+     *
      * @param data Unique identifier for which item to get
      * @return The {@link Bitmap} if found in cache, null otherwise
      */
@@ -397,7 +397,7 @@ public final class ImageCache {
     /**
      * Tries to return a cached image from memory cache before fetching from the
      * disk cache
-     * 
+     *
      * @param data Unique identifier for which item to get
      * @return The {@link Bitmap} if found in cache, null otherwise
      */
@@ -419,7 +419,7 @@ public final class ImageCache {
     /**
      * Tries to return the album art from memory cache and disk cache, before
      * calling {@code #getArtworkFromFile(Context, String)} again
-     * 
+     *
      * @param context The {@link Context} to use
      * @param data The name of the album art
      * @param id The ID of the album to find artwork for
@@ -442,7 +442,7 @@ public final class ImageCache {
 
     /**
      * Used to fetch the artwork for an album locally from the user's device
-     * 
+     *
      * @param context The {@link Context} to use
      * @param albumID The ID of the album to find artwork for
      * @return The artwork for an album
@@ -581,7 +581,7 @@ public final class ImageCache {
     /**
      * Used to temporarily pause the disk cache while the user is scrolling to
      * improve scrolling.
-     * 
+     *
      * @param pause True to temporarily pause the disk cache, false otherwise.
      */
     public void setPauseDiskCache(final boolean pause) {
@@ -618,7 +618,7 @@ public final class ImageCache {
 
     /**
      * Get a usable cache directory (external if available, internal otherwise)
-     * 
+     *
      * @param context The {@link Context} to use
      * @param uniqueName A unique directory name to append to the cache
      *            directory
@@ -634,7 +634,7 @@ public final class ImageCache {
 
     /**
      * Check if external storage is built-in or removable
-     * 
+     *
      * @return True if external storage is removable (like an SD card), false
      *         otherwise
      */
@@ -644,7 +644,7 @@ public final class ImageCache {
 
     /**
      * Get the external app cache directory
-     * 
+     *
      * @param context The {@link Context} to use
      * @return The external cache directory
      */
@@ -654,7 +654,7 @@ public final class ImageCache {
 
     /**
      * Check how much usable space is available at a given path.
-     * 
+     *
      * @param path The path to check
      * @return The space available in bytes
      */
@@ -665,7 +665,7 @@ public final class ImageCache {
     /**
      * A hashing method that changes a string (like a URL) into a hash suitable
      * for using as a disk filename.
-     * 
+     *
      * @param key The key used to store the file
      */
     public static final String hashKeyForDisk(final String key) {
@@ -682,7 +682,7 @@ public final class ImageCache {
 
     /**
      * http://stackoverflow.com/questions/332079
-     * 
+     *
      * @param bytes The bytes to convert.
      * @return A {@link String} converted from the bytes of a hashable key used
      *         to store a filename on the disk, to hex digits.
@@ -729,7 +729,7 @@ public final class ImageCache {
 
         /**
          * Store a single object in this {@link Fragment}
-         * 
+         *
          * @param object The object to store
          */
         public void setObject(final Object object) {
@@ -738,7 +738,7 @@ public final class ImageCache {
 
         /**
          * Get the stored object
-         * 
+         *
          * @return The stored object
          */
         public Object getObject() {
@@ -753,7 +753,7 @@ public final class ImageCache {
 
         /**
          * Constructor of <code>MemoryCache</code>
-         * 
+         *
          * @param maxSize The allowed size of the {@link LruCache}
          */
         public MemoryCache(final int maxSize) {
