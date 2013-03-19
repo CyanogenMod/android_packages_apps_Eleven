@@ -1272,16 +1272,21 @@ public class MusicPlaybackService extends Service {
                         ? RemoteControlClient.PLAYSTATE_PLAYING
                         : RemoteControlClient.PLAYSTATE_PAUSED);
             } else if (what.equals(META_CHANGED)) {
-                // Update the ockscreen controls
+                // Update the lockscreen controls
+                Bitmap albumArt = getAlbumArt();
+                if (albumArt != null) {
+                    // RemoteControlClient wants to recycle the bitmaps thrown at it, so we need
+                    // to make sure not to hand out our cache copy
+                    albumArt = albumArt.copy(albumArt.getConfig(), false);
+                }
                 mRemoteControlClient
                         .editMetadata(true)
                         .putString(MediaMetadataRetriever.METADATA_KEY_ARTIST, getArtistName())
                         .putString(MediaMetadataRetriever.METADATA_KEY_ALBUM, getAlbumName())
                         .putString(MediaMetadataRetriever.METADATA_KEY_TITLE, getTrackName())
                         .putLong(MediaMetadataRetriever.METADATA_KEY_DURATION, duration())
-                        .putBitmap(
-                                RemoteControlClient.MetadataEditor.BITMAP_KEY_ARTWORK,
-                                getAlbumArt()).apply();
+                        .putBitmap(RemoteControlClient.MetadataEditor.BITMAP_KEY_ARTWORK, albumArt)
+                        .apply();
             }
         }
     }

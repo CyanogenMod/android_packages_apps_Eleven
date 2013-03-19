@@ -28,7 +28,7 @@ import com.andrew.apollo.utils.ApolloUtils;
 /**
  * Builds the notification for Apollo's service. Jelly Bean and higher uses the
  * expanded notification by default.
- * 
+ *
  * @author Andrew Neal (andrewdneal@gmail.com)
  */
 @SuppressLint("NewApi")
@@ -66,7 +66,7 @@ public class NotificationHelper {
 
     /**
      * Constructor of <code>NotificationHelper</code>
-     * 
+     *
      * @param service The {@link Context} to use
      */
     public NotificationHelper(final MusicPlaybackService service) {
@@ -113,7 +113,7 @@ public class NotificationHelper {
 
     /**
      * Changes the playback controls in and out of a paused state
-     * 
+     *
      * @param isPlaying True if music is playing, false otherwise
      */
     public void updatePlayState(final boolean isPlaying) {
@@ -129,14 +129,7 @@ public class NotificationHelper {
             mExpandedView.setImageViewResource(R.id.notification_expanded_base_play,
                     isPlaying ? R.drawable.btn_playback_play : R.drawable.btn_playback_pause);
         }
-        try {
-            mNotificationManager.notify(APOLLO_MUSIC_SERVICE, mNotification);
-        } catch (final IllegalStateException e) {
-            Log.e("NotificationHelper", "updatePlayState - " + e);
-            // FIXME Every so often an ISE is throw reading
-            // "can't parcel recycled Bitmap". Figure out and understand why
-            // this is happening, then prevent it.
-        }
+        mNotificationManager.notify(APOLLO_MUSIC_SERVICE, mNotification);
     }
 
     /**
