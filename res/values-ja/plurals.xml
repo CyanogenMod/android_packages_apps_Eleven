@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright (C) 2012 Andrew Neal
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+
+          http://www.apache.org/licenses/LICENSE-2.0
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+ -->
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+
+    <plurals name="Nartists">
+        <item quantity="one">1 個のアーティスト</item>
+        <item quantity="other"><xliff:g id="count">%d</xliff:g> 個のアーティスト</item>
+    </plurals>
+
+    <plurals name="Nalbums">
+        <item quantity="one">1 個のアルバム</item>
+        <item quantity="other"><xliff:g id="count">%d</xliff:g> 個のアルバム</item>
+    </plurals>
+
+    <plurals name="Nsongs">
+        <item quantity="one">1 個の曲</item>
+        <item quantity="other"><xliff:g id="count">%d</xliff:g> 個の曲</item>
+    </plurals>
+
+    <plurals name="Ngenres">
+        <item quantity="one">1 個のジャンル</item>
+        <item quantity="other"><xliff:g id="count">%d</xliff:g> 個のジャンル</item>
+    </plurals>
+
+    <plurals name="NNNtrackstoplaylist">
+        <item quantity="one">1 個の曲をプレイリストに追加しました。</item>
+        <item quantity="other"><xliff:g id="number" example="27">%d</xliff:g> 個の曲をプレイリストに追加しました。</item>
+    </plurals>
+
+    <plurals name="NNNtrackstoqueue">
+        <item quantity="one">1 個の曲をキューに追加しました。</item>
+        <item quantity="other"><xliff:g id="number" example="27">%d</xliff:g> 個の曲をキューに追加しました。</item>
+    </plurals>
+
+    <plurals name="NNNtrackstofavorites">
+        <item quantity="one">1 個の曲をお気に入りに追加しました。</item>
+        <item quantity="other"><xliff:g id="number" example="27">%d</xliff:g> 個の曲をお気に入りに追加しました。</item>
+    </plurals>
+
+    <plurals name="NNNtracksdeleted">
+        <item quantity="one">1 個の曲を削除しました。</item>
+        <item quantity="other"><xliff:g id="songs_to_delete">%d</xliff:g> 個の曲を削除しました。</item>
+    </plurals>
+
+</resources>
