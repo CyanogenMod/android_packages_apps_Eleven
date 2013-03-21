@@ -250,7 +250,7 @@ public class ImageFetcher extends ImageWorker {
         // artwork = processBitmap(processImageUrl(artistName, albumName,
         // ImageType.ALBUM));
         // }
-        if (artwork != null) {
+        if (artwork != null && artwork.getConfig() != null) {
             return artwork;
         }
         return getDefaultArtwork();
