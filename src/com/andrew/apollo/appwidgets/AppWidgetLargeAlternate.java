@@ -14,7 +14,6 @@ package com.andrew.apollo.appwidgets;
 import android.annotation.SuppressLint;
 import android.app.PendingIntent;
 import android.appwidget.AppWidgetManager;
-import android.appwidget.AppWidgetProvider;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
@@ -29,11 +28,11 @@ import com.andrew.apollo.utils.ApolloUtils;
 
 /**
  * 4x2 App-Widget
- * 
+ *
  * @author Andrew Neal (andrewdneal@gmail.com)
  */
 @SuppressLint("NewApi")
-public class AppWidgetLargeAlternate extends AppWidgetProvider {
+public class AppWidgetLargeAlternate extends AppWidgetBase {
 
     public static final String CMDAPPWIDGETUPDATE = "app_widget_large_alternate_update";
 
@@ -184,7 +183,7 @@ public class AppWidgetLargeAlternate extends AppWidgetProvider {
 
     /**
      * Link up various button actions using {@link PendingIntents}.
-     * 
+     *
      * @param playerActive True if player is active in background, which means
      *            widget click will launch {@link AudioPlayerActivity},
      *            otherwise we launch {@link MusicBrowserActivity}.
@@ -212,33 +211,23 @@ public class AppWidgetLargeAlternate extends AppWidgetProvider {
             views.setOnClickPendingIntent(R.id.app_widget_large_alternate_image, pendingIntent);
         }
         // Shuffle modes
-        action = new Intent(MusicPlaybackService.SHUFFLE_ACTION);
-        action.setComponent(serviceName);
-        pendingIntent = PendingIntent.getService(context, 0, action, 0);
+        pendingIntent = buildPendingIntent(context, MusicPlaybackService.SHUFFLE_ACTION, serviceName);
         views.setOnClickPendingIntent(R.id.app_widget_large_alternate_shuffle, pendingIntent);
 
         // Previous track
-        action = new Intent(MusicPlaybackService.PREVIOUS_ACTION);
-        action.setComponent(serviceName);
-        pendingIntent = PendingIntent.getService(context, 0, action, 0);
+        pendingIntent = buildPendingIntent(context, MusicPlaybackService.PREVIOUS_ACTION, serviceName);
         views.setOnClickPendingIntent(R.id.app_widget_large_alternate_previous, pendingIntent);
 
         // Play and pause
-        action = new Intent(MusicPlaybackService.TOGGLEPAUSE_ACTION);
-        action.setComponent(serviceName);
-        pendingIntent = PendingIntent.getService(context, 0, action, 0);
+        pendingIntent = buildPendingIntent(context, MusicPlaybackService.TOGGLEPAUSE_ACTION, serviceName);
         views.setOnClickPendingIntent(R.id.app_widget_large_alternate_play, pendingIntent);
 
         // Next track
-        action = new Intent(MusicPlaybackService.NEXT_ACTION);
-        action.setComponent(serviceName);
-        pendingIntent = PendingIntent.getService(context, 0, action, 0);
+        pendingIntent = buildPendingIntent(context, MusicPlaybackService.NEXT_ACTION, serviceName);
         views.setOnClickPendingIntent(R.id.app_widget_large_alternate_next, pendingIntent);
 
         // Repeat modes
-        action = new Intent(MusicPlaybackService.REPEAT_ACTION);
-        action.setComponent(serviceName);
-        pendingIntent = PendingIntent.getService(context, 0, action, 0);
+        pendingIntent = buildPendingIntent(context, MusicPlaybackService.REPEAT_ACTION, serviceName);
         views.setOnClickPendingIntent(R.id.app_widget_large_alternate_repeat, pendingIntent);
     }
 

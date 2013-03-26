@@ -14,7 +14,6 @@ package com.andrew.apollo.appwidgets;
 import android.annotation.SuppressLint;
 import android.app.PendingIntent;
 import android.appwidget.AppWidgetManager;
-import android.appwidget.AppWidgetProvider;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
@@ -29,11 +28,11 @@ import com.andrew.apollo.utils.ApolloUtils;
 
 /**
  * 4x1 App-Widget
- * 
+ *
  * @author Andrew Neal (andrewdneal@gmail.com)
  */
 @SuppressLint("NewApi")
-public class AppWidgetSmall extends AppWidgetProvider {
+public class AppWidgetSmall extends AppWidgetBase {
 
     public static final String CMDAPPWIDGETUPDATE = "app_widget_small_update";
 
@@ -147,7 +146,7 @@ public class AppWidgetSmall extends AppWidgetProvider {
 
     /**
      * Link up various button actions using {@link PendingIntents}.
-     * 
+     *
      * @param playerActive True if player is active in background, which means
      *            widget click will launch {@link AudioPlayerActivity},
      *            otherwise we launch {@link MusicBrowserActivity}.
@@ -174,21 +173,15 @@ public class AppWidgetSmall extends AppWidgetProvider {
         }
 
         // Previous track
-        action = new Intent(MusicPlaybackService.PREVIOUS_ACTION);
-        action.setComponent(serviceName);
-        pendingIntent = PendingIntent.getService(context, 0, action, 0);
+        pendingIntent = buildPendingIntent(context, MusicPlaybackService.PREVIOUS_ACTION, serviceName);
         views.setOnClickPendingIntent(R.id.app_widget_small_previous, pendingIntent);
 
         // Play and pause
-        action = new Intent(MusicPlaybackService.TOGGLEPAUSE_ACTION);
-        action.setComponent(serviceName);
-        pendingIntent = PendingIntent.getService(context, 0, action, 0);
+        pendingIntent = buildPendingIntent(context, MusicPlaybackService.TOGGLEPAUSE_ACTION, serviceName);
         views.setOnClickPendingIntent(R.id.app_widget_small_play, pendingIntent);
 
         // Next track
-        action = new Intent(MusicPlaybackService.NEXT_ACTION);
-        action.setComponent(serviceName);
-        pendingIntent = PendingIntent.getService(context, 0, action, 0);
+        pendingIntent = buildPendingIntent(context, MusicPlaybackService.NEXT_ACTION, serviceName);
         views.setOnClickPendingIntent(R.id.app_widget_small_next, pendingIntent);
     }
 
