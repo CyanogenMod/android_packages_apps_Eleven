@@ -339,4 +339,23 @@ public final class ApolloUtils {
                 context.getString(R.string.cancel), (OnClickListener) null);
         colorPickerView.show();
     }
+
+    /**
+     * Method that removes the support for HardwareAcceleration from a {@link View}.<br/>
+     * <br/>
+     * Check AOSP notice:<br/>
+     * <pre>
+     * 'ComposeShader can only contain shaders of different types (a BitmapShader and a
+     * LinearGradient for instance, but not two instances of BitmapShader)'. But, 'If your
+     * application is affected by any of these missing features or limitations, you can turn
+     * off hardware acceleration for just the affected portion of your application by calling
+     * setLayerType(View.LAYER_TYPE_SOFTWARE, null).'</pre>
+     *
+     * @param v The view
+     */
+    public static void removeHardwareAccelerationSupport(View v) {
+        if (v.getLayerType() != View.LAYER_TYPE_SOFTWARE) {
+            v.setLayerType(View.LAYER_TYPE_SOFTWARE, null);
+        }
+   }
 }
