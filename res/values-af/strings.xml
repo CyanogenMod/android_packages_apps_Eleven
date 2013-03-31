@@ -112,7 +112,6 @@
     <string name="app_widget_large_alt">Apollo: 4x2 (Alternatiewe)</string>
     <string name="app_widget_recent">Apollo: Onlangs geluister</string>
     <string name="app_widget_text_separator">-</string>
-    <string name="apollo_themes_shop_key" translatable="false">Apollo Temas</string>
     <string name="no_effects_for_you">Die equalizer kon nie oopgemaak word nie.</string>
     <string name="empty_music">Om musiek van jou rekenaar na jou toestel te kopieer, gebruik \'n USB-kabel.</string>
     <string name="empty_last_added">Liedjies wat jy die afgelope maand bygevoeg het word hier vertoon.</string>
