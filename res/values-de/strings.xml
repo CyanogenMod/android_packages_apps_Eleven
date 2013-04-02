@@ -23,7 +23,7 @@
     <string name="page_albums">Alben</string>
     <string name="page_songs">Titel</string>
     <string name="page_playlists">Wiedergabelisten</string>
-    <string name="page_genres">Stilrichtungen</string>
+    <string name="page_genres">Genres</string>
 
     <!-- Option menu items -->
     <string name="menu_settings">Einstellungen</string>
@@ -32,7 +32,7 @@
     <string name="menu_play_all">Alle wiedergeben</string>
     <string name="menu_sort_by">Sortieren</string>
     <string name="menu_shop">Designs beziehen</string>
-    <string name="menu_clear_recents">\'Kürzlich gehört\' leeren</string>
+    <string name="menu_clear_recents">\"Kürzlich gehört\" leeren</string>
     <string name="menu_clear_queue">Warteschlange leeren</string>
     <string name="menu_save_queue">Warteschlange speichern</string>
     <string name="menu_share">Teilen</string>
@@ -48,7 +48,7 @@
     <string name="add_to_favorites">Zu Favoriten hinzufügen</string>
     <string name="add_to_queue">Zur Warteschlange hinzufügen</string>
     <string name="remove_from_favorites">Aus Favoriten entfernen</string>
-    <string name="remove_from_recent">Aus \'Kürzlich gehört\' entfernen</string>
+    <string name="remove_from_recent">Aus \"Kürzlich gehört\" entfernen</string>
     <string name="remove_from_queue">Aus Warteschlange entfernen</string>
 
     <!-- Sort orders -->
@@ -73,7 +73,7 @@
     <string name="cancel">Abbrechen</string>
     <string name="overwrite">Überschreiben</string>
     <string name="new_playlist_name_template">Wiedergabeliste <xliff:g id="number">%d</xliff:g></string>
-    <string name="create_playlist_prompt" msgid="942607395076646686">Name der Wiedergabeliste</string>
+    <string name="create_playlist_prompt">Name der Wiedergabeliste</string>
     <string name="delete_dialog_title"><xliff:g id="item">%s</xliff:g> löschen?</string>
     <string name="cannot_be_undone">Dies kann nicht rückgängig gemacht werden.</string>
     <string name="delete_warning">Alle zwischengespeicherten Bilder werden dauerhaft gelöscht.</string>
@@ -88,7 +88,7 @@
     <string name="context_menu_more_by_artist">Weitere Titel des Interpreten</string>
     <string name="context_menu_rename_playlist">Umbenennen</string>
     <string name="context_menu_delete">Löschen</string>
-    <string name="context_menu_fetch_album_art">Album-Cover herunterladen</string>
+    <string name="context_menu_fetch_album_art">Albumcover herunterladen</string>
     <string name="context_menu_fetch_artist_image">Interpretenbild herunterladen</string>
     <string name="context_menu_open_in_play_store">Im Play Store öffnen</string>
     <string name="context_menu_remove_from_recent">Aus \'Kürzlich gehört\' entfernen</string>
@@ -124,15 +124,15 @@
     <string name="settings_self_title">Andrew Neal</string>
     <string name="settings_lopez_title">A.J. Lopez</string>
     <string name="settings_lopez_summary">Design des Symbols und Play Store-Banners</string>
-    <string name="settings_color_scheme_title">Standard-Farbschema</string>
+    <string name="settings_color_scheme_title">Farbschema</string>
     <string name="settings_color_scheme_summary">Farbakzent auswählen</string>
-    <string name="settings_theme_chooser_title">Design-Auswahl</string>
-    <string name="settings_delete_cache_title">Zwischenspeicher löschen</string>
+    <string name="settings_theme_chooser_title">Designs</string>
+    <string name="settings_delete_cache_title">Cache löschen</string>
     <string name="settings_delete_cache_summary">Alle zwischengespeicherten Bilder löschen</string>
     <string name="settings_download_only_on_wifi_title">Nur über WLAN herunterladen</string>
-    <string name="settings_download_only_on_wifi_summary">Bilder nicht über mobile Netzwerke herunterladen</string>
-    <string name="settings_download_missing_artwork_title">Fehlende Alben-Cover laden</string>
-    <string name="settings_download_artist_images_title">Fehlende Interpreten-Bilder laden</string>
+    <string name="settings_download_only_on_wifi_summary">Bilder nicht über Mobilfunknetzwerke herunterladen</string>
+    <string name="settings_download_missing_artwork_title">Fehlende Albencover laden</string>
+    <string name="settings_download_artist_images_title">Fehlende Interpretenbilder laden</string>
     <string name="settings_open_source_licenses">Open-Source-Lizenzen</string>
     <string name="settings_use_lockscreen_controls">Steuerung im Sperrbildschirm</string>
     <string name="settings_version_title">Version</string>
