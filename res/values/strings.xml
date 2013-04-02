@@ -36,7 +36,7 @@
     <string name="menu_clear_queue">Clear queue</string>
     <string name="menu_save_queue">Save queue</string>
     <string name="menu_share">Share</string>
-    <string name="menu_add_to_homescreen">Place on Home screen</string>
+    <string name="menu_add_to_homescreen">Pin to home screen</string>
     <string name="menu_equalizer">Equalizer</string>
     <string name="menu_simple">Simple</string>
     <string name="menu_detailed">Detailed</string>
@@ -45,9 +45,9 @@
 
     <!-- Playlist items -->
     <string name="add_to_playlist">Add to playlist</string>
-    <string name="add_to_favorites">Add to Favorites</string>
+    <string name="add_to_favorites">Add to favorites</string>
     <string name="add_to_queue">Add to queue</string>
-    <string name="remove_from_favorites">Remove from Favorites</string>
+    <string name="remove_from_favorites">Remove from favorites</string>
     <string name="remove_from_recent">Remove from recent</string>
     <string name="remove_from_queue">Remove from queue</string>
 
@@ -73,7 +73,7 @@
     <string name="cancel">Cancel</string>
     <string name="overwrite">Overwrite</string>
     <string name="new_playlist_name_template">Playlist <xliff:g id="number">%d</xliff:g></string>
-    <string name="create_playlist_prompt" msgid="942607395076646686">"Playlist name"</string>
+    <string name="create_playlist_prompt">Playlist name</string>
     <string name="delete_dialog_title">Delete <xliff:g id="item" example="album">%s</xliff:g>?</string>
     <string name="cannot_be_undone">This cannot be undone</string>
     <string name="delete_warning">This will permanently delete the cached image entries</string>
@@ -108,7 +108,7 @@
     <!-- Toast messages -->
     <string name="pinned_to_home_screen"><xliff:g id="name">%s</xliff:g> pinned to your home screen</string>
     <string name="could_not_be_pinned_to_home_screen"><xliff:g id="name">%s</xliff:g> could not be pinned to your home screen</string>
-    <string name="set_as_ringtone">\"<xliff:g id="name" example="Alarm Bell">%s</xliff:g>\" set as ringtone</string>
+    <string name="set_as_ringtone">\'<xliff:g id="name" example="Alarm Bell">%s</xliff:g>\' set as ringtone</string>
     <string name="playlist_renamed">Playlist renamed</string>
     <string name="theme_set"><xliff:g id="name">%s</xliff:g> set as the theme</string>
 
@@ -150,8 +150,8 @@
     <!-- App widget -->
     <string name="app_widget_small">Apollo: 4x1</string>
     <string name="app_widget_large">Apollo: 4x2</string>
-    <string name="app_widget_large_alt">Apollo: 4x2 (Alternate)</string>
-    <string name="app_widget_recent">Apollo: Recently listened</string>
+    <string name="app_widget_large_alt">Apollo: 4x2 (alternate)</string>
+    <string name="app_widget_recent">Apollo: recently listened</string>
     <string name="app_widget_text_separator">-</string>
 
     <!-- What keywords to use when shopping for Apollo themes -->
@@ -160,9 +160,9 @@
     <!-- Empty list / error messages -->
     <string name="no_effects_for_you">The equalizer could not be opened.</string>
     <string name="empty_music">To copy music from your computer to your device, use a USB cable.</string>
-    <string name="empty_last_added">Songs you\'ve added over the last month will be shown here.</string>
+    <string name="empty_last_added">Songs you have added over the last month will be shown here.</string>
     <string name="empty_search">No search results found</string>
     <string name="empty_favorite">Songs you mark as favorites will be shown here.</string>
-    <string name="empty_recent">Albums you\'ve listened to will show up here. Try playing some music.</string>
+    <string name="empty_recent">Albums you have listened to will show up here. Try playing some music.</string>
 
 </resources>
