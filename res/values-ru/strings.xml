@@ -41,7 +41,7 @@
     <string name="menu_simple">Простой</string>
     <string name="menu_detailed">Подробный</string>
     <string name="menu_grid">Сетка</string>
-    <string name="menu_view_as">Просмотр</string>
+    <string name="menu_view_as">Вид</string>
 
     <!-- Sort orders -->
     <string name="sort_order_entry_az">A-Z</string>
@@ -73,7 +73,7 @@
     <string name="cancel">Отменить</string>
     <string name="overwrite">Перезаписать</string>
     <string name="new_playlist_name_template">Плейлист <xliff:g id="number">%d</xliff:g></string>
-    <string name="create_playlist_prompt" msgid="942607395076646686">"Имя плейлиста"</string>
+    <string name="create_playlist_prompt">Имя плейлиста</string>
     <string name="delete_dialog_title">Удалить <xliff:g id="item" example="album">%s</xliff:g>?</string>
     <string name="cannot_be_undone">Это действие не может быть отменено</string>
     <string name="delete_warning">Загруженные изображения будут удалены</string>
