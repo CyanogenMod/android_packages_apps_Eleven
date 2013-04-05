@@ -40,7 +40,7 @@
     <string name="add_to_playlist">Aggiungi alla playlist</string>
     <string name="add_to_favorites">Aggiungi ai preferiti</string>
     <string name="add_to_queue">Aggiungi alla coda</string>
-    <string name="remove_from_favorites">Rimuovi dai Preferiti</string>
+    <string name="remove_from_favorites">Rimuovi dai preferiti</string>
     <string name="remove_from_recent">Rimuovi da recenti</string>
     <string name="remove_from_queue">Rimuovi dalla coda</string>
     <string name="sort_order_entry_az">A-Z</string>
@@ -89,7 +89,7 @@
     <string name="accessibility_repeat_one">Ripeti singolo</string>
     <string name="pinned_to_home_screen"><xliff:g id="name">%s</xliff:g> aggiunto alla schermata home</string>
     <string name="could_not_be_pinned_to_home_screen">impossibile aggiungere alla schermata home <xliff:g id="name">%s</xliff:g></string>
-    <string name="set_as_ringtone">\"<xliff:g id="name" example="Alarm Bell">%s</xliff:g>\" impostata come suoneria</string>
+    <string name="set_as_ringtone">\'<xliff:g id="name" example="Alarm Bell">%s</xliff:g>\' impostata come suoneria</string>
     <string name="playlist_renamed">playlist rinominata</string>
     <string name="theme_set"><xliff:g id="name">%s</xliff:g> impostato come tema</string>
     <string name="settings_ui_category">Interfaccia</string>
@@ -123,8 +123,8 @@
     <string name="new_color">Nuovo</string>
     <string name="app_widget_small">Apollo: 4x1</string>
     <string name="app_widget_large">Apollo: 4x2</string>
-    <string name="app_widget_large_alt">Apollo: 4x2 (Alternativo)</string>
-    <string name="app_widget_recent">Apollo: Ascoltato recentemente</string>
+    <string name="app_widget_large_alt">Apollo: 4x2 (alternativo)</string>
+    <string name="app_widget_recent">Apollo: ascoltato recentemente</string>
     <string name="app_widget_text_separator">-</string>
     <string name="no_effects_for_you">L\'equalizzatore non può essere aperto.</string>
     <string name="empty_music">Per copiare musica dal tuo computer al dispositivo, utilizzare un cavo USB.</string>
