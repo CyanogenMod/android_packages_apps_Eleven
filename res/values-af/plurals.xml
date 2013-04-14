@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <plurals name="Nartists">
+        <item quantity="one">1 kunstenaar</item>
+        <item quantity="other"><xliff:g id="count">%d</xliff:g> kunstenaars</item>
+    </plurals>
+    <plurals name="Nalbums">
+        <item quantity="one">1 album</item>
+        <item quantity="other"><xliff:g id="count">%d</xliff:g> albums</item>
+    </plurals>
+    <plurals name="Nsongs">
+        <item quantity="one">1 lied</item>
+        <item quantity="other"><xliff:g id="count">%d</xliff:g> liedjies</item>
+    </plurals>
+    <plurals name="Ngenres">
+        <item quantity="one">1 genre</item>
+        <item quantity="other"><xliff:g id="count">%d</xliff:g> genres</item>
+    </plurals>
+    <plurals name="NNNtrackstoplaylist">
+        <item quantity="one">1 lied is bygevoeg by die speellys.</item>
+        <item quantity="other"><xliff:g id="number" example="27">%d</xliff:g> liedjies is bygevoeg by die speellys.</item>
+    </plurals>
+    <plurals name="NNNtrackstoqueue">
+        <item quantity="one">1 lied is bygevoeg by die lys.</item>
+        <item quantity="other"><xliff:g id="number" example="27">%d</xliff:g> liedjies is bygevoeg by die lys.</item>
+    </plurals>
+    <plurals name="NNNtrackstofavorites">
+        <item quantity="one">1 lied is bygevoeg by gunstellinge.</item>
+        <item quantity="other"><xliff:g id="number" example="27">%d</xliff:g> liedjies is bygevoeg by gunstellinge.</item>
+    </plurals>
+    <plurals name="NNNtracksdeleted">
+        <item quantity="one">1 lied was verwyder.</item>
+        <item quantity="other"><xliff:g id="songs_to_delete">%d</xliff:g> liedjies was verwyder.</item>
+    </plurals>
+</resources>
