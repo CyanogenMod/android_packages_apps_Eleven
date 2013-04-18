@@ -120,9 +120,6 @@
     <string name="settings_author_title">Skrevet av</string>
     <string name="settings_about_apollo">Om Apollo</string>
     <string name="settings_special_thanks">Spesielt takk til</string>
-    <string name="settings_cyanogenmod_title">CyanogenMod</string>
-    <string name="settings_self_title">Andrew Neal</string>
-    <string name="settings_lopez_title">A.J. Lopez</string>
     <string name="settings_lopez_summary">Ikon og Google Play banner design</string>
     <string name="settings_color_scheme_title">Velg Apollo\'s standard fargevalg</string>
     <string name="settings_color_scheme_summary">Endre hovedfargen i Apollo</string>
@@ -153,9 +150,6 @@
     <string name="app_widget_large_alt">Apollo: 4x2 (alternativ)</string>
     <string name="app_widget_recent">Apollo: nylig lyttet til</string>
     <string name="app_widget_text_separator">-</string>
-
-    <!-- What keywords to use when shopping for Apollo themes -->
-    <string name="apollo_themes_shop_key" translatable="false">Apollo Themes</string>
 
     <!-- Empty list / error messages -->
     <string name="no_effects_for_you">Equalizeren kan ikke åpnes.</string>

@@ -110,9 +110,6 @@
     <string name="settings_author_title">作者</string>
     <string name="settings_about_apollo">Apolloについて</string>
     <string name="settings_special_thanks">スペシャルサンクス</string>
-    <string name="settings_cyanogenmod_title">CyanogenMod</string>
-    <string name="settings_self_title">Andrew Neal</string>
-    <string name="settings_lopez_title">A.J. Lopez</string>
     <string name="settings_lopez_summary">アイコンとプレイストアのバナーデザイン</string>
     <string name="settings_color_scheme_title">Apolloのデフォルトカラースキームを選択</string>
     <string name="settings_color_scheme_summary">Apolloのアクセントカラーを変更する</string>

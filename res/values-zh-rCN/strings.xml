@@ -120,9 +120,6 @@
     <string name="settings_author_title">作者</string>
     <string name="settings_about_apollo">关于 Apollo</string>
     <string name="settings_special_thanks">特别感谢</string>
-    <string name="settings_cyanogenmod_title">CyanogenMod</string>
-    <string name="settings_self_title">Andrew Neal</string>
-    <string name="settings_lopez_title">A.J. Lopez</string>
     <string name="settings_lopez_summary">图标与 Play 商店横幅设计</string>
     <string name="settings_color_scheme_title">选择 Apollo 默认配色方案</string>
     <string name="settings_color_scheme_summary">更改 Apollo 界面的重点色</string>

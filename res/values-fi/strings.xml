@@ -110,9 +110,6 @@
     <string name="settings_author_title">Tekijä</string>
     <string name="settings_about_apollo">Tietoja Apollosta</string>
     <string name="settings_special_thanks">Erityiskiitokset</string>
-    <string name="settings_cyanogenmod_title">CyanogenMod</string>
-    <string name="settings_self_title">Andrew Neal</string>
-    <string name="settings_lopez_title">A.J. Lopez</string>
     <string name="settings_lopez_summary">Kuvakkeen ja Play-kaupan bannerin suunnittelu</string>
     <string name="settings_color_scheme_title">Valitse Apollon oletusväriteema</string>
     <string name="settings_color_scheme_summary">Vaihtaa Apollon väriteemaa</string>

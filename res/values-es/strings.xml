@@ -100,9 +100,6 @@
     <string name="settings_author_title">Autor</string>
     <string name="settings_about_apollo">Acerca de Apollo</string>
     <string name="settings_special_thanks">Agradecimientos</string>
-    <string name="settings_cyanogenmod_title">CyanogenMod</string>
-    <string name="settings_self_title">Andrew Neal</string>
-    <string name="settings_lopez_title">A.J. Lopez</string>
     <string name="settings_lopez_summary">Iconos y diseño en Play Store</string>
     <string name="settings_color_scheme_title">Esquema de color</string>
     <string name="settings_color_scheme_summary">Escoger un color para el diseño de Apollo</string>

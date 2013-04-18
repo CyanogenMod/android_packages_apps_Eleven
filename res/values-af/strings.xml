@@ -85,9 +85,6 @@
     <string name="settings_author_title">Skrywer</string>
     <string name="settings_about_apollo">Oor Apollo</string>
     <string name="settings_special_thanks">Spesiale woord van dank</string>
-    <string name="settings_cyanogenmod_title">CyanogenMod</string>
-    <string name="settings_self_title">Andrew Neal</string>
-    <string name="settings_lopez_title">A.J. Lopez</string>
     <string name="settings_lopez_summary">Ikoon en Play-winkel ontwerp</string>
     <string name="settings_color_scheme_title">Kies Apollo\'s default kleur skema</string>
     <string name="settings_color_scheme_summary">Verander die aksent kleur in Apollo</string>

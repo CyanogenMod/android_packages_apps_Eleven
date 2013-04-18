@@ -99,9 +99,6 @@
     <string name="settings_author_title">Συντάκτης</string>
     <string name="settings_about_apollo">Περί Apollo</string>
     <string name="settings_special_thanks">Θερμές ευχαριστίες</string>
-    <string name="settings_cyanogenmod_title">CyanogenMod</string>
-    <string name="settings_self_title">Andrew Neal</string>
-    <string name="settings_lopez_title">A.J. Lopez</string>
     <string name="settings_lopez_summary">Εικονίδια και σχεδιασμός Play Store banner</string>
     <string name="settings_color_scheme_title">Επιλογή προεπιλεγμένου συνδυασμόυ χρωμάτων</string>
     <string name="settings_color_scheme_summary">Αλλαγή τόνου χρώματος του Apollo</string>
