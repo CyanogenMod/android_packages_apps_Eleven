@@ -76,7 +76,7 @@ public final class PreferenceUtils {
     public static final String DOWNLOAD_MISSING_ARTIST_IMAGES = "download_missing_artist_images";
 
     // Enables lock screen controls on Honeycomb and above
-    public static final String USE_LOCKSREEN_CONTROLS = "use_lockscreen_controls";
+    public static final String USE_LOCKSREEN_CONTROLS = "lockscreen_controls";
 
     // Key used to set the overall theme color
     public static final String DEFAULT_THEME_COLOR = "default_theme_color";
