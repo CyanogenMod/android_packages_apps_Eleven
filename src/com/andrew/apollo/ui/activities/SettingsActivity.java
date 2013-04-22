@@ -59,7 +59,7 @@ public class SettingsActivity extends PreferenceActivity {
         overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
 
         // Get the preferences
-        mPreferences = PreferenceUtils.getInstace(this);
+        mPreferences = PreferenceUtils.getInstance(this);
 
         // Initialze the image cache
         mImageCache = ImageCache.getInstance(this);

@@ -96,9 +96,9 @@ public final class PreferenceUtils {
 
     /**
      * @param context The {@link Context} to use.
-     * @return A singelton of this class
+     * @return A singleton of this class
      */
-    public static final PreferenceUtils getInstace(final Context context) {
+    public static final PreferenceUtils getInstance(final Context context) {
         if (sInstance == null) {
             sInstance = new PreferenceUtils(context.getApplicationContext());
         }

@@ -452,12 +452,12 @@ public class AlbumFragment extends Fragment implements LoaderCallbacks<List<Albu
     }
 
     private boolean isSimpleLayout() {
-        return PreferenceUtils.getInstace(getActivity()).isSimpleLayout(ALBUM_LAYOUT,
+        return PreferenceUtils.getInstance(getActivity()).isSimpleLayout(ALBUM_LAYOUT,
                 getActivity());
     }
 
     private boolean isDetailedLayout() {
-        return PreferenceUtils.getInstace(getActivity()).isDetailedLayout(ALBUM_LAYOUT,
+        return PreferenceUtils.getInstance(getActivity()).isDetailedLayout(ALBUM_LAYOUT,
                 getActivity());
     }
 }

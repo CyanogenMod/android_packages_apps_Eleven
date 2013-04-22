@@ -111,7 +111,7 @@ public class ProfileActivity extends BaseActivity implements OnPageChangeListene
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
         // Get the preferences
-        mPreferences = PreferenceUtils.getInstace(this);
+        mPreferences = PreferenceUtils.getInstance(this);
 
         // Initialze the image fetcher
         mImageFetcher = ApolloUtils.getImageFetcher(this);

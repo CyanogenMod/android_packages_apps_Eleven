@@ -61,7 +61,7 @@ public class ColorSchemeDialog extends AlertDialog implements
     public ColorSchemeDialog(final Context context) {
         super(context);
         getWindow().setFormat(PixelFormat.RGBA_8888);
-        mCurrentColor = PreferenceUtils.getInstace(context).getDefaultThemeColor(context);
+        mCurrentColor = PreferenceUtils.getInstance(context).getDefaultThemeColor(context);
         setUp(mCurrentColor);
     }
 

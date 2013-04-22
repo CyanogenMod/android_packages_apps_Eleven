@@ -127,7 +127,7 @@ public class ShortcutActivity extends FragmentActivity implements ServiceConnect
                 // Make sure everthing is good-to-go
                 if (mService != null) {
 
-                    // Frist, check the artist MIME type
+                    // First, check the artist MIME type
                     if (getType(MediaStore.Audio.Artists.CONTENT_TYPE)) {
 
                         // Shuffle the artist track list

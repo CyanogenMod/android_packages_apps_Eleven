@@ -449,12 +449,12 @@ public class ArtistFragment extends Fragment implements LoaderCallbacks<List<Art
     }
 
     private boolean isSimpleLayout() {
-        return PreferenceUtils.getInstace(getActivity()).isSimpleLayout(ARTIST_LAYOUT,
+        return PreferenceUtils.getInstance(getActivity()).isSimpleLayout(ARTIST_LAYOUT,
                 getActivity());
     }
 
     private boolean isDetailedLayout() {
-        return PreferenceUtils.getInstace(getActivity()).isDetailedLayout(ARTIST_LAYOUT,
+        return PreferenceUtils.getInstance(getActivity()).isDetailedLayout(ARTIST_LAYOUT,
                 getActivity());
     }
 }

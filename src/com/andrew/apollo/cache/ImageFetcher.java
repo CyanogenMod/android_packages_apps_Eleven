@@ -104,7 +104,7 @@ public class ImageFetcher extends ImageWorker {
         switch (imageType) {
             case ARTIST:
                 if (!TextUtils.isEmpty(artistName)) {
-                    if (PreferenceUtils.getInstace(mContext).downloadMissingArtistImages()) {
+                    if (PreferenceUtils.getInstance(mContext).downloadMissingArtistImages()) {
                         final PaginatedResult<Image> paginatedResult = Artist.getImages(mContext,
                                 artistName);
                         if (paginatedResult != null) {
@@ -122,7 +122,7 @@ public class ImageFetcher extends ImageWorker {
                 break;
             case ALBUM:
                 if (!TextUtils.isEmpty(artistName) && !TextUtils.isEmpty(albumName)) {
-                    if (PreferenceUtils.getInstace(mContext).downloadMissingArtwork()) {
+                    if (PreferenceUtils.getInstance(mContext).downloadMissingArtwork()) {
                         final Artist correction = Artist.getCorrection(mContext, artistName);
                         if (correction != null) {
                             final Album album = Album.getInfo(mContext, correction.getName(),

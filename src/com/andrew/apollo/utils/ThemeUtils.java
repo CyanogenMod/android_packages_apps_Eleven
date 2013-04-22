@@ -127,7 +127,7 @@ public class ThemeUtils {
             setThemePackageName(APOLLO_PACKAGE);
         }
         // Get the current theme color
-        mCurrentThemeColor = PreferenceUtils.getInstace(context).getDefaultThemeColor(context);
+        mCurrentThemeColor = PreferenceUtils.getInstance(context).getDefaultThemeColor(context);
         // Inflate the custom layout
         mActionBarLayout = LayoutInflater.from(context).inflate(R.layout.action_bar, null);
     }

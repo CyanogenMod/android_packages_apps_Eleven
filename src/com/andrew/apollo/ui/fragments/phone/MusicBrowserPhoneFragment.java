@@ -80,7 +80,7 @@ public class MusicBrowserPhoneFragment extends Fragment implements
     public void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         // Get the preferences
-        mPreferences = PreferenceUtils.getInstace(getActivity());
+        mPreferences = PreferenceUtils.getInstance(getActivity());
     }
 
     /**

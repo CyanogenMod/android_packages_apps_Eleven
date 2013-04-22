@@ -33,7 +33,7 @@ public class PrefixHighlighter {
      * @param prefixHighlightColor The color used to highlight the prefixes.
      */
     public PrefixHighlighter(final Context context) {
-        mPrefixHighlightColor = PreferenceUtils.getInstace(context).getDefaultThemeColor(context);
+        mPrefixHighlightColor = PreferenceUtils.getInstance(context).getDefaultThemeColor(context);
     }
 
     /**

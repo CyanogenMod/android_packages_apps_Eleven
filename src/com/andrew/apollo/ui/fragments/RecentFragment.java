@@ -418,12 +418,12 @@ public class RecentFragment extends Fragment implements LoaderCallbacks<List<Alb
     }
 
     private boolean isSimpleLayout() {
-        return PreferenceUtils.getInstace(getActivity()).isSimpleLayout(RECENT_LAYOUT,
+        return PreferenceUtils.getInstance(getActivity()).isSimpleLayout(RECENT_LAYOUT,
                 getActivity());
     }
 
     private boolean isDetailedLayout() {
-        return PreferenceUtils.getInstace(getActivity()).isDetailedLayout(RECENT_LAYOUT,
+        return PreferenceUtils.getInstance(getActivity()).isDetailedLayout(RECENT_LAYOUT,
                 getActivity());
     }
 }

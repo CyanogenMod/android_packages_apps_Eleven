@@ -116,6 +116,6 @@ public class ArtistAlbumLoader extends WrappedAsyncTaskLoader<List<Album>> {
                         AlbumColumns.NUMBER_OF_SONGS,
                         /* 4 */
                         AlbumColumns.FIRST_YEAR
-                }, null, null, PreferenceUtils.getInstace(context).getArtistAlbumSortOrder());
+                }, null, null, PreferenceUtils.getInstance(context).getArtistAlbumSortOrder());
     }
 }

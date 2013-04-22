@@ -135,7 +135,7 @@ public final class ApolloUtils {
         }
 
         boolean state = false;
-        final boolean onlyOnWifi = PreferenceUtils.getInstace(context).onlyOnWifi();
+        final boolean onlyOnWifi = PreferenceUtils.getInstance(context).onlyOnWifi();
 
         /* Monitor network connections */
         final ConnectivityManager connectivityManager = (ConnectivityManager)context
@@ -331,7 +331,7 @@ public final class ApolloUtils {
 
                     @Override
                     public void onClick(final DialogInterface dialog, final int which) {
-                        PreferenceUtils.getInstace(context).setDefaultThemeColor(
+                        PreferenceUtils.getInstance(context).setDefaultThemeColor(
                                 colorPickerView.getColor());
                     }
                 });
