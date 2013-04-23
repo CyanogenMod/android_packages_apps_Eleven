@@ -320,14 +320,18 @@ public class ShortcutActivity extends FragmentActivity implements ServiceConnect
      * @return True if the user searched for the favorites playlist
      */
     private boolean isFavorite() {
-        final String favoritePlaylist = getString(R.string.playlist_favorites);
         // Check to see if the user spoke the word "Favorites"
+        final String favoritePlaylist = getString(R.string.playlist_favorites);
         if (mVoiceQuery.equals(favoritePlaylist)) {
             return true;
-            // Check to see if the user spoke the word "Favorite"
-        } else if (mVoiceQuery.equals(favoritePlaylist.substring(0, favoritePlaylist.length() - 1))) {
+        }
+
+        // Check to see if the user spoke the word "Favorite"
+        final String favorite = getString(R.string.playlist_favorite);
+        if (mVoiceQuery.equals(favorite)) {
             return true;
         }
+
         return false;
     }
 

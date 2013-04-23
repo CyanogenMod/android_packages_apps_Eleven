@@ -64,6 +64,7 @@
     <string name="sort_order_entry_number_of_albums">Number of albums</string>
 
     <!-- Default playlist names -->
+    <string name="playlist_favorite">Favorite</string> <!-- used in voice search processing only -->
     <string name="playlist_favorites">Favorites</string>
     <string name="playlist_last_added">Last added</string>
 
