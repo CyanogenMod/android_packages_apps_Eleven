@@ -18,6 +18,8 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.text.TextUtils;
+import android.view.View;
 import android.widget.RemoteViews;
 
 import com.andrew.apollo.MusicPlaybackService;
@@ -66,6 +68,7 @@ public class AppWidgetSmall extends AppWidgetBase {
     private void defaultAppWidget(final Context context, final int[] appWidgetIds) {
         final RemoteViews appWidgetViews = new RemoteViews(context.getPackageName(),
                 R.layout.app_widget_small);
+        appWidgetViews.setViewVisibility(R.id.app_widget_small_info_container, View.INVISIBLE);
         linkButtons(context, appWidgetViews, false);
         pushUpdate(context, appWidgetIds, appWidgetViews);
     }
@@ -115,8 +118,13 @@ public class AppWidgetSmall extends AppWidgetBase {
         final Bitmap bitmap = service.getAlbumArt();
 
         // Set the titles and artwork
-        appWidgetView.setTextViewText(R.id.app_widget_small_line_one, trackName);
-        appWidgetView.setTextViewText(R.id.app_widget_small_line_two, artistName);
+        if (TextUtils.isEmpty(trackName) && TextUtils.isEmpty(artistName)) {
+            appWidgetView.setViewVisibility(R.id.app_widget_small_info_container, View.INVISIBLE);
+        } else {
+            appWidgetView.setViewVisibility(R.id.app_widget_small_info_container, View.VISIBLE);
+            appWidgetView.setTextViewText(R.id.app_widget_small_line_one, trackName);
+            appWidgetView.setTextViewText(R.id.app_widget_small_line_two, artistName);
+        }
         appWidgetView.setImageViewBitmap(R.id.app_widget_small_image, bitmap);
 
         // Set correct drawable for pause state

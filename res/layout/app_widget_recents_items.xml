@@ -14,36 +14,32 @@
   See the License for the specific language governing permissions and
   limitations under the License.
 -->
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/app_widget_recents_items"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:gravity="center_vertical"
+    android:orientation="horizontal"
     tools:ignore="ContentDescription" >
 
     <ImageView
         android:id="@+id/app_widget_recents_base_image"
         android:layout_width="@dimen/item_normal_height"
         android:layout_height="@dimen/item_normal_height"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
         android:scaleType="fitXY" />
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/item_normal_height"
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
         android:layout_gravity="center_vertical"
-        android:layout_toRightOf="@+id/app_widget_recents_base_image"
-        android:gravity="center_vertical"
-        android:paddingLeft="@dimen/list_preferred_item_padding" >
+        android:paddingLeft="@dimen/list_preferred_item_padding"
+        android:orientation="vertical" >
 
         <TextView
             android:id="@+id/app_widget_recents_line_one"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
             android:singleLine="true"
             android:textSize="@dimen/text_size_medium"
             android:textStyle="bold" />
@@ -52,10 +48,10 @@
             android:id="@+id/app_widget_recents_line_two"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/app_widget_recents_line_one"
             android:layout_marginTop="@dimen/list_item_line_two_margin_top"
             android:singleLine="true"
             android:textSize="@dimen/text_size_small" />
-    </RelativeLayout>
 
-</RelativeLayout>
+    </LinearLayout>
+
+</LinearLayout>
