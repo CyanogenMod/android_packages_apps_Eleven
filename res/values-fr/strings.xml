@@ -14,18 +14,13 @@
      limitations under the License.
  -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-
     <string name="app_name">Apollo</string>
-
-    <!-- Page titles -->
     <string name="page_recent">Récents</string>
     <string name="page_artists">Artistes</string>
     <string name="page_albums">Albums</string>
     <string name="page_songs">Titres</string>
     <string name="page_playlists">Listes</string>
     <string name="page_genres">Genres</string>
-
-    <!-- Option menu items -->
     <string name="menu_settings">Paramètres</string>
     <string name="menu_search">Rechercher</string>
     <string name="menu_shuffle">Lecture aléatoire</string>
@@ -42,16 +37,12 @@
     <string name="menu_detailed">Détaillé</string>
     <string name="menu_grid">Grille</string>
     <string name="menu_view_as">Affichage</string>
-
-    <!-- Playlist items -->
     <string name="add_to_playlist">Ajouter à la liste</string>
     <string name="add_to_favorites">Ajouter aux favoris</string>
     <string name="add_to_queue">Ajouter à la liste d\'attente</string>
     <string name="remove_from_favorites">Supprimer des favoris</string>
     <string name="remove_from_recent">Supprimer des récents</string>
     <string name="remove_from_queue">Supprimer de la liste d\'attente</string>
-
-    <!-- Sort orders -->
     <string name="sort_order_entry_az">A-Z</string>
     <string name="sort_order_entry_za">Z-A</string>
     <string name="sort_order_entry_artist">Artiste</string>
@@ -62,12 +53,9 @@
     <string name="sort_order_entry_track_list">Suivre la liste</string>
     <string name="sort_order_entry_number_of_songs">Nombre de titres</string>
     <string name="sort_order_entry_number_of_albums">Nombre d\'albums</string>
-
-    <!-- Default playlist names -->
+    <string name="playlist_favorite">Favoris</string>
     <string name="playlist_favorites">Favoris</string>
     <string name="playlist_last_added">Derniers ajouts</string>
-
-    <!-- AlertDialog items -->
     <string name="new_playlist">Nouvelle liste</string>
     <string name="save">Enregistrer</string>
     <string name="cancel">Annuler</string>
@@ -81,8 +69,6 @@
     <string name="google_search">Recherche Google</string>
     <string name="use_default">Utiliser la photo par défaut</string>
     <string name="old_photo">Utiliser l\'ancienne photo</string>
-
-    <!-- Context menu items -->
     <string name="context_menu_play_selection">Lire</string>
     <string name="context_menu_play_next">Lire le suivant</string>
     <string name="context_menu_more_by_artist">Plus du même artiste</string>
@@ -93,8 +79,6 @@
     <string name="context_menu_open_in_play_store">Ouvrir dans le Play Store</string>
     <string name="context_menu_remove_from_recent">Supprimer des récents</string>
     <string name="context_menu_use_as_ringtone">Utiliser comme sonnerie</string>
-
-    <!-- Content descriptions -->
     <string name="accessibility_play">Lecture</string>
     <string name="accessibility_pause">Pause</string>
     <string name="accessibility_next">Suivant</string>
@@ -104,15 +88,11 @@
     <string name="accessibility_repeat">Répéter</string>
     <string name="accessibility_repeat_all">Répéter tout</string>
     <string name="accessibility_repeat_one">Répéter un</string>
-
-    <!-- Toast messages -->
     <string name="pinned_to_home_screen"><xliff:g id="name">%s</xliff:g> épinglé à votre écran d\'accueil</string>
     <string name="could_not_be_pinned_to_home_screen"><xliff:g id="name">%s</xliff:g> ne peut pas être épinglé à votre écran d\'accueil</string>
     <string name="set_as_ringtone">\"<xliff:g id="name" example="Alarm Bell">%s</xliff:g>\" défini comme sonnerie</string>
     <string name="playlist_renamed">Liste renommée</string>
     <string name="theme_set"><xliff:g id="name">%s</xliff:g> défini comme thème</string>
-
-    <!-- Settings -->
     <string name="settings_ui_category">Interface</string>
     <string name="settings_storage_category">Stockage</string>
     <string name="settings_data_category">Données</string>
@@ -133,30 +113,21 @@
     <string name="settings_open_source_licenses">Licenses open source</string>
     <string name="settings_use_lockscreen_controls">Commandes sur l\'écran de verrouillage</string>
     <string name="settings_version_title">Numéro de version</string>
-
-    <!-- Share Intent -->
     <string name="now_listening_to">#NowPlaying <xliff:g id="title">%1$s</xliff:g> par <xliff:g id="artist">%2$s</xliff:g> #Apollo</string>
     <string name="share_track_using">Partager le titre via\u00A0:</string>
-
-    <!-- ColorPicker -->
     <string name="color_picker_title">Charte de couleur</string>
     <string name="hex">#</string>
     <string name="current_color">Courante</string>
     <string name="new_color">Nouvelle</string>
-
-    <!-- App widget -->
     <string name="app_widget_small">Apollo: 4x1</string>
     <string name="app_widget_large">Apollo: 4x2</string>
     <string name="app_widget_large_alt">Apollo: 4x2 (Alternatif)</string>
     <string name="app_widget_recent">Apollo: Écoutés récemment</string>
     <string name="app_widget_text_separator">-</string>
-
-    <!-- Empty list / error messages -->
     <string name="no_effects_for_you">L\'égaliseur ne peut pas être ouvert.</string>
     <string name="empty_music">Utilisez un câble USB pour copier de la musique depuis votre ordinateur vers votre appareil.</string>
     <string name="empty_last_added">Les titres ajoutés au cours du dernier mois seront affichés ici.</string>
     <string name="empty_search">Aucun résultat de recherche</string>
     <string name="empty_favorite">Vos titres favoris seront affichés ici.</string>
     <string name="empty_recent">Les albums que vous avez écoutés seront affichés ici. Essayer de lire de la musique.</string>
-
 </resources>
