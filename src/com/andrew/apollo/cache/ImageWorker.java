@@ -389,7 +389,8 @@ public abstract class ImageWorker {
         if (lruBitmap != null && imageView != null) {
             // Bitmap found in memory cache
             imageView.setImageBitmap(lruBitmap);
-        } else if (executePotentialWork(key, imageView) && imageView != null) {
+        } else if (executePotentialWork(key, imageView)
+                && imageView != null && !mImageCache.isDiskCachePaused()) {
             // Otherwise run the worker task
             final BitmapWorkerTask bitmapWorkerTask = new BitmapWorkerTask(imageView, imageType);
             final AsyncDrawable asyncDrawable = new AsyncDrawable(mResources, mDefault,
