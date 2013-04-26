@@ -12,9 +12,9 @@
      WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
      See the License for the specific language governing permissions and
      limitations under the License.
- -->
-<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+-->
 
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
     <plurals name="Nartists">
         <item quantity="one">1 artista</item>
         <item quantity="other"><xliff:g id="count">%d</xliff:g> artistas</item>
@@ -47,5 +47,4 @@
         <item quantity="one">1 canción fue eliminada.</item>
         <item quantity="other"><xliff:g id="songs_to_delete">%d</xliff:g> canciones fueron eliminadas.</item>
     </plurals>
-
 </resources>

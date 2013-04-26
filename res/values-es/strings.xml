@@ -12,9 +12,9 @@
      WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
      See the License for the specific language governing permissions and
      limitations under the License.
- -->
-<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+-->
 
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
     <string name="app_name">Apollo</string>
     <string name="page_recent">Reciente</string>
     <string name="page_artists">Artistas</string>
@@ -54,6 +54,7 @@
     <string name="sort_order_entry_track_list">Número de pista</string>
     <string name="sort_order_entry_number_of_songs">Número de canciones</string>
     <string name="sort_order_entry_number_of_albums">Número de álbumes</string>
+    <string name="playlist_favorite">Favorito</string>
     <string name="playlist_favorites">Favoritos</string>
     <string name="playlist_last_added">Recientes</string>
     <string name="new_playlist">Nueva lista</string>
@@ -130,5 +131,4 @@
     <string name="empty_search">No hay resultados que mostrar</string>
     <string name="empty_favorite">Las canciones que has marcado como favoritas aparecerán aquí.</string>
     <string name="empty_recent">Los álbumes que has escuchado aparecerán aquí.</string>
-
 </resources>
