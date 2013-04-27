@@ -97,7 +97,6 @@
     <dimen name="app_widget_small_min_height">40.0dip</dimen>
     <dimen name="app_widget_small_info_container_padding_left">8.0dip</dimen>
     <dimen name="app_widget_small_info_container_padding_right">8.0dip</dimen>
-    <dimen name="app_widget_small_info_container_padding_top">5.0dip</dimen>
     <dimen name="app_widget_small_artwork_size">48.0dip</dimen>
     <dimen name="app_widget_small_button_padding">8.0dip</dimen>
     <dimen name="app_widget_small_button_height">48.0dip</dimen>
@@ -106,6 +105,7 @@
     <dimen name="app_widget_tiny_height">70.0dip</dimen>
     <dimen name="app_widget_tiny_width">70.0dip</dimen>
     <dimen name="app_widget_padding">0.0dip</dimen>
+    <dimen name="app_widget_bottom_margin">4.0dip</dimen>
 
     <!-- Shadow height -->
     <dimen name="shadow_height">5.0dip</dimen>

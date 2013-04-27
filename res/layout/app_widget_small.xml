@@ -14,104 +14,85 @@
   See the License for the specific language governing permissions and
   limitations under the License.
 -->
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<GridLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_gravity="top"
+    android:columnCount="2"
+    android:rowCount="3"
     android:background="@drawable/appwidget_bg"
     android:gravity="top"
     android:padding="@dimen/app_widget_padding"
     tools:ignore="NestedWeights" >
 
-    <LinearLayout
-        android:id="@+id/app_widget_small_buttons"
-        android:layout_width="match_parent"
+    <ImageView
+        android:id="@+id/app_widget_small_image"
+        android:layout_width="@dimen/app_widget_small_artwork_size"
         android:layout_height="@dimen/app_widget_small_artwork_size"
-        android:baselineAligned="false"
-        android:focusable="true"
-        android:orientation="horizontal" >
+        android:background="@drawable/default_artwork"
+        android:contentDescription="@null"
+        android:scaleType="centerInside" />
 
-        <FrameLayout
-            android:layout_width="@dimen/app_widget_small_artwork_size"
-            android:layout_height="@dimen/app_widget_small_artwork_size"
-            android:focusable="true" >
+    <LinearLayout
+       android:layout_gravity="fill_horizontal"
+       android:focusable="true"
+       android:gravity="center_horizontal"
+       android:orientation="horizontal" >
 
-            <ImageView
-                android:id="@+id/app_widget_small_image"
-                android:layout_width="@dimen/app_widget_small_artwork_size"
-                android:layout_height="@dimen/app_widget_small_artwork_size"
-                android:background="@drawable/default_artwork"
-                android:contentDescription="@null"
-                android:scaleType="centerInside" />
-        </FrameLayout>
+       <ImageButton
+           android:id="@+id/app_widget_small_previous"
+           android:layout_width="0dp"
+           android:layout_height="@dimen/app_widget_small_button_height"
+           android:layout_weight="1"
+           android:background="@null"
+           android:contentDescription="@string/accessibility_prev"
+           android:focusable="true"
+           android:padding="@dimen/app_widget_small_button_padding"
+           android:scaleType="fitCenter"
+           android:src="@drawable/btn_playback_previous" />
 
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_weight="1"
-            android:focusable="true"
-            android:gravity="center_horizontal"
-            android:orientation="horizontal" >
+       <ImageButton
+           android:id="@+id/app_widget_small_play"
+           android:layout_width="0dp"
+           android:layout_height="@dimen/app_widget_small_button_height"
+           android:layout_weight="1"
+           android:background="@null"
+           android:contentDescription="@string/accessibility_play"
+           android:focusable="true"
+           android:padding="@dimen/app_widget_small_button_padding"
+           android:scaleType="fitCenter"
+           android:src="@drawable/btn_playback_play" />
 
-            <ImageButton
-                android:id="@+id/app_widget_small_previous"
-                android:layout_width="0dp"
-                android:layout_height="@dimen/app_widget_small_button_height"
-                android:layout_weight="1"
-                android:background="@null"
-                android:contentDescription="@string/accessibility_prev"
-                android:focusable="true"
-                android:padding="@dimen/app_widget_small_button_padding"
-                android:scaleType="fitCenter"
-                android:src="@drawable/btn_playback_previous" />
+       <ImageButton
+           android:id="@+id/app_widget_small_next"
+           android:layout_width="0dp"
+           android:layout_height="@dimen/app_widget_small_button_height"
+           android:layout_weight="1"
+           android:background="@null"
+           android:contentDescription="@string/accessibility_next"
+           android:focusable="true"
+           android:padding="@dimen/app_widget_small_button_padding"
+           android:scaleType="fitCenter"
+           android:src="@drawable/btn_playback_next" />
 
-            <ImageButton
-                android:id="@+id/app_widget_small_play"
-                android:layout_width="0dp"
-                android:layout_height="@dimen/app_widget_small_button_height"
-                android:layout_weight="1"
-                android:background="@null"
-                android:contentDescription="@string/accessibility_play"
-                android:focusable="true"
-                android:padding="@dimen/app_widget_small_button_padding"
-                android:scaleType="fitCenter"
-                android:src="@drawable/btn_playback_play" />
-
-            <ImageButton
-                android:id="@+id/app_widget_small_next"
-                android:layout_width="0dp"
-                android:layout_height="@dimen/app_widget_small_button_height"
-                android:layout_weight="1"
-                android:background="@null"
-                android:contentDescription="@string/accessibility_next"
-                android:focusable="true"
-                android:padding="@dimen/app_widget_small_button_padding"
-                android:scaleType="fitCenter"
-                android:src="@drawable/btn_playback_next" />
-        </LinearLayout>
     </LinearLayout>
 
     <LinearLayout
-        android:id="@+id/app_widget_small_half_separator"
-        android:layout_width="match_parent"
+        android:layout_gravity="fill_horizontal"
         android:layout_height="1dp"
-        android:layout_below="@+id/app_widget_small_buttons"
+        android:layout_columnSpan="2"
         android:background="@color/transparent_white" />
 
-    <RelativeLayout
+    <LinearLayout
         android:id="@+id/app_widget_small_info_container"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_below="@+id/app_widget_small_half_separator"
+        android:layout_gravity="fill"
+        android:layout_columnSpan="2"
+        android:layout_marginBottom="@dimen/app_widget_bottom_margin"
         android:focusable="true"
-        android:gravity="top"
+        android:gravity="center_vertical"
         android:orientation="horizontal"
         android:paddingLeft="@dimen/app_widget_small_info_container_padding_left"
-        android:paddingRight="@dimen/app_widget_small_info_container_padding_right"
-        android:paddingTop="@dimen/app_widget_small_info_container_padding_top" >
+        android:paddingRight="@dimen/app_widget_small_info_container_padding_right" >
 
         <TextView
             android:id="@+id/app_widget_small_line_one"
@@ -127,7 +108,6 @@
             android:id="@+id/app_widget_small_text_separator"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_toRightOf="@+id/app_widget_small_line_one"
             android:ellipsize="none"
             android:paddingLeft="5dp"
             android:paddingRight="5dp"
@@ -141,11 +121,10 @@
             android:id="@+id/app_widget_small_line_two"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_toRightOf="@+id/app_widget_small_text_separator"
             android:ellipsize="marquee"
             android:singleLine="true"
             android:textColor="@color/transparent_white"
             android:textSize="@dimen/text_size_small" />
-    </RelativeLayout>
+    </LinearLayout>
 
-</RelativeLayout>
+</GridLayout>
