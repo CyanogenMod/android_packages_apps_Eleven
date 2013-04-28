@@ -53,6 +53,7 @@
     <string name="sort_order_entry_track_list">Elenco brani</string>
     <string name="sort_order_entry_number_of_songs">Numero canzoni</string>
     <string name="sort_order_entry_number_of_albums">Numero album</string>
+    <string name="playlist_favorite">Preferito</string>
     <string name="playlist_favorites">Preferiti</string>
     <string name="playlist_last_added">Aggiunti recentemente</string>
     <string name="new_playlist">Nuova playlist</string>
