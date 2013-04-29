@@ -554,6 +554,33 @@ public final class MusicUtils {
     }
 
     /**
+     * @param context The {@link Context} to use
+     * @param uri The source of the file
+     */
+    public static void playFile(final Context context, final Uri uri) {
+        if (uri == null || mService == null) {
+            return;
+        }
+
+        // If this is a file:// URI, just use the path directly instead
+        // of going through the open-from-filedescriptor codepath.
+        String filename;
+        String scheme = uri.getScheme();
+        if ("file".equals(scheme)) {
+            filename = uri.getPath();
+        } else {
+            filename = uri.toString();
+        }
+
+        try {
+            mService.stop();
+            mService.openFile(filename);
+            mService.play();
+        } catch (final RemoteException ignored) {
+        }
+    }
+
+    /**
      * @param context The {@link Context} to use.
      * @param list The list of songs to play.
      * @param position Specify where to start.
