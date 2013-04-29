@@ -64,6 +64,7 @@
     <string name="sort_order_entry_number_of_albums">Albumok száma</string>
 
     <!-- Default playlist names -->
+    <string name="playlist_favorite">Kedvenc</string>
     <string name="playlist_favorites">Kedvencek</string>
     <string name="playlist_last_added">Legutóbb hozzáadott</string>
 
@@ -121,7 +122,7 @@
     <string name="settings_about_apollo">Az Apollóról</string>
     <string name="settings_special_thanks">Külön köszönet</string>
     <string name="settings_lopez_summary">Az alkalmazás ikonját és Play Áruházbeli képét tervezte</string>
-    <string name="settings_color_scheme_title">Válassza ki a Apollo alapértelmezett színsémáját</string>
+    <string name="settings_color_scheme_title">Válassza ki az Apollo alapértelmezett színsémáját</string>
     <string name="settings_color_scheme_summary">Megváltoztatja az Apolloban megjelenő színeket</string>
     <string name="settings_theme_chooser_title">Témaválasztó</string>
     <string name="settings_delete_cache_title">Gyorsítótár ürítése</string>
