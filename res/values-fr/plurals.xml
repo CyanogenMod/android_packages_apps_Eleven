@@ -14,76 +14,36 @@
      limitations under the License.
  -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-
-    <!-- Used to indicate the number of artists -->
     <plurals name="Nartists">
-
-        <!-- Only one artist -->
         <item quantity="one">1 artiste</item>
-        <!-- More than one artist -->
         <item quantity="other"><xliff:g id="count">%d</xliff:g> artistes</item>
     </plurals>
-
-    <!-- Used to indicate the number of albums for an artist -->
     <plurals name="Nalbums">
-
-        <!-- Only one album -->
         <item quantity="one">1 album</item>
-        <!-- More than one album -->
         <item quantity="other"><xliff:g id="count">%d</xliff:g> albums</item>
     </plurals>
-
-    <!-- Used to indicate the number of songs for an album -->
     <plurals name="Nsongs">
-
-        <!-- Only one song -->
         <item quantity="one">1 titre</item>
         <item quantity="other"><xliff:g id="count">%d</xliff:g> titres</item>
     </plurals>
-
-    <!-- Used to indicate the number of genres -->
     <plurals name="Ngenres">
-
-        <!-- Only one genre -->
         <item quantity="one">1 genre</item>
-        <!-- More than one genre -->
         <item quantity="other"><xliff:g id="count">%d</xliff:g> genres</item>
     </plurals>
-
-    <!-- Toasts after adding song(s) to playlists -->
     <plurals name="NNNtrackstoplaylist">
-
-        <!-- message shown when one song was added -->
         <item quantity="one">1 titre ajouté à la liste.</item>
-        <!-- message shown when zero or more than one song was added -->
         <item quantity="other"><xliff:g id="number" example="27">%d</xliff:g> titres ajoutés à la liste.</item>
     </plurals>
-
-    <!-- Toasts after adding song(s) to queue -->
     <plurals name="NNNtrackstoqueue">
-
-        <!-- message shown when one song was added -->
         <item quantity="one">1 titre ajouté à la liste d\'attente.</item>
-        <!-- message shown when zero or more than one song was added -->
         <item quantity="other"><xliff:g id="number" example="27">%d</xliff:g> titres ajoutés à la liste d\'attente.</item>
     </plurals>
-
-    <!-- Toasts after adding song(s) to the favorites list -->
     <plurals name="NNNtrackstofavorites">
-
-        <!-- message shown when one song was added -->
         <item quantity="one">1 titre ajouté aux favoris.</item>
-        <!-- message shown when zero or more than one song was added -->
         <item quantity="other"><xliff:g id="number" example="27">%d</xliff:g> titres ajoutés aux favoris.</item>
     </plurals>
-
-    <!-- Toast confirming that song(s) was/were deleted. -->
     <plurals name="NNNtracksdeleted">
-
-        <!-- delete confirmation message for 1 song -->
         <item quantity="one">1 titre a été supprimé.</item>
-        <!-- delete confirmation message for 0 or more than 1 songs -->
         <item quantity="other"><xliff:g id="songs_to_delete">%d</xliff:g> titres ont été supprimés.</item>
     </plurals>
-
 </resources>
