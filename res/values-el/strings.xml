@@ -53,6 +53,7 @@
     <string name="sort_order_entry_track_list">Λίστα κομματιών</string>
     <string name="sort_order_entry_number_of_songs">Αριθμός τραγουδιών</string>
     <string name="sort_order_entry_number_of_albums">Αριθμός άλμπουμ</string>
+    <string name="playlist_favorite">Αγαπημένο</string>
     <string name="playlist_favorites">Αγαπημένα</string>
     <string name="playlist_last_added">Προστέθηκαν πρόσφατα</string>
     <string name="new_playlist">Νέα λίστα</string>
