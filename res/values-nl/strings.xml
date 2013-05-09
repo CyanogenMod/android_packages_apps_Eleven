@@ -54,6 +54,7 @@
     <string name="sort_order_entry_track_list">Nummerlijst</string>
     <string name="sort_order_entry_number_of_songs">Aantal nummers</string>
     <string name="sort_order_entry_number_of_albums">Aantal albums</string>
+    <string name="playlist_favorite">Favoriet</string>
     <string name="playlist_favorites">Favorieten</string>
     <string name="playlist_last_added">Laatst toegevoegd</string>
     <string name="new_playlist">Nieuwe afspeellijst</string>
