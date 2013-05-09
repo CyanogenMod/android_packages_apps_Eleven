@@ -14,21 +14,16 @@
      limitations under the License.
  -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-
     <string name="app_name">Apollo</string>
-
-    <!-- Page titles -->
     <string name="page_recent">Siste</string>
     <string name="page_artists">Artister</string>
     <string name="page_albums">Album</string>
     <string name="page_songs">Sanger</string>
     <string name="page_playlists">Spillelister</string>
     <string name="page_genres">Sjangrer</string>
-
-    <!-- Option menu items -->
     <string name="menu_settings">Innstillinger</string>
     <string name="menu_search">Søk</string>
-    <string name="menu_shuffle">Shuffle alle</string>
+    <string name="menu_shuffle">Bland alle</string>
     <string name="menu_play_all">Spill alle</string>
     <string name="menu_sort_by">Sorter etter</string>
     <string name="menu_shop">Se etter nye tema</string>
@@ -42,16 +37,12 @@
     <string name="menu_detailed">Detaljert</string>
     <string name="menu_grid">Rutenett</string>
     <string name="menu_view_as">Vis som</string>
-
-    <!-- Playlist items -->
     <string name="add_to_playlist">Legg til i spilleliste</string>
     <string name="add_to_favorites">Legg til som favoritt</string>
     <string name="add_to_queue">Legg til i køen</string>
     <string name="remove_from_favorites">Fjern fra favoritter</string>
     <string name="remove_from_recent">Fjern fra siste</string>
     <string name="remove_from_queue">Fjern fra køen</string>
-
-    <!-- Sort orders -->
     <string name="sort_order_entry_az">A-Å</string>
     <string name="sort_order_entry_za">Å-A</string>
     <string name="sort_order_entry_artist">Artist</string>
@@ -62,12 +53,9 @@
     <string name="sort_order_entry_track_list">Liste over spor</string>
     <string name="sort_order_entry_number_of_songs">Antall sanger</string>
     <string name="sort_order_entry_number_of_albums">Antall album</string>
-
-    <!-- Default playlist names -->
+    <string name="playlist_favorite">Favoritt</string>
     <string name="playlist_favorites">Favoritter</string>
     <string name="playlist_last_added">Nylige</string>
-
-    <!-- AlertDialog items -->
     <string name="new_playlist">Ny spilleliste</string>
     <string name="save">Lagre</string>
     <string name="cancel">Avbryt</string>
@@ -81,8 +69,6 @@
     <string name="google_search">Google søk</string>
     <string name="use_default">Bruk standard bilde</string>
     <string name="old_photo">Bruk gammelt bilde</string>
-
-    <!-- Context menu items -->
     <string name="context_menu_play_selection">Spill</string>
     <string name="context_menu_play_next">Spill neste</string>
     <string name="context_menu_more_by_artist">Mer fra denne artisten</string>
@@ -93,26 +79,20 @@
     <string name="context_menu_open_in_play_store">Åpne i Google Play</string>
     <string name="context_menu_remove_from_recent">Fjern fra nylige</string>
     <string name="context_menu_use_as_ringtone">Bruk som ringetone</string>
-
-    <!-- Content descriptions -->
     <string name="accessibility_play">Spill</string>
     <string name="accessibility_pause">Pause</string>
     <string name="accessibility_next">Neste</string>
     <string name="accessibility_prev">Forrige</string>
-    <string name="accessibility_shuffle">Shuffle</string>
-    <string name="accessibility_shuffle_all">Shuffle alle</string>
+    <string name="accessibility_shuffle">Bland</string>
+    <string name="accessibility_shuffle_all">Bland alle</string>
     <string name="accessibility_repeat">Gjenta</string>
     <string name="accessibility_repeat_all">Gjenta alle</string>
     <string name="accessibility_repeat_one">Gjenta én</string>
-
-    <!-- Toast messages -->
     <string name="pinned_to_home_screen"><xliff:g id="name">%s</xliff:g> ble festet til hjemmeskjermen</string>
     <string name="could_not_be_pinned_to_home_screen"><xliff:g id="name">%s</xliff:g> kunne ikke festes til hjemmeskjermen</string>
     <string name="set_as_ringtone">\'<xliff:g id="name" example="Alarm Bell">%s</xliff:g>\' ble satt som ringetone</string>
     <string name="playlist_renamed">Spillelisten fikk et nytt navn</string>
     <string name="theme_set"><xliff:g id="name">%s</xliff:g> satt som tema</string>
-
-    <!-- Settings -->
     <string name="settings_ui_category">Grensesnitt</string>
     <string name="settings_storage_category">Lagring</string>
     <string name="settings_data_category">Data</string>
@@ -132,26 +112,18 @@
     <string name="settings_download_artist_images_title">Last ned manglende artist bilder</string>
     <string name="settings_open_source_licenses">Åpen kildekode-lisenser</string>
     <string name="settings_use_lockscreen_controls">Bruk lockscreen kontroller</string>
-    <string name="settings_version_title">versjonsnummer</string>
-
-    <!-- Share Intent -->
+    <string name="settings_version_title">Versjonsnummer</string>
     <string name="now_listening_to">#NowPlaying <xliff:g id="title">%1$s</xliff:g> by <xliff:g id="artist">%2$s</xliff:g> #Apollo</string>
     <string name="share_track_using">Del spor med:</string>
-
-    <!-- ColorPicker -->
     <string name="color_picker_title">Fargevalg</string>
     <string name="hex">#</string>
     <string name="current_color">Nåværende</string>
     <string name="new_color">Ny</string>
-
-    <!-- App widget -->
     <string name="app_widget_small">Apollo: 4x1</string>
     <string name="app_widget_large">Apollo: 4x2</string>
     <string name="app_widget_large_alt">Apollo: 4x2 (alternativ)</string>
     <string name="app_widget_recent">Apollo: nylig lyttet til</string>
     <string name="app_widget_text_separator">-</string>
-
-    <!-- Empty list / error messages -->
     <string name="no_effects_for_you">Equalizeren kan ikke åpnes.</string>
     <string name="empty_music">For å kopiere musikk fra en datamaskin til enheten, bruk en USB kabel.</string>
     <string name="empty_last_added">Sanger du har lagt til den siste måneden vil bli vist her.</string>
