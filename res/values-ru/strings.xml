@@ -36,7 +36,7 @@
     <string name="menu_clear_queue">Очистить очередь</string>
     <string name="menu_save_queue">Сохранить очередь</string>
     <string name="menu_share">Отправить</string>
-    <string name="menu_add_to_homescreen">Поместить на домашний экран</string>
+    <string name="menu_add_to_homescreen">Поместить на главный экран</string>
     <string name="menu_equalizer">Эквалайзер</string>
     <string name="menu_simple">Простой</string>
     <string name="menu_detailed">Подробный</string>
@@ -106,8 +106,8 @@
     <string name="accessibility_repeat_one">Повтор трека</string>
 
     <!-- Toast messages -->
-    <string name="pinned_to_home_screen"><xliff:g id="name">%s</xliff:g> закреплено на домашнем экране</string>
-    <string name="could_not_be_pinned_to_home_screen"><xliff:g id="name">%s</xliff:g> не может быть закреплено на домашнем экране</string>
+    <string name="pinned_to_home_screen"><xliff:g id="name">%s</xliff:g> закреплено на главном экране</string>
+    <string name="could_not_be_pinned_to_home_screen"><xliff:g id="name">%s</xliff:g> не может быть закреплено на главном экране</string>
     <string name="set_as_ringtone">Трек \"<xliff:g id="name" example="Alarm Bell">%s</xliff:g>\" установлен как рингтон</string>
     <string name="playlist_renamed">Плейлист переименован</string>
     <string name="theme_set">Тема \"<xliff:g id="name">%s</xliff:g>\" установлена</string>
