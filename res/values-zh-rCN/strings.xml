@@ -17,7 +17,6 @@
 
     <string name="app_name">Apollo</string>
 
-    <!-- Page titles -->
     <string name="page_recent">最近播放</string>
     <string name="page_artists">艺术家</string>
     <string name="page_albums">专辑</string>
@@ -25,7 +24,6 @@
     <string name="page_playlists">播放列表</string>
     <string name="page_genres">类型</string>
 
-    <!-- Option menu items -->
     <string name="menu_settings">设置</string>
     <string name="menu_search">搜索</string>
     <string name="menu_shuffle">全部随机播放</string>
@@ -43,7 +41,6 @@
     <string name="menu_grid">网格</string>
     <string name="menu_view_as">视图</string>
 
-    <!-- Playlist items -->
     <string name="add_to_playlist">添加到播放列表</string>
     <string name="add_to_favorites">添加到收藏夹</string>
     <string name="add_to_queue">添加到队列</string>
@@ -51,7 +48,6 @@
     <string name="remove_from_recent">从最近播放列表移除</string>
     <string name="remove_from_queue">从队列移除</string>
 
-    <!-- Sort orders -->
     <string name="sort_order_entry_az">A-Z</string>
     <string name="sort_order_entry_za">Z-A</string>
     <string name="sort_order_entry_artist">艺术家</string>
@@ -63,26 +59,24 @@
     <string name="sort_order_entry_number_of_songs">歌曲数量</string>
     <string name="sort_order_entry_number_of_albums">专辑数量</string>
 
-    <!-- Default playlist names -->
+    <string name="playlist_favorite">收藏夹</string>
     <string name="playlist_favorites">收藏夹</string>
     <string name="playlist_last_added">最后添加</string>
 
-    <!-- AlertDialog items -->
     <string name="new_playlist">新的播放列表</string>
     <string name="save">保存</string>
     <string name="cancel">取消</string>
     <string name="overwrite">覆盖</string>
     <string name="new_playlist_name_template">播放列表 <xliff:g id="number">%d</xliff:g></string>
-    <string name="create_playlist_prompt" msgid="942607395076646686">"播放列表名称"</string>
-    <string name="delete_dialog_title">删除 <xliff:g id="item" example="专辑">%s</xliff:g>吗?</string>
+    <string name="create_playlist_prompt">播放列表名称</string>
+    <string name="delete_dialog_title">删除 <xliff:g id="item" example="album">%s</xliff:g>吗?</string>
     <string name="cannot_be_undone">此操作不能被撤消</string>
     <string name="delete_warning">这将永久删除缓存的图像</string>
     <string name="new_photo">从图库中选择照片</string>
-    <string name="google_search">谷歌搜索</string>
+    <string name="google_search">Google 搜索</string>
     <string name="use_default">使用默认照片</string>
     <string name="old_photo">使用旧照片</string>
 
-    <!-- Context menu items -->
     <string name="context_menu_play_selection">播放</string>
     <string name="context_menu_play_next">播放下一首</string>
     <string name="context_menu_more_by_artist">来自此艺术家的更多作品</string>
@@ -94,7 +88,6 @@
     <string name="context_menu_remove_from_recent">从最近播放列表移除</string>
     <string name="context_menu_use_as_ringtone">设为铃声</string>
 
-    <!-- Content descriptions -->
     <string name="accessibility_play">播放</string>
     <string name="accessibility_pause">暂停</string>
     <string name="accessibility_next">下一首</string>
@@ -105,14 +98,12 @@
     <string name="accessibility_repeat_all">全部重复播放</string>
     <string name="accessibility_repeat_one">单曲重复播放</string>
 
-    <!-- Toast messages -->
     <string name="pinned_to_home_screen"><xliff:g id="name">%s</xliff:g>已固定到主屏幕</string>
     <string name="could_not_be_pinned_to_home_screen"><xliff:g id="name">%s</xliff:g>不能被固定到主屏幕</string>
-    <string name="set_as_ringtone">\"<xliff:g id="name" example="警钟">%s</xliff:g>\" 设置为铃声</string>
+    <string name="set_as_ringtone">\"<xliff:g id="name" example="Alarm Bell">%s</xliff:g>\" 设置为铃声</string>
     <string name="playlist_renamed">播放列表已被重命名</string>
     <string name="theme_set">主题已设置为<xliff:g id="name">%s</xliff:g></string>
 
-    <!-- Settings -->
     <string name="settings_ui_category">界面</string>
     <string name="settings_storage_category">存储</string>
     <string name="settings_data_category">数据</string>
@@ -134,24 +125,20 @@
     <string name="settings_use_lockscreen_controls">使用锁屏控制</string>
     <string name="settings_version_title">版本号</string>
 
-    <!-- Share Intent -->
     <string name="now_listening_to">#NowPlaying <xliff:g id="title">%1$s</xliff:g> - <xliff:g id="artist">%2$s</xliff:g> #Apollo</string>
     <string name="share_track_using">曲目分享方式:</string>
 
-    <!-- ColorPicker -->
     <string name="color_picker_title">配色方案</string>
     <string name="hex">#</string>
     <string name="current_color">当前</string>
     <string name="new_color">新的</string>
 
-    <!-- App widget -->
     <string name="app_widget_small">Apollo: 4x1</string>
     <string name="app_widget_large">Apollo: 4x2</string>
     <string name="app_widget_large_alt">Apollo: 4x2 (扩展控制)</string>
     <string name="app_widget_recent">Apollo: 最近播放</string>
     <string name="app_widget_text_separator">-</string>
 
-    <!-- Empty list / error messages -->
     <string name="no_effects_for_you">无法打开均衡器.</string>
     <string name="empty_music">请使用 USB 数据线把音乐从您的计算机复制到您的设备中.</string>
     <string name="empty_last_added">您在这一个月以来添加的歌曲将在这里显示.</string>
