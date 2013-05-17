@@ -21,7 +21,7 @@
         <!-- Only one artist -->
         <item quantity="one">1 исполнитель</item>
         <!-- More than one artist -->
-        <item quantity="other"><xliff:g id="count">%d</xliff:g> исполнителя (ей)</item>
+        <item quantity="other">Исполнителей: <xliff:g id="count">%d</xliff:g></item>
     </plurals>
 
     <!-- Used to indicate the number of albums for an artist -->
@@ -30,7 +30,7 @@
         <!-- Only one album -->
         <item quantity="one">1 альбом</item>
         <!-- More than one album -->
-        <item quantity="other"><xliff:g id="count">%d</xliff:g> альбома (ов)</item>
+        <item quantity="other">Альбомов: <xliff:g id="count">%d</xliff:g></item>
     </plurals>
 
     <!-- Used to indicate the number of songs for an album -->
@@ -38,7 +38,7 @@
 
         <!-- Only one song -->
         <item quantity="one">1 трек</item>
-        <item quantity="other"><xliff:g id="count">%d</xliff:g> трека (ов)</item>
+        <item quantity="other">Треков: <xliff:g id="count">%d</xliff:g></item>
     </plurals>
 
     <!-- Used to indicate the number of genres -->
@@ -47,7 +47,7 @@
         <!-- Only one genre -->
         <item quantity="one">1 жанр</item>
         <!-- More than one genre -->
-        <item quantity="other"><xliff:g id="count">%d</xliff:g> жанра (ов)</item>
+        <item quantity="other">Жанров: <xliff:g id="count">%d</xliff:g></item>
     </plurals>
 
     <!-- Toasts after adding song(s) to playlists -->
@@ -56,7 +56,7 @@
         <!-- message shown when one song was added -->
         <item quantity="one">1 трек добавлен в плейлист</item>
         <!-- message shown when zero or more than one song was added -->
-        <item quantity="other"><xliff:g id="number" example="27">%d</xliff:g> трека (ов) добавлено в плейлист</item>
+        <item quantity="other">Добавлено треков в плейлист: <xliff:g id="number" example="27">%d</xliff:g></item>
     </plurals>
 
     <!-- Toasts after adding song(s) to queue -->
@@ -65,7 +65,7 @@
         <!-- message shown when one song was added -->
         <item quantity="one">1 трек добавлен в очередь</item>
         <!-- message shown when zero or more than one song was added -->
-        <item quantity="other"><xliff:g id="number" example="27">%d</xliff:g> трека (ов) добавлено в очередь</item>
+        <item quantity="other">Добавлено треков в очередь: <xliff:g id="number" example="27">%d</xliff:g></item>
     </plurals>
 
     <!-- Toasts after adding song(s) to the favorites list -->
@@ -74,7 +74,7 @@
         <!-- message shown when one song was added -->
         <item quantity="one">1 трек добавлен в избранное</item>
         <!-- message shown when zero or more than one song was added -->
-        <item quantity="other"><xliff:g id="number" example="27">%d</xliff:g> трека (ов) добавлено в избранное</item>
+        <item quantity="other">Добавлено треков в избранное: <xliff:g id="number" example="27">%d</xliff:g></item>
     </plurals>
 
     <!-- Toast confirming that song(s) was/were deleted. -->
@@ -83,7 +83,7 @@
         <!-- delete confirmation message for 1 song -->
         <item quantity="one">1 трек был удалён</item>
         <!-- delete confirmation message for 0 or more than 1 songs -->
-        <item quantity="other"><xliff:g id="songs_to_delete">%d</xliff:g> трека (ов) было удалено</item>
+        <item quantity="other">Удалено треков: <xliff:g id="songs_to_delete">%d</xliff:g></item>
     </plurals>
 
 </resources>

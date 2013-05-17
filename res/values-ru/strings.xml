@@ -36,7 +36,7 @@
     <string name="menu_clear_queue">Очистить очередь</string>
     <string name="menu_save_queue">Сохранить очередь</string>
     <string name="menu_share">Отправить</string>
-    <string name="menu_add_to_homescreen">Поместить на главный экран</string>
+    <string name="menu_add_to_homescreen">Закрепить на главном экране</string>
     <string name="menu_equalizer">Эквалайзер</string>
     <string name="menu_simple">Простой</string>
     <string name="menu_detailed">Подробный</string>
@@ -147,8 +147,8 @@
     <!-- App widget -->
     <string name="app_widget_small">Apollo: 4x1</string>
     <string name="app_widget_large">Apollo: 4x2</string>
-    <string name="app_widget_large_alt">Apollo: 4x2 (Альтернативный)</string>
-    <string name="app_widget_recent">Apollo: Последние прослушанные</string>
+    <string name="app_widget_large_alt">Apollo: 4x2 (альтернативный)</string>
+    <string name="app_widget_recent">Apollo: последние прослушанные</string>
     <string name="app_widget_text_separator">-</string>
 
     <!-- Empty list / error messages -->
@@ -157,6 +157,6 @@
     <string name="empty_last_added">Треки, добавленные за последний месяц, будут показаны здесь</string>
     <string name="empty_search">Поиск не дал результатов</string>
     <string name="empty_favorite">Треки, отмеченные как избранные, будут показаны здесь</string>
-    <string name="empty_recent">Прослушанные альбомы буду показаны здесь</string>
+    <string name="empty_recent">Прослушанные альбомы будут показаны здесь</string>
 
 </resources>
