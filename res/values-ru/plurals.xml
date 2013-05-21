@@ -19,7 +19,7 @@
     <plurals name="Nartists">
 
         <!-- Only one artist -->
-        <item quantity="one">1 исполнитель</item>
+        <item quantity="one">Исполнителей: <xliff:g id="count">%d</xliff:g></item>
         <!-- More than one artist -->
         <item quantity="other">Исполнителей: <xliff:g id="count">%d</xliff:g></item>
     </plurals>
@@ -28,7 +28,7 @@
     <plurals name="Nalbums">
 
         <!-- Only one album -->
-        <item quantity="one">1 альбом</item>
+        <item quantity="one">Альбомов: <xliff:g id="count">%d</xliff:g></item>
         <!-- More than one album -->
         <item quantity="other">Альбомов: <xliff:g id="count">%d</xliff:g></item>
     </plurals>
@@ -37,7 +37,7 @@
     <plurals name="Nsongs">
 
         <!-- Only one song -->
-        <item quantity="one">1 трек</item>
+        <item quantity="one">Треков: <xliff:g id="count">%d</xliff:g></item>
         <item quantity="other">Треков: <xliff:g id="count">%d</xliff:g></item>
     </plurals>
 
@@ -45,7 +45,7 @@
     <plurals name="Ngenres">
 
         <!-- Only one genre -->
-        <item quantity="one">1 жанр</item>
+        <item quantity="one">Жанров: <xliff:g id="count">%d</xliff:g></item>
         <!-- More than one genre -->
         <item quantity="other">Жанров: <xliff:g id="count">%d</xliff:g></item>
     </plurals>
@@ -54,7 +54,7 @@
     <plurals name="NNNtrackstoplaylist">
 
         <!-- message shown when one song was added -->
-        <item quantity="one">1 трек добавлен в плейлист</item>
+        <item quantity="one">Добавлено треков в плейлист: <xliff:g id="number" example="27">%d</xliff:g></item>
         <!-- message shown when zero or more than one song was added -->
         <item quantity="other">Добавлено треков в плейлист: <xliff:g id="number" example="27">%d</xliff:g></item>
     </plurals>
@@ -63,7 +63,7 @@
     <plurals name="NNNtrackstoqueue">
 
         <!-- message shown when one song was added -->
-        <item quantity="one">1 трек добавлен в очередь</item>
+        <item quantity="one">Добавлено треков в очередь: <xliff:g id="number" example="27">%d</xliff:g></item>
         <!-- message shown when zero or more than one song was added -->
         <item quantity="other">Добавлено треков в очередь: <xliff:g id="number" example="27">%d</xliff:g></item>
     </plurals>
@@ -72,7 +72,7 @@
     <plurals name="NNNtrackstofavorites">
 
         <!-- message shown when one song was added -->
-        <item quantity="one">1 трек добавлен в избранное</item>
+        <item quantity="one">Добавлено треков в избранное: <xliff:g id="number" example="27">%d</xliff:g></item>
         <!-- message shown when zero or more than one song was added -->
         <item quantity="other">Добавлено треков в избранное: <xliff:g id="number" example="27">%d</xliff:g></item>
     </plurals>
@@ -81,7 +81,7 @@
     <plurals name="NNNtracksdeleted">
 
         <!-- delete confirmation message for 1 song -->
-        <item quantity="one">1 трек был удалён</item>
+        <item quantity="one">Удалено треков: <xliff:g id="songs_to_delete">%d</xliff:g></item>
         <!-- delete confirmation message for 0 or more than 1 songs -->
         <item quantity="other">Удалено треков: <xliff:g id="songs_to_delete">%d</xliff:g></item>
     </plurals>
