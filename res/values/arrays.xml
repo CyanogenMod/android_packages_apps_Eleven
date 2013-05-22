@@ -16,7 +16,7 @@
 <resources>
 
     <!-- Main TitlePageIndicator titles -->
-    <string-array name="page_titles">
+    <string-array name="page_titles" translatable="false">
         <item>@string/page_playlists</item>
         <item>@string/page_recent</item>
         <item>@string/page_artists</item>
