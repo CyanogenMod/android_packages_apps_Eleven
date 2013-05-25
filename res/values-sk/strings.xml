@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright (C) 2012 Andrew Neal
+     Copyright (C) 2013 The CyanogenMod Project
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+
+          http://www.apache.org/licenses/LICENSE-2.0
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+ -->
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="app_name">Apollo</string>
+    <string name="page_recent">Nedávne</string>
+    <string name="page_artists">Interpreti</string>
+    <string name="page_albums">Albumy</string>
+    <string name="page_songs">Skladby</string>
+    <string name="page_playlists">Hracie zoznamy</string>
+    <string name="page_genres">Žánre</string>
+    <string name="menu_settings">Nastavenia</string>
+    <string name="menu_search">Hľadať</string>
+    <string name="menu_shuffle">Zamiešať všetko</string>
+    <string name="menu_play_all">Prehrať všetko</string>
+    <string name="menu_sort_by">Usporiadať podľa</string>
+    <string name="menu_shop">Kúpiť témy</string>
+    <string name="menu_clear_recents">Vymazať nedávne</string>
+    <string name="menu_clear_queue">Vymazať frontu</string>
+    <string name="menu_save_queue">Uložiť frontu</string>
+    <string name="menu_share">Zdieľať</string>
+    <string name="menu_add_to_homescreen">Pripnúť na domovskú obrazovku</string>
+    <string name="menu_equalizer">Ekvalizér</string>
+    <string name="menu_simple">Jednoducho</string>
+    <string name="menu_detailed">Podrobne</string>
+    <string name="menu_grid">Mriežka</string>
+    <string name="menu_view_as">Zobraziť ako</string>
+    <string name="add_to_playlist">Pridať do hracieho zoznamu</string>
+    <string name="add_to_favorites">Pridať do obľúbených</string>
+    <string name="add_to_queue">Pridať do fronty</string>
+    <string name="remove_from_favorites">Odstrániť z obľúbených</string>
+    <string name="remove_from_recent">Odstrániť z nedávnych</string>
+    <string name="remove_from_queue">Odstrániť z fronty</string>
+    <string name="sort_order_entry_az">A-Z</string>
+    <string name="sort_order_entry_za">Z-A</string>
+    <string name="sort_order_entry_artist">Umelca</string>
+    <string name="sort_order_entry_album">Albumu</string>
+    <string name="sort_order_entry_year">Roku</string>
+    <string name="sort_order_entry_duration">Dĺžky</string>
+    <string name="sort_order_entry_date_added">Dátumu pridania</string>
+    <string name="sort_order_entry_track_list">Zoznamu stôp</string>
+    <string name="sort_order_entry_number_of_songs">Počtu skladieb</string>
+    <string name="sort_order_entry_number_of_albums">Počtu albumov</string>
+    <string name="playlist_favorite">Obľúbené skladby</string>
+    <string name="playlist_favorites">Obľúbené skladby</string>
+    <string name="playlist_last_added">Naposledy pridané skladby</string>
+    <string name="new_playlist">Nový hrací zoznam</string>
+    <string name="save">Uložiť</string>
+    <string name="cancel">Zrušiť</string>
+    <string name="overwrite">Prepísať</string>
+    <string name="new_playlist_name_template">Hrací zoznam <xliff:g id="number">%d</xliff:g></string>
+    <string name="create_playlist_prompt">Názov hracieho zoznamu</string>
+    <string name="delete_dialog_title">Odstrániť <xliff:g id="item" example="album">%s</xliff:g>?</string>
+    <string name="cannot_be_undone">Táto akcia sa nedá vrátiť späť</string>
+    <string name="delete_warning">Týmto natrvalo odstránite obrázky vo vyrovnávacej pamäti</string>
+    <string name="new_photo">Zvoliť z galérie</string>
+    <string name="google_search">Vyhľadať pomocou Google</string>
+    <string name="use_default">Použiť predvolenú fotografiu</string>
+    <string name="old_photo">Použiť pôvodnú fotografiu</string>
+    <string name="context_menu_play_selection">Prehrať</string>
+    <string name="context_menu_play_next">Prehrať ďalšiu skladbu</string>
+    <string name="context_menu_more_by_artist">Viac od interpreta</string>
+    <string name="context_menu_rename_playlist">Premenovať</string>
+    <string name="context_menu_delete">Odstrániť</string>
+    <string name="context_menu_fetch_album_art">Získať obrázok albumu</string>
+    <string name="context_menu_fetch_artist_image">Získať obrázok umelca</string>
+    <string name="context_menu_open_in_play_store">Otvoriť v Obchode Play</string>
+    <string name="context_menu_remove_from_recent">Odstrániť z nedávnych</string>
+    <string name="context_menu_use_as_ringtone">Nastaviť ako zvonenie</string>
+    <string name="accessibility_play">Prehrať</string>
+    <string name="accessibility_pause">Pozastaviť</string>
+    <string name="accessibility_next">Ďaľsia</string>
+    <string name="accessibility_prev">Predošlá</string>
+    <string name="accessibility_shuffle">Zamiešať</string>
+    <string name="accessibility_shuffle_all">Zamiešať všetky</string>
+    <string name="accessibility_repeat">Opakovať</string>
+    <string name="accessibility_repeat_all">Opakovať všetky</string>
+    <string name="accessibility_repeat_one">Opakovať jednu</string>
+    <string name="pinned_to_home_screen">Skladba <xliff:g id="name">%s</xliff:g> bola pripnutá na vašu domovskú obrazovku</string>
+    <string name="could_not_be_pinned_to_home_screen">Skladba <xliff:g id="name">%s</xliff:g> sa nedá pripnúť na vašu domovskú obrazovku</string>
+    <string name="set_as_ringtone">Skladba „<xliff:g id="name" example="Alarm Bell">%s</xliff:g>“ bola nastavená ako zvonenie</string>
+    <string name="playlist_renamed">Hrací zoznam bol premenovaný</string>
+    <string name="theme_set"><xliff:g id="name">%s</xliff:g> bola nastavená ako téma</string>
+    <string name="settings_ui_category">Rozhranie</string>
+    <string name="settings_storage_category">Úložisko</string>
+    <string name="settings_data_category">Údaje</string>
+    <string name="settings_about_category">O programe</string>
+    <string name="settings_author_title">Autor</string>
+    <string name="settings_about_apollo">O programe Apollo</string>
+    <string name="settings_special_thanks">Špeciálne poďakovanie</string>
+    <string name="settings_lopez_summary">Návrh ikony a banneru v obchode Play</string>
+    <string name="settings_color_scheme_title">Zvoliť predvolenú farebnú schému pre program Apollo</string>
+    <string name="settings_color_scheme_summary">Zmení farbu posuvníka v programe Apollo</string>
+    <string name="settings_theme_chooser_title">Výber témy</string>
+    <string name="settings_delete_cache_title">Odstrániť vyrovnávaciu pamäť</string>
+    <string name="settings_delete_cache_summary">Odstráni všetky obrázky vo vyrovnávacej pamäti</string>
+    <string name="settings_download_only_on_wifi_title">Preberať iba cez Wi-Fi</string>
+    <string name="settings_download_only_on_wifi_summary">Na zníženie poplatkov poskytovateľovi sa nebude preberať cez mobilné siete</string>
+    <string name="settings_download_missing_artwork_title">Prevziať chýbajúce obrázky albumov</string>
+    <string name="settings_download_artist_images_title">Prevziať chýbajúce obrázky interpretov</string>
+    <string name="settings_open_source_licenses">Licencie otvoreného zdroja</string>
+    <string name="settings_use_lockscreen_controls">Použiť ovládanie na uzamknutej obrazovke</string>
+    <string name="settings_version_title">Číslo verzie</string>
+    <string name="now_listening_to">#Teraz počúvam skladbu <xliff:g id="title">%1$s</xliff:g> od interpreta <xliff:g id="artist">%2$s</xliff:g> #Apollo</string>
+    <string name="share_track_using">Zdieľať stopu cez:</string>
+    <string name="color_picker_title">Farebná schéma</string>
+    <string name="hex">#</string>
+    <string name="current_color">Aktuálna</string>
+    <string name="new_color">Nová</string>
+    <string name="app_widget_small">Apollo: 4x1</string>
+    <string name="app_widget_large">Apollo: 4x2</string>
+    <string name="app_widget_large_alt">Apollo: 4x2 (alternatívna)</string>
+    <string name="app_widget_recent">Apollo: nedávno počúvané</string>
+    <string name="app_widget_text_separator">-</string>
+    <string name="no_effects_for_you">Nedá sa otvoriť ekvalizér.</string>
+    <string name="empty_music">Na kopírovanie hudby z vášho počítača do vášho zariadenia použite kábel USB.</string>
+    <string name="empty_last_added">Tu budú zobrazené skladby, ktoré ste pridali za posledný mesiac.</string>
+    <string name="empty_search">Žiadne výsledky hľadania</string>
+    <string name="empty_favorite">Tu budú zobrazené skladby, ktoré ste označili ako obľúbené.</string>
+    <string name="empty_recent">Tu budú zobrazené albumy, ktoré ste počúvali. Skúste prehrať nejakú hudbu.</string>
+</resources>

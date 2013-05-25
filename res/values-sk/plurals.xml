@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright (C) 2012 Andrew Neal
+     Copyright (C) 2013 The CyanogenMod Project
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+
+          http://www.apache.org/licenses/LICENSE-2.0
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+ -->
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <plurals name="Nartists">
+        <item quantity="one">1 interpret</item>
+        <item quantity="other"><xliff:g id="count">%d</xliff:g> interpretov</item>
+        <item quantity="few"><xliff:g id="count">%d</xliff:g> interpreti</item>
+    </plurals>
+    <plurals name="Nalbums">
+        <item quantity="one">1 album</item>
+        <item quantity="other"><xliff:g id="count">%d</xliff:g> albumov</item>
+        <item quantity="few"><xliff:g id="count">%d</xliff:g> albumy</item>
+    </plurals>
+    <plurals name="Nsongs">
+        <item quantity="one">1 skladba</item>
+        <item quantity="other"><xliff:g id="count">%d</xliff:g> skladieb</item>
+        <item quantity="few"><xliff:g id="count">%d</xliff:g> skladby</item>
+    </plurals>
+    <plurals name="Ngenres">
+        <item quantity="one">1 žáner</item>
+        <item quantity="other"><xliff:g id="count">%d</xliff:g> žánrov</item>
+        <item quantity="few"><xliff:g id="count">%d</xliff:g> žánre</item>
+    </plurals>
+    <plurals name="NNNtrackstoplaylist">
+        <item quantity="one">1 skladba bola pridaná do hracieho zoznamu.</item>
+        <item quantity="other"><xliff:g id="number" example="27">%d</xliff:g> skladieb bolo pridaných do hracieho zoznamu.</item>
+        <item quantity="few"><xliff:g id="number" example="27">%d</xliff:g> skladby bolipridané do hracieho zoznamu.</item>
+    </plurals>
+    <plurals name="NNNtrackstoqueue">
+        <item quantity="one">1 skladba bola pridaná do fronty.</item>
+        <item quantity="other"><xliff:g id="number" example="27">%d</xliff:g> skladieb bolo pridaných do fronty.</item>
+        <item quantity="few"><xliff:g id="number" example="27">%d</xliff:g> skladby boli pridané do fronty.</item>
+    </plurals>
+    <plurals name="NNNtrackstofavorites">
+        <item quantity="one">1 skladba bola pridaná do obľúbených.</item>
+        <item quantity="other"><xliff:g id="number" example="27">%d</xliff:g> skladieb bolo pridaných do obľúbených.</item>
+        <item quantity="few"><xliff:g id="number" example="27">%d</xliff:g> skladby boli pridané do obľúbených.</item>
+    </plurals>
+    <plurals name="NNNtracksdeleted">
+        <item quantity="one">1 skladba bola odstránená.</item>
+        <item quantity="other"><xliff:g id="songs_to_delete">%d</xliff:g> skladieb bolo odstránených.</item>
+        <item quantity="few"><xliff:g id="songs_to_delete">%d</xliff:g> skladby boli odstránené.</item>
+    </plurals>
+</resources>
