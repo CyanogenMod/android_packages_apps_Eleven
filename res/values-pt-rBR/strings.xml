@@ -124,4 +124,5 @@
     <string name="empty_search">Nenhum resultado de busca</string>
     <string name="empty_favorite">Vão ser exibidas aqui as músicas que você marcou como favoritas.</string>
     <string name="empty_recent">Vão ser exibidos aqui os álbuns que você escutou. Tente tocar alguma música.</string>
+    <string name="playlist_favorite">Favorito</string>
 </resources>
