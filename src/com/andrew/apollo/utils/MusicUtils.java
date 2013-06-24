@@ -1156,9 +1156,12 @@ public final class MusicUtils {
         if (cursor != null && cursor.getCount() > 0 && cursor.moveToFirst()) {
             while (!cursor.isAfterLast()) {
                 final Intent intent = new Intent();
-                intent.putExtra("playlist", getIdForPlaylist(context, cursor.getString(1)));
-                subMenu.add(groupId, FragmentMenuItems.PLAYLIST_SELECTED, Menu.NONE,
-                        cursor.getString(1)).setIntent(intent);
+                String name = cursor.getString(1);
+                if (name != null) {
+                    intent.putExtra("playlist", getIdForPlaylist(context, name));
+                    subMenu.add(groupId, FragmentMenuItems.PLAYLIST_SELECTED, Menu.NONE,
+                            name).setIntent(intent);
+                }
                 cursor.moveToNext();
             }
         }
