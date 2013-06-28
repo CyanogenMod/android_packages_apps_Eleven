@@ -112,6 +112,14 @@ public class NotificationHelper {
     }
 
     /**
+     * Remove notification
+     */
+    public void killNotification() {
+        mService.stopForeground(true);
+        mNotification = null;
+    }
+
+    /**
      * Changes the playback controls in and out of a paused state
      *
      * @param isPlaying True if music is playing, false otherwise

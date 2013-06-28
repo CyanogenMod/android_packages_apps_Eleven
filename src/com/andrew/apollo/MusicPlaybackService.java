@@ -12,6 +12,7 @@
 package com.andrew.apollo;
 
 import android.annotation.SuppressLint;
+import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.app.Service;
 import android.appwidget.AppWidgetManager;
@@ -154,6 +155,16 @@ public class MusicPlaybackService extends Service {
      * changes
      */
     public static final String REFRESH = "com.andrew.apollo.refresh";
+
+    /**
+     * Used by the alarm intent to remove the notification
+     */
+    private static final String KILL_NOTIFICATION = "com.andrew.apollo.killnotification";
+
+    /**
+     * Called to update the remote control client
+     */
+    public static final String UPDATE_LOCKSCREEN = "com.andrew.apollo.updatelockscreen";
 
     public static final String CMDNAME = "command";
 
@@ -335,6 +346,13 @@ public class MusicPlaybackService extends Service {
     private WakeLock mWakeLock;
 
     /**
+     * Alarm intent for removing the notification when nothing is playing
+     * for some time
+     */
+    private AlarmManager mAlarmManager;
+    private PendingIntent mKillNotificationIntent;
+
+    /**
      * The cursor used to retrieve info on the current track and run the
      * necessary queries to play audio files
      */
@@ -371,9 +389,9 @@ public class MusicPlaybackService extends Service {
     private boolean mPausedByTransientLossOfFocus = false;
 
     /**
-     * Returns true if the Apollo is sent to the background, false otherwise
+     * Used to track whether any of Apollo's activities is in the foreground
      */
-    private boolean mBuildNotification = false;
+    private boolean mAnyActivityInForeground = false;
 
     /**
      * Lock screen controls
@@ -547,6 +565,13 @@ public class MusicPlaybackService extends Service {
         mWakeLock = powerManager.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, getClass().getName());
         mWakeLock.setReferenceCounted(false);
 
+        // Initialize the notification removal intent
+        final Intent killIntent = new Intent(this, MusicPlaybackService.class);
+        killIntent.setAction(KILL_NOTIFICATION);
+
+        mAlarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
+        mKillNotificationIntent = PendingIntent.getService(this, 0, killIntent, 0);
+
         // Bring the queue back
         reloadQueue();
         notifyChange(QUEUE_CHANGED);
@@ -591,6 +616,9 @@ public class MusicPlaybackService extends Service {
         audioEffectsIntent.putExtra(AudioEffect.EXTRA_PACKAGE_NAME, getPackageName());
         sendBroadcast(audioEffectsIntent);
 
+        // remove any pending alarms
+        mAlarmManager.cancel(mKillNotificationIntent);
+
         // Release the player
         mPlayer.release();
         mPlayer = null;
@@ -626,20 +654,37 @@ public class MusicPlaybackService extends Service {
     @Override
     public int onStartCommand(final Intent intent, final int flags, final int startId) {
         mServiceStartId = startId;
-        mDelayedStopHandler.removeCallbacksAndMessages(null);
+
         if (intent != null) {
             final String action = intent.getAction();
 
            if (intent.hasExtra(NOW_IN_FOREGROUND)) {
-                mBuildNotification = !intent.getBooleanExtra(NOW_IN_FOREGROUND, false);
-                if (mBuildNotification && isPlaying()) {
-                    buildNotification();
-                } else if (!mBuildNotification) {
-                    killNotification();
-                }
-            }
+                mAnyActivityInForeground = intent.getBooleanExtra(NOW_IN_FOREGROUND, false);
+                updateNotification();
+           }
 
+<<<<<<< HEAD
             handleCommandIntent(intent);
+=======
+            if (UPDATE_LOCKSCREEN.equals(action)) {
+                mEnableLockscreenControls = intent.getBooleanExtra(UPDATE_LOCKSCREEN, true);
+                if (mEnableLockscreenControls) {
+                    setUpRemoteControlClient();
+                    // Update the controls according to the current playback
+                    notifyChange(PLAYSTATE_CHANGED);
+                    notifyChange(META_CHANGED);
+                } else {
+                    // Remove then unregister the controls
+                    mRemoteControlClient
+                            .setPlaybackState(RemoteControlClient.PLAYSTATE_STOPPED);
+                    mAudioManager.unregisterRemoteControlClient(mRemoteControlClient);
+                }
+            } else if (KILL_NOTIFICATION.equals(action)) {
+                mNotificationHelper.killNotification();
+            } else {
+                handleCommandIntent(intent);
+            }
+>>>>>>> aeb807a... Make sure notification is shown when playback is started via media
         }
 
         // Make sure the service will shut down on its own if it was
@@ -679,7 +724,7 @@ public class MusicPlaybackService extends Service {
             pause();
             mPausedByTransientLossOfFocus = false;
             seek(0);
-            killNotification();
+            mNotificationHelper.killNotification();
         } else if (REPEAT_ACTION.equals(action)) {
             cycleRepeat();
         } else if (SHUFFLE_ACTION.equals(action)) {
@@ -688,20 +733,16 @@ public class MusicPlaybackService extends Service {
     }
 
     /**
-     * Builds the notification for Apollo
+     * Updates the notification, considering the current play and activity state
      */
-    public void buildNotification() {
-        if (mBuildNotification) {
+    private void updateNotification() {
+        if (!mAnyActivityInForeground && isPlaying()) {
+            mAlarmManager.cancel(mKillNotificationIntent);
             mNotificationHelper.buildNotification(getAlbumName(), getArtistName(),
                     getTrackName(), getAlbumId(), getAlbumArt(), isPlaying());
+        } else if (mAnyActivityInForeground) {
+            mNotificationHelper.killNotification();
         }
-    }
-
-    /**
-     * Removes the foreground notification
-     */
-    public void killNotification() {
-        stopForeground(true);
     }
 
     /**
@@ -777,24 +818,16 @@ public class MusicPlaybackService extends Service {
         mDelayedStopHandler.removeCallbacksAndMessages(null);
         final Message msg = mDelayedStopHandler.obtainMessage();
         mDelayedStopHandler.sendMessageDelayed(msg, IDLE_DELAY);
-        mDelayedStopHandler.postDelayed(new Runnable() {
-
-            /**
-             * {@inheritDoc}
-             */
-            @Override
-            public void run() {
-                killNotification();
-            }
-        }, IDLE_DELAY);
+        mAlarmManager.set(AlarmManager.ELAPSED_REALTIME_WAKEUP,
+                SystemClock.elapsedRealtime() + IDLE_DELAY, mKillNotificationIntent);
     }
 
     /**
      * Stops playback
      *
-     * @param remove_status_icon True to go to the idle state, false otherwise
+     * @param goToIdle True to go to the idle state, false otherwise
      */
-    private void stop(final boolean remove_status_icon) {
+    private void stop(final boolean goToIdle) {
         if (mPlayer.isInitialized()) {
             mPlayer.stop();
         }
@@ -803,13 +836,11 @@ public class MusicPlaybackService extends Service {
             mCursor.close();
             mCursor = null;
         }
-        if (remove_status_icon) {
+        if (goToIdle) {
             gotoIdleState();
+            mIsSupposedToBePlaying = false;
         } else {
             stopForeground(false);
-        }
-        if (remove_status_icon) {
-            mIsSupposedToBePlaying = false;
         }
     }
 
@@ -1214,7 +1245,7 @@ public class MusicPlaybackService extends Service {
             saveQueue(false);
         }
 
-        if (mBuildNotification && what.equals(PLAYSTATE_CHANGED)) {
+        if (what.equals(PLAYSTATE_CHANGED)) {
             mNotificationHelper.updatePlayState(isPlaying());
         }
 
@@ -1833,13 +1864,12 @@ public class MusicPlaybackService extends Service {
             mPlayerHandler.removeMessages(FADEDOWN);
             mPlayerHandler.sendEmptyMessage(FADEUP);
 
-            // Update the notification
-            buildNotification();
             if (!mIsSupposedToBePlaying) {
                 mIsSupposedToBePlaying = true;
                 notifyChange(PLAYSTATE_CHANGED);
             }
 
+            updateNotification();
         } else if (mPlayListLen <= 0) {
             setShuffleMode(SHUFFLE_AUTO);
         }
@@ -2241,7 +2271,7 @@ public class MusicPlaybackService extends Service {
                     }
                     service.mCursor = service.getCursorForId(service.mPlayList[service.mPlayPos]);
                     service.notifyChange(META_CHANGED);
-                    service.buildNotification();
+                    service.updateNotification();
                     service.setNextTrack();
                     break;
                 case TRACK_ENDED:
