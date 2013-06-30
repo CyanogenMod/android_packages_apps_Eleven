@@ -109,7 +109,6 @@
     <string name="settings_download_missing_artwork_title">Baixar artes de álbuns restantes</string>
     <string name="settings_download_artist_images_title">Baixar imagens de álbuns restantes</string>
     <string name="settings_open_source_licenses">Licenças de código livre</string>
-    <string name="settings_use_lockscreen_controls">Usar controles na tela de bloqueio</string>
     <string name="settings_version_title">Número de versão</string>
     <string name="share_track_using">Compartilhar faixa usando:</string>
     <string name="now_listening_to">#NowPlaying <xliff:g id="title" xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">%1$s</xliff:g> por <xliff:g id="artist" xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">%2$s</xliff:g> #Apollo</string>

@@ -122,7 +122,6 @@
     <string name="settings_download_missing_artwork_title">下载缺失的专辑封面</string>
     <string name="settings_download_artist_images_title">下载缺失的艺术家的图像</string>
     <string name="settings_open_source_licenses">开源许可证</string>
-    <string name="settings_use_lockscreen_controls">使用锁屏控制</string>
     <string name="settings_version_title">版本号</string>
 
     <string name="now_listening_to">#NowPlaying <xliff:g id="title">%1$s</xliff:g> - <xliff:g id="artist">%2$s</xliff:g> #Apollo</string>

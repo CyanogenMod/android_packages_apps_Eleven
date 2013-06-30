@@ -131,7 +131,6 @@
     <string name="settings_download_missing_artwork_title">Pobierz brakujące okładki albumów</string>
     <string name="settings_download_artist_images_title">Pobierz brakujące zdjęcia wykonawców</string>
     <string name="settings_open_source_licenses">Licencje open source</string>
-    <string name="settings_use_lockscreen_controls">Sterowanie na ekranie blokady</string>
     <string name="settings_version_title">Numer wersji</string>
 
     <!-- Share Intent -->

@@ -111,7 +111,6 @@ limitations under the License.
     <string name="settings_download_missing_artwork_title">Завантажити обкладинки</string>
     <string name="settings_download_artist_images_title">Завантажити фото співаків</string>
     <string name="settings_open_source_licenses">Відкриті ліцензії</string>
-    <string name="settings_use_lockscreen_controls">Керувати з екрану блокування</string>
     <string name="settings_version_title">Версія</string>
     <string name="now_listening_to">#яЗаразСлухаю <xliff:g id="title">%1$s</xliff:g> від <xliff:g id="artist">%2$s</xliff:g> #Apollo</string>
     <string name="share_track_using">Відправити трек за допомогою:</string>

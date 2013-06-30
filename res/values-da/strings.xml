@@ -120,7 +120,6 @@
     <string name="settings_download_missing_artwork_title">Download manglende albumgrafik</string>
     <string name="settings_download_artist_images_title">Download manglende kunstnerbilleder</string>
     <string name="settings_open_source_licenses">Open source-licenser</string>
-    <string name="settings_use_lockscreen_controls">Brug skærmlås-kontroller</string>
     <string name="settings_version_title">Versionsnummer</string>
 
     <string name="now_listening_to">#NowPlaying <xliff:g id="title">%1$s</xliff:g> af <xliff:g id="artist">%2$s</xliff:g> #Apollo</string>

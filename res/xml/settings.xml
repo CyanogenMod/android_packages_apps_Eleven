@@ -28,11 +28,6 @@
         <Preference
             android:key="theme_chooser"
             android:title="@string/settings_theme_chooser_title" />
-        <!-- Enable lockscreen controls -->
-        <CheckBoxPreference
-            android:defaultValue="true"
-            android:key="lockscreen_controls"
-            android:title="@string/settings_use_lockscreen_controls" />
     </PreferenceCategory>
     <!-- Data catetory -->
     <PreferenceCategory android:title="@string/settings_data_category" >

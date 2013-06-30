@@ -75,9 +75,6 @@ public final class PreferenceUtils {
     // Key that gives permissions to download missing artist images
     public static final String DOWNLOAD_MISSING_ARTIST_IMAGES = "download_missing_artist_images";
 
-    // Enables lock screen controls on Honeycomb and above
-    public static final String USE_LOCKSREEN_CONTROLS = "lockscreen_controls";
-
     // Key used to set the overall theme color
     public static final String DEFAULT_THEME_COLOR = "default_theme_color";
 
@@ -184,14 +181,6 @@ public final class PreferenceUtils {
      */
     public final boolean downloadMissingArtistImages() {
         return mPreferences.getBoolean(DOWNLOAD_MISSING_ARTIST_IMAGES, true);
-    }
-
-    /**
-     * @return True if the user has checked to use lockscreen controls, false
-     *         otherwise.
-     */
-    public final boolean enableLockscreenControls() {
-        return mPreferences.getBoolean(USE_LOCKSREEN_CONTROLS, true);
     }
 
     /**

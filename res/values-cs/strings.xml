@@ -121,7 +121,6 @@
     <string name="settings_download_missing_artwork_title">Stáhnout chybějící obaly alb</string>
     <string name="settings_download_artist_images_title">Stáhnout chybějící obrázky umělců</string>
     <string name="settings_open_source_licenses">Licence otevřeného software</string>
-    <string name="settings_use_lockscreen_controls">Použít ovládání na zamčené obrazovce</string>
     <string name="settings_version_title">Číslo verze</string>
 
     <string name="now_listening_to">#Přehrávání \'<xliff:g id="title">%1$s</xliff:g>\' / \'<xliff:g id="artist">%2$s</xliff:g>\' #Apollo</string>

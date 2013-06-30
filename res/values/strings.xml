@@ -135,7 +135,6 @@
     <string name="settings_download_missing_artwork_title">Download missing album art</string>
     <string name="settings_download_artist_images_title">Download missing artist images</string>
     <string name="settings_open_source_licenses">Open source licenses</string>
-    <string name="settings_use_lockscreen_controls">Use lockscreen controls</string>
     <string name="settings_version_title">Version number</string>
 
     <!-- Share Intent -->

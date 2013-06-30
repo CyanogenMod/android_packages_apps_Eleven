@@ -72,8 +72,6 @@ public class SettingsActivity extends PreferenceActivity {
 
         // Interface settings
         initInterface();
-        // Date settings
-        initData();
         // Removes the cache entries
         deleteCache();
         // About
@@ -132,14 +130,6 @@ public class SettingsActivity extends PreferenceActivity {
     }
 
     /**
-     * Initializes the preferences under the "Data" category
-     */
-    private void initData() {
-        // Lockscreen controls
-        toggleLockscreenControls();
-    }
-
-    /**
      * Shows the {@link ColorSchemeDialog} and then saves the changes.
      */
     private void updateColorScheme() {
@@ -164,27 +154,6 @@ public class SettingsActivity extends PreferenceActivity {
                 final Intent themeChooserIntent = new Intent(SettingsActivity.this,
                         ThemesActivity.class);
                 startActivity(themeChooserIntent);
-                return true;
-            }
-        });
-    }
-
-    /**
-     * Toggles the lock screen controls
-     */
-    private void toggleLockscreenControls() {
-        final CheckBoxPreference lockscreenControls = (CheckBoxPreference)findPreference("lockscreen_controls");
-        lockscreenControls.setOnPreferenceChangeListener(new OnPreferenceChangeListener() {
-
-            @Override
-            public boolean onPreferenceChange(final Preference preference, final Object newValue) {
-                // Let the service know
-                final Intent updateLockscreen = new Intent(SettingsActivity.this,
-                        MusicPlaybackService.class);
-                updateLockscreen.setAction(MusicPlaybackService.UPDATE_LOCKSCREEN);
-                updateLockscreen
-                        .putExtra(MusicPlaybackService.UPDATE_LOCKSCREEN, (Boolean)newValue);
-                startService(updateLockscreen);
                 return true;
             }
         });

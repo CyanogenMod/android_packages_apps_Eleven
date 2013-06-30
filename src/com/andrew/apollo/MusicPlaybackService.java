@@ -155,11 +155,6 @@ public class MusicPlaybackService extends Service {
      */
     public static final String REFRESH = "com.andrew.apollo.refresh";
 
-    /**
-     * Called to update the remote control client
-     */
-    public static final String UPDATE_LOCKSCREEN = "com.andrew.apollo.updatelockscreen";
-
     public static final String CMDNAME = "command";
 
     public static final String CMDTOGGLEPAUSE = "togglepause";
@@ -381,14 +376,9 @@ public class MusicPlaybackService extends Service {
     private boolean mBuildNotification = false;
 
     /**
-     * Lock screen controls ICS+
+     * Lock screen controls
      */
     private RemoteControlClient mRemoteControlClient;
-
-    /**
-     * Enables the remote control client
-     */
-    private boolean mEnableLockscreenControls;
 
     private ComponentName mMediaButtonReceiverComponent;
 
@@ -526,9 +516,7 @@ public class MusicPlaybackService extends Service {
                 MediaButtonIntentReceiver.class.getName());
         mAudioManager.registerMediaButtonEventReceiver(mMediaButtonReceiverComponent);
 
-        // Use the remote control APIs (if available and the user allows it) to
-        // set the playback state
-        mEnableLockscreenControls = PreferenceUtils.getInstance(this).enableLockscreenControls();
+        // Use the remote control APIs (if available) to set the playback state
         setUpRemoteControlClient();
 
         // Initialize the preferences
@@ -573,24 +561,21 @@ public class MusicPlaybackService extends Service {
      * Initializes the remote control client
      */
     private void setUpRemoteControlClient() {
-        if (mEnableLockscreenControls) {
-            if (mRemoteControlClient == null) {
-                final Intent mediaButtonIntent = new Intent(Intent.ACTION_MEDIA_BUTTON);
-                mediaButtonIntent.setComponent(mMediaButtonReceiverComponent);
-                mRemoteControlClient = new RemoteControlClient(
-                        PendingIntent.getBroadcast(getApplicationContext(), 0, mediaButtonIntent,
-                                PendingIntent.FLAG_UPDATE_CURRENT));
-                mAudioManager.registerRemoteControlClient(mRemoteControlClient);
-            }
-            // Flags for the media transport control that this client supports.
-            final int flags = RemoteControlClient.FLAG_KEY_MEDIA_PREVIOUS
-                    | RemoteControlClient.FLAG_KEY_MEDIA_NEXT
-                    | RemoteControlClient.FLAG_KEY_MEDIA_PLAY
-                    | RemoteControlClient.FLAG_KEY_MEDIA_PAUSE
-                    | RemoteControlClient.FLAG_KEY_MEDIA_PLAY_PAUSE
-                    | RemoteControlClient.FLAG_KEY_MEDIA_STOP;
-            mRemoteControlClient.setTransportControlFlags(flags);
-        }
+        final Intent mediaButtonIntent = new Intent(Intent.ACTION_MEDIA_BUTTON);
+        mediaButtonIntent.setComponent(mMediaButtonReceiverComponent);
+        mRemoteControlClient = new RemoteControlClient(
+                PendingIntent.getBroadcast(getApplicationContext(), 0, mediaButtonIntent,
+                        PendingIntent.FLAG_UPDATE_CURRENT));
+        mAudioManager.registerRemoteControlClient(mRemoteControlClient);
+
+        // Flags for the media transport control that this client supports.
+        final int flags = RemoteControlClient.FLAG_KEY_MEDIA_PREVIOUS
+                | RemoteControlClient.FLAG_KEY_MEDIA_NEXT
+                | RemoteControlClient.FLAG_KEY_MEDIA_PLAY
+                | RemoteControlClient.FLAG_KEY_MEDIA_PAUSE
+                | RemoteControlClient.FLAG_KEY_MEDIA_PLAY_PAUSE
+                | RemoteControlClient.FLAG_KEY_MEDIA_STOP;
+        mRemoteControlClient.setTransportControlFlags(flags);
     }
 
     /**
@@ -654,22 +639,7 @@ public class MusicPlaybackService extends Service {
                 }
             }
 
-            if (UPDATE_LOCKSCREEN.equals(action)) {
-                mEnableLockscreenControls = intent.getBooleanExtra(UPDATE_LOCKSCREEN, true);
-                if (mEnableLockscreenControls) {
-                    setUpRemoteControlClient();
-                    // Update the controls according to the current playback
-                    notifyChange(PLAYSTATE_CHANGED);
-                    notifyChange(META_CHANGED);
-                } else {
-                    // Remove then unregister the controls
-                    mRemoteControlClient
-                            .setPlaybackState(RemoteControlClient.PLAYSTATE_STOPPED);
-                    mAudioManager.unregisterRemoteControlClient(mRemoteControlClient);
-                }
-            } else {
-                handleCommandIntent(intent);
-            }
+            handleCommandIntent(intent);
         }
 
         // Make sure the service will shut down on its own if it was
@@ -1256,39 +1226,34 @@ public class MusicPlaybackService extends Service {
     }
 
     /**
-     * Updates the lockscreen controls, if enabled.
+     * Updates the lockscreen controls.
      *
      * @param what The broadcast
      */
     private void updateRemoteControlClient(final String what) {
-        if (mEnableLockscreenControls && mRemoteControlClient != null) {
-            if (what.equals(PLAYSTATE_CHANGED)) {
-                // If the playstate change notify the lock screen
-                // controls
-                mRemoteControlClient.setPlaybackState(mIsSupposedToBePlaying
-                        ? RemoteControlClient.PLAYSTATE_PLAYING
-                        : RemoteControlClient.PLAYSTATE_PAUSED);
-            } else if (what.equals(META_CHANGED)) {
-                // Update the lockscreen controls
-                Bitmap albumArt = getAlbumArt();
-                if (albumArt != null) {
-                    // RemoteControlClient wants to recycle the bitmaps thrown at it, so we need
-                    // to make sure not to hand out our cache copy
-                    Bitmap.Config config = albumArt.getConfig();
-                    if (config == null) {
-                        config = Bitmap.Config.ARGB_8888;
-                    }
-                    albumArt = albumArt.copy(config, false);
+        if (what.equals(PLAYSTATE_CHANGED)) {
+            mRemoteControlClient.setPlaybackState(mIsSupposedToBePlaying
+                    ? RemoteControlClient.PLAYSTATE_PLAYING
+                    : RemoteControlClient.PLAYSTATE_PAUSED);
+        } else if (what.equals(META_CHANGED)) {
+            Bitmap albumArt = getAlbumArt();
+            if (albumArt != null) {
+                // RemoteControlClient wants to recycle the bitmaps thrown at it, so we need
+                // to make sure not to hand out our cache copy
+                Bitmap.Config config = albumArt.getConfig();
+                if (config == null) {
+                    config = Bitmap.Config.ARGB_8888;
                 }
-                mRemoteControlClient
-                        .editMetadata(true)
-                        .putString(MediaMetadataRetriever.METADATA_KEY_ARTIST, getArtistName())
-                        .putString(MediaMetadataRetriever.METADATA_KEY_ALBUM, getAlbumName())
-                        .putString(MediaMetadataRetriever.METADATA_KEY_TITLE, getTrackName())
-                        .putLong(MediaMetadataRetriever.METADATA_KEY_DURATION, duration())
-                        .putBitmap(RemoteControlClient.MetadataEditor.BITMAP_KEY_ARTWORK, albumArt)
-                        .apply();
+                albumArt = albumArt.copy(config, false);
             }
+            mRemoteControlClient
+                    .editMetadata(true)
+                    .putString(MediaMetadataRetriever.METADATA_KEY_ARTIST, getArtistName())
+                    .putString(MediaMetadataRetriever.METADATA_KEY_ALBUM, getAlbumName())
+                    .putString(MediaMetadataRetriever.METADATA_KEY_TITLE, getTrackName())
+                    .putLong(MediaMetadataRetriever.METADATA_KEY_DURATION, duration())
+                    .putBitmap(RemoteControlClient.MetadataEditor.BITMAP_KEY_ARTWORK, albumArt)
+                    .apply();
         }
     }
 

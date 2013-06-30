@@ -121,7 +121,6 @@
     <string name="settings_download_missing_artwork_title">Lataa albumin puuttuva kansikuva</string>
     <string name="settings_download_artist_images_title">Lataa puuttuvat esittäjän kuvat</string>
     <string name="settings_open_source_licenses">Avoimen lähdekoodin lisenssit</string>
-    <string name="settings_use_lockscreen_controls">Käytä lukitusnäytön säätimiä</string>
     <string name="settings_version_title">Versionumero</string>
 
     <string name="now_listening_to">#NowPlaying <xliff:g id="title">%1$s</xliff:g> esittäjältä <xliff:g id="artist">%2$s</xliff:g> #Apollo</string>

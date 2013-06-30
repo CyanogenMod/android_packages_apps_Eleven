@@ -132,7 +132,6 @@
     <string name="settings_download_missing_artwork_title">Hiányzó albumborítók letöltése</string>
     <string name="settings_download_artist_images_title">Hiányzó előadóképek letöltése</string>
     <string name="settings_open_source_licenses">Nyílt forráskódú licenszek</string>
-    <string name="settings_use_lockscreen_controls">Zenevezérlés zárképernyőn</string>
     <string name="settings_version_title">Verziószám</string>
 
     <!-- Share Intent -->
