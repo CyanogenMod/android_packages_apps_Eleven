@@ -658,33 +658,16 @@ public class MusicPlaybackService extends Service {
         if (intent != null) {
             final String action = intent.getAction();
 
-           if (intent.hasExtra(NOW_IN_FOREGROUND)) {
+            if (intent.hasExtra(NOW_IN_FOREGROUND)) {
                 mAnyActivityInForeground = intent.getBooleanExtra(NOW_IN_FOREGROUND, false);
                 updateNotification();
-           }
+            }
 
-<<<<<<< HEAD
-            handleCommandIntent(intent);
-=======
-            if (UPDATE_LOCKSCREEN.equals(action)) {
-                mEnableLockscreenControls = intent.getBooleanExtra(UPDATE_LOCKSCREEN, true);
-                if (mEnableLockscreenControls) {
-                    setUpRemoteControlClient();
-                    // Update the controls according to the current playback
-                    notifyChange(PLAYSTATE_CHANGED);
-                    notifyChange(META_CHANGED);
-                } else {
-                    // Remove then unregister the controls
-                    mRemoteControlClient
-                            .setPlaybackState(RemoteControlClient.PLAYSTATE_STOPPED);
-                    mAudioManager.unregisterRemoteControlClient(mRemoteControlClient);
-                }
-            } else if (KILL_NOTIFICATION.equals(action)) {
+            if (KILL_NOTIFICATION.equals(action)) {
                 mNotificationHelper.killNotification();
             } else {
                 handleCommandIntent(intent);
             }
->>>>>>> aeb807a... Make sure notification is shown when playback is started via media
         }
 
         // Make sure the service will shut down on its own if it was
