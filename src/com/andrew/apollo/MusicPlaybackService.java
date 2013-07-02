@@ -1503,17 +1503,6 @@ public class MusicPlaybackService extends Service {
     }
 
     /**
-     * Sets the audio session ID.
-     *
-     * @param sessionId: the audio session ID.
-     */
-    public void setAudioSessionId(final int sessionId) {
-        synchronized (this) {
-            mPlayer.setAudioSessionId(sessionId);
-        }
-    }
-
-    /**
      * Indicates if the media storeage device has been mounted or not
      *
      * @return 1 if Intent.ACTION_MEDIA_MOUNTED is called, 0 otherwise

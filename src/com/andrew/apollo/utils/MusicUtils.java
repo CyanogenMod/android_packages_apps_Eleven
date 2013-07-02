@@ -417,6 +417,19 @@ public final class MusicUtils {
     }
 
     /**
+     * @return The audio session Id.
+     */
+    public static final int getAudioSessionId() {
+        if (mService != null) {
+            try {
+                return mService.getAudioSessionId();
+            } catch (final RemoteException ignored) {
+            }
+        }
+        return -1;
+    }
+
+    /**
      * @return The queue.
      */
     public static final long[] getQueue() {

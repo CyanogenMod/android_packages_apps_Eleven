@@ -88,7 +88,7 @@ public final class NavUtils {
     public static void openEffectsPanel(final Activity context) {
         try {
             final Intent effects = new Intent(AudioEffect.ACTION_DISPLAY_AUDIO_EFFECT_CONTROL_PANEL);
-            effects.putExtra(AudioEffect.EXTRA_AUDIO_SESSION, MusicUtils.getCurrentAudioId());
+            effects.putExtra(AudioEffect.EXTRA_AUDIO_SESSION, MusicUtils.getAudioSessionId());
             context.startActivity(effects);
         } catch (final ActivityNotFoundException notFound) {
             AppMsg.makeText(context, context.getString(R.string.no_effects_for_you),
