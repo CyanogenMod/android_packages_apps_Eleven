@@ -124,4 +124,10 @@
     <string name="empty_favorite">Vão ser exibidas aqui as músicas que você marcou como favoritas.</string>
     <string name="empty_recent">Vão ser exibidos aqui os álbuns que você escutou. Tente tocar alguma música.</string>
     <string name="playlist_favorite">Favorito</string>
+    <string name="sort_order_entry_az">A-Z</string>
+    <string name="sort_order_entry_za">Z-A</string>
+    <string name="hex">#</string>
+    <string name="app_widget_small">Apollo: 4x1</string>
+    <string name="app_widget_large">Apollo: 4x2</string>
+    <string name="app_widget_text_separator">-</string>
 </resources>
