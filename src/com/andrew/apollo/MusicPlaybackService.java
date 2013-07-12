@@ -44,6 +44,7 @@ import android.os.RemoteException;
 import android.os.SystemClock;
 import android.provider.MediaStore;
 import android.provider.MediaStore.Audio.AudioColumns;
+import android.util.Log;
 
 import com.andrew.apollo.appwidgets.AppWidgetLarge;
 import com.andrew.apollo.appwidgets.AppWidgetLargeAlternate;
@@ -70,6 +71,9 @@ import java.util.TreeSet;
  */
 @SuppressLint("NewApi")
 public class MusicPlaybackService extends Service {
+    private static final String TAG = "MusicPlaybackService";
+    private static final boolean D = false;
+
     /**
      * Indicates that the music has paused or resumed
      */
@@ -454,6 +458,7 @@ public class MusicPlaybackService extends Service {
      */
     @Override
     public IBinder onBind(final Intent intent) {
+        if (D) Log.d(TAG, "Service bound, intent = " + intent);
         cancelShutdown();
         mServiceInUse = true;
         return mBinder;
@@ -464,6 +469,7 @@ public class MusicPlaybackService extends Service {
      */
     @Override
     public boolean onUnbind(final Intent intent) {
+        if (D) Log.d(TAG, "Service unbound");
         mServiceInUse = false;
         saveQueue(true);
 
@@ -499,6 +505,7 @@ public class MusicPlaybackService extends Service {
      */
     @Override
     public void onCreate() {
+        if (D) Log.d(TAG, "Creating service");
         super.onCreate();
 
         // Initialize the favorites and recents databases
@@ -604,6 +611,7 @@ public class MusicPlaybackService extends Service {
      */
     @Override
     public void onDestroy() {
+        if (D) Log.d(TAG, "Destroying service");
         super.onDestroy();
         // Remove any sound effects
         final Intent audioEffectsIntent = new Intent(
@@ -648,6 +656,7 @@ public class MusicPlaybackService extends Service {
      */
     @Override
     public int onStartCommand(final Intent intent, final int flags, final int startId) {
+        if (D) Log.d(TAG, "Got new intent " + intent + ", startId = " + startId);
         mServiceStartId = startId;
 
         if (intent != null) {
@@ -680,6 +689,7 @@ public class MusicPlaybackService extends Service {
             return;
         }
 
+        if (D) Log.d(TAG, "Nothing is playing anymore, releasing notification");
         mNotificationHelper.killNotification();
         mAudioManager.abandonAudioFocus(mAudioFocusListener);
 
@@ -692,6 +702,8 @@ public class MusicPlaybackService extends Service {
     private void handleCommandIntent(Intent intent) {
         final String action = intent.getAction();
         final String command = SERVICECMD.equals(action) ? intent.getStringExtra(CMDNAME) : null;
+
+        if (D) Log.d(TAG, "handleCommandIntent: action = " + action + ", command = " + command);
 
         if (CMDNEXT.equals(command) || NEXT_ACTION.equals(action)) {
             gotoNext(true);
@@ -804,12 +816,14 @@ public class MusicPlaybackService extends Service {
     }
 
     private void scheduleDelayedShutdown() {
+        if (D) Log.v(TAG, "Scheduling shutdown in " + IDLE_DELAY + " ms");
         mAlarmManager.set(AlarmManager.ELAPSED_REALTIME_WAKEUP,
                 SystemClock.elapsedRealtime() + IDLE_DELAY, mShutdownIntent);
         mShutdownScheduled = true;
     }
 
     private void cancelShutdown() {
+        if (D) Log.d(TAG, "Cancelling delayed shutdown, scheduled = " + mShutdownScheduled);
         if (mShutdownScheduled) {
             mAlarmManager.cancel(mShutdownIntent);
             mShutdownScheduled = false;
@@ -822,6 +836,7 @@ public class MusicPlaybackService extends Service {
      * @param goToIdle True to go to the idle state, false otherwise
      */
     private void stop(final boolean goToIdle) {
+        if (D) Log.d(TAG, "Stopping playback, goToIdle = " + goToIdle);
         if (mPlayer.isInitialized()) {
             mPlayer.stop();
         }
@@ -999,6 +1014,7 @@ public class MusicPlaybackService extends Service {
                     mCursor = getCursorForId(mPlayList[mPlayPos]);
                 } else {
                     mOpenFailedCounter = 0;
+                    Log.w(TAG, "Failed to open file for playback");
                     scheduleDelayedShutdown();
                     if (mIsSupposedToBePlaying) {
                         mIsSupposedToBePlaying = false;
@@ -1093,6 +1109,7 @@ public class MusicPlaybackService extends Service {
      */
     private void setNextTrack() {
         mNextPlayPos = getNextPosition(false);
+        if (D) Log.d(TAG, "setNextTrack: next play position = " + mNextPlayPos);
         if (mNextPlayPos >= 0 && mPlayList != null) {
             final long id = mPlayList[mNextPlayPos];
             mPlayer.setNextDataSource(MediaStore.Audio.Media.EXTERNAL_CONTENT_URI + "/" + id);
@@ -1207,6 +1224,8 @@ public class MusicPlaybackService extends Service {
      * Notify the change-receivers that something has changed.
      */
     private void notifyChange(final String what) {
+        if (D) Log.d(TAG, "notifyChange: what = " + what);
+
         final Intent intent = new Intent(what);
         intent.putExtra("id", getAudioId());
         intent.putExtra("artist", getArtistName());
@@ -1409,6 +1428,12 @@ public class MusicPlaybackService extends Service {
             final long seekpos = mPreferences.getLong("seekpos", 0);
             seek(seekpos >= 0 && seekpos < duration() ? seekpos : 0);
 
+            if (D) {
+                Log.d(TAG, "restored queue, currently at position "
+                        + position() + "/" + duration()
+                        + " (requested " + seekpos + ")");
+            }
+
             int repmode = mPreferences.getInt("repeatmode", REPEAT_NONE);
             if (repmode != REPEAT_ALL && repmode != REPEAT_CURRENT) {
                 repmode = REPEAT_NONE;
@@ -1466,6 +1491,7 @@ public class MusicPlaybackService extends Service {
      * @param path The path of the file to open
      */
     public boolean openFile(final String path) {
+        if (D) Log.d(TAG, "openFile: path = " + path);
         synchronized (this) {
             if (path == null) {
                 return false;
@@ -1833,6 +1859,9 @@ public class MusicPlaybackService extends Service {
     public void play() {
         int status = mAudioManager.requestAudioFocus(mAudioFocusListener,
                 AudioManager.STREAM_MUSIC, AudioManager.AUDIOFOCUS_GAIN);
+
+        if (D) Log.d(TAG, "Starting playback: audio focus request status = " + status);
+
         if (status != AudioManager.AUDIOFOCUS_REQUEST_GRANTED) {
             return;
         }
@@ -1867,6 +1896,7 @@ public class MusicPlaybackService extends Service {
      * Temporarily pauses playback.
      */
     public void pause() {
+        if (D) Log.d(TAG, "Pausing playback");
         synchronized (this) {
             mPlayerHandler.removeMessages(FADEUP);
             if (mIsSupposedToBePlaying) {
@@ -1882,8 +1912,11 @@ public class MusicPlaybackService extends Service {
      * Changes from the current track to the next track
      */
     public void gotoNext(final boolean force) {
+        if (D) Log.d(TAG, "Going to next track");
         synchronized (this) {
             if (mPlayListLen <= 0) {
+                if (D) Log.d(TAG, "No play queue");
+                scheduleDelayedShutdown();
                 return;
             }
             final int pos = getNextPosition(force);
@@ -1908,6 +1941,7 @@ public class MusicPlaybackService extends Service {
      * Changes from the current track to the previous played track
      */
     public void prev() {
+        if (D) Log.d(TAG, "Going to previous track");
         synchronized (this) {
             if (mShuffleMode == SHUFFLE_NORMAL) {
                 // Go to previously-played track and remove it from the history
@@ -2242,6 +2276,7 @@ public class MusicPlaybackService extends Service {
                     service.mWakeLock.release();
                     break;
                 case FOCUSCHANGE:
+                    if (D) Log.d(TAG, "Received audio focus change event " + msg.arg1);
                     switch (msg.arg1) {
                         case AudioManager.AUDIOFOCUS_LOSS:
                         case AudioManager.AUDIOFOCUS_LOSS_TRANSIENT:
