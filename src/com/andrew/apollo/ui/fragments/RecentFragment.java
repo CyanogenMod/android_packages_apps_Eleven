@@ -284,7 +284,7 @@ public class RecentFragment extends Fragment implements LoaderCallbacks<List<Alb
     public void onItemClick(final AdapterView<?> parent, final View view, final int position,
             final long id) {
         mAlbum = mAdapter.getItem(position);
-        NavUtils.openAlbumProfile(getActivity(), mAlbum.mAlbumName, mAlbum.mArtistName);
+        NavUtils.openAlbumProfile(getActivity(), mAlbum.mAlbumName, mAlbum.mArtistName, mAlbum.mAlbumId);
     }
 
     /**

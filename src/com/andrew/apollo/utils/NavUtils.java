@@ -21,6 +21,7 @@ import android.provider.MediaStore;
 
 import com.andrew.apollo.Config;
 import com.andrew.apollo.R;
+import com.andrew.apollo.model.Album;
 import com.andrew.apollo.ui.activities.AudioPlayerActivity;
 import com.andrew.apollo.ui.activities.HomeActivity;
 import com.andrew.apollo.ui.activities.ProfileActivity;
@@ -62,16 +63,17 @@ public final class NavUtils {
      * @param context The {@link Activity} to use.
      * @param albumName The name of the album
      * @param artistName The name of the album artist
+     * @param albumId The id of the album
      */
     public static void openAlbumProfile(final Activity context,
-            final String albumName, final String artistName) {
+            final String albumName, final String artistName, final long albumId) {
 
         // Create a new bundle to transfer the album info
         final Bundle bundle = new Bundle();
         bundle.putString(Config.ALBUM_YEAR, MusicUtils.getReleaseDateForAlbum(context, albumName));
         bundle.putString(Config.ARTIST_NAME, artistName);
         bundle.putString(Config.MIME_TYPE, MediaStore.Audio.Albums.CONTENT_TYPE);
-        bundle.putLong(Config.ID, MusicUtils.getIdForAlbum(context, albumName));
+        bundle.putLong(Config.ID, albumId);
         bundle.putString(Config.NAME, albumName);
 
         // Create the intent to launch the profile activity

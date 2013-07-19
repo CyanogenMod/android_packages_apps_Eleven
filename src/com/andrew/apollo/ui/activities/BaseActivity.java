@@ -361,7 +361,7 @@ public abstract class BaseActivity extends FragmentActivity implements ServiceCo
         public void onClick(final View v) {
             if (MusicUtils.getCurrentAudioId() != -1) {
                 NavUtils.openAlbumProfile(BaseActivity.this, MusicUtils.getAlbumName(),
-                        MusicUtils.getArtistName());
+                        MusicUtils.getArtistName(), MusicUtils.getCurrentAlbumId());
             } else {
                 MusicUtils.shuffleAll(BaseActivity.this);
             }

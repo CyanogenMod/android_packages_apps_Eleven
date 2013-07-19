@@ -848,7 +848,7 @@ public class AudioPlayerActivity extends FragmentActivity implements ServiceConn
         @Override
         public void onClick(final View v) {
             NavUtils.openAlbumProfile(AudioPlayerActivity.this, MusicUtils.getAlbumName(),
-                    MusicUtils.getArtistName());
+                    MusicUtils.getArtistName(), MusicUtils.getCurrentAlbumId());
         }
     };
 

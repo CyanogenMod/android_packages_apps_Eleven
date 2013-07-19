@@ -369,7 +369,8 @@ public class SearchActivity extends Activity implements LoaderCallbacks<Cursor>,
             // If it's an album, open the album profile
             NavUtils.openAlbumProfile(this,
                     cursor.getString(cursor.getColumnIndexOrThrow(MediaStore.Audio.Albums.ALBUM)),
-                    cursor.getString(cursor.getColumnIndexOrThrow(MediaStore.Audio.Albums.ARTIST)));
+                    cursor.getString(cursor.getColumnIndexOrThrow(MediaStore.Audio.Albums.ARTIST)),
+                    cursor.getLong(cursor.getColumnIndexOrThrow(MediaStore.Audio.Albums._ID)));
         } else if (position >= 0 && id >= 0) {
             // If it's a song, play it and leave
             final long[] list = new long[] {
