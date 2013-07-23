@@ -28,5 +28,9 @@
         android:id="@+id/menu_audio_player_ringtone"
         android:showAsAction="never"
         android:title="@string/context_menu_use_as_ringtone"/>
+    <item
+        android:id="@+id/menu_audio_player_delete"
+        android:showAsAction="never"
+        android:title="@string/context_menu_delete"/>
 
 </menu>
