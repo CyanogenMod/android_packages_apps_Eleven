@@ -313,7 +313,7 @@ public class ProfileActivity extends BaseActivity implements OnPageChangeListene
                 // screen. Definitely one of my favorite features.
                 final String name = isArtist() ? mArtistName : mProfileName;
                 final Long id = mArguments.getLong(Config.ID);
-                ApolloUtils.createShortcutIntent(name, id, mType, this);
+                ApolloUtils.createShortcutIntent(name, mArtistName, id, mType, this);
                 return true;
             }
             case R.id.menu_shuffle: {
@@ -518,7 +518,7 @@ public class ProfileActivity extends BaseActivity implements OnPageChangeListene
                     if (isArtist()) {
                         key = mArtistName;
                     } else if (isAlbum()) {
-                        key = mProfileName + Config.ALBUM_ART_SUFFIX;
+                        key = ImageFetcher.generateAlbumCacheKey(mProfileName, mArtistName);
                     }
 
                     final Bitmap bitmap = ImageFetcher.decodeSampledBitmapFromFile(picturePath);
@@ -573,7 +573,7 @@ public class ProfileActivity extends BaseActivity implements OnPageChangeListene
         // First remove the old image
         removeFromCache();
         // Fetch for the artwork
-        mTabCarousel.fetchAlbumPhoto(this, mProfileName);
+        mTabCarousel.fetchAlbumPhoto(this, mProfileName, mArtistName);
     }
 
     /**
@@ -599,7 +599,7 @@ public class ProfileActivity extends BaseActivity implements OnPageChangeListene
         if (isArtist()) {
             key = mArtistName;
         } else if (isAlbum()) {
-            key = mProfileName + Config.ALBUM_ART_SUFFIX;
+            key = ImageFetcher.generateAlbumCacheKey(mProfileName, mArtistName);
         }
         mImageFetcher.removeFromCache(key);
         // Give the disk cache a little time before requesting a new image.

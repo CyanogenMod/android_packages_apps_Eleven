@@ -276,13 +276,14 @@ public final class ApolloUtils {
      * @param mimeType The MIME type of the shortcut
      * @param context The {@link Context} to use to
      */
-    public static void createShortcutIntent(final String displayName, final Long id,
-            final String mimeType, final Activity context) {
+    public static void createShortcutIntent(final String displayName, final String artistName,
+            final Long id, final String mimeType, final Activity context) {
         try {
             final ImageFetcher fetcher = getImageFetcher(context);
             Bitmap bitmap = null;
             if (mimeType.equals(MediaStore.Audio.Albums.CONTENT_TYPE)) {
-                bitmap = fetcher.getCachedBitmap(displayName + Config.ALBUM_ART_SUFFIX);
+                bitmap = fetcher.getCachedBitmap(
+                        ImageFetcher.generateAlbumCacheKey(displayName, artistName));
             } else {
                 bitmap = fetcher.getCachedBitmap(displayName);
             }

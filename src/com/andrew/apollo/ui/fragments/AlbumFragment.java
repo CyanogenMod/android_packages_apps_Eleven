@@ -41,6 +41,7 @@ import com.andrew.apollo.Config;
 import com.andrew.apollo.MusicStateListener;
 import com.andrew.apollo.R;
 import com.andrew.apollo.adapters.AlbumAdapter;
+import com.andrew.apollo.cache.ImageFetcher;
 import com.andrew.apollo.loaders.AlbumLoader;
 import com.andrew.apollo.menu.CreateNewPlaylist;
 import com.andrew.apollo.menu.DeleteDialog;
@@ -244,7 +245,8 @@ public class AlbumFragment extends Fragment implements LoaderCallbacks<List<Albu
                 case FragmentMenuItems.DELETE:
                     mShouldRefresh = true;
                     final String album = mAlbum.mAlbumName;
-                    DeleteDialog.newInstance(album, mAlbumList, album + Config.ALBUM_ART_SUFFIX)
+                    DeleteDialog.newInstance(album, mAlbumList,
+                            ImageFetcher.generateAlbumCacheKey(album,mAlbum.mArtistName))
                             .show(getFragmentManager(), "DeleteDialog");
                     return true;
                 default:

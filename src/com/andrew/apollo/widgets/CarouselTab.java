@@ -114,7 +114,7 @@ public class CarouselTab extends FrameLayoutWithOverlay {
         Bitmap artistImage = mFetcher.getCachedBitmap(artist);
         // Second check for cached artwork
         if (artistImage == null) {
-            artistImage = mFetcher.getCachedArtwork(album);
+            artistImage = mFetcher.getCachedArtwork(album, artist);
         }
         // If all else, use the default image
         if (artistImage == null) {
@@ -130,11 +130,11 @@ public class CarouselTab extends FrameLayoutWithOverlay {
      * @param context The {@link Context} to use.
      * @param album The name of the album in the profile the user is viewing.
      */
-    public void setAlbumPhoto(final Activity context, final String album) {
+    public void setAlbumPhoto(final Activity context, final String album, final String artist) {
         if (!TextUtils.isEmpty(album)) {
             mAlbumArt.setVisibility(View.VISIBLE);
-            mFetcher.loadAlbumImage(MusicUtils.getAlbumArtist(context, album), album,
-                    MusicUtils.getIdForAlbum(context, album), mAlbumArt);
+            mFetcher.loadAlbumImage(artist, album,
+                    MusicUtils.getIdForAlbum(context, album, artist), mAlbumArt);
         } else {
             setDefault(context);
         }
@@ -145,12 +145,12 @@ public class CarouselTab extends FrameLayoutWithOverlay {
      * 
      * @param context The {@link Context} to use.
      * @param album The name of the album in the profile the user is viewing.
+     * @param artist The name of the album artist in the profile the user is viewing
      */
-    public void fetchAlbumPhoto(final Activity context, final String album) {
+    public void fetchAlbumPhoto(final Activity context, final String album, final String artist) {
         if (!TextUtils.isEmpty(album)) {
-            mFetcher.removeFromCache(album + Config.ALBUM_ART_SUFFIX);
-            mFetcher.loadAlbumImage(MusicUtils.getAlbumArtist(context, album), album, -1,
-                    mAlbumArt);
+            mFetcher.removeFromCache(ImageFetcher.generateAlbumCacheKey(album, artist));
+            mFetcher.loadAlbumImage(artist, album, -1, mAlbumArt);
         } else {
             setDefault(context);
         }
@@ -167,14 +167,14 @@ public class CarouselTab extends FrameLayoutWithOverlay {
         if (!TextUtils.isEmpty(lastAlbum)) {
             // Set the last album the artist played
             mFetcher.loadAlbumImage(artist, lastAlbum,
-                    MusicUtils.getIdForAlbum(context, lastAlbum), mPhoto);
+                    MusicUtils.getIdForAlbum(context, lastAlbum, artist), mPhoto);
             // Play the album
             mPhoto.setOnClickListener(new OnClickListener() {
 
                 @Override
                 public void onClick(final View v) {
                     final long[] albumList = MusicUtils.getSongListForAlbum(getContext(),
-                            MusicUtils.getIdForAlbum(context, lastAlbum));
+                            MusicUtils.getIdForAlbum(context, lastAlbum, artist));
                     MusicUtils.playAll(getContext(), albumList, 0, false);
                 }
             });

@@ -226,7 +226,8 @@ public class ArtistAlbumAdapter extends ArrayAdapter<Album> {
      */
     public void removeFromCache(final Album album) {
         if (mImageFetcher != null) {
-            mImageFetcher.removeFromCache(album.mAlbumName + Config.ALBUM_ART_SUFFIX);
+            mImageFetcher.removeFromCache(
+                     ImageFetcher.generateAlbumCacheKey(album.mAlbumName, album.mArtistName));
         }
     }
 

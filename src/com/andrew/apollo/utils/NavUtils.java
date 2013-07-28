@@ -70,7 +70,7 @@ public final class NavUtils {
 
         // Create a new bundle to transfer the album info
         final Bundle bundle = new Bundle();
-        bundle.putString(Config.ALBUM_YEAR, MusicUtils.getReleaseDateForAlbum(context, albumName));
+        bundle.putString(Config.ALBUM_YEAR, MusicUtils.getReleaseDateForAlbum(context, albumId));
         bundle.putString(Config.ARTIST_NAME, artistName);
         bundle.putString(Config.MIME_TYPE, MediaStore.Audio.Albums.CONTENT_TYPE);
         bundle.putLong(Config.ID, albumId);
