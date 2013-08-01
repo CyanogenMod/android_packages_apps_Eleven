@@ -38,6 +38,7 @@ import com.andrew.apollo.dragdrop.DragSortListView.RemoveListener;
 import com.andrew.apollo.loaders.NowPlayingCursor;
 import com.andrew.apollo.loaders.QueueLoader;
 import com.andrew.apollo.menu.CreateNewPlaylist;
+import com.andrew.apollo.menu.DeleteDialog;
 import com.andrew.apollo.menu.FragmentMenuItems;
 import com.andrew.apollo.model.Song;
 import com.andrew.apollo.provider.FavoritesStore;
@@ -223,8 +224,8 @@ public class QueueFragment extends Fragment implements LoaderCallbacks<List<Song
                 getString(R.string.context_menu_use_as_ringtone));
 
         // Delete the song
-        // menu.add(GROUP_ID, FragmentMenuItems.DELETE, Menu.NONE,
-        // getString(R.string.context_menu_delete));
+        menu.add(GROUP_ID, FragmentMenuItems.DELETE, Menu.NONE,
+                getString(R.string.context_menu_delete));
     }
 
     /**
@@ -271,8 +272,11 @@ public class QueueFragment extends Fragment implements LoaderCallbacks<List<Song
                 case FragmentMenuItems.USE_AS_RINGTONE:
                     MusicUtils.setRingtone(getActivity(), mSelectedId);
                     return true;
-                    // case FragmentMenuItems.DELETE:
-                    // return true;
+                case FragmentMenuItems.DELETE:
+                    DeleteDialog.newInstance(mSong.mSongName, new long[] {
+                        mSelectedId
+                    }, null).show(getFragmentManager(), "DeleteDialog");
+                    return true;
                 default:
                     break;
             }
