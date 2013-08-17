@@ -215,6 +215,10 @@ public class PlaylistSongFragment extends Fragment implements LoaderCallbacks<Li
         menu.add(GROUP_ID, FragmentMenuItems.PLAY_SELECTION, Menu.NONE,
                 getString(R.string.context_menu_play_selection));
 
+        // Play next
+        menu.add(GROUP_ID, FragmentMenuItems.PLAY_NEXT, Menu.NONE,
+                getString(R.string.context_menu_play_next));
+
         // Add the song to the queue
         menu.add(GROUP_ID, FragmentMenuItems.ADD_TO_QUEUE, Menu.NONE,
                 getString(R.string.add_to_queue));
@@ -245,6 +249,11 @@ public class PlaylistSongFragment extends Fragment implements LoaderCallbacks<Li
                     MusicUtils.playAll(getActivity(), new long[] {
                         mSelectedId
                     }, 0, false);
+                    return true;
+                case FragmentMenuItems.PLAY_NEXT:
+                    MusicUtils.playNext(new long[] {
+                        mSelectedId
+                    });
                     return true;
                 case FragmentMenuItems.ADD_TO_QUEUE:
                     MusicUtils.addToQueue(getActivity(), new long[] {
