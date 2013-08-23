@@ -59,6 +59,7 @@
     <string name="sort_order_entry_number_of_songs">Kappaleiden määrä</string>
     <string name="sort_order_entry_number_of_albums">Albumeiden määrä</string>
 
+    <string name="playlist_favorite">Suosikki</string>
     <string name="playlist_favorites">Suosikit</string>
     <string name="playlist_last_added">Viimeksi lisätyt</string>
 
