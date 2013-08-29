@@ -837,6 +837,24 @@ public final class MusicUtils {
     }
 
     /**
+     * Removes a single track from a given playlist
+     * @param context The {@link Context} to use.
+     * @param id The id of the song to remove.
+     * @param playlistId The id of the playlist being removed from.
+     */
+    public static void removeFromPlaylist(final Context context, final long id,
+            final long playlistId) {
+        final Uri uri = MediaStore.Audio.Playlists.Members.getContentUri("external", playlistId);
+        final ContentResolver resolver = context.getContentResolver();
+        resolver.delete(uri, Playlists.Members.AUDIO_ID + " = ? ", new String[] {
+            Long.toString(id)
+        });
+        final String message = context.getResources().getQuantityString(
+                R.plurals.NNNtracksfromplaylist, 1, 1);
+        AppMsg.makeText((Activity)context, message, AppMsg.STYLE_CONFIRM).show();
+    }
+
+    /**
      * @param context The {@link Context} to use.
      * @param list The list to enqueue.
      */
