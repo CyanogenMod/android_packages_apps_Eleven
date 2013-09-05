@@ -79,6 +79,7 @@
     <string name="context_menu_open_in_play_store">Apri in Play Store</string>
     <string name="context_menu_remove_from_recent">Rimuovi dai recenti</string>
     <string name="context_menu_use_as_ringtone">Usa come suoneria</string>
+    <string name="context_menu_remove_from_playlist">Rimuovi dalla playlist</string>
     <string name="accessibility_play">Riproduci</string>
     <string name="accessibility_pause">Pausa</string>
     <string name="accessibility_next">Successivo</string>
