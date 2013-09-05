@@ -80,6 +80,7 @@
     <string name="context_menu_open_in_play_store">Abrir en Play Store</string>
     <string name="context_menu_remove_from_recent">Quitar de recientes</string>
     <string name="context_menu_use_as_ringtone">Usar como tono</string>
+    <string name="context_menu_remove_from_playlist">Quitar de la lista</string>
     <string name="accessibility_play">Reproducir</string>
     <string name="accessibility_pause">Pausar</string>
     <string name="accessibility_next">Siguiente</string>
