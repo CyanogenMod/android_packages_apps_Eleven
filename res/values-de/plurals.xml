@@ -39,6 +39,11 @@
         <item quantity="other"><xliff:g id="number" example="27">%d</xliff:g> Titel wurden zur Wiedergabeliste hinzugefügt.</item>
     </plurals>
 
+    <plurals name="NNNtracksfromplaylist">
+        <item quantity="one">1 Titel wurde aus der Wiedergabeliste entfernt.</item>
+        <item quantity="other"><xliff:g id="number" example="27">%d</xliff:g> Titel wurden aus der Wiedergabeliste entfernt.</item>
+    </plurals>
+
     <plurals name="NNNtrackstoqueue">
         <item quantity="one">1 Titel wurde zur Warteschlange hinzugefügt.</item>
         <item quantity="other"><xliff:g id="number" example="27">%d</xliff:g> Titel wurden zur Warteschlange hinzugefügt.</item>

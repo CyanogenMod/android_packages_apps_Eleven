@@ -59,7 +59,7 @@
         <item quantity="other"><xliff:g id="number" example="27">%d</xliff:g> songs added to playlist.</item>
     </plurals>
 
-    <!-- Toasts after removing a song from playlist -->
+    <!-- Toasts after removing song(s) from playlists -->
     <plurals name="NNNtracksfromplaylist">
 
         <!-- message shown when one song was removed -->

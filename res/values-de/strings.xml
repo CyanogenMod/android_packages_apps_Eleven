@@ -94,6 +94,7 @@
     <string name="context_menu_open_in_play_store">Im Play Store öffnen</string>
     <string name="context_menu_remove_from_recent">Aus \'Kürzlich gehört\' entfernen</string>
     <string name="context_menu_use_as_ringtone">Als Klingelton verwenden</string>
+    <string name="context_menu_remove_from_playlist">Aus Wiedergabeliste entfernen</string>
 
     <!-- Content descriptions -->
     <string name="accessibility_play">Wiedergabe</string>
