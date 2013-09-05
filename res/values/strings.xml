@@ -94,6 +94,7 @@
     <string name="context_menu_open_in_play_store">Open in Play Store</string>
     <string name="context_menu_remove_from_recent">Remove from recent</string>
     <string name="context_menu_use_as_ringtone">Use as ringtone</string>
+    <string name="context_menu_remove_from_playlist">Remove from playlist</string>
 
     <!-- Content descriptions -->
     <string name="accessibility_play">Play</string>
