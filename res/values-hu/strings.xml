@@ -14,18 +14,13 @@
      limitations under the License.
  -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-
     <string name="app_name">Apollo</string>
-
-    <!-- Page titles -->
     <string name="page_recent">Előzmények</string>
     <string name="page_artists">Előadók</string>
     <string name="page_albums">Albumok</string>
     <string name="page_songs">Dalok</string>
     <string name="page_playlists">Lejátszási listák</string>
     <string name="page_genres">Műfajok</string>
-
-    <!-- Option menu items -->
     <string name="menu_settings">Beállítások</string>
     <string name="menu_search">Keresés</string>
     <string name="menu_shuffle">Véletlen sorrend</string>
@@ -42,16 +37,12 @@
     <string name="menu_detailed">Részletes</string>
     <string name="menu_grid">Rács</string>
     <string name="menu_view_as">Megtekintés</string>
-
-    <!-- Playlist items -->
     <string name="add_to_playlist">Lejátszási listához ad</string>
     <string name="add_to_favorites">Kedvencekhez ad</string>
     <string name="add_to_queue">Lejátszási sorhoz ad</string>
     <string name="remove_from_favorites">Törlés a kedvencekből</string>
     <string name="remove_from_recent">Törlés a legutóbbiakból</string>
     <string name="remove_from_queue">Törlés a lejátszási sorból</string>
-
-    <!-- Sort orders -->
     <string name="sort_order_entry_az">A-Z</string>
     <string name="sort_order_entry_za">Z-A</string>
     <string name="sort_order_entry_artist">Előadó</string>
@@ -62,13 +53,9 @@
     <string name="sort_order_entry_track_list">Dalok listája</string>
     <string name="sort_order_entry_number_of_songs">Dalok száma</string>
     <string name="sort_order_entry_number_of_albums">Albumok száma</string>
-
-    <!-- Default playlist names -->
     <string name="playlist_favorite">Kedvenc</string>
     <string name="playlist_favorites">Kedvencek</string>
     <string name="playlist_last_added">Legutóbb hozzáadott</string>
-
-    <!-- AlertDialog items -->
     <string name="new_playlist">Új lejátszási lista</string>
     <string name="save">Mentés</string>
     <string name="cancel">Mégsem</string>
@@ -82,8 +69,6 @@
     <string name="google_search">Google keresés</string>
     <string name="use_default">Alapértelmezett kép használata</string>
     <string name="old_photo">Régi kép használata</string>
-
-    <!-- Context menu items -->
     <string name="context_menu_play_selection">Lejátszás</string>
     <string name="context_menu_play_next">Következő lejátszása</string>
     <string name="context_menu_more_by_artist">Több az előadótól</string>
@@ -94,8 +79,7 @@
     <string name="context_menu_open_in_play_store">Megnyitás Play Áruházban</string>
     <string name="context_menu_remove_from_recent">@string/remove_from_recent</string>
     <string name="context_menu_use_as_ringtone">Beállítás csengőhangként</string>
-
-    <!-- Content descriptions -->
+    <string name="context_menu_remove_from_playlist">Eltávolítás a lejátszási listából</string>
     <string name="accessibility_play">Lejátszás</string>
     <string name="accessibility_pause">Szünet</string>
     <string name="accessibility_next">Következő</string>
@@ -105,15 +89,11 @@
     <string name="accessibility_repeat">Ismétlés</string>
     <string name="accessibility_repeat_all">Összes ismétlése</string>
     <string name="accessibility_repeat_one">Egy dal ismétlése</string>
-
-    <!-- Toast messages -->
     <string name="pinned_to_home_screen"><xliff:g id="name">%s</xliff:g> felvéve a kezdőképernyőre</string>
     <string name="could_not_be_pinned_to_home_screen"><xliff:g id="name">%s</xliff:g> nem lett felvéve a kezdőképernyőre</string>
     <string name="set_as_ringtone">\"<xliff:g id="name" example="Alarm Bell">%s</xliff:g>\" beállítva csengőhangként</string>
     <string name="playlist_renamed">Lejátszási lista átnevezve</string>
     <string name="theme_set"><xliff:g id="name">%s</xliff:g> beállítva témaként</string>
-
-    <!-- Settings -->
     <string name="settings_ui_category">Felhasználói felület</string>
     <string name="settings_storage_category">Tárhely</string>
     <string name="settings_data_category">Adat</string>
@@ -133,30 +113,21 @@
     <string name="settings_download_artist_images_title">Hiányzó előadóképek letöltése</string>
     <string name="settings_open_source_licenses">Nyílt forráskódú licenszek</string>
     <string name="settings_version_title">Verziószám</string>
-
-    <!-- Share Intent -->
     <string name="now_listening_to">#MostHallgatom <xliff:g id="title">%1$s</xliff:g> ettől: <xliff:g id="artist">%2$s</xliff:g> #Apollo</string>
     <string name="share_track_using">Szám megosztása:</string>
-
-    <!-- ColorPicker -->
     <string name="color_picker_title">Színséma</string>
     <string name="hex">#</string>
     <string name="current_color">Jelenlegi</string>
     <string name="new_color">Új</string>
-
-    <!-- App widget -->
     <string name="app_widget_small">Apollo: 4x1</string>
     <string name="app_widget_large">Apollo: 4x2</string>
     <string name="app_widget_large_alt">Apollo: 4x2 (Alternatív)</string>
     <string name="app_widget_recent">Apollo: Mostanában hallgatott</string>
     <string name="app_widget_text_separator">-</string>
-
-    <!-- Empty list / error messages -->
     <string name="no_effects_for_you">Nem sikerült megnyitni a hangszínszabályzót.</string>
     <string name="empty_music">Számítógépről történő zene másoláshoz használjon USB kábelt.</string>
     <string name="empty_last_added">Itt az utolsó hónapban hozzáadott zenéi fognak megjelenni.</string>
     <string name="empty_search">Nincs találat</string>
     <string name="empty_favorite">Itt a kedvencként megjelölt dalok fognak megjelenni.</string>
     <string name="empty_recent">Itt a legutóbb hallgatott albumok fognak megjelenni.</string>
-
 </resources>
