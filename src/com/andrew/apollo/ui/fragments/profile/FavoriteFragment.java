@@ -129,7 +129,11 @@ public class FavoriteFragment extends Fragment implements LoaderCallbacks<List<S
     public void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         // Create the adpater
-        mAdapter = new ProfileSongAdapter(getActivity(), R.layout.list_item_simple);
+        mAdapter = new ProfileSongAdapter(
+                getActivity(),
+                R.layout.list_item_simple,
+                ProfileSongAdapter.DISPLAY_PLAYLIST_SETTING
+        );
     }
 
     /**

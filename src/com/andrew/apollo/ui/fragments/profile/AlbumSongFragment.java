@@ -122,7 +122,11 @@ public class AlbumSongFragment extends Fragment implements LoaderCallbacks<List<
     public void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         // Create the adpater
-        mAdapter = new ProfileSongAdapter(getActivity(), R.layout.list_item_simple, true);
+        mAdapter = new ProfileSongAdapter(
+                getActivity(),
+                R.layout.list_item_simple,
+                ProfileSongAdapter.DISPLAY_ALBUM_SETTING
+        );
     }
 
     /**
