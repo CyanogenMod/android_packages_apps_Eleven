@@ -44,6 +44,12 @@
         <item quantity="other">Do seznamu skladeb bylo přidáno <xliff:g id="number" example="27">%d</xliff:g> skladeb.</item>
     </plurals>
 
+    <plurals name="NNNtracksfromplaylist">
+        <item quantity="one">Skladba ze seznamu skladeb odebrána.</item>
+        <item quantity="few">Ze seznamu skladeb odebrány <xliff:g id="number" example="2">%d</xliff:g> skladby.</item>
+        <item quantity="other">Ze seznamu skladeb odebráno <xliff:g id="number" example="27">%d</xliff:g> skladeb.</item>
+    </plurals>
+
     <plurals name="NNNtrackstoqueue">
         <item quantity="one">Do fronty byla přidána jedna skladba.</item>
         <item quantity="few">Do fronty byly přidány <xliff:g id="number" example="2">%d</xliff:g> skladby.</item>
