@@ -34,6 +34,10 @@
         <item quantity="one">1 titre ajouté à la liste.</item>
         <item quantity="other"><xliff:g id="number" example="27">%d</xliff:g> titres ajoutés à la liste.</item>
     </plurals>
+    <plurals name="NNNtracksfromplaylist">
+        <item quantity="one">1 chanson supprimée de votre liste de lecture.</item>
+        <item quantity="other"><xliff:g id="number" example="27">%d</xliff:g> chansons supprimées de votre liste de lecture.</item>
+    </plurals>
     <plurals name="NNNtrackstoqueue">
         <item quantity="one">1 titre ajouté à la liste d\'attente.</item>
         <item quantity="other"><xliff:g id="number" example="27">%d</xliff:g> titres ajoutés à la liste d\'attente.</item>
