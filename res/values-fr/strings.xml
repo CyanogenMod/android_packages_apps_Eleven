@@ -79,6 +79,7 @@
     <string name="context_menu_open_in_play_store">Ouvrir dans le Play Store</string>
     <string name="context_menu_remove_from_recent">Supprimer des récents</string>
     <string name="context_menu_use_as_ringtone">Utiliser comme sonnerie</string>
+    <string name="context_menu_remove_from_playlist">Supprimer de la liste de lecture</string>
     <string name="accessibility_play">Lecture</string>
     <string name="accessibility_pause">Pause</string>
     <string name="accessibility_next">Suivant</string>
