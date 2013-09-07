@@ -79,6 +79,7 @@
     <string name="context_menu_open_in_play_store">Άνοιγμα στο Play Store</string>
     <string name="context_menu_remove_from_recent">Αφαίρεση από πρόσφατα</string>
     <string name="context_menu_use_as_ringtone">Χρήση ως ήχο κλήσης</string>
+    <string name="context_menu_remove_from_playlist">Αφαίρεση από τη λίστα</string>
     <string name="accessibility_play">Αναπαραγωγή</string>
     <string name="accessibility_pause">Παύση</string>
     <string name="accessibility_next">Επόμενο</string>
