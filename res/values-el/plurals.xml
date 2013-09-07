@@ -34,6 +34,10 @@
         <item quantity="one">1 τραγούδι προστέθηκε στη λίστα αναπαραγωγής.</item>
         <item quantity="other"><xliff:g id="number" example="27">%d</xliff:g> τραγούδια προστέθηκαν στη λίστα αναπαραγωγής.</item>
     </plurals>
+    <plurals name="NNNtracksfromplaylist">
+        <item quantity="one">1 τραγούδι αφαιρέθηκε από τη λίστα αναπαραγωγής.</item>
+        <item quantity="other"><xliff:g id="number" example="27">%d</xliff:g> τραγούδια αφαιρέθηκαν από τη λίστα αναπαραγωγής.</item>
+    </plurals>
     <plurals name="NNNtrackstoqueue">
         <item quantity="one">1 τραγούδι προστέθηκε στην ουρά.</item>
         <item quantity="other"><xliff:g id="number" example="27">%d</xliff:g> τραγούδια προστέθηκαν στην ουρά.</item>
