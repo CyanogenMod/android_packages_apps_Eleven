@@ -93,6 +93,7 @@
     <string name="context_menu_open_in_play_store">Открыть в Play Store</string>
     <string name="context_menu_remove_from_recent">Удалить из последних</string>
     <string name="context_menu_use_as_ringtone">Использовать как рингтон</string>
+    <string name="context_menu_remove_from_playlist">Удалить из плейлиста</string>
 
     <!-- Content descriptions -->
     <string name="accessibility_play">Воспроизведение</string>
