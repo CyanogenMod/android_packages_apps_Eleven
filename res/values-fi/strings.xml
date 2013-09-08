@@ -87,6 +87,7 @@
     <string name="context_menu_open_in_play_store">Avaa Play-kaupassa</string>
     <string name="context_menu_remove_from_recent">Poista äskettäin kuunnelluista</string>
     <string name="context_menu_use_as_ringtone">Käytä soittoäänenä</string>
+    <string name="context_menu_remove_from_playlist">Poista soittolistalta</string>
 
     <string name="accessibility_play">Toista</string>
     <string name="accessibility_pause">Pysäytä</string>

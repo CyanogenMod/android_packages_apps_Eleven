@@ -45,6 +45,12 @@
         <item quantity="other"><xliff:g id="number" example="27">%d</xliff:g> kappaletta lisätty soittolistalle.</item>
     </plurals>
 
+    <plurals name="NNNtracksfromplaylist">
+
+        <item quantity="one">1 kappale poistettu soittolistalta.</item>
+        <item quantity="other"><xliff:g id="number" example="27">%d</xliff:g> kappaletta poistettu soittolistalta.</item>
+    </plurals>
+
     <plurals name="NNNtrackstoqueue">
 
         <item quantity="one">1 kappale lisätty jonoon.</item>
