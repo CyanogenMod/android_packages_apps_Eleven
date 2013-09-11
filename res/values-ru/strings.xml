@@ -109,9 +109,9 @@
     <!-- Toast messages -->
     <string name="pinned_to_home_screen"><xliff:g id="name">%s</xliff:g> закреплено на главном экране</string>
     <string name="could_not_be_pinned_to_home_screen"><xliff:g id="name">%s</xliff:g> не может быть закреплено на главном экране</string>
-    <string name="set_as_ringtone">Трек \"<xliff:g id="name" example="Alarm Bell">%s</xliff:g>\" установлен как рингтон</string>
+    <string name="set_as_ringtone">Трек «<xliff:g id="name" example="Alarm Bell">%s</xliff:g>» установлен как рингтон</string>
     <string name="playlist_renamed">Плейлист переименован</string>
-    <string name="theme_set">Тема \"<xliff:g id="name">%s</xliff:g>\" установлена</string>
+    <string name="theme_set">Тема «<xliff:g id="name">%s</xliff:g>» установлена</string>
 
     <!-- Settings -->
     <string name="settings_ui_category">Интерфейс</string>
