@@ -75,7 +75,7 @@
     <string name="context_menu_more_by_artist">Meer van deze artiest</string>
     <string name="context_menu_rename_playlist">Naam wijzigen</string>
     <string name="context_menu_delete">Verwijderen</string>
-    <string name="context_menu_fetch_album_art">Albumillustratie ophalen</string>
+    <string name="context_menu_fetch_album_art">Albumhoes ophalen</string>
     <string name="context_menu_fetch_artist_image">Artiestenafbeelding ophalen</string>
     <string name="context_menu_open_in_play_store">Openen in Play Store</string>
     <string name="context_menu_remove_from_recent">Verwijderen uit recente</string>
@@ -108,10 +108,10 @@
     <string name="settings_theme_chooser_title">Thema selecteren</string>
     <string name="settings_delete_cache_title">Cache wissen</string>
     <string name="settings_delete_cache_summary">Opgeslagen afbeeldingen verwijderen</string>
-    <string name="settings_download_only_on_wifi_title">Alleen via Wi-Fi</string>
+    <string name="settings_download_only_on_wifi_title">Alleen via wifi</string>
     <string name="settings_download_only_on_wifi_summary">Om gegevensgebruik te verminderen, niet downloaden via mobiele gegevensverbinding</string>
-    <string name="settings_download_missing_artwork_title">Ontbr. albumill. downl.</string>
-    <string name="settings_download_artist_images_title">Ontbr. art.afb. downl.</string>
+    <string name="settings_download_missing_artwork_title">Albumhoezen downloaden</string>
+    <string name="settings_download_artist_images_title">Artiestenafbeeldingen downloaden</string>
     <string name="settings_open_source_licenses">Open-sourcelicenties</string>
     <string name="settings_version_title">Versienummer</string>
     <string name="now_listening_to">#NowPlaying <xliff:g id="title">%1$s</xliff:g> door <xliff:g id="artist">%2$s</xliff:g> #Apollo</string>
@@ -130,5 +130,5 @@
     <string name="empty_last_added">Afgespeelde nummers in de afgelopen maand worden hier getoond.</string>
     <string name="empty_search">Geen zoekresultaten gevonden</string>
     <string name="empty_favorite">Uw favoriete nummers worden hier getoond.</string>
-    <string name="empty_recent">Afgespeelde albums worden hier getoond. Probeert u ook eens wat muziek af te spelen.</string>
+    <string name="empty_recent">Afgespeelde albums worden hier getoond. Probeer wat muziek af te spelen.</string>
 </resources>
