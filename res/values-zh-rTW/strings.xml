@@ -23,11 +23,11 @@
     <string name="page_genres">類型</string>
     <string name="menu_settings">設定</string>
     <string name="menu_search">搜尋</string>
-    <string name="menu_shuffle">全部隨機撥放</string>
+    <string name="menu_shuffle">全部隨機播放</string>
     <string name="menu_play_all">全部播放</string>
     <string name="menu_sort_by">排序</string>
     <string name="menu_shop">購買主題</string>
-    <string name="menu_clear_recents">清除最近撥放</string>
+    <string name="menu_clear_recents">清除最近播放</string>
     <string name="menu_clear_queue">清除佇列</string>
     <string name="menu_save_queue">儲存佇列</string>
     <string name="menu_share">分享</string>
@@ -56,7 +56,7 @@
     <string name="playlist_favorite">我的最愛</string>
     <string name="playlist_favorites">我的最愛</string>
     <string name="playlist_last_added">最後加入</string>
-    <string name="new_playlist">新增撥放清單</string>
+    <string name="new_playlist">新增播放清單</string>
     <string name="save">儲存</string>
     <string name="cancel">取消</string>
     <string name="overwrite">覆寫</string>
@@ -77,14 +77,15 @@
     <string name="context_menu_fetch_album_art">取得專輯封面</string>
     <string name="context_menu_fetch_artist_image">取得演出者影像</string>
     <string name="context_menu_open_in_play_store">在Play商店中開啟</string>
-    <string name="context_menu_remove_from_recent">從最近撥放移除</string>
+    <string name="context_menu_remove_from_recent">從最近播放移除</string>
     <string name="context_menu_use_as_ringtone">做為鈴聲</string>
+    <string name="context_menu_remove_from_playlist">從播放清單中移除</string>
     <string name="accessibility_play">播放</string>
     <string name="accessibility_pause">暫停</string>
     <string name="accessibility_next">下一首</string>
     <string name="accessibility_prev">上一首</string>
-    <string name="accessibility_shuffle">隨機撥放</string>
-    <string name="accessibility_shuffle_all">全部隨機撥放</string>
+    <string name="accessibility_shuffle">隨機播放</string>
+    <string name="accessibility_shuffle_all">全部隨機播放</string>
     <string name="accessibility_repeat">循環</string>
     <string name="accessibility_repeat_all">全部循環</string>
     <string name="accessibility_repeat_one">單曲循環</string>
@@ -128,5 +129,5 @@
     <string name="empty_last_added">您最近一個月加入的音樂將會顯示在這裡。</string>
     <string name="empty_search">未發現搜尋結果</string>
     <string name="empty_favorite">您標記為我的最愛的樂曲將會顯示在這裡。</string>
-    <string name="empty_recent">您已撥放的專輯將會顯示在這裡，請嘗試撥放一些音樂。</string>
+    <string name="empty_recent">您已播放的專輯將會顯示在這裡，請嘗試播放一些音樂。</string>
 </resources>

@@ -34,6 +34,10 @@
         <item quantity="one">1 首歌已加入播放清單。</item>
         <item quantity="other"><xliff:g id="number" example="27">%d</xliff:g> 首歌已加入播放清單。</item>
     </plurals>
+    <plurals name="NNNtracksfromplaylist">
+        <item quantity="one">1 首歌已從播放清單中移除。</item>
+        <item quantity="other"><xliff:g id="number" example="27">%d</xliff:g> 首歌已從播放清單中移除。</item>
+    </plurals>
     <plurals name="NNNtrackstoqueue">
         <item quantity="one">1 首歌已加入佇列。</item>
         <item quantity="other"><xliff:g id="number" example="27">%d</xliff:g> 首歌已加入佇列。</item>
