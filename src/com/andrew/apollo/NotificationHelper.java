@@ -196,7 +196,7 @@ public class NotificationHelper {
 
         // Update the play button image
         mNotificationTemplate.setImageViewResource(R.id.notification_base_play,
-                isPlaying ? R.drawable.btn_playback_play : R.drawable.btn_playback_pause);
+                isPlaying ? R.drawable.btn_playback_pause : R.drawable.btn_playback_play);
     }
 
     /**
