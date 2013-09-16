@@ -55,4 +55,9 @@
         <item quantity="other"><xliff:g id="songs_to_delete">%d</xliff:g> skladieb bolo odstránených.</item>
         <item quantity="few"><xliff:g id="songs_to_delete">%d</xliff:g> skladby boli odstránené.</item>
     </plurals>
+    <plurals name="NNNtracksfromplaylist">
+        <item quantity="one">1 skladba bola odstránená zo zoznamu skladieb.</item>
+        <item quantity="few"><xliff:g id="number" example="3">%d</xliff:g> skladby boli odstránené zo zoznamu skladieb.</item>
+        <item quantity="other"><xliff:g id="number" example="27">%d</xliff:g> skladieb bolo odstránených zo zoznamu skladieb.</item>
+    </plurals>
 </resources>

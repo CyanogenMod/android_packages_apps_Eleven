@@ -130,4 +130,5 @@
     <string name="empty_search">Žiadne výsledky hľadania</string>
     <string name="empty_favorite">Tu budú zobrazené skladby, ktoré ste označili ako obľúbené.</string>
     <string name="empty_recent">Tu budú zobrazené albumy, ktoré ste počúvali. Skúste prehrať nejakú hudbu.</string>
+    <string name="context_menu_remove_from_playlist">Odstrániť zo zoznamu skladieb</string>
 </resources>
