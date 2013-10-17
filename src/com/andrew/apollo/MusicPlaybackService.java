@@ -1348,7 +1348,8 @@ public class MusicPlaybackService extends Service {
                 ? RemoteControlClient.PLAYSTATE_PLAYING
                 : RemoteControlClient.PLAYSTATE_PAUSED;
 
-        if (ApolloUtils.hasJellyBeanMR2() && what.equals(POSITION_CHANGED)) {
+        if (ApolloUtils.hasJellyBeanMR2()
+                && (what.equals(PLAYSTATE_CHANGED) || what.equals(POSITION_CHANGED))) {
             mRemoteControlClient.setPlaybackState(playState, position(), 1.0f);
         } else if (what.equals(PLAYSTATE_CHANGED)) {
             mRemoteControlClient.setPlaybackState(playState);
@@ -1373,6 +1374,10 @@ public class MusicPlaybackService extends Service {
                     .putLong(MediaMetadataRetriever.METADATA_KEY_DURATION, duration())
                     .putBitmap(RemoteControlClient.MetadataEditor.BITMAP_KEY_ARTWORK, albumArt)
                     .apply();
+
+            if (ApolloUtils.hasJellyBeanMR2()) {
+                mRemoteControlClient.setPlaybackState(playState, position(), 1.0f);
+            }
         }
     }
 
