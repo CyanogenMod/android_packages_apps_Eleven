@@ -39,6 +39,11 @@
         <item quantity="other"><xliff:g id="number" example="27">%d</xliff:g> sange tilføjet til playliste.</item>
     </plurals>
 
+    <plurals name="NNNtracksfromplaylist">
+        <item quantity="one">1 sang fjernet fra playliste.</item>
+        <item quantity="other"><xliff:g id="number" example="27">%d</xliff:g> sange fjernet fra playliste.</item>
+    </plurals>
+
     <plurals name="NNNtrackstoqueue">
         <item quantity="one">1 sang tilføjet til køen.</item>
         <item quantity="other"><xliff:g id="number" example="27">%d</xliff:g> sange tilføjet til køen.</item>

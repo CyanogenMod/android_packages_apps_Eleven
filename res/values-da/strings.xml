@@ -85,6 +85,7 @@
     <string name="context_menu_open_in_play_store">Åbn i Play Butik</string>
     <string name="context_menu_remove_from_recent">Fjern fra seneste</string>
     <string name="context_menu_use_as_ringtone">Brug som ringetone</string>
+    <string name="context_menu_remove_from_playlist">Fjern fra playliste</string>
 
     <string name="accessibility_play">Afspil</string>
     <string name="accessibility_pause">Pause</string>
