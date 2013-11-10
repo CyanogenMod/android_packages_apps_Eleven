@@ -50,24 +50,7 @@ public class Image extends ImageHolder {
         public Image createItemFromElement(final DomElement element) {
             final Image i = new Image();
             i.url = element.getChildText("url");
-            final DomElement sizes = element.getChild("sizes");
-            for (final DomElement image : sizes.getChildren("size")) {
-                // code copied from ImageHolder.loadImages
-                final String attribute = image.getAttribute("name");
-                ImageSize size = null;
-                if (attribute == null) {
-                    size = ImageSize.LARGESQUARE;
-                } else {
-                    try {
-                        size = ImageSize.valueOf(attribute.toUpperCase(Locale.ENGLISH));
-                    } catch (final IllegalArgumentException e) {
-                        // if they suddenly again introduce a new image size
-                    }
-                }
-                if (size != null) {
-                    i.imageUrls.put(size, image.getText());
-                }
-            }
+            loadImages(i, element);
             return i;
         }
     }
