@@ -67,7 +67,7 @@ public abstract class ImageHolder {
             final String attribute = image.getAttribute("size");
             ImageSize size = null;
             if (attribute == null) {
-                size = ImageSize.LARGESQUARE;
+                size = ImageSize.UNKNOWN;
             } else {
                 try {
                     size = ImageSize.valueOf(attribute.toUpperCase(Locale.ENGLISH));

@@ -49,12 +49,10 @@ public class Artist extends MusicEntry {
      * Retrieves detailed artist info for the given artist or mbid entry.
      * 
      * @param artistOrMbid Name of the artist or an mbid
-     * @param apiKey The API key
      * @return detailed artist info
      */
-    public final static Artist getInfo(final Context context, final String artistOrMbid,
-            final String apiKey) {
-        return getInfo(context, artistOrMbid, Locale.getDefault(), apiKey);
+    public final static Artist getInfo(final Context context, final String artistOrMbid) {
+        return getInfo(context, artistOrMbid, Locale.getDefault(), Config.LASTFM_API_KEY);
     }
 
     /**
@@ -62,9 +60,6 @@ public class Artist extends MusicEntry {
      * 
      * @param artistOrMbid Name of the artist or an mbid
      * @param locale The language to fetch info in, or <code>null</code>
-     * @param username The username for the context of the request, or
-     *            <code>null</code>. If supplied, the user's playcount for this
-     *            artist is included in the response
      * @param apiKey The API key
      * @return detailed artist info
      */
@@ -105,41 +100,6 @@ public class Artist extends MusicEntry {
         } catch (final Exception ignored) {
             return null;
         }
-    }
-
-    /**
-     * Get {@link Image}s for this artist in a variety of sizes.
-     * 
-     * @param artistOrMbid The artist name in question
-     * @return a list of {@link Image}s
-     */
-    public final static PaginatedResult<Image> getImages(final Context context,
-            final String artistOrMbid) {
-        return getImages(context, artistOrMbid, -1, -1, Config.LASTFM_API_KEY);
-    }
-
-    /**
-     * Get {@link Image}s for this artist in a variety of sizes.
-     * 
-     * @param artistOrMbid The artist name in question
-     * @param page Which page of limit amount to display
-     * @param limit How many to return. Defaults and maxes out at 50
-     * @param apiKey A Last.fm API key
-     * @return a list of {@link Image}s
-     */
-    public final static PaginatedResult<Image> getImages(final Context context,
-            final String artistOrMbid, final int page, final int limit, final String apiKey) {
-        final Map<String, String> params = new WeakHashMap<String, String>();
-        params.put("artist", artistOrMbid);
-        MapUtilities.nullSafePut(params, "page", page);
-        MapUtilities.nullSafePut(params, "limit", limit);
-        Result result = null;
-        try {
-            result = Caller.getInstance(context).call("artist.getImages", apiKey, params);
-        } catch (final Exception ignored) {
-            return null;
-        }
-        return ResponseBuilder.buildPaginatedResult(result, Image.class);
     }
 
     private final static class ArtistFactory implements ItemFactory<Artist> {
