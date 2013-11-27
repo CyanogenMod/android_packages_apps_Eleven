@@ -398,6 +398,16 @@ public class ProfileActivity extends BaseActivity implements OnPageChangeListene
                 mPreferences.setAlbumSongSortOrder(SortOrder.AlbumSongSortOrder.SONG_TRACK_LIST);
                 getAlbumSongFragment().refresh();
                 return true;
+            case R.id.menu_sort_by_filename:
+                if(isArtistSongPage()) {
+                    mPreferences.setArtistSortOrder(SortOrder.ArtistSongSortOrder.SONG_FILENAME);
+                    getArtistSongFragment().refresh();
+                }
+                else {
+                    mPreferences.setAlbumSongSortOrder(SortOrder.AlbumSongSortOrder.SONG_FILENAME);
+                    getAlbumSongFragment().refresh();
+                }
+                return true;
             default:
                 break;
         }

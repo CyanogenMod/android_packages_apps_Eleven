@@ -89,6 +89,9 @@ public final class SortOrder {
 
         /* Song sort order date */
         public final static String SONG_DATE = MediaStore.Audio.Media.DATE_ADDED + " DESC";
+
+        /* Song sort order filename */
+        public final static String SONG_FILENAME = MediaStore.Audio.Media.DATA;
     }
 
     /**
@@ -107,6 +110,9 @@ public final class SortOrder {
 
         /* Album song sort order duration */
         public final static String SONG_DURATION = SongSortOrder.SONG_DURATION;
+
+        /* Album song sort order filename */
+        public final static String SONG_FILENAME = SongSortOrder.SONG_FILENAME;
     }
 
     /**
@@ -130,6 +136,9 @@ public final class SortOrder {
 
         /* Artist song sort order date */
         public final static String SONG_DATE = MediaStore.Audio.Media.DATE_ADDED + " DESC";
+
+        /* Artist song sort order filename */
+        public final static String SONG_FILENAME = SongSortOrder.SONG_FILENAME;
     }
 
     /**

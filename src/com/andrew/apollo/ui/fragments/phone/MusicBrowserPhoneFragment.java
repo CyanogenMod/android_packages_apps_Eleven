@@ -261,6 +261,12 @@ public class MusicBrowserPhoneFragment extends Fragment implements
                     getArtistFragment().refresh();
                 }
                 return true;
+            case R.id.menu_sort_by_filename:
+                if(isSongPage()) {
+                    mPreferences.setSongSortOrder(SortOrder.SongSortOrder.SONG_FILENAME);
+                    getSongFragment().refresh();
+                }
+                return true;
             case R.id.menu_view_as_simple:
                 if (isRecentPage()) {
                     mPreferences.setRecentLayout("simple");

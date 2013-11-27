@@ -63,6 +63,7 @@
     <string name="sort_order_entry_track_list">Track list</string>
     <string name="sort_order_entry_number_of_songs">Number of songs</string>
     <string name="sort_order_entry_number_of_albums">Number of albums</string>
+    <string name="sort_order_entry_filename">Filename</string>
 
     <!-- Default playlist names -->
     <string name="playlist_favorite">Favorite</string> <!-- used in voice search processing only -->

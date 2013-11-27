@@ -33,6 +33,9 @@
             <item
                 android:id="@+id/menu_sort_by_track_list"
                 android:title="@string/sort_order_entry_track_list"/>
+            <item
+                android:id="@+id/menu_sort_by_filename"
+                android:title="@string/sort_order_entry_filename"/>
         </menu>
     </item>
 
