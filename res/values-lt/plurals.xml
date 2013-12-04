@@ -55,7 +55,7 @@
     </plurals>
 
     <plurals name="NNNtracksdeleted">
-        <item quantity="one">Pašalinta 1 daina.</item>
+        <item quantity="one">1 daina pašalinta.</item>
         <item quantity="other"><xliff:g id="songs_to_delete">%d</xliff:g> dainos pašalintos.</item>
     </plurals>
 </resources>
