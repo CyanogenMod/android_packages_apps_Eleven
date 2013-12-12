@@ -34,6 +34,10 @@
         <item quantity="one">1 música adicionada à lista de reprodução.</item>
         <item quantity="other"><xliff:g id="number" example="27">%d</xliff:g> músicas adicionadas à lista de reprodução.</item>
     </plurals>
+    <plurals name="NNNtracksfromplaylist">
+        <item quantity="one">1 música removida da lista de reprodução.</item>
+        <item quantity="other"><xliff:g id="number" example="27">%d</xliff:g> músicas removidas da lista de reprodução.</item>
+    </plurals>
     <plurals name="NNNtrackstoqueue">
         <item quantity="one">1 música adicionada à fila.</item>
         <item quantity="other"><xliff:g id="number" example="27">%d</xliff:g> músicas adicionadas à fila.</item>
@@ -45,9 +49,5 @@
     <plurals name="NNNtracksdeleted">
         <item quantity="one">1 música foi excluída.</item>
         <item quantity="other"><xliff:g id="songs_to_delete">%d</xliff:g> músicas foram excluídas.</item>
-    </plurals>
-    <plurals name="NNNtracksfromplaylist">
-        <item quantity="one">1 música removida da lista de reprodução.</item>
-        <item quantity="other"><xliff:g id="number" example="27" xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">%d</xliff:g> músicas removidas da lista de reprodução.</item>
     </plurals>
 </resources>
