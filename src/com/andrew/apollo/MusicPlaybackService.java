@@ -2518,7 +2518,14 @@ public class MusicPlaybackService extends Service {
          *            you want to play
          */
         public void setNextDataSource(final String path) {
-            mCurrentMediaPlayer.setNextMediaPlayer(null);
+            try {
+                mCurrentMediaPlayer.setNextMediaPlayer(null);
+            } catch (IllegalArgumentException e) {
+                Log.i(TAG, "Next media player is current one, continuing");
+            } catch (IllegalStateException e) {
+                Log.e(TAG, "Media player not initialized!");
+                return;
+            }
             if (mNextMediaPlayer != null) {
                 mNextMediaPlayer.release();
                 mNextMediaPlayer = null;
