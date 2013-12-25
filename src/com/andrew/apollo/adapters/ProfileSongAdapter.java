@@ -42,6 +42,21 @@ import java.util.List;
 public class ProfileSongAdapter extends ArrayAdapter<Song> {
 
     /**
+     * Default display setting: title/album
+     */
+    public static final int DISPLAY_DEFAULT_SETTING = 0;
+
+    /**
+     * Playlist display setting: title/artist-album
+     */
+    public static final int DISPLAY_PLAYLIST_SETTING = 1;
+
+    /**
+     * Album display setting: title/duration
+     */
+    public static final int DISPLAY_ALBUM_SETTING = 2;
+
+    /**
      * The header view
      */
     private static final int ITEM_VIEW_TYPE_HEADER = 0;
@@ -72,10 +87,14 @@ public class ProfileSongAdapter extends ArrayAdapter<Song> {
     private final int mLayoutId;
 
     /**
-     * In {@link AlbumSongFragment} that duration is shown on line two, this
-     * makes that happen while showing the album name on all others
+     * Display setting for the second line in a song fragment
      */
-    private final boolean mShowDuration;
+    private final int mDisplaySetting;
+
+    /**
+     * Separator used for separating album/artist strings
+     */
+    private final String SEPARATOR_STRING = " - ";
 
     /**
      * Used to set the size of the data in the adapter
@@ -87,10 +106,9 @@ public class ProfileSongAdapter extends ArrayAdapter<Song> {
      * 
      * @param context The {@link Context} to use
      * @param layoutId The resource Id of the view to inflate.
-     * @param yesToDuration True to show the duration of a track on line two,
-     *            false otherwise
+     * @param setting defines the content of the second line
      */
-    public ProfileSongAdapter(final Context context, final int layoutId, final boolean yesToDuration) {
+    public ProfileSongAdapter(final Context context, final int layoutId, final int setting) {
         super(context, 0);
         // Used to create the custom layout
         mInflater = LayoutInflater.from(context);
@@ -99,7 +117,7 @@ public class ProfileSongAdapter extends ArrayAdapter<Song> {
         // Get the layout Id
         mLayoutId = layoutId;
         // Know what to put in line two
-        mShowDuration = yesToDuration;
+        mDisplaySetting = setting;
     }
 
     /**
@@ -109,15 +127,7 @@ public class ProfileSongAdapter extends ArrayAdapter<Song> {
      * @param layoutId The resource Id of the view to inflate.
      */
     public ProfileSongAdapter(final Context context, final int layoutId) {
-        super(context, 0);
-        // Used to create the custom layout
-        mInflater = LayoutInflater.from(context);
-        // Cache the header
-        mHeader = mInflater.inflate(R.layout.faux_carousel, null);
-        // Get the layout Id
-        mLayoutId = layoutId;
-        // Know what to put in line two
-        mShowDuration = false;
+        this(context, layoutId, DISPLAY_DEFAULT_SETTING);
     }
 
     /**
@@ -148,12 +158,23 @@ public class ProfileSongAdapter extends ArrayAdapter<Song> {
 
         // Set each track name (line one)
         holder.mLineOne.get().setText(song.mSongName);
-        // Set the duration or album name (line two)
-        if (mShowDuration) {
-            holder.mLineTwo.get().setText(
-                    MusicUtils.makeTimeString(getContext(), song.mDuration));
-        } else {
-            holder.mLineTwo.get().setText(song.mAlbumName);
+        // Set the line two
+        switch (mDisplaySetting) {
+            // show duration if on album fragment
+            case DISPLAY_ALBUM_SETTING:
+                holder.mLineTwo.get().setText(
+                        MusicUtils.makeTimeString(getContext(), song.mDuration));
+                break;
+            case DISPLAY_PLAYLIST_SETTING:
+                final StringBuilder sb = new StringBuilder(song.mArtistName);
+                sb.append(SEPARATOR_STRING);
+                sb.append(song.mAlbumName);
+                holder.mLineTwo.get().setText(sb.toString());
+                break;
+            case DISPLAY_DEFAULT_SETTING:
+            default:
+                holder.mLineTwo.get().setText(song.mAlbumName);
+                break;
         }
         return convertView;
     }

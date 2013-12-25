@@ -984,10 +984,12 @@ public class MusicPlaybackService extends Service {
     }
 
     private void updateCursor(final String selection, final String[] selectionArgs) {
-        closeCursor();
+        synchronized (this) {
+            closeCursor();
 
-        mCursor = openCursorAndGoToFirst(MediaStore.Audio.Media.EXTERNAL_CONTENT_URI,
-                PROJECTION, selection, selectionArgs);
+            mCursor = openCursorAndGoToFirst(MediaStore.Audio.Media.EXTERNAL_CONTENT_URI,
+                    PROJECTION, selection, selectionArgs);
+        }
 
         long albumId = getAlbumId();
         if (albumId >= 0) {
@@ -1490,9 +1492,11 @@ public class MusicPlaybackService extends Service {
                 SystemClock.sleep(3000);
                 updateCursor(mPlayList[mPlayPos]);
             }
-            closeCursor();
-            mOpenFailedCounter = 20;
-            openCurrentAndNext();
+            synchronized (this) {
+                closeCursor();
+                mOpenFailedCounter = 20;
+                openCurrentAndNext();
+            }
             if (!mPlayer.isInitialized()) {
                 mPlayListLen = 0;
                 return;
@@ -2514,7 +2518,14 @@ public class MusicPlaybackService extends Service {
          *            you want to play
          */
         public void setNextDataSource(final String path) {
-            mCurrentMediaPlayer.setNextMediaPlayer(null);
+            try {
+                mCurrentMediaPlayer.setNextMediaPlayer(null);
+            } catch (IllegalArgumentException e) {
+                Log.i(TAG, "Next media player is current one, continuing");
+            } catch (IllegalStateException e) {
+                Log.e(TAG, "Media player not initialized!");
+                return;
+            }
             if (mNextMediaPlayer != null) {
                 mNextMediaPlayer.release();
                 mNextMediaPlayer = null;

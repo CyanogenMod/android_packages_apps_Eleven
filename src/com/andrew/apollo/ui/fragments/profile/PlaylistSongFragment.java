@@ -133,7 +133,11 @@ public class PlaylistSongFragment extends Fragment implements LoaderCallbacks<Li
     public void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         // Create the adpater
-        mAdapter = new ProfileSongAdapter(getActivity(), R.layout.edit_track_list_item);
+        mAdapter = new ProfileSongAdapter(
+                getActivity(),
+                R.layout.edit_track_list_item,
+                ProfileSongAdapter.DISPLAY_PLAYLIST_SETTING
+        );
     }
 
     /**
