@@ -52,7 +52,7 @@
 
     <plurals name="NNNtrackstofavorites">
         <item quantity="one">1 daina įtraukta į mėgstamus.</item>
-        <item quantity="other"><xliff:g id="number" example="27">%d</xliff:g> dainos įtrauktos mėgstamus.</item>
+        <item quantity="other"><xliff:g id="number" example="27">%d</xliff:g> dainos įtrauktos į mėgstamus.</item>
     </plurals>
 
     <plurals name="NNNtracksdeleted">
