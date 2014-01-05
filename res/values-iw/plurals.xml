@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     Copyright (C) 2012-2013 Andrew Neal
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+
+          http://www.apache.org/licenses/LICENSE-2.0
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <plurals name="Nartists">
+    <item quantity="one">אומן אחד</item>
+    <item quantity="other"><xliff:g id="count">%d</xliff:g> אומנים</item>
+  </plurals>
+  <plurals name="Nalbums">
+    <item quantity="one">אלבום אחד</item>
+    <item quantity="other"><xliff:g id="count">%d</xliff:g> אלבומים</item>
+  </plurals>
+  <plurals name="Nsongs">
+    <item quantity="one">1 שיר</item>
+    <item quantity="other"><xliff:g id="count">%d</xliff:g> שירים</item>
+  </plurals>
+  <plurals name="Ngenres">
+    <item quantity="one">1 ז\'אנר</item>
+    <item quantity="other"><xliff:g id="count">%d</xliff:g> ז\'אנרים</item>
+  </plurals>
+  <plurals name="NNNtrackstoplaylist">
+    <item quantity="one">שיר אחד נוסף לרשימת השמעה.</item>
+    <item quantity="other"><xliff:g id="number" example="27">%d</xliff:g> שירים נוספו לרשימת השמעה.</item>
+  </plurals>
+  <plurals name="NNNtracksfromplaylist">
+    <item quantity="one">שיר אחד הוסר מרשימת השמעה.</item>
+    <item quantity="other"><xliff:g id="number" example="27">%d</xliff:g> שירים הוסרו מרשימת השמעה.</item>
+  </plurals>
+  <plurals name="NNNtrackstoqueue">
+    <item quantity="one">שיר אחד הוסף לתור השמעה.</item>
+    <item quantity="other"><xliff:g id="number" example="27">%d</xliff:g> שירים נוספו לתור השמעה.</item>
+  </plurals>
+  <plurals name="NNNtrackstofavorites">
+    <item quantity="one">שיר אחד נוסף למועדפים.</item>
+    <item quantity="other"><xliff:g id="number" example="27">%d</xliff:g> שירים נוספו למועדפים.</item>
+  </plurals>
+  <plurals name="NNNtracksdeleted">
+    <item quantity="one">שיר אחד נמחק.</item>
+    <item quantity="other"><xliff:g id="songs_to_delete">%d</xliff:g> שירים נמחקו.</item>
+  </plurals>
+</resources>
