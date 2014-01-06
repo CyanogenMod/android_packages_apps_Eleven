@@ -53,6 +53,7 @@
     <string name="sort_order_entry_track_list">Dalok listája</string>
     <string name="sort_order_entry_number_of_songs">Dalok száma</string>
     <string name="sort_order_entry_number_of_albums">Albumok száma</string>
+    <string name="sort_order_entry_filename">Fájlnév</string>
     <string name="playlist_favorite">Kedvenc</string>
     <string name="playlist_favorites">Kedvencek</string>
     <string name="playlist_last_added">Legutóbb hozzáadott</string>
