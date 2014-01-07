@@ -54,6 +54,7 @@
     <string name="sort_order_entry_track_list">Трек-листу</string>
     <string name="sort_order_entry_number_of_songs">Количеству треков</string>
     <string name="sort_order_entry_number_of_albums">Количеству альбомов</string>
+    <string name="sort_order_entry_filename">Имени файла</string>
 
     <!-- Playlist items -->
     <string name="add_to_playlist">Добавить в плейлист</string>
@@ -64,6 +65,7 @@
     <string name="remove_from_queue">Удалить из очереди</string>
 
     <!-- Default playlist names -->
+    <string name="playlist_favorite">Избранное</string>
     <string name="playlist_favorites">Избранное</string>
     <string name="playlist_last_added">Недавно добавленные</string>
 
