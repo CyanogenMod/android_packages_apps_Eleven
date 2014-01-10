@@ -39,6 +39,7 @@
     <string name="sort_order_entry_track_list">Speellys</string>
     <string name="sort_order_entry_number_of_songs">Aantal liedjies</string>
     <string name="sort_order_entry_number_of_albums">Aantal albums</string>
+    <string name="sort_order_entry_filename">Leêrnaam</string>
     <string name="playlist_favorite">Gunstelling</string>
     <string name="playlist_favorites">Gunstellinge</string>
     <string name="playlist_last_added">Laaste bygevoeg</string>
