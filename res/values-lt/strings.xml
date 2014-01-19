@@ -91,11 +91,11 @@
     <string name="accessibility_repeat">Pakartoti</string>
     <string name="accessibility_repeat_all">Pakartoti visus</string>
     <string name="accessibility_repeat_one">Pakartoti vieną</string>
-    <string name="pinned_to_home_screen"><xliff:g id="name">%s</xliff:g> Prisegta į pagrindinį ekraną</string>
-    <string name="could_not_be_pinned_to_home_screen"><xliff:g id="name">%s</xliff:g> Nepavyko prisegti į pagrindinį ekraną</string>
-    <string name="set_as_ringtone">\'<xliff:g id="name" example="Alarm Bell">%s</xliff:g>\' Nustatyti kaip skambėjimo signalą</string>
+    <string name="pinned_to_home_screen"><xliff:g id="name">%s</xliff:g> prisegta į pagrindinį ekraną</string>
+    <string name="could_not_be_pinned_to_home_screen"><xliff:g id="name">%s</xliff:g> nepavyko prisegti į pagrindinį ekraną</string>
+    <string name="set_as_ringtone">\„<xliff:g id="name" example="Alarm Bell">%s</xliff:g>\“ nustatytas kaip skambėjimo tonas</string>
     <string name="playlist_renamed">Grojaraštis pervadintas</string>
-    <string name="theme_set"><xliff:g id="name">%s</xliff:g> Nustatyti temą</string>
+    <string name="theme_set"><xliff:g id="name">%s</xliff:g> tema nustatyta</string>
     <string name="settings_ui_category">Sąsaja</string>
     <string name="settings_storage_category">Saugykla</string>
     <string name="settings_data_category">Duomenys</string>
