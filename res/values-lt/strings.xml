@@ -68,7 +68,7 @@
     <string name="cannot_be_undone">Tai negali būti atšaukta</string>
     <string name="delete_warning">Visam laikui bus ištrinti talpyklos vaizdo įrašai</string>
     <string name="new_photo">Pasirinkite nuotrauką iš galerijos</string>
-    <string name="google_search">Google paieška</string>
+    <string name="google_search">"„Google“ paieška"</string>
     <string name="use_default">Naudoti numatytąją nuotrauką</string>
     <string name="old_photo">Naudoti seną nuotrauką</string>
     <string name="context_menu_play_selection">Groti</string>
@@ -78,7 +78,7 @@
     <string name="context_menu_delete">Ištrinti</string>
     <string name="context_menu_fetch_album_art">Atsisiųsti albumo viršelį</string>
     <string name="context_menu_fetch_artist_image">Atsisiųsti artisto atvaizdą</string>
-    <string name="context_menu_open_in_play_store">Atidaryti Play parduotuvę</string>
+    <string name="context_menu_open_in_play_store">"Atidaryti „Play“ parduotuvę"</string>
     <string name="context_menu_remove_from_recent">Pašalinti iš naujų</string>
     <string name="context_menu_use_as_ringtone">Naudoti kaip skambėjimo toną</string>
     <string name="context_menu_remove_from_playlist">Pašalinti iš grojaraščio</string>
@@ -93,7 +93,7 @@
     <string name="accessibility_repeat_one">Pakartoti vieną</string>
     <string name="pinned_to_home_screen"><xliff:g id="name">%s</xliff:g> prisegta į pagrindinį ekraną</string>
     <string name="could_not_be_pinned_to_home_screen"><xliff:g id="name">%s</xliff:g> nepavyko prisegti į pagrindinį ekraną</string>
-    <string name="set_as_ringtone">\„<xliff:g id="name" example="Alarm Bell">%s</xliff:g>\“ nustatytas kaip skambėjimo tonas</string>
+    <string name="set_as_ringtone">"„<xliff:g id="name" example="Alarm Bell">%s</xliff:g>“ nustatytas kaip skambėjimo tonas"</string>
     <string name="playlist_renamed">Grojaraštis pervadintas</string>
     <string name="theme_set"><xliff:g id="name">%s</xliff:g> tema nustatyta</string>
     <string name="settings_ui_category">Sąsaja</string>
@@ -103,13 +103,13 @@
     <string name="settings_author_title">Autorius</string>
     <string name="settings_about_apollo">Apie Apollo</string>
     <string name="settings_special_thanks">Ypatingas ačiū</string>
-    <string name="settings_lopez_summary">Piktogramos ir Play parduotuvės reklamos dizainas</string>
+    <string name="settings_lopez_summary">"Piktogramos ir „Play“ parduotuvės reklamos dizainas"</string>
     <string name="settings_color_scheme_title">Pasirinkite Apollo numatytąją spalvų schemą</string>
     <string name="settings_color_scheme_summary">Keičia Apollo spalvų akcentą</string>
     <string name="settings_theme_chooser_title">Pasirinkite temą</string>
     <string name="settings_delete_cache_title">Ištrinti talpyklą</string>
     <string name="settings_delete_cache_summary">Pašalinti visus talpyklos vaizdus</string>
-    <string name="settings_download_only_on_wifi_title">Atsisiųsti tik per Wi-Fi</string>
+    <string name="settings_download_only_on_wifi_title">"Atsisiųsti tik per „Wi-Fi“"</string>
     <string name="settings_download_only_on_wifi_summary">Siekiant sumažinti operatoriaus mokesčius nesisiųskite per mobiliojio ryšio tinklus</string>
     <string name="settings_download_missing_artwork_title">Parsisiųsti trūkstamus albumo viršelius</string>
     <string name="settings_download_artist_images_title">Parsisiųsti trūkstamus artistų atvaizdus</string>
