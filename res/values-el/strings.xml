@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- Copyright (C) 2012-2013 Andrew Neal
+<!--
+     Copyright (C) 2012-2014 Andrew Neal
 
      Licensed under the Apache License, Version 2.0 (the "License");
      you may not use this file except in compliance with the License.
@@ -53,6 +54,7 @@
     <string name="sort_order_entry_track_list">Λίστα κομματιών</string>
     <string name="sort_order_entry_number_of_songs">Αριθμός τραγουδιών</string>
     <string name="sort_order_entry_number_of_albums">Αριθμός άλμπουμ</string>
+    <string name="sort_order_entry_filename">Όνομα αρχείου</string>
     <string name="playlist_favorite">Αγαπημένο</string>
     <string name="playlist_favorites">Αγαπημένα</string>
     <string name="playlist_last_added">Προστέθηκαν πρόσφατα</string>
