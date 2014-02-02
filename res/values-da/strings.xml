@@ -21,7 +21,6 @@
     <string name="page_songs">Sange</string>
     <string name="page_playlists">Playlister</string>
     <string name="page_genres">Genrer</string>
-
     <string name="menu_settings">Indstillinger</string>
     <string name="menu_search">Søg</string>
     <string name="menu_shuffle">Bland alle</string>
@@ -38,14 +37,12 @@
     <string name="menu_detailed">Detaljeret</string>
     <string name="menu_grid">Gitter</string>
     <string name="menu_view_as">Vis som</string>
-
     <string name="add_to_playlist">Tilføj til playliste</string>
     <string name="add_to_favorites">Tilføj til favoritter</string>
     <string name="add_to_queue">Tilføj til kø</string>
     <string name="remove_from_favorites">Fjern fra favoritter</string>
     <string name="remove_from_recent">Fjern fra seneste</string>
     <string name="remove_from_queue">Fjern fra kø</string>
-
     <string name="sort_order_entry_az">A-Z</string>
     <string name="sort_order_entry_za">Z-A</string>
     <string name="sort_order_entry_artist">Kunstner</string>
@@ -56,11 +53,10 @@
     <string name="sort_order_entry_track_list">Trackliste</string>
     <string name="sort_order_entry_number_of_songs">Antal sange</string>
     <string name="sort_order_entry_number_of_albums">Antal albums</string>
-
+    <string name="sort_order_entry_filename">Filnavn</string>
     <string name="playlist_favorite">Favorit</string>
     <string name="playlist_favorites">Favoritter</string>
     <string name="playlist_last_added">Sidst tilføjet</string>
-
     <string name="new_playlist">Ny playliste</string>
     <string name="save">Gem</string>
     <string name="cancel">Afbryd</string>
@@ -74,7 +70,6 @@
     <string name="google_search">Google-søgning</string>
     <string name="use_default">Brug standardfoto</string>
     <string name="old_photo">Brug gammelt foto</string>
-
     <string name="context_menu_play_selection">Afspil</string>
     <string name="context_menu_play_next">Afspil næste</string>
     <string name="context_menu_more_by_artist">Mere af kunstner</string>
@@ -86,7 +81,6 @@
     <string name="context_menu_remove_from_recent">Fjern fra seneste</string>
     <string name="context_menu_use_as_ringtone">Brug som ringetone</string>
     <string name="context_menu_remove_from_playlist">Fjern fra playliste</string>
-
     <string name="accessibility_play">Afspil</string>
     <string name="accessibility_pause">Pause</string>
     <string name="accessibility_next">Næste</string>
@@ -96,13 +90,11 @@
     <string name="accessibility_repeat">Gentag</string>
     <string name="accessibility_repeat_all">Gentag alle</string>
     <string name="accessibility_repeat_one">Gentag én</string>
-
     <string name="pinned_to_home_screen"><xliff:g id="name">%s</xliff:g> fastgjort til din startskærm</string>
     <string name="could_not_be_pinned_to_home_screen"><xliff:g id="name">%s</xliff:g> kunne ikke fastgøres til din startskærm</string>
     <string name="set_as_ringtone">\'<xliff:g id="name" example="Alarm Bell">%s</xliff:g>\' sat som ringetone</string>
     <string name="playlist_renamed">Playliste omdøbt</string>
     <string name="theme_set"><xliff:g id="name">%s</xliff:g> sat som temaet</string>
-
     <string name="settings_ui_category">Brugerflade</string>
     <string name="settings_storage_category">Lagring</string>
     <string name="settings_data_category">Data</string>
@@ -122,21 +114,17 @@
     <string name="settings_download_artist_images_title">Download manglende kunstnerbilleder</string>
     <string name="settings_open_source_licenses">Open source-licenser</string>
     <string name="settings_version_title">Versionsnummer</string>
-
     <string name="now_listening_to">#NowPlaying <xliff:g id="title">%1$s</xliff:g> af <xliff:g id="artist">%2$s</xliff:g> #Apollo</string>
     <string name="share_track_using">Del sang vha.:</string>
-
     <string name="color_picker_title">Farveskema</string>
     <string name="hex">#</string>
     <string name="current_color">Aktuel</string>
     <string name="new_color">Ny</string>
-
     <string name="app_widget_small">Apollo: 4x1</string>
     <string name="app_widget_large">Apollo: 4x2</string>
     <string name="app_widget_large_alt">Apollo: 4x2 (alternativ)</string>
     <string name="app_widget_recent">Apollo: senest lyttet til</string>
     <string name="app_widget_text_separator">-</string>
-
     <string name="no_effects_for_you">Equalizeren kunne ikke åbnes.</string>
     <string name="empty_music">Brug et USB-kabel for at kopiere musik fra din computer til enheden.</string>
     <string name="empty_last_added">Sange, som du har tilføjet i løbet af den sidste måned, vil blive vist her.</string>
