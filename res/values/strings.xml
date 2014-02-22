@@ -114,7 +114,7 @@
     <!-- Toast messages -->
     <string name="pinned_to_home_screen"><xliff:g id="name">%s</xliff:g> pinned to your home screen</string>
     <string name="could_not_be_pinned_to_home_screen"><xliff:g id="name">%s</xliff:g> could not be pinned to your home screen</string>
-    <string name="set_as_ringtone">\u2018<xliff:g id="name" example="Alarm Bell">%s</xliff:g>\u2019 set as ringtone</string>
+    <string name="set_as_ringtone">\'<xliff:g id="name" example="Alarm Bell">%s</xliff:g>\' set as ringtone</string>
     <string name="playlist_renamed">Playlist renamed</string>
     <string name="theme_set"><xliff:g id="name">%s</xliff:g> set as the theme</string>
 
