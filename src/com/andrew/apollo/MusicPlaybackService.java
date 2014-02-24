@@ -281,6 +281,13 @@ public class MusicPlaybackService extends Service {
     private static final int IDLE_DELAY = 60000;
 
     /**
+     * Song play time used as threshold for rewinding to the beginning of the
+     * track instead of skipping to the previous track when getting the PREVIOUS
+     * command
+     */
+    private static final long REWIND_INSTEAD_PREVIOUS_THRESHOLD = 3000;
+
+    /**
      * The max size allowed for the track history
      */
     private static final int MAX_HISTORY_SIZE = 100;
@@ -746,7 +753,7 @@ public class MusicPlaybackService extends Service {
         if (CMDNEXT.equals(command) || NEXT_ACTION.equals(action)) {
             gotoNext(true);
         } else if (CMDPREVIOUS.equals(command) || PREVIOUS_ACTION.equals(action)) {
-            if (position() < 2000) {
+            if (position() < REWIND_INSTEAD_PREVIOUS_THRESHOLD) {
                 prev();
             } else {
                 seek(0);
