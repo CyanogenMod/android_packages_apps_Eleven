@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- Copyright (C) 2012 Andrew Neal
+<!--
+     Copyright (C) 2012 Andrew Neal
+     Copyright (C) 2014 The CyanogenMod Project
 
      Licensed under the Apache License, Version 2.0 (the "License");
      you may not use this file except in compliance with the License.
@@ -12,12 +14,8 @@
      WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
      See the License for the specific language governing permissions and
      limitations under the License.
- -->
+-->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-
-    <string name="app_name">Apollo</string>
-
-    <!-- Page titles -->
     <string name="page_recent">Ostatnio słuchane</string>
     <string name="page_artists">Wykonawcy</string>
     <string name="page_albums">Albumy</string>
@@ -25,7 +23,6 @@
     <string name="page_playlists">Playlisty</string>
     <string name="page_genres">Gatunki</string>
 
-    <!-- Option menu items -->
     <string name="menu_settings">Ustawienia</string>
     <string name="menu_search">Szukaj</string>
     <string name="menu_shuffle">Losuj wszystko</string>
@@ -43,7 +40,6 @@
     <string name="menu_grid">Siatka</string>
     <string name="menu_view_as">Zobacz jako</string>
 
-    <!-- Playlist items -->
     <string name="add_to_playlist">Dodaj do playlisty</string>
     <string name="add_to_favorites">Dodaj do ulubionych</string>
     <string name="add_to_queue">Dodaj do kolejki</string>
@@ -51,7 +47,6 @@
     <string name="remove_from_recent">Usuń z ostatnio słuchanych</string>
     <string name="remove_from_queue">Usuń z kolejki</string>
 
-    <!-- Sort orders -->
     <string name="sort_order_entry_az">A-Z</string>
     <string name="sort_order_entry_za">Z-A</string>
     <string name="sort_order_entry_artist">Wykonawca</string>
@@ -63,12 +58,10 @@
     <string name="sort_order_entry_number_of_songs">Liczba utworów</string>
     <string name="sort_order_entry_number_of_albums">Liczba albumów</string>
 
-    <!-- Default playlist names -->
     <string name="playlist_favorite">Ulubiona</string>
     <string name="playlist_favorites">Ulubione</string>
     <string name="playlist_last_added">Ostatnio dodane</string>
 
-    <!-- AlertDialog items -->
     <string name="new_playlist">Nowa playlista</string>
     <string name="save">Zapisz</string>
     <string name="cancel">Anuluj</string>
@@ -83,7 +76,6 @@
     <string name="use_default">Użyj domyślnego zdjęcia</string>
     <string name="old_photo">Użyj starego zdjęcia</string>
 
-    <!-- Context menu items -->
     <string name="context_menu_play_selection">Odtwórz</string>
     <string name="context_menu_play_next">Odtwórz następny</string>
     <string name="context_menu_more_by_artist">Więcej tego wykonawcy</string>
@@ -96,7 +88,6 @@
     <string name="context_menu_use_as_ringtone">Ustaw jako dzwonek</string>
     <string name="context_menu_remove_from_playlist">Usuń z playlisty</string>
 
-    <!-- Content descriptions -->
     <string name="accessibility_play">Odtwórz</string>
     <string name="accessibility_pause">Pauza</string>
     <string name="accessibility_next">Następny</string>
@@ -107,14 +98,12 @@
     <string name="accessibility_repeat_all">Powtarzaj wszystkie</string>
     <string name="accessibility_repeat_one">Powtarzaj bieżący</string>
 
-    <!-- Toast messages -->
     <string name="pinned_to_home_screen">Przypięto <xliff:g id="name">%s</xliff:g> do ekranu głównego</string>
     <string name="could_not_be_pinned_to_home_screen">Nie udało się przypiąć <xliff:g id="name">%s</xliff:g> do ekranu głównego</string>
     <string name="set_as_ringtone">\"<xliff:g id="name" example="Alarm Bell">%s</xliff:g>\" ustawiono jako dzwonek</string>
     <string name="playlist_renamed">Zmieniono nazwę playlisty</string>
     <string name="theme_set">Ustawiono motyw <xliff:g id="name">%s</xliff:g></string>
 
-    <!-- Settings -->
     <string name="settings_ui_category">Interfejs</string>
     <string name="settings_storage_category">Pamięć</string>
     <string name="settings_data_category">Dane</string>
@@ -135,24 +124,16 @@
     <string name="settings_open_source_licenses">Licencje open source</string>
     <string name="settings_version_title">Numer wersji</string>
 
-    <!-- Share Intent -->
     <string name="now_listening_to">#NowPlaying <xliff:g id="title">%1$s</xliff:g> wykonawcy <xliff:g id="artist">%2$s</xliff:g> #Apollo</string>
     <string name="share_track_using">Udostępnij utwór za pomocą:</string>
 
-    <!-- ColorPicker -->
     <string name="color_picker_title">Schemat kolorów</string>
-    <string name="hex">#</string>
     <string name="current_color">Bieżący</string>
     <string name="new_color">Nowy</string>
 
-    <!-- App widget -->
-    <string name="app_widget_small">Apollo: 4x1</string>
-    <string name="app_widget_large">Apollo: 4x2</string>
-    <string name="app_widget_large_alt">Apollo: 4x2 (alternatywny)</string>
+    <string name="app_widget_large_alt">Apollo: 4×2 (alternatywny)</string>
     <string name="app_widget_recent">Apollo: Ostatnio słuchane</string>
-    <string name="app_widget_text_separator">-</string>
 
-    <!-- Empty list / error messages -->
     <string name="no_effects_for_you">Equalizer nie może zostać uruchomiony.</string>
     <string name="empty_music">Aby skopiować muzykę z komputera do urządzenia, użyj kabla USB.</string>
     <string name="empty_last_added">Tutaj pojawią się utwory dodane w przeciągu ostatniego miesiąca.</string>

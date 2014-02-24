@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- Copyright (C) 2012 Andrew Neal
-     Copyright (C) 2013 The CyanogenMod Project
+<!--
+     Copyright (C) 2012 Andrew Neal
+     Copyright (C) 2014 The CyanogenMod Project
 
      Licensed under the Apache License, Version 2.0 (the "License");
      you may not use this file except in compliance with the License.
@@ -13,9 +14,8 @@
      WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
      See the License for the specific language governing permissions and
      limitations under the License.
- -->
+-->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-    <string name="app_name">Apollo</string>
     <string name="page_recent">Nesenie</string>
     <string name="page_artists">Izpildītāji</string>
     <string name="page_albums">Albumi</string>
@@ -116,14 +116,10 @@
     <string name="now_listening_to">#NowPlaying <xliff:g id="title">%1$s</xliff:g> by <xliff:g id="artist">%2$s</xliff:g> #Apollo</string>
     <string name="share_track_using">Kopīgot dziemsu ar:</string>
     <string name="color_picker_title">Krāsu shēma</string>
-    <string name="hex">#</string>
     <string name="current_color">Pašreizēja</string>
     <string name="new_color">Jauna</string>
-    <string name="app_widget_small">Apollo: 4x1</string>
-    <string name="app_widget_large">Apollo: 4x2</string>
-    <string name="app_widget_large_alt">Apollo: 4x2 (alternatīvs)</string>
+    <string name="app_widget_large_alt">Apollo: 4×2 (alternatīvs)</string>
     <string name="app_widget_recent">Apollo: nesen klausītie</string>
-    <string name="app_widget_text_separator">-</string>
     <string name="no_effects_for_you">Ekvalaizers nevar tikt atvērts.</string>
     <string name="empty_music">Lai kopētu mūziku no datora uz šo iekārtu, izmantojiet USB kabeli.</string>
     <string name="empty_last_added">Pēdējā mēneša laikā pievienotās dziesmas tiks parādītas šeit.</string>

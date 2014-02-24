@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- Copyright (C) 2012 Andrew Neal
+<!--
+     Copyright (C) 2012 Andrew Neal
+     Copyright (C) 2014 The CyanogenMod Project
 
      Licensed under the Apache License, Version 2.0 (the "License");
      you may not use this file except in compliance with the License.
@@ -12,12 +14,9 @@
      WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
      See the License for the specific language governing permissions and
      limitations under the License.
- -->
+-->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
 
-    <string name="app_name">Apollo</string>
-
-    <!-- Page titles -->
     <string name="page_recent">Недавние</string>
     <string name="page_artists">Исполнители</string>
     <string name="page_albums">Альбомы</string>
@@ -25,7 +24,6 @@
     <string name="page_playlists">Плейлисты</string>
     <string name="page_genres">Жанры</string>
 
-    <!-- Option menu items -->
     <string name="menu_settings">Настройки</string>
     <string name="menu_search">Поиск</string>
     <string name="menu_shuffle">Перемешать все</string>
@@ -43,7 +41,6 @@
     <string name="menu_grid">Сетка</string>
     <string name="menu_view_as">Вид объектов</string>
 
-    <!-- Sort orders -->
     <string name="sort_order_entry_az">Алфавиту</string>
     <string name="sort_order_entry_za">Алфавиту в обр. порядке</string>
     <string name="sort_order_entry_artist">Исполнителю</string>
@@ -56,7 +53,6 @@
     <string name="sort_order_entry_number_of_albums">Количеству альбомов</string>
     <string name="sort_order_entry_filename">Имени файла</string>
 
-    <!-- Playlist items -->
     <string name="add_to_playlist">Добавить в плейлист</string>
     <string name="add_to_favorites">Добавить в избранное</string>
     <string name="add_to_queue">Добавить в очередь</string>
@@ -64,12 +60,10 @@
     <string name="remove_from_recent">Удалить из недавних</string>
     <string name="remove_from_queue">Удалить из очереди</string>
 
-    <!-- Default playlist names -->
     <string name="playlist_favorite">Избранное</string>
     <string name="playlist_favorites">Избранное</string>
     <string name="playlist_last_added">Недавно добавленные</string>
 
-    <!-- AlertDialog items -->
     <string name="new_playlist">Новый плейлист</string>
     <string name="save">Сохранить</string>
     <string name="cancel">Отмена</string>
@@ -84,7 +78,6 @@
     <string name="use_default">Изображение по умолчанию</string>
     <string name="old_photo">Исходное изображение</string>
 
-    <!-- Context menu items -->
     <string name="context_menu_play_selection">Воспроизвести</string>
     <string name="context_menu_play_next">Воспроизвести следующим</string>
     <string name="context_menu_more_by_artist">Все треки исполнителя</string>
@@ -97,7 +90,6 @@
     <string name="context_menu_use_as_ringtone">Использовать как рингтон</string>
     <string name="context_menu_remove_from_playlist">Удалить из плейлиста</string>
 
-    <!-- Content descriptions -->
     <string name="accessibility_play">Воспроизведение</string>
     <string name="accessibility_pause">Пауза</string>
     <string name="accessibility_next">След. трек</string>
@@ -108,14 +100,12 @@
     <string name="accessibility_repeat_all">Повтор всех</string>
     <string name="accessibility_repeat_one">Повтор трека</string>
 
-    <!-- Toast messages -->
     <string name="pinned_to_home_screen">Ярлык «<xliff:g id="name">%s</xliff:g>» добавлен на главный экран.</string>
     <string name="could_not_be_pinned_to_home_screen">Невозможно добавить «<xliff:g id="name">%s</xliff:g>» на главный экран.</string>
     <string name="set_as_ringtone">Трек «<xliff:g id="name" example="Alarm Bell">%s</xliff:g>» установлен как рингтон.</string>
     <string name="playlist_renamed">Плейлист переименован</string>
     <string name="theme_set">Тема «<xliff:g id="name">%s</xliff:g>» установлена</string>
 
-    <!-- Settings -->
     <string name="settings_ui_category">Интерфейс</string>
     <string name="settings_storage_category">Память</string>
     <string name="settings_data_category">Данные</string>
@@ -136,24 +126,16 @@
     <string name="settings_open_source_licenses">Лицензии открытого ПО</string>
     <string name="settings_version_title">Версия приложения</string>
 
-    <!-- Share Intent -->
     <string name="now_listening_to">#NowPlaying <xliff:g id="title">%1$s</xliff:g> от <xliff:g id="artist">%2$s</xliff:g> #Apollo</string>
     <string name="share_track_using">Опубликовать сведения в:</string>
 
-    <!-- ColorPicker -->
     <string name="color_picker_title">Цветовая схема</string>
-    <string name="hex">#</string>
     <string name="current_color">Текущий</string>
     <string name="new_color">Новый</string>
 
-    <!-- App widget -->
-    <string name="app_widget_small">Apollo: 4x1</string>
-    <string name="app_widget_large">Apollo: 4x2</string>
-    <string name="app_widget_large_alt">Apollo: 4x2 (альтернативный)</string>
+    <string name="app_widget_large_alt">Apollo: 4×2 (альтернативный)</string>
     <string name="app_widget_recent">Apollo: недавно прослушанные</string>
-    <string name="app_widget_text_separator">-</string>
 
-    <!-- Empty list / error messages -->
     <string name="no_effects_for_you">Эквалайзер не может быть открыт</string>
     <string name="empty_music">Чтобы скопировать музыку с ПК, используйте USB-кабель.</string>
     <string name="empty_last_added">Треки, добавленные за последний месяц, будут показаны здесь.</string>

@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- Copyright (C) 2012 Andrew Neal
+<!--
+     Copyright (C) 2012 Andrew Neal
+     Copyright (C) 2014 The CyanogenMod Project
 
      Licensed under the Apache License, Version 2.0 (the "License");
      you may not use this file except in compliance with the License.
@@ -12,9 +14,8 @@
      WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
      See the License for the specific language governing permissions and
      limitations under the License.
- -->
+-->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-    <string name="app_name">Apollo</string>
     <string name="page_recent">最近播放</string>
     <string name="page_artists">演出者</string>
     <string name="page_albums">專輯</string>
@@ -116,14 +117,10 @@
     <string name="now_listening_to">#NowPlaying <xliff:g id="title">%1$s</xliff:g> by <xliff:g id="artist">%2$s</xliff:g> #Apollo</string>
     <string name="share_track_using">分享曲目使用：</string>
     <string name="color_picker_title">配色方案</string>
-    <string name="hex">#</string>
     <string name="current_color">目前：</string>
     <string name="new_color">新的：</string>
-    <string name="app_widget_small">Apollo: 4x1</string>
-    <string name="app_widget_large">Apollo: 4x2</string>
-    <string name="app_widget_large_alt">Apollo: 4x2 (替代)</string>
+    <string name="app_widget_large_alt">Apollo: 4×2 (替代)</string>
     <string name="app_widget_recent">Apollo: 最近播放</string>
-    <string name="app_widget_text_separator">-</string>
     <string name="no_effects_for_you">無法開啟等化器。</string>
     <string name="empty_music">請使用 USB 連接線將音樂從您的電腦複製到您的裝置。</string>
     <string name="empty_last_added">您最近一個月加入的音樂將會顯示在這裡。</string>

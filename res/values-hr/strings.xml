@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- Copyright (C) 2012 Andrew Neal
+<!--
+     Copyright (C) 2012 Andrew Neal
+     Copyright (C) 2014 The CyanogenMod Project
 
      Licensed under the Apache License, Version 2.0 (the "License");
      you may not use this file except in compliance with the License.
@@ -12,9 +14,8 @@
      WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
      See the License for the specific language governing permissions and
      limitations under the License.
- -->
+-->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-    <string name="app_name">Apollo</string>
     <string name="page_recent">Nedavno</string>
     <string name="page_artists">Umjetnici</string>
     <string name="page_albums">Albumi</string>
@@ -116,14 +117,10 @@
     <string name="now_listening_to">#NowPlaying <xliff:g id="title">%1$s</xliff:g> by <xliff:g id="artist">%2$s</xliff:g> #Apollo</string>
     <string name="share_track_using">Dijeli pjesmu preko:</string>
     <string name="color_picker_title">Šema boja</string>
-    <string name="hex">#</string>
     <string name="current_color">Trenutna</string>
     <string name="new_color">Nova</string>
-    <string name="app_widget_small">Apollo: 4x1</string>
-    <string name="app_widget_large">Apollo: 4x2</string>
-    <string name="app_widget_large_alt">Apollo: 4x2 (rezervna)</string>
+    <string name="app_widget_large_alt">Apollo: 4×2 (rezervna)</string>
     <string name="app_widget_recent">Apollo: nedavno slušano</string>
-    <string name="app_widget_text_separator">-</string>
     <string name="no_effects_for_you">Ekvalizer se ne može otvoriti.</string>
     <string name="empty_music">Za kopiranje glazbe s računala na uređaj, koristite USB kabel.</string>
     <string name="empty_last_added">Pjesme koje ste dodali u posljednjih mjesec dana biti će prikazane ovdje.</string>

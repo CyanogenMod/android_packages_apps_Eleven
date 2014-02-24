@@ -1,6 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--
+     Copyright (C) 2012 Andrew Neal
+     Copyright (C) 2014 The CyanogenMod Project
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+
+          http://www.apache.org/licenses/LICENSE-2.0
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-    <string name="app_name">Apollo</string>
     <string name="page_recent">Onlangs</string>
     <string name="page_artists">Kunstenaars</string>
     <string name="page_albums">Albums</string>
@@ -103,14 +118,10 @@
     <string name="now_listening_to">#Speel nou <xliff:g id="title">%1$s</xliff:g> deur <xliff:g id="artist">%2$s</xliff:g> #Apollo</string>
     <string name="share_track_using">Deel liedtjie d.m.v.:</string>
     <string name="color_picker_title">Kleur skema</string>
-    <string name="hex">#</string>
     <string name="current_color">Huidig</string>
     <string name="new_color">Nuut</string>
-    <string name="app_widget_small">Apollo: 4x1</string>
-    <string name="app_widget_large">Apollo: 4x2</string>
-    <string name="app_widget_large_alt">Apollo: 4x2 (Alternatiewe)</string>
+    <string name="app_widget_large_alt">Apollo: 4×2 (Alternatiewe)</string>
     <string name="app_widget_recent">Apollo: Onlangs geluister</string>
-    <string name="app_widget_text_separator">-</string>
     <string name="no_effects_for_you">Die equalizer kon nie oopgemaak word nie.</string>
     <string name="empty_music">Om musiek van jou rekenaar na jou toestel te kopieer, gebruik \'n USB-kabel.</string>
     <string name="empty_last_added">Liedjies wat jy die afgelope maand bygevoeg het word hier vertoon.</string>

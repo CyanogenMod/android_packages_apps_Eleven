@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- Copyright (C) 2012 Andrew Neal
+<!--
+     Copyright (C) 2012 Andrew Neal
+     Copyright (C) 2014 The CyanogenMod Project
 
      Licensed under the Apache License, Version 2.0 (the "License");
      you may not use this file except in compliance with the License.
@@ -12,12 +14,9 @@
      WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
      See the License for the specific language governing permissions and
      limitations under the License.
- -->
+-->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
 
-    <string name="app_name">Apollo</string>
-
-    <!-- Page titles -->
     <string name="page_recent">最近播放</string>
     <string name="page_artists">艺术家</string>
     <string name="page_albums">专辑</string>
@@ -25,7 +24,6 @@
     <string name="page_playlists">播放列表</string>
     <string name="page_genres">类型</string>
 
-    <!-- Option menu items -->
     <string name="menu_settings">设置</string>
     <string name="menu_search">搜索</string>
     <string name="menu_shuffle">全部随机播放</string>
@@ -43,7 +41,6 @@
     <string name="menu_grid">网格</string>
     <string name="menu_view_as">视图</string>
 
-    <!-- Playlist items -->
     <string name="add_to_playlist">添加到播放列表</string>
     <string name="add_to_favorites">添加到收藏夹</string>
     <string name="add_to_queue">添加到队列</string>
@@ -114,7 +111,6 @@
     <string name="playlist_renamed">播放列表已被重命名</string>
     <string name="theme_set">主题已设置为<xliff:g id="name">%s</xliff:g></string>
 
-    <!-- Settings -->
     <string name="settings_ui_category">界面</string>
     <string name="settings_storage_category">存储</string>
     <string name="settings_data_category">数据</string>
@@ -135,24 +131,16 @@
     <string name="settings_open_source_licenses">开源许可证</string>
     <string name="settings_version_title">版本号</string>
 
-    <!-- Share Intent -->
     <string name="now_listening_to">#NowPlaying <xliff:g id="title">%1$s</xliff:g> - <xliff:g id="artist">%2$s</xliff:g> #Apollo</string>
     <string name="share_track_using">曲目分享方式:</string>
 
-    <!-- ColorPicker -->
     <string name="color_picker_title">配色方案</string>
-    <string name="hex">#</string>
     <string name="current_color">当前</string>
     <string name="new_color">新的</string>
 
-    <!-- App widget -->
-    <string name="app_widget_small">Apollo: 4x1</string>
-    <string name="app_widget_large">Apollo: 4x2</string>
-    <string name="app_widget_large_alt">Apollo: 4x2 (扩展控制)</string>
+    <string name="app_widget_large_alt">Apollo: 4×2 (扩展控制)</string>
     <string name="app_widget_recent">Apollo: 最近播放</string>
-    <string name="app_widget_text_separator">-</string>
 
-    <!-- Empty list / error messages -->
     <string name="no_effects_for_you">无法打开均衡器.</string>
     <string name="empty_music">请使用 USB 数据线把音乐从您的计算机复制到您的设备中.</string>
     <string name="empty_last_added">您在这一个月以来添加的歌曲将在这里显示.</string>

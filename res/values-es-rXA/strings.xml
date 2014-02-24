@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
-     Copyright (C) 2012-2013 Andrew Neal
+     Copyright (C) 2012 Andrew Neal
+     Copyright (C) 2014 The CyanogenMod Project
 
      Licensed under the Apache License, Version 2.0 (the "License");
      you may not use this file except in compliance with the License.
@@ -15,7 +16,6 @@
      limitations under the License.
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-    <string name="app_name">Apollo</string>
     <string name="page_recent">Reciente</string>
     <string name="page_artists">Artistes</string>
     <string name="page_albums">Álbumes</string>
@@ -118,14 +118,10 @@
     <string name="now_listening_to">#Sintiendo <xliff:g id="title">%1$s</xliff:g> de <xliff:g id="artist">%2$s</xliff:g> #Apollo</string>
     <string name="share_track_using">Compartir canción usando:</string>
     <string name="color_picker_title">Esquema de color</string>
-    <string name="hex">#</string>
     <string name="current_color">Actual</string>
     <string name="new_color">Nuevu</string>
-    <string name="app_widget_small">Apollo: 4x1</string>
-    <string name="app_widget_large">Apollo: 4x2</string>
-    <string name="app_widget_large_alt">Apollo: 4x2 (alt.)</string>
+    <string name="app_widget_large_alt">Apollo: 4×2 (alt.)</string>
     <string name="app_widget_recent">Apollo: Recientes</string>
-    <string name="app_widget_text_separator">-</string>
     <string name="no_effects_for_you">L\'ecualizador nun pudo abrise.</string>
     <string name="empty_music">Pa copiar música del ordenador al preséu, usa un cable USB.</string>
     <string name="empty_last_added">Les canciones qu\'amestasti nel caberu mes, van apaecer equí.</string>

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- Copyright (C) 2012 Andrew Neal
-     Copyright (C) 2013 The CyanogenMod Project
+<!--
+     Copyright (C) 2012 Andrew Neal
+     Copyright (C) 2014 The CyanogenMod Project
 
      Licensed under the Apache License, Version 2.0 (the "License");
      you may not use this file except in compliance with the License.
@@ -13,9 +14,8 @@
      WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
      See the License for the specific language governing permissions and
      limitations under the License.
- -->
+-->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-    <string name="app_name">Apollo</string>
     <string name="page_recent">Nedávne</string>
     <string name="page_artists">Interpreti</string>
     <string name="page_albums">Albumy</string>
@@ -116,14 +116,10 @@
     <string name="now_listening_to">#Teraz počúvam skladbu <xliff:g id="title">%1$s</xliff:g> od interpreta <xliff:g id="artist">%2$s</xliff:g> #Apollo</string>
     <string name="share_track_using">Zdieľať stopu cez:</string>
     <string name="color_picker_title">Farebná schéma</string>
-    <string name="hex">#</string>
     <string name="current_color">Aktuálna</string>
     <string name="new_color">Nová</string>
-    <string name="app_widget_small">Apollo: 4x1</string>
-    <string name="app_widget_large">Apollo: 4x2</string>
-    <string name="app_widget_large_alt">Apollo: 4x2 (alternatívna)</string>
+    <string name="app_widget_large_alt">Apollo: 4×2 (alternatívna)</string>
     <string name="app_widget_recent">Apollo: nedávno počúvané</string>
-    <string name="app_widget_text_separator">-</string>
     <string name="no_effects_for_you">Nedá sa otvoriť ekvalizér.</string>
     <string name="empty_music">Na kopírovanie hudby z vášho počítača do vášho zariadenia použite kábel USB.</string>
     <string name="empty_last_added">Tu budú zobrazené skladby, ktoré ste pridali za posledný mesiac.</string>

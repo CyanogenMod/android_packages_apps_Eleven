@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- Copyright (C) 2012 Andrew Neal
+<!--
+     Copyright (C) 2012 Andrew Neal
+     Copyright (C) 2014 The CyanogenMod Project
 
      Licensed under the Apache License, Version 2.0 (the "License");
      you may not use this file except in compliance with the License.
@@ -12,10 +14,8 @@
      WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
      See the License for the specific language governing permissions and
      limitations under the License.
- -->
-
+-->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-    <string name="app_name">Apollo</string>
     <string name="page_recent">Recente</string>
     <string name="page_artists">Artistas</string>
     <string name="page_albums">Álbuns</string>
@@ -115,7 +115,7 @@
     <string name="color_picker_title">Esquema de cor</string>
     <string name="current_color">Atual</string>
     <string name="new_color">Nova</string>
-    <string name="app_widget_large_alt">Apollo: 4x2 (alternativo)</string>
+    <string name="app_widget_large_alt">Apollo: 4×2 (alternativo)</string>
     <string name="app_widget_recent">Apollo: escutado recentemente</string>
     <string name="no_effects_for_you">O equalizador não pôde ser aberto.</string>
     <string name="empty_music">Para copiar a música do seu computador para seu dispositivo, use um cabo USB.</string>

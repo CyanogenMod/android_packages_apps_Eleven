@@ -1,21 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- Copyright (C) 2012 Andrew Neal
+<!--
+     Copyright (C) 2012 Andrew Neal
+     Copyright (C) 2014 The CyanogenMod Project
 
-    Licensed under the Apache License, Version 2.0 (the "License");
-    you may not use this file except in compliance with the License.
-    You may obtain a copy of the License at
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
 
-    http://www.apache.org/licenses/LICENSE-2.0
+          http://www.apache.org/licenses/LICENSE-2.0
 
-    Unless required by applicable law or agreed to in writing, software
-    distributed under the License is distributed on an "AS IS" BASIS,
-    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-    See the License for the specific language governing permissions and
-limitations under the License.
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
 -->
-
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-    <string name="app_name">Apollo</string>
     <string name="page_recent">Недавні</string>
     <string name="page_artists">Виконавці</string>
     <string name="page_albums">Альбоми</string>
@@ -115,10 +115,9 @@ limitations under the License.
     <string name="now_listening_to">#яЗаразСлухаю <xliff:g id="title">%1$s</xliff:g> від <xliff:g id="artist">%2$s</xliff:g> #Apollo</string>
     <string name="share_track_using">Відправити трек за допомогою:</string>
     <string name="color_picker_title">Кольорова тема</string>
-    <string name="hex">#</string>
     <string name="current_color">Поточний</string>
     <string name="new_color">Новий</string>
-    <string name="app_widget_large_alt">Apollo: 4x2 (альтернативний)</string>
+    <string name="app_widget_large_alt">Apollo: 4×2 (альтернативний)</string>
     <string name="app_widget_recent">Apollo: недавно відтворені</string>
     <string name="no_effects_for_you">Неможливо відкрити еквалайзер.</string>
     <string name="empty_music">Використовуйте USB-кабель для копіювання музики з комп’ютера.</string>

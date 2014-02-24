@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
-     Copyright (C) 2012-2013 Andrew Neal
-     Copyright (C) 2012-2014 The CyanogenMod Project
+     Copyright (C) 2012 Andrew Neal
+     Copyright (C) 2014 The CyanogenMod Project
 
      Licensed under the Apache License, Version 2.0 (the "License");
      you may not use this file except in compliance with the License.
@@ -14,9 +14,8 @@
      WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
      See the License for the specific language governing permissions and
      limitations under the License.
- -->
+-->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-    <string name="app_name">Apollo</string>
     <string name="page_recent">Nauja</string>
     <string name="page_artists">Artistai</string>
     <string name="page_albums">Albumai</string>
@@ -119,14 +118,10 @@
     <string name="now_listening_to">#Dabar grojama <xliff:g id="title">%1$s</xliff:g> pagal <xliff:g id="artist">%2$s</xliff:g> #Apollo</string>
     <string name="share_track_using">Dalintis daina naudojant:</string>
     <string name="color_picker_title">Spalvų schema</string>
-    <string name="hex">#</string>
     <string name="current_color">Dabartinė</string>
     <string name="new_color">Nauja</string>
-    <string name="app_widget_small">"„Apollo“: 4x1"</string>
-    <string name="app_widget_large">"„Apollo“: 4x2"</string>
-    <string name="app_widget_large_alt">"„Apollo“: 4x2 (alternatyva)"</string>
-    <string name="app_widget_recent">"„Apollo“: Neseniai klausyta"</string>
-    <string name="app_widget_text_separator">-</string>
+    <string name="app_widget_large_alt">"Apollo: 4×2 (alternatyva)"</string>
+    <string name="app_widget_recent">"Apollo: Neseniai klausyta"</string>
     <string name="no_effects_for_you">Nepavyko atidaryti ekvalaizerio.</string>
     <string name="empty_music">Norėdami kopijuoti muziką iš kompiuterio į savo prietaisą, naudokite USB kabelį.</string>
     <string name="empty_last_added">Dainas, kurias pridėjote per pastarąjį mėnesį bus rodomos čia.</string>

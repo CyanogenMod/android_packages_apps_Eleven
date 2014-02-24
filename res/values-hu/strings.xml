@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- Copyright (C) 2012 Andrew Neal
+<!--
+     Copyright (C) 2012 Andrew Neal
+     Copyright (C) 2014 The CyanogenMod Project
 
      Licensed under the Apache License, Version 2.0 (the "License");
      you may not use this file except in compliance with the License.
@@ -12,9 +14,8 @@
      WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
      See the License for the specific language governing permissions and
      limitations under the License.
- -->
+-->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-    <string name="app_name">Apollo</string>
     <string name="page_recent">Előzmények</string>
     <string name="page_artists">Előadók</string>
     <string name="page_albums">Albumok</string>
@@ -117,14 +118,10 @@
     <string name="now_listening_to">#MostHallgatom <xliff:g id="title">%1$s</xliff:g> ettől: <xliff:g id="artist">%2$s</xliff:g> #Apollo</string>
     <string name="share_track_using">Szám megosztása:</string>
     <string name="color_picker_title">Színséma</string>
-    <string name="hex">#</string>
     <string name="current_color">Jelenlegi</string>
     <string name="new_color">Új</string>
-    <string name="app_widget_small">Apollo: 4x1</string>
-    <string name="app_widget_large">Apollo: 4x2</string>
-    <string name="app_widget_large_alt">Apollo: 4x2 (Alternatív)</string>
+    <string name="app_widget_large_alt">Apollo: 4×2 (Alternatív)</string>
     <string name="app_widget_recent">Apollo: Mostanában hallgatott</string>
-    <string name="app_widget_text_separator">-</string>
     <string name="no_effects_for_you">Nem sikerült megnyitni a hangszínszabályzót.</string>
     <string name="empty_music">Számítógépről történő zene másoláshoz használjon USB kábelt.</string>
     <string name="empty_last_added">Itt az utolsó hónapban hozzáadott zenéi fognak megjelenni.</string>
