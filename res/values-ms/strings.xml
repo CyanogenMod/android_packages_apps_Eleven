@@ -16,7 +16,6 @@
      limitations under the License.
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-  <string name="app_name">Apollo</string>
   <string name="page_recent">Baru sahaja</string>
   <string name="page_artists">Artis</string>
   <string name="page_albums">Album</string>
@@ -118,14 +117,10 @@
   <string name="now_listening_to">#SedangMainkan <xliff:g id="title">%1$s</xliff:g> oleh <xliff:g id="artist">%2$s</xliff:g> #Apollo</string>
   <string name="share_track_using">Kongsi trek menggunakan:</string>
   <string name="color_picker_title">Skema warna</string>
-  <string name="hex">#</string>
   <string name="current_color">Semasa</string>
   <string name="new_color">Baru</string>
-  <string name="app_widget_small">Apollo: 4x1</string>
-  <string name="app_widget_large">Apollo: 4x2</string>
   <string name="app_widget_large_alt">Apollo: 4x2 (alternatif)</string>
   <string name="app_widget_recent">Apollo: baharu sahaja dengar</string>
-  <string name="app_widget_text_separator">-</string>
   <string name="no_effects_for_you">Penyama tidak dapat dibuka.</string>
   <string name="empty_music">Untuk salin lagu dari komputer anda ke peranti, gunakan kabel USB.</string>
   <string name="empty_last_added">Lagu yang anda tambah sepanjang bulan lepas akan dipaparkan di sini.</string>
