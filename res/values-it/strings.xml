@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
-     Copyright (C) 2012 Andrew Neal
-     Copyright (C) 2014 The CyanogenMod Project
+     Copyright (C) 2012-2013 Andrew Neal
+     Copyright (C) 2012-2014 The CyanogenMod Project
 
      Licensed under the Apache License, Version 2.0 (the "License");
      you may not use this file except in compliance with the License.
@@ -63,7 +63,7 @@
     <string name="cancel">Annulla</string>
     <string name="overwrite">Sovrascrivi</string>
     <string name="new_playlist_name_template">Playlist <xliff:g id="number">%d</xliff:g></string>
-    <string name="create_playlist_prompt">"Nome playlist"</string>
+    <string name="create_playlist_prompt">Nome playlist</string>
     <string name="delete_dialog_title">Eliminare <xliff:g id="item" example="album">%s</xliff:g>?</string>
     <string name="cannot_be_undone">Questa azione non può essere annullata</string>
     <string name="delete_warning">Eliminare definitivamente le immagini memorizzate nella cache?</string>
