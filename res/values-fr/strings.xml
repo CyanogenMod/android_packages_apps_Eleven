@@ -54,6 +54,7 @@
     <string name="sort_order_entry_track_list">Suivre la liste</string>
     <string name="sort_order_entry_number_of_songs">Nombre de titres</string>
     <string name="sort_order_entry_number_of_albums">Nombre d\'albums</string>
+    <string name="sort_order_entry_filename">Nom de fichier</string>
     <string name="playlist_favorite">Favoris</string>
     <string name="playlist_favorites">Favoris</string>
     <string name="playlist_last_added">Derniers ajouts</string>
