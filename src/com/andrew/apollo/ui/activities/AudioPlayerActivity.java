@@ -32,6 +32,8 @@ import android.os.IBinder;
 import android.os.Message;
 import android.os.SystemClock;
 import android.provider.MediaStore.Audio.Playlists;
+import android.provider.MediaStore.Audio.Albums;
+import android.provider.MediaStore.Audio.Artists;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewPager;
 import android.view.Menu;
@@ -559,6 +561,22 @@ public class AudioPlayerActivity extends FragmentActivity implements ServiceConn
 
     }
 
+    private long parseIdFromIntent(Intent intent, String longKey,
+        String stringKey, long defaultId) {
+        long id = intent.getLongExtra(longKey, -1);
+        if (id < 0) {
+            String idString = intent.getStringExtra(stringKey);
+            if (idString != null) {
+                try {
+                    id = Long.parseLong(idString);
+                } catch (NumberFormatException e) {
+                    // ignore
+                }
+            }
+        }
+        return id;
+    }
+
     /**
      * Checks whether the passed intent contains a playback request,
      * and starts playback if that's the case
@@ -578,19 +596,23 @@ public class AudioPlayerActivity extends FragmentActivity implements ServiceConn
             MusicUtils.playFile(this, uri);
             handled = true;
         } else if (Playlists.CONTENT_TYPE.equals(mimeType)) {
-            long id = intent.getLongExtra("playlistId", -1);
-            if (id < 0) {
-                String idString = intent.getStringExtra("playlist");
-                if (idString != null) {
-                    try {
-                        id = Long.parseLong(idString);
-                    } catch (NumberFormatException e) {
-                        // ignore
-                    }
-                }
-            }
+            long id = parseIdFromIntent(intent, "playlistId", "playlist", -1);
             if (id >= 0) {
                 MusicUtils.playPlaylist(this, id);
+                handled = true;
+            }
+        } else if (Albums.CONTENT_TYPE.equals(mimeType)) {
+            long id = parseIdFromIntent(intent, "albumId", "album", -1);
+            if (id >= 0) {
+                int position = intent.getIntExtra("position", 0);
+                MusicUtils.playAlbum(this, id, position);
+                handled = true;
+            }
+        } else if (Artists.CONTENT_TYPE.equals(mimeType)) {
+            long id = parseIdFromIntent(intent, "artistId", "artist", -1);
+            if (id >= 0) {
+                int position = intent.getIntExtra("position", 0);
+                MusicUtils.playArtist(this, id, position);
                 handled = true;
             }
         }

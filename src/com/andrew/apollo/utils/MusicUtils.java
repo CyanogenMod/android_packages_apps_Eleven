@@ -543,6 +543,20 @@ public final class MusicUtils {
     }
 
     /**
+     * Plays songs by an artist.
+     *
+     * @param context The {@link Context} to use.
+     * @param artistId The artist Id.
+     * @param position Specify where to start.
+     */
+    public static void playArtist(final Context context, final long artistId, int position) {
+        final long[] artistList = getSongListForArtist(context, artistId);
+        if (artistList != null) {
+            playAll(context, artistList, position, false);
+        }
+    }
+
+    /**
      * @param context The {@link Context} to use.
      * @param id The ID of the genre.
      * @return The song list for an genre.
@@ -749,6 +763,20 @@ public final class MusicUtils {
             cursor = null;
         }
         return id;
+    }
+
+    /**
+     * Plays songs from an album.
+     *
+     * @param context The {@link Context} to use.
+     * @param albumId The album Id.
+     * @param position Specify where to start.
+     */
+    public static void playAlbum(final Context context, final long albumId, int position) {
+        final long[] albumList = getSongListForAlbum(context, albumId);
+        if (albumList != null) {
+            playAll(context, albumList, position, false);
+        }
     }
 
     /*  */
