@@ -257,11 +257,6 @@ public class ImageFetcher extends ImageWorker {
             // Check for local artwork
             artwork = mImageCache.getArtworkFromFile(mContext, albumId);
         }
-        // if (artwork == null && artistName != null && albumName != null) {
-        // // Download missing artwork
-        // artwork = processBitmap(processImageUrl(artistName, albumName,
-        // ImageType.ALBUM));
-        // }
         if (artwork != null) {
             return artwork;
         }
