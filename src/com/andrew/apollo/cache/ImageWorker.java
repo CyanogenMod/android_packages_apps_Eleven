@@ -27,6 +27,7 @@ import com.andrew.apollo.utils.ApolloUtils;
 import com.andrew.apollo.utils.ThemeUtils;
 
 import java.lang.ref.WeakReference;
+import java.util.concurrent.RejectedExecutionException;
 
 /**
  * This class wraps up completing some arbitrary long running work when loading
@@ -396,8 +397,13 @@ public abstract class ImageWorker {
             final AsyncDrawable asyncDrawable = new AsyncDrawable(mResources, mDefault,
                     bitmapWorkerTask);
             imageView.setImageDrawable(asyncDrawable);
-            ApolloUtils.execute(false, bitmapWorkerTask, key,
-                    artistName, albumName, String.valueOf(albumId));
+            try {
+                ApolloUtils.execute(false, bitmapWorkerTask, key,
+                        artistName, albumName, String.valueOf(albumId));
+            } catch (RejectedExecutionException e) {
+                // Executor has exhausted queue space, show default artwork
+                imageView.setImageBitmap(getDefaultArtwork());
+            }
         }
     }
 
