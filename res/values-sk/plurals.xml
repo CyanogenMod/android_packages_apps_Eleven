@@ -18,48 +18,48 @@
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
   <plurals name="Nartists">
-    <item quantity="one">1 interpret</item>
-    <item quantity="few"><xliff:g id="count">%d</xliff:g> interpretov</item>
-    <item quantity="other"><xliff:g id="count">%d</xliff:g> interpreti</item>
+    <item quantity="one"><xliff:g id="count">%d</xliff:g> interpret</item>
+    <item quantity="few"><xliff:g id="count">%d</xliff:g> interpreti</item>
+    <item quantity="other"><xliff:g id="count">%d</xliff:g> interpretov</item>
   </plurals>
   <plurals name="Nalbums">
-    <item quantity="one">1 album</item>
-    <item quantity="few"><xliff:g id="count">%d</xliff:g> albumov</item>
-    <item quantity="other"><xliff:g id="count">%d</xliff:g> albumy</item>
+    <item quantity="one"><xliff:g id="count">%d</xliff:g> album</item>
+    <item quantity="few"><xliff:g id="count">%d</xliff:g> albumy</item>
+    <item quantity="other"><xliff:g id="count">%d</xliff:g> albumov</item>
   </plurals>
   <plurals name="Nsongs">
-    <item quantity="one">1 skladba</item>
-    <item quantity="few"><xliff:g id="count">%d</xliff:g> skladieb</item>
-    <item quantity="other"><xliff:g id="count">%d</xliff:g> skladby</item>
+    <item quantity="one"><xliff:g id="count">%d</xliff:g> skladba</item>
+    <item quantity="few"><xliff:g id="count">%d</xliff:g> skladby</item>
+    <item quantity="other"><xliff:g id="count">%d</xliff:g> skladieb</item>
   </plurals>
   <plurals name="Ngenres">
-    <item quantity="one">1 žáner</item>
-    <item quantity="few"><xliff:g id="count">%d</xliff:g> žánrov</item>
-    <item quantity="other"><xliff:g id="count">%d</xliff:g> žánre</item>
+    <item quantity="one"><xliff:g id="count">%d</xliff:g> žáner</item>
+    <item quantity="few"><xliff:g id="count">%d</xliff:g> žánre</item>
+    <item quantity="other"><xliff:g id="count">%d</xliff:g> žánrov</item>
   </plurals>
   <plurals name="NNNtrackstoplaylist">
-    <item quantity="one">1 skladba bola pridaná do hracieho zoznamu.</item>
-    <item quantity="few"><xliff:g id="number" example="27">%d</xliff:g> skladieb bolo pridaných do hracieho zoznamu.</item>
-    <item quantity="other"><xliff:g id="number" example="27">%d</xliff:g> skladby bolipridané do hracieho zoznamu.</item>
+    <item quantity="one"><xliff:g id="number" example="1">%d</xliff:g> skladba bola pridaná do zoznamu skladieb.</item>
+    <item quantity="few"><xliff:g id="number" example="3">%d</xliff:g> skladby boli pridané do zoznamu skladieb.</item>
+    <item quantity="other"><xliff:g id="number" example="27">%d</xliff:g> skladieb bolo pridaných do zoznamu skladieb.</item>
   </plurals>
   <plurals name="NNNtracksfromplaylist">
-    <item quantity="one">1 skladba bola odstránená zo zoznamu skladieb.</item>
+    <item quantity="one"><xliff:g id="number" example="1">%d</xliff:g> skladba bola odstránená zo zoznamu skladieb.</item>
     <item quantity="few"><xliff:g id="number" example="3">%d</xliff:g> skladby boli odstránené zo zoznamu skladieb.</item>
     <item quantity="other"><xliff:g id="number" example="27">%d</xliff:g> skladieb bolo odstránených zo zoznamu skladieb.</item>
   </plurals>
   <plurals name="NNNtrackstoqueue">
-    <item quantity="one">1 skladba bola pridaná do fronty.</item>
-    <item quantity="few"><xliff:g id="number" example="27">%d</xliff:g> skladieb bolo pridaných do fronty.</item>
-    <item quantity="other"><xliff:g id="number" example="27">%d</xliff:g> skladby boli pridané do fronty.</item>
+    <item quantity="one"><xliff:g id="number" example="1">%d</xliff:g> skladba bola pridaná do poradia.</item>
+    <item quantity="few"><xliff:g id="number" example="3">%d</xliff:g> skladby boli pridané do poradia.</item>
+    <item quantity="other"><xliff:g id="number" example="27">%d</xliff:g> skladieb bolo pridaných do poradia.</item>
   </plurals>
   <plurals name="NNNtrackstofavorites">
-    <item quantity="one">1 skladba bola pridaná do obľúbených.</item>
-    <item quantity="few"><xliff:g id="number" example="27">%d</xliff:g> skladieb bolo pridaných do obľúbených.</item>
-    <item quantity="other"><xliff:g id="number" example="27">%d</xliff:g> skladby boli pridané do obľúbených.</item>
+    <item quantity="one"><xliff:g id="number" example="1">%d</xliff:g> skladba bola pridaná do obľúbených.</item>
+    <item quantity="few"><xliff:g id="number" example="3">%d</xliff:g> skladby boli pridané do obľúbených.</item>
+    <item quantity="other"><xliff:g id="number" example="27">%d</xliff:g> skladieb bolo pridaných do obľúbených.</item>
   </plurals>
   <plurals name="NNNtracksdeleted">
-    <item quantity="one">1 skladba bola odstránená.</item>
-    <item quantity="few"><xliff:g id="songs_to_delete">%d</xliff:g> skladieb bolo odstránených.</item>
-    <item quantity="other"><xliff:g id="songs_to_delete">%d</xliff:g> skladby boli odstránené.</item>
+    <item quantity="one"><xliff:g id="songs_to_delete" example="1">%d</xliff:g> skladba bola vymazaná.</item>
+    <item quantity="few"><xliff:g id="songs_to_delete" example="3">%d</xliff:g> skladby boli vymazané.</item>
+    <item quantity="other"><xliff:g id="songs_to_delete" example="27">%d</xliff:g> skladieb bolo vymazaných.</item>
   </plurals>
 </resources>
