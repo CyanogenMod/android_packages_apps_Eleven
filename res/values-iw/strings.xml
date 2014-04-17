@@ -34,6 +34,7 @@
   <string name="menu_save_queue">שמור תור השמעה</string>
   <string name="menu_share">שתף</string>
   <string name="menu_add_to_homescreen">הצמד למסך הבית</string>
+  <string name="menu_equalizer">Equalizer</string>
   <string name="menu_simple">פשוט</string>
   <string name="menu_detailed">מפורט</string>
   <string name="menu_grid">טבלה</string>
@@ -54,6 +55,7 @@
   <string name="sort_order_entry_track_list">רשימת שירים</string>
   <string name="sort_order_entry_number_of_songs">מספר שירים</string>
   <string name="sort_order_entry_number_of_albums">מספר האלבומים</string>
+  <string name="sort_order_entry_filename">שם קובץ</string>
   <string name="playlist_favorite">מועדף</string>
   <string name="playlist_favorites">מועדפים</string>
   <string name="playlist_last_added">הוספו לאחרונה</string>

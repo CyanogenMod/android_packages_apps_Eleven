@@ -39,7 +39,7 @@
   <string name="menu_detailed">Detalhado</string>
   <string name="menu_grid">Grelha</string>
   <string name="menu_view_as">Ver como</string>
-  <string name="add_to_playlist">Adicionar à lista de rep.</string>
+  <string name="add_to_playlist">Adicionar à lista de reprodução</string>
   <string name="add_to_favorites">Adicionar aos favoritos</string>
   <string name="add_to_queue">Adicionar à fila</string>
   <string name="remove_from_favorites">Remover dos favoritos</string>
@@ -59,12 +59,12 @@
   <string name="playlist_favorite">Favorito</string>
   <string name="playlist_favorites">Favoritos</string>
   <string name="playlist_last_added">Adicionadas recentemente</string>
-  <string name="new_playlist">Nova lista de rep.</string>
+  <string name="new_playlist">Nova lista de reprodução</string>
   <string name="save">Gravar</string>
   <string name="cancel">Cancelar</string>
   <string name="overwrite">Sobrescrever</string>
   <string name="new_playlist_name_template">Lista de Reprodução <xliff:g id="number">%d</xliff:g></string>
-  <string name="create_playlist_prompt">Nome da lista de rep.</string>
+  <string name="create_playlist_prompt">Nome da lista de reprodução</string>
   <string name="delete_dialog_title">Eliminar <xliff:g id="item" example="album">%s</xliff:g>?</string>
   <string name="cannot_be_undone">Não pode ser desfeito</string>
   <string name="delete_warning">Isto irá eliminar permanentemente as entradas de imagem em cache</string>
@@ -75,7 +75,7 @@
   <string name="context_menu_play_selection">Reproduzir</string>
   <string name="context_menu_play_next">Reproduzir próxima</string>
   <string name="context_menu_more_by_artist">Mais do artista</string>
-  <string name="context_menu_rename_playlist">Renomear</string>
+  <string name="context_menu_rename_playlist">Mudar o nome</string>
   <string name="context_menu_delete">Eliminar</string>
   <string name="context_menu_fetch_album_art">Procurar arte do álbum</string>
   <string name="context_menu_fetch_artist_image">Procurar imagem do artista</string>
@@ -95,7 +95,7 @@
   <string name="pinned_to_home_screen"><xliff:g id="name">%s</xliff:g> foi colocada no ecrã inicial</string>
   <string name="could_not_be_pinned_to_home_screen"><xliff:g xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2" id="name">%s</xliff:g> não pode ser colocada no ecrã inicial</string>
   <string name="set_as_ringtone">\'<xliff:g xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2" id="name" example="Alarm Bell">%s</xliff:g>\' definida como toque</string>
-  <string name="playlist_renamed">Lista de rep. renomeada</string>
+  <string name="playlist_renamed">Lista de reprodução renomeada</string>
   <string name="theme_set"><xliff:g id="name">%s</xliff:g> definido como tema</string>
   <string name="settings_ui_category">Interface</string>
   <string name="settings_storage_category">Armazenamento</string>
@@ -113,7 +113,7 @@
   <string name="settings_download_only_on_wifi_title">Transferir apenas via Wi-Fi</string>
   <string name="settings_download_only_on_wifi_summary">Para evitar custos pela operadora, não transfira através de redes móveis</string>
   <string name="settings_download_missing_artwork_title">Transferir arte de álbuns em falta</string>
-  <string name="settings_download_artist_images_title">Transferir imagens de álbuns em falta</string>
+  <string name="settings_download_artist_images_title">Transferir imagens de artistas em falta</string>
   <string name="settings_open_source_licenses">Licenças de código aberto</string>
   <string name="settings_version_title">Número de versão</string>
   <string name="now_listening_to">#AReproduzir <xliff:g id="title">%1$s</xliff:g> por <xliff:g id="artist">%2$s</xliff:g> #Apollo</string>

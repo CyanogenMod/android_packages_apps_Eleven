@@ -29,7 +29,7 @@
   <string name="menu_play_all">Riproduci tutti</string>
   <string name="menu_sort_by">Ordina per</string>
   <string name="menu_shop">Negozio temi</string>
-  <string name="menu_clear_recents">Cancella recenti</string>
+  <string name="menu_clear_recents">Elimina recenti</string>
   <string name="menu_clear_queue">Cancella coda</string>
   <string name="menu_save_queue">Salva coda</string>
   <string name="menu_share">Condividi</string>
@@ -127,6 +127,6 @@
   <string name="empty_music">Per copiare musica dal tuo computer al dispositivo, utilizzare un cavo USB.</string>
   <string name="empty_last_added">Le canzoni che hai aggiunto nel corso dell\'ultimo mese saranno indicate qui.</string>
   <string name="empty_search">La ricerca non ha prodotto risultati</string>
-  <string name="empty_favorite">Le canzoni contrassegnate come preferite verranno mostrate qui.</string>
+  <string name="empty_favorite">Le canzoni segnate come preferite verranno mostrate qui.</string>
   <string name="empty_recent">Gli album che hai ascoltato verranno mostrati qui. Provate a sentire un po\' di musica.</string>
 </resources>

@@ -29,4 +29,19 @@
   <plurals name="Ngenres">
     <item quantity="other"><xliff:g id="count">%d</xliff:g> 種類型</item>
   </plurals>
+  <plurals name="NNNtrackstoplaylist">
+    <item quantity="other"><xliff:g id="number" example="27">%d</xliff:g> 首歌已加入播放清單。</item>
+  </plurals>
+  <plurals name="NNNtracksfromplaylist">
+    <item quantity="other"><xliff:g id="number" example="27">%d</xliff:g> 首歌已從播放清單移除。</item>
+  </plurals>
+  <plurals name="NNNtrackstoqueue">
+    <item quantity="other"><xliff:g id="number" example="27">%d</xliff:g> 首歌已加入隊列。</item>
+  </plurals>
+  <plurals name="NNNtrackstofavorites">
+    <item quantity="other"><xliff:g id="number" example="27">%d</xliff:g> 首歌已加入最愛。</item>
+  </plurals>
+  <plurals name="NNNtracksdeleted">
+    <item quantity="other"><xliff:g id="songs_to_delete">%d</xliff:g> 首歌已刪除。</item>
+  </plurals>
 </resources>
