@@ -32,7 +32,7 @@
   <string name="menu_clear_recents">Обриши недавне</string>
   <string name="menu_clear_queue">Обриши редослед</string>
   <string name="menu_save_queue">Сачувај редослед</string>
-  <string name="menu_share">Дели</string>
+  <string name="menu_share">Делите</string>
   <string name="menu_add_to_homescreen">Постави на почетни екран</string>
   <string name="menu_equalizer">Еквилајзер</string>
   <string name="menu_simple">Једноставно</string>
@@ -79,7 +79,7 @@
   <string name="context_menu_delete">Избриши</string>
   <string name="context_menu_fetch_album_art">Преузми фотографију албума</string>
   <string name="context_menu_fetch_artist_image">Преузми фотографију извођача</string>
-  <string name="context_menu_open_in_play_store">Отвори у Play Store</string>
+  <string name="context_menu_open_in_play_store">Отвори у Play продавници</string>
   <string name="context_menu_remove_from_recent">Уклони из недавног</string>
   <string name="context_menu_use_as_ringtone">Користи као звук долазећег позива</string>
   <string name="context_menu_remove_from_playlist">Уклони из плејлисте</string>
@@ -116,7 +116,7 @@
   <string name="settings_download_artist_images_title">Преузмите слике аутора које недостају</string>
   <string name="settings_open_source_licenses">Open Source лиценце</string>
   <string name="settings_version_title">Број верзије</string>
-  <string name="now_listening_to">#NowPlaying <xliff:g id="title">%1$s</xliff:g> by <xliff:g id="artist">%2$s</xliff:g> #Apollo</string>
+  <string name="now_listening_to">#Тренутно се слуша <xliff:g id="title">%1$s</xliff:g> од <xliff:g id="artist">%2$s</xliff:g> #Apollo</string>
   <string name="share_track_using">Дели песму путем:</string>
   <string name="color_picker_title">Боје</string>
   <string name="current_color">Тренутно</string>
@@ -124,7 +124,7 @@
   <string name="app_widget_large_alt">Apollo: 4×2 (алтернативно)</string>
   <string name="app_widget_recent">Apollo: недавно излистане</string>
   <string name="no_effects_for_you">Грешка приликом отварања еквилајзера.</string>
-  <string name="empty_music">Да би сте пребацили музику са рачунара на Ваш уређај, користите USB кабел.</string>
+  <string name="empty_music">Да би сте пребацили музику са рачунара на Ваш уређај, користите USB кабал.</string>
   <string name="empty_last_added">Песме које сте додали током претходног месеца ће бити приказане овде.</string>
   <string name="empty_search">Нема пронађених резултата</string>
   <string name="empty_favorite">Песме које означите као омиљене ће бити приказане овде.</string>

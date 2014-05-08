@@ -81,7 +81,7 @@
   <string name="context_menu_fetch_artist_image">アーティストイメージを取得</string>
   <string name="context_menu_open_in_play_store">Playストアで開く</string>
   <string name="context_menu_remove_from_recent">履歴から削除</string>
-  <string name="context_menu_use_as_ringtone">着信音に使用</string>
+  <string name="context_menu_use_as_ringtone">着信音として使用</string>
   <string name="context_menu_remove_from_playlist">プレイリストから削除</string>
   <string name="accessibility_play">再生</string>
   <string name="accessibility_pause">一時停止</string>
@@ -94,7 +94,7 @@
   <string name="accessibility_repeat_one">曲をリピート</string>
   <string name="pinned_to_home_screen"><xliff:g id="name">%s</xliff:g>をホーム画面に追加しました</string>
   <string name="could_not_be_pinned_to_home_screen"><xliff:g id="name">%s</xliff:g>をホーム画面に追加できませんでした</string>
-  <string name="set_as_ringtone">\"<xliff:g id="name" example="Alarm Bell">%s</xliff:g>\"を着信音に設定しました</string>
+  <string name="set_as_ringtone">｢<xliff:g id="name" example="Alarm Bell">%s</xliff:g>｣を着信音として設定しました</string>
   <string name="playlist_renamed">プレイリストの名前を変更しました</string>
   <string name="theme_set"><xliff:g id="name">%s</xliff:g>をテーマに設定しました</string>
   <string name="settings_ui_category">インターフェース</string>
