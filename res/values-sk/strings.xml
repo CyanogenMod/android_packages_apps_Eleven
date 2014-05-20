@@ -25,7 +25,7 @@
   <string name="page_genres">Žánre</string>
   <string name="menu_settings">Nastavenia</string>
   <string name="menu_search">Hľadať</string>
-  <string name="menu_shuffle">Náhodne všetko</string>
+  <string name="menu_shuffle">Náhodne prehrať všetko</string>
   <string name="menu_play_all">Prehrať všetko</string>
   <string name="menu_sort_by">Zoradiť podľa</string>
   <string name="menu_shop">Obchod s témami</string>
@@ -76,7 +76,7 @@
   <string name="context_menu_play_next">Prehrať ďalšiu</string>
   <string name="context_menu_more_by_artist">Viac od interpreta</string>
   <string name="context_menu_rename_playlist">Premenovať</string>
-  <string name="context_menu_delete">Odstrániť</string>
+  <string name="context_menu_delete">Vymazať</string>
   <string name="context_menu_fetch_album_art">Stiahnuť obrázok albumu</string>
   <string name="context_menu_fetch_artist_image">Stiahnuť obrázok interpreta</string>
   <string name="context_menu_open_in_play_store">Otvoriť v Obchode Play</string>
@@ -87,8 +87,8 @@
   <string name="accessibility_pause">Pozastaviť</string>
   <string name="accessibility_next">Ďalšie</string>
   <string name="accessibility_prev">Naspäť</string>
-  <string name="accessibility_shuffle">Náhodne</string>
-  <string name="accessibility_shuffle_all">Náhodne všetko</string>
+  <string name="accessibility_shuffle">Náhodne prehrať</string>
+  <string name="accessibility_shuffle_all">Náhodne prehrať všetko</string>
   <string name="accessibility_repeat">Opakovať</string>
   <string name="accessibility_repeat_all">Opakovať všetko</string>
   <string name="accessibility_repeat_one">Opakovať raz</string>

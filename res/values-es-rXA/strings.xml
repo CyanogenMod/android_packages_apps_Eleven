@@ -88,7 +88,7 @@
   <string name="accessibility_next">Siguiente</string>
   <string name="accessibility_prev">Anterior</string>
   <string name="accessibility_shuffle">Mecer</string>
-  <string name="accessibility_shuffle_all">Mecer toes</string>
+  <string name="accessibility_shuffle_all">Meceles toes</string>
   <string name="accessibility_repeat">Repetir</string>
   <string name="accessibility_repeat_all">Repetir toes</string>
   <string name="accessibility_repeat_one">Repetir una</string>
@@ -103,14 +103,14 @@
   <string name="settings_about_category">Tocante a</string>
   <string name="settings_author_title">Autor</string>
   <string name="settings_about_apollo">Tocante a Apollo</string>
-  <string name="settings_special_thanks">Agradecimientos</string>
+  <string name="settings_special_thanks">Gracies a</string>
   <string name="settings_lopez_summary">Iconos y diseñu en Play Store</string>
   <string name="settings_color_scheme_title">Esquema de color</string>
   <string name="settings_color_scheme_summary">Esbillar un color pal diseñu d\'Apollo</string>
   <string name="settings_theme_chooser_title">Temes</string>
   <string name="settings_delete_cache_title">Llimpiar caché</string>
   <string name="settings_delete_cache_summary">Desaniciar toles imáxenes almacenaes</string>
-  <string name="settings_download_only_on_wifi_title">Descargar namái vía Wi-Fi</string>
+  <string name="settings_download_only_on_wifi_title">Descargar namái per aciu de Wi-Fi</string>
   <string name="settings_download_only_on_wifi_summary">Nun descargar conteníu en redes móviles p\'amenorgar los cargos de datos del operador</string>
   <string name="settings_download_missing_artwork_title">Obtener carátules</string>
   <string name="settings_download_artist_images_title">Obtener semeyes d\'artistes</string>
@@ -125,7 +125,7 @@
   <string name="app_widget_recent">Apollo: Recientes</string>
   <string name="no_effects_for_you">L\'ecualizador nun pudo abrise.</string>
   <string name="empty_music">Pa copiar música del ordenador al preséu, usa un cable USB.</string>
-  <string name="empty_last_added">Les canciones qu\'amestasti nel caberu mes, van apaecer equí.</string>
+  <string name="empty_last_added">Les canciones qu\'amestasti\'l postrer mes, van apaecer equí.</string>
   <string name="empty_search">Nun hai resultaos qu\'amosar</string>
   <string name="empty_favorite">Les canciones que marcasti como favorites van apaecer equí.</string>
   <string name="empty_recent">Los álbumes que sentisti van apaecer equí.</string>

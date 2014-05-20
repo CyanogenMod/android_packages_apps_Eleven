@@ -18,23 +18,23 @@
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
   <plurals name="Nartists">
-    <item quantity="one">1 artista</item>
+    <item quantity="one"><xliff:g id="count">%d</xliff:g> artista</item>
     <item quantity="other"><xliff:g id="count">%d</xliff:g> artistas</item>
   </plurals>
   <plurals name="Nalbums">
-    <item quantity="one">1 álbum</item>
+    <item quantity="one"><xliff:g id="count">%d</xliff:g> álbum</item>
     <item quantity="other"><xliff:g id="count">%d</xliff:g> álbums</item>
   </plurals>
   <plurals name="Nsongs">
-    <item quantity="one">1 música</item>
+    <item quantity="one"><xliff:g id="count">%d</xliff:g> música</item>
     <item quantity="other"><xliff:g id="count">%d</xliff:g> músicas</item>
   </plurals>
   <plurals name="Ngenres">
-    <item quantity="one">1 género</item>
+    <item quantity="one"><xliff:g id="count">%d</xliff:g> género</item>
     <item quantity="other"><xliff:g id="count">%d</xliff:g> géneros</item>
   </plurals>
   <plurals name="NNNtrackstoplaylist">
-    <item quantity="one">1 música adicionada à lista de reprodução.</item>
+    <item quantity="one"><xliff:g id="number" example="1">%d</xliff:g> música adicionada à lista de reprodução.</item>
     <item quantity="other"><xliff:g id="number" example="27">%d</xliff:g> músicas adicionadas à lista de reprodução.</item>
   </plurals>
   <plurals name="NNNtracksfromplaylist">
@@ -42,15 +42,15 @@
     <item quantity="other"><xliff:g id="number" example="27">%d</xliff:g> músicas removidas da lista de reprodução.</item>
   </plurals>
   <plurals name="NNNtrackstoqueue">
-    <item quantity="one">1 música adicionada à fila.</item>
+    <item quantity="one"><xliff:g id="number" example="1">%d</xliff:g> música adicionada à fila.</item>
     <item quantity="other"><xliff:g id="number" example="27">%d</xliff:g> músicas adicionadas à fila.</item>
   </plurals>
   <plurals name="NNNtrackstofavorites">
-    <item quantity="one">1 música adicionada aos Favoritos.</item>
+    <item quantity="one"><xliff:g id="number" example="1">%d</xliff:g> música adicionada aos Favoritos.</item>
     <item quantity="other"><xliff:g id="number" example="27">%d</xliff:g> músicas adicionadas aos Favoritos.</item>
   </plurals>
   <plurals name="NNNtracksdeleted">
-    <item quantity="one">Uma música foi eliminada.</item>
-    <item quantity="other"><xliff:g id="songs_to_delete">%d</xliff:g> músicas foram eliminadas.</item>
+    <item quantity="one"><xliff:g id="songs_to_delete" example="1">%d</xliff:g> canção foi eliminada.</item>
+    <item quantity="other"><xliff:g id="songs_to_delete" example="1">%d</xliff:g> canções foram eliminadas.</item>
   </plurals>
 </resources>

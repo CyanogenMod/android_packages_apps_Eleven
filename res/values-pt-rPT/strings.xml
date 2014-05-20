@@ -109,7 +109,7 @@
   <string name="settings_color_scheme_summary">Muda a cor de destaque do Apollo</string>
   <string name="settings_theme_chooser_title">Alterar tema</string>
   <string name="settings_delete_cache_title">Eliminar cache</string>
-  <string name="settings_delete_cache_summary">Remover todas as imagens em cache</string>
+  <string name="settings_delete_cache_summary">Eliminar todas as imagens em cache</string>
   <string name="settings_download_only_on_wifi_title">Transferir apenas via Wi-Fi</string>
   <string name="settings_download_only_on_wifi_summary">Para evitar custos pela operadora, não transfira através de redes móveis</string>
   <string name="settings_download_missing_artwork_title">Transferir arte de álbuns em falta</string>

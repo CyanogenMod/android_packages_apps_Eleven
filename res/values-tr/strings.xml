@@ -86,7 +86,7 @@
   <string name="accessibility_play">Oynat</string>
   <string name="accessibility_pause">Duraklat</string>
   <string name="accessibility_next">Sonraki</string>
-  <string name="accessibility_prev">Geri</string>
+  <string name="accessibility_prev">Önceki</string>
   <string name="accessibility_shuffle">Karıştır</string>
   <string name="accessibility_shuffle_all">Hepsini karıştır</string>
   <string name="accessibility_repeat">Tekrarla</string>
@@ -103,8 +103,8 @@
   <string name="settings_about_category">Hakkında</string>
   <string name="settings_author_title">Hazırlayan</string>
   <string name="settings_about_apollo">Apollo Hakkında</string>
-  <string name="settings_special_thanks">Özel teşekkür</string>
-  <string name="settings_lopez_summary">Simge ve Play Store banner tasarımı</string>
+  <string name="settings_special_thanks">Özel teşekkürler</string>
+  <string name="settings_lopez_summary">Simge ve Play Store afiş tasarımı</string>
   <string name="settings_color_scheme_title">Apollo\'nun varsayılan renk düzenini seçin</string>
   <string name="settings_color_scheme_summary">Apollo\'nun rengini değiştirir</string>
   <string name="settings_theme_chooser_title">Tema seçici</string>
@@ -124,7 +124,7 @@
   <string name="app_widget_large_alt">Apollo: 4x2 (alternatif)</string>
   <string name="app_widget_recent">Apollo: en son dinlenilenler</string>
   <string name="no_effects_for_you">Equalizer açılamadı</string>
-  <string name="empty_music">Bilgisayarınızdan cihazınıza müzik kopyalamak için USB kablosunu kullanabilirsiniz.</string>
+  <string name="empty_music">Bilgisayarınızdan cihazınıza müzik kopyalamak için bir USB kablosu kullanın.</string>
   <string name="empty_last_added">Geçen ay boyunca eklediğiniz şarkılar burada gösterilecek.</string>
   <string name="empty_search">Arama sonucu bulunamadı</string>
   <string name="empty_favorite">Fovori olarak eklediğiniz şarkılar burada gösterilecek.</string>

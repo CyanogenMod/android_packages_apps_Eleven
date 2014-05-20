@@ -33,9 +33,11 @@
   <string name="menu_clear_queue">清除佇列</string>
   <string name="menu_save_queue">儲存佇列</string>
   <string name="menu_share">分享</string>
+  <string name="menu_add_to_homescreen">釘選到主螢幕</string>
   <string name="menu_equalizer">等化器</string>
   <string name="menu_simple">簡單</string>
   <string name="menu_detailed">詳細</string>
+  <string name="menu_grid">格框</string>
   <string name="menu_view_as">檢視為</string>
   <string name="add_to_playlist">添加到播放清單中</string>
   <string name="add_to_favorites">添加到最愛收藏中</string>
@@ -64,6 +66,8 @@
   <string name="new_playlist_name_template">播放清單 <xliff:g id="number">%d</xliff:g></string>
   <string name="create_playlist_prompt">播放清單名稱</string>
   <string name="delete_dialog_title">刪除 <xliff:g id="item" example="album">%s</xliff:g>？</string>
+  <string name="cannot_be_undone">這個步驟無法被復原</string>
+  <string name="delete_warning">這將永久刪除緩存的圖像</string>
   <string name="new_photo">從圖庫中選擇照片</string>
   <string name="google_search">Google 搜尋</string>
   <string name="use_default">使用預設相片</string>
@@ -88,9 +92,13 @@
   <string name="accessibility_repeat">重複播放</string>
   <string name="accessibility_repeat_all">全部重複播放</string>
   <string name="accessibility_repeat_one">單曲重複播放</string>
+  <string name="pinned_to_home_screen"><xliff:g id="name">%s</xliff:g> 已釘選到你的主螢幕</string>
+  <string name="could_not_be_pinned_to_home_screen"><xliff:g id="name">%s</xliff:g> 無法被釘選到你的主螢幕</string>
+  <string name="set_as_ringtone">「<xliff:g id="name" example="Alarm Bell">%s</xliff:g>」設為鈴聲</string>
   <string name="playlist_renamed">已重新命名播放清單</string>
+  <string name="theme_set">主題已設置為 <xliff:g id="name">%s</xliff:g></string>
   <string name="settings_ui_category">介面</string>
-  <string name="settings_storage_category">存儲</string>
+  <string name="settings_storage_category">儲存</string>
   <string name="settings_data_category">數據</string>
   <string name="settings_about_category">關於</string>
   <string name="settings_author_title">作者</string>
@@ -108,6 +116,7 @@
   <string name="settings_download_artist_images_title">下載缺少的演出者影像</string>
   <string name="settings_open_source_licenses">開放原始碼授權</string>
   <string name="settings_version_title">版本號碼</string>
+  <string name="now_listening_to">#正在播放 <xliff:g id="artist">%2$s</xliff:g> - <xliff:g id="title">%1$s</xliff:g> #Apollo</string>
   <string name="share_track_using">曲目分享方式:</string>
   <string name="color_picker_title">配色方案</string>
   <string name="current_color">目前</string>
