@@ -18,15 +18,15 @@
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
   <plurals name="Nartists">
-    <item quantity="one">אומן אחד</item>
+    <item quantity="one">אומן <xliff:g id="count">%d</xliff:g></item>
     <item quantity="other"><xliff:g id="count">%d</xliff:g> אומנים</item>
   </plurals>
   <plurals name="Nalbums">
-    <item quantity="one">אלבום אחד</item>
+    <item quantity="one"><xliff:g id="count">%d</xliff:g> אלבום</item>
     <item quantity="other"><xliff:g id="count">%d</xliff:g> אלבומים</item>
   </plurals>
   <plurals name="Nsongs">
-    <item quantity="one">1 שיר</item>
+    <item quantity="one">שיר <xliff:g id="count">%d</xliff:g></item>
     <item quantity="other"><xliff:g id="count">%d</xliff:g> שירים</item>
   </plurals>
   <plurals name="Ngenres">
@@ -46,7 +46,7 @@
     <item quantity="other"><xliff:g id="number" example="27">%d</xliff:g> שירים נוספו לתור השמעה.</item>
   </plurals>
   <plurals name="NNNtrackstofavorites">
-    <item quantity="one">שיר אחד נוסף למועדפים.</item>
+    <item quantity="one"><xliff:g id="number" example="1">%d</xliff:g> שיר נוסף למועדפים.</item>
     <item quantity="other"><xliff:g id="number" example="27">%d</xliff:g> שירים נוספו למועדפים.</item>
   </plurals>
   <plurals name="NNNtracksdeleted">

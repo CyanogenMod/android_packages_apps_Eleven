@@ -106,7 +106,7 @@
   <string name="settings_special_thanks">Remerciements</string>
   <string name="settings_lopez_summary">Design de l\'icône et de la bannière du Play Store</string>
   <string name="settings_color_scheme_title">Charte de couleur</string>
-  <string name="settings_color_scheme_summary">Choisir la couleur dominante par défaut d\'Apollo</string>
+  <string name="settings_color_scheme_summary">Choisir la couleur dominante d\'Apollo</string>
   <string name="settings_theme_chooser_title">Sélecteur de thèmes</string>
   <string name="settings_delete_cache_title">Supprimer le cache</string>
   <string name="settings_delete_cache_summary">Supprimer toutes les images du cache</string>
@@ -119,10 +119,10 @@
   <string name="now_listening_to">#Lecture de <xliff:g id="title">%1$s</xliff:g> par <xliff:g id="artist">%2$s</xliff:g> #Apollo</string>
   <string name="share_track_using">Partager le titre via\u00A0:</string>
   <string name="color_picker_title">Charte de couleur</string>
-  <string name="current_color">Courante</string>
+  <string name="current_color">Actuelle</string>
   <string name="new_color">Nouvelle</string>
   <string name="app_widget_large_alt">Apollo: 4×2 (Alternatif)</string>
-  <string name="app_widget_recent">Apollo: Écoutés récemment</string>
+  <string name="app_widget_recent">Apollo : Écoutés récemment</string>
   <string name="no_effects_for_you">L\'égaliseur ne peut pas être ouvert.</string>
   <string name="empty_music">Utilisez un câble USB pour copier de la musique depuis votre ordinateur vers votre appareil.</string>
   <string name="empty_last_added">Les titres ajoutés au cours du dernier mois seront affichés ici.</string>

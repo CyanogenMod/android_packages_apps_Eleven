@@ -18,7 +18,7 @@
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
   <string name="page_recent">אחרונים</string>
-  <string name="page_artists">אומנים</string>
+  <string name="page_artists">אמנים</string>
   <string name="page_albums">אלבומים</string>
   <string name="page_songs">שירים</string>
   <string name="page_playlists">רשימות השמעה</string>
@@ -109,7 +109,7 @@
   <string name="settings_color_scheme_summary">משנה את צבע המבטא באפולו</string>
   <string name="settings_theme_chooser_title">בוחר ערכת נושא</string>
   <string name="settings_delete_cache_title">מחק מטמון</string>
-  <string name="settings_delete_cache_summary">מחק כל תמונות שבמטמון</string>
+  <string name="settings_delete_cache_summary">מחק את כל תמונות המטמון</string>
   <string name="settings_download_only_on_wifi_title">הורד ב-Wi-Fi בלבד</string>
   <string name="settings_download_only_on_wifi_summary">כדי להוריד עלויות מפעיל, אל תוריד מאינטרנט סלולרי</string>
   <string name="settings_download_missing_artwork_title">הורד תמונות אלבומים חסרות</string>
