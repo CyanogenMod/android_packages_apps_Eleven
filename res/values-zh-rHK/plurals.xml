@@ -30,16 +30,16 @@
     <item quantity="other"><xliff:g id="count">%d</xliff:g> 種類型</item>
   </plurals>
   <plurals name="NNNtrackstoplaylist">
-    <item quantity="other">已添加 <xliff:g id="number" example="27">%d</xliff:g> 首歌曲到播放清單中。</item>
+    <item quantity="other">已新增 <xliff:g id="number" example="27">%d</xliff:g> 首歌曲到播放清單中。</item>
   </plurals>
   <plurals name="NNNtracksfromplaylist">
     <item quantity="other">已從播放清單中移除 <xliff:g id="number" example="27">%d</xliff:g> 首歌。</item>
   </plurals>
   <plurals name="NNNtrackstoqueue">
-    <item quantity="other">已添加 <xliff:g id="number" example="27">%d</xliff:g> 首歌曲到隊列中。</item>
+    <item quantity="other">已新增 <xliff:g id="number" example="27">%d</xliff:g> 首歌曲到隊列中。</item>
   </plurals>
   <plurals name="NNNtrackstofavorites">
-    <item quantity="other">已添加 <xliff:g id="number" example="27">%d</xliff:g> 首歌曲到最愛收藏中。</item>
+    <item quantity="other">已新增 <xliff:g id="number" example="27">%d</xliff:g> 首歌曲到最愛收藏中。</item>
   </plurals>
   <plurals name="NNNtracksdeleted">
     <item quantity="other">已刪除 <xliff:g id="songs_to_delete">%d</xliff:g> 首歌曲。</item>

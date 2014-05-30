@@ -78,7 +78,7 @@
   <string name="context_menu_rename_playlist">Pervardyti</string>
   <string name="context_menu_delete">Ištrinti</string>
   <string name="context_menu_fetch_album_art">Atsisiųsti albumo viršelį</string>
-  <string name="context_menu_fetch_artist_image">Atsisiųsti artisto atvaizdą</string>
+  <string name="context_menu_fetch_artist_image">Atsisiųsti artisto vaizdą</string>
   <string name="context_menu_open_in_play_store">Atidaryti „Play“ parduotuvę</string>
   <string name="context_menu_remove_from_recent">Pašalinti iš naujų</string>
   <string name="context_menu_use_as_ringtone">Naudoti kaip skambėjimo toną</string>
@@ -113,7 +113,7 @@
   <string name="settings_download_only_on_wifi_title">Atsisiųsti tik per „Wi-Fi“</string>
   <string name="settings_download_only_on_wifi_summary">Siekiant sumažinti operatoriaus mokesčius nesisiųsti per mobiliojo ryšio tinklus</string>
   <string name="settings_download_missing_artwork_title">Parsisiųsti trūkstamus albumų viršelius</string>
-  <string name="settings_download_artist_images_title">Parsisiųsti trūkstamus artistų atvaizdus</string>
+  <string name="settings_download_artist_images_title">Parsisiųsti trūkstamus artistų vaizdus</string>
   <string name="settings_open_source_licenses">Atviro kodo licencijos</string>
   <string name="settings_version_title">Versijos numeris</string>
   <string name="now_listening_to">#Dabar grojama <xliff:g id="title">%1$s</xliff:g> pagal <xliff:g id="artist">%2$s</xliff:g> #Apollo</string>

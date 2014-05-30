@@ -109,11 +109,11 @@
   <string name="settings_color_scheme_summary">Apolloのアクセントカラーを変更する</string>
   <string name="settings_theme_chooser_title">テーマを選択</string>
   <string name="settings_delete_cache_title">キャッシュを削除</string>
-  <string name="settings_delete_cache_summary">すべてのキャッシュされたイメージを削除する</string>
+  <string name="settings_delete_cache_summary">キャッシュされたすべてのイメージを削除する</string>
   <string name="settings_download_only_on_wifi_title">Wi-Fi経由でのみダウンロード</string>
   <string name="settings_download_only_on_wifi_summary">パケット通信料を減らすためにモバイルネットワーク経由でダウンロードしない</string>
-  <string name="settings_download_missing_artwork_title">足りないアルバムアートをダウンロード</string>
-  <string name="settings_download_artist_images_title">足りないアーティストイメージをダウンロード</string>
+  <string name="settings_download_missing_artwork_title">持っていないアルバムアートをダウンロード</string>
+  <string name="settings_download_artist_images_title">持っていないアーティストイメージをダウンロード</string>
   <string name="settings_open_source_licenses">オープンソースライセンス</string>
   <string name="settings_version_title">バージョン</string>
   <string name="now_listening_to">#NowPlaying <xliff:g id="title">%1$s</xliff:g> by <xliff:g id="artist">%2$s</xliff:g> #Apollo</string>

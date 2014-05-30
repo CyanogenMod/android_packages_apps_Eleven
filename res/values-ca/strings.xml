@@ -23,7 +23,7 @@
   <string name="page_songs">Cançons</string>
   <string name="page_playlists">Llistes de reproducció</string>
   <string name="page_genres">Gèneres</string>
-  <string name="menu_settings">Ajustaments</string>
+  <string name="menu_settings">Configuració</string>
   <string name="menu_search">Cerca</string>
   <string name="menu_shuffle">Barreja-ho tot</string>
   <string name="menu_play_all">Reprodueix tot</string>

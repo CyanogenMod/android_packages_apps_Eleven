@@ -63,7 +63,7 @@
   <string name="save">Сачувај</string>
   <string name="cancel">Поништи</string>
   <string name="overwrite">Пресними</string>
-  <string name="new_playlist_name_template">Плејлиста <xliff:g id="number">%d</xliff:g></string>
+  <string name="new_playlist_name_template">Плејлиста <xliff:g id="број">%d</xliff:g></string>
   <string name="create_playlist_prompt">Име плејлисте</string>
   <string name="delete_dialog_title">Уклони <xliff:g id="item" example="album">%s</xliff:g>?</string>
   <string name="cannot_be_undone">Ова акција не може бити поништена</string>

@@ -50,7 +50,7 @@
     <item quantity="other"><xliff:g id="number" example="27">%d</xliff:g> músicas adicionadas aos Favoritos.</item>
   </plurals>
   <plurals name="NNNtracksdeleted">
-    <item quantity="one"><xliff:g id="songs_to_delete" example="1">%d</xliff:g> canção foi eliminada.</item>
-    <item quantity="other"><xliff:g id="songs_to_delete" example="1">%d</xliff:g> canções foram eliminadas.</item>
+    <item quantity="one"><xliff:g id="songs_to_delete" example="1">%d</xliff:g> música foi eliminada.</item>
+    <item quantity="other"><xliff:g id="songs_to_delete" example="1">%d</xliff:g> músicas foram eliminadas.</item>
   </plurals>
 </resources>
