@@ -68,7 +68,7 @@
   <string name="delete_dialog_title">刪除 <xliff:g id="item" example="album">%s</xliff:g>？</string>
   <string name="cannot_be_undone">這個步驟無法被復原</string>
   <string name="delete_warning">這將永久刪除緩存的圖像</string>
-  <string name="new_photo">從圖片庫中選擇照片</string>
+  <string name="new_photo">從圖片庫中選擇相片</string>
   <string name="google_search">Google 搜尋</string>
   <string name="use_default">使用預設相片</string>
   <string name="old_photo">使用舊有相片</string>
