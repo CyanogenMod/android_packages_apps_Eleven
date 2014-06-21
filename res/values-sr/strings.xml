@@ -33,7 +33,7 @@
   <string name="menu_clear_queue">Избриши редослед</string>
   <string name="menu_save_queue">Сачувај редослед</string>
   <string name="menu_share">Дели</string>
-  <string name="menu_add_to_homescreen">Постави на почетни екран</string>
+  <string name="menu_add_to_homescreen">Закачи на почетни екран</string>
   <string name="menu_equalizer">Еквилајзер</string>
   <string name="menu_simple">Једноставно</string>
   <string name="menu_detailed">Детаљно</string>
@@ -56,9 +56,9 @@
   <string name="sort_order_entry_number_of_songs">Број песама</string>
   <string name="sort_order_entry_number_of_albums">Број албума</string>
   <string name="sort_order_entry_filename">Име фајла</string>
-  <string name="playlist_favorite">Омиљено</string>
+  <string name="playlist_favorite">Омиљена</string>
   <string name="playlist_favorites">Омиљене</string>
-  <string name="playlist_last_added">Последње додато</string>
+  <string name="playlist_last_added">Последње додате</string>
   <string name="new_playlist">Нова плејлиста</string>
   <string name="save">Сачувај</string>
   <string name="cancel">Поништи</string>
