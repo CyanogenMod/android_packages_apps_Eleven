@@ -25,9 +25,11 @@ import static com.andrew.apollo.lastfm.StringUtilities.encode;
 import static com.andrew.apollo.lastfm.StringUtilities.map;
 
 import android.content.Context;
+import android.util.Log;
 
 import com.andrew.apollo.lastfm.Result.Status;
 
+import org.apache.http.HttpStatus;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.xml.sax.InputSource;
@@ -64,6 +66,8 @@ import javax.xml.parsers.ParserConfigurationException;
  * @author Janni Kovacs
  */
 public class Caller {
+
+    private final static String TAG = "LastFm.Caller";
 
     private final static String PARAM_API_KEY = "api_key";
 
@@ -135,18 +139,26 @@ public class Caller {
                             urlConnection.getResponseMessage());
                     return lastResult;
                 }
-            } catch (final IOException ignored) {
+            } catch (final IOException ioEx) {
+                // We will assume that the server is not ready
+                Log.e(TAG, "Failed to download data", ioEx);
+                lastResult = Result.createHttpErrorResult(HttpStatus.SC_SERVICE_UNAVAILABLE,
+                        ioEx.getLocalizedMessage());
+                return lastResult;
             }
         }
 
         try {
             final Result result = createResultFromInputStream(inputStream);
             lastResult = result;
-            return result;
-        } catch (final IOException ignored) {
-        } catch (final SAXException ignored) {
+        } catch (final IOException ioEx) {
+            Log.e(TAG, "Failed to read document", ioEx);
+            lastResult = new Result(ioEx.getLocalizedMessage());
+        } catch (final SAXException saxEx) {
+            Log.e(TAG, "Failed to parse document", saxEx);
+            lastResult = new Result(saxEx.getLocalizedMessage());
         }
-        return null;
+        return lastResult;
     }
 
     /**
