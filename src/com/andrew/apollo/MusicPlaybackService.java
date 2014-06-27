@@ -1000,11 +1000,21 @@ public class MusicPlaybackService extends Service {
     private void updateCursor(final String selection, final String[] selectionArgs) {
         synchronized (this) {
             closeCursor();
-
             mCursor = openCursorAndGoToFirst(MediaStore.Audio.Media.EXTERNAL_CONTENT_URI,
                     PROJECTION, selection, selectionArgs);
         }
+        updateAlbumCursor();
+    }
 
+    private void updateCursor(final Uri uri) {
+        synchronized (this) {
+            closeCursor();
+            mCursor = openCursorAndGoToFirst(uri, PROJECTION, null, null);
+        }
+        updateAlbumCursor();
+    }
+
+    private void updateAlbumCursor() {
         long albumId = getAlbumId();
         if (albumId >= 0) {
             mAlbumCursor = openCursorAndGoToFirst(MediaStore.Audio.Albums.EXTERNAL_CONTENT_URI,
@@ -1590,23 +1600,28 @@ public class MusicPlaybackService extends Service {
 
             // If mCursor is null, try to associate path with a database cursor
             if (mCursor == null) {
-                final ContentResolver resolver = getContentResolver();
-                Uri uri;
-                String where;
-                String selectionArgs[];
-                if (path.startsWith("content://media/")) {
-                    uri = Uri.parse(path);
-                    where = null;
-                    selectionArgs = null;
+                Uri uri = Uri.parse(path);
+                long id = -1;
+                try  {
+                    id = Long.valueOf(uri.getLastPathSegment());
+                } catch (NumberFormatException ex) {
+                    // Ignore
+                }
+
+                if (id != -1 && path.startsWith(MediaStore.Audio.Media.
+                        EXTERNAL_CONTENT_URI.toString())) {
+                    updateCursor(uri);
+
+                } else if (id != -1 && path.startsWith(MediaStore.Files.getContentUri(
+                        "external").toString())) {
+                    updateCursor(id);
+
                 } else {
-                    uri = MediaStore.Audio.Media.getContentUriForPath(path);
-                    where = MediaStore.Audio.Media.DATA + "=?";
-                    selectionArgs = new String[] {
-                        path
-                    };
+                    String where = MediaStore.Audio.Media.DATA + "=?";
+                    String[] selectionArgs = new String[] {path};
+                    updateCursor(where, selectionArgs);
                 }
                 try {
-                    updateCursor(where, selectionArgs);
                     if (mCursor != null) {
                         ensurePlayListCapacity(1);
                         mPlayListLen = 1;
