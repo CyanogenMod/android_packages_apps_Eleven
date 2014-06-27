@@ -27,10 +27,23 @@
         android:id="@+id/line_one"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
+        android:layout_toLeftOf="@+id/line_one_right"
         android:singleLine="true"
         android:textSize="@dimen/text_size_medium"
         android:textStyle="bold"
+        app:themeResource="line_one" />
+
+    <com.andrew.apollo.widgets.theme.ThemeableTextView
+        android:id="@+id/line_one_right"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true"
+        android:paddingRight="@dimen/list_preferred_item_padding"
+        android:singleLine="true"
+        android:textSize="@dimen/text_size_medium"
         app:themeResource="line_one" />
 
     <com.andrew.apollo.widgets.theme.ThemeableTextView

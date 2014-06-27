@@ -162,10 +162,20 @@ public class ProfileSongAdapter extends ArrayAdapter<Song> {
         switch (mDisplaySetting) {
             // show duration if on album fragment
             case DISPLAY_ALBUM_SETTING:
+                holder.mLineOneRight.get().setVisibility(View.GONE);
+
                 holder.mLineTwo.get().setText(
                         MusicUtils.makeTimeString(getContext(), song.mDuration));
                 break;
             case DISPLAY_PLAYLIST_SETTING:
+                if (song.mDuration == -1) {
+                    holder.mLineOneRight.get().setVisibility(View.GONE);
+                } else {
+                    holder.mLineOneRight.get().setVisibility(View.VISIBLE);
+                    holder.mLineOneRight.get().setText(
+                            MusicUtils.makeTimeString(getContext(), song.mDuration));
+                }
+
                 final StringBuilder sb = new StringBuilder(song.mArtistName);
                 sb.append(SEPARATOR_STRING);
                 sb.append(song.mAlbumName);
@@ -173,6 +183,10 @@ public class ProfileSongAdapter extends ArrayAdapter<Song> {
                 break;
             case DISPLAY_DEFAULT_SETTING:
             default:
+                holder.mLineOneRight.get().setVisibility(View.VISIBLE);
+
+                holder.mLineOneRight.get().setText(
+                        MusicUtils.makeTimeString(getContext(), song.mDuration));
                 holder.mLineTwo.get().setText(song.mAlbumName);
                 break;
         }
