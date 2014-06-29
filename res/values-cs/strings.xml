@@ -28,7 +28,7 @@
   <string name="menu_shuffle">Vše náhodně</string>
   <string name="menu_play_all">Přehrát vše</string>
   <string name="menu_sort_by">Řadit podle\u2026</string>
-  <string name="menu_shop">Obchod s tématy</string>
+  <string name="menu_shop">Obchod s motivy</string>
   <string name="menu_clear_recents">Vyčistit nedávné</string>
   <string name="menu_clear_queue">Vyčistit frontu</string>
   <string name="menu_save_queue">Uložit frontu</string>
@@ -96,7 +96,7 @@
   <string name="could_not_be_pinned_to_home_screen">\u201a<xliff:g id="name">%s</xliff:g>\u2018 nelze přidat na plochu</string>
   <string name="set_as_ringtone">\u201a<xliff:g id="name" example="Alarm Bell">%s</xliff:g>\u2018 nastaven jako vyzvánění</string>
   <string name="playlist_renamed">Seznam skladeb přejmenován</string>
-  <string name="theme_set">\u201a<xliff:g id="name">%s</xliff:g>\u2018 nastaveno jako aktivní téma</string>
+  <string name="theme_set">\u201a<xliff:g id="name">%s</xliff:g>\u2018 nastaveno jako aktivní motiv</string>
   <string name="settings_ui_category">Rozhraní</string>
   <string name="settings_storage_category">Úložiště</string>
   <string name="settings_data_category">Data</string>
@@ -107,7 +107,7 @@
   <string name="settings_lopez_summary">Vzhled ikony a upoutávky v Google Play</string>
   <string name="settings_color_scheme_title">Zvolte výchozí barevné schéma</string>
   <string name="settings_color_scheme_summary">Změní barevný vzhled aplikace Apollo</string>
-  <string name="settings_theme_chooser_title">Volba tématu</string>
+  <string name="settings_theme_chooser_title">Výběr motivu</string>
   <string name="settings_delete_cache_title">Smazat cache</string>
   <string name="settings_delete_cache_summary">Odstranit všechny uložené obrázky</string>
   <string name="settings_download_only_on_wifi_title">Stahovat pouze přes síť Wi-Fi</string>
