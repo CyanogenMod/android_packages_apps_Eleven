@@ -78,7 +78,7 @@
   <string name="context_menu_rename_playlist">Renommer</string>
   <string name="context_menu_delete">Supprimer</string>
   <string name="context_menu_fetch_album_art">Récupérer la pochette de l\'album</string>
-  <string name="context_menu_fetch_artist_image">Récupérer une photo de l\'artiste</string>
+  <string name="context_menu_fetch_artist_image">Récupérer une image de l\'artiste</string>
   <string name="context_menu_open_in_play_store">Ouvrir dans le Play Store</string>
   <string name="context_menu_remove_from_recent">Supprimer des récents</string>
   <string name="context_menu_use_as_ringtone">Utiliser comme sonnerie</string>
@@ -113,7 +113,7 @@
   <string name="settings_download_only_on_wifi_title">Télécharger par Wi-Fi uniquement</string>
   <string name="settings_download_only_on_wifi_summary">Ne pas télécharger lorsque vous êtes connecté au réseau mobile, afin de réduire la consommation lié à votre opérateur</string>
   <string name="settings_download_missing_artwork_title">Télécharger les pochettes manquantes</string>
-  <string name="settings_download_artist_images_title">Télécharger les photos d\'artistes manquantes</string>
+  <string name="settings_download_artist_images_title">Télécharger les images d\'artistes manquantes</string>
   <string name="settings_open_source_licenses">Licenses open source</string>
   <string name="settings_version_title">Numéro de version</string>
   <string name="now_listening_to">#Lecture de <xliff:g id="title">%1$s</xliff:g> par <xliff:g id="artist">%2$s</xliff:g> #Apollo</string>

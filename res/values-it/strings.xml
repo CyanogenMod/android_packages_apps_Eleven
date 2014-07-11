@@ -110,7 +110,7 @@
   <string name="settings_theme_chooser_title">Selettore tema</string>
   <string name="settings_delete_cache_title">Cancella cache</string>
   <string name="settings_delete_cache_summary">Rimuovi tutte le immagini memorizzate nella cache</string>
-  <string name="settings_download_only_on_wifi_title">Scarica con wi-fi</string>
+  <string name="settings_download_only_on_wifi_title">Download solo Wi-Fi</string>
   <string name="settings_download_only_on_wifi_summary">Non scaricare con connessione dati mobili</string>
   <string name="settings_download_missing_artwork_title">Scarica cover album</string>
   <string name="settings_download_artist_images_title">Scarica immagine artista</string>
