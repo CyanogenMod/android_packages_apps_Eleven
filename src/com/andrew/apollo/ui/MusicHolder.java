@@ -55,6 +55,13 @@ public class MusicHolder {
     public WeakReference<TextView> mLineOne;
 
     /**
+     * This is displayed on the right side of the first line in the list or grid
+     *
+     * @see {@code #getView()} of a specific adapter for more detailed info
+     */
+    public WeakReference<TextView> mLineOneRight;
+
+    /**
      * This is the second line displayed in the list or grid
      * 
      * @see {@code #getView()} of a specific adapter for more detailed info
@@ -89,6 +96,10 @@ public class MusicHolder {
         // Initialize mLineOne
         mLineOne = new WeakReference<TextView>((TextView)view.findViewById(R.id.line_one));
 
+        // Initialize mLineOneRight
+        mLineOneRight = new WeakReference<TextView>(
+                (TextView)view.findViewById(R.id.line_one_right));
+
         // Initialize mLineTwo
         mLineTwo = new WeakReference<TextView>((TextView)view.findViewById(R.id.line_two));
 
@@ -112,6 +123,13 @@ public class MusicHolder {
          * @see {@code #getView()} of a specific adapter for more detailed info
          */
         public String mLineOne;
+
+        /**
+         * This is displayed on the right side of the first line in the list or grid
+         *
+         * @see {@code #getView()} of a specific adapter for more detailed info
+         */
+        public String mLineOneRight;
 
         /**
          * This is the second line displayed in the list or grid

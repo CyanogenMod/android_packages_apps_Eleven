@@ -82,8 +82,15 @@ public class PlaylistSongLoader extends WrappedAsyncTaskLoader<List<Song>> {
                 final String album = mCursor.getString(mCursor
                         .getColumnIndexOrThrow(AudioColumns.ALBUM));
 
+                // Copy the duration
+                final long duration = mCursor.getLong(mCursor
+                        .getColumnIndexOrThrow(AudioColumns.DURATION));
+
+                // Convert the duration into seconds
+                final int durationInSecs = (int) duration / 1000;
+
                 // Create a new song
-                final Song song = new Song(id, songName, artist, album, -1);
+                final Song song = new Song(id, songName, artist, album, durationInSecs);
 
                 // Add everything up
                 mSongList.add(song);
@@ -120,7 +127,9 @@ public class PlaylistSongLoader extends WrappedAsyncTaskLoader<List<Song>> {
                         /* 3 */
                         AudioColumns.ARTIST,
                         /* 4 */
-                        AudioColumns.ALBUM
+                        AudioColumns.ALBUM,
+                        /* 5 */
+                        AudioColumns.DURATION
                 }, mSelection.toString(), null,
                 MediaStore.Audio.Playlists.Members.DEFAULT_SORT_ORDER);
     }

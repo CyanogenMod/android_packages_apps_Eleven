@@ -77,8 +77,14 @@ public class GenreSongLoader extends WrappedAsyncTaskLoader<List<Song>> {
                 // Copy the artist name
                 final String artist = mCursor.getString(3);
 
+                // Copy the duration
+                final long duration = mCursor.getLong(4);
+
+                // Convert the duration into seconds
+                final int durationInSecs = (int) duration / 1000;
+
                 // Create a new song
-                final Song song = new Song(id, songName, artist, album, -1);
+                final Song song = new Song(id, songName, artist, album, durationInSecs);
 
                 // Add everything up
                 mSongList.add(song);
@@ -111,7 +117,9 @@ public class GenreSongLoader extends WrappedAsyncTaskLoader<List<Song>> {
                         /* 2 */
                         MediaStore.Audio.Genres.Members.ALBUM,
                         /* 3 */
-                        MediaStore.Audio.Genres.Members.ARTIST
+                        MediaStore.Audio.Genres.Members.ARTIST,
+                        /* 4 */
+                        MediaStore.Audio.Genres.Members.DURATION
                 }, selection.toString(), null, MediaStore.Audio.Genres.Members.DEFAULT_SORT_ORDER);
     }
 }
