@@ -34,19 +34,19 @@
     <item quantity="other"><xliff:g id="count">%d</xliff:g> műfaj</item>
   </plurals>
   <plurals name="NNNtrackstoplaylist">
-    <item quantity="one"><xliff:g id="number" example="27">%d</xliff:g> dal hozzáadva a lejátszási listához.</item>
+    <item quantity="one"><xliff:g id="number" example="1">%d</xliff:g> dal hozzáadva a lejátszási listához.</item>
     <item quantity="other"><xliff:g id="number" example="27">%d</xliff:g> dal hozzáadva a lejátszási listához.</item>
   </plurals>
   <plurals name="NNNtracksfromplaylist">
-    <item quantity="one"><xliff:g id="number" example="27">%d</xliff:g> dal eltávolítva a lejátszási listából.</item>
+    <item quantity="one"><xliff:g id="number" example="1">%d</xliff:g> dal eltávolítva a lejátszási listából.</item>
     <item quantity="other"><xliff:g id="number" example="27">%d</xliff:g> dal eltávolítva a lejátszási listából.</item>
   </plurals>
   <plurals name="NNNtrackstoqueue">
-    <item quantity="one"><xliff:g id="number" example="27">%d</xliff:g> dal hozzáadva a lejátszási sorhoz.</item>
+    <item quantity="one"><xliff:g id="number" example="1">%d</xliff:g> dal hozzáadva a lejátszási sorhoz.</item>
     <item quantity="other"><xliff:g id="number" example="27">%d</xliff:g> dal hozzáadva a lejátszási sorhoz.</item>
   </plurals>
   <plurals name="NNNtrackstofavorites">
-    <item quantity="one"><xliff:g id="number" example="27">%d</xliff:g> dal hozzáadva a kedvencekhez.</item>
+    <item quantity="one"><xliff:g id="number" example="1">%d</xliff:g> dal hozzáadva a kedvencekhez.</item>
     <item quantity="other"><xliff:g id="number" example="27">%d</xliff:g> dal hozzáadva a kedvencekhez.</item>
   </plurals>
   <plurals name="NNNtracksdeleted">

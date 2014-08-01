@@ -121,7 +121,7 @@
   <string name="color_picker_title">Színséma</string>
   <string name="current_color">Jelenlegi</string>
   <string name="new_color">Új</string>
-  <string name="app_widget_large_alt">Apollo: 4×2 (Alternatív)</string>
+  <string name="app_widget_large_alt">Apollo: 4×2 (alternatív)</string>
   <string name="app_widget_recent">Apollo: Mostanában hallgatott</string>
   <string name="no_effects_for_you">Nem sikerült megnyitni a hangszínszabályzót.</string>
   <string name="empty_music">Számítógépről történő zene másoláshoz használjon USB kábelt.</string>
