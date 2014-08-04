@@ -18,13 +18,13 @@
     android:layout_width="0dip"
     android:layout_height="match_parent"
     android:layout_weight="1"
-    class="com.andrew.apollo.widgets.CarouselTab" >
+    class="com.cyngn.eleven.widgets.CarouselTab" >
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent" >
 
-        <com.andrew.apollo.widgets.LayoutSuppressingImageView
+        <com.cyngn.eleven.widgets.LayoutSuppressingImageView
             android:id="@+id/profile_tab_photo"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -33,7 +33,7 @@
             android:contentDescription="@null"
             android:scaleType="centerCrop" />
 
-        <com.andrew.apollo.widgets.SquareImageView
+        <com.cyngn.eleven.widgets.SquareImageView
             android:id="@+id/profile_tab_album_art"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -58,7 +58,7 @@
             android:layout_alignParentLeft="true"
             android:background="@color/transparent_black" />
 
-        <com.andrew.apollo.widgets.theme.Colorstrip
+        <com.cyngn.eleven.widgets.theme.Colorstrip
             android:id="@+id/profile_tab_colorstrip"
             android:layout_width="match_parent"
             android:layout_height="@dimen/profile_indicator_height"

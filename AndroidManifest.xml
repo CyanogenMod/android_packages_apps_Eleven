@@ -14,7 +14,7 @@
      limitations under the License.
  -->
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.andrew.apollo"
+    package="com.cyngn.eleven"
     android:versionCode="2"
     android:versionName="1.1" >
 
@@ -45,14 +45,14 @@
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
 
     <application
-        android:name=".ApolloApplication"
+        android:name=".ElevenApplication"
         android:allowBackup="true"
         android:allowTaskReparenting="true"
         android:hardwareAccelerated="@bool/config_hardwareAccelerated"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
         android:largeHeap="@bool/config_largeHeap"
-        android:taskAffinity="com.andrew.apollo.task" >
+        android:taskAffinity="com.cyngn.eleven.task" >
 
         <!-- Searchable -->
         <meta-data
@@ -122,7 +122,7 @@
                 <data android:mimeType="vnd.android.cursor.dir/artists" />
             </intent-filter>
             <intent-filter>
-                <action android:name="com.andrew.apollo.AUDIO_PLAYER" />
+                <action android:name="com.cyngn.eleven.AUDIO_PLAYER" />
 
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
@@ -176,7 +176,7 @@
             android:excludeFromRecents="true" />
         <!-- 4x1 App Widget -->
         <receiver
-            android:name="com.andrew.apollo.appwidgets.AppWidgetSmall"
+            android:name="com.cyngn.eleven.appwidgets.AppWidgetSmall"
             android:exported="false"
             android:label="@string/app_widget_small" >
             <intent-filter>
@@ -189,7 +189,7 @@
         </receiver>
         <!-- 4x2  App Widget -->
         <receiver
-            android:name="com.andrew.apollo.appwidgets.AppWidgetLarge"
+            android:name="com.cyngn.eleven.appwidgets.AppWidgetLarge"
             android:exported="false"
             android:label="@string/app_widget_large" >
             <intent-filter>
@@ -202,7 +202,7 @@
         </receiver>
         <!-- 4x2 alternate App Widget -->
         <receiver
-            android:name="com.andrew.apollo.appwidgets.AppWidgetLargeAlternate"
+            android:name="com.cyngn.eleven.appwidgets.AppWidgetLargeAlternate"
             android:exported="false"
             android:label="@string/app_widget_large_alt" >
             <intent-filter>
@@ -215,7 +215,7 @@
         </receiver>
         <!-- Resizable recently listened App Widget -->
         <receiver
-            android:name="com.andrew.apollo.appwidgets.RecentWidgetProvider"
+            android:name="com.cyngn.eleven.appwidgets.RecentWidgetProvider"
             android:exported="false"
             android:label="@string/app_widget_recent" >
             <intent-filter>
@@ -228,7 +228,7 @@
         </receiver>
         <!-- The service serving the RemoteViews to the recently listened App Widget -->
         <service
-            android:name="com.andrew.apollo.appwidgets.RecentWidgetService"
+            android:name="com.cyngn.eleven.appwidgets.RecentWidgetService"
             android:permission="android.permission.BIND_REMOTEVIEWS" />
         <!-- Media button receiver -->
         <receiver android:name=".MediaButtonIntentReceiver" >

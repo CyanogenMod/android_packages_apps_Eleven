@@ -17,7 +17,7 @@
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
 
-    <string name="app_name" translatable="false">Apollo</string>
+    <string name="app_name" translatable="false">Music</string>
 
     <!-- Page titles -->
     <string name="page_recent">Recent</string>
@@ -153,10 +153,10 @@
     <string name="new_color">New</string>
 
     <!-- App widget -->
-    <string name="app_widget_small" translatable="false">Apollo: 4×1</string>
-    <string name="app_widget_large" translatable="false">Apollo: 4×2</string>
-    <string name="app_widget_large_alt">Apollo: 4×2 (alternate)</string>
-    <string name="app_widget_recent">Apollo: recently listened</string>
+    <string name="app_widget_small" translatable="false">Music: 4×1</string>
+    <string name="app_widget_large" translatable="false">Music: 4×2</string>
+    <string name="app_widget_large_alt">Music: 4×2 (alternate)</string>
+    <string name="app_widget_recent">Music: recently listened</string>
     <string name="app_widget_text_separator" translatable="false">-</string>
 
     <!-- What keywords to use when shopping for Apollo themes -->

@@ -32,7 +32,7 @@
         android:textStyle="bold"
         android:visibility="gone" />
 
-    <com.andrew.apollo.dragdrop.DragSortListView
+    <com.cyngn.eleven.dragdrop.DragSortListView
         android:id="@+id/list_base"
         android:layout_width="match_parent"
         android:layout_height="match_parent"

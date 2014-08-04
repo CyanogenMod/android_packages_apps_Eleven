@@ -18,7 +18,7 @@
     android:id="@+id/profile_tab_carousel"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    class="com.andrew.apollo.widgets.ProfileTabCarousel"
+    class="com.cyngn.eleven.widgets.ProfileTabCarousel"
     android:fadingEdge="none"
     android:scrollbars="none" >
 

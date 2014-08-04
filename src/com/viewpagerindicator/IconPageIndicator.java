@@ -29,7 +29,7 @@ import android.widget.ImageView;
 import static android.view.ViewGroup.LayoutParams.FILL_PARENT;
 import static android.view.ViewGroup.LayoutParams.WRAP_CONTENT;
 
-import com.andrew.apollo.R;
+import com.cyngn.eleven.R;
 
 /**
  * This widget implements the dynamic action bar tab behavior that can change

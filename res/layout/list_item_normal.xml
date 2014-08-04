@@ -16,13 +16,13 @@
 -->
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    xmlns:app="http://schemas.android.com/apk/res/com.andrew.apollo"
+    xmlns:app="http://schemas.android.com/apk/res/com.cyngn.eleven"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:gravity="center_vertical"
     tools:ignore="ContentDescription" >
 
-    <com.andrew.apollo.widgets.SquareImageView
+    <com.cyngn.eleven.widgets.SquareImageView
         android:id="@+id/image"
         android:layout_width="@dimen/item_normal_height"
         android:layout_height="@dimen/item_normal_height"
@@ -40,7 +40,7 @@
         android:paddingLeft="@dimen/list_preferred_item_padding"
         android:paddingRight="@dimen/list_preferred_item_padding" >
 
-        <com.andrew.apollo.widgets.theme.ThemeableTextView
+        <com.cyngn.eleven.widgets.theme.ThemeableTextView
             android:id="@+id/line_one"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -50,7 +50,7 @@
             android:textStyle="bold"
             app:themeResource="line_one" />
 
-        <com.andrew.apollo.widgets.theme.ThemeableTextView
+        <com.cyngn.eleven.widgets.theme.ThemeableTextView
             android:id="@+id/line_two"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
