@@ -163,7 +163,7 @@ public class ProfileActivity extends BaseActivity implements OnPageChangeListene
             mPagerAdapter.add(ArtistAlbumFragment.class, mArguments);
 
             // Action bar title
-            mResources.setTitle(mArtistName);
+            getActionBar().setTitle(mArtistName);
 
         } else
         // Set up the album profile
@@ -175,9 +175,9 @@ public class ProfileActivity extends BaseActivity implements OnPageChangeListene
             mPagerAdapter.add(AlbumSongFragment.class, mArguments);
 
             // Action bar title = album name
-            mResources.setTitle(mProfileName);
+            getActionBar().setTitle(mProfileName);
             // Action bar subtitle = year released
-            mResources.setSubtitle(mArguments.getString(Config.ALBUM_YEAR));
+            getActionBar().setSubtitle(mArguments.getString(Config.ALBUM_YEAR));
         } else
         // Set up the favorites profile
         if (isFavorites()) {
@@ -188,7 +188,7 @@ public class ProfileActivity extends BaseActivity implements OnPageChangeListene
             mPagerAdapter.add(FavoriteFragment.class, null);
 
             // Action bar title = Favorites
-            mResources.setTitle(mProfileName);
+            getActionBar().setTitle(mProfileName);
         } else
         // Set up the last added profile
         if (isLastAdded()) {
@@ -199,7 +199,7 @@ public class ProfileActivity extends BaseActivity implements OnPageChangeListene
             mPagerAdapter.add(LastAddedFragment.class, null);
 
             // Action bar title = Last added
-            mResources.setTitle(mProfileName);
+            getActionBar().setTitle(mProfileName);
         } else
         // Set up the user playlist profile
         if (isPlaylist()) {
@@ -210,7 +210,7 @@ public class ProfileActivity extends BaseActivity implements OnPageChangeListene
             mPagerAdapter.add(PlaylistSongFragment.class, mArguments);
 
             // Action bar title = playlist name
-            mResources.setTitle(mProfileName);
+            getActionBar().setTitle(mProfileName);
         } else
         // Set up the genre profile
         if (isGenre()) {
@@ -221,7 +221,7 @@ public class ProfileActivity extends BaseActivity implements OnPageChangeListene
             mPagerAdapter.add(GenreSongFragment.class, mArguments);
 
             // Action bar title = playlist name
-            mResources.setTitle(mProfileName);
+            getActionBar().setTitle(mProfileName);
         }
 
         // Initialize the ViewPager
@@ -258,8 +258,6 @@ public class ProfileActivity extends BaseActivity implements OnPageChangeListene
      */
     @Override
     public boolean onPrepareOptionsMenu(final Menu menu) {
-        // Theme the add to home screen icon
-        mResources.setAddToHomeScreenIcon(menu);
         // Set the shuffle all title to "play all" if a playlist.
         final MenuItem shuffle = menu.findItem(R.id.menu_shuffle);
         String title = null;

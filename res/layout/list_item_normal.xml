@@ -16,7 +16,6 @@
 -->
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    xmlns:app="http://schemas.android.com/apk/res/com.cyngn.eleven"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:gravity="center_vertical"
@@ -40,25 +39,23 @@
         android:paddingLeft="@dimen/list_preferred_item_padding"
         android:paddingRight="@dimen/list_preferred_item_padding" >
 
-        <com.cyngn.eleven.widgets.theme.ThemeableTextView
+        <TextView
             android:id="@+id/line_one"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
             android:singleLine="true"
             android:textSize="@dimen/text_size_medium"
-            android:textStyle="bold"
-            app:themeResource="line_one" />
+            android:textStyle="bold" />
 
-        <com.cyngn.eleven.widgets.theme.ThemeableTextView
+        <TextView
             android:id="@+id/line_two"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/line_one"
             android:layout_marginTop="@dimen/list_item_line_two_margin_top"
             android:singleLine="true"
-            android:textSize="@dimen/text_size_small"
-            app:themeResource="line_two" />
+            android:textSize="@dimen/text_size_small" />
     </RelativeLayout>
 
 </RelativeLayout>

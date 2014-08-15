@@ -18,7 +18,6 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
 import com.cyngn.eleven.R;
-import com.cyngn.eleven.utils.ThemeUtils;
 
 /**
  * @author Andrew Neal (andrewdneal@gmail.com)
@@ -38,10 +37,7 @@ public class BottomActionBar extends RelativeLayout {
      */
     public BottomActionBar(final Context context, final AttributeSet attrs) {
         super(context, attrs);
-        // Initialze the theme resources
-        final ThemeUtils resources = new ThemeUtils(context);
-        // Theme the bottom action bar
-        setBackgroundDrawable(resources.getDrawable(BOTTOM_ACTION_BAR));
+        setBackgroundDrawable(getResources().getDrawable(R.drawable.bottom_action_bar));
     }
 
     /**

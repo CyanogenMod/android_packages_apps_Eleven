@@ -15,7 +15,6 @@
   limitations under the License.
 -->
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res/com.cyngn.eleven"
     android:layout_width="match_parent"
     android:layout_height="@dimen/item_normal_height"
     android:gravity="center_vertical"
@@ -23,7 +22,7 @@
     android:paddingLeft="@dimen/list_preferred_item_padding"
     android:paddingRight="@dimen/list_preferred_item_padding" >
 
-    <com.cyngn.eleven.widgets.theme.ThemeableTextView
+    <TextView
         android:id="@+id/line_one"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -32,10 +31,9 @@
         android:layout_toLeftOf="@+id/line_one_right"
         android:singleLine="true"
         android:textSize="@dimen/text_size_medium"
-        android:textStyle="bold"
-        app:themeResource="line_one" />
+        android:textStyle="bold" />
 
-    <com.cyngn.eleven.widgets.theme.ThemeableTextView
+    <TextView
         android:id="@+id/line_one_right"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -43,26 +41,23 @@
         android:layout_alignParentRight="true"
         android:paddingRight="@dimen/list_preferred_item_padding"
         android:singleLine="true"
-        android:textSize="@dimen/text_size_medium"
-        app:themeResource="line_one" />
+        android:textSize="@dimen/text_size_medium" />
 
-    <com.cyngn.eleven.widgets.theme.ThemeableTextView
+    <TextView
         android:id="@+id/line_two"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/line_one"
         android:layout_marginTop="@dimen/list_item_line_two_margin_top"
         android:singleLine="true"
-        android:textSize="@dimen/text_size_small"
-        app:themeResource="line_two" />
+        android:textSize="@dimen/text_size_small" />
 
-    <com.cyngn.eleven.widgets.theme.ThemeableTextView
+    <TextView
         android:id="@+id/line_three"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:singleLine="true"
-        android:textSize="@dimen/text_size_small"
-        app:themeResource="line_three" />
+        android:textSize="@dimen/text_size_small" />
 
 </RelativeLayout>

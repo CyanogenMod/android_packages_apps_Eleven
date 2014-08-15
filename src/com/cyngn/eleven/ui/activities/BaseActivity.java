@@ -28,7 +28,6 @@ import android.support.v4.app.FragmentActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.Window;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.SearchView;
@@ -44,7 +43,6 @@ import com.cyngn.eleven.utils.Lists;
 import com.cyngn.eleven.utils.MusicUtils;
 import com.cyngn.eleven.utils.MusicUtils.ServiceToken;
 import com.cyngn.eleven.utils.NavUtils;
-import com.cyngn.eleven.utils.ThemeUtils;
 import com.cyngn.eleven.widgets.PlayPauseButton;
 import com.cyngn.eleven.widgets.RepeatButton;
 import com.cyngn.eleven.widgets.ShuffleButton;
@@ -113,22 +111,11 @@ public abstract class BaseActivity extends FragmentActivity implements ServiceCo
     private boolean mIsBackPressed = false;
 
     /**
-     * Theme resources
-     */
-    protected ThemeUtils mResources;
-
-    /**
      * {@inheritDoc}
      */
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        // Initialze the theme resources
-        mResources = new ThemeUtils(this);
-
-        // Set the overflow style
-        mResources.setOverflowStyle(this);
 
         // Fade it in
         overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
@@ -142,8 +129,7 @@ public abstract class BaseActivity extends FragmentActivity implements ServiceCo
         // Initialize the broadcast receiver
         mPlaybackStatus = new PlaybackStatus(this);
 
-        // Theme the action bar
-        mResources.themeActionBar(getActionBar(), getString(R.string.app_name));
+        getActionBar().setTitle(getString(R.string.app_name));
 
         // Set the layout
         setContentView(setContentView());
@@ -183,8 +169,6 @@ public abstract class BaseActivity extends FragmentActivity implements ServiceCo
         getMenuInflater().inflate(R.menu.search, menu);
         // Settings
         getMenuInflater().inflate(R.menu.activity_base, menu);
-        // Theme the search icon
-        mResources.setSearchIcon(menu);
 
         final SearchView searchView = (SearchView)menu.findItem(R.id.menu_search).getActionView();
         // Add voice search

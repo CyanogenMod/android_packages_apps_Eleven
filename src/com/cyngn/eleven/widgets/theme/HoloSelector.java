@@ -17,8 +17,7 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.StateListDrawable;
 
-import com.cyngn.eleven.utils.ApolloUtils;
-import com.cyngn.eleven.utils.ThemeUtils;
+import com.cyngn.eleven.R;
 
 import java.lang.ref.WeakReference;
 
@@ -51,8 +50,7 @@ public class HoloSelector extends StateListDrawable {
      */
     @SuppressLint("NewApi")
     public HoloSelector(final Context context) {
-        final ThemeUtils resources = new ThemeUtils(context);
-        final int themeColor = resources.getColor(RESOURCE_NAME);
+        final int themeColor = context.getResources().getColor(R.color.holo_blue_light);
         // Focused
         addState(new int[] {
             FOCUSED

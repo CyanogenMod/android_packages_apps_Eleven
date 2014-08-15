@@ -24,10 +24,6 @@
             android:key="color_scheme"
             android:summary="@string/settings_color_scheme_summary"
             android:title="@string/settings_color_scheme_title" />
-        <!-- Theme chooser -->
-        <Preference
-            android:key="theme_chooser"
-            android:title="@string/settings_theme_chooser_title" />
     </PreferenceCategory>
     <!-- Data catetory -->
     <PreferenceCategory android:title="@string/settings_data_category" >

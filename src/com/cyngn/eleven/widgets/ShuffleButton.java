@@ -23,7 +23,6 @@ import com.cyngn.eleven.MusicPlaybackService;
 import com.cyngn.eleven.R;
 import com.cyngn.eleven.utils.ApolloUtils;
 import com.cyngn.eleven.utils.MusicUtils;
-import com.cyngn.eleven.utils.ThemeUtils;
 import com.cyngn.eleven.widgets.theme.HoloSelector;
 
 /**
@@ -42,19 +41,12 @@ public class ShuffleButton extends ImageButton implements OnClickListener, OnLon
     private static final String SHUFFLE_ALL = "btn_playback_shuffle_all";
 
     /**
-     * The resources to use.
-     */
-    private final ThemeUtils mResources;
-
-    /**
      * @param context The {@link Context} to use
      * @param attrs The attributes of the XML tag that is inflating the view.
      */
     @SuppressWarnings("deprecation")
     public ShuffleButton(final Context context, final AttributeSet attrs) {
         super(context, attrs);
-        // Initialze the theme resources
-        mResources = new ThemeUtils(context);
         // Theme the selector
         setBackgroundDrawable(new HoloSelector(context));
         // Control playback (cycle shuffle)
@@ -92,15 +84,15 @@ public class ShuffleButton extends ImageButton implements OnClickListener, OnLon
         switch (MusicUtils.getShuffleMode()) {
             case MusicPlaybackService.SHUFFLE_NORMAL:
                 setContentDescription(getResources().getString(R.string.accessibility_shuffle_all));
-                setImageDrawable(mResources.getDrawable(SHUFFLE_ALL));
+                setImageDrawable(getResources().getDrawable(R.drawable.btn_playback_shuffle_all));
                 break;
             case MusicPlaybackService.SHUFFLE_AUTO:
                 setContentDescription(getResources().getString(R.string.accessibility_shuffle_all));
-                setImageDrawable(mResources.getDrawable(SHUFFLE_ALL));
+                setImageDrawable(getResources().getDrawable(R.drawable.btn_playback_shuffle_all));
                 break;
             case MusicPlaybackService.SHUFFLE_NONE:
                 setContentDescription(getResources().getString(R.string.accessibility_shuffle));
-                setImageDrawable(mResources.getDrawable(SHUFFLE));
+                setImageDrawable(getResources().getDrawable(R.drawable.btn_playback_shuffle));
                 break;
             default:
                 break;

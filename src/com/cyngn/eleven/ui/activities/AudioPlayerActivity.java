@@ -61,7 +61,6 @@ import com.cyngn.eleven.utils.ApolloUtils;
 import com.cyngn.eleven.utils.MusicUtils;
 import com.cyngn.eleven.utils.MusicUtils.ServiceToken;
 import com.cyngn.eleven.utils.NavUtils;
-import com.cyngn.eleven.utils.ThemeUtils;
 import com.cyngn.eleven.widgets.PlayPauseButton;
 import com.cyngn.eleven.widgets.RepeatButton;
 import com.cyngn.eleven.widgets.RepeatingImageButton;
@@ -143,9 +142,6 @@ public class AudioPlayerActivity extends FragmentActivity implements ServiceConn
     // Image cache
     private ImageFetcher mImageFetcher;
 
-    // Theme resources
-    private ThemeUtils mResources;
-
     private long mPosOverride = -1;
 
     private long mStartSeekPos = 0;
@@ -164,11 +160,6 @@ public class AudioPlayerActivity extends FragmentActivity implements ServiceConn
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        // Initialze the theme resources
-        mResources = new ThemeUtils(this);
-        // Set the overflow style
-        mResources.setOverflowStyle(this);
 
         // Fade it in
         overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
@@ -190,7 +181,7 @@ public class AudioPlayerActivity extends FragmentActivity implements ServiceConn
 
         // Theme the action bar
         final ActionBar actionBar = getActionBar();
-        mResources.themeActionBar(actionBar, getString(R.string.app_name));
+        actionBar.setTitle(getString(R.string.app_name));
         actionBar.setDisplayHomeAsUpEnabled(true);
 
         // Set the layout
@@ -291,7 +282,7 @@ public class AudioPlayerActivity extends FragmentActivity implements ServiceConn
             final MenuItem effects = menu.findItem(R.id.menu_audio_player_equalizer);
             effects.setVisible(false);
         }
-        mResources.setFavoriteIcon(menu);
+//        mResources.setFavoriteIcon(menu);
         return true;
     }
 
@@ -303,7 +294,7 @@ public class AudioPlayerActivity extends FragmentActivity implements ServiceConn
         // Search view
         getMenuInflater().inflate(R.menu.search, menu);
         // Theme the search icon
-        mResources.setSearchIcon(menu);
+//        mResources.setSearchIcon(menu);
 
         final SearchView searchView = (SearchView)menu.findItem(R.id.menu_search).getActionView();
         // Add voice search
@@ -483,7 +474,7 @@ public class AudioPlayerActivity extends FragmentActivity implements ServiceConn
         mPageContainer = (FrameLayout)findViewById(R.id.audio_player_pager_container);
         // Theme the pager container background
         mPageContainer
-                .setBackgroundDrawable(mResources.getDrawable("audio_player_pager_container"));
+                .setBackgroundDrawable(getResources().getDrawable(R.drawable.audio_player_pager_container));
 
         // Now playing header
         mAudioPlayerHeader = (LinearLayout)findViewById(R.id.audio_player_header);
@@ -530,7 +521,7 @@ public class AudioPlayerActivity extends FragmentActivity implements ServiceConn
         // Used to show and hide the queue fragment
         mQueueSwitch = (ImageView)findViewById(R.id.audio_player_switch_queue);
         // Theme the queue switch icon
-        mQueueSwitch.setImageDrawable(mResources.getDrawable("btn_switch_queue"));
+        mQueueSwitch.setImageDrawable(getResources().getDrawable(R.drawable.btn_switch_queue));
         // Progress
         mProgress = (SeekBar)findViewById(android.R.id.progress);
 

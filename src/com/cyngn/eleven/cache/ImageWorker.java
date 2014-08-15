@@ -24,7 +24,6 @@ import android.widget.ImageView;
 
 import com.cyngn.eleven.R;
 import com.cyngn.eleven.utils.ApolloUtils;
-import com.cyngn.eleven.utils.ThemeUtils;
 
 import java.lang.ref.WeakReference;
 import java.util.concurrent.RejectedExecutionException;
@@ -81,8 +80,7 @@ public abstract class ImageWorker {
         mContext = context.getApplicationContext();
         mResources = mContext.getResources();
         // Create the default artwork
-        final ThemeUtils theme = new ThemeUtils(context);
-        mDefault = ((BitmapDrawable) theme.getDrawable("default_artwork")).getBitmap();
+        mDefault = ((BitmapDrawable) mResources.getDrawable(R.drawable.default_artwork)).getBitmap();
         // Create the transparent layer for the transition drawable
         mCurrentDrawable = new ColorDrawable(mResources.getColor(R.color.transparent));
         // A transparent image (layer 0) and the new result (layer 1)

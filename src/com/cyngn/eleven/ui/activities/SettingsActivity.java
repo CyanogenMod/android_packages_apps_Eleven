@@ -28,7 +28,6 @@ import android.view.MenuItem;
 import com.cyngn.eleven.MusicPlaybackService;
 import com.cyngn.eleven.R;
 import com.cyngn.eleven.cache.ImageCache;
-import com.cyngn.eleven.ui.fragments.ThemeFragment;
 import com.cyngn.eleven.utils.ApolloUtils;
 import com.cyngn.eleven.utils.MusicUtils;
 import com.cyngn.eleven.utils.PreferenceUtils;
@@ -125,8 +124,6 @@ public class SettingsActivity extends PreferenceActivity {
     private void initInterface() {
         // Color scheme picker
         updateColorScheme();
-        // Open the theme chooser
-        openThemeChooser();
     }
 
     /**
@@ -138,22 +135,6 @@ public class SettingsActivity extends PreferenceActivity {
             @Override
             public boolean onPreferenceClick(final Preference preference) {
                 ApolloUtils.showColorPicker(SettingsActivity.this);
-                return true;
-            }
-        });
-    }
-
-    /**
-     * Opens the {@link ThemeFragment}.
-     */
-    private void openThemeChooser() {
-        final Preference themeChooser = findPreference("theme_chooser");
-        themeChooser.setOnPreferenceClickListener(new OnPreferenceClickListener() {
-            @Override
-            public boolean onPreferenceClick(final Preference preference) {
-                final Intent themeChooserIntent = new Intent(SettingsActivity.this,
-                        ThemesActivity.class);
-                startActivity(themeChooserIntent);
                 return true;
             }
         });

@@ -23,7 +23,6 @@ import com.cyngn.eleven.MusicPlaybackService;
 import com.cyngn.eleven.R;
 import com.cyngn.eleven.utils.ApolloUtils;
 import com.cyngn.eleven.utils.MusicUtils;
-import com.cyngn.eleven.utils.ThemeUtils;
 import com.cyngn.eleven.widgets.theme.HoloSelector;
 
 /**
@@ -49,19 +48,12 @@ public class RepeatButton extends ImageButton implements OnClickListener, OnLong
     private static final String REPEAT_NONE = "btn_playback_repeat";
 
     /**
-     * The resources to use.
-     */
-    private final ThemeUtils mResources;
-
-    /**
      * @param context The {@link Context} to use
      * @param attrs The attributes of the XML tag that is inflating the view.
      */
     @SuppressWarnings("deprecation")
     public RepeatButton(final Context context, final AttributeSet attrs) {
         super(context, attrs);
-        // Initialze the theme resources
-        mResources = new ThemeUtils(context);
         // Set the selector
         setBackgroundDrawable(new HoloSelector(context));
         // Control playback (cycle repeat modes)
@@ -99,15 +91,15 @@ public class RepeatButton extends ImageButton implements OnClickListener, OnLong
         switch (MusicUtils.getRepeatMode()) {
             case MusicPlaybackService.REPEAT_ALL:
                 setContentDescription(getResources().getString(R.string.accessibility_repeat_all));
-                setImageDrawable(mResources.getDrawable(REPEAT_ALL));
+                setImageDrawable(getResources().getDrawable(R.drawable.btn_playback_repeat_all));
                 break;
             case MusicPlaybackService.REPEAT_CURRENT:
                 setContentDescription(getResources().getString(R.string.accessibility_repeat_one));
-                setImageDrawable(mResources.getDrawable(REPEAT_CURRENT));
+                setImageDrawable(getResources().getDrawable(R.drawable.btn_playback_repeat_one));
                 break;
             case MusicPlaybackService.REPEAT_NONE:
                 setContentDescription(getResources().getString(R.string.accessibility_repeat));
-                setImageDrawable(mResources.getDrawable(REPEAT_NONE));
+                setImageDrawable(getResources().getDrawable(R.drawable.btn_playback_repeat));
                 break;
             default:
                 break;

@@ -22,7 +22,6 @@ import android.widget.ImageButton;
 import com.cyngn.eleven.R;
 import com.cyngn.eleven.utils.ApolloUtils;
 import com.cyngn.eleven.utils.MusicUtils;
-import com.cyngn.eleven.utils.ThemeUtils;
 import com.cyngn.eleven.widgets.theme.HoloSelector;
 
 /**
@@ -43,19 +42,12 @@ public class PlayPauseButton extends ImageButton implements OnClickListener, OnL
     private static final String PAUSE = "btn_playback_pause";
 
     /**
-     * The resources to use.
-     */
-    private final ThemeUtils mResources;
-
-    /**
      * @param context The {@link Context} to use
      * @param attrs The attributes of the XML tag that is inflating the view.
      */
     @SuppressWarnings("deprecation")
     public PlayPauseButton(final Context context, final AttributeSet attrs) {
         super(context, attrs);
-        // Initialze the theme resources
-        mResources = new ThemeUtils(context);
         // Theme the selector
         setBackgroundDrawable(new HoloSelector(context));
         // Control playback (play/pause)
@@ -92,10 +84,10 @@ public class PlayPauseButton extends ImageButton implements OnClickListener, OnL
     public void updateState() {
         if (MusicUtils.isPlaying()) {
             setContentDescription(getResources().getString(R.string.accessibility_pause));
-            setImageDrawable(mResources.getDrawable(PAUSE));
+            setImageDrawable(getResources().getDrawable(R.drawable.btn_playback_pause));
         } else {
             setContentDescription(getResources().getString(R.string.accessibility_play));
-            setImageDrawable(mResources.getDrawable(PLAY));
+            setImageDrawable(getResources().getDrawable(R.drawable.btn_playback_play));
         }
     }
 

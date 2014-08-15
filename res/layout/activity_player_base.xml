@@ -14,8 +14,7 @@
   See the License for the specific language governing permissions and
   limitations under the License.
 -->
-<com.cyngn.eleven.widgets.theme.ThemeableFrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res/com.cyngn.eleven"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent" >
 
@@ -47,24 +46,22 @@
                 android:paddingLeft="@dimen/audio_player_header_padding_left"
                 android:paddingRight="@dimen/audio_player_header_padding_right" >
 
-                <com.cyngn.eleven.widgets.theme.ThemeableTextView
+                <TextView
                     android:id="@+id/audio_player_track_name"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:ellipsize="end"
                     android:singleLine="true"
                     android:textSize="@dimen/text_size_medium"
-                    android:textStyle="bold"
-                    app:themeResource="audio_player_line_one" />
+                    android:textStyle="bold" />
 
-                <com.cyngn.eleven.widgets.theme.ThemeableTextView
+                <TextView
                     android:id="@+id/audio_player_artist_name"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:ellipsize="end"
                     android:singleLine="true"
-                    android:textSize="@dimen/text_size_medium"
-                    app:themeResource="audio_player_line_two" />
+                    android:textSize="@dimen/text_size_medium" />
             </LinearLayout>
 
             <FrameLayout
@@ -154,7 +151,7 @@
             </FrameLayout>
         </RelativeLayout>
 
-        <com.cyngn.eleven.widgets.theme.ThemeableTextView
+        <TextView
             android:id="@+id/audio_player_current_time"
             android:layout_width="@dimen/audio_player_time_width"
             android:layout_height="wrap_content"
@@ -162,10 +159,9 @@
             android:layout_alignParentLeft="true"
             android:layout_alignTop="@android:id/progress"
             android:gravity="center"
-            android:textSize="@dimen/text_size_micro"
-            app:themeResource="audio_player_current_time" />
+            android:textSize="@dimen/text_size_micro" />
 
-        <com.cyngn.eleven.widgets.theme.ThemeableTextView
+        <TextView
             android:id="@+id/audio_player_total_time"
             android:layout_width="@dimen/audio_player_time_width"
             android:layout_height="wrap_content"
@@ -173,10 +169,9 @@
             android:layout_alignParentRight="true"
             android:layout_alignTop="@android:id/progress"
             android:gravity="center"
-            android:textSize="@dimen/text_size_micro"
-            app:themeResource="audio_player_total_time" />
+            android:textSize="@dimen/text_size_micro" />
 
-        <com.cyngn.eleven.widgets.theme.ThemeableSeekBar
+        <SeekBar
             android:id="@android:id/progress"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -203,4 +198,4 @@
 
     <include layout="@layout/colorstrip" />
 
-</com.cyngn.eleven.widgets.theme.ThemeableFrameLayout>
+</FrameLayout>

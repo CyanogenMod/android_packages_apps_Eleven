@@ -36,7 +36,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.Window;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AbsListView;
 import android.widget.AbsListView.OnScrollListener;
@@ -60,7 +59,6 @@ import com.cyngn.eleven.utils.ApolloUtils;
 import com.cyngn.eleven.utils.MusicUtils;
 import com.cyngn.eleven.utils.MusicUtils.ServiceToken;
 import com.cyngn.eleven.utils.NavUtils;
-import com.cyngn.eleven.utils.ThemeUtils;
 
 import java.util.Locale;
 
@@ -100,22 +98,12 @@ public class SearchActivity extends Activity implements LoaderCallbacks<Cursor>,
     private SearchView mSearchView;
 
     /**
-     * Theme resources
-     */
-    private ThemeUtils mResources;
-
-    /**
      * {@inheritDoc}
      */
     @SuppressWarnings("deprecation")
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        // Initialze the theme resources
-        mResources = new ThemeUtils(this);
-        // Set the overflow style
-        mResources.setOverflowStyle(this);
 
         // Fade it in
         overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
@@ -128,7 +116,7 @@ public class SearchActivity extends Activity implements LoaderCallbacks<Cursor>,
 
         // Theme the action bar
         final ActionBar actionBar = getActionBar();
-        mResources.themeActionBar(actionBar, getString(R.string.app_name));
+        actionBar.setTitle(getString(R.string.app_name));
         actionBar.setDisplayHomeAsUpEnabled(true);
 
         // Set the layout
@@ -143,7 +131,7 @@ public class SearchActivity extends Activity implements LoaderCallbacks<Cursor>,
         mFilterString = !TextUtils.isEmpty(query) ? query : null;
 
         // Action bar subtitle
-        mResources.setSubtitle("\"" + mFilterString + "\"");
+        getActionBar().setSubtitle("\"" + mFilterString + "\"");
 
         // Initialize the adapter
         mAdapter = new SearchAdapter(this);
@@ -188,8 +176,6 @@ public class SearchActivity extends Activity implements LoaderCallbacks<Cursor>,
     public boolean onCreateOptionsMenu(final Menu menu) {
         // Search view
         getMenuInflater().inflate(R.menu.search, menu);
-        // Theme the search icon
-        mResources.setSearchIcon(menu);
 
         // Filter the list the user is looking it via SearchView
         mSearchView = (SearchView)menu.findItem(R.id.menu_search).getActionView();
@@ -324,7 +310,7 @@ public class SearchActivity extends Activity implements LoaderCallbacks<Cursor>,
             mSearchView.clearFocus();
         }
         // Action bar subtitle
-        mResources.setSubtitle("\"" + mFilterString + "\"");
+        getActionBar().setSubtitle("\"" + mFilterString + "\"");
         return true;
     }
 

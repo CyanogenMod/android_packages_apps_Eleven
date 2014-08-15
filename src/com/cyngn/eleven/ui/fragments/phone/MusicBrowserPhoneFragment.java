@@ -31,7 +31,6 @@ import com.cyngn.eleven.utils.MusicUtils;
 import com.cyngn.eleven.utils.NavUtils;
 import com.cyngn.eleven.utils.PreferenceUtils;
 import com.cyngn.eleven.utils.SortOrder;
-import com.cyngn.eleven.utils.ThemeUtils;
 import com.viewpagerindicator.TitlePageIndicator;
 import com.viewpagerindicator.TitlePageIndicator.OnCenterItemClickListener;
 
@@ -59,11 +58,6 @@ public class MusicBrowserPhoneFragment extends Fragment implements
      * VP's adapter
      */
     private PagerAdapter mPagerAdapter;
-
-    /**
-     * Theme resources
-     */
-    private ThemeUtils mResources;
 
     private PreferenceUtils mPreferences;
 
@@ -125,8 +119,6 @@ public class MusicBrowserPhoneFragment extends Fragment implements
     @Override
     public void onActivityCreated(final Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        // Initialze the theme resources
-        mResources = new ThemeUtils(getActivity());
         // Enable the options menu
         setHasOptionsMenu(true);
     }
@@ -147,7 +139,6 @@ public class MusicBrowserPhoneFragment extends Fragment implements
     @Override
     public void onPrepareOptionsMenu(final Menu menu) {
         super.onPrepareOptionsMenu(menu);
-        mResources.setFavoriteIcon(menu);
     }
 
     /**

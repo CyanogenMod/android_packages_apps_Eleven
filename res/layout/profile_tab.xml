@@ -58,7 +58,7 @@
             android:layout_alignParentLeft="true"
             android:background="@color/transparent_black" />
 
-        <com.cyngn.eleven.widgets.theme.Colorstrip
+        <View
             android:id="@+id/profile_tab_colorstrip"
             android:layout_width="match_parent"
             android:layout_height="@dimen/profile_indicator_height"

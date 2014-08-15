@@ -23,7 +23,6 @@ import android.widget.ImageButton;
 import com.cyngn.eleven.R;
 import com.cyngn.eleven.utils.ApolloUtils;
 import com.cyngn.eleven.utils.MusicUtils;
-import com.cyngn.eleven.utils.ThemeUtils;
 import com.cyngn.eleven.widgets.theme.HoloSelector;
 
 /**
@@ -45,11 +44,6 @@ public class RepeatingImageButton extends ImageButton implements OnClickListener
 
     private static final long sInterval = 400;
 
-    /**
-     * The resources to use.
-     */
-    private final ThemeUtils mResources;
-
     private long mStartTime;
 
     private int mRepeatCount;
@@ -63,8 +57,6 @@ public class RepeatingImageButton extends ImageButton implements OnClickListener
     @SuppressWarnings("deprecation")
     public RepeatingImageButton(final Context context, final AttributeSet attrs) {
         super(context, attrs);
-        // Initialze the theme resources
-        mResources = new ThemeUtils(context);
         // Theme the selector
         setBackgroundDrawable(new HoloSelector(context));
         setFocusable(true);
@@ -193,10 +185,10 @@ public class RepeatingImageButton extends ImageButton implements OnClickListener
     public void updateState() {
         switch (getId()) {
             case R.id.action_button_next:
-                setImageDrawable(mResources.getDrawable(NEXT));
+                setImageDrawable(getResources().getDrawable(R.drawable.btn_playback_next));
                 break;
             case R.id.action_button_previous:
-                setImageDrawable(mResources.getDrawable(PREVIOUS));
+                setImageDrawable(getResources().getDrawable(R.drawable.btn_playback_previous));
                 break;
             default:
                 break;
