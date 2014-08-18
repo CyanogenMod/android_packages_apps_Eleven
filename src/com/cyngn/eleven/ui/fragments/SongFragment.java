@@ -12,6 +12,7 @@
 package com.cyngn.eleven.ui.fragments;
 
 import android.app.Activity;
+import android.content.Context;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.os.SystemClock;
@@ -42,9 +43,13 @@ import com.cyngn.eleven.menu.FragmentMenuItems;
 import com.cyngn.eleven.model.Song;
 import com.cyngn.eleven.provider.FavoritesStore;
 import com.cyngn.eleven.recycler.RecycleHolder;
+import com.cyngn.eleven.sectionadapter.SectionAdapter;
+import com.cyngn.eleven.sectionadapter.SectionCreator;
+import com.cyngn.eleven.sectionadapter.SectionListContainer;
 import com.cyngn.eleven.ui.activities.BaseActivity;
 import com.cyngn.eleven.utils.MusicUtils;
 import com.cyngn.eleven.utils.NavUtils;
+import com.cyngn.eleven.utils.SectionCreatorUtils;
 import com.viewpagerindicator.TitlePageIndicator;
 
 import java.util.List;
@@ -54,7 +59,7 @@ import java.util.List;
  * 
  * @author Andrew Neal (andrewdneal@gmail.com)
  */
-public class SongFragment extends Fragment implements LoaderCallbacks<List<Song>>,
+public class SongFragment extends Fragment implements LoaderCallbacks<SectionListContainer<Song>>,
         OnItemClickListener, MusicStateListener {
 
     /**
@@ -75,7 +80,7 @@ public class SongFragment extends Fragment implements LoaderCallbacks<List<Song>
     /**
      * The adapter for the list
      */
-    private SongAdapter mAdapter;
+    private SectionAdapter<Song, SongAdapter> mAdapter;
 
     /**
      * The list view
@@ -130,7 +135,7 @@ public class SongFragment extends Fragment implements LoaderCallbacks<List<Song>
     public void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         // Create the adpater
-        mAdapter = new SongAdapter(getActivity(), R.layout.list_item_simple);
+        mAdapter = new SectionAdapter<Song, SongAdapter>(getActivity(), new SongAdapter(getActivity(), R.layout.list_item_simple));
     }
 
     /**
@@ -177,7 +182,7 @@ public class SongFragment extends Fragment implements LoaderCallbacks<List<Song>
         final AdapterContextMenuInfo info = (AdapterContextMenuInfo)menuInfo;
         mSelectedPosition = info.position;
         // Creat a new song
-        mSong = mAdapter.getItem(mSelectedPosition);
+        mSong = mAdapter.getTItem(mSelectedPosition);
         mSelectedId = mSong.mSongId;
         mSongName = mSong.mSongName;
         mAlbumName = mSong.mAlbumName;
@@ -272,9 +277,10 @@ public class SongFragment extends Fragment implements LoaderCallbacks<List<Song>
     @Override
     public void onItemClick(final AdapterView<?> parent, final View view, final int position,
             final long id) {
+        int internalPosition = mAdapter.getInternalPosition(position);
         Cursor cursor = SongLoader.makeSongCursor(getActivity());
         final long[] list = MusicUtils.getSongListForCursor(cursor);
-        MusicUtils.playAll(getActivity(), list, position, false);
+        MusicUtils.playAll(getActivity(), list, internalPosition, false);
         cursor.close();
         cursor = null;
     }
@@ -283,17 +289,27 @@ public class SongFragment extends Fragment implements LoaderCallbacks<List<Song>
      * {@inheritDoc}
      */
     @Override
-    public Loader<List<Song>> onCreateLoader(final int id, final Bundle args) {
-        return new SongLoader(getActivity());
+    public Loader<SectionListContainer<Song>> onCreateLoader(final int id, final Bundle args) {
+        // get the context
+        Context context = getActivity();
+
+        // create the underlying song loader
+        SongLoader songLoader = new SongLoader(context);
+
+        // get the song comparison method to create the headers with
+        SectionCreatorUtils.IItemCompare<Song> songComparison = SectionCreatorUtils.createSongComparison(context);
+
+        // return the wrapped section creator
+        return new SectionCreator<Song>(context, songLoader, songComparison);
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public void onLoadFinished(final Loader<List<Song>> loader, final List<Song> data) {
+    public void onLoadFinished(final Loader<SectionListContainer<Song>> loader, final SectionListContainer<Song> data) {
         // Check for any errors
-        if (data.isEmpty()) {
+        if (data.mListResults.isEmpty()) {
             // Set the empty text
             final TextView empty = (TextView)mRootView.findViewById(R.id.empty);
             empty.setText(getString(R.string.empty_music));
@@ -301,21 +317,15 @@ public class SongFragment extends Fragment implements LoaderCallbacks<List<Song>
             return;
         }
 
-        // Start fresh
-        mAdapter.unload();
-        // Add the data to the adpater
-        for (final Song song : data) {
-            mAdapter.add(song);
-        }
-        // Build the cache
-        mAdapter.buildCache();
+        // Set the data
+        mAdapter.setData(data);
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public void onLoaderReset(final Loader<List<Song>> loader) {
+    public void onLoaderReset(final Loader<SectionListContainer<Song>> loader) {
         // Clear the data in the adapter
         mAdapter.unload();
     }
@@ -342,7 +352,7 @@ public class SongFragment extends Fragment implements LoaderCallbacks<List<Song>
             return 0;
         }
         for (int i = 0; i < mAdapter.getCount(); i++) {
-            if (mAdapter.getItem(i).mSongId == trackId) {
+            if (mAdapter.getTItem(i).mSongId == trackId) {
                 return i;
             }
         }

@@ -18,6 +18,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 
 import com.cyngn.eleven.model.Song;
+import com.cyngn.eleven.sectionadapter.SectionAdapter;
 import com.cyngn.eleven.ui.MusicHolder;
 import com.cyngn.eleven.ui.MusicHolder.DataHolder;
 import com.cyngn.eleven.ui.fragments.QueueFragment;
@@ -31,7 +32,7 @@ import com.cyngn.eleven.utils.MusicUtils;
  * 
  * @author Andrew Neal (andrewdneal@gmail.com)
  */
-public class SongAdapter extends ArrayAdapter<Song> {
+public class SongAdapter extends ArrayAdapter<Song> implements SectionAdapter.BasicAdapter {
 
     /**
      * Number of views (TextView)
@@ -137,4 +138,9 @@ public class SongAdapter extends ArrayAdapter<Song> {
         mData = null;
     }
 
+    /**
+     * Do nothing.
+     */
+    public void flush() {
+    }
 }

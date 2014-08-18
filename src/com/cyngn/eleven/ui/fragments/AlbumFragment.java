@@ -19,7 +19,6 @@ import android.os.SystemClock;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.LoaderManager.LoaderCallbacks;
 import android.support.v4.content.Loader;
-import android.text.TextUtils;
 import android.view.ContextMenu;
 import android.view.ContextMenu.ContextMenuInfo;
 import android.view.LayoutInflater;
@@ -37,7 +36,6 @@ import android.widget.GridView;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import com.cyngn.eleven.Config;
 import com.cyngn.eleven.MusicStateListener;
 import com.cyngn.eleven.R;
 import com.cyngn.eleven.adapters.AlbumAdapter;
@@ -48,21 +46,23 @@ import com.cyngn.eleven.menu.DeleteDialog;
 import com.cyngn.eleven.menu.FragmentMenuItems;
 import com.cyngn.eleven.model.Album;
 import com.cyngn.eleven.recycler.RecycleHolder;
+import com.cyngn.eleven.sectionadapter.SectionAdapter;
+import com.cyngn.eleven.sectionadapter.SectionCreator;
+import com.cyngn.eleven.sectionadapter.SectionListContainer;
 import com.cyngn.eleven.ui.activities.BaseActivity;
 import com.cyngn.eleven.utils.ApolloUtils;
 import com.cyngn.eleven.utils.MusicUtils;
 import com.cyngn.eleven.utils.NavUtils;
 import com.cyngn.eleven.utils.PreferenceUtils;
+import com.cyngn.eleven.utils.SectionCreatorUtils;
 import com.viewpagerindicator.TitlePageIndicator;
-
-import java.util.List;
 
 /**
  * This class is used to display all of the albums on a user's device.
  * 
  * @author Andrew Neal (andrewdneal@gmail.com)
  */
-public class AlbumFragment extends Fragment implements LoaderCallbacks<List<Album>>,
+public class AlbumFragment extends Fragment implements LoaderCallbacks<SectionListContainer<Album>>,
         OnScrollListener, OnItemClickListener, MusicStateListener {
 
     /**
@@ -88,7 +88,7 @@ public class AlbumFragment extends Fragment implements LoaderCallbacks<List<Albu
     /**
      * The adapter for the grid
      */
-    private AlbumAdapter mAdapter;
+    private SectionAdapter<Album, AlbumAdapter> mAdapter;
 
     /**
      * The grid view
@@ -139,7 +139,9 @@ public class AlbumFragment extends Fragment implements LoaderCallbacks<List<Albu
         } else {
             layout = R.layout.grid_items_normal;
         }
-        mAdapter = new AlbumAdapter(getActivity(), layout);
+
+        AlbumAdapter adapter = new AlbumAdapter(getActivity(), layout);
+        mAdapter = new SectionAdapter<Album, AlbumAdapter>(getActivity(), adapter);
     }
 
     /**
@@ -191,7 +193,7 @@ public class AlbumFragment extends Fragment implements LoaderCallbacks<List<Albu
         // Get the position of the selected item
         final AdapterContextMenuInfo info = (AdapterContextMenuInfo)menuInfo;
         // Create a new album
-        mAlbum = mAdapter.getItem(info.position);
+        mAlbum = mAdapter.getTItem(info.position);
         // Create a list of the album's songs
         mAlbumList = MusicUtils.getSongListForAlbum(getActivity(), mAlbum.mAlbumId);
 
@@ -264,9 +266,9 @@ public class AlbumFragment extends Fragment implements LoaderCallbacks<List<Albu
         // Pause disk cache access to ensure smoother scrolling
         if (scrollState == AbsListView.OnScrollListener.SCROLL_STATE_FLING
                 || scrollState == AbsListView.OnScrollListener.SCROLL_STATE_TOUCH_SCROLL) {
-            mAdapter.setPauseDiskCache(true);
+            mAdapter.getUnderlyingAdapter().setPauseDiskCache(true);
         } else {
-            mAdapter.setPauseDiskCache(false);
+            mAdapter.getUnderlyingAdapter().setPauseDiskCache(false);
             mAdapter.notifyDataSetChanged();
         }
     }
@@ -277,7 +279,7 @@ public class AlbumFragment extends Fragment implements LoaderCallbacks<List<Albu
     @Override
     public void onItemClick(final AdapterView<?> parent, final View view, final int position,
             final long id) {
-        mAlbum = mAdapter.getItem(position);
+        mAlbum = mAdapter.getTItem(position);
         NavUtils.openAlbumProfile(getActivity(), mAlbum.mAlbumName, mAlbum.mArtistName, mAlbum.mAlbumId);
     }
 
@@ -285,17 +287,25 @@ public class AlbumFragment extends Fragment implements LoaderCallbacks<List<Albu
      * {@inheritDoc}
      */
     @Override
-    public Loader<List<Album>> onCreateLoader(final int id, final Bundle args) {
-        return new AlbumLoader(getActivity());
+    public Loader<SectionListContainer<Album>> onCreateLoader(final int id, final Bundle args) {
+        // only show section headers in the simple and detailed layout
+        SectionCreatorUtils.IItemCompare<Album> comparator = null;
+
+        if (isSimpleLayout() || isDetailedLayout()) {
+            comparator = SectionCreatorUtils.createAlbumComparison(getActivity());
+        }
+
+        return new SectionCreator<Album>(getActivity(), new AlbumLoader(getActivity()), comparator);
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public void onLoadFinished(final Loader<List<Album>> loader, final List<Album> data) {
+    public void onLoadFinished(final Loader<SectionListContainer<Album>> loader,
+                               final SectionListContainer<Album> data) {
         // Check for any errors
-        if (data.isEmpty()) {
+        if (data.mListResults.isEmpty()) {
             // Set the empty text
             final TextView empty = (TextView)mRootView.findViewById(R.id.empty);
             empty.setText(getString(R.string.empty_music));
@@ -307,21 +317,15 @@ public class AlbumFragment extends Fragment implements LoaderCallbacks<List<Albu
             return;
         }
 
-        // Start fresh
-        mAdapter.unload();
-        // Add the data to the adpater
-        for (final Album album : data) {
-            mAdapter.add(album);
-        }
-        // Build the cache
-        mAdapter.buildCache();
+        // Set the data
+        mAdapter.setData(data);
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public void onLoaderReset(final Loader<List<Album>> loader) {
+    public void onLoaderReset(final Loader<SectionListContainer<Album>> loader) {
         // Clear the data in the adapter
         mAdapter.unload();
     }
@@ -352,7 +356,7 @@ public class AlbumFragment extends Fragment implements LoaderCallbacks<List<Albu
             return 0;
         }
         for (int i = 0; i < mAdapter.getCount(); i++) {
-            if (mAdapter.getItem(i).mAlbumId == albumId) {
+            if (mAdapter.getTItem(i).mAlbumId == albumId) {
                 return i;
             }
         }
@@ -423,7 +427,7 @@ public class AlbumFragment extends Fragment implements LoaderCallbacks<List<Albu
         mListView.setAdapter(mAdapter);
         // Set up the helpers
         initAbsListView(mListView);
-        mAdapter.setTouchPlay(true);
+        mAdapter.getUnderlyingAdapter().setTouchPlay(true);
     }
 
     /**
@@ -438,14 +442,14 @@ public class AlbumFragment extends Fragment implements LoaderCallbacks<List<Albu
         initAbsListView(mGridView);
         if (ApolloUtils.isLandscape(getActivity())) {
             if (isDetailedLayout()) {
-                mAdapter.setLoadExtraData(true);
+                mAdapter.getUnderlyingAdapter().setLoadExtraData(true);
                 mGridView.setNumColumns(TWO);
             } else {
                 mGridView.setNumColumns(FOUR);
             }
         } else {
             if (isDetailedLayout()) {
-                mAdapter.setLoadExtraData(true);
+                mAdapter.getUnderlyingAdapter().setLoadExtraData(true);
                 mGridView.setNumColumns(ONE);
             } else {
                 mGridView.setNumColumns(TWO);

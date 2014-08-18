@@ -76,7 +76,7 @@ public class FavoritesLoader extends WrappedAsyncTaskLoader<List<Song>> {
                         .getColumnIndexOrThrow(FavoriteColumns.ALBUMNAME));
 
                 // Create a new song
-                final Song song = new Song(id, songName, artist, album, -1);
+                final Song song = new Song(id, songName, artist, album, -1, -1);
 
                 // Add everything up
                 mSongList.add(song);

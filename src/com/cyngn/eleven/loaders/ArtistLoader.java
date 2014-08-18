@@ -19,6 +19,7 @@ import android.provider.MediaStore.Audio.ArtistColumns;
 
 import com.cyngn.eleven.R;
 import com.cyngn.eleven.model.Artist;
+import com.cyngn.eleven.sectionadapter.SectionCreator;
 import com.cyngn.eleven.utils.Lists;
 import com.cyngn.eleven.utils.PreferenceUtils;
 
@@ -31,7 +32,7 @@ import java.util.List;
  * 
  * @author Andrew Neal (andrewdneal@gmail.com)
  */
-public class ArtistLoader extends WrappedAsyncTaskLoader<List<Artist>> {
+public class ArtistLoader extends SectionCreator.SimpleListLoader<Artist> {
 
     /**
      * The result

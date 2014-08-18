@@ -46,6 +46,11 @@ public class Song {
     public int mDuration;
 
     /**
+     * The year the song was recorded
+     */
+    public int mYear;
+
+    /**
      * Constructor of <code>Song</code>
      * 
      * @param songId The Id of the song
@@ -53,14 +58,16 @@ public class Song {
      * @param artistName The song artist
      * @param albumName The song album
      * @param duration The duration of a song in seconds
+     * @param year The year the song was recorded
      */
     public Song(final long songId, final String songName, final String artistName,
-            final String albumName, final int duration) {
+            final String albumName, final int duration, final int year) {
         mSongId = songId;
         mSongName = songName;
         mArtistName = artistName;
         mAlbumName = albumName;
         mDuration = duration;
+        mYear = year;
     }
 
     /**
@@ -75,6 +82,7 @@ public class Song {
         result = prime * result + mDuration;
         result = prime * result + (int) mSongId;
         result = prime * result + (mSongName == null ? 0 : mSongName.hashCode());
+        result = prime * result + mYear;
         return result;
     }
 
@@ -108,6 +116,11 @@ public class Song {
         if (!TextUtils.equals(mSongName, other.mSongName)) {
             return false;
         }
+
+        if (mYear != other.mYear) {
+            return false;
+        }
+
         return true;
     }
 

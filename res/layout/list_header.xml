@@ -15,11 +15,11 @@
   limitations under the License.
 -->
 <TextView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/header"
     android:layout_width="match_parent"
     android:layout_height="32.0dip"
     android:background="@null"
     android:gravity="center_vertical"
     android:paddingLeft="10.0dip"
-    android:textAllCaps="true"
     android:textColor="@color/white"
     android:textSize="@dimen/text_size_medium" />

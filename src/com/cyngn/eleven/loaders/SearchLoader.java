@@ -93,7 +93,7 @@ public class SearchLoader extends WrappedAsyncTaskLoader<List<Song>> {
                 }
 
                 // Create a new song
-                final Song song = new Song(id, songName, artist, album, -1);
+                final Song song = new Song(id, songName, artist, album, -1, -1);
 
                 // Add everything up
                 mSongList.add(song);

@@ -20,10 +20,10 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 
-import com.cyngn.eleven.Config;
 import com.cyngn.eleven.R;
 import com.cyngn.eleven.cache.ImageFetcher;
 import com.cyngn.eleven.model.Album;
+import com.cyngn.eleven.sectionadapter.SectionAdapter;
 import com.cyngn.eleven.ui.MusicHolder;
 import com.cyngn.eleven.ui.MusicHolder.DataHolder;
 import com.cyngn.eleven.utils.ApolloUtils;
@@ -35,7 +35,7 @@ import com.cyngn.eleven.utils.MusicUtils;
  * 
  * @author Andrew Neal (andrewdneal@gmail.com)
  */
-public class AlbumAdapter extends ArrayAdapter<Album> {
+public class AlbumAdapter extends ArrayAdapter<Album> implements SectionAdapter.BasicAdapter {
 
     /**
      * Number of views (ImageView and TextView)

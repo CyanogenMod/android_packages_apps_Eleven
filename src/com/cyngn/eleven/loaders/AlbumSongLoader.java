@@ -86,8 +86,11 @@ public class AlbumSongLoader extends WrappedAsyncTaskLoader<List<Song>> {
                 // Make the duration label
                 final int seconds = (int) (duration / 1000);
 
+                // Grab the Song Year
+                final int year = mCursor.getInt(5);
+
                 // Create a new song
-                final Song song = new Song(id, songName, artist, album, seconds);
+                final Song song = new Song(id, songName, artist, album, seconds, year);
 
                 // Add everything up
                 mSongList.add(song);
@@ -123,7 +126,9 @@ public class AlbumSongLoader extends WrappedAsyncTaskLoader<List<Song>> {
                         /* 3 */
                         AudioColumns.ALBUM,
                         /* 4 */
-                        AudioColumns.DURATION
+                        AudioColumns.DURATION,
+                        /* 5 */
+                        AudioColumns.YEAR,
                 }, selection.toString(), null,
                 PreferenceUtils.getInstance(context).getAlbumSongSortOrder());
     }

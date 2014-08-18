@@ -23,6 +23,7 @@ import android.widget.ImageView;
 import com.cyngn.eleven.R;
 import com.cyngn.eleven.cache.ImageFetcher;
 import com.cyngn.eleven.model.Artist;
+import com.cyngn.eleven.sectionadapter.SectionAdapter;
 import com.cyngn.eleven.ui.MusicHolder;
 import com.cyngn.eleven.ui.MusicHolder.DataHolder;
 import com.cyngn.eleven.utils.ApolloUtils;
@@ -37,7 +38,7 @@ import com.cyngn.eleven.utils.MusicUtils;
 /**
  * @author Andrew Neal (andrewdneal@gmail.com)
  */
-public class ArtistAdapter extends ArrayAdapter<Artist> {
+public class ArtistAdapter extends ArrayAdapter<Artist> implements SectionAdapter.BasicAdapter {
 
     /**
      * Number of views (ImageView and TextView)

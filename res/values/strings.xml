@@ -170,4 +170,25 @@
     <string name="empty_favorite">Songs you mark as favorites will be shown here.</string>
     <string name="empty_recent">Albums you have listened to will show up here. Try playing some music.</string>
 
+    <!-- Section Headers -->
+    <string name="header_unknown_year">Unknown Year</string>
+    <string name="header_less_than_30s">Less than 30s</string>
+    <string name="header_30_to_60_seconds">30 - 60 seconds</string>
+    <string name="header_1_to_2_minutes">1 - 2 minutes</string>
+    <string name="header_2_to_3_minutes">2 - 3 minutes</string>
+    <string name="header_3_to_4_minutes">3 - 4 minutes</string>
+    <string name="header_4_to_5_minutes">4 - 5 minutes</string>
+    <string name="header_5_to_10_minutes">5 - 10 minutes</string>
+    <string name="header_10_to_30_minutes">10 - 30 minutes</string>
+    <string name="header_30_to_60_minutes">30 - 60 minutes</string>
+    <string name="header_greater_than_60_minutes">More than 60 minutes</string>
+
+    <string name="header_1_song">1 Song</string>
+    <string name="header_2_to_4_songs">2 - 4 Songs</string>
+    <string name="header_5_to_9_songs">5 - 9 Songs</string>
+    <string name="header_10_plus_songs">10+ Songs</string>
+
+    <string name="header_1_album">1 Album</string>
+    <string name="header_n_albums"><xliff:g id="number">%d</xliff:g> Albums</string>
+    <string name="header_5_plus_albums">5+ Albums</string>
 </resources>

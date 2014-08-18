@@ -83,8 +83,11 @@ public class GenreSongLoader extends WrappedAsyncTaskLoader<List<Song>> {
                 // Convert the duration into seconds
                 final int durationInSecs = (int) duration / 1000;
 
+                // Grab the Song Year
+                final int year = mCursor.getInt(5);
+
                 // Create a new song
-                final Song song = new Song(id, songName, artist, album, durationInSecs);
+                final Song song = new Song(id, songName, artist, album, durationInSecs, year);
 
                 // Add everything up
                 mSongList.add(song);
@@ -119,7 +122,9 @@ public class GenreSongLoader extends WrappedAsyncTaskLoader<List<Song>> {
                         /* 3 */
                         MediaStore.Audio.Genres.Members.ARTIST,
                         /* 4 */
-                        MediaStore.Audio.Genres.Members.DURATION
+                        MediaStore.Audio.Genres.Members.DURATION,
+                        /* 5 */
+                        MediaStore.Audio.Genres.Members.YEAR,
                 }, selection.toString(), null, MediaStore.Audio.Genres.Members.DEFAULT_SORT_ORDER);
     }
 }

@@ -7,12 +7,12 @@ LOCAL_SRC_FILES := src/com/cyngn/eleven/IElevenService.aidl
 LOCAL_SRC_FILES += $(call all-java-files-under, src)
 
 LOCAL_STATIC_JAVA_LIBRARIES := \
-    android-support-v4
+    android-support-v4 \
+    android-common
 
 LOCAL_PACKAGE_NAME := Eleven
 LOCAL_OVERRIDES_PACKAGES := Music
 
-LOCAL_SDK_VERSION := current
 LOCAL_PROGUARD_ENABLED := disabled
 
 include $(BUILD_PACKAGE)

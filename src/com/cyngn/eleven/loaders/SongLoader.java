@@ -18,6 +18,7 @@ import android.provider.MediaStore;
 import android.provider.MediaStore.Audio.AudioColumns;
 
 import com.cyngn.eleven.model.Song;
+import com.cyngn.eleven.sectionadapter.SectionCreator;
 import com.cyngn.eleven.utils.Lists;
 import com.cyngn.eleven.utils.PreferenceUtils;
 
@@ -30,7 +31,7 @@ import java.util.List;
  * 
  * @author Andrew Neal (andrewdneal@gmail.com)
  */
-public class SongLoader extends WrappedAsyncTaskLoader<List<Song>> {
+public class SongLoader extends SectionCreator.SimpleListLoader<Song> {
 
     /**
      * The result
@@ -79,8 +80,11 @@ public class SongLoader extends WrappedAsyncTaskLoader<List<Song>> {
                 // Convert the duration into seconds
                 final int durationInSecs = (int) duration / 1000;
 
+                // Copy the Year
+                final int year = mCursor.getInt(5);
+
                 // Create a new song
-                final Song song = new Song(id, songName, artist, album, durationInSecs);
+                final Song song = new Song(id, songName, artist, album, durationInSecs, year);
 
                 // Add everything up
                 mSongList.add(song);
@@ -115,7 +119,9 @@ public class SongLoader extends WrappedAsyncTaskLoader<List<Song>> {
                         /* 3 */
                         AudioColumns.ALBUM,
                         /* 4 */
-                        AudioColumns.DURATION
+                        AudioColumns.DURATION,
+                        /* 5 */
+                        AudioColumns.YEAR,
                 }, mSelection.toString(), null,
                 PreferenceUtils.getInstance(context).getSongSortOrder());
     }

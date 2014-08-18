@@ -73,6 +73,8 @@ public final class MusicUtils {
 
     private static ContentValues[] mContentValuesCache = null;
 
+    private static final int MIN_VALID_YEAR = 1900; // used to remove invalid years from metadata
+
     static {
         mConnectionMap = new WeakHashMap<Context, ServiceBinder>();
         sEmptyList = new long[0];
@@ -1365,5 +1367,49 @@ public final class MusicUtils {
         context.getContentResolver().notifyChange(Uri.parse("content://media"), null);
         // Notify the lists to update
         refresh();
+    }
+
+    /**
+     * Simple function used to determine if the song/album year is invalid
+     * @param year value to test
+     * @return true if the app considers it valid
+     */
+    public static boolean isInvalidYear(int year) {
+        return year < MIN_VALID_YEAR;
+    }
+
+    /**
+     * A snippet is taken from MediaStore.Audio.keyFor method
+     * This will take a name, removes things like "the", "an", etc
+     * as well as special characters, then find the localized label
+     * @param name Name to get the label of
+     * @param trimName boolean flag to run the trimmer on the name
+     * @return the localized label of the bucket that the name falls into
+     */
+    public static String getLocalizedBucketLetter(String name, boolean trimName) {
+        if (trimName) {
+            name = name.trim().toLowerCase();
+            if (name.startsWith("the ")) {
+                name = name.substring(4);
+            }
+            if (name.startsWith("an ")) {
+                name = name.substring(3);
+            }
+            if (name.startsWith("a ")) {
+                name = name.substring(2);
+            }
+            if (name.endsWith(", the") || name.endsWith(",the") ||
+                    name.endsWith(", an") || name.endsWith(",an") ||
+                    name.endsWith(", a") || name.endsWith(",a")) {
+                name = name.substring(0, name.lastIndexOf(','));
+            }
+            name = name.replaceAll("[\\[\\]\\(\\)\"'.,?!]", "").trim();
+        }
+
+        if (name.length() > 0) {
+            return LocaleUtils.getInstance().getLabel(name);
+        }
+
+        return null;
     }
 }

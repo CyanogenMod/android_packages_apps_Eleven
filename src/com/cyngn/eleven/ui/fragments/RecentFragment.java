@@ -58,7 +58,7 @@ import java.util.List;
 /**
  * This class is used to display all of the recently listened to albums by the
  * user.
- * 
+ *
  * @author Andrew Neal (andrewdneal@gmail.com)
  */
 public class RecentFragment extends Fragment implements LoaderCallbacks<List<Album>>,
@@ -146,7 +146,7 @@ public class RecentFragment extends Fragment implements LoaderCallbacks<List<Alb
      */
     @Override
     public View onCreateView(final LayoutInflater inflater, final ViewGroup container,
-            final Bundle savedInstanceState) {
+                             final Bundle savedInstanceState) {
         // The View for the fragment's UI
         if (isSimpleLayout()) {
             mRootView = (ViewGroup)inflater.inflate(R.layout.list_base, null);
@@ -184,7 +184,7 @@ public class RecentFragment extends Fragment implements LoaderCallbacks<List<Alb
      */
     @Override
     public void onCreateContextMenu(final ContextMenu menu, final View v,
-            final ContextMenuInfo menuInfo) {
+                                    final ContextMenuInfo menuInfo) {
         super.onCreateContextMenu(menu, v, menuInfo);
 
         // Get the position of the selected item
@@ -284,7 +284,7 @@ public class RecentFragment extends Fragment implements LoaderCallbacks<List<Alb
      */
     @Override
     public void onItemClick(final AdapterView<?> parent, final View view, final int position,
-            final long id) {
+                            final long id) {
         mAlbum = mAdapter.getItem(position);
         NavUtils.openAlbumProfile(getActivity(), mAlbum.mAlbumName, mAlbum.mArtistName, mAlbum.mAlbumId);
     }
@@ -339,7 +339,7 @@ public class RecentFragment extends Fragment implements LoaderCallbacks<List<Alb
      */
     @Override
     public void onScroll(final AbsListView view, final int firstVisibleItem,
-            final int visibleItemCount, final int totalItemCount) {
+                         final int visibleItemCount, final int totalItemCount) {
         // Nothing to do
     }
 
@@ -365,7 +365,7 @@ public class RecentFragment extends Fragment implements LoaderCallbacks<List<Alb
 
     /**
      * Sets up various helpers for both the list and grid
-     * 
+     *
      * @param list The list or grid
      */
     private void initAbsListView(final AbsListView list) {

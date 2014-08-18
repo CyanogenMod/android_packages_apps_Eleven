@@ -19,8 +19,12 @@ import android.provider.MediaStore.Audio.AlbumColumns;
 
 import com.cyngn.eleven.R;
 import com.cyngn.eleven.model.Album;
+import com.cyngn.eleven.sectionadapter.SectionCreator;
 import com.cyngn.eleven.utils.Lists;
+import com.cyngn.eleven.utils.MusicUtils;
 import com.cyngn.eleven.utils.PreferenceUtils;
+import com.cyngn.eleven.utils.SectionCreatorUtils;
+import com.cyngn.eleven.utils.SortOrder;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -31,7 +35,7 @@ import java.util.List;
  * 
  * @author Andrew Neal (andrewdneal@gmail.com)
  */
-public class AlbumLoader extends WrappedAsyncTaskLoader<List<Album>> {
+public class AlbumLoader extends SectionCreator.SimpleListLoader<Album> {
 
     /**
      * The result
@@ -45,7 +49,7 @@ public class AlbumLoader extends WrappedAsyncTaskLoader<List<Album>> {
 
     /**
      * Constructor of <code>AlbumLoader</code>
-     * 
+     *
      * @param context The {@link Context} to use
      */
     public AlbumLoader(final Context context) {
@@ -89,6 +93,7 @@ public class AlbumLoader extends WrappedAsyncTaskLoader<List<Album>> {
             mCursor.close();
             mCursor = null;
         }
+
         return mAlbumsList;
     }
 

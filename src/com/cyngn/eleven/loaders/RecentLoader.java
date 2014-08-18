@@ -25,7 +25,7 @@ import java.util.List;
 
 /**
  * Used to query {@link RecentStore} and return the last listened to albums.
- * 
+ *
  * @author Andrew Neal (andrewdneal@gmail.com)
  */
 public class RecentLoader extends WrappedAsyncTaskLoader<List<Album>> {
@@ -42,7 +42,7 @@ public class RecentLoader extends WrappedAsyncTaskLoader<List<Album>> {
 
     /**
      * Constructor of <code>RecentLoader</code>
-     * 
+     *
      * @param context The {@link Context} to use
      */
     public RecentLoader(final Context context) {
@@ -96,7 +96,7 @@ public class RecentLoader extends WrappedAsyncTaskLoader<List<Album>> {
 
     /**
      * Creates the {@link Cursor} used to run the query.
-     * 
+     *
      * @param context The {@link Context} to use.
      * @return The {@link Cursor} used to run the album query.
      */

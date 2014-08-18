@@ -89,8 +89,12 @@ public class PlaylistSongLoader extends WrappedAsyncTaskLoader<List<Song>> {
                 // Convert the duration into seconds
                 final int durationInSecs = (int) duration / 1000;
 
+                // Grab the Song Year
+                final int year = mCursor.getInt(mCursor
+                        .getColumnIndexOrThrow(AudioColumns.YEAR));
+
                 // Create a new song
-                final Song song = new Song(id, songName, artist, album, durationInSecs);
+                final Song song = new Song(id, songName, artist, album, durationInSecs, year);
 
                 // Add everything up
                 mSongList.add(song);
@@ -129,7 +133,9 @@ public class PlaylistSongLoader extends WrappedAsyncTaskLoader<List<Song>> {
                         /* 4 */
                         AudioColumns.ALBUM,
                         /* 5 */
-                        AudioColumns.DURATION
+                        AudioColumns.DURATION,
+                        /* 6 */
+                        AudioColumns.YEAR,
                 }, mSelection.toString(), null,
                 MediaStore.Audio.Playlists.Members.DEFAULT_SORT_ORDER);
     }

@@ -45,11 +45,15 @@ import com.cyngn.eleven.menu.DeleteDialog;
 import com.cyngn.eleven.menu.FragmentMenuItems;
 import com.cyngn.eleven.model.Artist;
 import com.cyngn.eleven.recycler.RecycleHolder;
+import com.cyngn.eleven.sectionadapter.SectionAdapter;
+import com.cyngn.eleven.sectionadapter.SectionCreator;
+import com.cyngn.eleven.sectionadapter.SectionListContainer;
 import com.cyngn.eleven.ui.activities.BaseActivity;
 import com.cyngn.eleven.utils.ApolloUtils;
 import com.cyngn.eleven.utils.MusicUtils;
 import com.cyngn.eleven.utils.NavUtils;
 import com.cyngn.eleven.utils.PreferenceUtils;
+import com.cyngn.eleven.utils.SectionCreatorUtils;
 import com.viewpagerindicator.TitlePageIndicator;
 
 import java.util.List;
@@ -59,7 +63,7 @@ import java.util.List;
  * 
  * @author Andrew Neal (andrewdneal@gmail.com)
  */
-public class ArtistFragment extends Fragment implements LoaderCallbacks<List<Artist>>,
+public class ArtistFragment extends Fragment implements LoaderCallbacks<SectionListContainer<Artist>>,
         OnScrollListener, OnItemClickListener, MusicStateListener {
 
     /**
@@ -85,7 +89,7 @@ public class ArtistFragment extends Fragment implements LoaderCallbacks<List<Art
     /**
      * The adapter for the grid
      */
-    private ArtistAdapter mAdapter;
+    private SectionAdapter<Artist, ArtistAdapter> mAdapter;
 
     /**
      * The grid view
@@ -143,7 +147,9 @@ public class ArtistFragment extends Fragment implements LoaderCallbacks<List<Art
         } else {
             layout = R.layout.grid_items_normal;
         }
-        mAdapter = new ArtistAdapter(getActivity(), layout);
+
+        ArtistAdapter adapter = new ArtistAdapter(getActivity(), layout);
+        mAdapter = new SectionAdapter<Artist, ArtistAdapter>(getActivity(), adapter);
     }
 
     /**
@@ -195,7 +201,7 @@ public class ArtistFragment extends Fragment implements LoaderCallbacks<List<Art
         // Get the position of the selected item
         final AdapterContextMenuInfo info = (AdapterContextMenuInfo)menuInfo;
         // Creat a new model
-        mArtist = mAdapter.getItem(info.position);
+        mArtist = mAdapter.getTItem(info.position);
         // Create a list of the artist's songs
         mArtistList = MusicUtils.getSongListForArtist(getActivity(), mArtist.mArtistId);
 
@@ -260,9 +266,9 @@ public class ArtistFragment extends Fragment implements LoaderCallbacks<List<Art
         // Pause disk cache access to ensure smoother scrolling
         if (scrollState == AbsListView.OnScrollListener.SCROLL_STATE_FLING
                 || scrollState == AbsListView.OnScrollListener.SCROLL_STATE_TOUCH_SCROLL) {
-            mAdapter.setPauseDiskCache(true);
+            mAdapter.getUnderlyingAdapter().setPauseDiskCache(true);
         } else {
-            mAdapter.setPauseDiskCache(false);
+            mAdapter.getUnderlyingAdapter().setPauseDiskCache(false);
             mAdapter.notifyDataSetChanged();
         }
     }
@@ -273,7 +279,7 @@ public class ArtistFragment extends Fragment implements LoaderCallbacks<List<Art
     @Override
     public void onItemClick(final AdapterView<?> parent, final View view, final int position,
             final long id) {
-        mArtist = mAdapter.getItem(position);
+        mArtist = mAdapter.getTItem(position);
         NavUtils.openArtistProfile(getActivity(), mArtist.mArtistName);
     }
 
@@ -281,17 +287,25 @@ public class ArtistFragment extends Fragment implements LoaderCallbacks<List<Art
      * {@inheritDoc}
      */
     @Override
-    public Loader<List<Artist>> onCreateLoader(final int id, final Bundle args) {
-        return new ArtistLoader(getActivity());
+    public Loader<SectionListContainer<Artist>> onCreateLoader(final int id, final Bundle args) {
+        SectionCreatorUtils.IItemCompare<Artist> comparator = null;
+
+        // only show section headers in the simple and detailed layout
+        if (isSimpleLayout() || isDetailedLayout()) {
+            comparator = SectionCreatorUtils.createArtistComparison(getActivity());
+        }
+
+        return new SectionCreator<Artist>(getActivity(), new ArtistLoader(getActivity()), comparator);
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public void onLoadFinished(final Loader<List<Artist>> loader, final List<Artist> data) {
+    public void onLoadFinished(final Loader<SectionListContainer<Artist>> loader,
+                               final SectionListContainer<Artist> data) {
         // Check for any errors
-        if (data.isEmpty()) {
+        if (data.mListResults.isEmpty()) {
             // Set the empty text
             final TextView empty = (TextView)mRootView.findViewById(R.id.empty);
             empty.setText(getString(R.string.empty_music));
@@ -303,21 +317,15 @@ public class ArtistFragment extends Fragment implements LoaderCallbacks<List<Art
             return;
         }
 
-        // Start fresh
-        mAdapter.unload();
-        // Add the data to the adpater
-        for (final Artist artist : data) {
-            mAdapter.add(artist);
-        }
-        // Build the cache
-        mAdapter.buildCache();
+        // Set the data
+        mAdapter.setData(data);
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public void onLoaderReset(final Loader<List<Artist>> loader) {
+    public void onLoaderReset(final Loader<SectionListContainer<Artist>> loader) {
         // Clear the data in the adapter
         mAdapter.unload();
     }
@@ -348,7 +356,7 @@ public class ArtistFragment extends Fragment implements LoaderCallbacks<List<Art
             return 0;
         }
         for (int i = 0; i < mAdapter.getCount(); i++) {
-            if (mAdapter.getItem(i).mArtistId == artistId) {
+            if (mAdapter.getTItem(i).mArtistId == artistId) {
                 return i;
             }
         }
@@ -433,14 +441,14 @@ public class ArtistFragment extends Fragment implements LoaderCallbacks<List<Art
         initAbsListView(mGridView);
         if (ApolloUtils.isLandscape(getActivity())) {
             if (isDetailedLayout()) {
-                mAdapter.setLoadExtraData(true);
+                mAdapter.getUnderlyingAdapter().setLoadExtraData(true);
                 mGridView.setNumColumns(TWO);
             } else {
                 mGridView.setNumColumns(FOUR);
             }
         } else {
             if (isDetailedLayout()) {
-                mAdapter.setLoadExtraData(true);
+                mAdapter.getUnderlyingAdapter().setLoadExtraData(true);
                 mGridView.setNumColumns(ONE);
             } else {
                 mGridView.setNumColumns(TWO);
