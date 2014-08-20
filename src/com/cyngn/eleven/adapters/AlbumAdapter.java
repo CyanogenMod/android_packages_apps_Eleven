@@ -226,6 +226,22 @@ public class AlbumAdapter extends ArrayAdapter<Album> implements SectionAdapter.
     }
 
     /**
+     * Gets the item position for a given id
+     * @param id identifies the object
+     * @return the position if found, -1 otherwise
+     */
+    @Override
+    public int getItemPosition(long id) {
+        for (int i = 0; i < getCount(); i++) {
+            if (getItem(i).mAlbumId == id) {
+                return i;
+            }
+        }
+
+        return  -1;
+    }
+
+    /**
      * @param extra True to load line three and the background image, false
      *            otherwise.
      */

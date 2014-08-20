@@ -33,6 +33,7 @@ public class SectionAdapter<TItem,
         public void unload();
         public void buildCache();
         public void flush();
+        public int getItemPosition(long id);
     }
 
     /**
@@ -230,6 +231,26 @@ public class SectionAdapter<TItem,
     }
 
     /**
+     * Converts the underlaying adapter position to wrapped adapter position
+     * @param internalPosition the position of the underlying adapter
+     * @return the position of the wrapped adapter
+     */
+    public int getExternalPosition(int internalPosition) {
+        int externalPosition = internalPosition;
+        for (Integer sectionPosition : mSectionHeaders.keySet()) {
+            // because the section headers are tracking the 'merged' lists, we need to keep bumping
+            // our position for each found section header
+            if (sectionPosition <= externalPosition) {
+                externalPosition++;
+            } else {
+                break;
+            }
+        }
+
+        return externalPosition;
+    }
+
+    /**
      * Sets the data on the adapter
      * @param data data to set
      */
@@ -263,5 +284,19 @@ public class SectionAdapter<TItem,
     public void flush() {
         mUnderlyingAdapter.flush();
         notifyDataSetChanged();
+    }
+
+    /**
+     * Gets the item position for the given identifier
+     * @param identifier used to identify the object
+     * @return item position, or -1 if not found
+     */
+    public int getItemPosition(long identifier) {
+        int internalPosition = mUnderlyingAdapter.getItemPosition(identifier);
+        if (internalPosition >= 0) {
+            return getExternalPosition(internalPosition);
+        }
+
+        return -1;
     }
 }

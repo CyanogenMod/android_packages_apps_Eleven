@@ -355,12 +355,15 @@ public class ArtistFragment extends Fragment implements LoaderCallbacks<SectionL
         if (mAdapter == null) {
             return 0;
         }
-        for (int i = 0; i < mAdapter.getCount(); i++) {
-            if (mAdapter.getTItem(i).mArtistId == artistId) {
-                return i;
-            }
+
+        int position = mAdapter.getItemPosition(artistId);
+
+        // if for some reason we don't find the item, just jump to the top
+        if (position < 0) {
+            return 0;
         }
-        return 0;
+
+        return position;
     }
 
     /**

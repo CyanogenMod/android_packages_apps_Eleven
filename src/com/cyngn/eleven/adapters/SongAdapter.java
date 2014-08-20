@@ -143,4 +143,20 @@ public class SongAdapter extends ArrayAdapter<Song> implements SectionAdapter.Ba
      */
     public void flush() {
     }
+
+    /**
+     * Gets the item position for a given id
+     * @param id identifies the object
+     * @return the position if found, -1 otherwise
+     */
+    @Override
+    public int getItemPosition(long id) {
+        for (int i = 0; i < getCount(); i++) {
+            if (getItem(i).mSongId == id) {
+                return i;
+            }
+        }
+
+        return  -1;
+    }
 }
