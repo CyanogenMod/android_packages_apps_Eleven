@@ -43,11 +43,6 @@ public abstract class ImageWorker {
     private static final int FADE_IN_TIME = 200;
 
     /**
-     * Default artwork
-     */
-    private final BitmapDrawable mDefaultArtwork;
-
-    /**
      * The resources to use
      */
     private final Resources mResources;
@@ -88,10 +83,6 @@ public abstract class ImageWorker {
         // Create the default artwork
         final ThemeUtils theme = new ThemeUtils(context);
         mDefault = ((BitmapDrawable) theme.getDrawable("default_artwork")).getBitmap();
-        mDefaultArtwork = new BitmapDrawable(mResources, mDefault);
-        // No filter and no dither makes things much quicker
-        mDefaultArtwork.setFilterBitmap(false);
-        mDefaultArtwork.setDither(false);
         // Create the transparent layer for the transition drawable
         mCurrentDrawable = new ColorDrawable(mResources.getColor(R.color.transparent));
         // A transparent image (layer 0) and the new result (layer 1)
@@ -150,6 +141,18 @@ public abstract class ImageWorker {
     }
 
     /**
+     * @return A new bitmap drawable of the default artwork
+     */
+    public BitmapDrawable getNewDefaultBitmapDrawable() {
+        BitmapDrawable bitmapDrawable = new BitmapDrawable(mResources, mDefault);
+        // No filter and no dither makes things much quicker
+        bitmapDrawable.setFilterBitmap(false);
+        bitmapDrawable.setDither(false);
+
+        return bitmapDrawable;
+    }
+
+    /**
      * The actual {@link AsyncTask} that will process the image.
      */
     private final class BitmapWorkerTask extends AsyncTask<String, Void, TransitionDrawable> {
@@ -197,7 +200,6 @@ public abstract class ImageWorker {
          */
         @SuppressWarnings("deprecation")
         public BitmapWorkerTask(final ImageView imageView, final ImageType imageType) {
-            imageView.setBackgroundDrawable(mDefaultArtwork);
             mImageReference = new WeakReference<ImageView>(imageView);
             mImageType = imageType;
         }
@@ -385,24 +387,33 @@ public abstract class ImageWorker {
         if (key == null || mImageCache == null || imageView == null) {
             return;
         }
+
         // First, check the memory for the image
         final Bitmap lruBitmap = mImageCache.getBitmapFromMemCache(key);
         if (lruBitmap != null && imageView != null) {
             // Bitmap found in memory cache
             imageView.setImageBitmap(lruBitmap);
-        } else if (executePotentialWork(key, imageView)
-                && imageView != null && !mImageCache.isDiskCachePaused()) {
-            // Otherwise run the worker task
-            final BitmapWorkerTask bitmapWorkerTask = new BitmapWorkerTask(imageView, imageType);
-            final AsyncDrawable asyncDrawable = new AsyncDrawable(mResources, mDefault,
-                    bitmapWorkerTask);
-            imageView.setImageDrawable(asyncDrawable);
-            try {
-                ApolloUtils.execute(false, bitmapWorkerTask, key,
-                        artistName, albumName, String.valueOf(albumId));
-            } catch (RejectedExecutionException e) {
-                // Executor has exhausted queue space, show default artwork
-                imageView.setImageBitmap(getDefaultArtwork());
+        } else {
+            // if a background drawable hasn't been set, create one so that even if
+            // the disk cache is paused we see something
+            if (imageView.getBackground() == null) {
+                imageView.setBackgroundDrawable(getNewDefaultBitmapDrawable());
+            }
+
+            if (executePotentialWork(key, imageView)
+                    && imageView != null && !mImageCache.isDiskCachePaused()) {
+                // Otherwise run the worker task
+                final BitmapWorkerTask bitmapWorkerTask = new BitmapWorkerTask(imageView, imageType);
+                final AsyncDrawable asyncDrawable = new AsyncDrawable(mResources, mDefault,
+                        bitmapWorkerTask);
+                imageView.setImageDrawable(asyncDrawable);
+                try {
+                    ApolloUtils.execute(false, bitmapWorkerTask, key,
+                            artistName, albumName, String.valueOf(albumId));
+                } catch (RejectedExecutionException e) {
+                    // Executor has exhausted queue space, show default artwork
+                    imageView.setImageBitmap(getDefaultArtwork());
+                }
             }
         }
     }
