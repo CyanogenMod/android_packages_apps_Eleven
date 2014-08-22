@@ -61,7 +61,10 @@
         <!-- Main activity -->
         <activity
             android:name=".ui.activities.HomeActivity"
-            android:windowSoftInputMode="adjustPan" >
+            android:windowSoftInputMode="adjustPan"
+            android:launchMode="singleTask"
+            android:exported="true"
+            android:theme="@style/Eleven.Theme.ActionBar.Overlay">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <action android:name="android.intent.action.MUSIC_PLAYER" />
@@ -70,14 +73,7 @@
                 <category android:name="android.intent.category.APP_MUSIC" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
-        </activity>
-        <!-- Now playing -->
-        <activity
-            android:name=".ui.activities.AudioPlayerActivity"
-            android:clearTaskOnLaunch="true"
-            android:exported="true"
-            android:launchMode="singleTask"
-            android:windowSoftInputMode="adjustPan" >
+
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
 
@@ -169,7 +165,7 @@
         <activity
             android:name=".ui.activities.SettingsActivity"
             android:label="@string/menu_settings"
-            android:theme="@style/Apollo.Theme.Dark" />
+            android:theme="@style/Eleven.Theme" />
         <!-- Themes Activity -->
         <activity
             android:name=".ui.activities.ThemesActivity"

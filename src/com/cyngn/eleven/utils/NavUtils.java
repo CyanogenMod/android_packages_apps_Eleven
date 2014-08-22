@@ -22,7 +22,7 @@ import android.provider.MediaStore;
 import com.cyngn.eleven.Config;
 import com.cyngn.eleven.R;
 import com.cyngn.eleven.model.Album;
-import com.cyngn.eleven.ui.activities.AudioPlayerActivity;
+import com.cyngn.eleven.ui.fragments.AudioPlayerFragment;
 import com.cyngn.eleven.ui.activities.HomeActivity;
 import com.cyngn.eleven.ui.activities.ProfileActivity;
 import com.cyngn.eleven.ui.activities.SearchActivity;
@@ -109,17 +109,14 @@ public final class NavUtils {
     }
 
     /**
-     * Opens to {@link AudioPlayerActivity}.
+     * Opens to {@link AudioPlayerFragment}.
      * 
      * @param activity The {@link Activity} to use.
      */
     public static void openAudioPlayer(final Activity activity) {
-        final Intent intent = new Intent(activity, AudioPlayerActivity.class);
-        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
-        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        final Intent intent = new Intent(activity, HomeActivity.class);
+        intent.setAction(HomeActivity.ACTION_VIEW_MUSIC_PLAYER);
         activity.startActivity(intent);
-        activity.finish();
     }
 
     /**
@@ -143,9 +140,7 @@ public final class NavUtils {
      */
     public static void goHome(final Activity activity) {
         final Intent intent = new Intent(activity, HomeActivity.class);
-        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
-        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        intent.setAction(HomeActivity.ACTION_VIEW_BROWSE);
         activity.startActivity(intent);
         activity.finish();
     }

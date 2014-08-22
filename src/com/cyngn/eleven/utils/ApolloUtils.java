@@ -29,10 +29,13 @@ import android.os.AsyncTask;
 import android.os.Build;
 import android.provider.MediaStore;
 import android.util.Log;
+import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.ViewTreeObserver.OnGlobalLayoutListener;
 import android.webkit.WebView;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.cyngn.eleven.Config;
@@ -370,4 +373,19 @@ public final class ApolloUtils {
             v.setLayerType(View.LAYER_TYPE_SOFTWARE, null);
         }
    }
+
+    /**
+     * Gets the action bar height in pixels
+     * @param context
+     * @return action bar height in pixels
+     */
+    public static int getActionBarHeight(Context context) {
+        TypedValue tv = new TypedValue();
+        View view = new View(context);
+        if (context.getTheme().resolveAttribute(android.R.attr.actionBarSize, tv, true))  {
+            return TypedValue.complexToDimensionPixelSize(tv.data, context.getResources().getDisplayMetrics());
+        }
+
+        return 0;
+    }
 }

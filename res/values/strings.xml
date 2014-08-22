@@ -26,6 +26,8 @@
     <string name="page_songs">Songs</string>
     <string name="page_playlists">Playlists</string>
     <string name="page_genres">Genres</string>
+    <string name="page_now_playing">NOW PLAYING</string>
+    <string name="page_play_queue">PLAY QUEUE</string>
 
     <!-- Option menu items -->
     <string name="menu_settings">Settings</string>

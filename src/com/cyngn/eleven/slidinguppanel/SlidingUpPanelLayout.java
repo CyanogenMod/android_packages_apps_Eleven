@@ -83,6 +83,16 @@ public class SlidingUpPanelLayout extends ViewGroup {
     private static final int DEFAULT_PARALAX_OFFSET = 0;
 
     /**
+     * Default slide panel offset when collapsed
+     */
+    private static final int DEFAULT_SLIDE_PANEL_OFFSET = 0;
+
+    /**
+     * Default direct offset flag
+     */
+    private static final boolean DEFAULT_DIRECT_OFFSET_FLAG = false;
+
+    /**
      * The paint used to dim the main layout when sliding
      */
     private final Paint mCoveredFadePaint = new Paint();
@@ -98,6 +108,11 @@ public class SlidingUpPanelLayout extends ViewGroup {
     private int mPanelHeight = -1;
 
     /**
+     * Determines how much to slide the panel off when expanded
+     */
+    private int mSlidePanelOffset = 0;
+
+    /**
      * The size of the shadow in pixels.
      */
     private int mShadowHeight = -1;
@@ -106,6 +121,11 @@ public class SlidingUpPanelLayout extends ViewGroup {
      * Paralax offset
      */
     private int mParallaxOffset = -1;
+
+    /**
+     * Clamps the Main view to the slideable view
+     */
+    private boolean mDirectOffset = false;
 
     /**
      * True if the collapsed panel should be dragged up.
@@ -289,8 +309,10 @@ public class SlidingUpPanelLayout extends ViewGroup {
 
             if (ta != null) {
                 mPanelHeight = ta.getDimensionPixelSize(R.styleable.SlidingUpPanelLayout_panelHeight, -1);
+                mSlidePanelOffset = ta.getDimensionPixelSize(R.styleable.SlidingUpPanelLayout_slidePanelOffset, DEFAULT_SLIDE_PANEL_OFFSET);
                 mShadowHeight = ta.getDimensionPixelSize(R.styleable.SlidingUpPanelLayout_shadowHeight, -1);
                 mParallaxOffset = ta.getDimensionPixelSize(R.styleable.SlidingUpPanelLayout_paralaxOffset, -1);
+                mDirectOffset = ta.getBoolean(R.styleable.SlidingUpPanelLayout_directOffset,DEFAULT_DIRECT_OFFSET_FLAG);
 
                 mMinFlingVelocity = ta.getInt(R.styleable.SlidingUpPanelLayout_flingVelocity, DEFAULT_MIN_FLING_VELOCITY);
                 mCoveredFadeColor = ta.getColor(R.styleable.SlidingUpPanelLayout_fadeColor, DEFAULT_FADE_COLOR);
@@ -396,12 +418,32 @@ public class SlidingUpPanelLayout extends ViewGroup {
     }
 
     /**
+     * Sets the panel offset when collapsed so you can exit
+     * the boundaries of the top of the screen
+     *
+     * @param val Offset in pixels
+     */
+    public void setSlidePanelOffset(int val) {
+        mSlidePanelOffset = val;
+        requestLayout();
+    }
+
+    /**
      * @return The current paralax offset
      */
     public int getCurrentParalaxOffset() {
-        // Clamp slide offset at zero for parallax computation;
-        int offset = (int)(mParallaxOffset * Math.max(mSlideOffset, 0));
-        return mIsSlidingUp ? -offset : offset;
+        if (mParallaxOffset < 0) {
+            return 0;
+        }
+
+        return (int)(mParallaxOffset * getDirectionalSlideOffset());
+    }
+
+    /**
+     * @return The directional slide offset
+     */
+    protected float getDirectionalSlideOffset() {
+        return mIsSlidingUp ? -mSlideOffset : mSlideOffset;
     }
 
     /**
@@ -637,7 +679,8 @@ public class SlidingUpPanelLayout extends ViewGroup {
             }
 
             if (child == mSlideableView) {
-                mSlideRange = MeasureSpec.getSize(childHeightSpec) - mPanelHeight;
+                mSlideRange = MeasureSpec.getSize(childHeightSpec) - mPanelHeight + mSlidePanelOffset;
+                childHeightSpec += mSlidePanelOffset;
             }
 
             child.measure(childWidthSpec, childHeightSpec);
@@ -952,14 +995,21 @@ public class SlidingUpPanelLayout extends ViewGroup {
         // Recompute the slide offset based on the new top position
         mSlideOffset = computeSlideOffset(newTop);
         // Update the parallax based on the new slide offset
-        if (mParallaxOffset > 0 && mSlideOffset >= 0) {
-            int mainViewOffset = getCurrentParalaxOffset();
+        if ((mParallaxOffset > 0 || mDirectOffset) && mSlideOffset >= 0) {
+            int mainViewOffset = 0;
+            if (mParallaxOffset > 0) {
+                mainViewOffset = getCurrentParalaxOffset();
+            } else {
+                mainViewOffset = (int)(getDirectionalSlideOffset() * mSlideRange);
+            }
+
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
                 mMainView.setTranslationY(mainViewOffset);
             } else {
                 AnimatorProxy.wrap(mMainView).setTranslationY(mainViewOffset);
             }
         }
+
         // Dispatch the slide event
         dispatchOnPanelSlide(mSlideableView);
         // If the slide offset is negative, and overlay is not on, we need to increase the

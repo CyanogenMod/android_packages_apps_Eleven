@@ -57,4 +57,10 @@
     <!-- A dark Holo shade of orange -->
     <color name="holo_orange_dark">#ffff8800</color>
 
+    <!-- Color for the header action bar -->
+    <color name="header_action_bar_color">#ff444444</color>
+
+    <!-- Color for backgrounds of panels -->
+    <color name="panel_background_color">#ff000000</color>
+
 </resources>

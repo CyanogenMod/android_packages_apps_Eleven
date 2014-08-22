@@ -16,13 +16,12 @@
 <resources xmlns:android="http://schemas.android.com/apk/res/android">
 
     <!-- Main Holo -->
-    <style name="Apollo.Theme.Dark" parent="@android:style/Theme.Holo">
+    <style name="Eleven.Theme" parent="@android:style/Theme.DeviceDefault">
         <item name="android:windowContentOverlay">@null</item>
     </style>
 
-    <!-- Main Holo light -->
-    <style name="Apollo.Theme.Light" parent="@android:style/Theme.Holo.Light">
-        <item name="android:windowContentOverlay">@null</item>
+    <style name="Eleven.Theme.ActionBar.Overlay" parent="@style/Eleven.Theme">
+        <item name="android:windowActionBarOverlay">true</item>
     </style>
 
     <!-- Shortcut Activity theme -->

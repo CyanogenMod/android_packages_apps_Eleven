@@ -53,7 +53,7 @@ public class ShortcutActivity extends FragmentActivity implements ServiceConnect
 
     /**
      * If true, this class will begin playback and open
-     * {@link AudioPlayerActivity}, false will close the class after playback,
+     * {@link AudioPlayerFragment}, false will close the class after playback,
      * which is what happens when a user starts playing something from an
      * app-widget
      */
@@ -323,7 +323,7 @@ public class ShortcutActivity extends FragmentActivity implements ServiceConnect
     }
 
     /**
-     * Starts playback, open {@link AudioPlayerActivity} and finishes this one
+     * Starts playback, open {@link AudioPlayerFragment} and finishes this one
      */
     private void allDone() {
         final boolean shouldOpenAudioPlayer = mIntent.getBooleanExtra(OPEN_AUDIO_PLAYER, true);
@@ -334,8 +334,8 @@ public class ShortcutActivity extends FragmentActivity implements ServiceConnect
 
         // Open the now playing screen
         if (shouldOpenAudioPlayer) {
-            final Intent intent = new Intent(this, AudioPlayerActivity.class);
-            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            final Intent intent = new Intent(this, HomeActivity.class);
+            intent.setAction(HomeActivity.ACTION_VIEW_MUSIC_PLAYER);
             startActivity(intent);
         }
         // All done
