@@ -159,8 +159,7 @@ public class QueueFragment extends Fragment implements LoaderCallbacks<List<Song
     @Override
     public void onActivityCreated(final Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        // Enable the options menu
-        setHasOptionsMenu(true);
+        // TODO: Hook up the options menu to the custom action bar we have
 
         // Initialize the broadcast receiver
         mQueueUpdateListener = new QueueUpdateListener(this);

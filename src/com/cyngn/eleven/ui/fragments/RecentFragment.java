@@ -11,8 +11,6 @@
 
 package com.cyngn.eleven.ui.fragments;
 
-import static com.cyngn.eleven.utils.PreferenceUtils.RECENT_LAYOUT;
-
 import android.app.Activity;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -130,14 +128,7 @@ public class RecentFragment extends Fragment implements LoaderCallbacks<List<Alb
     @Override
     public void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        int layout = R.layout.list_item_normal;
-        if (isSimpleLayout()) {
-            layout = R.layout.list_item_normal;
-        } else if (isDetailedLayout()) {
-            layout = R.layout.list_item_detailed;
-        } else {
-            layout = R.layout.grid_items_normal;
-        }
+        final int layout = R.layout.list_item_normal;
         mAdapter = new AlbumAdapter(getActivity(), layout);
     }
 
@@ -148,13 +139,9 @@ public class RecentFragment extends Fragment implements LoaderCallbacks<List<Alb
     public View onCreateView(final LayoutInflater inflater, final ViewGroup container,
                              final Bundle savedInstanceState) {
         // The View for the fragment's UI
-        if (isSimpleLayout()) {
-            mRootView = (ViewGroup)inflater.inflate(R.layout.list_base, null);
-            initListView();
-        } else {
-            mRootView = (ViewGroup)inflater.inflate(R.layout.grid_base, null);
-            initGridView();
-        }
+        mRootView = (ViewGroup)inflater.inflate(R.layout.list_base, null);
+        initListView();
+
         return mRootView;
     }
 
@@ -307,11 +294,7 @@ public class RecentFragment extends Fragment implements LoaderCallbacks<List<Alb
             // Set the empty text
             final TextView empty = (TextView)mRootView.findViewById(R.id.empty);
             empty.setText(getString(R.string.empty_recent));
-            if (isSimpleLayout()) {
-                mListView.setEmptyView(empty);
-            } else {
-                mGridView.setEmptyView(empty);
-            }
+            mListView.setEmptyView(empty);
             return;
         }
 
@@ -390,42 +373,5 @@ public class RecentFragment extends Fragment implements LoaderCallbacks<List<Alb
         // Set up the helpers
         initAbsListView(mListView);
         mAdapter.setTouchPlay(true);
-    }
-
-    /**
-     * Sets up the grid view
-     */
-    private void initGridView() {
-        // Initialize the grid
-        mGridView = (GridView)mRootView.findViewById(R.id.grid_base);
-        // Set the data behind the grid
-        mGridView.setAdapter(mAdapter);
-        // Set up the helpers
-        initAbsListView(mGridView);
-        if (ApolloUtils.isLandscape(getActivity())) {
-            if (isDetailedLayout()) {
-                mAdapter.setLoadExtraData(true);
-                mGridView.setNumColumns(TWO);
-            } else {
-                mGridView.setNumColumns(FOUR);
-            }
-        } else {
-            if (isDetailedLayout()) {
-                mAdapter.setLoadExtraData(true);
-                mGridView.setNumColumns(ONE);
-            } else {
-                mGridView.setNumColumns(TWO);
-            }
-        }
-    }
-
-    private boolean isSimpleLayout() {
-        return PreferenceUtils.getInstance(getActivity()).isSimpleLayout(RECENT_LAYOUT,
-                getActivity());
-    }
-
-    private boolean isDetailedLayout() {
-        return PreferenceUtils.getInstance(getActivity()).isDetailedLayout(RECENT_LAYOUT,
-                getActivity());
     }
 }

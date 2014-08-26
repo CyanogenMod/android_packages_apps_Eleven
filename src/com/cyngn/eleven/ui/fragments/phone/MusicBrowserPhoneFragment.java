@@ -151,15 +151,10 @@ public class MusicBrowserPhoneFragment extends Fragment implements
         inflater.inflate(R.menu.favorite, menu);
         // Shuffle all
         inflater.inflate(R.menu.shuffle, menu);
-        // Sort orders
-        if (isRecentPage()) {
-            inflater.inflate(R.menu.view_as, menu);
-        } else if (isArtistPage()) {
+        if (isArtistPage()) {
             inflater.inflate(R.menu.artist_sort_by, menu);
-            inflater.inflate(R.menu.view_as, menu);
         } else if (isAlbumPage()) {
             inflater.inflate(R.menu.album_sort_by, menu);
-            inflater.inflate(R.menu.view_as, menu);
         } else if (isSongPage()) {
             inflater.inflate(R.menu.song_sort_by, menu);
         }
@@ -257,36 +252,6 @@ public class MusicBrowserPhoneFragment extends Fragment implements
                     mPreferences.setSongSortOrder(SortOrder.SongSortOrder.SONG_FILENAME);
                     getSongFragment().refresh();
                 }
-                return true;
-            case R.id.menu_view_as_simple:
-                if (isRecentPage()) {
-                    mPreferences.setRecentLayout("simple");
-                } else if (isArtistPage()) {
-                    mPreferences.setArtistLayout("simple");
-                } else if (isAlbumPage()) {
-                    mPreferences.setAlbumLayout("simple");
-                }
-                NavUtils.goHome(getActivity());
-                return true;
-            case R.id.menu_view_as_detailed:
-                if (isRecentPage()) {
-                    mPreferences.setRecentLayout("detailed");
-                } else if (isArtistPage()) {
-                    mPreferences.setArtistLayout("detailed");
-                } else if (isAlbumPage()) {
-                    mPreferences.setAlbumLayout("detailed");
-                }
-                NavUtils.goHome(getActivity());
-                return true;
-            case R.id.menu_view_as_grid:
-                if (isRecentPage()) {
-                    mPreferences.setRecentLayout("grid");
-                } else if (isArtistPage()) {
-                    mPreferences.setArtistLayout("grid");
-                } else if (isAlbumPage()) {
-                    mPreferences.setAlbumLayout("grid");
-                }
-                NavUtils.goHome(getActivity());
                 return true;
             default:
                 break;

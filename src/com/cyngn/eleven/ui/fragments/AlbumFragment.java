@@ -11,8 +11,6 @@
 
 package com.cyngn.eleven.ui.fragments;
 
-import static com.cyngn.eleven.utils.PreferenceUtils.ALBUM_LAYOUT;
-
 import android.app.Activity;
 import android.os.Bundle;
 import android.os.SystemClock;
@@ -131,14 +129,7 @@ public class AlbumFragment extends Fragment implements LoaderCallbacks<SectionLi
     @Override
     public void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        int layout = R.layout.list_item_normal;
-        if (isSimpleLayout()) {
-            layout = R.layout.list_item_normal;
-        } else if (isDetailedLayout()) {
-            layout = R.layout.list_item_detailed;
-        } else {
-            layout = R.layout.grid_items_normal;
-        }
+        int layout = R.layout.grid_items_normal;
 
         AlbumAdapter adapter = new AlbumAdapter(getActivity(), layout);
         mAdapter = new SectionAdapter<Album, AlbumAdapter>(getActivity(), adapter);
@@ -150,14 +141,8 @@ public class AlbumFragment extends Fragment implements LoaderCallbacks<SectionLi
     @Override
     public View onCreateView(final LayoutInflater inflater, final ViewGroup container,
             final Bundle savedInstanceState) {
-        // The View for the fragment's UI
-        if (isSimpleLayout()) {
-            mRootView = (ViewGroup)inflater.inflate(R.layout.list_base, null);
-            initListView();
-        } else {
-            mRootView = (ViewGroup)inflater.inflate(R.layout.grid_base, null);
-            initGridView();
-        }
+        mRootView = (ViewGroup)inflater.inflate(R.layout.grid_base, null);
+        initGridView();
         return mRootView;
     }
 
@@ -288,14 +273,9 @@ public class AlbumFragment extends Fragment implements LoaderCallbacks<SectionLi
      */
     @Override
     public Loader<SectionListContainer<Album>> onCreateLoader(final int id, final Bundle args) {
-        // only show section headers in the simple and detailed layout
-        SectionCreatorUtils.IItemCompare<Album> comparator = null;
-
-        if (isSimpleLayout() || isDetailedLayout()) {
-            comparator = SectionCreatorUtils.createAlbumComparison(getActivity());
-        }
-
-        return new SectionCreator<Album>(getActivity(), new AlbumLoader(getActivity()), comparator);
+        // if we ever decide to add section headers for grid items, we can pass a compartor
+        // instead of null
+        return new SectionCreator<Album>(getActivity(), new AlbumLoader(getActivity()), null);
     }
 
     /**
@@ -309,11 +289,7 @@ public class AlbumFragment extends Fragment implements LoaderCallbacks<SectionLi
             // Set the empty text
             final TextView empty = (TextView)mRootView.findViewById(R.id.empty);
             empty.setText(getString(R.string.empty_music));
-            if (isSimpleLayout()) {
-                mListView.setEmptyView(empty);
-            } else {
-                mGridView.setEmptyView(empty);
-            }
+            mGridView.setEmptyView(empty);
             return;
         }
 
@@ -338,11 +314,7 @@ public class AlbumFragment extends Fragment implements LoaderCallbacks<SectionLi
         final int currentAlbumPosition = getItemPositionByAlbum();
 
         if (currentAlbumPosition != 0) {
-            if (isSimpleLayout()) {
-                mListView.setSelection(currentAlbumPosition);
-            } else {
-                mGridView.setSelection(currentAlbumPosition);
-            }
+            mGridView.setSelection(currentAlbumPosition);
         }
     }
 
@@ -421,19 +393,6 @@ public class AlbumFragment extends Fragment implements LoaderCallbacks<SectionLi
     }
 
     /**
-     * Sets up the list view
-     */
-    private void initListView() {
-        // Initialize the grid
-        mListView = (ListView)mRootView.findViewById(R.id.list_base);
-        // Set the data behind the list
-        mListView.setAdapter(mAdapter);
-        // Set up the helpers
-        initAbsListView(mListView);
-        mAdapter.getUnderlyingAdapter().setTouchPlay(true);
-    }
-
-    /**
      * Sets up the grid view
      */
     private void initGridView() {
@@ -444,29 +403,9 @@ public class AlbumFragment extends Fragment implements LoaderCallbacks<SectionLi
         // Set up the helpers
         initAbsListView(mGridView);
         if (ApolloUtils.isLandscape(getActivity())) {
-            if (isDetailedLayout()) {
-                mAdapter.getUnderlyingAdapter().setLoadExtraData(true);
-                mGridView.setNumColumns(TWO);
-            } else {
-                mGridView.setNumColumns(FOUR);
-            }
+            mGridView.setNumColumns(FOUR);
         } else {
-            if (isDetailedLayout()) {
-                mAdapter.getUnderlyingAdapter().setLoadExtraData(true);
-                mGridView.setNumColumns(ONE);
-            } else {
-                mGridView.setNumColumns(TWO);
-            }
+            mGridView.setNumColumns(TWO);
         }
-    }
-
-    private boolean isSimpleLayout() {
-        return PreferenceUtils.getInstance(getActivity()).isSimpleLayout(ALBUM_LAYOUT,
-                getActivity());
-    }
-
-    private boolean isDetailedLayout() {
-        return PreferenceUtils.getInstance(getActivity()).isDetailedLayout(ALBUM_LAYOUT,
-                getActivity());
     }
 }

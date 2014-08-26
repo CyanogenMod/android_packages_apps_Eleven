@@ -57,15 +57,6 @@ public final class PreferenceUtils {
     // Sort order for the song list
     public static final String SONG_SORT_ORDER = "song_sort_order";
 
-    // Sets the type of layout to use for the artist list
-    public static final String ARTIST_LAYOUT = "artist_layout";
-
-    // Sets the type of layout to use for the album list
-    public static final String ALBUM_LAYOUT = "album_layout";
-
-    // Sets the type of layout to use for the recent list
-    public static final String RECENT_LAYOUT = "recent_layout";
-
     // Key used to download images only on Wi-Fi
     public static final String ONLY_ON_WIFI = "only_on_wifi";
 
@@ -303,84 +294,4 @@ public final class PreferenceUtils {
     public final String getSongSortOrder() {
         return mPreferences.getString(SONG_SORT_ORDER, SortOrder.SongSortOrder.SONG_A_Z);
     }
-
-    /**
-     * Saves the layout type for a list
-     * 
-     * @param key Which layout to change
-     * @param value The new layout type
-     */
-    private void setLayoutType(final String key, final String value) {
-        ApolloUtils.execute(false, new AsyncTask<Void, Void, Void>() {
-            @Override
-            protected Void doInBackground(final Void... unused) {
-                final SharedPreferences.Editor editor = mPreferences.edit();
-                editor.putString(key, value);
-                editor.apply();
-
-                return null;
-            }
-        }, (Void[])null);
-    }
-
-    /**
-     * Sets the layout type for the artist list
-     * 
-     * @param value The new layout type
-     */
-    public void setArtistLayout(final String value) {
-        setLayoutType(ARTIST_LAYOUT, value);
-    }
-
-    /**
-     * Sets the layout type for the album list
-     * 
-     * @param value The new layout type
-     */
-    public void setAlbumLayout(final String value) {
-        setLayoutType(ALBUM_LAYOUT, value);
-    }
-
-    /**
-     * Sets the layout type for the recent list
-     * 
-     * @param value The new layout type
-     */
-    public void setRecentLayout(final String value) {
-        setLayoutType(RECENT_LAYOUT, value);
-    }
-
-    /**
-     * @param context The {@link Context} to use.
-     * @param which Which list to check.
-     * @return True if the layout type is the simple layout, false otherwise.
-     */
-    public boolean isSimpleLayout(final String which, final Context context) {
-        final String simple = "simple";
-        final String defaultValue = "grid";
-        return mPreferences.getString(which, defaultValue).equals(simple);
-    }
-
-    /**
-     * @param context The {@link Context} to use.
-     * @param which Which list to check.
-     * @return True if the layout type is the simple layout, false otherwise.
-     */
-    public boolean isDetailedLayout(final String which, final Context context) {
-        final String detailed = "detailed";
-        final String defaultValue = "grid";
-        return mPreferences.getString(which, defaultValue).equals(detailed);
-    }
-
-    /**
-     * @param context The {@link Context} to use.
-     * @param which Which list to check.
-     * @return True if the layout type is the simple layout, false otherwise.
-     */
-    public boolean isGridLayout(final String which, final Context context) {
-        final String grid = "grid";
-        final String defaultValue = "simple";
-        return mPreferences.getString(which, defaultValue).equals(grid);
-    }
-
 }
