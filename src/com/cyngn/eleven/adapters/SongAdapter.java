@@ -24,6 +24,7 @@ import com.cyngn.eleven.ui.MusicHolder.DataHolder;
 import com.cyngn.eleven.ui.fragments.QueueFragment;
 import com.cyngn.eleven.ui.fragments.SongFragment;
 import com.cyngn.eleven.utils.MusicUtils;
+import com.cyngn.eleven.widgets.PlayPauseButton;
 
 /**
  * This {@link ArrayAdapter} is used to display all of the songs on a user's
@@ -43,6 +44,11 @@ public class SongAdapter extends ArrayAdapter<Song> implements SectionAdapter.Ba
      * The resource Id of the layout to inflate
      */
     private final int mLayoutId;
+
+    /**
+     * The index of the item that is currently playing
+     */
+    private long mCurrentlyPlayingSongId = -1;
 
     /**
      * Used to cache the song info
@@ -87,6 +93,19 @@ public class SongAdapter extends ArrayAdapter<Song> implements SectionAdapter.Ba
         holder.mLineOneRight.get().setText(dataHolder.mLineOneRight);
         // Set the album name (line two)
         holder.mLineTwo.get().setText(dataHolder.mLineTwo);
+
+        PlayPauseButton playPauseButton = holder.mPlayPauseButton.get();
+        if (mCurrentlyPlayingSongId == dataHolder.mItemId) {
+            // make it visible
+            playPauseButton.setVisibility(View.VISIBLE);
+
+            // update the state based on whether we are playing or not
+            playPauseButton.updateState();
+        } else {
+            // hide it
+            playPauseButton.setVisibility(View.GONE);
+        }
+
         return convertView;
     }
 
@@ -158,5 +177,13 @@ public class SongAdapter extends ArrayAdapter<Song> implements SectionAdapter.Ba
         }
 
         return  -1;
+    }
+
+    public void setCurrentlyPlayingSongId(long songId) {
+        if (mCurrentlyPlayingSongId != songId) {
+            mCurrentlyPlayingSongId = songId;
+
+            notifyDataSetChanged();
+        }
     }
 }

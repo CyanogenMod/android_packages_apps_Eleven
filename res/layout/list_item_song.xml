@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+  Copyright (C) 2014 Cyanogen, Inc.
+-->
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/item_normal_height"
+    android:gravity="center_vertical"
+    android:minHeight="@dimen/item_normal_height"
+    android:paddingLeft="@dimen/list_preferred_item_padding"
+    android:paddingRight="@dimen/list_preferred_item_padding">
+
+    <TextView
+        android:id="@+id/line_one"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_toLeftOf="@+id/action_button_play"
+        android:singleLine="true"
+        android:textSize="@dimen/text_size_medium"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/line_two"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/line_one"
+        android:layout_marginTop="@dimen/list_item_line_two_margin_top"
+        android:layout_toLeftOf="@id/action_button_play"
+        android:singleLine="true"
+        android:textSize="@dimen/text_size_small" />
+
+    <TextView
+        android:id="@+id/line_three"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_toLeftOf="@id/action_button_play"
+        android:singleLine="true"
+        android:textSize="@dimen/text_size_small" />
+
+    <com.cyngn.eleven.widgets.PlayPauseButton
+        android:id="@+id/action_button_play"
+        android:layout_width="@dimen/songlist_control_button_width"
+        android:layout_height="@dimen/songlist_control_button_height"
+        android:layout_gravity="center"
+        android:layout_toLeftOf="@+id/line_one_right"
+        android:contentDescription="@string/accessibility_play"
+        android:focusable="true"
+        android:scaleType="centerInside"
+        android:src="@drawable/btn_playback_play"
+        android:visibility="gone" />
+
+    <TextView
+        android:id="@+id/line_one_right"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:layout_gravity="top"
+        android:paddingRight="@dimen/list_preferred_item_padding"
+        android:singleLine="true"
+        android:textSize="@dimen/text_size_medium" />
+</RelativeLayout>

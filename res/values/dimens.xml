@@ -126,4 +126,7 @@
     <dimen name="header_bar_up_width">50.0dip</dimen>
     <dimen name="header_bar_up_height">50.0dip</dimen>
     <dimen name="header_bar_up_padding">8.0dip</dimen>
+
+    <dimen name="songlist_control_button_width">50.0dip</dimen>
+    <dimen name="songlist_control_button_height">50.0dip</dimen>
 </resources>

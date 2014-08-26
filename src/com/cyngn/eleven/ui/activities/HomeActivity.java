@@ -117,24 +117,14 @@ public class HomeActivity extends BaseActivity {
     private void setupSecondPanel() {
         mSecondPanel = (SlidingUpPanelLayout)findViewById(R.id.sliding_layout2);
         mSecondPanel.setPanelSlideListener(new SlidingUpPanelLayout.PanelSlideListener() {
-            private boolean firstRefresh = true;
             @Override
             public void onPanelSlide(View panel, float slideOffset) {
                 mFirstPanel.setSlidingEnabled(false);
-                // TODO: Make the queue fragment selfaware instead of hacking it here
-                if (firstRefresh) {
-                    firstRefresh = false;
-                    QueueFragment queueFragment = getQueueFragment();
-                    if (queueFragment != null) {
-                        queueFragment.refreshQueue();
-                    }
-                }
             }
 
             @Override
             public void onPanelCollapsed(View panel) {
                 mFirstPanel.setSlidingEnabled(true);
-                firstRefresh = true;
             }
 
             @Override
@@ -249,10 +239,6 @@ public class HomeActivity extends BaseActivity {
 
     protected AudioPlayerFragment getAudioPlayerFragment() {
         return (AudioPlayerFragment)getSupportFragmentManager().findFragmentById(R.id.audioPlayerFragment);
-    }
-
-    protected QueueFragment getQueueFragment() {
-        return (QueueFragment)getSupportFragmentManager().findFragmentById(R.id.queueFragment);
     }
 
     protected void setHeaderText(int containerId, int textId) {

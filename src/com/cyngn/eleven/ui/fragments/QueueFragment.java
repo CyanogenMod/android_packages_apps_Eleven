@@ -11,6 +11,10 @@
 
 package com.cyngn.eleven.ui.fragments;
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.LoaderManager.LoaderCallbacks;
@@ -29,6 +33,7 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.AdapterContextMenuInfo;
 import android.widget.AdapterView.OnItemClickListener;
 
+import com.cyngn.eleven.MusicPlaybackService;
 import com.cyngn.eleven.R;
 import com.cyngn.eleven.adapters.SongAdapter;
 import com.cyngn.eleven.dragdrop.DragSortListView;
@@ -47,6 +52,7 @@ import com.cyngn.eleven.utils.MusicUtils;
 import com.cyngn.eleven.utils.NavUtils;
 import com.viewpagerindicator.TitlePageIndicator;
 
+import java.lang.ref.WeakReference;
 import java.util.List;
 
 /**
@@ -66,6 +72,11 @@ public class QueueFragment extends Fragment implements LoaderCallbacks<List<Song
      * LoaderCallbacks identifier
      */
     private static final int LOADER = 0;
+
+    /**
+     * The listener to the playback service that will trigger updates to the ui
+     */
+    private QueueUpdateListener mQueueUpdateListener;
 
     /**
      * The adapter for the list
@@ -137,6 +148,8 @@ public class QueueFragment extends Fragment implements LoaderCallbacks<List<Song
         mListView.setRemoveListener(this);
         // Quick scroll while dragging
         mListView.setDragScrollProfile(this);
+        // Enable fast scroll bars
+        mListView.setFastScrollEnabled(true);
         return rootView;
     }
 
@@ -148,8 +161,38 @@ public class QueueFragment extends Fragment implements LoaderCallbacks<List<Song
         super.onActivityCreated(savedInstanceState);
         // Enable the options menu
         setHasOptionsMenu(true);
+
+        // Initialize the broadcast receiver
+        mQueueUpdateListener = new QueueUpdateListener(this);
+
         // Start the loader
         getLoaderManager().initLoader(LOADER, null, this);
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+
+        final IntentFilter filter = new IntentFilter();
+        // Play and pause changes
+        filter.addAction(MusicPlaybackService.PLAYSTATE_CHANGED);
+        // Queue changes
+        filter.addAction(MusicPlaybackService.QUEUE_CHANGED);
+        // Track changes
+        filter.addAction(MusicPlaybackService.META_CHANGED);
+
+        getActivity().registerReceiver(mQueueUpdateListener, filter);
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+
+        try {
+            getActivity().unregisterReceiver(mQueueUpdateListener);
+        } catch (final Throwable e) {
+            //$FALL-THROUGH$
+        }
     }
 
     /**
@@ -321,6 +364,9 @@ public class QueueFragment extends Fragment implements LoaderCallbacks<List<Song
         }
         // Build the cache
         mAdapter.buildCache();
+
+        // Set the currently playing audio
+        mAdapter.setCurrentlyPlayingSongId(MusicUtils.getCurrentAudioId());
     }
 
     /**
@@ -406,6 +452,37 @@ public class QueueFragment extends Fragment implements LoaderCallbacks<List<Song
     public void refreshQueue() {
         if (isAdded()) {
             getLoaderManager().restartLoader(LOADER, null, this);
+        }
+    }
+
+    /**
+     * Used to monitor the state of playback
+     */
+    private static final class QueueUpdateListener extends BroadcastReceiver {
+
+        private final WeakReference<QueueFragment> mReference;
+
+        /**
+         * Constructor of <code>PlaybackStatus</code>
+         */
+        public QueueUpdateListener(final QueueFragment fragment) {
+            mReference = new WeakReference<QueueFragment>(fragment);
+        }
+
+        /**
+         * {@inheritDoc}
+         */
+        @Override
+        public void onReceive(final Context context, final Intent intent) {
+            // TODO: Invalid options menu if opened?
+            final String action = intent.getAction();
+            if (action.equals(MusicPlaybackService.META_CHANGED)) {
+                mReference.get().mAdapter.setCurrentlyPlayingSongId(MusicUtils.getCurrentAudioId());
+            } else if (action.equals(MusicPlaybackService.PLAYSTATE_CHANGED)) {
+                mReference.get().mAdapter.notifyDataSetChanged();
+            } else if (action.equals(MusicPlaybackService.QUEUE_CHANGED)) {
+                mReference.get().refreshQueue();
+            }
         }
     }
 }
