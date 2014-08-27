@@ -31,9 +31,6 @@ public class FragmentMenuItems {
     /* Used to add to a playlist */
     public static final int ADD_TO_PLAYLIST = 3;
 
-    /* Used to add to the favorites cache */
-    public static final int ADD_TO_FAVORITES = 4;
-
     /* Used to create a new playlist */
     public static final int NEW_PLAYLIST = 5;
 
@@ -57,9 +54,6 @@ public class FragmentMenuItems {
 
     /* Used to set a track as a ringtone */
     public static final int USE_AS_RINGTONE = 12;
-
-    /* Used to remove a track from the favorites cache */
-    public static final int REMOVE_FROM_FAVORITES = 13;
 
     /* Used to remove a track from a playlist */
     public static final int REMOVE_FROM_PLAYLIST = 14;

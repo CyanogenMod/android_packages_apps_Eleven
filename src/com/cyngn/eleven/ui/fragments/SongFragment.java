@@ -41,7 +41,6 @@ import com.cyngn.eleven.menu.CreateNewPlaylist;
 import com.cyngn.eleven.menu.DeleteDialog;
 import com.cyngn.eleven.menu.FragmentMenuItems;
 import com.cyngn.eleven.model.Song;
-import com.cyngn.eleven.provider.FavoritesStore;
 import com.cyngn.eleven.recycler.RecycleHolder;
 import com.cyngn.eleven.sectionadapter.SectionAdapter;
 import com.cyngn.eleven.sectionadapter.SectionCreator;
@@ -203,7 +202,7 @@ public class SongFragment extends Fragment implements LoaderCallbacks<SectionLis
         // Add the song to a playlist
         final SubMenu subMenu = menu.addSubMenu(GROUP_ID, FragmentMenuItems.ADD_TO_PLAYLIST,
                 Menu.NONE, R.string.add_to_playlist);
-        MusicUtils.makePlaylistMenu(getActivity(), GROUP_ID, subMenu, true);
+        MusicUtils.makePlaylistMenu(getActivity(), GROUP_ID, subMenu);
 
         // View more content by the song artist
         menu.add(GROUP_ID, FragmentMenuItems.MORE_BY_ARTIST, Menu.NONE,
@@ -236,10 +235,6 @@ public class SongFragment extends Fragment implements LoaderCallbacks<SectionLis
                     MusicUtils.addToQueue(getActivity(), new long[] {
                         mSelectedId
                     });
-                    return true;
-                case FragmentMenuItems.ADD_TO_FAVORITES:
-                    FavoritesStore.getInstance(getActivity()).addSongId(
-                            mSelectedId, mSongName, mAlbumName, mArtistName);
                     return true;
                 case FragmentMenuItems.NEW_PLAYLIST:
                     CreateNewPlaylist.getInstance(new long[] {

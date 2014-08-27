@@ -160,15 +160,6 @@ public class ShortcutActivity extends FragmentActivity implements ServiceConnect
                         // Get the playlist song list
                         mList = MusicUtils.getSongListForPlaylist(ShortcutActivity.this, getId());
                     } else
-                    // Check the Favorites playlist
-                    if (getString(R.string.playlist_favorites).equals(requestedMimeType)) {
-
-                        // Don't shuffle the Favorites track list
-                        mShouldShuffle = false;
-
-                        // Get the Favorites song list
-                        mList = MusicUtils.getSongListForFavorites(ShortcutActivity.this);
-                    } else
                     // Check for the Last added playlist
                     if (getString(R.string.playlist_last_added).equals(requestedMimeType)) {
 
@@ -235,11 +226,6 @@ public class ShortcutActivity extends FragmentActivity implements ServiceConnect
             // If the user searched for a playlist or genre, this list will
             // return empty
             if (data.isEmpty()) {
-                // Before running the playlist loader, try to play the
-                // "Favorites" playlist
-                if (isFavorite()) {
-                    MusicUtils.playFavorites(ShortcutActivity.this);
-                }
                 // Finish up
                 allDone();
                 return;
@@ -301,25 +287,6 @@ public class ShortcutActivity extends FragmentActivity implements ServiceConnect
      */
     private long getId() {
         return mIntent.getExtras().getLong(Config.ID);
-    }
-
-    /**
-     * @return True if the user searched for the favorites playlist
-     */
-    private boolean isFavorite() {
-        // Check to see if the user spoke the word "Favorites"
-        final String favoritePlaylist = getString(R.string.playlist_favorites);
-        if (mVoiceQuery.equals(favoritePlaylist)) {
-            return true;
-        }
-
-        // Check to see if the user spoke the word "Favorite"
-        final String favorite = getString(R.string.playlist_favorite);
-        if (mVoiceQuery.equals(favorite)) {
-            return true;
-        }
-
-        return false;
     }
 
     /**

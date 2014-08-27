@@ -16,9 +16,7 @@ interface IElevenService
     void setShuffleMode(int shufflemode);
     void setRepeatMode(int repeatmode);
     void moveQueueItem(int from, int to);
-    void toggleFavorite();
     void refresh();
-    boolean isFavorite();
     boolean isPlaying();
     long [] getQueue();
     long duration();

@@ -90,11 +90,6 @@ public class PlaylistLoader extends WrappedAsyncTaskLoader<List<Playlist>> {
     private void makeDefaultPlaylists() {
         final Resources resources = getContext().getResources();
 
-        /* Favorites list */
-        final Playlist favorites = new Playlist(-1,
-                resources.getString(R.string.playlist_favorites));
-        mPlaylistList.add(favorites);
-
         /* Last added list */
         final Playlist lastAdded = new Playlist(-2,
                 resources.getString(R.string.playlist_last_added));

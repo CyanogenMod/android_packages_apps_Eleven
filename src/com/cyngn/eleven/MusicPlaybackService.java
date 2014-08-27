@@ -53,7 +53,6 @@ import com.cyngn.eleven.appwidgets.AppWidgetSmall;
 import com.cyngn.eleven.appwidgets.RecentWidgetProvider;
 import com.cyngn.eleven.cache.ImageCache;
 import com.cyngn.eleven.cache.ImageFetcher;
-import com.cyngn.eleven.provider.FavoritesStore;
 import com.cyngn.eleven.provider.RecentStore;
 import com.cyngn.eleven.utils.ApolloUtils;
 import com.cyngn.eleven.utils.Lists;
@@ -479,11 +478,6 @@ public class MusicPlaybackService extends Service {
     private RecentStore mRecentsCache;
 
     /**
-     * Favorites database
-     */
-    private FavoritesStore mFavoritesCache;
-
-    /**
      * {@inheritDoc}
      */
     @Override
@@ -540,7 +534,6 @@ public class MusicPlaybackService extends Service {
 
         // Initialize the favorites and recents databases
         mRecentsCache = RecentStore.getInstance(this);
-        mFavoritesCache = FavoritesStore.getInstance(this);
 
         // Initialize the notification helper
         mNotificationHelper = new NotificationHelper(this);
@@ -1327,7 +1320,6 @@ public class MusicPlaybackService extends Service {
         intent.putExtra("album", getAlbumName());
         intent.putExtra("track", getTrackName());
         intent.putExtra("playing", isPlaying());
-        intent.putExtra("isfavorite", isFavorite());
         sendStickyBroadcast(intent);
 
         final Intent musicIntent = new Intent(intent);
@@ -1335,11 +1327,6 @@ public class MusicPlaybackService extends Service {
         sendStickyBroadcast(musicIntent);
 
         if (what.equals(META_CHANGED)) {
-            // Increase the play count for favorite songs.
-            if (mFavoritesCache.getSongId(getAudioId()) != null) {
-                mFavoritesCache.addSongId(getAudioId(), getTrackName(), getAlbumName(),
-                        getArtistName());
-            }
             // Add the track to the recently played list.
             mRecentsCache.addAlbumId(getAlbumId(), getAlbumName(), getArtistName(),
                     MusicUtils.getSongCountForAlbum(this, getAlbumId()),
@@ -1910,19 +1897,6 @@ public class MusicPlaybackService extends Service {
     }
 
     /**
-     * True if the current track is a "favorite", false otherwise
-     */
-    public boolean isFavorite() {
-        if (mFavoritesCache != null) {
-            synchronized (this) {
-                final Long id = mFavoritesCache.getSongId(getAudioId());
-                return id != null ? true : false;
-            }
-        }
-        return false;
-    }
-
-    /**
      * Opens a list for playback
      *
      * @param list The list of tracks to open
@@ -2090,18 +2064,6 @@ public class MusicPlaybackService extends Service {
      */
     private void openCurrent() {
         openCurrentAndMaybeNext(false);
-    }
-
-    /**
-     * Toggles the current song as a favorite.
-     */
-    public void toggleFavorite() {
-        if (mFavoritesCache != null) {
-            synchronized (this) {
-                mFavoritesCache.toggleSong(getAudioId(), getTrackName(), getAlbumName(),
-                        getArtistName());
-            }
-        }
     }
 
     /**
@@ -2824,24 +2786,8 @@ public class MusicPlaybackService extends Service {
          * {@inheritDoc}
          */
         @Override
-        public void toggleFavorite() throws RemoteException {
-            mService.get().toggleFavorite();
-        }
-
-        /**
-         * {@inheritDoc}
-         */
-        @Override
         public void refresh() throws RemoteException {
             mService.get().refresh();
-        }
-
-        /**
-         * {@inheritDoc}
-         */
-        @Override
-        public boolean isFavorite() throws RemoteException {
-            return mService.get().isFavorite();
         }
 
         /**

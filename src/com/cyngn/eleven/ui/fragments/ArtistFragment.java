@@ -203,7 +203,7 @@ public class ArtistFragment extends Fragment implements LoaderCallbacks<SectionL
         // Add the artist to a playlist
         final SubMenu subMenu = menu.addSubMenu(GROUP_ID, FragmentMenuItems.ADD_TO_PLAYLIST,
                 Menu.NONE, R.string.add_to_playlist);
-        MusicUtils.makePlaylistMenu(getActivity(), GROUP_ID, subMenu, false);
+        MusicUtils.makePlaylistMenu(getActivity(), GROUP_ID, subMenu);
 
         // Delete the artist
         menu.add(GROUP_ID, FragmentMenuItems.DELETE, Menu.NONE,

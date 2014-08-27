@@ -37,7 +37,6 @@ import com.cyngn.eleven.menu.PhotoSelectionDialog.ProfileType;
 import com.cyngn.eleven.ui.fragments.profile.AlbumSongFragment;
 import com.cyngn.eleven.ui.fragments.profile.ArtistAlbumFragment;
 import com.cyngn.eleven.ui.fragments.profile.ArtistSongFragment;
-import com.cyngn.eleven.ui.fragments.profile.FavoriteFragment;
 import com.cyngn.eleven.ui.fragments.profile.GenreSongFragment;
 import com.cyngn.eleven.ui.fragments.profile.LastAddedFragment;
 import com.cyngn.eleven.ui.fragments.profile.PlaylistSongFragment;
@@ -179,17 +178,6 @@ public class ProfileActivity extends BaseActivity implements OnPageChangeListene
             // Action bar subtitle = year released
             getActionBar().setSubtitle(mArguments.getString(Config.ALBUM_YEAR));
         } else
-        // Set up the favorites profile
-        if (isFavorites()) {
-            // Add the carousel images
-            mTabCarousel.setPlaylistOrGenreProfileHeader(this, mProfileName);
-
-            // Favorite fragment
-            mPagerAdapter.add(FavoriteFragment.class, null);
-
-            // Action bar title = Favorites
-            getActionBar().setTitle(mProfileName);
-        } else
         // Set up the last added profile
         if (isLastAdded()) {
             // Add the carousel images
@@ -261,7 +249,7 @@ public class ProfileActivity extends BaseActivity implements OnPageChangeListene
         // Set the shuffle all title to "play all" if a playlist.
         final MenuItem shuffle = menu.findItem(R.id.menu_shuffle);
         String title = null;
-        if (isFavorites() || isLastAdded() || isPlaylist()) {
+        if (isLastAdded() || isPlaylist()) {
             title = getString(R.string.menu_play_all);
         } else {
             title = getString(R.string.menu_shuffle);
@@ -326,8 +314,6 @@ public class ProfileActivity extends BaseActivity implements OnPageChangeListene
                 }
                 if (isPlaylist()) {
                     MusicUtils.playPlaylist(this, id);
-                } else if (isFavorites()) {
-                    MusicUtils.playFavorites(this);
                 } else if (isLastAdded()) {
                     MusicUtils.playLastAdded(this);
                 } else {
@@ -651,13 +637,6 @@ public class ProfileActivity extends BaseActivity implements OnPageChangeListene
      */
     private final boolean isPlaylist() {
         return mType.equals(MediaStore.Audio.Playlists.CONTENT_TYPE);
-    }
-
-    /**
-     * @return True if the MIME type is "Favorites", false otherwise.
-     */
-    private final boolean isFavorites() {
-        return mType.equals(getString(R.string.playlist_favorites));
     }
 
     /**

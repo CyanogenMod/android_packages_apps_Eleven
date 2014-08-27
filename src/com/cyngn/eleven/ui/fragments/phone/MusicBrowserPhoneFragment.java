@@ -147,8 +147,6 @@ public class MusicBrowserPhoneFragment extends Fragment implements
     @Override
     public void onCreateOptionsMenu(final Menu menu, final MenuInflater inflater) {
         super.onCreateOptionsMenu(menu, inflater);
-        // Favorite action
-        inflater.inflate(R.menu.favorite, menu);
         // Shuffle all
         inflater.inflate(R.menu.shuffle, menu);
         if (isArtistPage()) {
@@ -169,12 +167,6 @@ public class MusicBrowserPhoneFragment extends Fragment implements
             case R.id.menu_shuffle:
                 // Shuffle all the songs
                 MusicUtils.shuffleAll(getActivity());
-                return true;
-            case R.id.menu_favorite:
-                // Toggle the current track as a favorite and update the menu
-                // item
-                MusicUtils.toggleFavorite();
-                getActivity().invalidateOptionsMenu();
                 return true;
             case R.id.menu_sort_by_az:
                 if (isArtistPage()) {

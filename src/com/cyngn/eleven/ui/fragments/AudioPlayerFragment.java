@@ -168,8 +168,6 @@ public class AudioPlayerFragment extends Fragment implements ServiceConnection,
         updatePlaybackControls();
         // Current info
         updateNowPlayingInfo();
-        // Update the favorites icon
-        dismissPopupMenu();
     }
 
     @Override
@@ -749,7 +747,6 @@ public class AudioPlayerFragment extends Fragment implements ServiceConnection,
             if (action.equals(MusicPlaybackService.META_CHANGED)) {
                 // Current info
                 mReference.get().updateNowPlayingInfo();
-                // Update the favorites icon
                 mReference.get().dismissPopupMenu();
             } else if (action.equals(MusicPlaybackService.PLAYSTATE_CHANGED)) {
                 // Set the play and pause image

@@ -183,8 +183,6 @@ public class PlaylistFragment extends Fragment implements LoaderCallbacks<List<P
             switch (item.getItemId()) {
                 case FragmentMenuItems.PLAY_SELECTION:
                     if (info.position == 0) {
-                        MusicUtils.playFavorites(getActivity());
-                    } else if (info.position == 1) {
                         MusicUtils.playLastAdded(getActivity());
                     } else {
                         MusicUtils.playPlaylist(getActivity(), mPlaylist.mPlaylistId);
@@ -193,8 +191,6 @@ public class PlaylistFragment extends Fragment implements LoaderCallbacks<List<P
                 case FragmentMenuItems.ADD_TO_QUEUE:
                     long[] list = null;
                     if (info.position == 0) {
-                        list = MusicUtils.getSongListForFavorites(getActivity());
-                    } else if (info.position == 1) {
                         list = MusicUtils.getSongListForLastAdded(getActivity());
                     } else {
                         list = MusicUtils.getSongListForPlaylist(getActivity(),
@@ -225,12 +221,7 @@ public class PlaylistFragment extends Fragment implements LoaderCallbacks<List<P
         final Bundle bundle = new Bundle();
         mPlaylist = mAdapter.getItem(position);
         String playlistName;
-        // Favorites list
         if (position == 0) {
-            playlistName = getString(R.string.playlist_favorites);
-            bundle.putString(Config.MIME_TYPE, getString(R.string.playlist_favorites));
-            // Last added
-        } else if (position == 1) {
             playlistName = getString(R.string.playlist_last_added);
             bundle.putString(Config.MIME_TYPE, getString(R.string.playlist_last_added));
         } else {

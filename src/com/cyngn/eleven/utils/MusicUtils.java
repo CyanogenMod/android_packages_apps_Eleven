@@ -40,13 +40,10 @@ import android.view.SubMenu;
 import com.cyngn.eleven.IElevenService;
 import com.cyngn.eleven.MusicPlaybackService;
 import com.cyngn.eleven.R;
-import com.cyngn.eleven.loaders.FavoritesLoader;
 import com.cyngn.eleven.loaders.LastAddedLoader;
 import com.cyngn.eleven.loaders.PlaylistLoader;
 import com.cyngn.eleven.loaders.SongLoader;
 import com.cyngn.eleven.menu.FragmentMenuItems;
-import com.cyngn.eleven.provider.FavoritesStore;
-import com.cyngn.eleven.provider.FavoritesStore.FavoriteColumns;
 import com.cyngn.eleven.provider.RecentStore;
 import com.devspark.appmsg.AppMsg;
 
@@ -1017,31 +1014,6 @@ public final class MusicUtils {
     }
 
     /**
-     * Toggles the current song as a favorite.
-     */
-    public static void toggleFavorite() {
-        try {
-            if (mService != null) {
-                mService.toggleFavorite();
-            }
-        } catch (final RemoteException ignored) {
-        }
-    }
-
-    /**
-     * @return True if the current song is a favorite, false otherwise.
-     */
-    public static final boolean isFavorite() {
-        try {
-            if (mService != null) {
-                return mService.isFavorite();
-            }
-        } catch (final RemoteException ignored) {
-        }
-        return false;
-    }
-
-    /**
      * @param context The {@link Context} to sue
      * @param playlistId The playlist Id
      * @return The track list for a playlist
@@ -1078,56 +1050,6 @@ public final class MusicUtils {
     }
 
     /**
-     * @param cursor The {@link Cursor} used to gather the list in our favorites
-     *            database
-     * @return The song list for the favorite playlist
-     */
-    public final static long[] getSongListForFavoritesCursor(Cursor cursor) {
-        if (cursor == null) {
-            return sEmptyList;
-        }
-        final int len = cursor.getCount();
-        final long[] list = new long[len];
-        cursor.moveToFirst();
-        int colidx = -1;
-        try {
-            colidx = cursor.getColumnIndexOrThrow(FavoriteColumns.ID);
-        } catch (final Exception ignored) {
-        }
-        for (int i = 0; i < len; i++) {
-            list[i] = cursor.getLong(colidx);
-            cursor.moveToNext();
-        }
-        cursor.close();
-        cursor = null;
-        return list;
-    }
-
-    /**
-     * @param context The {@link Context} to use
-     * @return The song list from our favorites database
-     */
-    public final static long[] getSongListForFavorites(final Context context) {
-        Cursor cursor = FavoritesLoader.makeFavoritesCursor(context);
-        if (cursor != null) {
-            final long[] list = getSongListForFavoritesCursor(cursor);
-            cursor.close();
-            cursor = null;
-            return list;
-        }
-        return sEmptyList;
-    }
-
-    /**
-     * Play the songs that have been marked as favorites.
-     *
-     * @param context The {@link Context} to use
-     */
-    public static void playFavorites(final Context context) {
-        playAll(context, getSongListForFavorites(context), 0, false);
-    }
-
-    /**
      * @param context The {@link Context} to use
      * @return The song list for the last added playlist
      */
@@ -1161,16 +1083,10 @@ public final class MusicUtils {
      * @param context The {@link Context} to use.
      * @param groupId The group Id of the menu.
      * @param subMenu The {@link SubMenu} to add to.
-     * @param showFavorites True if we should show the option to add to the
-     *            Favorites cache.
      */
     public static void makePlaylistMenu(final Context context, final int groupId,
-            final SubMenu subMenu, final boolean showFavorites) {
+            final SubMenu subMenu) {
         subMenu.clear();
-        if (showFavorites) {
-            subMenu.add(groupId, FragmentMenuItems.ADD_TO_FAVORITES, Menu.NONE,
-                    R.string.add_to_favorites);
-        }
         subMenu.add(groupId, FragmentMenuItems.NEW_PLAYLIST, Menu.NONE, R.string.new_playlist);
         Cursor cursor = PlaylistLoader.makePlaylistCursor(context);
         if (cursor != null && cursor.getCount() > 0 && cursor.moveToFirst()) {
@@ -1328,8 +1244,6 @@ public final class MusicUtils {
                 // Remove from current playlist
                 final long id = c.getLong(0);
                 removeTrack(id);
-                // Remove from the favorites playlist
-                FavoritesStore.getInstance(context).removeItem(id);
                 // Remove any items in the recents database
                 RecentStore.getInstance(context).removeItem(c.getLong(2));
                 c.moveToNext();

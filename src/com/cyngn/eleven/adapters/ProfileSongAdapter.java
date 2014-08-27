@@ -22,7 +22,6 @@ import com.cyngn.eleven.model.Song;
 import com.cyngn.eleven.ui.MusicHolder;
 import com.cyngn.eleven.ui.fragments.profile.AlbumSongFragment;
 import com.cyngn.eleven.ui.fragments.profile.ArtistSongFragment;
-import com.cyngn.eleven.ui.fragments.profile.FavoriteFragment;
 import com.cyngn.eleven.ui.fragments.profile.GenreSongFragment;
 import com.cyngn.eleven.ui.fragments.profile.LastAddedFragment;
 import com.cyngn.eleven.ui.fragments.profile.PlaylistSongFragment;
@@ -35,7 +34,7 @@ import java.util.List;
  * This {@link ArrayAdapter} is used to display the songs for a particular
  * artist, album, playlist, or genre for {@link ArtistSongFragment},
  * {@link AlbumSongFragment},{@link PlaylistSongFragment},
- * {@link GenreSongFragment},{@link FavoriteFragment},{@link LastAddedFragment}.
+ * {@link GenreSongFragment},{@link LastAddedFragment}.
  * 
  * @author Andrew Neal (andrewdneal@gmail.com)
  */

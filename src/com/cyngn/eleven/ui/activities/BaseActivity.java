@@ -148,8 +148,6 @@ public abstract class BaseActivity extends FragmentActivity implements ServiceCo
         updatePlaybackControls();
         // Current info
         updateBottomActionBarInfo();
-        // Update the favorites icon
-        invalidateOptionsMenu();
     }
 
     /**
@@ -396,8 +394,6 @@ public abstract class BaseActivity extends FragmentActivity implements ServiceCo
             if (action.equals(MusicPlaybackService.META_CHANGED)) {
                 // Current info
                 mReference.get().updateBottomActionBarInfo();
-                // Update the favorites icon
-                mReference.get().invalidateOptionsMenu();
                 // Let the listener know to the meta chnaged
                 for (final MusicStateListener listener : mReference.get().mMusicStateListener) {
                     if (listener != null) {
