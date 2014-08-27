@@ -18,6 +18,7 @@
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
 
     <string name="app_name" translatable="false">Music</string>
+    <string name="app_name_uppercase" translatable="false">MUSIC</string>
 
     <!-- Page titles -->
     <string name="page_recent">Recent</string>

@@ -19,6 +19,9 @@ import android.os.Message;
 import android.os.SystemClock;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -32,6 +35,8 @@ import android.provider.MediaStore.Audio.Artists;
 import com.cyngn.eleven.MusicPlaybackService;
 import com.cyngn.eleven.R;
 import com.cyngn.eleven.cache.ImageFetcher;
+import com.cyngn.eleven.menu.DeleteDialog;
+import com.cyngn.eleven.ui.HeaderBar;
 import com.cyngn.eleven.utils.ApolloUtils;
 import com.cyngn.eleven.utils.MusicUtils;
 import com.cyngn.eleven.utils.NavUtils;
@@ -41,11 +46,12 @@ import com.cyngn.eleven.widgets.RepeatingImageButton;
 import com.cyngn.eleven.widgets.ShuffleButton;
 
 import java.lang.ref.WeakReference;
+import java.util.ArrayList;
 
 import static com.cyngn.eleven.utils.MusicUtils.mService;
 
 public class AudioPlayerFragment extends Fragment implements ServiceConnection,
-        SeekBar.OnSeekBarChangeListener {
+        SeekBar.OnSeekBarChangeListener, HeaderBar.PopupMenuCreator {
 
     // fragment view
     private ViewGroup mRootView;
@@ -104,6 +110,9 @@ public class AudioPlayerFragment extends Fragment implements ServiceConnection,
     // Image cache
     private ImageFetcher mImageFetcher;
 
+    // Tracks the Header bars that trigger popup menu options
+    private ArrayList<WeakReference<HeaderBar>> mHeaderBarList = new ArrayList<WeakReference<HeaderBar>>();
+
     private long mPosOverride = -1;
 
     private long mStartSeekPos = 0;
@@ -160,8 +169,7 @@ public class AudioPlayerFragment extends Fragment implements ServiceConnection,
         // Current info
         updateNowPlayingInfo();
         // Update the favorites icon
-        // TODO: Revisit
-        // invalidateOptionsMenu();
+        dismissPopupMenu();
     }
 
     @Override
@@ -626,6 +634,71 @@ public class AudioPlayerFragment extends Fragment implements ServiceConnection,
         }
     };
 
+    @Override
+    public void onCreatePopupMenu(final Menu menu, final MenuInflater inflater) {
+        // Shuffle all
+        inflater.inflate(R.menu.shuffle, menu);
+        // Share, ringtone, and equalizer
+        inflater.inflate(R.menu.audio_player, menu);
+        // Settings
+        inflater.inflate(R.menu.activity_base, menu);
+    }
+
+    @Override
+    public boolean onPopupMenuItemClick(final MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.menu_shuffle:
+                // Shuffle all the songs
+                MusicUtils.shuffleAll(getActivity());
+                return true;
+            case R.id.menu_audio_player_ringtone:
+                // Set the current track as a ringtone
+                MusicUtils.setRingtone(getActivity(), MusicUtils.getCurrentAudioId());
+                return true;
+            case R.id.menu_audio_player_share:
+                // Share the current meta data
+                shareCurrentTrack();
+                return true;
+            case R.id.menu_audio_player_equalizer:
+                // Sound effects
+                NavUtils.openEffectsPanel(getActivity());
+                return true;
+            case R.id.menu_settings:
+                // Settings
+                NavUtils.openSettings(getActivity());
+                return true;
+            case R.id.menu_audio_player_delete:
+                // Delete current song
+                DeleteDialog.newInstance(MusicUtils.getTrackName(), new long[]{
+                        MusicUtils.getCurrentAudioId()
+                }, null).show(getActivity().getSupportFragmentManager(), "DeleteDialog");
+                return true;
+            default:
+                break;
+        }
+
+        return false;
+    }
+
+    @Override
+    public void addHeaderBar(final WeakReference<HeaderBar> headerBar) {
+        mHeaderBarList.add(headerBar);
+    }
+
+    @Override
+    public void clearHeaderBars() {
+        mHeaderBarList.clear();
+    }
+
+    public void dismissPopupMenu() {
+        for (WeakReference<HeaderBar> headerBarRef : mHeaderBarList) {
+            HeaderBar headerBar = headerBarRef.get();
+            if (headerBar != null) {
+                headerBar.dismissPopupMenu();
+            }
+        }
+    }
+
     /**
      * Used to update the current time string
      */
@@ -677,8 +750,7 @@ public class AudioPlayerFragment extends Fragment implements ServiceConnection,
                 // Current info
                 mReference.get().updateNowPlayingInfo();
                 // Update the favorites icon
-                // TODO: Revist
-                // mReference.get().invalidateOptionsMenu();
+                mReference.get().dismissPopupMenu();
             } else if (action.equals(MusicPlaybackService.PLAYSTATE_CHANGED)) {
                 // Set the play and pause image
                 mReference.get().mPlayPauseButton.updateState();

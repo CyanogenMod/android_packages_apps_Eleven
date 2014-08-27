@@ -16,12 +16,17 @@ import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
+import android.view.MenuInflater;
 import android.view.View;
 import android.widget.FrameLayout;
+import android.widget.ImageView;
+import android.widget.PopupMenu;
 import android.widget.TextView;
 
 import com.cyngn.eleven.R;
 import com.cyngn.eleven.slidinguppanel.SlidingUpPanelLayout;
+import com.cyngn.eleven.slidinguppanel.SlidingUpPanelLayout.SimplePanelSlideListener;
+import com.cyngn.eleven.ui.HeaderBar;
 import com.cyngn.eleven.ui.fragments.AudioPlayerFragment;
 import com.cyngn.eleven.ui.fragments.QueueFragment;
 import com.cyngn.eleven.ui.fragments.phone.MusicBrowserPhoneFragment;
@@ -59,12 +64,6 @@ public class HomeActivity extends BaseActivity {
         getSupportFragmentManager().beginTransaction()
                 .replace(R.id.activity_base_content, new MusicBrowserPhoneFragment()).commit();
 
-        getSupportFragmentManager().beginTransaction()
-                .replace(R.id.audioPlayerFragment, new AudioPlayerFragment()).commit();
-
-        getSupportFragmentManager().beginTransaction()
-                .replace(R.id.queueFragment, new QueueFragment()).commit();
-
         // set the action bar background color to be the background theme color
         mActionBarColor = getResources().getColor(R.color.header_action_bar_color);
         getActionBar().setBackgroundDrawable(new ColorDrawable(mActionBarColor));
@@ -81,8 +80,7 @@ public class HomeActivity extends BaseActivity {
 
     private void setupFirstPanel() {
         mFirstPanel = (SlidingUpPanelLayout)findViewById(R.id.sliding_layout);
-        setHeaderText(R.id.firstHeaderBar, R.string.page_now_playing);
-        mFirstPanel.setPanelSlideListener(new SlidingUpPanelLayout.PanelSlideListener() {
+        mFirstPanel.setPanelSlideListener(new SimplePanelSlideListener() {
             @Override
             public void onPanelSlide(View panel, float slideOffset) {
                 if (slideOffset > 0.8f) {
@@ -91,32 +89,15 @@ public class HomeActivity extends BaseActivity {
                     getActionBar().show();
                 }
             }
-
-            @Override
-            public void onPanelCollapsed(View panel) {
-
-            }
-
-            @Override
-            public void onPanelExpanded(View panel) {
-
-            }
-
-            @Override
-            public void onPanelAnchored(View panel) {
-
-            }
-
-            @Override
-            public void onPanelHidden(View panel) {
-
-            }
         });
+
+        // setup the header bar
+        setupHeaderBar(R.id.firstHeaderBar, R.string.app_name_uppercase); //R.string.page_now_playing);
     }
 
     private void setupSecondPanel() {
         mSecondPanel = (SlidingUpPanelLayout)findViewById(R.id.sliding_layout2);
-        mSecondPanel.setPanelSlideListener(new SlidingUpPanelLayout.PanelSlideListener() {
+        mSecondPanel.setPanelSlideListener(new SimplePanelSlideListener() {
             @Override
             public void onPanelSlide(View panel, float slideOffset) {
                 mFirstPanel.setSlidingEnabled(false);
@@ -126,25 +107,10 @@ public class HomeActivity extends BaseActivity {
             public void onPanelCollapsed(View panel) {
                 mFirstPanel.setSlidingEnabled(true);
             }
-
-            @Override
-            public void onPanelExpanded(View panel) {
-
-            }
-
-            @Override
-            public void onPanelAnchored(View panel) {
-
-            }
-
-            @Override
-            public void onPanelHidden(View panel) {
-
-            }
         });
 
-        // set the text of the second header
-        setHeaderText(R.id.secondHeaderBar, R.string.page_play_queue);
+        // setup the header bar
+        setupHeaderBar(R.id.secondHeaderBar, R.string.page_play_queue);
 
         // set the drag view offset to allow the panel to go past the top of the viewport
         // since the previous view's is hiding the slide offset, we need to subtract that
@@ -241,9 +207,16 @@ public class HomeActivity extends BaseActivity {
         return (AudioPlayerFragment)getSupportFragmentManager().findFragmentById(R.id.audioPlayerFragment);
     }
 
-    protected void setHeaderText(int containerId, int textId) {
-        View container = findViewById(containerId);
-        TextView textView = (TextView)container.findViewById(R.id.header_bar_title);
+    protected QueueFragment getQueueFragment() {
+        return (QueueFragment)getSupportFragmentManager().findFragmentById(R.id.queueFragment);
+    }
+
+    protected void setupHeaderBar(final int containerId, final int textId) {
+        final HeaderBar headerBar = (HeaderBar)findViewById(containerId);
+        TextView textView = (TextView)headerBar.findViewById(R.id.header_bar_title);
         textView.setText(textId);
+
+        headerBar.add(getAudioPlayerFragment());
+        headerBar.add(getQueueFragment());
     }
 }

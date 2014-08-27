@@ -142,6 +142,5 @@ public final class NavUtils {
         final Intent intent = new Intent(activity, HomeActivity.class);
         intent.setAction(HomeActivity.ACTION_VIEW_BROWSE);
         activity.startActivity(intent);
-        activity.finish();
     }
 }

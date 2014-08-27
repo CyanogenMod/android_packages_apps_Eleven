@@ -62,8 +62,9 @@
                         android:id="@+id/firstHeaderBar"
                         layout="@layout/header_bar" />
 
-                    <FrameLayout
+                    <fragment
                         android:id="@+id/audioPlayerFragment"
+                        class="com.cyngn.eleven.ui.fragments.AudioPlayerFragment"
                         android:layout_width="match_parent"
                         android:layout_height="0dip"
                         android:layout_weight="1" />
@@ -95,8 +96,9 @@
                         layout="@layout/header_bar" />
                 </LinearLayout>
 
-                <FrameLayout
+                <fragment
                     android:id="@+id/queueFragment"
+                    class="com.cyngn.eleven.ui.fragments.QueueFragment"
                     android:layout_width="match_parent"
                     android:layout_height="0dip"
                     android:layout_weight="1" />

@@ -48,6 +48,8 @@ import com.cyngn.eleven.menu.FragmentMenuItems;
 import com.cyngn.eleven.model.Song;
 import com.cyngn.eleven.provider.FavoritesStore;
 import com.cyngn.eleven.recycler.RecycleHolder;
+import com.cyngn.eleven.ui.HeaderBar;
+import com.cyngn.eleven.ui.HeaderBar.PopupMenuCreator;
 import com.cyngn.eleven.utils.MusicUtils;
 import com.cyngn.eleven.utils.NavUtils;
 import com.viewpagerindicator.TitlePageIndicator;
@@ -61,7 +63,7 @@ import java.util.List;
  * @author Andrew Neal (andrewdneal@gmail.com)
  */
 public class QueueFragment extends Fragment implements LoaderCallbacks<List<Song>>,
-        OnItemClickListener, DropListener, RemoveListener, DragScrollProfile {
+        OnItemClickListener, DropListener, RemoveListener, DragScrollProfile, PopupMenuCreator {
 
     /**
      * Used to keep context menu items from bleeding into other fragments
@@ -159,7 +161,6 @@ public class QueueFragment extends Fragment implements LoaderCallbacks<List<Song
     @Override
     public void onActivityCreated(final Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        // TODO: Hook up the options menu to the custom action bar we have
 
         // Initialize the broadcast receiver
         mQueueUpdateListener = new QueueUpdateListener(this);
@@ -194,20 +195,23 @@ public class QueueFragment extends Fragment implements LoaderCallbacks<List<Song
         }
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
-    public void onCreateOptionsMenu(final Menu menu, final MenuInflater inflater) {
+    public void onCreatePopupMenu(final Menu menu, final MenuInflater inflater) {
         inflater.inflate(R.menu.queue, menu);
-        super.onCreateOptionsMenu(menu, inflater);
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
-    public boolean onOptionsItemSelected(final MenuItem item) {
+    public void addHeaderBar(final WeakReference<HeaderBar> headerBar) {
+        // do nothing since we don't need to invalidate the popup menu
+    }
+
+    @Override
+    public void clearHeaderBars() {
+        // do nothing since we don't need to invalidate the popup menu
+    }
+
+    @Override
+    public boolean onPopupMenuItemClick(final MenuItem item) {
         switch (item.getItemId()) {
             case R.id.menu_save_queue:
                 NowPlayingCursor queue = (NowPlayingCursor)QueueLoader
@@ -224,7 +228,8 @@ public class QueueFragment extends Fragment implements LoaderCallbacks<List<Song
             default:
                 break;
         }
-        return super.onOptionsItemSelected(item);
+
+        return false;
     }
 
     /**

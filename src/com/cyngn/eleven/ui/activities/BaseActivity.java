@@ -129,7 +129,7 @@ public abstract class BaseActivity extends FragmentActivity implements ServiceCo
         // Initialize the broadcast receiver
         mPlaybackStatus = new PlaybackStatus(this);
 
-        getActionBar().setTitle(getString(R.string.app_name));
+        getActionBar().setTitle(getString(R.string.app_name_uppercase));
 
         // Set the layout
         setContentView(setContentView());
