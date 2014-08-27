@@ -61,8 +61,10 @@ public class HomeActivity extends BaseActivity {
     protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        getSupportFragmentManager().beginTransaction()
-                .replace(R.id.activity_base_content, new MusicBrowserPhoneFragment()).commit();
+        if (savedInstanceState == null) {
+            getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.activity_base_content, new MusicBrowserPhoneFragment()).commit();
+        }
 
         // set the action bar background color to be the background theme color
         mActionBarColor = getResources().getColor(R.color.header_action_bar_color);

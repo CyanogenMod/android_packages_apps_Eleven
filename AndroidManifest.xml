@@ -64,6 +64,7 @@
             android:windowSoftInputMode="adjustPan"
             android:launchMode="singleTask"
             android:exported="true"
+            android:screenOrientation="portrait"
             android:theme="@style/Eleven.Theme.ActionBar.Overlay">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -133,13 +134,15 @@
         <!-- Profile phone Activity -->
         <activity
             android:name=".ui.activities.ProfileActivity"
-            android:excludeFromRecents="true" />
+            android:excludeFromRecents="true"
+            android:screenOrientation="portrait"/>
         <!-- Shortcut launcher Activity -->
         <activity
             android:name=".ui.activities.ShortcutActivity"
             android:excludeFromRecents="true"
             android:exported="true"
-            android:theme="@style/Theme.Transparent" >
+            android:theme="@style/Theme.Transparent"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.media.action.MEDIA_PLAY_FROM_SEARCH" />
 
@@ -149,7 +152,8 @@
         <!-- Search interface -->
         <activity
             android:name=".ui.activities.SearchActivity"
-            android:exported="true" >
+            android:exported="true"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.SEARCH" />
                 <action android:name="android.intent.action.MEDIA_SEARCH" />
@@ -165,11 +169,8 @@
         <activity
             android:name=".ui.activities.SettingsActivity"
             android:label="@string/menu_settings"
-            android:theme="@style/Eleven.Theme" />
-        <!-- Themes Activity -->
-        <activity
-            android:name=".ui.activities.ThemesActivity"
-            android:excludeFromRecents="true" />
+            android:theme="@style/Eleven.Theme"
+            android:screenOrientation="portrait"/>
         <!-- 4x1 App Widget -->
         <receiver
             android:name="com.cyngn.eleven.appwidgets.AppWidgetSmall"

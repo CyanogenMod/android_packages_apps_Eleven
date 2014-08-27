@@ -86,9 +86,6 @@ public class AudioPlayerFragment extends Fragment implements ServiceConnection,
     // Album art
     private ImageView mAlbumArt;
 
-    // Tiny artwork
-    private ImageView mAlbumArtSmall;
-
     // Current time
     private TextView mCurrentTime;
 
@@ -311,8 +308,6 @@ public class AudioPlayerFragment extends Fragment implements ServiceConnection,
         mArtistName = (TextView)mRootView.findViewById(R.id.audio_player_artist_name);
         // Album art
         mAlbumArt = (ImageView)mRootView.findViewById(R.id.audio_player_album_art);
-        // Small album art
-        mAlbumArtSmall = (ImageView)mRootView.findViewById(R.id.audio_player_switch_album_art);
         // Current time
         mCurrentTime = (TextView)mRootView.findViewById(R.id.audio_player_current_time);
         // Total time
@@ -340,8 +335,6 @@ public class AudioPlayerFragment extends Fragment implements ServiceConnection,
         mTotalTime.setText(MusicUtils.makeTimeString(getActivity(), MusicUtils.duration() / 1000));
         // Set the album art
         mImageFetcher.loadCurrentArtwork(mAlbumArt);
-        // Set the small artwork
-        mImageFetcher.loadCurrentArtwork(mAlbumArtSmall);
         // Update the current time
         queueNextRefresh(1);
 
