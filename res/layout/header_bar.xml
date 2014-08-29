@@ -14,7 +14,11 @@
         android:id="@+id/header_bar_up"
         android:layout_width="@dimen/header_bar_up_width"
         android:layout_height="@dimen/header_bar_up_height"
+        android:layout_gravity="center_vertical"
         android:layout_weight="0"
+        android:paddingLeft="@dimen/header_bar_button_padding_small"
+        android:paddingRight="@dimen/header_bar_button_padding_small"
+        android:scaleType="centerCrop"
         android:src="@drawable/btn_header_collapse"/>
 
     <TextView
@@ -28,11 +32,24 @@
         android:textSize="@dimen/text_size_large" />
 
     <ImageView
+        android:id="@+id/header_bar_custom_button"
+        android:layout_width="@dimen/header_bar_custom_button_width"
+        android:layout_height="@dimen/header_bar_custom_button_height"
+        android:layout_gravity="center_vertical"
+        android:layout_weight="0"
+        android:paddingLeft="@dimen/header_bar_button_padding_small"
+        android:paddingRight="@dimen/header_bar_button_padding_large"
+        android:scaleType="centerCrop" />
+
+    <ImageView
         android:id="@+id/header_bar_menu_button"
         android:layout_width="@dimen/header_bar_menu_button_width"
         android:layout_height="@dimen/header_bar_menu_button_height"
+        android:layout_gravity="center_vertical"
         android:layout_weight="0"
-        android:scaleType="centerInside"
+        android:paddingLeft="@dimen/header_bar_button_padding_small"
+        android:paddingRight="@dimen/header_bar_button_padding_large"
+        android:scaleType="centerCrop"
         android:src="@drawable/menu_button_light"/>
 
 </com.cyngn.eleven.ui.HeaderBar>

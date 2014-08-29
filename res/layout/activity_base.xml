@@ -27,7 +27,8 @@
         android:gravity="bottom"
         sothree:panelHeight="@dimen/bottom_action_bar_height"
         sothree:slidePanelOffset="@dimen/bottom_action_bar_height"
-        sothree:dragView="@+id/firstPanelDragArea">
+        sothree:dragView="@+id/firstPanelDragArea"
+        sothree:shadowHeight="@dimen/sliding_panel_shadow_height">
 
         <FrameLayout
             android:id="@+id/activity_base_content"
@@ -43,7 +44,8 @@
             android:gravity="bottom"
             sothree:directOffset="true"
             sothree:panelHeight="@dimen/sliding_panel_indicator_height"
-            sothree:dragView="@+id/secondPanelDragArea">
+            sothree:dragView="@+id/secondPanelDragArea"
+            sothree:shadowHeight="@dimen/sliding_panel_shadow_height">
 
             <LinearLayout
                 android:layout_width="match_parent"

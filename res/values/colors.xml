@@ -66,9 +66,6 @@
     <color name="bottom_action_bar_text_color">@color/white</color>
 
 
-    <!-- Color for the audio player fragment text -->
-    <color name="audio_player_text_color">@color/default_text_color</color>
-
     <!-- Color for the pop up menu -->
     <color name="menu_divider_color">#4ca19d9e</color>
     <color name="menu_text_color">@color/white</color>
@@ -85,4 +82,10 @@
     <color name="tpi_selected_text_color">#bf3d4049</color>
 
 
+    <!-- Color for the text on the audio player -->
+    <color name="audio_player_text_color">#bfffffff</color>
+
+    <!-- Color for the Progress bar -->
+    <color name="circular_progress_bar_background">#bfababab</color>
+    <color name="circular_progress_bar">#ffffffff</color>
 </resources>

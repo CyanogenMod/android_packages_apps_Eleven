@@ -13,7 +13,7 @@
         android:layout_height="fill_parent"
         android:gravity="center_vertical"
         android:layout_alignParentLeft="true"
-        android:layout_toLeftOf="@+id/action_button_play"
+        android:layout_toLeftOf="@+id/play_pause_container"
         android:orientation="vertical">
         <TextView
             android:id="@+id/line_one"
@@ -34,17 +34,20 @@
             android:layout_height="wrap_content" />
     </LinearLayout>
 
-    <com.cyngn.eleven.widgets.PlayPauseButton
-        android:id="@+id/action_button_play"
-        android:layout_width="@dimen/songlist_control_button_width"
-        android:layout_height="@dimen/songlist_control_button_height"
+    <FrameLayout
+        android:id="@id/play_pause_container"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_centerVertical="true"
         android:layout_toLeftOf="@+id/line_one_right"
-        android:contentDescription="@string/accessibility_play"
-        android:focusable="true"
-        android:scaleType="centerInside"
-        android:src="@drawable/btn_playback_play"
-        android:visibility="gone" />
+        android:paddingLeft="@dimen/list_item_progress_padding_left"
+        android:paddingRight="@dimen/list_item_progress_padding_right">
+        <include
+            android:layout_width="@dimen/list_item_progress_width"
+            android:layout_height="@dimen/list_item_progress_height"
+            android:layout_centerVertical="true"
+            layout="@layout/play_pause_progress_button"/>
+    </FrameLayout>
 
     <TextView
         android:id="@+id/line_one_right"

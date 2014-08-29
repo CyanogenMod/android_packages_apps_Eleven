@@ -151,7 +151,7 @@ public abstract class BaseActivity extends FragmentActivity implements ServiceCo
         // Set the playback drawables
         updatePlaybackControls();
         // Current info
-        updateBottomActionBarInfo();
+        updateMetaInfo();
     }
 
     /**
@@ -222,7 +222,7 @@ public abstract class BaseActivity extends FragmentActivity implements ServiceCo
         // Set the playback drawables
         updatePlaybackControls();
         // Current info
-        updateBottomActionBarInfo();
+        updateMetaInfo();
     }
 
     /**
@@ -312,6 +312,13 @@ public abstract class BaseActivity extends FragmentActivity implements ServiceCo
     }
 
     /**
+     * Sets the track name, album name, and album art.  This is protected to enable overriding
+     */
+    protected void updateMetaInfo() {
+        updateBottomActionBarInfo();
+    }
+
+    /**
      * Sets the track name, album name, and album art.
      */
     private void updateBottomActionBarInfo() {
@@ -397,7 +404,7 @@ public abstract class BaseActivity extends FragmentActivity implements ServiceCo
             final String action = intent.getAction();
             if (action.equals(MusicPlaybackService.META_CHANGED)) {
                 // Current info
-                mReference.get().updateBottomActionBarInfo();
+                mReference.get().updateMetaInfo();
                 // Let the listener know to the meta chnaged
                 for (final MusicStateListener listener : mReference.get().mMusicStateListener) {
                     if (listener != null) {

@@ -89,7 +89,6 @@
         <item name="android:textColor">@color/list_item_text_color</item>
         <item name="android:textSize">@dimen/list_item_main_text_size</item>
         <item name="android:textStyle">bold</item>
-        <item name="android:singleLine">true</item>
         <item name="android:ellipsize">end</item>
     </style>
 

@@ -1148,12 +1148,12 @@ public final class MusicUtils {
      *
      * @param context The {@link Context} to use.
      * @param groupId The group Id of the menu.
-     * @param subMenu The {@link SubMenu} to add to.
+     * @param menu The {@link Menu} to add to.
      */
     public static void makePlaylistMenu(final Context context, final int groupId,
-            final SubMenu subMenu) {
-        subMenu.clear();
-        subMenu.add(groupId, FragmentMenuItems.NEW_PLAYLIST, Menu.NONE, R.string.new_playlist);
+            final Menu menu) {
+        menu.clear();
+        menu.add(groupId, FragmentMenuItems.NEW_PLAYLIST, Menu.NONE, R.string.new_playlist);
         Cursor cursor = PlaylistLoader.makePlaylistCursor(context);
         if (cursor != null && cursor.getCount() > 0 && cursor.moveToFirst()) {
             while (!cursor.isAfterLast()) {
@@ -1161,7 +1161,7 @@ public final class MusicUtils {
                 String name = cursor.getString(1);
                 if (name != null) {
                     intent.putExtra("playlist", getIdForPlaylist(context, name));
-                    subMenu.add(groupId, FragmentMenuItems.PLAYLIST_SELECTED, Menu.NONE,
+                    menu.add(groupId, FragmentMenuItems.PLAYLIST_SELECTED, Menu.NONE,
                             name).setIntent(intent);
                 }
                 cursor.moveToNext();

@@ -60,6 +60,11 @@ public class RecycleHolder implements RecyclerListener {
         if (holder.mLineThree.get() != null) {
             holder.mLineThree.get().setText(null);
         }
+
+        // Stop the play pause button logic
+        if (holder.mPlayPauseProgressButton.get() != null) {
+            holder.mPlayPauseProgressButton.get().disableAndHide();
+        }
     }
 
 }

@@ -22,7 +22,6 @@ import android.os.IBinder;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.LoaderManager.LoaderCallbacks;
 import android.support.v4.content.Loader;
-import android.text.TextUtils;
 import android.view.ContextMenu;
 import android.view.ContextMenu.ContextMenuInfo;
 import android.view.LayoutInflater;
@@ -50,10 +49,9 @@ import com.cyngn.eleven.menu.DeleteDialog;
 import com.cyngn.eleven.menu.FragmentMenuItems;
 import com.cyngn.eleven.model.Song;
 import com.cyngn.eleven.recycler.RecycleHolder;
-import com.cyngn.eleven.ui.HeaderBar;
-import com.cyngn.eleven.ui.HeaderBar.PopupMenuCreator;
 import com.cyngn.eleven.utils.MusicUtils;
 import com.cyngn.eleven.utils.NavUtils;
+import com.cyngn.eleven.widgets.PlayPauseProgressButton;
 import com.viewpagerindicator.TitlePageIndicator;
 
 import java.lang.ref.WeakReference;
@@ -67,8 +65,7 @@ import static com.cyngn.eleven.utils.MusicUtils.mService;
  * @author Andrew Neal (andrewdneal@gmail.com)
  */
 public class QueueFragment extends Fragment implements LoaderCallbacks<List<Song>>,
-        OnItemClickListener, DropListener, RemoveListener, DragScrollProfile, PopupMenuCreator,
-        ServiceConnection {
+        OnItemClickListener, DropListener, RemoveListener, DragScrollProfile, ServiceConnection {
 
     /**
      * Used to keep context menu items from bleeding into other fragments
@@ -204,6 +201,43 @@ public class QueueFragment extends Fragment implements LoaderCallbacks<List<Song
         filter.addAction(MusicPlaybackService.META_CHANGED);
 
         getActivity().registerReceiver(mQueueUpdateListener, filter);
+
+        // resume the progress listeners
+        setPlayPauseProgressButtonStates(false);
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+
+        // stops the progress listeners
+        setPlayPauseProgressButtonStates(true);
+    }
+
+    /**
+     * Sets the state for any play pause progress buttons under the listview
+     * This is neede because the buttons update themselves so if the activity
+     * is hidden, we want to pause those handlers
+     * @param pause the state to set it to
+     */
+    public void setPlayPauseProgressButtonStates(boolean pause) {
+        if (mListView != null) {
+            // walk through the visible list items
+            for (int i = mListView.getFirstVisiblePosition();
+                 i <= mListView.getLastVisiblePosition(); i++) {
+                View childView = mListView.getChildAt(i);
+                if (childView != null) {
+                    PlayPauseProgressButton button = (PlayPauseProgressButton) childView.findViewById(R.id.playPauseProgressButton);
+
+                    // pause or resume based on the flag
+                    if (pause) {
+                        button.pause();
+                    } else {
+                        button.resume();
+                    }
+                }
+            }
+        }
     }
 
     @Override
@@ -220,43 +254,6 @@ public class QueueFragment extends Fragment implements LoaderCallbacks<List<Song
             MusicUtils.unbindFromService(mToken);
             mToken = null;
         }
-    }
-
-    @Override
-    public void onCreatePopupMenu(final Menu menu, final MenuInflater inflater) {
-        inflater.inflate(R.menu.queue, menu);
-    }
-
-    @Override
-    public void addHeaderBar(final WeakReference<HeaderBar> headerBar) {
-        // do nothing since we don't need to invalidate the popup menu
-    }
-
-    @Override
-    public void clearHeaderBars() {
-        // do nothing since we don't need to invalidate the popup menu
-    }
-
-    @Override
-    public boolean onPopupMenuItemClick(final MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.menu_save_queue:
-                NowPlayingCursor queue = (NowPlayingCursor)QueueLoader
-                        .makeQueueCursor(getActivity());
-                CreateNewPlaylist.getInstance(MusicUtils.getSongListForCursor(queue)).show(
-                        getFragmentManager(), "CreatePlaylist");
-                queue.close();
-                queue = null;
-                return true;
-            case R.id.menu_clear_queue:
-                MusicUtils.clearQueue();
-                NavUtils.goHome(getActivity());
-                return true;
-            default:
-                break;
-        }
-
-        return false;
     }
 
     /**

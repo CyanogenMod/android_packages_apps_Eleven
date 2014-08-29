@@ -12,15 +12,10 @@
 package com.cyngn.eleven.ui.activities;
 
 import android.content.Intent;
-import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
-import android.view.MenuInflater;
 import android.view.View;
-import android.widget.FrameLayout;
-import android.widget.ImageView;
-import android.widget.PopupMenu;
 import android.widget.TextView;
 
 import com.cyngn.eleven.R;
@@ -31,7 +26,7 @@ import com.cyngn.eleven.ui.fragments.AudioPlayerFragment;
 import com.cyngn.eleven.ui.fragments.QueueFragment;
 import com.cyngn.eleven.ui.fragments.phone.MusicBrowserPhoneFragment;
 import com.cyngn.eleven.utils.ApolloUtils;
-import com.cyngn.eleven.widgets.theme.BottomActionBar;
+import com.cyngn.eleven.utils.MusicUtils;
 
 /**
  * This class is used to display the {@link ViewPager} used to swipe between the
@@ -51,7 +46,9 @@ public class HomeActivity extends BaseActivity {
     }
 
     private SlidingUpPanelLayout mFirstPanel;
+    private HeaderBar mFirstHeaderBar;
     private SlidingUpPanelLayout mSecondPanel;
+    private HeaderBar mSecondHeaderBar;
 
     /**
      * {@inheritDoc}
@@ -89,7 +86,14 @@ public class HomeActivity extends BaseActivity {
         });
 
         // setup the header bar
-        setupHeaderBar(R.id.firstHeaderBar, R.string.app_name_uppercase); //R.string.page_now_playing);
+        mFirstHeaderBar = setupHeaderBar(R.id.firstHeaderBar, R.string.page_now_playing,
+                R.drawable.btn_queue_icon,
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        showPanel(Panel.Queue);
+                    }
+                });
     }
 
     private void setupSecondPanel() {
@@ -107,7 +111,14 @@ public class HomeActivity extends BaseActivity {
         });
 
         // setup the header bar
-        setupHeaderBar(R.id.secondHeaderBar, R.string.page_play_queue);
+        mSecondHeaderBar = setupHeaderBar(R.id.secondHeaderBar, R.string.page_play_queue,
+                R.drawable.btn_playback_icon,
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        showPanel(Panel.MusicPlayer);
+                    }
+                });
 
         // set the drag view offset to allow the panel to go past the top of the viewport
         // since the previous view's is hiding the slide offset, we need to subtract that
@@ -200,20 +211,24 @@ public class HomeActivity extends BaseActivity {
         }
     }
 
+    @Override
+    protected void updateMetaInfo() {
+        super.updateMetaInfo();
+
+        // Set the artist name
+        mFirstHeaderBar.setTitleText(MusicUtils.getArtistName());
+    }
+
     protected AudioPlayerFragment getAudioPlayerFragment() {
         return (AudioPlayerFragment)getSupportFragmentManager().findFragmentById(R.id.audioPlayerFragment);
     }
 
-    protected QueueFragment getQueueFragment() {
-        return (QueueFragment)getSupportFragmentManager().findFragmentById(R.id.queueFragment);
-    }
+    protected HeaderBar setupHeaderBar(final int containerId, final int textId,
+                                       final int customIconId, final View.OnClickListener listener) {
+        final HeaderBar headerBar = (HeaderBar) findViewById(containerId);
+        headerBar.setTitleText(textId);
+        headerBar.setupCustomButton(customIconId, listener);
 
-    protected void setupHeaderBar(final int containerId, final int textId) {
-        final HeaderBar headerBar = (HeaderBar)findViewById(containerId);
-        TextView textView = (TextView)headerBar.findViewById(R.id.header_bar_title);
-        textView.setText(textId);
-
-        headerBar.add(getAudioPlayerFragment());
-        headerBar.add(getQueueFragment());
+        return headerBar;
     }
 }

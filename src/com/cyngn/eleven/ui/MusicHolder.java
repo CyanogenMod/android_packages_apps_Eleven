@@ -20,7 +20,7 @@ import android.widget.TextView;
 
 import com.cyngn.eleven.R;
 import com.cyngn.eleven.appwidgets.RecentWidgetService;
-import com.cyngn.eleven.widgets.PlayPauseButton;
+import com.cyngn.eleven.widgets.PlayPauseProgressButton;
 
 import java.lang.ref.WeakReference;
 
@@ -77,11 +77,16 @@ public class MusicHolder {
     public WeakReference<TextView> mLineThree;
 
     /**
-     * A play/pause button for the currently playing song
+     * The container for the circular progress bar and play/pause button
      *
      * @see {@code #getView()} of a specific adapter for more detailed info
      */
-    public WeakReference<PlayPauseButton> mPlayPauseButton;
+    public WeakReference<PlayPauseProgressButton> mPlayPauseProgressButton;
+
+    /**
+     * The Padding container for the circular progress bar
+     */
+    public WeakReference<View> mPlayPauseProgressContainer;
 
     /**
      * Constructor of <code>ViewHolder</code>
@@ -114,8 +119,13 @@ public class MusicHolder {
         // Initialize mLineThree
         mLineThree = new WeakReference<TextView>((TextView)view.findViewById(R.id.line_three));
 
-        // Initialize mImageRight
-        mPlayPauseButton = new WeakReference<PlayPauseButton>((PlayPauseButton)view.findViewById(R.id.action_button_play));
+        // Initialize Circular progress bar container
+        mPlayPauseProgressButton = new WeakReference<PlayPauseProgressButton>(
+                (PlayPauseProgressButton)view.findViewById(R.id.playPauseProgressButton));
+
+        // Get the padding container for the progress bar
+        mPlayPauseProgressContainer = new WeakReference<View>(
+                view.findViewById(R.id.play_pause_container));
     }
 
     /**

@@ -24,7 +24,7 @@ import com.cyngn.eleven.ui.MusicHolder.DataHolder;
 import com.cyngn.eleven.ui.fragments.QueueFragment;
 import com.cyngn.eleven.ui.fragments.SongFragment;
 import com.cyngn.eleven.utils.MusicUtils;
-import com.cyngn.eleven.widgets.PlayPauseButton;
+import com.cyngn.eleven.widgets.PlayPauseProgressButton;
 
 /**
  * This {@link ArrayAdapter} is used to display all of the songs on a user's
@@ -94,16 +94,18 @@ public class SongAdapter extends ArrayAdapter<Song> implements SectionAdapter.Ba
         // Set the album name (line two)
         holder.mLineTwo.get().setText(dataHolder.mLineTwo);
 
-        PlayPauseButton playPauseButton = holder.mPlayPauseButton.get();
+        // padding doesn't apply to included layouts, so we need
+        // to wrap it in a container and show/hide with the container
+        PlayPauseProgressButton playPauseProgressButton = holder.mPlayPauseProgressButton.get();
+        View playPauseContainer = holder.mPlayPauseProgressContainer.get();
         if (mCurrentlyPlayingSongId == dataHolder.mItemId) {
             // make it visible
-            playPauseButton.setVisibility(View.VISIBLE);
-
-            // update the state based on whether we are playing or not
-            playPauseButton.updateState();
+            playPauseProgressButton.enableAndShow();
+            playPauseContainer.setVisibility(View.VISIBLE);
         } else {
             // hide it
-            playPauseButton.setVisibility(View.GONE);
+            playPauseProgressButton.disableAndHide();
+            playPauseContainer.setVisibility(View.GONE);
         }
 
         return convertView;

@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Copyright (C) 2014 Cyanogen, Inc.
+-->
+<com.cyngn.eleven.widgets.PlayPauseProgressButton
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/playPauseProgressButton"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:visibility="gone">
+
+    <!-- TODO: Figure out why scaleType: centerInside isn't properly scaling up -->
+    <com.cyngn.eleven.widgets.PlayPauseButton
+        android:id="@+id/action_button_play"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_gravity="center"
+        android:contentDescription="@string/accessibility_play"
+        android:focusable="true"
+        android:scaleType="centerCrop"
+        android:src="@drawable/btn_playback_play_med" />
+
+    <ProgressBar
+        android:id="@+id/progressBarBackground"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:clickable="false"
+        android:indeterminate="false"
+        android:max="100"
+        android:progress="100"
+        android:progressDrawable="@drawable/circular_drawable_background" />
+
+    <ProgressBar
+        android:id="@+id/circularProgressBar"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:clickable="false"
+        android:indeterminate="false"
+        android:max="100"
+        android:progressDrawable="@drawable/circular_drawable" />
+
+
+</com.cyngn.eleven.widgets.PlayPauseProgressButton>
