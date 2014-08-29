@@ -3,7 +3,6 @@
  */
 package com.cyngn.eleven.ui.fragments;
 
-import android.app.Activity;
 import android.content.BroadcastReceiver;
 import android.content.ComponentName;
 import android.content.Context;
@@ -18,13 +17,14 @@ import android.os.IBinder;
 import android.os.Message;
 import android.os.SystemClock;
 import android.support.v4.app.Fragment;
+import android.support.v4.view.ViewPager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.SeekBar;
 import android.widget.TextView;
@@ -34,6 +34,7 @@ import android.provider.MediaStore.Audio.Albums;
 import android.provider.MediaStore.Audio.Artists;
 import com.cyngn.eleven.MusicPlaybackService;
 import com.cyngn.eleven.R;
+import com.cyngn.eleven.adapters.AlbumArtPagerAdapter;
 import com.cyngn.eleven.cache.ImageFetcher;
 import com.cyngn.eleven.menu.DeleteDialog;
 import com.cyngn.eleven.ui.HeaderBar;
@@ -52,6 +53,7 @@ import static com.cyngn.eleven.utils.MusicUtils.mService;
 
 public class AudioPlayerFragment extends Fragment implements ServiceConnection,
         SeekBar.OnSeekBarChangeListener, HeaderBar.PopupMenuCreator {
+    private static final String TAG = AudioPlayerFragment.class.getSimpleName();
 
     // fragment view
     private ViewGroup mRootView;
@@ -83,8 +85,10 @@ public class AudioPlayerFragment extends Fragment implements ServiceConnection,
     // Artist name
     private TextView mArtistName;
 
-    // Album art
-    private ImageView mAlbumArt;
+    // Album art ListView
+    private ViewPager mAlbumArtViewPager;
+
+    private AlbumArtPagerAdapter mAlbumArtPagerAdapter;
 
     // Current time
     private TextView mCurrentTime;
@@ -163,6 +167,8 @@ public class AudioPlayerFragment extends Fragment implements ServiceConnection,
         startPlayback();
         // Set the playback drawables
         updatePlaybackControls();
+        // Setup the adapter
+        createAndSetAdapter();
         // Current info
         updateNowPlayingInfo();
     }
@@ -249,6 +255,9 @@ public class AudioPlayerFragment extends Fragment implements ServiceConnection,
         filter.addAction(MusicPlaybackService.META_CHANGED);
         // Update a list, probably the playlist fragment's
         filter.addAction(MusicPlaybackService.REFRESH);
+        // Listen to changes to the entire queue
+        filter.addAction(MusicPlaybackService.QUEUE_CHANGED);
+        // Register the intent filters
         getActivity().registerReceiver(mPlaybackStatus, filter);
         // Refresh the current time
         final long next = refreshCurrentTime();
@@ -306,8 +315,37 @@ public class AudioPlayerFragment extends Fragment implements ServiceConnection,
         mTrackName = (TextView)mRootView.findViewById(R.id.audio_player_track_name);
         // Artist name
         mArtistName = (TextView)mRootView.findViewById(R.id.audio_player_artist_name);
-        // Album art
-        mAlbumArt = (ImageView)mRootView.findViewById(R.id.audio_player_album_art);
+
+
+
+        // Album art view pager
+        mAlbumArtViewPager = (ViewPager)mRootView.findViewById(R.id.audio_player_album_art_viewpager);
+        mAlbumArtViewPager.setOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener() {
+            @Override
+            public void onPageSelected(int position) {
+                super.onPageSelected(position);
+
+                int currentPosition = 0;
+                if (MusicUtils.getShuffleMode() == MusicPlaybackService.SHUFFLE_NONE) {
+                    // if we aren't shuffling, base the position on the queue position
+                    currentPosition = MusicUtils.getQueuePosition();
+                } else {
+                    // if we are shuffling, use the history size as the position
+                    currentPosition = MusicUtils.getQueueHistorySize();
+                }
+
+                // check if we are going to next or previous track
+                if (position - currentPosition == 1) {
+                    MusicUtils.asyncNext(getActivity());
+                } else if (position - currentPosition == -1) {
+                    MusicUtils.previous(getActivity(), true);
+                } else if (currentPosition != position) {
+                    Log.w(TAG, "Unexpected page position of " + position
+                            + " when current is: " + currentPosition);
+                }
+            }
+        });
+
         // Current time
         mCurrentTime = (TextView)mRootView.findViewById(R.id.audio_player_current_time);
         // Total time
@@ -333,11 +371,49 @@ public class AudioPlayerFragment extends Fragment implements ServiceConnection,
         mArtistName.setText(MusicUtils.getArtistName());
         // Set the total time
         mTotalTime.setText(MusicUtils.makeTimeString(getActivity(), MusicUtils.duration() / 1000));
-        // Set the album art
-        mImageFetcher.loadCurrentArtwork(mAlbumArt);
+
+        if (MusicUtils.getRepeatMode() == MusicPlaybackService.REPEAT_CURRENT) {
+            // we are repeating 1 so just jump to the 1st and only item
+            mAlbumArtViewPager.setCurrentItem(0, false);
+        } else if (MusicUtils.getShuffleMode() == MusicPlaybackService.SHUFFLE_NONE) {
+            // we are playing in-order, base the position on the queue position
+            mAlbumArtViewPager.setCurrentItem(MusicUtils.getQueuePosition(), true);
+        } else {
+            // if we are shuffling, just based our index based on the history
+            mAlbumArtViewPager.setCurrentItem(MusicUtils.getQueueHistorySize(), true);
+        }
+
         // Update the current time
         queueNextRefresh(1);
+    }
 
+    /**
+     * This creates the adapter based on the repeat and shuffle configuration and sets it into the
+     * page adapter
+     */
+    private void createAndSetAdapter() {
+        mAlbumArtPagerAdapter = new AlbumArtPagerAdapter(getFragmentManager());
+
+        int repeatMode = MusicUtils.getRepeatMode();
+        int targetSize = 0;
+        int targetIndex = 0;
+
+        if (repeatMode == MusicPlaybackService.REPEAT_CURRENT) {
+            targetSize = 1;
+            targetIndex = 0;
+        } else if (MusicUtils.getShuffleMode() == MusicPlaybackService.SHUFFLE_NONE) {
+            // if we aren't shuffling, use the queue to determine where we are
+            targetSize = MusicUtils.getQueue().length;
+            targetIndex = MusicUtils.getQueuePosition();
+        } else {
+            // otherwise, set it to the max history size
+            targetSize = MusicPlaybackService.MAX_HISTORY_SIZE;
+            targetIndex = MusicUtils.getQueueHistorySize();
+        }
+
+        mAlbumArtPagerAdapter.setPlaylistLength(targetSize);
+        mAlbumArtViewPager.setAdapter(mAlbumArtPagerAdapter);
+        mAlbumArtViewPager.setCurrentItem(targetIndex);
     }
 
     private long parseIdFromIntent(Intent intent, String longKey,
@@ -400,8 +476,6 @@ public class AudioPlayerFragment extends Fragment implements ServiceConnection,
         if (handled) {
             // Make sure to process intent only once
             getActivity().setIntent(new Intent());
-            // Refresh the queue
-            // TODO: Refresh queue or have it self-aware
             return true;
         }
 
@@ -455,7 +529,7 @@ public class AudioPlayerFragment extends Fragment implements ServiceConnection,
             long newpos = mStartSeekPos - delta;
             if (newpos < 0) {
                 // move to previous track
-                MusicUtils.previous(getActivity());
+                MusicUtils.previous(getActivity(), true);
                 final long duration = MusicUtils.duration();
                 mStartSeekPos += duration;
                 newpos += duration;
@@ -750,6 +824,11 @@ public class AudioPlayerFragment extends Fragment implements ServiceConnection,
                 mReference.get().mRepeatButton.updateRepeatState();
                 // Set the shuffle image
                 mReference.get().mShuffleButton.updateShuffleState();
+
+                // Update the queue
+                mReference.get().createAndSetAdapter();
+            } else if (action.equals(MusicPlaybackService.QUEUE_CHANGED)) {
+                mReference.get().createAndSetAdapter();
             }
         }
     }

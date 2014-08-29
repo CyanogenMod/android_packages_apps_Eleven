@@ -72,7 +72,7 @@ public class RepeatingImageButton extends ImageButton implements OnClickListener
     public void onClick(final View view) {
         switch (view.getId()) {
             case R.id.action_button_previous:
-                MusicUtils.previous(getContext());
+                MusicUtils.previous(getContext(), false);
                 break;
             case R.id.action_button_next:
                 MusicUtils.next();

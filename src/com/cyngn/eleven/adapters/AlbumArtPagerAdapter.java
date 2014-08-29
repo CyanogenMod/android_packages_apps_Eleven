@@ -1,0 +1,301 @@
+/*
+ * Copyright (C) 2014 Cyanogen, Inc.
+ */
+
+package com.cyngn.eleven.adapters;
+
+import android.content.Context;
+import android.database.Cursor;
+import android.os.AsyncTask;
+import android.os.Bundle;
+import android.provider.BaseColumns;
+import android.provider.MediaStore;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentStatePagerAdapter;
+import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+
+import com.cyngn.eleven.MusicPlaybackService;
+import com.cyngn.eleven.R;
+import com.cyngn.eleven.utils.ApolloUtils;
+import com.cyngn.eleven.utils.MusicUtils;
+import com.cyngn.eleven.widgets.SquareImageView;
+
+import java.util.Iterator;
+import java.util.LinkedList;
+
+/**
+ * A {@link android.support.v4.app.FragmentStatePagerAdapter} class for swiping between album art
+ */
+public class AlbumArtPagerAdapter extends FragmentStatePagerAdapter {
+    private static boolean DEBUG = false;
+    private static final String TAG = AlbumArtPagerAdapter.class.getSimpleName();
+
+    public static final long NO_TRACK_ID = -1;
+    private static final int MAX_ALBUM_ARTIST_SIZE = 10;
+
+    // This helps with flickering and jumping and reloading the same tracks
+    private final static LinkedList<AlbumArtistDetails> sCacheAlbumArtistDetails = new LinkedList<AlbumArtistDetails>();
+
+    /**
+     * Adds the album artist details to the cache
+     * @param details the AlbumArtistDetails to add
+     */
+    public static void addAlbumArtistDetails(AlbumArtistDetails details) {
+        if (getAlbumArtistDetails(details.mAudioId) == null) {
+            sCacheAlbumArtistDetails.add(details);
+            if (sCacheAlbumArtistDetails.size() > MAX_ALBUM_ARTIST_SIZE) {
+                sCacheAlbumArtistDetails.remove();
+            }
+        }
+    }
+
+    /**
+     * Gets the album artist details for the audio track.  If it exists, it re-inserts the item
+     * to the end of the queue so it is considered the 'freshest' and stays longer
+     * @param audioId the audio track to look for
+     * @return the details of the album artist
+     */
+    public static AlbumArtistDetails getAlbumArtistDetails(long audioId) {
+        for (Iterator<AlbumArtistDetails> i = sCacheAlbumArtistDetails.descendingIterator(); i.hasNext();) {
+            final AlbumArtistDetails entry = i.next();
+            if (entry.mAudioId == audioId) {
+                // remove it from the stack to re-add to the top
+                i.remove();
+                sCacheAlbumArtistDetails.add(entry);
+                return entry;
+            }
+        }
+
+        return null;
+    }
+
+    // the length of the playlist
+    private int mPlaylistLen = 0;
+
+    public AlbumArtPagerAdapter(FragmentManager fm) {
+        super(fm);
+    }
+
+    @Override
+    public Fragment getItem(final int position) {
+        long trackID = getTrackId(position);
+        return AlbumArtFragment.newInstance(trackID);
+    }
+
+    @Override
+    public int getCount() {
+        return mPlaylistLen;
+    }
+
+    public void setPlaylistLength(final int len) {
+        mPlaylistLen = len;
+        notifyDataSetChanged();
+    }
+
+    /**
+     * Gets the track id for the item at position
+     * @param position position of the item of the queue
+     * @return track id of the item at position or NO_TRACK_ID if unknown
+     */
+    private long getTrackId(int position) {
+        if (MusicUtils.getRepeatMode() == MusicPlaybackService.REPEAT_CURRENT) {
+            // if we are only playing one song, return the current audio id
+            return MusicUtils.getCurrentAudioId();
+        } else if (MusicUtils.getShuffleMode() == MusicPlaybackService.SHUFFLE_NONE) {
+            // if we aren't shuffling, just return based on the queue position
+            return MusicUtils.getQueue()[position];
+        } else {
+            // if we are shuffling, there is no 'queue' going forward per say
+            // because it is dynamically generated.  In that case we can only look
+            // at the history and up to the very next track.  When we come back to this
+            // after the demo, we should redo that queue logic to be able to give us
+            // tracks going forward
+
+            // how far into the history we are
+            int positionOffset = MusicUtils.getQueueHistorySize();
+
+            if (position - positionOffset == 0) { // current track
+                return MusicUtils.getCurrentAudioId();
+            } else if (position - positionOffset == 1) { // next track
+                return MusicUtils.getNextAudioId();
+            } else if (position < positionOffset) {
+                // historical track - look up the historical position
+                long[] audioIds = MusicUtils.getQueue();
+                int[] historyPositions = MusicUtils.getQueueHistoryList();
+                if (position < historyPositions.length) {
+                    int queuePosition = historyPositions[position];
+                    if (queuePosition < audioIds.length) {
+                        return audioIds[queuePosition];
+                    }
+                }
+            }
+        }
+
+        // fallback case
+        return NO_TRACK_ID;
+    }
+
+    /**
+     * The fragments to be displayed inside this adapter.  This wraps the album art
+     * and handles loading the album art for a given audio id
+     */
+    public static class AlbumArtFragment extends Fragment {
+        private static final String ID = "com.cyngn.eleven.adapters.AlbumArtPagerAdapter.AlbumArtFragment.ID";
+
+        private View mRootView;
+        private AlbumArtistLoader mTask;
+        private SquareImageView mImageView;
+        private long mAudioId = NO_TRACK_ID;
+
+        public static AlbumArtFragment newInstance(final long trackId) {
+            AlbumArtFragment frag = new AlbumArtFragment();
+            final Bundle args = new Bundle();
+            args.putLong(ID, trackId);
+            frag.setArguments(args);
+            return frag;
+        }
+
+        @Override
+        public void onCreate(final Bundle savedInstanceState) {
+            super.onCreate(savedInstanceState);
+
+            mAudioId = getArguments().getLong(ID, NO_TRACK_ID);
+        }
+
+        @Override
+        public View onCreateView(final LayoutInflater inflater, final ViewGroup container, final Bundle savedInstanceState) {
+            mRootView = inflater.inflate(R.layout.album_art_fragment, null);
+            return mRootView;
+        }
+
+        @Override
+        public void onDestroyView() {
+            super.onDestroyView();
+
+            // if we are destroying our view, cancel our task and null it
+            if (mTask != null) {
+                mTask.cancel(true);
+                mTask = null;
+            }
+        }
+
+        @Override
+        public void onActivityCreated(final Bundle savedInstanceState) {
+            super.onActivityCreated(savedInstanceState);
+            mImageView = (SquareImageView)mRootView.findViewById(R.id.audio_player_album_art);
+            loadImageAsync();
+        }
+
+        /**
+         * Loads the image asynchronously
+         */
+        private void loadImageAsync() {
+            // if we have no track id, quit
+            if (mAudioId == NO_TRACK_ID) {
+                return;
+            }
+
+            // try loading from the cache
+            AlbumArtistDetails details = getAlbumArtistDetails(mAudioId);
+            if (details != null) {
+                loadImageAsync(details);
+            } else {
+                mTask = new AlbumArtistLoader(this, getActivity());
+                ApolloUtils.execute(false, mTask, mAudioId);
+            }
+
+        }
+
+        /**
+         * Loads the image asynchronously
+         * @param details details of the image to load
+         */
+        private void loadImageAsync(AlbumArtistDetails details) {
+            // load the actual image
+            ApolloUtils.getImageFetcher(getActivity()).loadAlbumImage(
+                    details.mArtistName,
+                    details.mAlbumName,
+                    details.mAlbumId,
+                    mImageView
+            );
+        }
+    }
+
+    /**
+     * Simple container for the album and artist name as well as album id
+     */
+    private static class AlbumArtistDetails {
+        public long mAudioId;
+        public long mAlbumId;
+        public String mAlbumName;
+        public String mArtistName;
+    }
+
+    /**
+     * This looks up the album and artist details for a track
+     */
+    private static class AlbumArtistLoader extends AsyncTask<Long, Void, AlbumArtistDetails> {
+        private Context mContext;
+        private AlbumArtFragment mFragment;
+
+        public AlbumArtistLoader(final AlbumArtFragment albumArtFragment, final Context context) {
+            mContext = context;
+            mFragment = albumArtFragment;
+        }
+
+        @Override
+        protected AlbumArtistDetails doInBackground(final Long... params) {
+            long id = params[0];
+
+            final StringBuilder selection = new StringBuilder();
+            selection.append(MediaStore.Audio.AudioColumns.IS_MUSIC + "=1");
+            selection.append(" AND " + BaseColumns._ID + " = '" + id + "'");
+
+            Cursor cursor = mContext.getContentResolver().query(
+                    MediaStore.Audio.Media.EXTERNAL_CONTENT_URI,
+                    new String[] {
+                            /* 0 */
+                            MediaStore.Audio.AudioColumns.ALBUM_ID,
+                            /* 1 */
+                            MediaStore.Audio.AudioColumns.ALBUM,
+                            /* 2 */
+                            MediaStore.Audio.AlbumColumns.ARTIST,
+                    }, selection.toString(), null, null);
+
+            if (!cursor.moveToFirst()) {
+                cursor.close();
+                return null;
+            }
+
+            AlbumArtistDetails result = new AlbumArtistDetails();
+            result.mAudioId = id;
+            result.mAlbumId = cursor.getLong(0);
+            result.mAlbumName = cursor.getString(1);
+            result.mArtistName = cursor.getString(2);
+            cursor.close();
+
+            return result;
+        }
+
+        @Override
+        protected void onPostExecute(final AlbumArtistDetails result) {
+            if (result != null) {
+                if (DEBUG) {
+                    Log.d(TAG, "[" + mFragment.mAudioId + "] Loading image: "
+                            + result.mAlbumId + ","
+                            + result.mAlbumName + ","
+                            + result.mArtistName);
+                }
+
+                AlbumArtPagerAdapter.addAlbumArtistDetails(result);
+                mFragment.loadImageAsync(result);
+            } else if (DEBUG) {
+                Log.d(TAG, "No Image found for audioId: " + mFragment.mAudioId);
+            }
+        }
+    }
+}

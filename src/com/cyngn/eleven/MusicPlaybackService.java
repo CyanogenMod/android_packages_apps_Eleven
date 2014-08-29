@@ -134,9 +134,14 @@ public class MusicPlaybackService extends Service {
     public static final String STOP_ACTION = "com.cyngn.eleven.stop";
 
     /**
-     * Called to go to the previous track
+     * Called to go to the previous track or the beginning of the track if partway through the track
      */
     public static final String PREVIOUS_ACTION = "com.cyngn.eleven.previous";
+
+    /**
+     * Called to go to the previous track regardless of how far in the current track the playback is
+     */
+    public static final String PREVIOUS_FORCE_ACTION = "com.cyngn.eleven.previous.force";
 
     /**
      * Called to go to the next track
@@ -290,8 +295,9 @@ public class MusicPlaybackService extends Service {
 
     /**
      * The max size allowed for the track history
+     * TODO: Comeback and rewrite/fix all the whole queue code bugs after demo
      */
-    private static final int MAX_HISTORY_SIZE = 100;
+    public static final int MAX_HISTORY_SIZE = 1000;
 
     /**
      * The columns used to retrieve any info from the current track
@@ -582,6 +588,7 @@ public class MusicPlaybackService extends Service {
         filter.addAction(STOP_ACTION);
         filter.addAction(NEXT_ACTION);
         filter.addAction(PREVIOUS_ACTION);
+        filter.addAction(PREVIOUS_FORCE_ACTION);
         filter.addAction(REPEAT_ACTION);
         filter.addAction(SHUFFLE_ACTION);
         // Attach the broadcast listener
@@ -752,13 +759,9 @@ public class MusicPlaybackService extends Service {
 
         if (CMDNEXT.equals(command) || NEXT_ACTION.equals(action)) {
             gotoNext(true);
-        } else if (CMDPREVIOUS.equals(command) || PREVIOUS_ACTION.equals(action)) {
-            if (position() < REWIND_INSTEAD_PREVIOUS_THRESHOLD) {
-                prev();
-            } else {
-                seek(0);
-                play();
-            }
+        } else if (CMDPREVIOUS.equals(command) || PREVIOUS_ACTION.equals(action)
+                || PREVIOUS_FORCE_ACTION.equals(action)) {
+            prev(PREVIOUS_FORCE_ACTION.equals(action));
         } else if (CMDTOGGLEPAUSE.equals(command) || TOGGLEPAUSE_ACTION.equals(action)) {
             if (isPlaying()) {
                 pause();
@@ -1111,61 +1114,80 @@ public class MusicPlaybackService extends Service {
     /**
      * @param force True to force the player onto the track next, false
      *            otherwise.
+     * @param saveToHistory True to save the mPlayPos to the history
      * @return The next position to play.
      */
     private int getNextPosition(final boolean force) {
+        // if we're not forced to go to the next track and we are only playing the current track
         if (!force && mRepeatMode == REPEAT_CURRENT) {
             if (mPlayPos < 0) {
                 return 0;
             }
             return mPlayPos;
         } else if (mShuffleMode == SHUFFLE_NORMAL) {
-            if (mPlayPos >= 0) {
-                mHistory.add(mPlayPos);
-            }
-            if (mHistory.size() > MAX_HISTORY_SIZE) {
-                mHistory.remove(0);
-            }
             final int numTracks = mPlayListLen;
-            final int[] tracks = new int[numTracks];
+
+            // count the number of times a track has been played
+            final int[] trackNumPlays = new int[numTracks];
             for (int i = 0; i < numTracks; i++) {
-                tracks[i] = i;
+                // set it all to 0
+                trackNumPlays[i] = 0;
             }
 
+            // walk through the history and add up the number of times the track
+            // has been played
             final int numHistory = mHistory.size();
-            int numUnplayed = numTracks;
             for (int i = 0; i < numHistory; i++) {
                 final int idx = mHistory.get(i).intValue();
-                if (idx < numTracks && tracks[idx] >= 0) {
-                    numUnplayed--;
-                    tracks[idx] = -1;
+                if (idx >= 0 && idx < numTracks) {
+                    trackNumPlays[idx]++;
                 }
             }
-            if (numUnplayed <= 0) {
-                if (mRepeatMode == REPEAT_ALL || force) {
-                    numUnplayed = numTracks;
-                    for (int i = 0; i < numTracks; i++) {
-                        tracks[i] = i;
-                    }
-                } else {
+
+            // also add the currently playing track to the count
+            if (mPlayPos >= 0 && mPlayPos < numTracks) {
+                trackNumPlays[mPlayPos]++;
+            }
+
+            // figure out the least # of times a track has a played as well as
+            // how many tracks share that count
+            int minNumPlays = Integer.MAX_VALUE;
+            int numTracksWithMinNumPlays = 0;
+            for (int i = 0; i < trackNumPlays.length; i++) {
+                // if we found a new track that has less number of plays, reset the counters
+                if (trackNumPlays[i] < minNumPlays) {
+                    minNumPlays = trackNumPlays[i];
+                    numTracksWithMinNumPlays = 1;
+                } else if (trackNumPlays[i] == minNumPlays) {
+                    // increment this track shares the # of tracks
+                    numTracksWithMinNumPlays++;
+                }
+            }
+
+            // if we've played each track at least once
+            if (minNumPlays > 0) {
+                // if we aren't repeating all and we're not forcing a track
+                // return no more tracks
+                if (mRepeatMode != REPEAT_ALL && !force) {
                     return -1;
                 }
             }
-            int skip = 0;
-            if (mShuffleMode == SHUFFLE_NORMAL || mShuffleMode == SHUFFLE_AUTO) {
-                skip = mShuffler.nextInt(numUnplayed);
-            }
-            int cnt = -1;
-            while (true) {
-                while (tracks[++cnt] < 0) {
-                    ;
-                }
-                skip--;
-                if (skip < 0) {
-                    break;
+
+            // else pick a track from the least number of played tracks
+            int skip = mShuffler.nextInt(numTracksWithMinNumPlays);
+            for (int i = 0; i < trackNumPlays.length; i++) {
+                if (trackNumPlays[i] == minNumPlays) {
+                    if (skip == 0) {
+                        return i;
+                    } else {
+                        skip--;
+                    }
                 }
             }
-            return cnt;
+
+            // Unexpected to land here
+            if (D) Log.e(TAG, "Getting the next position resulted did not get a result when it should have");
+            return -1;
         } else if (mShuffleMode == SHUFFLE_AUTO) {
             doAutoShuffleUpdate();
             return mPlayPos + 1;
@@ -1184,10 +1206,18 @@ public class MusicPlaybackService extends Service {
     }
 
     /**
-     * Sets the track track to be played
+     * Sets the track to be played
      */
     private void setNextTrack() {
-        mNextPlayPos = getNextPosition(false);
+        setNextTrack(getNextPosition(false));
+    }
+
+    /**
+     * Sets the next track to be played
+     * @param position the target position we want
+     */
+    private void setNextTrack(int position) {
+        mNextPlayPos = position;
         if (D) Log.d(TAG, "setNextTrack: next play position = " + mNextPlayPos);
         if (mNextPlayPos >= 0 && mPlayList != null) {
             final long id = mPlayList[mNextPlayPos];
@@ -1614,6 +1644,7 @@ public class MusicPlaybackService extends Service {
                         mPlayListLen = 1;
                         mPlayList[0] = mCursor.getLong(IDCOLIDX);
                         mPlayPos = 0;
+                        mHistory.clear();
                     }
                 } catch (final UnsupportedOperationException ex) {
                 }
@@ -1714,6 +1745,29 @@ public class MusicPlaybackService extends Service {
     public int getQueuePosition() {
         synchronized (this) {
             return mPlayPos;
+        }
+    }
+
+    /**
+     * @return the size of the queue history cache
+     */
+    public int getQueueHistorySize() {
+        synchronized (this) {
+            return mHistory.size();
+        }
+    }
+
+    /**
+     * @return the queue of history positions
+     */
+    public int[] getQueueHistoryList() {
+        synchronized (this) {
+            int[] history = new int[mHistory.size()];
+            for (int i = 0; i < mHistory.size(); i++) {
+                history[i] = mHistory.get(i);
+            }
+
+            return history;
         }
     }
 
@@ -1824,6 +1878,37 @@ public class MusicPlaybackService extends Service {
         synchronized (this) {
             if (mPlayPos >= 0 && mPlayer.isInitialized()) {
                 return mPlayList[mPlayPos];
+            }
+        }
+        return -1;
+    }
+
+    /**
+     * Returns the next audio ID
+     *
+     * @return The next track ID
+     */
+    public long getNextAudioId() {
+        synchronized (this) {
+            if (mNextPlayPos >= 0 && mPlayer.isInitialized()) {
+                return mPlayList[mNextPlayPos];
+            }
+        }
+        return -1;
+    }
+
+    /**
+     * Returns the previous audio ID
+     *
+     * @return The previous track ID
+     */
+    public long getPreviousAudioId() {
+        synchronized (this) {
+            if (mPlayer.isInitialized()) {
+                int pos = getPreviousPlayPosition(false);
+                if (pos >= 0) {
+                    return mPlayList[pos];
+                }
             }
         }
         return -1;
@@ -1947,6 +2032,15 @@ public class MusicPlaybackService extends Service {
      * Resumes or starts playback.
      */
     public void play() {
+        play(true);
+    }
+
+    /**
+     * Resumes or starts playback.
+     * @param createNewNextTrack True if you want to figure out the next track, false
+     *                           if you want to re-use the existing next track (used for going back)
+     */
+    public void play(boolean createNewNextTrack) {
         int status = mAudioManager.requestAudioFocus(mAudioFocusListener,
                 AudioManager.STREAM_MUSIC, AudioManager.AUDIOFOCUS_GAIN);
 
@@ -1959,7 +2053,11 @@ public class MusicPlaybackService extends Service {
         mAudioManager.registerMediaButtonEventReceiver(new ComponentName(getPackageName(),
                 MediaButtonIntentReceiver.class.getName()));
 
-        setNextTrack();
+        if (createNewNextTrack) {
+            setNextTrack();
+        } else {
+            setNextTrack(mNextPlayPos);
+        }
 
         if (mPlayer.isInitialized()) {
             final long duration = mPlayer.duration();
@@ -2011,7 +2109,11 @@ public class MusicPlaybackService extends Service {
                 scheduleDelayedShutdown();
                 return;
             }
-            final int pos = getNextPosition(force);
+            int pos = mNextPlayPos;
+            if (pos < 0) {
+                pos = getNextPosition(force);
+            }
+
             if (pos < 0) {
                 scheduleDelayedShutdown();
                 if (mIsSupposedToBePlaying) {
@@ -2020,40 +2122,80 @@ public class MusicPlaybackService extends Service {
                 }
                 return;
             }
-            mPlayPos = pos;
+
             stop(false);
-            mPlayPos = pos;
+            setAndRecordPlayPos(pos);
             openCurrentAndNext();
             play();
             notifyChange(META_CHANGED);
         }
     }
 
+    public void setAndRecordPlayPos(int nextPos) {
+        synchronized (this) {
+            // save to the history
+            if (mShuffleMode != SHUFFLE_NONE) {
+                mHistory.add(mPlayPos);
+                if (mHistory.size() > MAX_HISTORY_SIZE) {
+                    mHistory.remove(0);
+                }
+            }
+
+            mPlayPos = nextPos;
+        }
+    }
+
     /**
      * Changes from the current track to the previous played track
      */
-    public void prev() {
-        if (D) Log.d(TAG, "Going to previous track");
+    public void prev(boolean forcePrevious) {
+        synchronized (this) {
+            // if we aren't repeating 1, and we are either early in the song
+            // or we want to force go back, then go to the prevous track
+            boolean goPrevious = getRepeatMode() != REPEAT_CURRENT &&
+                    (position() < REWIND_INSTEAD_PREVIOUS_THRESHOLD || forcePrevious);
+
+            if (goPrevious) {
+                if (D) Log.d(TAG, "Going to previous track");
+                int pos = getPreviousPlayPosition(true);
+                // if we have no more previous tracks, quit
+                if (pos < 0) {
+                    return;
+                }
+                mNextPlayPos = mPlayPos;
+                mPlayPos = pos;
+                stop(false);
+                openCurrent();
+                play(false);
+                notifyChange(META_CHANGED);
+            } else {
+                if (D) Log.d(TAG, "Going to beginning of track");
+                seek(0);
+                play(false);
+            }
+        }
+    }
+
+    public int getPreviousPlayPosition(boolean removeFromHistory) {
         synchronized (this) {
             if (mShuffleMode == SHUFFLE_NORMAL) {
                 // Go to previously-played track and remove it from the history
                 final int histsize = mHistory.size();
                 if (histsize == 0) {
-                    return;
+                    return -1;
                 }
-                final Integer pos = mHistory.remove(histsize - 1);
-                mPlayPos = pos.intValue();
+                final Integer pos = mHistory.get(histsize - 1);
+                if (removeFromHistory) {
+                    mHistory.remove(histsize - 1);
+                }
+                return pos.intValue();
             } else {
                 if (mPlayPos > 0) {
-                    mPlayPos--;
+                    return mPlayPos - 1;
                 } else {
-                    mPlayPos = mPlayListLen - 1;
+                    return mPlayListLen - 1;
                 }
             }
-            stop(false);
-            openCurrent();
-            play();
-            notifyChange(META_CHANGED);
         }
     }
 
@@ -2131,6 +2273,7 @@ public class MusicPlaybackService extends Service {
             if (mShuffleMode == shufflemode && mPlayListLen > 0) {
                 return;
             }
+
             mShuffleMode = shufflemode;
             if (mShuffleMode == SHUFFLE_AUTO) {
                 if (makeAutoShuffleList()) {
@@ -2144,6 +2287,8 @@ public class MusicPlaybackService extends Service {
                 } else {
                     mShuffleMode = SHUFFLE_NONE;
                 }
+            } else {
+                setNextTrack();
             }
             saveQueue(false);
             notifyChange(SHUFFLEMODE_CHANGED);
@@ -2335,14 +2480,14 @@ public class MusicPlaybackService extends Service {
                     }
                     break;
                 case TRACK_WENT_TO_NEXT:
-                    service.mPlayPos = service.mNextPlayPos;
+                    service.setAndRecordPlayPos(service.mNextPlayPos);
+                    service.setNextTrack();
                     if (service.mCursor != null) {
                         service.mCursor.close();
                     }
                     service.updateCursor(service.mPlayList[service.mPlayPos]);
                     service.notifyChange(META_CHANGED);
                     service.updateNotification();
-                    service.setNextTrack();
                     break;
                 case TRACK_ENDED:
                     if (service.mRepeatMode == REPEAT_CURRENT) {
@@ -2730,8 +2875,8 @@ public class MusicPlaybackService extends Service {
          * {@inheritDoc}
          */
         @Override
-        public void prev() throws RemoteException {
-            mService.get().prev();
+        public void prev(boolean forcePrevious) throws RemoteException {
+            mService.get().prev(forcePrevious);
         }
 
         /**
@@ -2810,6 +2955,22 @@ public class MusicPlaybackService extends Service {
          * {@inheritDoc}
          */
         @Override
+        public int getQueueHistorySize() throws RemoteException {
+            return mService.get().getQueueHistorySize();
+        }
+
+        /**
+         * {@inheritDoc}
+         */
+        @Override
+        public int[] getQueueHistoryList() throws RemoteException {
+            return mService.get().getQueueHistoryList();
+        }
+
+        /**
+         * {@inheritDoc}
+         */
+        @Override
         public long duration() throws RemoteException {
             return mService.get().duration();
         }
@@ -2836,6 +2997,22 @@ public class MusicPlaybackService extends Service {
         @Override
         public long getAudioId() throws RemoteException {
             return mService.get().getAudioId();
+        }
+
+        /**
+         * {@inheritDoc}
+         */
+        @Override
+        public long getNextAudioId() throws RemoteException {
+            return mService.get().getNextAudioId();
+        }
+
+        /**
+         * {@inheritDoc}
+         */
+        @Override
+        public long getPreviousAudioId() throws RemoteException {
+            return mService.get().getPreviousAudioId();
         }
 
         /**

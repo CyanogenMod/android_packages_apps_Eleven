@@ -22,6 +22,7 @@ import android.content.Intent;
 import android.content.ServiceConnection;
 import android.database.Cursor;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.IBinder;
 import android.os.RemoteException;
 import android.provider.BaseColumns;
@@ -211,6 +212,15 @@ public final class MusicUtils {
     }
 
     /**
+     * Changes to the next track asynchronously
+     */
+    public static void asyncNext(final Context context) {
+        final Intent previous = new Intent(context, MusicPlaybackService.class);
+        previous.setAction(MusicPlaybackService.NEXT_ACTION);
+        context.startService(previous);
+    }
+
+    /**
      * Changes to the previous track.
      *
      * @NOTE The AIDL isn't used here in order to properly use the previous
@@ -224,9 +234,13 @@ public final class MusicUtils {
      *       less than 2000 ms, start the track over, otherwise move to the
      *       previously listened track.
      */
-    public static void previous(final Context context) {
+    public static void previous(final Context context, final boolean force) {
         final Intent previous = new Intent(context, MusicPlaybackService.class);
-        previous.setAction(MusicPlaybackService.PREVIOUS_ACTION);
+        if (force) {
+            previous.setAction(MusicPlaybackService.PREVIOUS_FORCE_ACTION);
+        } else {
+            previous.setAction(MusicPlaybackService.PREVIOUS_ACTION);
+        }
         context.startService(previous);
     }
 
@@ -403,6 +417,32 @@ public final class MusicUtils {
     }
 
     /**
+     * @return The next song Id.
+     */
+    public static final long getNextAudioId() {
+        if (mService != null) {
+            try {
+                return mService.getNextAudioId();
+            } catch (final RemoteException ignored) {
+            }
+        }
+        return -1;
+    }
+
+    /**
+     * @return The previous song Id.
+     */
+    public static final long getPreviousAudioId() {
+        if (mService != null) {
+            try {
+                return mService.getPreviousAudioId();
+            } catch (final RemoteException ignored) {
+            }
+        }
+        return -1;
+    }
+
+    /**
      * @return The current artist Id.
      */
     public static final long getCurrentArtistId() {
@@ -443,6 +483,45 @@ public final class MusicUtils {
     }
 
     /**
+     * @return The position of the current track in the queue.
+     */
+    public static final int getQueuePosition() {
+        try {
+            if (mService != null) {
+                return mService.getQueuePosition();
+            }
+        } catch (final RemoteException ignored) {
+        }
+        return 0;
+    }
+
+    /**
+     * @return The queue history size
+     */
+    public static final int getQueueHistorySize() {
+        if (mService != null) {
+            try {
+                return mService.getQueueHistorySize();
+            } catch (final RemoteException ignored) {
+            }
+        }
+        return 0;
+    }
+
+    /**
+     * @return The queue history
+     */
+    public static final int[] getQueueHistoryList() {
+        if (mService != null) {
+            try {
+                return mService.getQueueHistoryList();
+            } catch (final RemoteException ignored) {
+            }
+        }
+        return null;
+    }
+
+    /**
      * @param id The ID of the track to remove.
      * @return removes track from a playlist or the queue.
      */
@@ -452,19 +531,6 @@ public final class MusicUtils {
                 return mService.removeTrack(id);
             }
         } catch (final RemoteException ingored) {
-        }
-        return 0;
-    }
-
-    /**
-     * @return The position of the current track in the queue.
-     */
-    public static final int getQueuePosition() {
-        try {
-            if (mService != null) {
-                return mService.getQueuePosition();
-            }
-        } catch (final RemoteException ignored) {
         }
         return 0;
     }
