@@ -119,12 +119,9 @@ public class SearchActivity extends Activity implements LoaderCallbacks<Cursor>,
         actionBar.setTitle(getString(R.string.app_name));
         actionBar.setDisplayHomeAsUpEnabled(true);
 
+
         // Set the layout
         setContentView(R.layout.grid_base);
-
-        // Give the background a little UI
-        final FrameLayout background = (FrameLayout)findViewById(R.id.grid_base_container);
-        background.setBackgroundDrawable(getResources().getDrawable(R.drawable.pager_background));
 
         // Get the query
         final String query = getIntent().getStringExtra(SearchManager.QUERY);

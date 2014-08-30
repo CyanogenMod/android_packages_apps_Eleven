@@ -43,32 +43,27 @@
 
         <TextView
             android:id="@+id/line_one"
+            style="@style/ListItemMainText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
-            android:maxLines="2"
-            android:textColor="@color/white"
-            android:textSize="@dimen/text_size_medium"
-            android:textStyle="bold" />
+            android:maxLines="2"/>
 
         <TextView
             android:id="@+id/line_two"
+            style="@style/ListItemSecondaryText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/line_one"
             android:layout_marginTop="@dimen/list_item_line_two_margin_top"
-            android:maxLines="2"
-            android:textColor="@color/transparent_white"
-            android:textSize="@dimen/text_size_small" />
+            android:maxLines="2"/>
 
         <TextView
             android:id="@+id/line_three"
+            style="@style/ListItemSecondaryText.Single"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:singleLine="true"
-            android:textColor="@color/transparent_white"
-            android:textSize="@dimen/text_size_small" />
+            android:layout_alignParentBottom="true" />
     </RelativeLayout>
 
 </RelativeLayout>

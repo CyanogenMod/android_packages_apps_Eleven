@@ -15,6 +15,9 @@
  -->
 <resources>
 
+    <!-- light color -->
+    <color name="background_color">#ffe4e9ed</color>
+
     <!-- See through -->
     <color name="transparent">#00000000</color>
 
@@ -24,14 +27,14 @@
     <!-- White -->
     <color name="white">#ffffffff</color>
 
+    <!-- Standard Text Color -->
+    <color name="default_text_color">#cc231f20</color>
+
     <!-- Transparent black -->
     <color name="transparent_black">#99000000</color>
 
     <!-- Transparent white -->
     <color name="transparent_white">#ffcccccc</color>
-
-    <!-- Dark transparent color -->
-    <color name="list_item_background">#c1000000</color>
 
     <!-- A darkish color used for the action bar -->
     <color name="action_bar_color">#ff0d0d0d</color>
@@ -57,10 +60,29 @@
     <!-- A dark Holo shade of orange -->
     <color name="holo_orange_dark">#ffff8800</color>
 
-    <!-- Color for the header action bar -->
-    <color name="header_action_bar_color">#ff444444</color>
+    <!-- Color for the action bar -->
+    <color name="header_action_bar_color">#ff31353f</color>
+    <color name="header_action_bar_text_color">@color/white</color>
+    <color name="bottom_action_bar_text_color">@color/white</color>
 
-    <!-- Color for backgrounds of panels -->
-    <color name="panel_background_color">#ff000000</color>
+
+    <!-- Color for the audio player fragment text -->
+    <color name="audio_player_text_color">@color/default_text_color</color>
+
+    <!-- Color for the pop up menu -->
+    <color name="menu_divider_color">#4ca19d9e</color>
+    <color name="menu_text_color">@color/white</color>
+
+    <!-- List view related colors -->
+    <color name="list_item_background">#4ce4e9ed</color>
+    <color name="list_item_header_text_color">#ff3d4049</color>
+    <color name="list_item_text_color">@color/default_text_color</color>
+    <color name="list_item_divider_color">#4c231f20</color>
+
+    <!-- Top title page colors -->
+    <color name="tpi_background_color">#fff4f4f4</color>
+    <color name="tpi_text_color">#bf3d4049</color>
+    <color name="tpi_selected_text_color">#bf3d4049</color>
+
 
 </resources>

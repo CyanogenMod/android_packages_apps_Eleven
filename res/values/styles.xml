@@ -16,12 +16,96 @@
 <resources xmlns:android="http://schemas.android.com/apk/res/android">
 
     <!-- Main Holo -->
-    <style name="Eleven.Theme" parent="@android:style/Theme.DeviceDefault">
+    <style name="Eleven.Theme" parent="@android:style/Theme.Holo.Light">
         <item name="android:windowContentOverlay">@null</item>
+        <item name="android:popupMenuStyle">@style/PopupMenu</item>
+        <item name="android:dropDownListViewStyle">@style/DropDownListView</item>
+        <item name="android:textAppearanceSmallPopupMenu">@style/SmallPopupMenu</item>
+        <item name="android:textAppearanceLargePopupMenu">@style/LargePopupMenu</item>
+        <item name="android:listViewStyle">@style/ListView</item>
+        <item name="android:actionBarStyle">@style/ActionBar</item>
+        <item name="android:actionOverflowButtonStyle">@style/ActionOverFlowButton</item>
+        <!-- this guy is too large - need to get a smaller one -->
+        <!--item name="android:homeAsUpIndicator">@drawable/back_arrow</item-->
     </style>
 
+    <!-- Make the action bar not take up space - I will remove action bar this upcoming week -->
     <style name="Eleven.Theme.ActionBar.Overlay" parent="@style/Eleven.Theme">
         <item name="android:windowActionBarOverlay">true</item>
+    </style>
+
+    <!-- Set the default list view divider color and size -->
+    <style name="ListView" parent="@android:style/Widget.Holo.ListView">
+        <item name="android:divider">@color/list_item_divider_color</item>
+        <item name="android:dividerHeight">1dp</item>
+    </style>
+
+    <!-- Sets up the pop up menu backgroudn resource -->
+    <style name="PopupMenu" parent="@android:style/Widget.Holo.PopupMenu">
+        <item name="android:popupBackground">@drawable/menu_background</item>
+    </style>
+
+    <!-- Sets up the pop up menu divider color and height -->
+    <style name="DropDownListView" parent="@android:style/Widget.Holo.ListView.DropDown">
+        <item name="android:divider">@color/menu_divider_color</item>
+        <item name="android:dividerHeight">1dp</item>
+    </style>
+
+    <!-- Sets up the pop up menu text color and size -->
+    <style name="SmallPopupMenu" parent="@android:style/TextAppearance.Widget.PopupMenu.Small">
+        <item name="android:textColor">@color/menu_text_color</item>
+        <item name="android:textSize">@dimen/text_size_medium</item>
+    </style>
+
+    <!-- Sets up the pop up menu text color and size -->
+    <style name="LargePopupMenu" parent="@android:style/TextAppearance.Widget.PopupMenu.Large">
+        <item name="android:textColor">@color/menu_text_color</item>
+        <item name="android:textSize">@dimen/text_size_medium</item>
+    </style>
+
+    <!-- Sets the action bar title text style -->
+    <style name="ActionBar" parent="@android:style/Widget.Holo.Light.ActionBar">
+        <item name="android:titleTextStyle">@style/ActionBar.TitleText</item>
+        <item name="android:subtitleTextStyle">@style/ActionBar.SubtitleText</item>
+        <item name="android:background">@color/header_action_bar_color</item>
+    </style>
+
+    <!-- Sets the action bar title text color -->
+    <style name="ActionBar.TitleText" parent="@android:style/TextAppearance.Holo.Widget.ActionBar.Title">
+        <item name="android:textColor">@color/header_action_bar_text_color</item>
+    </style>
+
+    <style name="ActionBar.SubtitleText" parent="@android:style/TextAppearance.Holo.Widget.ActionBar.Subtitle">
+        <item name="android:textColor">@color/header_action_bar_text_color</item>
+    </style>
+
+    <!-- Sets the action bar menu icon -->
+    <style name="ActionOverFlowButton" parent="@android:style/Widget.Holo.ActionButton.Overflow">
+        <item name="android:src">@drawable/menu_button_light</item>
+    </style>
+
+    <!-- The list item main text style/color -->
+    <style name="ListItemMainText">
+        <item name="android:textColor">@color/list_item_text_color</item>
+        <item name="android:textSize">@dimen/list_item_main_text_size</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:singleLine">true</item>
+        <item name="android:ellipsize">end</item>
+    </style>
+
+    <style name="ListItemMainText.Single" parent="ListItemMainText">
+        <item name="android:singleLine">true</item>
+    </style>
+
+    <!-- The list item secondary text style/color -->
+    <style name="ListItemSecondaryText">
+        <item name="android:textColor">@color/list_item_text_color</item>
+        <item name="android:textSize">@dimen/list_item_secondary_text_size</item>
+        <item name="android:ellipsize">end</item>
+    </style>
+
+    <style name="ListItemSecondaryText.Single" parent="ListItemSecondaryText">
+        <item name="android:singleLine">true</item>
     </style>
 
     <!-- Shortcut Activity theme -->
@@ -82,6 +166,7 @@
         <item name="android:gravity">top|left|center</item>
         <item name="android:singleLine">true</item>
         <item name="android:textAllCaps">true</item>
+        <item name="android:textColor">@color/bottom_action_bar_text_color</item>
         <item name="android:textSize">@dimen/text_size_extra_micro</item>
     </style>
 

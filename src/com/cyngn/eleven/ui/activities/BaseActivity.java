@@ -134,6 +134,10 @@ public abstract class BaseActivity extends FragmentActivity implements ServiceCo
         // Set the layout
         setContentView(setContentView());
 
+        // set the background on the root view
+        getWindow().getDecorView().getRootView().setBackgroundColor(
+                getResources().getColor(R.color.background_color));
+
         // Initialze the bottom action bar
         initBottomActionBar();
     }

@@ -18,7 +18,9 @@
     android:id="@+id/grid_base_container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="@dimen/list_preferred_item_padding" >
+    android:paddingLeft="@dimen/list_preferred_item_padding"
+    android:paddingRight="@dimen/list_preferred_item_padding"
+    android:paddingTop="@dimen/list_preferred_item_padding">
 
     <TextView
         android:id="@+id/empty"

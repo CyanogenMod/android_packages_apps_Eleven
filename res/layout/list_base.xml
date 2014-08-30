@@ -18,8 +18,9 @@
     android:id="@+id/list_base_container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingBottom="@dimen/list_preferred_item_padding"
-    android:paddingTop="@dimen/list_preferred_item_padding" >
+    android:paddingTop="@dimen/list_preferred_item_padding"
+    android:paddingLeft="@dimen/list_preferred_item_padding"
+    android:paddingRight="@dimen/list_preferred_item_padding">
 
     <TextView
         android:id="@+id/empty"
@@ -39,8 +40,6 @@
         android:cacheColorHint="@color/transparent"
         android:drawSelectorOnTop="false"
         android:fadingEdge="vertical"
-        android:fastScrollEnabled="true"
-        android:paddingLeft="@dimen/fast_scroll_padding_left"
-        android:paddingRight="@dimen/fast_scroll_padding_right" />
+        android:fastScrollEnabled="true" />
 
 </FrameLayout>

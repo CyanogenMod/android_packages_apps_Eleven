@@ -26,6 +26,15 @@
 
     <!-- List and grid view padding -->
     <dimen name="list_preferred_item_padding">10.0dip</dimen>
+    <dimen name="list_menu_item_padding_right">2.0dip</dimen>
+    <dimen name="list_item_menu_button_width">24.0dip</dimen>
+    <dimen name="list_item_menu_button_height">30.0dip</dimen>
+    <dimen name="list_item_padding_top">10.0dip</dimen>
+    <dimen name="list_item_padding_bottom">10.0dip</dimen>
+    <dimen name="list_item_header_size">16.0sp</dimen>
+    <dimen name="list_item_main_text_size">14.0sp</dimen>
+    <dimen name="list_item_secondary_text_size">12.0sp</dimen>
+
     <!-- List view fast scroll padding left -->
     <dimen name="fast_scroll_padding_left">8.0dip</dimen>
     <!-- List view fast scroll padding right -->
@@ -39,7 +48,9 @@
     <!-- Left padding in the grid text -->
     <dimen name="grid_item_padding_left">8.0dip</dimen>
     <!-- Grid and list item normal height -->
-    <dimen name="item_normal_height">64.0dip</dimen>
+    <dimen name="item_normal_height">70.0dip</dimen>
+    <dimen name="list_item_image_height">50.0dip</dimen>
+    <dimen name="list_item_image_width">50.0dip</dimen>
 
     <!-- Bottom Action Bar -->
     <dimen name="bottom_action_bar_height">48.0dip</dimen>
@@ -123,11 +134,16 @@
     <dimen name="sliding_panel_indicator_height">25.0dip</dimen>
 
     <!-- Header Bar -->
-    <dimen name="header_bar_up_width">40.0dip</dimen>
-    <dimen name="header_bar_up_height">40.0dip</dimen>
-    <dimen name="header_bar_up_padding">8.0dip</dimen>
-    <dimen name="header_bar_menu_button_width">50.0dip</dimen>
+    <dimen name="header_bar_up_width">50.0dip</dimen>
+    <dimen name="header_bar_up_height">50.0dip</dimen>
+    <dimen name="header_bar_menu_button_width">30.0dip</dimen>
     <dimen name="header_bar_menu_button_height">50.0dip</dimen>
+
+    <!-- Title Page Indicator Settings -->
+    <dimen name="tpi_height">50dp</dimen>
+    <dimen name="tpi_footer_line_height">0dp</dimen>
+    <dimen name="tpi_footer_indicator_height">6dp</dimen>
+    <dimen name="tpi_text_size">16sp</dimen>
 
     <dimen name="songlist_control_button_width">50.0dip</dimen>
     <dimen name="songlist_control_button_height">50.0dip</dimen>

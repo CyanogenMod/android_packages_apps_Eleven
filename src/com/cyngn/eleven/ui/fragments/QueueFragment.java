@@ -12,10 +12,13 @@
 package com.cyngn.eleven.ui.fragments;
 
 import android.content.BroadcastReceiver;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.ServiceConnection;
 import android.os.Bundle;
+import android.os.IBinder;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.LoaderManager.LoaderCallbacks;
 import android.support.v4.content.Loader;
@@ -56,13 +59,16 @@ import com.viewpagerindicator.TitlePageIndicator;
 import java.lang.ref.WeakReference;
 import java.util.List;
 
+import static com.cyngn.eleven.utils.MusicUtils.mService;
+
 /**
  * This class is used to display all of the songs in the queue.
  * 
  * @author Andrew Neal (andrewdneal@gmail.com)
  */
 public class QueueFragment extends Fragment implements LoaderCallbacks<List<Song>>,
-        OnItemClickListener, DropListener, RemoveListener, DragScrollProfile, PopupMenuCreator {
+        OnItemClickListener, DropListener, RemoveListener, DragScrollProfile, PopupMenuCreator,
+        ServiceConnection {
 
     /**
      * Used to keep context menu items from bleeding into other fragments
@@ -73,6 +79,11 @@ public class QueueFragment extends Fragment implements LoaderCallbacks<List<Song
      * LoaderCallbacks identifier
      */
     private static final int LOADER = 0;
+
+    /**
+     * Service token for binding to the music service
+     */
+    private MusicUtils.ServiceToken mToken;
 
     /**
      * The listener to the playback service that will trigger updates to the ui
@@ -164,8 +175,20 @@ public class QueueFragment extends Fragment implements LoaderCallbacks<List<Song
         // Initialize the broadcast receiver
         mQueueUpdateListener = new QueueUpdateListener(this);
 
-        // Start the loader
-        getLoaderManager().initLoader(LOADER, null, this);
+        // Bind Apollo's service
+        mToken = MusicUtils.bindToService(getActivity(), this);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void onServiceConnected(final ComponentName name, final IBinder service) {
+        refreshQueue();
+    }
+
+    @Override
+    public void onServiceDisconnected(ComponentName name) {
     }
 
     @Override
@@ -191,6 +214,11 @@ public class QueueFragment extends Fragment implements LoaderCallbacks<List<Song
             getActivity().unregisterReceiver(mQueueUpdateListener);
         } catch (final Throwable e) {
             //$FALL-THROUGH$
+        }
+
+        if (mService != null) {
+            MusicUtils.unbindFromService(mToken);
+            mToken = null;
         }
     }
 

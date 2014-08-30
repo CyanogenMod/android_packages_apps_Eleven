@@ -21,5 +21,5 @@
     android:background="@null"
     android:gravity="center_vertical"
     android:paddingLeft="10.0dip"
-    android:textColor="@color/white"
-    android:textSize="@dimen/text_size_medium" />
+    android:textColor="@color/list_item_header_text_color"
+    android:textSize="@dimen/list_item_header_size" />

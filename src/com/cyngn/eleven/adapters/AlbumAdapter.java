@@ -19,6 +19,7 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.cyngn.eleven.R;
 import com.cyngn.eleven.cache.ImageFetcher;
@@ -116,15 +117,23 @@ public class AlbumAdapter extends ArrayAdapter<Album> implements SectionAdapter.
         // Asynchronously load the album images into the adapter
         mImageFetcher.loadAlbumImage(dataHolder.mLineTwo, dataHolder.mLineOne, dataHolder.mItemId,
                 holder.mImage.get());
+
+        TextView lineThree = holder.mLineThree.get();
         // List view only items
         if (mLoadExtraData) {
             // Make sure the background layer gets set
             holder.mOverlay.get().setBackgroundColor(mOverlay);
-            // Set the number of songs (line three)
-            holder.mLineThree.get().setText(dataHolder.mLineThree);
+            if (lineThree != null) {
+                // Set the number of songs (line three)
+                lineThree.setText(dataHolder.mLineThree);
+                lineThree.setVisibility(View.VISIBLE);
+            }
             // Asynchronously load the artist image on the background view
             mImageFetcher.loadArtistImage(dataHolder.mLineTwo, holder.mBackground.get());
+        } else if (lineThree != null) {
+            lineThree.setVisibility(View.GONE);
         }
+
         if (mTouchPlay) {
             // Play the album when the artwork is touched
             playAlbum(holder.mImage.get(), position);

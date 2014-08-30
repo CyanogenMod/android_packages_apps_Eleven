@@ -19,6 +19,7 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.cyngn.eleven.R;
 import com.cyngn.eleven.cache.ImageFetcher;
@@ -110,15 +111,23 @@ public class ArtistAdapter extends ArrayAdapter<Artist> implements SectionAdapte
         holder.mLineTwo.get().setText(dataHolder.mLineTwo);
         // Asynchronously load the artist image into the adapter
         mImageFetcher.loadArtistImage(dataHolder.mLineOne, holder.mImage.get());
+
+        TextView lineThree = holder.mLineThree.get();
         if (mLoadExtraData) {
             // Make sure the background layer gets set
             holder.mOverlay.get().setBackgroundColor(mOverlay);
-            // Set the number of songs (line three)
-            holder.mLineThree.get().setText(dataHolder.mLineThree);
+            if (lineThree != null) {
+                // Set the number of songs (line three)
+                lineThree.setText(dataHolder.mLineThree);
+                lineThree.setVisibility(View.VISIBLE);
+            }
+
             // Set the background image
             mImageFetcher.loadArtistImage(dataHolder.mLineOne, holder.mBackground.get());
             // Play the artist when the artwork is touched
             playArtist(holder.mImage.get(), position);
+        } else if (lineThree != null) {
+            lineThree.setVisibility(View.GONE);
         }
         return convertView;
     }

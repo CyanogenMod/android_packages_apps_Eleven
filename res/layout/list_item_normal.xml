@@ -17,45 +17,41 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="@dimen/item_normal_height"
     android:gravity="center_vertical"
+    android:minHeight="@dimen/item_normal_height"
+    android:paddingTop="@dimen/list_item_padding_top"
+    android:paddingBottom="@dimen/list_item_padding_bottom"
     tools:ignore="ContentDescription" >
 
     <com.cyngn.eleven.widgets.SquareImageView
         android:id="@+id/image"
-        android:layout_width="@dimen/item_normal_height"
-        android:layout_height="@dimen/item_normal_height"
-        android:layout_alignParentBottom="true"
+        android:layout_width="@dimen/list_item_image_width"
+        android:layout_height="@dimen/list_item_image_height"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
         android:scaleType="fitXY" />
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="@dimen/item_normal_height"
+        android:layout_height="@dimen/list_item_image_height"
         android:layout_toRightOf="@+id/image"
         android:gravity="center_vertical"
         android:minHeight="@dimen/item_normal_height"
-        android:paddingLeft="@dimen/list_preferred_item_padding"
-        android:paddingRight="@dimen/list_preferred_item_padding" >
+        android:paddingLeft="@dimen/list_preferred_item_padding" >
 
         <TextView
             android:id="@+id/line_one"
+            style="@style/ListItemMainText.Single"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            android:singleLine="true"
-            android:textSize="@dimen/text_size_medium"
-            android:textStyle="bold" />
+            android:layout_height="wrap_content" />
 
         <TextView
             android:id="@+id/line_two"
+            style="@style/ListItemSecondaryText.Single"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/line_one"
-            android:layout_marginTop="@dimen/list_item_line_two_margin_top"
-            android:singleLine="true"
-            android:textSize="@dimen/text_size_small" />
+            android:layout_below="@+id/line_one" />
     </RelativeLayout>
 
 </RelativeLayout>
