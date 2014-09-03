@@ -24,6 +24,9 @@
     <dimen name="text_size_x_large">24.0sp</dimen>
     <dimen name="text_size_dayum">36.0sp</dimen>
 
+    <!-- List item section header -->
+    <dimen name="list_item_header_height">30.0dip</dimen>
+
     <!-- List and grid view padding -->
     <dimen name="list_preferred_item_padding">10.0dip</dimen>
     <dimen name="list_menu_item_padding_right">2.0dip</dimen>
@@ -132,7 +135,8 @@
     <dimen name="colorstrip_height">2.0dip</dimen>
 
     <!-- Drag and drop -->
-    <dimen name="drag_and_drop_handle">26.0dip</dimen>
+    <dimen name="drag_and_drop_width">20.0dip</dimen>
+    <dimen name="drag_and_drop_height">50.0dip</dimen>
 
     <!-- Color scheme dialog -->
     <dimen name="color_scheme_dialog_row_padding">8.0dip</dimen>

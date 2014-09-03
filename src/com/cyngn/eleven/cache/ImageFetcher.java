@@ -25,6 +25,7 @@ import com.cyngn.eleven.lastfm.MusicEntry;
 import com.cyngn.eleven.lastfm.ImageSize;
 import com.cyngn.eleven.utils.MusicUtils;
 import com.cyngn.eleven.utils.PreferenceUtils;
+import com.cyngn.eleven.widgets.BlurScrimImage;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
@@ -157,6 +158,15 @@ public class ImageFetcher extends ImageWorker {
         loadImage(generateAlbumCacheKey(MusicUtils.getAlbumName(), MusicUtils.getArtistName()),
                 MusicUtils.getArtistName(), MusicUtils.getAlbumName(), MusicUtils.getCurrentAlbumId(),
                 imageView, ImageType.ALBUM);
+    }
+
+    /**
+     * Used to fetch the current artwork blurred.
+     */
+    public void loadCurrentBlurredArtwork(final BlurScrimImage image) {
+        loadBlurImage(generateAlbumCacheKey(MusicUtils.getAlbumName(), MusicUtils.getArtistName()),
+                MusicUtils.getArtistName(), MusicUtils.getAlbumName(), MusicUtils.getCurrentAlbumId(),
+                image, ImageType.ALBUM);
     }
 
     /**

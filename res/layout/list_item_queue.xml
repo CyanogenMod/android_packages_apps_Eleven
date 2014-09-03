@@ -17,19 +17,19 @@
         android:orientation="vertical">
         <TextView
             android:id="@+id/line_one"
-            style="@style/ListItemMainText.Single"
+            style="@style/ListItemMainText.Light.Single"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
         <TextView
             android:id="@+id/line_two"
-            style="@style/ListItemSecondaryText.Single"
+            style="@style/ListItemSecondaryText.Light.Single"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
         <TextView
             android:id="@+id/line_three"
-            style="@style/ListItemSecondaryText.Single"
+            style="@style/ListItemSecondaryText.Light.Single"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
     </LinearLayout>
@@ -51,10 +51,9 @@
 
     <TextView
         android:id="@+id/line_one_right"
-        style="@style/ListItemSecondaryText.Single"
+        style="@style/ListItemSecondaryText.Light.Single"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"
-        android:layout_alignParentRight="true"
-        android:paddingRight="@dimen/list_preferred_item_padding" />
+        android:layout_alignParentRight="true" />
 </RelativeLayout>

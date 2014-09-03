@@ -107,6 +107,14 @@
         <item name="android:singleLine">true</item>
     </style>
 
+    <style name="ListItemMainText.Light.Single" parent="ListItemMainText.Single">
+        <item name="android:textColor">@color/list_item_text_color_light</item>
+    </style>
+
+    <style name="ListItemSecondaryText.Light.Single" parent="ListItemSecondaryText.Single">
+        <item name="android:textColor">@color/list_item_text_color_light</item>
+    </style>
+
     <!-- Shortcut Activity theme -->
     <style name="Theme.Transparent" parent="@android:style/Theme.Holo.NoActionBar">
         <item name="android:windowIsTranslucent">true</item>

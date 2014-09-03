@@ -1367,6 +1367,10 @@ public final class MusicUtils {
      * @return the localized label of the bucket that the name falls into
      */
     public static String getLocalizedBucketLetter(String name, boolean trimName) {
+        if (name == null || name.length() == 0) {
+            return null;
+        }
+
         if (trimName) {
             name = name.trim().toLowerCase();
             if (name.startsWith("the ")) {
@@ -1387,7 +1391,21 @@ public final class MusicUtils {
         }
 
         if (name.length() > 0) {
-            return LocaleUtils.getInstance().getLabel(name);
+            String lbl = LocaleUtils.getInstance().getLabel(name);
+            // For now let's cap it to latin alphabet and the # sign
+            // since chinese characters are resulting in " " and other random
+            // characters but the sort doesn't match the sql sort so it is
+            // not quite sorted
+            if (lbl != null && lbl.length() > 0) {
+                char ch = lbl.charAt(0);
+                if (ch < 'A' && ch > 'Z' && ch != '#') {
+                    return null;
+                }
+            }
+
+            if (lbl != null && lbl.length() > 0) {
+                return lbl;
+            }
         }
 
         return null;

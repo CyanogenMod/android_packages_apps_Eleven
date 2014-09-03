@@ -29,6 +29,7 @@
 
     <!-- Standard Text Color -->
     <color name="default_text_color">#cc231f20</color>
+    <color name="default_text_color_light">#bfffffff</color>
 
     <!-- Transparent black -->
     <color name="transparent_black">#99000000</color>
@@ -74,6 +75,7 @@
     <color name="list_item_background">#4ce4e9ed</color>
     <color name="list_item_header_text_color">#ff3d4049</color>
     <color name="list_item_text_color">@color/default_text_color</color>
+    <color name="list_item_text_color_light">@color/default_text_color_light</color>
     <color name="list_item_divider_color">#4c231f20</color>
 
     <!-- Top title page colors -->
@@ -83,9 +85,9 @@
 
 
     <!-- Color for the text on the audio player -->
-    <color name="audio_player_text_color">#bfffffff</color>
+    <color name="audio_player_text_color">@color/default_text_color_light</color>
 
     <!-- Color for the Progress bar -->
     <color name="circular_progress_bar_background">#bfababab</color>
-    <color name="circular_progress_bar">#ffffffff</color>
+    <color name="circular_progress_bar">@color/white</color>
 </resources>

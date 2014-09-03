@@ -12,26 +12,27 @@
 package com.cyngn.eleven.ui.activities;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.view.View;
-import android.widget.TextView;
+import android.widget.ImageView;
 
 import com.cyngn.eleven.R;
 import com.cyngn.eleven.slidinguppanel.SlidingUpPanelLayout;
 import com.cyngn.eleven.slidinguppanel.SlidingUpPanelLayout.SimplePanelSlideListener;
 import com.cyngn.eleven.ui.HeaderBar;
 import com.cyngn.eleven.ui.fragments.AudioPlayerFragment;
-import com.cyngn.eleven.ui.fragments.QueueFragment;
 import com.cyngn.eleven.ui.fragments.phone.MusicBrowserPhoneFragment;
 import com.cyngn.eleven.utils.ApolloUtils;
 import com.cyngn.eleven.utils.MusicUtils;
+import com.cyngn.eleven.widgets.BlurScrimImage;
 
 /**
  * This class is used to display the {@link ViewPager} used to swipe between the
  * main {@link Fragment}s used to browse the user's music.
- * 
+ *
  * @author Andrew Neal (andrewdneal@gmail.com)
  */
 public class HomeActivity extends BaseActivity {
@@ -50,6 +51,9 @@ public class HomeActivity extends BaseActivity {
     private SlidingUpPanelLayout mSecondPanel;
     private HeaderBar mSecondHeaderBar;
 
+    // this is the blurred image that goes behind the now playing and queue fragments
+    private BlurScrimImage mBlurScrimImage;
+
     /**
      * {@inheritDoc}
      */
@@ -64,6 +68,10 @@ public class HomeActivity extends BaseActivity {
 
         setupFirstPanel();
         setupSecondPanel();
+
+        // get the blur scrim image
+        findViewById(R.id.bottom_action_bar_parent).setBackgroundColor(Color.TRANSPARENT);
+        mBlurScrimImage = (BlurScrimImage)findViewById(R.id.blurScrimImage);
 
         // if we've been launched by an intent, parse it
         Intent launchIntent = getIntent();
@@ -215,6 +223,9 @@ public class HomeActivity extends BaseActivity {
     protected void updateMetaInfo() {
         super.updateMetaInfo();
 
+        // load the blurred image
+        mBlurScrimImage.loadBlurImage(ApolloUtils.getImageFetcher(this));
+
         // Set the artist name
         mFirstHeaderBar.setTitleText(MusicUtils.getArtistName());
     }
@@ -228,6 +239,7 @@ public class HomeActivity extends BaseActivity {
         final HeaderBar headerBar = (HeaderBar) findViewById(containerId);
         headerBar.setTitleText(textId);
         headerBar.setupCustomButton(customIconId, listener);
+        headerBar.setBackgroundColor(Color.TRANSPARENT);
 
         return headerBar;
     }

@@ -25,7 +25,7 @@
         android:layout_height="@dimen/drag_and_drop_height"
         android:layout_centerVertical="true"
         android:scaleType="fitXY"
-        android:src="@drawable/gripper" />
+        android:src="@drawable/gripper_light" />
 
     <FrameLayout
         android:id="@+id/edit_track_list_container"
@@ -34,7 +34,7 @@
         android:layout_toRightOf="@+id/edit_track_list_item_handle"
         android:gravity="center_vertical" >
 
-        <include layout="@layout/list_item_simple" />
+        <include layout="@layout/list_item_queue" />
     </FrameLayout>
 
 </RelativeLayout>

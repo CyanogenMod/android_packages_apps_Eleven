@@ -160,6 +160,11 @@ public class SlidingUpPanelLayout extends ViewGroup {
     private View mMainView;
 
     /**
+     * The background view
+     */
+    private View mBackgroundView;
+
+    /**
      * Current state of the slideable view.
      */
     private enum SlideState {
@@ -572,7 +577,7 @@ public class SlidingUpPanelLayout extends ViewGroup {
         } else {
             left = right = top = bottom = 0;
         }
-        View child = getChildAt(0);
+        View child = mMainView;
         final int clampedChildLeft = Math.max(leftBound, child.getLeft());
         final int clampedChildTop = Math.max(topBound, child.getTop());
         final int clampedChildRight = Math.min(rightBound, child.getRight());
@@ -628,12 +633,19 @@ public class SlidingUpPanelLayout extends ViewGroup {
 
         final int childCount = getChildCount();
 
-        if (childCount != 2) {
-            throw new IllegalStateException("Sliding up panel layout must have exactly 2 children!");
+        if (childCount != 2 && childCount != 3) {
+            throw new IllegalStateException("Sliding up panel layout must have exactly 2 or 3 children!");
         }
 
-        mMainView = getChildAt(0);
-        mSlideableView = getChildAt(1);
+        if (childCount == 2) {
+            mMainView = getChildAt(0);
+            mSlideableView = getChildAt(1);
+        } else {
+            mBackgroundView = getChildAt(0);
+            mMainView = getChildAt(1);
+            mSlideableView = getChildAt(2);
+        }
+
         if (mDragView == null) {
             setDragView(mSlideableView);
         }
@@ -651,7 +663,7 @@ public class SlidingUpPanelLayout extends ViewGroup {
             final LayoutParams lp = (LayoutParams) child.getLayoutParams();
 
             // We always measure the sliding panel in order to know it's height (needed for show panel)
-            if (child.getVisibility() == GONE && i == 0) {
+            if (child.getVisibility() == GONE && child == mMainView) {
                 continue;
             }
 
@@ -718,7 +730,7 @@ public class SlidingUpPanelLayout extends ViewGroup {
             final View child = getChildAt(i);
 
             // Always layout the sliding view on the first layout
-            if (child.getVisibility() == GONE && (i == 0 || mFirstLayout)) {
+            if (child.getVisibility() == GONE && (child == mMainView || mFirstLayout)) {
                 continue;
             }
 
@@ -1027,7 +1039,7 @@ public class SlidingUpPanelLayout extends ViewGroup {
         boolean result;
         final int save = canvas.save(Canvas.CLIP_SAVE_FLAG);
 
-        if (isSlidingEnabled() && mSlideableView != child) {
+        if (isSlidingEnabled() && mMainView == child) {
             // Clip against the slider; no sense drawing what will immediately be covered,
             // Unless the panel is set to overlay content
             if (!mOverlayContent) {

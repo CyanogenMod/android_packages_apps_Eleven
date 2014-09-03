@@ -50,8 +50,13 @@ public class SectionCreatorUtils {
         @Override
         public String createSectionSeparator(T first, T second) {
             String secondLabel = createLabel(second);
-            if (first == null || !createLabel(first).equals(secondLabel)) {
-                return createLabel(second);
+            // if we can't determine a good label then don't bother creating a section
+            if (secondLabel == null) {
+                return null;
+            }
+
+            if (first == null || !secondLabel.equals(createLabel(first))) {
+                return secondLabel;
             }
 
             return null;

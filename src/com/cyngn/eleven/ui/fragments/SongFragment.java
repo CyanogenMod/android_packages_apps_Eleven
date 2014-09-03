@@ -134,7 +134,7 @@ public class SongFragment extends Fragment implements LoaderCallbacks<SectionLis
     public void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         // Create the adpater
-        mAdapter = new SectionAdapter<Song, SongAdapter>(getActivity(), new SongAdapter(getActivity(), R.layout.list_item_song));
+        mAdapter = new SectionAdapter<Song, SongAdapter>(getActivity(), new SongAdapter(getActivity(), R.layout.list_item_simple));
     }
 
     /**

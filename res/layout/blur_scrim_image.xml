@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Copyright (C) 2014 Cyanogen, Inc.
+-->
+<com.cyngn.eleven.widgets.BlurScrimImage
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/blurScrimImage"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:id="@+id/blurImage"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="centerCrop"
+        android:src="@drawable/default_artwork_blur"/>
+    <LinearLayout
+        android:id="@+id/blurScrim"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+</com.cyngn.eleven.widgets.BlurScrimImage>

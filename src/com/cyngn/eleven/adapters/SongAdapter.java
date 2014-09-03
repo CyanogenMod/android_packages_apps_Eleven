@@ -97,15 +97,18 @@ public class SongAdapter extends ArrayAdapter<Song> implements SectionAdapter.Ba
         // padding doesn't apply to included layouts, so we need
         // to wrap it in a container and show/hide with the container
         PlayPauseProgressButton playPauseProgressButton = holder.mPlayPauseProgressButton.get();
-        View playPauseContainer = holder.mPlayPauseProgressContainer.get();
-        if (mCurrentlyPlayingSongId == dataHolder.mItemId) {
-            // make it visible
-            playPauseProgressButton.enableAndShow();
-            playPauseContainer.setVisibility(View.VISIBLE);
-        } else {
-            // hide it
-            playPauseProgressButton.disableAndHide();
-            playPauseContainer.setVisibility(View.GONE);
+        if (playPauseProgressButton != null) {
+            View playPauseContainer = holder.mPlayPauseProgressContainer.get();
+
+            if (mCurrentlyPlayingSongId == dataHolder.mItemId) {
+                // make it visible
+                playPauseProgressButton.enableAndShow();
+                playPauseContainer.setVisibility(View.VISIBLE);
+            } else {
+                // hide it
+                playPauseProgressButton.disableAndHide();
+                playPauseContainer.setVisibility(View.GONE);
+            }
         }
 
         return convertView;
