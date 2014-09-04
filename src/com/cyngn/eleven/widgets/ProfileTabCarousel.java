@@ -28,7 +28,6 @@ import android.widget.HorizontalScrollView;
 import android.widget.ImageView;
 
 import com.cyngn.eleven.R;
-import com.cyngn.eleven.ui.activities.ProfileActivity;
 import com.cyngn.eleven.utils.ApolloUtils;
 
 /**

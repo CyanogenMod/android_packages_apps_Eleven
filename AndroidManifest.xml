@@ -21,7 +21,7 @@
     <!-- ICS to Jelly Bean -->
     <uses-sdk
         android:minSdkVersion="16"
-        android:targetSdkVersion="18" />
+        android:targetSdkVersion="20" />
 
     <!-- Used for caching and creating new playlists -->
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
@@ -135,6 +135,13 @@
         <!-- Profile phone Activity -->
         <activity
             android:name=".ui.activities.ProfileActivity"
+            android:excludeFromRecents="true"
+            android:screenOrientation="portrait"
+            android:theme="@style/Eleven.Theme.ActionBar.Overlay">
+        </activity>
+        <!-- Artist Detail Activity -->
+        <activity
+            android:name=".ui.activities.ArtistDetailActivity"
             android:excludeFromRecents="true"
             android:screenOrientation="portrait"
             android:theme="@style/Eleven.Theme.ActionBar.Overlay">

@@ -1,0 +1,60 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="70dp" >
+
+    <ImageView
+        android:id="@+id/album_art"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_margin="10dp" />
+
+    <!-- FIXME: hide this until we know what goes in the popup menu -->
+    <ImageView
+        android:visibility="gone"
+        android:id="@+id/overflow"
+        android:layout_width="24dp"
+        android:layout_height="68dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginBottom="2dp"
+        android:gravity="center"
+        android:src="@drawable/menu_item_button" />
+
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_toLeftOf="@id/overflow"
+        android:layout_toRightOf="@id/album_art"
+        android:layout_marginTop="16dp"
+        android:singleLine="true"
+        android:fontFamily="sans-serif"
+        android:textStyle="bold"
+        android:textSize="@dimen/text_size_small"
+        android:textColor="@color/default_text_color" />
+
+    <TextView
+        android:id="@+id/album"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/title"
+        android:layout_toRightOf="@id/album_art"
+        android:layout_toLeftOf="@id/overflow"
+        android:layout_marginTop="-2dp"
+        android:singleLine="true"
+        android:fontFamily="sans-serif-light"
+        android:textSize="@dimen/text_size_micro"
+        android:textColor="@color/default_text_color" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:background="@color/list_item_divider_color" />
+</RelativeLayout>

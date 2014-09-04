@@ -21,6 +21,7 @@ import android.provider.MediaStore;
 
 import com.cyngn.eleven.Config;
 import com.cyngn.eleven.R;
+import com.cyngn.eleven.ui.activities.ArtistDetailActivity;
 import com.cyngn.eleven.ui.activities.HomeActivity;
 import com.cyngn.eleven.ui.activities.ProfileActivity;
 import com.cyngn.eleven.ui.activities.SearchActivity;
@@ -40,9 +41,7 @@ public final class NavUtils {
      * @param context The {@link Activity} to use.
      * @param artistName The name of the artist
      */
-    public static void openArtistProfile(final Activity context,
-            final String artistName) {
-
+    public static void openArtistProfile(final Activity context, final String artistName) {
         // Create a new bundle to transfer the artist info
         final Bundle bundle = new Bundle();
         bundle.putLong(Config.ID, MusicUtils.getIdForArtist(context, artistName));
@@ -50,8 +49,8 @@ public final class NavUtils {
         bundle.putString(Config.ARTIST_NAME, artistName);
 
         // Create the intent to launch the profile activity
-        final Intent intent = new Intent(context, ProfileActivity.class);
-        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        final Intent intent = new Intent(context, ArtistDetailActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         intent.putExtras(bundle);
         context.startActivity(intent);
     }

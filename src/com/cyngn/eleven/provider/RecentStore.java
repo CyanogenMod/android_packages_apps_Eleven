@@ -18,8 +18,6 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.text.TextUtils;
 
-import com.cyngn.eleven.ui.activities.ProfileActivity;
-
 /**
  * The {@link RecentlyListenedFragment} is used to display a a grid or list of
  * recently listened to albums. In order to populate the this grid or list with

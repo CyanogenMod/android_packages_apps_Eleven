@@ -30,6 +30,11 @@
     <string name="page_now_playing">NOW PLAYING</string>
     <string name="page_play_queue">PLAY QUEUE</string>
 
+    <!-- Section Headers -->
+    <string name="header_albums">ALBUMS</string>
+    <string name="header_top_songs">TOP SONGS</string>
+    <string name="header_all_songs">ALL SONGS</string>
+
     <!-- Option menu items -->
     <string name="menu_settings">Settings</string>
     <string name="menu_search">Search</string>

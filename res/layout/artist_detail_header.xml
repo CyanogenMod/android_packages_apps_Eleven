@@ -1,0 +1,43 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background_color" >
+
+    <ImageView
+        android:id="@+id/hero"
+        android:layout_width="match_parent"
+        android:layout_height="220dp"
+        android:scaleType="centerCrop" />
+
+    <TextView
+        android:id="@+id/albums_label"
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:layout_marginLeft="10dp"
+        android:layout_below="@id/hero"
+        android:gravity="center_vertical"
+        android:fontFamily="sans-serif-light"
+        android:textColor="@color/list_item_header_text_color"
+        android:textSize="@dimen/text_size_medium"
+        android:text="@string/header_albums" />
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/albums"
+        android:scrollbars="none"
+        android:layout_width="match_parent"
+        android:layout_height="161dp"
+        android:layout_below="@id/albums_label" />
+
+    <TextView
+        android:id="@+id/songs_label"
+        android:layout_width="wrap_content"
+        android:layout_height="30dp"
+        android:layout_marginLeft="10dp"
+        android:layout_below="@id/albums"
+        android:gravity="bottom"
+        android:fontFamily="sans-serif-light"
+        android:textColor="@color/list_item_header_text_color"
+        android:textSize="@dimen/text_size_medium"
+        android:text="@string/header_all_songs" />
+
+</RelativeLayout>
