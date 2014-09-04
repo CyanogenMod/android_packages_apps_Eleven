@@ -22,8 +22,8 @@ import android.widget.RemoteViews;
 
 import com.cyngn.eleven.MusicPlaybackService;
 import com.cyngn.eleven.R;
-import com.cyngn.eleven.ui.fragments.AudioPlayerFragment;
 import com.cyngn.eleven.ui.activities.HomeActivity;
+import com.cyngn.eleven.ui.fragments.AudioPlayerFragment;
 import com.cyngn.eleven.utils.ApolloUtils;
 
 /**
@@ -164,6 +164,7 @@ public class AppWidgetLarge extends AppWidgetBase {
         if (playerActive) {
             action = new Intent(context, HomeActivity.class);
             action.setAction(HomeActivity.ACTION_VIEW_MUSIC_PLAYER);
+            action.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
             pendingIntent = PendingIntent.getActivity(context, 0, action, 0);
             views.setOnClickPendingIntent(R.id.app_widget_large_info_container, pendingIntent);
             views.setOnClickPendingIntent(R.id.app_widget_large_image, pendingIntent);
@@ -171,6 +172,7 @@ public class AppWidgetLarge extends AppWidgetBase {
             // Home
             action = new Intent(context, HomeActivity.class);
             action.setAction(HomeActivity.ACTION_VIEW_BROWSE);
+            action.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
             pendingIntent = PendingIntent.getActivity(context, 0, action, 0);
             views.setOnClickPendingIntent(R.id.app_widget_large_info_container, pendingIntent);
             views.setOnClickPendingIntent(R.id.app_widget_large_image, pendingIntent);

@@ -28,8 +28,8 @@ import android.widget.RemoteViews;
 import com.cyngn.eleven.Config;
 import com.cyngn.eleven.MusicPlaybackService;
 import com.cyngn.eleven.R;
-import com.cyngn.eleven.ui.fragments.AudioPlayerFragment;
 import com.cyngn.eleven.ui.activities.HomeActivity;
+import com.cyngn.eleven.ui.fragments.AudioPlayerFragment;
 import com.cyngn.eleven.ui.activities.ProfileActivity;
 import com.cyngn.eleven.ui.activities.ShortcutActivity;
 import com.cyngn.eleven.utils.MusicUtils;
@@ -258,12 +258,14 @@ public class RecentWidgetProvider extends AppWidgetBase {
         // Now playing
         if (playerActive) {
             action = new Intent(context, HomeActivity.class);
+            action.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
             action.setAction(HomeActivity.ACTION_VIEW_MUSIC_PLAYER);
             pendingIntent = PendingIntent.getActivity(context, 0, action, 0);
             views.setOnClickPendingIntent(R.id.app_widget_recents_action_bar, pendingIntent);
         } else {
             // Home
             action = new Intent(context, HomeActivity.class);
+            action.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
             action.setAction(HomeActivity.ACTION_VIEW_BROWSE);
             pendingIntent = PendingIntent.getActivity(context, 0, action, 0);
             views.setOnClickPendingIntent(R.id.app_widget_recents_action_bar, pendingIntent);

@@ -34,7 +34,12 @@
             android:id="@+id/activity_base_content"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:paddingTop="?android:attr/actionBarSize" />
+            android:paddingTop="?android:attr/actionBarSize">
+            <ViewStub
+                    android:id="@+id/content_stub"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"/>
+        </FrameLayout>
 
         <com.cyngn.eleven.slidinguppanel.SlidingUpPanelLayout
             xmlns:sothree="http://schemas.android.com/apk/res-auto"

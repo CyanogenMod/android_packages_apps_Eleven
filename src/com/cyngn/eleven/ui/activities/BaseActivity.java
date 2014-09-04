@@ -55,7 +55,7 @@ import java.util.ArrayList;
  * A base {@link FragmentActivity} used to update the bottom bar and
  * bind to Apollo's service.
  * <p>
- * {@link HomeActivity} extends from this skeleton.
+ * {@link SlidingPanelActivity} extends from this skeleton.
  * 
  * @author Andrew Neal (andrewdneal@gmail.com)
  */
@@ -283,7 +283,7 @@ public abstract class BaseActivity extends FragmentActivity implements ServiceCo
     /**
      * Initializes the items in the bottom action bar.
      */
-    private void initBottomActionBar() {
+    protected void initBottomActionBar() {
         // Play and pause button
         mPlayPauseProgressButton = (PlayPauseProgressButton)findViewById(R.id.playPauseProgressButton);
         mPlayPauseProgressButton.enableAndShow();
@@ -296,11 +296,6 @@ public abstract class BaseActivity extends FragmentActivity implements ServiceCo
         mAlbumArt = (ImageView)findViewById(R.id.bottom_action_bar_album_art);
         // Open to the currently playing album profile
         mAlbumArt.setOnClickListener(mOpenCurrentAlbumProfile);
-        // Bottom action bar
-        final LinearLayout bottomActionBar = (LinearLayout)findViewById(R.id.bottom_action_bar);
-        // Display the now playing screen or shuffle if this isn't anything
-        // playing
-        bottomActionBar.setOnClickListener(mOpenNowPlaying);
     }
 
     /**
@@ -348,24 +343,6 @@ public abstract class BaseActivity extends FragmentActivity implements ServiceCo
             }
             if (BaseActivity.this instanceof ProfileActivity) {
                 finish();
-            }
-        }
-    };
-
-    /**
-     * Opens the now playing screen
-     */
-    private final View.OnClickListener mOpenNowPlaying = new View.OnClickListener() {
-
-        /**
-         * {@inheritDoc}
-         */
-        @Override
-        public void onClick(final View v) {
-            if (MusicUtils.getCurrentAudioId() != -1) {
-                NavUtils.openAudioPlayer(BaseActivity.this);
-            } else {
-                MusicUtils.shuffleAll(BaseActivity.this);
             }
         }
     };

@@ -302,6 +302,7 @@ public class ShortcutActivity extends FragmentActivity implements ServiceConnect
         // Open the now playing screen
         if (shouldOpenAudioPlayer) {
             final Intent intent = new Intent(this, HomeActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
             intent.setAction(HomeActivity.ACTION_VIEW_MUSIC_PLAYER);
             startActivity(intent);
         }

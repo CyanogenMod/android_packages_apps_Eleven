@@ -14,41 +14,25 @@
   See the License for the specific language governing permissions and
   limitations under the License.
 -->
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent" >
+<!-- content -->
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical" >
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
 
-        <include
-            android:id="@+id/shadow"
-            layout="@layout/top_shadow" />
-
-        <RelativeLayout
+    <android.support.v4.view.ViewPager
+            android:id="@+id/acivity_profile_base_pager"
             android:layout_width="match_parent"
-            android:layout_height="0dip"
-            android:layout_weight="1" >
+            android:layout_height="match_parent"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"/>
 
-            <android.support.v4.view.ViewPager
-                android:id="@+id/acivity_profile_base_pager"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentTop="true" />
-
-            <include
-                android:id="@+id/acivity_profile_base_tab_carousel"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentTop="true"
-                layout="@layout/profile_tab_carousel" />
-        </RelativeLayout>
-
-        <include layout="@layout/bottom_action_bar" />
-    </LinearLayout>
-
-</FrameLayout>
+    <include
+            android:id="@+id/acivity_profile_base_tab_carousel"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            layout="@layout/profile_tab_carousel"/>
+</RelativeLayout>
+        <!-- end content -->

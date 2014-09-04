@@ -136,7 +136,9 @@
         <activity
             android:name=".ui.activities.ProfileActivity"
             android:excludeFromRecents="true"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait"
+            android:theme="@style/Eleven.Theme.ActionBar.Overlay">
+        </activity>
         <!-- Shortcut launcher Activity -->
         <activity
             android:name=".ui.activities.ShortcutActivity"

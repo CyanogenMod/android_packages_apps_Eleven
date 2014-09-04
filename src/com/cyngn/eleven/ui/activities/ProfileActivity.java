@@ -54,7 +54,7 @@ import com.cyngn.eleven.widgets.ProfileTabCarousel.Listener;
  * 
  * @author Andrew Neal (andrewdneal@gmail.com)
  */
-public class ProfileActivity extends BaseActivity implements OnPageChangeListener, Listener {
+public class ProfileActivity extends SlidingPanelActivity implements OnPageChangeListener, Listener {
 
     private static final int NEW_PHOTO = 1;
 
@@ -224,6 +224,11 @@ public class ProfileActivity extends BaseActivity implements OnPageChangeListene
         mTabCarousel.setListener(this);
     }
 
+    @Override
+    protected int getLayoutToInflate() {
+        return R.layout.activity_profile_base;
+    }
+
     /**
      * {@inheritDoc}
      */
@@ -231,14 +236,6 @@ public class ProfileActivity extends BaseActivity implements OnPageChangeListene
     protected void onPause() {
         super.onPause();
         mImageFetcher.flush();
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public int setContentView() {
-        return R.layout.activity_profile_base;
     }
 
     /**
@@ -413,7 +410,6 @@ public class ProfileActivity extends BaseActivity implements OnPageChangeListene
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        goBack();
     }
 
     /**
