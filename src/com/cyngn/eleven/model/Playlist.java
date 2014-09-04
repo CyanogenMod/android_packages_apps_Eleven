@@ -31,15 +31,21 @@ public class Playlist {
     public String mPlaylistName;
 
     /**
+     * The number of songs in this playlist
+     */
+    public int mSongCount;
+
+    /**
      * Constructor of <code>Genre</code>
      * 
      * @param playlistId The Id of the playlist
      * @param playlistName The playlist name
      */
-    public Playlist(final long playlistId, final String playlistName) {
+    public Playlist(final long playlistId, final String playlistName, final int songCount) {
         super();
         mPlaylistId = playlistId;
         mPlaylistName = playlistName;
+        mSongCount = songCount;
     }
 
     /**
@@ -51,6 +57,7 @@ public class Playlist {
         int result = 1;
         result = prime * result + (int) mPlaylistId;
         result = prime * result + (mPlaylistName == null ? 0 : mPlaylistName.hashCode());
+        result = prime * result + mSongCount;
         return result;
     }
 
@@ -72,6 +79,11 @@ public class Playlist {
         if (mPlaylistId != other.mPlaylistId) {
             return false;
         }
+
+        if (mSongCount != other.mSongCount) {
+            return false;
+        }
+
         return TextUtils.equals(mPlaylistName, other.mPlaylistName);
     }
 

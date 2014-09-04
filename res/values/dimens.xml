@@ -67,7 +67,9 @@
     <dimen name="bottom_action_bar_album_art_width">30.0dip</dimen>
     <dimen name="bottom_action_bar_album_art_height">30.0dip</dimen>
     <dimen name="bottom_action_bar_info_padding_left">5.0dip</dimen>
-    <dimen name="bottom_action_bar_button_container_width">165.0dip</dimen>
+    <dimen name="bab_progress_size">35.0dip</dimen>
+    <dimen name="bab_progress_padding_left">16.0dip</dimen>
+    <dimen name="bab_progress_padding_right">22.0dip</dimen>
 
     <!-- Notification template -->
     <dimen name="notification_big_icon_height">64.0dip</dimen>

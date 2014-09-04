@@ -11,6 +11,7 @@
 
 package com.cyngn.eleven.adapters;
 
+import android.app.Activity;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,6 +19,8 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 
 import com.cyngn.eleven.R;
+import com.cyngn.eleven.cache.ImageFetcher;
+import com.cyngn.eleven.model.Artist;
 import com.cyngn.eleven.model.Song;
 import com.cyngn.eleven.ui.MusicHolder;
 import com.cyngn.eleven.ui.fragments.profile.AlbumSongFragment;
@@ -25,6 +28,7 @@ import com.cyngn.eleven.ui.fragments.profile.ArtistSongFragment;
 import com.cyngn.eleven.ui.fragments.profile.GenreSongFragment;
 import com.cyngn.eleven.ui.fragments.profile.LastAddedFragment;
 import com.cyngn.eleven.ui.fragments.profile.PlaylistSongFragment;
+import com.cyngn.eleven.utils.ApolloUtils;
 import com.cyngn.eleven.utils.Lists;
 import com.cyngn.eleven.utils.MusicUtils;
 
@@ -86,6 +90,11 @@ public class ProfileSongAdapter extends ArrayAdapter<Song> {
     private final int mLayoutId;
 
     /**
+     * Image cache and image fetcher
+     */
+    private final ImageFetcher mImageFetcher;
+
+    /**
      * Display setting for the second line in a song fragment
      */
     private final int mDisplaySetting;
@@ -103,30 +112,32 @@ public class ProfileSongAdapter extends ArrayAdapter<Song> {
     /**
      * Constructor of <code>ProfileSongAdapter</code>
      * 
-     * @param context The {@link Context} to use
+     * @param activity The {@link Activity} to use
      * @param layoutId The resource Id of the view to inflate.
      * @param setting defines the content of the second line
      */
-    public ProfileSongAdapter(final Context context, final int layoutId, final int setting) {
-        super(context, 0);
+    public ProfileSongAdapter(final Activity activity, final int layoutId, final int setting) {
+        super(activity, 0);
         // Used to create the custom layout
-        mInflater = LayoutInflater.from(context);
+        mInflater = LayoutInflater.from(activity);
         // Cache the header
         mHeader = mInflater.inflate(R.layout.faux_carousel, null);
         // Get the layout Id
         mLayoutId = layoutId;
         // Know what to put in line two
         mDisplaySetting = setting;
+        // Initialize the cache & image fetcher
+        mImageFetcher = ApolloUtils.getImageFetcher(activity);
     }
 
     /**
      * Constructor of <code>ProfileSongAdapter</code>
      * 
-     * @param context The {@link Context} to use
+     * @param activity The {@link Activity} to use
      * @param layoutId The resource Id of the view to inflate.
      */
-    public ProfileSongAdapter(final Context context, final int layoutId) {
-        this(context, layoutId, DISPLAY_DEFAULT_SETTING);
+    public ProfileSongAdapter(final Activity activity, final int layoutId) {
+        this(activity, layoutId, DISPLAY_DEFAULT_SETTING);
     }
 
     /**
@@ -146,7 +157,9 @@ public class ProfileSongAdapter extends ArrayAdapter<Song> {
             convertView = LayoutInflater.from(getContext()).inflate(mLayoutId, parent, false);
             holder = new MusicHolder(convertView);
             // Hide the third line of text
-            holder.mLineThree.get().setVisibility(View.GONE);
+            if (holder.mLineThree.get() != null) {
+                holder.mLineThree.get().setVisibility(View.GONE);
+            }
             convertView.setTag(holder);
         } else {
             holder = (MusicHolder)convertView.getTag();
@@ -179,6 +192,12 @@ public class ProfileSongAdapter extends ArrayAdapter<Song> {
                 sb.append(SEPARATOR_STRING);
                 sb.append(song.mAlbumName);
                 holder.mLineTwo.get().setText(sb.toString());
+
+                // Asynchronously load the album image
+                if (song.mAlbumId >= 0) {
+                    mImageFetcher.loadAlbumImage(song.mArtistName, song.mAlbumName, song.mAlbumId,
+                            holder.mImage.get());
+                }
                 break;
             case DISPLAY_DEFAULT_SETTING:
             default:
@@ -237,6 +256,24 @@ public class ProfileSongAdapter extends ArrayAdapter<Song> {
             return ITEM_VIEW_TYPE_HEADER;
         }
         return ITEM_VIEW_TYPE_MUSIC;
+    }
+
+    /**
+     * @param pause True to temporarily pause the disk cache, false otherwise.
+     */
+    public void setPauseDiskCache(final boolean pause) {
+        if (mImageFetcher != null) {
+            mImageFetcher.setPauseDiskCache(pause);
+        }
+    }
+
+    /**
+     * @param artist The key used to find the cached artist to remove
+     */
+    public void removeFromCache(final Artist artist) {
+        if (mImageFetcher != null) {
+            mImageFetcher.removeFromCache(artist.mArtistName);
+        }
     }
 
     /**

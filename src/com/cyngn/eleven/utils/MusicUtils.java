@@ -73,6 +73,9 @@ public final class MusicUtils {
 
     private static final int MIN_VALID_YEAR = 1900; // used to remove invalid years from metadata
 
+    public static final String MUSIC_ONLY_SELECTION = MediaStore.Audio.AudioColumns.IS_MUSIC + "=1"
+                    + " AND " + MediaStore.Audio.AudioColumns.TITLE + " != ''"; //$NON-NLS-2$
+
     static {
         mConnectionMap = new WeakHashMap<Context, ServiceBinder>();
         sEmptyList = new long[0];

@@ -21,6 +21,7 @@ import android.provider.MediaStore.Audio.PlaylistsColumns;
 import com.cyngn.eleven.R;
 import com.cyngn.eleven.model.Playlist;
 import com.cyngn.eleven.utils.Lists;
+import com.cyngn.eleven.utils.MusicUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -71,8 +72,10 @@ public class PlaylistLoader extends WrappedAsyncTaskLoader<List<Playlist>> {
                 // Copy the playlist name
                 final String name = mCursor.getString(1);
 
+                final int songCount = getSongCount(getContext(), id);
+
                 // Create a new playlist
-                final Playlist playlist = new Playlist(id, name);
+                final Playlist playlist = new Playlist(id, name, songCount);
 
                 // Add everything up
                 mPlaylistList.add(playlist);
@@ -92,7 +95,7 @@ public class PlaylistLoader extends WrappedAsyncTaskLoader<List<Playlist>> {
 
         /* Last added list */
         final Playlist lastAdded = new Playlist(-2,
-                resources.getString(R.string.playlist_last_added));
+                resources.getString(R.string.playlist_last_added), -1);
         mPlaylistList.add(lastAdded);
     }
 
@@ -110,5 +113,26 @@ public class PlaylistLoader extends WrappedAsyncTaskLoader<List<Playlist>> {
                         /* 1 */
                         PlaylistsColumns.NAME
                 }, null, null, MediaStore.Audio.Playlists.DEFAULT_SORT_ORDER);
+    }
+
+    /**
+     * Gets the number of songs for a playlist
+     * @param context The {@link Context} to use.
+     * @param playlistId the id of the playlist
+     * @return the # of songs in the playlist or -1 if not found
+     */
+    public static final int getSongCount(final Context context, final long playlistId) {
+        Cursor c = context.getContentResolver().query(
+                MediaStore.Audio.Playlists.Members.getContentUri("external", playlistId),
+                new String[]{ BaseColumns._ID }, MusicUtils.MUSIC_ONLY_SELECTION, null, null);
+
+        if (c != null && c.moveToFirst()) {
+            int count = c.getCount();
+            c.close();
+            c = null;
+            return count;
+        }
+
+        return -1;
     }
 }

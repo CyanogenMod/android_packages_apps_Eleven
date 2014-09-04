@@ -123,7 +123,11 @@ public class HomeActivity extends BaseActivity {
         mSecondPanel.setPanelSlideListener(new SimplePanelSlideListener() {
             @Override
             public void onPanelSlide(View panel, float slideOffset) {
-                mFirstPanel.setSlidingEnabled(false);
+                // if we are not going to a specific panel, then disable sliding to prevent
+                // the two sliding panels from fighting for touch input
+                if (mTargetNavigatePanel == Panel.None) {
+                    mFirstPanel.setSlidingEnabled(false);
+                }
             }
 
             @Override
@@ -133,6 +137,7 @@ public class HomeActivity extends BaseActivity {
 
             @Override
             public void onPanelCollapsed(View panel) {
+                // re-enable sliding when the second panel is collapsed
                 mFirstPanel.setSlidingEnabled(true);
                 checkTargetNavigation();
             }
@@ -218,6 +223,8 @@ public class HomeActivity extends BaseActivity {
                 // if we are two panels over, we need special logic to jump twice
                 mTargetNavigatePanel = panel;
                 mSecondPanel.collapsePanel();
+                // re-enable sliding on first panel so we can collapse it
+                mFirstPanel.setSlidingEnabled(true);
                 mFirstPanel.collapsePanel();
                 break;
             case MusicPlayer:
@@ -234,15 +241,11 @@ public class HomeActivity extends BaseActivity {
     }
 
     /**
-     * This checks if we are at our target panel, and if not, continues the motion
+     * This checks if we are at our target panel and resets our flag if we are there
      */
     protected void checkTargetNavigation() {
-        if (mTargetNavigatePanel != Panel.None) {
-            if (mTargetNavigatePanel == getCurrentPanel()) {
-                mTargetNavigatePanel = Panel.None;
-            } else {
-                showPanel(mTargetNavigatePanel);
-            }
+        if (mTargetNavigatePanel == getCurrentPanel()) {
+            mTargetNavigatePanel = Panel.None;
         }
     }
 

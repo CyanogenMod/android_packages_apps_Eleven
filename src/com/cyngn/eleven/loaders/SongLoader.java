@@ -20,6 +20,7 @@ import android.provider.MediaStore.Audio.AudioColumns;
 import com.cyngn.eleven.model.Song;
 import com.cyngn.eleven.sectionadapter.SectionCreator;
 import com.cyngn.eleven.utils.Lists;
+import com.cyngn.eleven.utils.MusicUtils;
 import com.cyngn.eleven.utils.PreferenceUtils;
 
 import java.util.ArrayList;
@@ -108,9 +109,6 @@ public class SongLoader extends SectionCreator.SimpleListLoader<Song> {
      * @return The {@link Cursor} used to run the song query.
      */
     public static final Cursor makeSongCursor(final Context context) {
-        final StringBuilder mSelection = new StringBuilder();
-        mSelection.append(AudioColumns.IS_MUSIC + "=1");
-        mSelection.append(" AND " + AudioColumns.TITLE + " != ''"); //$NON-NLS-2$
         return context.getContentResolver().query(MediaStore.Audio.Media.EXTERNAL_CONTENT_URI,
                 new String[] {
                         /* 0 */
@@ -127,7 +125,7 @@ public class SongLoader extends SectionCreator.SimpleListLoader<Song> {
                         AudioColumns.DURATION,
                         /* 6 */
                         AudioColumns.YEAR,
-                }, mSelection.toString(), null,
+                }, MusicUtils.MUSIC_ONLY_SELECTION, null,
                 PreferenceUtils.getInstance(context).getSongSortOrder());
     }
 }

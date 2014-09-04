@@ -44,6 +44,7 @@ import com.cyngn.eleven.utils.MusicUtils;
 import com.cyngn.eleven.utils.MusicUtils.ServiceToken;
 import com.cyngn.eleven.utils.NavUtils;
 import com.cyngn.eleven.widgets.PlayPauseButton;
+import com.cyngn.eleven.widgets.PlayPauseProgressButton;
 import com.cyngn.eleven.widgets.RepeatButton;
 import com.cyngn.eleven.widgets.ShuffleButton;
 
@@ -71,19 +72,9 @@ public abstract class BaseActivity extends FragmentActivity implements ServiceCo
     private ServiceToken mToken;
 
     /**
-     * Play and pause button (BAB)
+     * Play pause progress button
      */
-    private PlayPauseButton mPlayPauseButton;
-
-    /**
-     * Repeat button (BAB)
-     */
-    private RepeatButton mRepeatButton;
-
-    /**
-     * Shuffle button (BAB)
-     */
-    private ShuffleButton mShuffleButton;
+    private PlayPauseProgressButton mPlayPauseProgressButton;
 
     /**
      * Track name (BAB)
@@ -234,14 +225,14 @@ public abstract class BaseActivity extends FragmentActivity implements ServiceCo
         final IntentFilter filter = new IntentFilter();
         // Play and pause changes
         filter.addAction(MusicPlaybackService.PLAYSTATE_CHANGED);
-        // Shuffle and repeat changes
-        filter.addAction(MusicPlaybackService.SHUFFLEMODE_CHANGED);
-        filter.addAction(MusicPlaybackService.REPEATMODE_CHANGED);
         // Track changes
         filter.addAction(MusicPlaybackService.META_CHANGED);
         // Update a list, probably the playlist fragment's
         filter.addAction(MusicPlaybackService.REFRESH);
         registerReceiver(mPlaybackStatus, filter);
+
+        mPlayPauseProgressButton.resume();
+
         MusicUtils.notifyForegroundStateChanged(this, true);
     }
 
@@ -251,6 +242,9 @@ public abstract class BaseActivity extends FragmentActivity implements ServiceCo
     @Override
     protected void onStop() {
         super.onStop();
+
+        mPlayPauseProgressButton.pause();
+
         MusicUtils.notifyForegroundStateChanged(this, false);
     }
 
@@ -291,11 +285,9 @@ public abstract class BaseActivity extends FragmentActivity implements ServiceCo
      */
     private void initBottomActionBar() {
         // Play and pause button
-        mPlayPauseButton = (PlayPauseButton)findViewById(R.id.action_button_play);
-        // Shuffle button
-        mShuffleButton = (ShuffleButton)findViewById(R.id.action_button_shuffle);
-        // Repeat button
-        mRepeatButton = (RepeatButton)findViewById(R.id.action_button_repeat);
+        mPlayPauseProgressButton = (PlayPauseProgressButton)findViewById(R.id.playPauseProgressButton);
+        mPlayPauseProgressButton.enableAndShow();
+
         // Track name
         mTrackName = (TextView)findViewById(R.id.bottom_action_bar_line_one);
         // Artist name
@@ -335,11 +327,7 @@ public abstract class BaseActivity extends FragmentActivity implements ServiceCo
      */
     private void updatePlaybackControls() {
         // Set the play and pause image
-        mPlayPauseButton.updateState();
-        // Set the shuffle image
-        mShuffleButton.updateShuffleState();
-        // Set the repeat image
-        mRepeatButton.updateRepeatState();
+        mPlayPauseProgressButton.getPlayPauseButton().updateState();
     }
 
     /**
@@ -413,13 +401,7 @@ public abstract class BaseActivity extends FragmentActivity implements ServiceCo
                 }
             } else if (action.equals(MusicPlaybackService.PLAYSTATE_CHANGED)) {
                 // Set the play and pause image
-                mReference.get().mPlayPauseButton.updateState();
-            } else if (action.equals(MusicPlaybackService.REPEATMODE_CHANGED)
-                    || action.equals(MusicPlaybackService.SHUFFLEMODE_CHANGED)) {
-                // Set the repeat image
-                mReference.get().mRepeatButton.updateRepeatState();
-                // Set the shuffle image
-                mReference.get().mShuffleButton.updateShuffleState();
+                mReference.get().mPlayPauseProgressButton.getPlayPauseButton().updateState();
             } else if (action.equals(MusicPlaybackService.REFRESH)) {
                 // Let the listener know to update a list
                 for (final MusicStateListener listener : mReference.get().mMusicStateListener) {

@@ -10,8 +10,8 @@ LOCAL_STATIC_JAVA_LIBRARIES := \
     android-support-v4 \
     android-support-v8-renderscript \
     android-common \
-    nineoldandroids \
-    palette
+    eleven_nineoldandroids \
+    eleven_palette
 
 LOCAL_PACKAGE_NAME := Eleven
 LOCAL_OVERRIDES_PACKAGES := Music
@@ -25,6 +25,6 @@ include $(BUILD_PACKAGE)
 include $(CLEAR_VARS)
 
 LOCAL_PREBUILT_STATIC_JAVA_LIBRARIES := \
-    nineoldandroids:libs/nineoldandroids-2.4.0.jar \
-    palette:libs/android-support-v7-palette.jar
+    eleven_nineoldandroids:libs/nineoldandroids-2.4.0.jar \
+    eleven_palette:libs/android-support-v7-palette.jar
 include $(BUILD_MULTI_PREBUILT)

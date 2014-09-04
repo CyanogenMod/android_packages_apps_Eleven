@@ -23,10 +23,6 @@
     android:layout_gravity="bottom"
     tools:ignore="ContentDescription" >
 
-    <include
-        android:id="@+id/colorstrip"
-        layout="@layout/colorstrip" />
-
     <LinearLayout
         android:id="@+id/bottom_action_bar"
         android:layout_width="match_parent"
@@ -60,37 +56,19 @@
                 android:layout_below="@+id/bottom_action_bar_line_one" />
         </RelativeLayout>
 
-        <HorizontalScrollView
-            android:layout_width="@dimen/bottom_action_bar_button_container_width"
-            android:layout_height="match_parent"
-            android:scrollbars="none" >
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:orientation="horizontal" >
-
-                <com.cyngn.eleven.widgets.RepeatingImageButton
-                    android:id="@+id/action_button_previous"
-                    style="@style/BottomActionBarItem.Previous" />
-
-                <com.cyngn.eleven.widgets.PlayPauseButton
-                    android:id="@+id/action_button_play"
-                    style="@style/BottomActionBarItem.Play" />
-
-                <com.cyngn.eleven.widgets.RepeatingImageButton
-                    android:id="@+id/action_button_next"
-                    style="@style/BottomActionBarItem.Next" />
-
-                <com.cyngn.eleven.widgets.ShuffleButton
-                    android:id="@+id/action_button_shuffle"
-                    style="@style/BottomActionBarItem.Shuffle" />
-
-                <com.cyngn.eleven.widgets.RepeatButton
-                    android:id="@+id/action_button_repeat"
-                    style="@style/BottomActionBarItem.Repeat" />
-            </LinearLayout>
-        </HorizontalScrollView>
+        <FrameLayout
+            android:id="@+id/play_pause_container"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:paddingLeft="@dimen/bab_progress_padding_left"
+            android:paddingRight="@dimen/bab_progress_padding_right">
+            <include
+                android:contentDescription="@string/accessibility_play"
+                android:layout_width="@dimen/bab_progress_size"
+                android:layout_height="@dimen/bab_progress_size"
+                layout="@layout/play_pause_progress_button" />
+        </FrameLayout>
     </LinearLayout>
 
 </com.cyngn.eleven.widgets.theme.BottomActionBar>

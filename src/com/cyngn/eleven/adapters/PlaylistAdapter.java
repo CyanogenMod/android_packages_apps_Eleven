@@ -23,6 +23,7 @@ import com.cyngn.eleven.model.Playlist;
 import com.cyngn.eleven.ui.MusicHolder;
 import com.cyngn.eleven.ui.MusicHolder.DataHolder;
 import com.cyngn.eleven.ui.fragments.PlaylistFragment;
+import com.cyngn.eleven.utils.MusicUtils;
 
 /**
  * This {@link ArrayAdapter} is used to display all of the playlists on a user's
@@ -69,12 +70,8 @@ public class PlaylistAdapter extends ArrayAdapter<Playlist> {
         if (convertView == null) {
             convertView = LayoutInflater.from(getContext()).inflate(mLayoutId, parent, false);
             holder = new MusicHolder(convertView);
-            // Hide the second and third lines of text
-            holder.mLineTwo.get().setVisibility(View.GONE);
+            // hide the third line
             holder.mLineThree.get().setVisibility(View.GONE);
-            // Make line one slightly larger
-            holder.mLineOne.get().setTextSize(TypedValue.COMPLEX_UNIT_PX,
-                    getContext().getResources().getDimension(R.dimen.text_size_large));
             convertView.setTag(holder);
         } else {
             holder = (MusicHolder)convertView.getTag();
@@ -85,6 +82,14 @@ public class PlaylistAdapter extends ArrayAdapter<Playlist> {
 
         // Set each playlist name (line one)
         holder.mLineOne.get().setText(dataHolder.mLineOne);
+
+        if (dataHolder.mLineTwo == null) {
+            holder.mLineTwo.get().setVisibility(View.GONE);
+        } else {
+            holder.mLineTwo.get().setVisibility(View.VISIBLE);
+            holder.mLineTwo.get().setText(dataHolder.mLineTwo);
+        }
+
         return convertView;
     }
 
@@ -121,6 +126,11 @@ public class PlaylistAdapter extends ArrayAdapter<Playlist> {
             mData[i].mItemId = playlist.mPlaylistId;
             // Playlist names (line one)
             mData[i].mLineOne = playlist.mPlaylistName;
+            // # of songs
+            if (playlist.mSongCount >= 0) {
+                mData[i].mLineTwo = MusicUtils.makeLabel(getContext(),
+                        R.plurals.Nsongs, playlist.mSongCount);
+            }
         }
     }
 

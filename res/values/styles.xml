@@ -211,24 +211,8 @@
         <item name="android:scaleType">centerInside</item>
     </style>
 
-    <style name="BottomActionBarItem.Previous" parent="@style/BottomActionBarItem">
-        <item name="android:contentDescription">@string/accessibility_prev</item>
-    </style>
-
-    <style name="BottomActionBarItem.Next" parent="@style/BottomActionBarItem">
-        <item name="android:contentDescription">@string/accessibility_next</item>
-    </style>
-
     <style name="BottomActionBarItem.Play" parent="@style/BottomActionBarItem">
-        <item name="android:contentDescription">@string/accessibility_play</item>
-    </style>
 
-    <style name="BottomActionBarItem.Shuffle" parent="@style/BottomActionBarItem">
-        <item name="android:contentDescription">@string/accessibility_shuffle</item>
-    </style>
-
-    <style name="BottomActionBarItem.Repeat" parent="@style/BottomActionBarItem">
-        <item name="android:contentDescription">@string/accessibility_repeat</item>
     </style>
 
 </resources>

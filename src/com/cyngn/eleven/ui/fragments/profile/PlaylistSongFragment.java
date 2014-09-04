@@ -27,6 +27,7 @@ import android.view.Menu;
 import android.view.SubMenu;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.AdapterView.AdapterContextMenuInfo;
 import android.widget.AdapterView.OnItemClickListener;
@@ -164,7 +165,21 @@ public class PlaylistSongFragment extends Fragment implements LoaderCallbacks<Li
         // Quick scroll while dragging
         mListView.setDragScrollProfile(this);
         // To help make scrolling smooth
-        mListView.setOnScrollListener(new VerticalScrollListener(null, mProfileTabCarousel, 0));
+        mListView.setOnScrollListener(new VerticalScrollListener(null, mProfileTabCarousel, 0) {
+            @Override
+            public void onScrollStateChanged(AbsListView view, int scrollState) {
+                super.onScrollStateChanged(view, scrollState);
+
+                // Pause disk cache access to ensure smoother scrolling
+                if (scrollState == AbsListView.OnScrollListener.SCROLL_STATE_FLING
+                        || scrollState == AbsListView.OnScrollListener.SCROLL_STATE_TOUCH_SCROLL) {
+                    mAdapter.setPauseDiskCache(true);
+                } else {
+                    mAdapter.setPauseDiskCache(false);
+                    mAdapter.notifyDataSetChanged();
+                }
+            }
+        });
         // Remove the scrollbars and padding for the fast scroll
         mListView.setVerticalScrollBarEnabled(false);
         mListView.setFastScrollEnabled(false);
