@@ -84,6 +84,9 @@
     <!-- Sets the action bar menu icon -->
     <style name="ActionOverFlowButton" parent="@android:style/Widget.Holo.ActionButton.Overflow">
         <item name="android:src">@drawable/menu_button_light</item>
+        <item name="android:minWidth">0dip</item>
+        <item name="android:paddingLeft">8dip</item>
+        <item name="android:paddingRight">8dip</item>
     </style>
 
     <!-- The list item main text style/color -->
