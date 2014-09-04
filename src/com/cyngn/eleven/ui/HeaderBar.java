@@ -202,5 +202,14 @@ public class HeaderBar extends LinearLayout implements View.OnClickListener,
      */
     public void setBackListener(final OnClickListener listener) {
         mBackButton.setOnClickListener(listener);
+        setOnClickListener(listener);
+    }
+
+    /**
+     * Sets the header bar listener
+     * @param listener listener
+     */
+    public void setHeaderClickListener(final OnClickListener listener) {
+        setOnClickListener(listener);
     }
 }

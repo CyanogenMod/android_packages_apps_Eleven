@@ -55,6 +55,10 @@ public class SlidingPanelActivity extends BaseActivity {
     private HeaderBar mSecondHeaderBar;
     private Panel mTargetNavigatePanel;
 
+    private final ShowPanelClickListener mShowBrowse = new ShowPanelClickListener(Panel.Browse);
+    private final ShowPanelClickListener mShowMusicPlayer = new ShowPanelClickListener(Panel.MusicPlayer);
+    private final ShowPanelClickListener mShowQueue = new ShowPanelClickListener(Panel.Queue);
+
     // this is the blurred image that goes behind the now playing and queue fragments
     private BlurScrimImage mBlurScrimImage;
 
@@ -99,7 +103,6 @@ public class SlidingPanelActivity extends BaseActivity {
         setupSecondPanel();
 
         // get the blur scrim image
-        findViewById(R.id.bottom_action_bar_parent).setBackgroundColor(Color.TRANSPARENT);
         mBlurScrimImage = (BlurScrimImage)findViewById(R.id.blurScrimImage);
 
         if (getLayoutToInflate() != 0) {
@@ -140,13 +143,7 @@ public class SlidingPanelActivity extends BaseActivity {
 
         // setup the header bar
         mFirstHeaderBar = setupHeaderBar(R.id.firstHeaderBar, R.string.page_now_playing,
-                R.drawable.btn_queue_icon,
-                new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        showPanel(Panel.Queue);
-                    }
-                });
+                R.drawable.btn_queue_icon, mShowQueue, mShowBrowse);
     }
 
     private void setupSecondPanel() {
@@ -176,13 +173,7 @@ public class SlidingPanelActivity extends BaseActivity {
 
         // setup the header bar
         mSecondHeaderBar = setupHeaderBar(R.id.secondHeaderBar, R.string.page_play_queue,
-                R.drawable.btn_playback_icon,
-                new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        showPanel(Panel.MusicPlayer);
-                    }
-                });
+                R.drawable.btn_playback_icon, mShowMusicPlayer, mShowMusicPlayer);
 
         // set the drag view offset to allow the panel to go past the top of the viewport
         // since the previous view's is hiding the slide offset, we need to subtract that
@@ -292,18 +283,29 @@ public class SlidingPanelActivity extends BaseActivity {
     }
 
     protected HeaderBar setupHeaderBar(final int containerId, final int textId,
-                                       final int customIconId, final View.OnClickListener listener) {
+                                       final int customIconId, final View.OnClickListener customListener,
+                                        final View.OnClickListener headerClickListener) {
         final HeaderBar headerBar = (HeaderBar) findViewById(containerId);
         headerBar.setTitleText(textId);
-        headerBar.setupCustomButton(customIconId, listener);
+        headerBar.setupCustomButton(customIconId, customListener);
         headerBar.setBackgroundColor(Color.TRANSPARENT);
-        headerBar.setBackListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                showPanel(Panel.Browse);
-            }
-        });
+        headerBar.setBackListener(mShowBrowse);
+        headerBar.setHeaderClickListener(headerClickListener);
 
         return headerBar;
+    }
+
+    private class ShowPanelClickListener implements View.OnClickListener {
+
+        private Panel mTargetPanel;
+
+        public ShowPanelClickListener(Panel targetPanel) {
+            mTargetPanel = targetPanel;
+        }
+
+        @Override
+        public void onClick(View v) {
+            showPanel(mTargetPanel);
+        }
     }
 }

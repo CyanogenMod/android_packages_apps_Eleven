@@ -28,6 +28,7 @@
         sothree:panelHeight="@dimen/bottom_action_bar_height"
         sothree:slidePanelOffset="@dimen/bottom_action_bar_height"
         sothree:dragView="@+id/firstPanelDragArea"
+        sothree:dragViewClickable="false"
         sothree:shadowHeight="@dimen/sliding_panel_shadow_height">
 
         <FrameLayout

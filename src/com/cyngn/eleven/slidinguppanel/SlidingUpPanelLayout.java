@@ -53,6 +53,11 @@ public class SlidingUpPanelLayout extends ViewGroup {
     private static final int DEFAULT_FADE_COLOR = 0x99000000;
 
     /**
+     * Whether we should hook up the drag view clickable state
+     */
+    private static final boolean DEFAULT_DRAG_VIEW_CLICKABLE = true;
+
+    /**
      * Default Minimum velocity that will be detected as a fling
      */
     private static final int DEFAULT_MIN_FLING_VELOCITY = 400; // dips per second
@@ -148,6 +153,11 @@ public class SlidingUpPanelLayout extends ViewGroup {
      * used for dragging.
      */
     private int mDragViewResId = -1;
+
+    /**
+     * Whether clicking on the drag view will expand/collapse
+     */
+    private boolean mDragViewClickable = DEFAULT_DRAG_VIEW_CLICKABLE;
 
     /**
      * The child view that can slide, if any.
@@ -323,6 +333,7 @@ public class SlidingUpPanelLayout extends ViewGroup {
                 mCoveredFadeColor = ta.getColor(R.styleable.SlidingUpPanelLayout_fadeColor, DEFAULT_FADE_COLOR);
 
                 mDragViewResId = ta.getResourceId(R.styleable.SlidingUpPanelLayout_dragView, -1);
+                mDragViewClickable = ta.getBoolean(R.styleable.SlidingUpPanelLayout_dragViewClickable, DEFAULT_DRAG_VIEW_CLICKABLE);
 
                 mOverlayContent = ta.getBoolean(R.styleable.SlidingUpPanelLayout_overlay,DEFAULT_OVERLAY_FLAG);
 
@@ -465,7 +476,7 @@ public class SlidingUpPanelLayout extends ViewGroup {
      * @param dragView A view that will be used to drag the panel.
      */
     public void setDragView(View dragView) {
-        if (mDragView != null) {
+        if (mDragView != null && mDragViewClickable) {
             mDragView.setOnClickListener(null);
         }
         mDragView = dragView;
@@ -473,17 +484,19 @@ public class SlidingUpPanelLayout extends ViewGroup {
             mDragView.setClickable(true);
             mDragView.setFocusable(false);
             mDragView.setFocusableInTouchMode(false);
-            mDragView.setOnClickListener(new OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    if (!isEnabled()) return;
-                    if (!isPanelExpanded() && !isPanelAnchored()) {
-                        expandPanel(mAnchorPoint);
-                    } else {
-                        collapsePanel();
+            if (mDragViewClickable) {
+                mDragView.setOnClickListener(new OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        if (!isEnabled()) return;
+                        if (!isPanelExpanded() && !isPanelAnchored()) {
+                            expandPanel(mAnchorPoint);
+                        } else {
+                            collapsePanel();
+                        }
                     }
-                }
-            });;
+                });
+            }
         }
     }
 
