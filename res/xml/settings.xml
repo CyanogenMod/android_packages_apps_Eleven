@@ -16,15 +16,6 @@
 -->
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" >
 
-    <!-- UI catetgory -->
-    <PreferenceCategory android:title="@string/settings_ui_category" >
-
-        <!-- Color scheme -->
-        <Preference
-            android:key="color_scheme"
-            android:summary="@string/settings_color_scheme_summary"
-            android:title="@string/settings_color_scheme_title" />
-    </PreferenceCategory>
     <!-- Data catetory -->
     <PreferenceCategory android:title="@string/settings_data_category" >
 
@@ -54,27 +45,4 @@
             android:summary="@string/settings_delete_cache_summary"
             android:title="@string/settings_delete_cache_title" />
     </PreferenceCategory>
-    <!-- About -->
-    <PreferenceCategory android:title="@string/settings_about_category" >
-        <PreferenceScreen android:title="@string/settings_about_apollo" >
-            <PreferenceCategory android:title="@string/settings_about_category" >
-                <Preference
-                    android:summary="@string/settings_self_title"
-                    android:title="@string/settings_author_title" />
-                <Preference
-                    android:key="version"
-                    android:title="@string/settings_version_title" />
-                <Preference
-                    android:key="open_source"
-                    android:title="@string/settings_open_source_licenses" />
-            </PreferenceCategory>
-            <PreferenceCategory android:title="@string/settings_special_thanks" >
-                <Preference
-                    android:summary="@string/settings_lopez_summary"
-                    android:title="@string/settings_lopez_title" />
-                <Preference android:title="@string/settings_cyanogenmod_title" />
-            </PreferenceCategory>
-        </PreferenceScreen>
-    </PreferenceCategory>
-
 </PreferenceScreen>

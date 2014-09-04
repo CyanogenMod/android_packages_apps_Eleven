@@ -118,7 +118,7 @@ public class CarouselTab extends FrameLayoutWithOverlay {
         }
         // If all else, use the default image
         if (artistImage == null) {
-            artistImage = BitmapFactory.decodeResource(getResources(), R.drawable.theme_preview);
+            artistImage = BitmapFactory.decodeResource(getResources(), R.drawable.default_artist);
         }
         final Bitmap blur = BitmapUtils.createBlurredBitmap(artistImage);
         mPhoto.setImageBitmap(blur);
@@ -207,7 +207,7 @@ public class CarouselTab extends FrameLayoutWithOverlay {
      * @param context The {@link Context} to use.
      */
     public void setDefault(final Context context) {
-        mPhoto.setImageDrawable(context.getResources().getDrawable(R.drawable.header_temp));
+        mPhoto.setImageDrawable(context.getResources().getDrawable(R.drawable.default_artwork));
     }
 
     /**

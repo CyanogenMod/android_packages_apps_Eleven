@@ -69,19 +69,8 @@ public class SettingsActivity extends PreferenceActivity {
         // Add the preferences
         addPreferencesFromResource(R.xml.settings);
 
-        // Interface settings
-        initInterface();
         // Removes the cache entries
         deleteCache();
-        // About
-        showOpenSourceLicenses();
-        // Update the version number
-        try {
-            final PackageInfo packageInfo = getPackageManager().getPackageInfo(getPackageName(), 0);
-            findPreference("version").setSummary(packageInfo.versionName);
-        } catch (final NameNotFoundException e) {
-            findPreference("version").setSummary("?");
-        }
     }
 
     /**
@@ -119,28 +108,6 @@ public class SettingsActivity extends PreferenceActivity {
     }
 
     /**
-     * Initializes the preferences under the "Interface" category
-     */
-    private void initInterface() {
-        // Color scheme picker
-        updateColorScheme();
-    }
-
-    /**
-     * Shows the {@link ColorSchemeDialog} and then saves the changes.
-     */
-    private void updateColorScheme() {
-        final Preference colorScheme = findPreference("color_scheme");
-        colorScheme.setOnPreferenceClickListener(new OnPreferenceClickListener() {
-            @Override
-            public boolean onPreferenceClick(final Preference preference) {
-                ApolloUtils.showColorPicker(SettingsActivity.this);
-                return true;
-            }
-        });
-    }
-
-    /**
      * Removes all of the cache entries.
      */
     private void deleteCache() {
@@ -162,21 +129,6 @@ public class SettingsActivity extends PreferenceActivity {
                                 dialog.dismiss();
                             }
                         }).create().show();
-                return true;
-            }
-        });
-    }
-
-    /**
-     * Show the open source licenses
-     */
-    private void showOpenSourceLicenses() {
-        final Preference mOpenSourceLicenses = findPreference("open_source");
-        mOpenSourceLicenses.setOnPreferenceClickListener(new OnPreferenceClickListener() {
-
-            @Override
-            public boolean onPreferenceClick(final Preference preference) {
-                ApolloUtils.createOpenSourceDialog(SettingsActivity.this).show();
                 return true;
             }
         });

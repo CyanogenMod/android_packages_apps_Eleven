@@ -221,21 +221,6 @@ public final class ApolloUtils {
     }
 
     /**
-     * @param context The {@link Context} to use.
-     * @return An {@link AlertDialog} used to show the open source licenses used
-     *         in Apollo.
-     */
-    public static final AlertDialog createOpenSourceDialog(final Context context) {
-        final WebView webView = new WebView(context);
-        webView.loadUrl("file:///android_asset/licenses.html");
-        return new AlertDialog.Builder(context)
-                .setTitle(R.string.settings_open_source_licenses)
-                .setView(webView)
-                .setPositiveButton(android.R.string.ok, null)
-                .create();
-    }
-
-    /**
      * Calculate whether a color is light or dark, based on a commonly known
      * brightness formula.
      * 
@@ -279,80 +264,6 @@ public final class ApolloUtils {
         final ImageFetcher imageFetcher = ImageFetcher.getInstance(activity);
         imageFetcher.setImageCache(ImageCache.findOrCreateCache(activity));
         return imageFetcher;
-    }
-
-    /**
-     * Used to create shortcuts for an artist, album, or playlist that is then
-     * placed on the default launcher homescreen
-     * 
-     * @param displayName The shortcut name
-     * @param id The ID of the artist, album, playlist, or genre
-     * @param mimeType The MIME type of the shortcut
-     * @param context The {@link Context} to use to
-     */
-    public static void createShortcutIntent(final String displayName, final String artistName,
-            final Long id, final String mimeType, final Activity context) {
-        try {
-            final ImageFetcher fetcher = getImageFetcher(context);
-            Bitmap bitmap = null;
-            if (mimeType.equals(MediaStore.Audio.Albums.CONTENT_TYPE)) {
-                bitmap = fetcher.getCachedBitmap(
-                        ImageFetcher.generateAlbumCacheKey(displayName, artistName));
-            } else {
-                bitmap = fetcher.getCachedBitmap(displayName);
-            }
-            if (bitmap == null) {
-                bitmap = BitmapFactory.decodeResource(context.getResources(),
-                        R.drawable.default_artwork);
-            }
-
-            // Intent used when the icon is touched
-            final Intent shortcutIntent = new Intent(context, ShortcutActivity.class);
-            shortcutIntent.setAction(Intent.ACTION_VIEW);
-            shortcutIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            shortcutIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
-            shortcutIntent.putExtra(Config.ID, id);
-            shortcutIntent.putExtra(Config.NAME, displayName);
-            shortcutIntent.putExtra(Config.MIME_TYPE, mimeType);
-
-            // Intent that actually sets the shortcut
-            final Intent intent = new Intent();
-            intent.putExtra(Intent.EXTRA_SHORTCUT_ICON, BitmapUtils.resizeAndCropCenter(bitmap, 96));
-            intent.putExtra(Intent.EXTRA_SHORTCUT_INTENT, shortcutIntent);
-            intent.putExtra(Intent.EXTRA_SHORTCUT_NAME, displayName);
-            intent.setAction("com.android.launcher.action.INSTALL_SHORTCUT");
-            context.sendBroadcast(intent);
-            AppMsg.makeText(context,
-                    context.getString(R.string.pinned_to_home_screen, displayName),
-                    AppMsg.STYLE_CONFIRM).show();
-        } catch (final Exception e) {
-            Log.e("ApolloUtils", "createShortcutIntent", e);
-            AppMsg.makeText(
-                    context,
-                    context.getString(R.string.could_not_be_pinned_to_home_screen, displayName),
-                    AppMsg.STYLE_ALERT).show();
-        }
-    }
-
-    /**
-     * Shows the {@link ColorPickerView}
-     * 
-     * @param context The {@link Context} to use.
-     */
-    public static void showColorPicker(final Context context) {
-        final ColorSchemeDialog colorPickerView = new ColorSchemeDialog(context);
-        colorPickerView.setButton(AlertDialog.BUTTON_POSITIVE,
-                context.getString(android.R.string.ok), new OnClickListener() {
-
-                    @Override
-                    public void onClick(final DialogInterface dialog, final int which) {
-                        PreferenceUtils.getInstance(context).setDefaultThemeColor(
-                                colorPickerView.getColor());
-                    }
-                });
-        colorPickerView.setButton(AlertDialog.BUTTON_NEGATIVE,
-                context.getString(R.string.cancel), (OnClickListener) null);
-        colorPickerView.show();
     }
 
     /**

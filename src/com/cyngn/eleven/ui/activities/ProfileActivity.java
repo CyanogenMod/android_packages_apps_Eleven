@@ -260,8 +260,6 @@ public class ProfileActivity extends SlidingPanelActivity implements OnPageChang
      */
     @Override
     public boolean onCreateOptionsMenu(final Menu menu) {
-        // Pin to Home screen
-        getMenuInflater().inflate(R.menu.add_to_homescreen, menu);
         // Shuffle
         getMenuInflater().inflate(R.menu.shuffle, menu);
         // Sort orders
@@ -291,14 +289,6 @@ public class ProfileActivity extends SlidingPanelActivity implements OnPageChang
                     goBack();
                 }
                 return true;
-            case R.id.menu_add_to_homescreen: {
-                // Place the artist, album, genre, or playlist onto the Home
-                // screen. Definitely one of my favorite features.
-                final String name = isArtist() ? mArtistName : mProfileName;
-                final Long id = mArguments.getLong(Config.ID);
-                ApolloUtils.createShortcutIntent(name, mArtistName, id, mType, this);
-                return true;
-            }
             case R.id.menu_shuffle: {
                 final long id = mArguments.getLong(Config.ID);
                 long[] list = null;

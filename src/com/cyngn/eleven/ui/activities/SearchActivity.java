@@ -489,8 +489,8 @@ public class SearchActivity extends Activity implements LoaderCallbacks<Cursor>,
 
             } else if (mimetype.startsWith("audio/") || mimetype.equals("application/ogg")
                     || mimetype.equals("application/x-ogg")) {
-                holder.mImage.get().setScaleType(ScaleType.FIT_XY);
-                holder.mImage.get().setImageResource(R.drawable.header_temp);
+                holder.mImage.get().setScaleType(ScaleType.CENTER_CROP);
+                holder.mImage.get().setImageResource(R.drawable.default_artwork);
 
                 // Get the track name
                 final String track = cursor.getString(cursor

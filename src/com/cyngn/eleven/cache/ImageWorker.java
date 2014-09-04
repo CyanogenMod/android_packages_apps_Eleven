@@ -79,6 +79,16 @@ public abstract class ImageWorker {
     private final Bitmap mDefaultBlur;
 
     /**
+     * Default Artist art
+     */
+    private final Bitmap mDefaultArtist;
+
+    /**
+     * Default Playlist art
+     */
+    private final Bitmap mDefaultPlaylist;
+
+    /**
      * The Context to use
      */
     protected Context mContext;
@@ -105,6 +115,10 @@ public abstract class ImageWorker {
         mDefault = ((BitmapDrawable) mResources.getDrawable(R.drawable.default_artwork)).getBitmap();
         // Create the default blurred artwork
         mDefaultBlur = ((BitmapDrawable) mResources.getDrawable(R.drawable.default_artwork_blur)).getBitmap();
+        // Create the artist artwork
+        mDefaultArtist = ((BitmapDrawable) mResources.getDrawable(R.drawable.default_artist)).getBitmap();
+        // Create the playlist artwork
+        mDefaultPlaylist = ((BitmapDrawable) mResources.getDrawable(R.drawable.default_playlist)).getBitmap();
         // Create the transparent layer for the transition drawable
         mTransparentDrawable = new ColorDrawable(Color.TRANSPARENT);
     }
@@ -161,8 +175,21 @@ public abstract class ImageWorker {
     /**
      * @return A new bitmap drawable of the default artwork
      */
-    public BitmapDrawable getNewDefaultBitmapDrawable() {
-        BitmapDrawable bitmapDrawable = new BitmapDrawable(mResources, mDefault);
+    public BitmapDrawable getNewDefaultBitmapDrawable(ImageType imageType) {
+        Bitmap targetBitmap = null;
+
+        switch (imageType) {
+            case ARTIST:
+                targetBitmap = mDefaultArtist;
+                break;
+
+            case ALBUM:
+            default:
+                targetBitmap = mDefault;
+                break;
+        }
+
+        BitmapDrawable bitmapDrawable = new BitmapDrawable(mResources, targetBitmap);
         // No filter and no dither makes things much quicker
         bitmapDrawable.setFilterBitmap(false);
         bitmapDrawable.setDither(false);
@@ -289,7 +316,7 @@ public abstract class ImageWorker {
         @Override
         protected void onPostExecute(Object result) {
             if (isCancelled()) {
-                result = null;
+                return;
             }
 
             TransitionDrawable transitionDrawable = (TransitionDrawable)result;
@@ -404,16 +431,15 @@ public abstract class ImageWorker {
 
                 // calculate the palette color
                 result.mPaletteColor = getPaletteColorInBackground(output);
-            } else {
-                // else transition to the default blur bitmap
-                output = mDefaultBlur;
+
+                // create the bitmap transition drawable
+                result.mImageViewBitmapDrawable = createImageTransitionDrawable(mResources, mFromDrawable,
+                        output, FADE_IN_TIME_SLOW, true, true);
+
+                return result;
             }
 
-            // create the bitmap transition drawable
-            result.mImageViewBitmapDrawable = createImageTransitionDrawable(mResources, mFromDrawable,
-                    output, FADE_IN_TIME_SLOW, true, true);
-
-            return result;
+            return null;
         }
 
         /**
@@ -475,18 +501,25 @@ public abstract class ImageWorker {
         @Override
         protected void onPostExecute(Object result) {
             if (isCancelled()) {
-                result = null;
+                return;
             }
-
-            ResultContainer resultContainer = (ResultContainer)result;
 
             BlurScrimImage blurScrimImage = mBlurScrimImage.get();
             if (blurScrimImage != null) {
-                TransitionDrawable paletteTransition = createPaletteTransition(blurScrimImage,
-                        resultContainer.mPaletteColor);
+                if (result == null) {
+                    // if we have no image, then signal the transition to the default state
+                    blurScrimImage.transitionToDefaultState();
+                } else {
+                    ResultContainer resultContainer = (ResultContainer)result;
 
-                blurScrimImage.setTransitionDrawable(resultContainer.mImageViewBitmapDrawable,
-                        paletteTransition);
+                    // create the palette transition
+                    TransitionDrawable paletteTransition = createPaletteTransition(blurScrimImage,
+                            resultContainer.mPaletteColor);
+
+                    // set the transition drawable
+                    blurScrimImage.setTransitionDrawable(false,
+                            resultContainer.mImageViewBitmapDrawable, paletteTransition);
+                }
             }
         }
 
@@ -709,7 +742,7 @@ public abstract class ImageWorker {
             // if a background drawable hasn't been set, create one so that even if
             // the disk cache is paused we see something
             if (imageView.getBackground() == null) {
-                imageView.setBackgroundDrawable(getNewDefaultBitmapDrawable());
+                imageView.setBackgroundDrawable(getNewDefaultBitmapDrawable(imageType));
             }
 
             if (executePotentialWork(key, imageView)

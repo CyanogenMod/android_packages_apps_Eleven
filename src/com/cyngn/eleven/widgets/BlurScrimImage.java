@@ -19,11 +19,13 @@ import com.cyngn.eleven.cache.ImageWorker;
 public class BlurScrimImage extends FrameLayout {
     private ImageView mImageView;
 
+    private boolean mUsingDefaultBlur;
+
     public BlurScrimImage(Context context, AttributeSet attrs) {
         super(context, attrs);
+
+        mUsingDefaultBlur = true;
     }
-
-
 
     @Override
     protected void onFinishInflate() {
@@ -49,18 +51,27 @@ public class BlurScrimImage extends FrameLayout {
                 Color.TRANSPARENT);
 
 
-        setTransitionDrawable(imageTransition, paletteTransition);
+        setTransitionDrawable(true, imageTransition, paletteTransition);
     }
 
     /**
      * Sets the transition drawable
+     * @param defaultBlur flag whether this is transitioning to the default blur
      * @param imageTransition the transition for the imageview
      * @param paletteTransition the transition for the scrim overlay
      */
-    public void setTransitionDrawable(TransitionDrawable imageTransition,
+    public void setTransitionDrawable(boolean defaultBlur, TransitionDrawable imageTransition,
                                TransitionDrawable paletteTransition) {
+
+        // if we are already showing the default blur and we are transitioning to the default blur
+        // then don't do the transition at all
+        if (mUsingDefaultBlur && defaultBlur) {
+            return;
+        }
+
         setBackground(paletteTransition);
         mImageView.setImageDrawable(imageTransition);
+        mUsingDefaultBlur = defaultBlur;
     }
 
     /**

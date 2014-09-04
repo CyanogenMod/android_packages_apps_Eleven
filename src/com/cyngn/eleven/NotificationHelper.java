@@ -90,8 +90,9 @@ public class NotificationHelper {
         initCollapsedLayout(trackName, artistName, albumArt);
 
         // Notification Builder
+        // TODO: Add back a beter small icon when we have time
         mNotification = new NotificationCompat.Builder(mService)
-                .setSmallIcon(R.drawable.stat_notify_music)
+                .setSmallIcon(R.drawable.ic_launcher)
                 .setContentIntent(getPendingIntent())
                 .setPriority(Notification.PRIORITY_DEFAULT)
                 .setContent(mNotificationTemplate)
