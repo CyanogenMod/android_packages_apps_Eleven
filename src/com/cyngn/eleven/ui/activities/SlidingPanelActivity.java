@@ -53,7 +53,7 @@ public class SlidingPanelActivity extends BaseActivity {
     private HeaderBar mFirstHeaderBar;
     private SlidingUpPanelLayout mSecondPanel;
     private HeaderBar mSecondHeaderBar;
-    private Panel mTargetNavigatePanel;
+    protected Panel mTargetNavigatePanel;
 
     private final ShowPanelClickListener mShowBrowse = new ShowPanelClickListener(Panel.Browse);
     private final ShowPanelClickListener mShowMusicPlayer = new ShowPanelClickListener(Panel.MusicPlayer);

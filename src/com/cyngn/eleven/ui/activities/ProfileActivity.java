@@ -105,6 +105,7 @@ public class ProfileActivity extends SlidingPanelActivity implements OnPageChang
      */
     @Override
     public void onCreate(final Bundle savedInstanceState) {
+        mTargetNavigatePanel = Panel.Browse;
         super.onCreate(savedInstanceState);
         // Temporay until I can work out a nice landscape layout
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
