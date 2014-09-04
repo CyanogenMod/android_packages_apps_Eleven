@@ -204,6 +204,12 @@ public class AlbumArtPagerAdapter extends FragmentStatePagerAdapter {
             if (details != null) {
                 loadImageAsync(details);
             } else {
+                // Cancel any previous tasks
+                if (mTask != null) {
+                    mTask.cancel(true);
+                    mTask = null;
+                }
+
                 mTask = new AlbumArtistLoader(this, getActivity());
                 ApolloUtils.execute(false, mTask, mAudioId);
             }

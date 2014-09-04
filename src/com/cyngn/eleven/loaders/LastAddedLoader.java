@@ -55,7 +55,7 @@ public class LastAddedLoader extends WrappedAsyncTaskLoader<List<Song>> {
      */
     @Override
     public List<Song> loadInBackground() {
-        // Create the Cursor
+        // Create the xCursor
         mCursor = makeLastAddedCursor(getContext());
         // Gather the data
         if (mCursor != null && mCursor.moveToFirst()) {
@@ -69,20 +69,23 @@ public class LastAddedLoader extends WrappedAsyncTaskLoader<List<Song>> {
                 // Copy the artist name
                 final String artist = mCursor.getString(2);
 
+                // Copy the album id
+                final long albumId = mCursor.getLong(3);
+
                 // Copy the album name
-                final String album = mCursor.getString(3);
+                final String album = mCursor.getString(4);
 
                 // Copy the duration
-                final long duration = mCursor.getLong(4);
+                final long duration = mCursor.getLong(5);
 
                 // Convert the duration into seconds
                 final int durationInSecs = (int) duration / 1000;
 
                 // Grab the Song Year
-                final int year = mCursor.getInt(5);
+                final int year = mCursor.getInt(6);
 
                 // Create a new song
-                final Song song = new Song(id, songName, artist, album, durationInSecs, year);
+                final Song song = new Song(id, songName, artist, album, albumId, durationInSecs, year);
 
                 // Add everything up
                 mSongList.add(song);
@@ -116,10 +119,12 @@ public class LastAddedLoader extends WrappedAsyncTaskLoader<List<Song>> {
                         /* 2 */
                         AudioColumns.ARTIST,
                         /* 3 */
-                        AudioColumns.ALBUM,
+                        AudioColumns.ALBUM_ID,
                         /* 4 */
-                        AudioColumns.DURATION,
+                        AudioColumns.ALBUM,
                         /* 5 */
+                        AudioColumns.DURATION,
+                        /* 6 */
                         AudioColumns.YEAR,
                 }, selection.toString(), null, MediaStore.Audio.Media.DATE_ADDED + " DESC");
     }

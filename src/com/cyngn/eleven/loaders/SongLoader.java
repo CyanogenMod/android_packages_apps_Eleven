@@ -71,20 +71,23 @@ public class SongLoader extends SectionCreator.SimpleListLoader<Song> {
                 // Copy the artist name
                 final String artist = mCursor.getString(2);
 
+                // Copy the album id
+                final long albumId = mCursor.getLong(3);
+
                 // Copy the album name
-                final String album = mCursor.getString(3);
+                final String album = mCursor.getString(4);
 
                 // Copy the duration
-                final long duration = mCursor.getLong(4);
+                final long duration = mCursor.getLong(5);
 
                 // Convert the duration into seconds
                 final int durationInSecs = (int) duration / 1000;
 
                 // Copy the Year
-                final int year = mCursor.getInt(5);
+                final int year = mCursor.getInt(6);
 
                 // Create a new song
-                final Song song = new Song(id, songName, artist, album, durationInSecs, year);
+                final Song song = new Song(id, songName, artist, album, albumId, durationInSecs, year);
 
                 // Add everything up
                 mSongList.add(song);
@@ -117,10 +120,12 @@ public class SongLoader extends SectionCreator.SimpleListLoader<Song> {
                         /* 2 */
                         AudioColumns.ARTIST,
                         /* 3 */
-                        AudioColumns.ALBUM,
+                        AudioColumns.ALBUM_ID,
                         /* 4 */
-                        AudioColumns.DURATION,
+                        AudioColumns.ALBUM,
                         /* 5 */
+                        AudioColumns.DURATION,
+                        /* 6 */
                         AudioColumns.YEAR,
                 }, mSelection.toString(), null,
                 PreferenceUtils.getInstance(context).getSongSortOrder());

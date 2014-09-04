@@ -13,6 +13,7 @@ package com.cyngn.eleven.adapters;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.res.Resources;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -165,12 +166,18 @@ public class ArtistAdapter extends ArrayAdapter<Artist> implements SectionAdapte
             mData[i].mItemId = artist.mArtistId;
             // Artist names (line one)
             mData[i].mLineOne = artist.mArtistName;
-            // Number of albums (line two)
-            mData[i].mLineTwo = MusicUtils.makeLabel(getContext(),
+
+            String albumNumber = MusicUtils.makeLabel(getContext(),
                     R.plurals.Nalbums, artist.mAlbumNumber);
-            // Number of songs (line three)
-            mData[i].mLineThree = MusicUtils.makeLabel(getContext(),
+            String songNumber = MusicUtils.makeLabel(getContext(),
                     R.plurals.Nsongs, artist.mSongNumber);
+
+            final Resources resources = getContext().getResources();
+            // combine the ablum number and song number
+            String combinedString = resources.getString(R.string.combine_two_strings,
+                    albumNumber, songNumber);
+
+            mData[i].mLineTwo = combinedString;
         }
     }
 

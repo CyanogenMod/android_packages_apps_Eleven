@@ -27,6 +27,8 @@ import android.view.Menu;
 import android.view.SubMenu;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AbsListView;
+import android.widget.AbsListView.OnScrollListener;
 import android.widget.AdapterView;
 import android.widget.AdapterView.AdapterContextMenuInfo;
 import android.widget.AdapterView.OnItemClickListener;
@@ -59,7 +61,7 @@ import java.util.List;
  * @author Andrew Neal (andrewdneal@gmail.com)
  */
 public class SongFragment extends Fragment implements LoaderCallbacks<SectionListContainer<Song>>,
-        OnItemClickListener, MusicStateListener {
+        OnScrollListener, OnItemClickListener, MusicStateListener {
 
     /**
      * Used to keep context menu items from bleeding into other fragments
@@ -134,7 +136,7 @@ public class SongFragment extends Fragment implements LoaderCallbacks<SectionLis
     public void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         // Create the adpater
-        mAdapter = new SectionAdapter<Song, SongAdapter>(getActivity(), new SongAdapter(getActivity(), R.layout.list_item_simple));
+        mAdapter = new SectionAdapter<Song, SongAdapter>(getActivity(), new SongAdapter(getActivity(), R.layout.list_item_normal));
     }
 
     /**
@@ -155,6 +157,8 @@ public class SongFragment extends Fragment implements LoaderCallbacks<SectionLis
         mListView.setOnCreateContextMenuListener(this);
         // Play the selected song
         mListView.setOnItemClickListener(this);
+        // To help make scrolling smooth
+        mListView.setOnScrollListener(this);
         return mRootView;
     }
 
@@ -264,6 +268,30 @@ public class SongFragment extends Fragment implements LoaderCallbacks<SectionLis
             }
         }
         return super.onContextItemSelected(item);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void onScrollStateChanged(final AbsListView view, final int scrollState) {
+        // Pause disk cache access to ensure smoother scrolling
+        if (scrollState == AbsListView.OnScrollListener.SCROLL_STATE_FLING
+                || scrollState == AbsListView.OnScrollListener.SCROLL_STATE_TOUCH_SCROLL) {
+            mAdapter.getUnderlyingAdapter().setPauseDiskCache(true);
+        } else {
+            mAdapter.getUnderlyingAdapter().setPauseDiskCache(false);
+            mAdapter.notifyDataSetChanged();
+        }
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void onScroll(final AbsListView view, final int firstVisibleItem,
+                         final int visibleItemCount, final int totalItemCount) {
+        // Nothing to do
     }
 
     /**

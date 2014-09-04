@@ -102,6 +102,8 @@
         <attr name="selectedColor" />
         <!-- Whether or not the selected item is displayed as bold. -->
         <attr name="selectedBold" format="boolean" />
+        <!-- Whether or not to bold all items. -->
+        <attr name="boldAll" format="boolean" />
         <!-- Color of regular titles. -->
         <attr name="android:textColor" />
         <!-- Size of title text. -->

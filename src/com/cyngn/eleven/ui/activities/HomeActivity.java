@@ -44,12 +44,14 @@ public class HomeActivity extends BaseActivity {
         Browse,
         MusicPlayer,
         Queue,
+        None,
     }
 
     private SlidingUpPanelLayout mFirstPanel;
     private HeaderBar mFirstHeaderBar;
     private SlidingUpPanelLayout mSecondPanel;
     private HeaderBar mSecondHeaderBar;
+    private Panel mTargetNavigatePanel;
 
     // this is the blurred image that goes behind the now playing and queue fragments
     private BlurScrimImage mBlurScrimImage;
@@ -65,6 +67,8 @@ public class HomeActivity extends BaseActivity {
             getSupportFragmentManager().beginTransaction()
                     .replace(R.id.activity_base_content, new MusicBrowserPhoneFragment()).commit();
         }
+
+        mTargetNavigatePanel = Panel.None;
 
         setupFirstPanel();
         setupSecondPanel();
@@ -91,6 +95,16 @@ public class HomeActivity extends BaseActivity {
                     getActionBar().show();
                 }
             }
+
+            @Override
+            public void onPanelExpanded(View panel) {
+                checkTargetNavigation();
+            }
+
+            @Override
+            public void onPanelCollapsed(View panel) {
+                checkTargetNavigation();
+            }
         });
 
         // setup the header bar
@@ -113,8 +127,14 @@ public class HomeActivity extends BaseActivity {
             }
 
             @Override
+            public void onPanelExpanded(View panel) {
+                checkTargetNavigation();
+            }
+
+            @Override
             public void onPanelCollapsed(View panel) {
                 mFirstPanel.setSlidingEnabled(true);
+                checkTargetNavigation();
             }
         });
 
@@ -195,6 +215,8 @@ public class HomeActivity extends BaseActivity {
         // TODO: Add ability to do this instantaneously as opposed to animate
         switch (panel) {
             case Browse:
+                // if we are two panels over, we need special logic to jump twice
+                mTargetNavigatePanel = panel;
                 mSecondPanel.collapsePanel();
                 mFirstPanel.collapsePanel();
                 break;
@@ -203,9 +225,24 @@ public class HomeActivity extends BaseActivity {
                 mFirstPanel.expandPanel();
                 break;
             case Queue:
+                // if we are two panels over, we need special logic to jump twice
+                mTargetNavigatePanel = panel;
                 mSecondPanel.expandPanel();
                 mFirstPanel.expandPanel();
                 break;
+        }
+    }
+
+    /**
+     * This checks if we are at our target panel, and if not, continues the motion
+     */
+    protected void checkTargetNavigation() {
+        if (mTargetNavigatePanel != Panel.None) {
+            if (mTargetNavigatePanel == getCurrentPanel()) {
+                mTargetNavigatePanel = Panel.None;
+            } else {
+                showPanel(mTargetNavigatePanel);
+            }
         }
     }
 
@@ -240,6 +277,12 @@ public class HomeActivity extends BaseActivity {
         headerBar.setTitleText(textId);
         headerBar.setupCustomButton(customIconId, listener);
         headerBar.setBackgroundColor(Color.TRANSPARENT);
+        headerBar.setBackListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showPanel(Panel.Browse);
+            }
+        });
 
         return headerBar;
     }

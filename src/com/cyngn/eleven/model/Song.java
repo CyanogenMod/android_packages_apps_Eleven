@@ -41,6 +41,11 @@ public class Song {
     public String mAlbumName;
 
     /**
+     * The album id
+     */
+    public long mAlbumId;
+
+    /**
      * The song duration in seconds
      */
     public int mDuration;
@@ -61,11 +66,12 @@ public class Song {
      * @param year The year the song was recorded
      */
     public Song(final long songId, final String songName, final String artistName,
-            final String albumName, final int duration, final int year) {
+            final String albumName, final long albumId, final int duration, final int year) {
         mSongId = songId;
         mSongName = songName;
         mArtistName = artistName;
         mAlbumName = albumName;
+        mAlbumId = albumId;
         mDuration = duration;
         mYear = year;
     }
@@ -78,6 +84,7 @@ public class Song {
         final int prime = 31;
         int result = 1;
         result = prime * result + (mAlbumName == null ? 0 : mAlbumName.hashCode());
+        result = prime * result + (int) mAlbumId;
         result = prime * result + (mArtistName == null ? 0 : mArtistName.hashCode());
         result = prime * result + mDuration;
         result = prime * result + (int) mSongId;
@@ -105,6 +112,9 @@ public class Song {
             return false;
         }
         if (!TextUtils.equals(mAlbumName, other.mAlbumName)) {
+            return false;
+        }
+        if (mAlbumId != other.mAlbumId) {
             return false;
         }
         if (!TextUtils.equals(mArtistName, other.mArtistName)) {

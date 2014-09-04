@@ -28,6 +28,7 @@
         android:layout_weight="1"
         android:ellipsize="end"
         android:singleLine="true"
+        android:textAllCaps="true"
         android:textColor="@color/header_action_bar_text_color"
         android:textSize="@dimen/text_size_large" />
 

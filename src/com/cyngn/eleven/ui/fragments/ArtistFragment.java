@@ -139,7 +139,7 @@ public class ArtistFragment extends Fragment implements LoaderCallbacks<SectionL
     public void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         // Create the adpater
-        final int layout = R.layout.list_item_simple;
+        final int layout = R.layout.list_item_normal;
         ArtistAdapter adapter = new ArtistAdapter(getActivity(), layout);
         mAdapter = new SectionAdapter<Artist, ArtistAdapter>(getActivity(), adapter);
     }

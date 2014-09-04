@@ -123,6 +123,7 @@ public class TitlePageIndicator extends View implements PageIndicator {
     private int mScrollState;
     private final Paint mPaintText = new Paint();
     private boolean mBoldText;
+    private boolean mBoldAll;
     private int mColorText;
     private int mColorSelected;
     private Path mPath = new Path();
@@ -173,6 +174,7 @@ public class TitlePageIndicator extends View implements PageIndicator {
         final int defaultLinePosition = res.getInteger(R.integer.default_title_indicator_line_position);
         final int defaultSelectedColor = res.getColor(R.color.default_title_indicator_selected_color);
         final boolean defaultSelectedBold = res.getBoolean(R.bool.default_title_indicator_selected_bold);
+        final boolean defaultBoldAll = res.getBoolean(R.bool.default_title_indicator_bold_all);
         final int defaultTextColor = res.getColor(R.color.default_title_indicator_text_color);
         final float defaultTextSize = res.getDimension(R.dimen.default_title_indicator_text_size);
         final float defaultTitlePadding = res.getDimension(R.dimen.default_title_indicator_title_padding);
@@ -195,6 +197,7 @@ public class TitlePageIndicator extends View implements PageIndicator {
         mColorSelected = a.getColor(R.styleable.TitlePageIndicator_selectedColor, defaultSelectedColor);
         mColorText = a.getColor(R.styleable.TitlePageIndicator_android_textColor, defaultTextColor);
         mBoldText = a.getBoolean(R.styleable.TitlePageIndicator_selectedBold, defaultSelectedBold);
+        mBoldAll = a.getBoolean(R.styleable.TitlePageIndicator_boldAll, defaultBoldAll);
 
         final float textSize = a.getDimension(R.styleable.TitlePageIndicator_android_textSize, defaultTextSize);
         final int footerColor = a.getColor(R.styleable.TitlePageIndicator_footerColor, defaultFooterColor);
@@ -289,6 +292,15 @@ public class TitlePageIndicator extends View implements PageIndicator {
 
     public void setSelectedBold(boolean selectedBold) {
         mBoldText = selectedBold;
+        invalidate();
+    }
+
+    public boolean isBoldAll() {
+        return mBoldAll;
+    }
+
+    public void setBoldAll(boolean boldAll) {
+        mBoldAll = boldAll;
         invalidate();
     }
 
@@ -462,11 +474,11 @@ public class TitlePageIndicator extends View implements PageIndicator {
                 final CharSequence pageTitle = getTitle(i);
 
                 //Only set bold if we are within bounds
-                mPaintText.setFakeBoldText(currentPage && currentBold && mBoldText);
+                mPaintText.setFakeBoldText(mBoldAll || (currentPage && currentBold && mBoldText));
 
                 //Draw text as unselected
                 mPaintText.setColor(mColorText);
-                if(currentPage && currentSelected) {
+                if(currentPage && currentSelected && !mBoldAll) {
                     //Fade out/in unselected text as the selected text fades in/out
                     mPaintText.setAlpha(colorTextAlpha - (int)(colorTextAlpha * selectedPercent));
                 }

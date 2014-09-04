@@ -32,10 +32,12 @@ public class NowPlayingCursor extends AbstractCursor {
             /* 2 */
             AudioColumns.ARTIST,
             /* 3 */
-            AudioColumns.ALBUM,
+            AudioColumns.ALBUM_ID,
             /* 4 */
-            AudioColumns.DURATION,
+            AudioColumns.ALBUM,
             /* 5 */
+            AudioColumns.DURATION,
+            /* 6 */
             AudioColumns.YEAR,
     };
 

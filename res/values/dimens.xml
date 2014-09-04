@@ -37,26 +37,30 @@
     <dimen name="list_item_header_size">16.0sp</dimen>
     <dimen name="list_item_main_text_size">14.0sp</dimen>
     <dimen name="list_item_secondary_text_size">12.0sp</dimen>
+    <dimen name="list_item_queue_text_padding_left">15.0dip</dimen>
 
     <!-- List view fast scroll padding left -->
     <dimen name="fast_scroll_padding_left">8.0dip</dimen>
     <!-- List view fast scroll padding right -->
     <dimen name="fast_scroll_padding_right">8.0dip</dimen>
     <!-- grid view vertical and horizontal spacing -->
-    <dimen name="grid_item_spacing">4.0dip</dimen>
+    <dimen name="grid_item_horizontal_spacing">4.0dip</dimen>
+    <dimen name="grid_item_vertical_spacing">6.0dip</dimen>
     <!-- List item detailed height -->
     <dimen name="list_item_detailed_height">120.0dip</dimen>
     <!-- Top margin of "line_two" -->
     <dimen name="list_item_line_two_margin_top">8.0dip</dimen>
     <!-- Left padding in the grid text -->
     <dimen name="grid_item_padding_left">8.0dip</dimen>
+    <!-- Left padding in the grid text -->
+    <dimen name="grid_bottom_height">40dip</dimen>
     <!-- Grid and list item normal height -->
     <dimen name="item_normal_height">70.0dip</dimen>
     <dimen name="list_item_image_height">50.0dip</dimen>
     <dimen name="list_item_image_width">50.0dip</dimen>
 
     <!-- Bottom Action Bar -->
-    <dimen name="bottom_action_bar_height">48.0dip</dimen>
+    <dimen name="bottom_action_bar_height">50.0dip</dimen>
     <dimen name="bottom_action_bar_item_width">56.0dip</dimen>
     <dimen name="bottom_action_bar_item_padding_left">12.0dip</dimen>
     <dimen name="bottom_action_bar_item_padding_right">12.0dip</dimen>

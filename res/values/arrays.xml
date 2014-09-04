@@ -19,12 +19,10 @@
 
     <!-- Main TitlePageIndicator titles -->
     <string-array name="page_titles" translatable="false">
-        <item>@string/page_playlists</item>
-        <item>@string/page_recent</item>
         <item>@string/page_artists</item>
         <item>@string/page_albums</item>
         <item>@string/page_songs</item>
-        <item>@string/page_genres</item>
+        <item>@string/page_playlists</item>
     </string-array>
 
 </resources>

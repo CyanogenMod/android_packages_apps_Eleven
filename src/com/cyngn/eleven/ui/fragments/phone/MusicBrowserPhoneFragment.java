@@ -257,42 +257,38 @@ public class MusicBrowserPhoneFragment extends Fragment implements
     @Override
     public void onCenterItemClick(final int position) {
         // If on the artist fragment, scrolls to the current artist
-        if (position == 2) {
+        if (position == MusicFragments.ARTIST.ordinal()) {
             getArtistFragment().scrollToCurrentArtist();
             // If on the album fragment, scrolls to the current album
-        } else if (position == 3) {
+        } else if (position == MusicFragments.ALBUM.ordinal()) {
             getAlbumFragment().scrollToCurrentAlbum();
             // If on the song fragment, scrolls to the current song
-        } else if (position == 4) {
+        } else if (position == MusicFragments.SONG.ordinal()) {
             getSongFragment().scrollToCurrentSong();
         }
     }
 
     private boolean isArtistPage() {
-        return mViewPager.getCurrentItem() == 2;
+        return mViewPager.getCurrentItem() == MusicFragments.ARTIST.ordinal();
     }
 
     private ArtistFragment getArtistFragment() {
-        return (ArtistFragment)mPagerAdapter.getFragment(2);
+        return (ArtistFragment)mPagerAdapter.getFragment(MusicFragments.ARTIST.ordinal());
     }
 
     private boolean isAlbumPage() {
-        return mViewPager.getCurrentItem() == 3;
+        return mViewPager.getCurrentItem() == MusicFragments.ALBUM.ordinal();
     }
 
     private AlbumFragment getAlbumFragment() {
-        return (AlbumFragment)mPagerAdapter.getFragment(3);
+        return (AlbumFragment)mPagerAdapter.getFragment(MusicFragments.ALBUM.ordinal());
     }
 
     private boolean isSongPage() {
-        return mViewPager.getCurrentItem() == 4;
+        return mViewPager.getCurrentItem() == MusicFragments.SONG.ordinal();
     }
 
     private SongFragment getSongFragment() {
-        return (SongFragment)mPagerAdapter.getFragment(4);
-    }
-
-    private boolean isRecentPage() {
-        return mViewPager.getCurrentItem() == 1;
+        return (SongFragment)mPagerAdapter.getFragment(MusicFragments.SONG.ordinal());
     }
 }

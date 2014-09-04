@@ -16,37 +16,31 @@
 -->
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:gravity="center_vertical" >
 
     <include layout="@layout/square_image_view" />
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="@dimen/item_normal_height"
-        android:layout_alignParentBottom="true"
-        android:background="@color/transparent_black"
-        android:gravity="center_vertical"
+        android:layout_height="@dimen/grid_bottom_height"
+        android:layout_below="@+id/square_view"
+        android:background="@drawable/cardcontainer"
         android:paddingLeft="@dimen/grid_item_padding_left" >
 
         <TextView
             android:id="@+id/line_one"
+            style="@style/ListItemMainText.Grid.Single"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            android:maxLines="2"
-            android:textColor="@color/white"
-            android:textSize="@dimen/text_size_medium"
-            android:textStyle="bold" />
+            android:layout_alignParentTop="true" />
 
         <TextView
             android:id="@+id/line_two"
+            style="@style/ListItemSecondaryText.Grid.Single"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/line_one"
-            android:singleLine="true"
-            android:textColor="@color/transparent_white"
-            android:textSize="@dimen/text_size_small" />
+            android:layout_below="@+id/line_one" />
     </RelativeLayout>
 
 </RelativeLayout>

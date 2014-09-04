@@ -376,7 +376,7 @@ public class AudioPlayerFragment extends Fragment implements ServiceConnection {
      * page adapter
      */
     private void createAndSetAdapter() {
-        mAlbumArtPagerAdapter = new AlbumArtPagerAdapter(getFragmentManager());
+        mAlbumArtPagerAdapter = new AlbumArtPagerAdapter(getChildFragmentManager());
 
         int repeatMode = MusicUtils.getRepeatMode();
         int targetSize = 0;

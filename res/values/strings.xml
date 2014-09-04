@@ -194,4 +194,6 @@
     <string name="header_1_album">1 Album</string>
     <string name="header_n_albums"><xliff:g id="number">%d</xliff:g> Albums</string>
     <string name="header_5_plus_albums">5+ Albums</string>
+
+    <string name="combine_two_strings">%1$s | %2$s</string>
 </resources>

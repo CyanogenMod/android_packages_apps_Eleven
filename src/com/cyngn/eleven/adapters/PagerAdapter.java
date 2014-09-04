@@ -167,14 +167,6 @@ public class PagerAdapter extends FragmentPagerAdapter {
      */
     public enum MusicFragments {
         /**
-         * The playlist fragment
-         */
-        PLAYLIST(PlaylistFragment.class),
-        /**
-         * The recent fragment
-         */
-        RECENT(RecentFragment.class),
-        /**
          * The artist fragment
          */
         ARTIST(ArtistFragment.class),
@@ -187,9 +179,9 @@ public class PagerAdapter extends FragmentPagerAdapter {
          */
         SONG(SongFragment.class),
         /**
-         * The genre fragment
+         * The playlist fragment
          */
-        GENRE(GenreFragment.class);
+        PLAYLIST(PlaylistFragment.class);
 
         private Class<? extends Fragment> mFragmentClass;
 

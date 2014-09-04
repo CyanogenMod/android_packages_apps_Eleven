@@ -40,9 +40,9 @@
         android:drawSelectorOnTop="true"
         android:fadingEdge="vertical"
         android:fastScrollEnabled="true"
-        android:horizontalSpacing="@dimen/grid_item_spacing"
+        android:horizontalSpacing="@dimen/grid_item_horizontal_spacing"
         android:scrollbarStyle="outsideOverlay"
         android:scrollbars="vertical"
-        android:verticalSpacing="@dimen/grid_item_spacing" />
+        android:verticalSpacing="@dimen/grid_item_vertical_spacing" />
 
 </FrameLayout>

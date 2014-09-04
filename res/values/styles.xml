@@ -53,12 +53,14 @@
 
     <!-- Sets up the pop up menu text color and size -->
     <style name="SmallPopupMenu" parent="@android:style/TextAppearance.Widget.PopupMenu.Small">
+        <item name="android:fontFamily">sans-serif-light</item>
         <item name="android:textColor">@color/menu_text_color</item>
         <item name="android:textSize">@dimen/text_size_medium</item>
     </style>
 
     <!-- Sets up the pop up menu text color and size -->
     <style name="LargePopupMenu" parent="@android:style/TextAppearance.Widget.PopupMenu.Large">
+        <item name="android:fontFamily">sans-serif-light</item>
         <item name="android:textColor">@color/menu_text_color</item>
         <item name="android:textSize">@dimen/text_size_medium</item>
     </style>
@@ -88,6 +90,7 @@
     <style name="ListItemMainText">
         <item name="android:textColor">@color/list_item_text_color</item>
         <item name="android:textSize">@dimen/list_item_main_text_size</item>
+        <item name="android:fontFamily">sans-serif</item>
         <item name="android:textStyle">bold</item>
         <item name="android:ellipsize">end</item>
     </style>
@@ -96,15 +99,25 @@
         <item name="android:singleLine">true</item>
     </style>
 
+    <style name="ListItemMainText.Grid.Single" parent="ListItemMainText.Single">
+        <item name="android:textColor">@color/grid_list_item_text_color</item>
+    </style>
+
     <!-- The list item secondary text style/color -->
     <style name="ListItemSecondaryText">
         <item name="android:textColor">@color/list_item_text_color</item>
         <item name="android:textSize">@dimen/list_item_secondary_text_size</item>
+        <item name="android:fontFamily">sans-serif-light</item>
+        <item name="android:textStyle">normal</item>
         <item name="android:ellipsize">end</item>
     </style>
 
     <style name="ListItemSecondaryText.Single" parent="ListItemSecondaryText">
         <item name="android:singleLine">true</item>
+    </style>
+
+    <style name="ListItemSecondaryText.Grid.Single" parent="ListItemSecondaryText.Single">
+        <item name="android:textColor">@color/grid_list_item_text_color</item>
     </style>
 
     <style name="ListItemMainText.Light.Single" parent="ListItemMainText.Single">
@@ -170,18 +183,22 @@
         <item name="android:layout_height">wrap_content</item>
         <item name="android:ellipsize">end</item>
         <item name="android:paddingLeft">5dp</item>
+        <item name="android:paddingRight">16dp</item>
         <item name="android:gravity">top|left|center</item>
         <item name="android:singleLine">true</item>
-        <item name="android:textAllCaps">true</item>
         <item name="android:textColor">@color/bottom_action_bar_text_color</item>
-        <item name="android:textSize">@dimen/text_size_extra_micro</item>
     </style>
 
     <style name="BottomActionBarLineOne" parent="@style/BottomActionBarText">
+        <item name="android:fontFamily">sans-serif</item>
         <item name="android:textStyle">bold</item>
+        <item name="android:textSize">@dimen/text_size_small</item>
     </style>
 
-    <style name="BottomActionBarLineTwo" parent="@style/BottomActionBarText"></style>
+    <style name="BottomActionBarLineTwo" parent="@style/BottomActionBarText">
+        <item name="android:fontFamily">sans-serif-light</item>
+        <item name="android:textSize">@dimen/text_size_extra_micro</item>
+    </style>
 
     <!-- Bottom Action Bar Image Buttons -->
     <style name="BottomActionBarItem">

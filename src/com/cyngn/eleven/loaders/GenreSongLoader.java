@@ -87,7 +87,7 @@ public class GenreSongLoader extends WrappedAsyncTaskLoader<List<Song>> {
                 final int year = mCursor.getInt(5);
 
                 // Create a new song
-                final Song song = new Song(id, songName, artist, album, durationInSecs, year);
+                final Song song = new Song(id, songName, artist, album, -1, durationInSecs, year);
 
                 // Add everything up
                 mSongList.add(song);

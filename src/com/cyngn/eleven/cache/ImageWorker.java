@@ -714,6 +714,15 @@ public abstract class ImageWorker {
 
             if (executePotentialWork(key, imageView)
                     && imageView != null && !mImageCache.isDiskCachePaused()) {
+                // cancel the old task if any
+                final Drawable previousDrawable = imageView.getDrawable();
+                if (previousDrawable != null && previousDrawable instanceof AsyncDrawable) {
+                    BitmapWorkerTask workerTask = ((AsyncDrawable)previousDrawable).getBitmapWorkerTask();
+                    if (workerTask != null) {
+                        workerTask.cancel(false);
+                    }
+                }
+
                 // Otherwise run the worker task
                 final BitmapWorkerTask bitmapWorkerTask = new BitmapWorkerTask(imageView, imageType);
                 final AsyncDrawable asyncDrawable = new AsyncDrawable(mResources, mDefault,
@@ -752,6 +761,15 @@ public abstract class ImageWorker {
 
         if (executePotentialWork(blurKey, blurScrimImage)
                 && blurScrimImage != null && !mImageCache.isDiskCachePaused()) {
+            // cancel the old task if any
+            final AsyncDrawable previousDrawable = (AsyncDrawable)blurScrimImage.getTag();
+            if (previousDrawable != null) {
+                BitmapWorkerTask workerTask = previousDrawable.getBitmapWorkerTask();
+                if (workerTask != null) {
+                    workerTask.cancel(true);
+                }
+            }
+
             // Otherwise run the worker task
             final BlurBitmapWorkerTask blurWorkerTask = new BlurBitmapWorkerTask(blurScrimImage, imageType);
             final AsyncDrawable asyncDrawable = new AsyncDrawable(mResources, mDefault,

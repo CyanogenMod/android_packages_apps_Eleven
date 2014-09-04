@@ -38,6 +38,7 @@ public class HeaderBar extends LinearLayout implements View.OnClickListener,
 
     private ImageView mMenuButton;
     private ImageView mCustomButton;
+    private ImageView mBackButton;
     private TextView mTitleText;
 
     // this tracks the views that want to add to the context menu
@@ -62,6 +63,9 @@ public class HeaderBar extends LinearLayout implements View.OnClickListener,
         mCustomButton = (ImageView)findViewById(R.id.header_bar_custom_button);
         mCustomButton.setVisibility(GONE);
         mCustomButton.setBackground(new HoloSelector(getContext()));
+
+        mBackButton = (ImageView)findViewById(R.id.header_bar_up);
+        mBackButton.setBackground(new HoloSelector(getContext()));
 
         mTitleText = (TextView)findViewById(R.id.header_bar_title);
 
@@ -190,5 +194,13 @@ public class HeaderBar extends LinearLayout implements View.OnClickListener,
         mCustomButton.setImageResource(resId);
         mCustomButton.setVisibility(VISIBLE);
         mCustomButton.setOnClickListener(listener);
+    }
+
+    /**
+     * Sets the back button listener
+     * @param listener listener
+     */
+    public void setBackListener(final OnClickListener listener) {
+        mBackButton.setOnClickListener(listener);
     }
 }

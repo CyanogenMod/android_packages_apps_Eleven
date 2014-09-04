@@ -76,6 +76,10 @@ public class SearchLoader extends WrappedAsyncTaskLoader<List<Song>> {
                 final String album = mCursor.getString(mCursor
                         .getColumnIndexOrThrow(MediaStore.Audio.Albums.ALBUM));
 
+                // Copy the album id
+                final long albumId = mCursor.getLong(mCursor
+                        .getColumnIndexOrThrow(MediaStore.Audio.Albums.ALBUM_ID));
+
                 // Check for a album Id
                 if (id < 0 && !TextUtils.isEmpty(album)) {
                     id = mCursor.getLong(mCursor
@@ -93,7 +97,7 @@ public class SearchLoader extends WrappedAsyncTaskLoader<List<Song>> {
                 }
 
                 // Create a new song
-                final Song song = new Song(id, songName, artist, album, -1, -1);
+                final Song song = new Song(id, songName, artist, album, albumId, -1, -1);
 
                 // Add everything up
                 mSongList.add(song);
@@ -118,8 +122,8 @@ public class SearchLoader extends WrappedAsyncTaskLoader<List<Song>> {
                 Uri.parse("content://media/external/audio/search/fancy/" + Uri.encode(query)),
                 new String[] {
                         BaseColumns._ID, MediaStore.Audio.Media.MIME_TYPE,
-                        MediaStore.Audio.Artists.ARTIST, MediaStore.Audio.Albums.ALBUM,
-                        MediaStore.Audio.Media.TITLE, "data1", "data2" //$NON-NLS-2$ 
+                        MediaStore.Audio.Artists.ARTIST, MediaStore.Audio.Albums.ALBUM_ID,
+                        MediaStore.Audio.Albums.ALBUM, MediaStore.Audio.Media.TITLE, "data1", "data2" //$NON-NLS-2$
                 }, null, null, null);
     }
 

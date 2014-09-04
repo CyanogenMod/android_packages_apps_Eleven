@@ -20,7 +20,7 @@
 
     <!-- ICS to Jelly Bean -->
     <uses-sdk
-        android:minSdkVersion="14"
+        android:minSdkVersion="16"
         android:targetSdkVersion="18" />
 
     <!-- Used for caching and creating new playlists -->

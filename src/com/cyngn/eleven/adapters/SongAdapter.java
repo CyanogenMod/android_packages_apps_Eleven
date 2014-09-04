@@ -11,18 +11,22 @@
 
 package com.cyngn.eleven.adapters;
 
+import android.app.Activity;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 
+import com.cyngn.eleven.cache.ImageFetcher;
+import com.cyngn.eleven.model.Artist;
 import com.cyngn.eleven.model.Song;
 import com.cyngn.eleven.sectionadapter.SectionAdapter;
 import com.cyngn.eleven.ui.MusicHolder;
 import com.cyngn.eleven.ui.MusicHolder.DataHolder;
 import com.cyngn.eleven.ui.fragments.QueueFragment;
 import com.cyngn.eleven.ui.fragments.SongFragment;
+import com.cyngn.eleven.utils.ApolloUtils;
 import com.cyngn.eleven.utils.MusicUtils;
 import com.cyngn.eleven.widgets.PlayPauseProgressButton;
 
@@ -46,6 +50,11 @@ public class SongAdapter extends ArrayAdapter<Song> implements SectionAdapter.Ba
     private final int mLayoutId;
 
     /**
+     * Image cache and image fetcher
+     */
+    private final ImageFetcher mImageFetcher;
+
+    /**
      * The index of the item that is currently playing
      */
     private long mCurrentlyPlayingSongId = -1;
@@ -61,10 +70,12 @@ public class SongAdapter extends ArrayAdapter<Song> implements SectionAdapter.Ba
      * @param context The {@link Context} to use.
      * @param layoutId The resource Id of the view to inflate.
      */
-    public SongAdapter(final Context context, final int layoutId) {
+    public SongAdapter(final Activity context, final int layoutId) {
         super(context, 0);
         // Get the layout Id
         mLayoutId = layoutId;
+        // Initialize the cache & image fetcher
+        mImageFetcher = ApolloUtils.getImageFetcher(context);
     }
 
     /**
@@ -77,8 +88,6 @@ public class SongAdapter extends ArrayAdapter<Song> implements SectionAdapter.Ba
         if (convertView == null) {
             convertView = LayoutInflater.from(getContext()).inflate(mLayoutId, parent, false);
             holder = new MusicHolder(convertView);
-            // Hide the third line of text
-            holder.mLineThree.get().setVisibility(View.GONE);
             convertView.setTag(holder);
         } else {
             holder = (MusicHolder)convertView.getTag();
@@ -89,10 +98,15 @@ public class SongAdapter extends ArrayAdapter<Song> implements SectionAdapter.Ba
 
         // Set each song name (line one)
         holder.mLineOne.get().setText(dataHolder.mLineOne);
-        // Set the song duration (line one, right)
-        holder.mLineOneRight.get().setText(dataHolder.mLineOneRight);
         // Set the album name (line two)
         holder.mLineTwo.get().setText(dataHolder.mLineTwo);
+
+        // Asynchronously load the artist image into the adapter
+        Song item = getItem(position);
+        if (item.mAlbumId >= 0) {
+            mImageFetcher.loadAlbumImage(item.mArtistName, item.mAlbumName, item.mAlbumId,
+                    holder.mImage.get());
+        }
 
         // padding doesn't apply to included layouts, so we need
         // to wrap it in a container and show/hide with the container
@@ -151,6 +165,24 @@ public class SongAdapter extends ArrayAdapter<Song> implements SectionAdapter.Ba
             mData[i].mLineOneRight = MusicUtils.makeTimeString(getContext(), song.mDuration);
             // Album names (line two)
             mData[i].mLineTwo = song.mAlbumName;
+        }
+    }
+
+    /**
+     * @param pause True to temporarily pause the disk cache, false otherwise.
+     */
+    public void setPauseDiskCache(final boolean pause) {
+        if (mImageFetcher != null) {
+            mImageFetcher.setPauseDiskCache(pause);
+        }
+    }
+
+    /**
+     * @param artist The key used to find the cached artist to remove
+     */
+    public void removeFromCache(final Artist artist) {
+        if (mImageFetcher != null) {
+            mImageFetcher.removeFromCache(artist.mArtistName);
         }
     }
 
