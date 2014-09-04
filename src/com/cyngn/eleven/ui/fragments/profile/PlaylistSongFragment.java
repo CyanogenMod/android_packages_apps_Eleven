@@ -147,7 +147,7 @@ public class PlaylistSongFragment extends Fragment implements LoaderCallbacks<Li
     public View onCreateView(final LayoutInflater inflater, final ViewGroup container,
             final Bundle savedInstanceState) {
         // The View for the fragment's UI
-        final ViewGroup rootView = (ViewGroup)inflater.inflate(R.layout.list_base, null);
+        final ViewGroup rootView = (ViewGroup)inflater.inflate(R.layout.list_base_nopadding, null);
         // Initialize the list
         mListView = (DragSortListView)rootView.findViewById(R.id.list_base);
         // Set the data behind the list
