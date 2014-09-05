@@ -19,9 +19,13 @@ package com.devspark.appmsg;
 import java.util.LinkedList;
 import java.util.Queue;
 
+import android.app.ActionBar;
+import android.app.Activity;
 import android.os.Handler;
 import android.os.Message;
+import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 
@@ -138,6 +142,27 @@ class MsgManager extends Handler {
 
     private void addMsgToView(AppMsg appMsg) {
         if (appMsg.getView().getParent() == null) {
+            final Activity appActivity = appMsg.getActivity();
+            final ActionBar actionBar = appActivity.getActionBar();
+
+            // if the action bar is showing and we are overlaying the action bar then adjust
+            // the view to account for the height of the action bar in case the action bar is
+            // opaque
+            if (actionBar.isShowing()
+                    && appActivity.getWindow().hasFeature(Window.FEATURE_ACTION_BAR_OVERLAY)) {
+                final View v = appMsg.getView();
+
+                // for some reason calling setTranslateY causes an animation glitch but setPadding
+                // doesn't
+                v.setPadding(
+                    v.getPaddingLeft(),
+                    v.getPaddingTop() + actionBar.getHeight(),
+                    v.getPaddingRight(),
+                    v.getPaddingBottom()
+                );
+            }
+
+
             appMsg.getActivity().addContentView(
                     appMsg.getView(),
                     appMsg.getLayoutParams());
