@@ -57,6 +57,11 @@ import static com.cyngn.eleven.utils.MusicUtils.mService;
 public class AudioPlayerFragment extends Fragment implements ServiceConnection {
     private static final String TAG = AudioPlayerFragment.class.getSimpleName();
 
+    /**
+     * Used to keep context menu items from bleeding into other fragments
+     */
+    private static final int GROUP_ID = 15;
+
     // fragment view
     private ViewGroup mRootView;
 
@@ -277,7 +282,7 @@ public class AudioPlayerFragment extends Fragment implements ServiceConnection {
         mAddToPlaylistButton.setOnCreateContextMenuListener(new View.OnCreateContextMenuListener() {
             @Override
             public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
-                MusicUtils.makePlaylistMenu(getActivity(), 0, menu);
+                MusicUtils.makePlaylistMenu(getActivity(), GROUP_ID, menu);
             }
         });
 
@@ -755,20 +760,22 @@ public class AudioPlayerFragment extends Fragment implements ServiceConnection {
 
     @Override
     public boolean onContextItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case FragmentMenuItems.NEW_PLAYLIST:
-                CreateNewPlaylist.getInstance(new long[]{
-                        mSelectedId
-                }).show(getFragmentManager(), "CreatePlaylist");
-                return true;
-            case FragmentMenuItems.PLAYLIST_SELECTED:
-                final long mPlaylistId = item.getIntent().getLongExtra("playlist", 0);
-                MusicUtils.addToPlaylist(getActivity(), new long[]{
-                        mSelectedId
-                }, mPlaylistId);
-                return true;
-            default:
-                break;
+        if (item.getGroupId() == GROUP_ID) {
+            switch (item.getItemId()) {
+                case FragmentMenuItems.NEW_PLAYLIST:
+                    CreateNewPlaylist.getInstance(new long[]{
+                            mSelectedId
+                    }).show(getFragmentManager(), "CreatePlaylist");
+                    return true;
+                case FragmentMenuItems.PLAYLIST_SELECTED:
+                    final long mPlaylistId = item.getIntent().getLongExtra("playlist", 0);
+                    MusicUtils.addToPlaylist(getActivity(), new long[]{
+                            mSelectedId
+                    }, mPlaylistId);
+                    return true;
+                default:
+                    break;
+            }
         }
 
         return super.onContextItemSelected(item);
