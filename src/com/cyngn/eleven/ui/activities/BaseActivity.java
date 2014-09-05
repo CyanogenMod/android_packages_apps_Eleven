@@ -159,31 +159,10 @@ public abstract class BaseActivity extends FragmentActivity implements ServiceCo
     @Override
     public boolean onCreateOptionsMenu(final Menu menu) {
         // Search view
-        getMenuInflater().inflate(R.menu.search, menu);
+        getMenuInflater().inflate(R.menu.search_btn, menu);
         // Settings
         getMenuInflater().inflate(R.menu.activity_base, menu);
 
-        final SearchView searchView = (SearchView)menu.findItem(R.id.menu_search).getActionView();
-        // Add voice search
-        final SearchManager searchManager = (SearchManager)getSystemService(Context.SEARCH_SERVICE);
-        final SearchableInfo searchableInfo = searchManager.getSearchableInfo(getComponentName());
-        searchView.setSearchableInfo(searchableInfo);
-        // Perform the search
-        searchView.setOnQueryTextListener(new OnQueryTextListener() {
-
-            @Override
-            public boolean onQueryTextSubmit(final String query) {
-                // Open the search activity
-                NavUtils.openSearch(BaseActivity.this, query);
-                return true;
-            }
-
-            @Override
-            public boolean onQueryTextChange(final String newText) {
-                // Nothing to do
-                return false;
-            }
-        });
         return super.onCreateOptionsMenu(menu);
     }
 
@@ -197,6 +176,10 @@ public abstract class BaseActivity extends FragmentActivity implements ServiceCo
                 // Settings
                 NavUtils.openSettings(this);
                 return true;
+
+            case R.id.menu_search:
+                NavUtils.openSearch(BaseActivity.this, "");
+                break;
 
             default:
                 break;

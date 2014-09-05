@@ -174,7 +174,8 @@
     <string name="no_effects_for_you">The equalizer could not be opened.</string>
     <string name="empty_music">To copy music from your computer to your device, use a USB cable.</string>
     <string name="empty_last_added">Songs you have added over the last month will be shown here.</string>
-    <string name="empty_search">No search results found</string>
+    <string name="empty_search">NO SEARCH RESULTS FOR</string>
+    <string name="empty_search_check">Please check that you have the correct spelling or try a different keyword.</string>
     <string name="empty_favorite">Songs you mark as favorites will be shown here.</string>
     <string name="empty_recent">Albums you have listened to will show up here. Try playing some music.</string>
 

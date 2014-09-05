@@ -82,6 +82,31 @@ public final class NavUtils {
     }
 
     /**
+     * Opens the playlist view
+     *
+     * @param context The {@link Activity} to use.
+     * @param playlistId the id of the playlist
+     * @param mimeType the mimetype if specified, or the default if null passed in
+     * @param playlistName the playlist name
+     */
+    public static void openPlaylist(final Activity context, final long playlistId,
+                                    final String mimeType, final String playlistName) {
+        final Bundle bundle = new Bundle();
+        bundle.putLong(Config.ID, playlistId);
+        if (mimeType != null) {
+            bundle.putString(Config.MIME_TYPE, mimeType);
+        } else {
+            bundle.putString(Config.MIME_TYPE, MediaStore.Audio.Playlists.CONTENT_TYPE);
+        }
+        bundle.putString(Config.NAME, playlistName);
+
+        // Create the intent to launch the profile activity
+        final Intent intent = new Intent(context, ProfileActivity.class);
+        intent.putExtras(bundle);
+        context.startActivity(intent);
+    }
+
+    /**
      * Opens the sound effects panel or DSP manager in CM
      * 
      * @param context The {@link Activity} to use.
@@ -108,7 +133,7 @@ public final class NavUtils {
     }
 
     /**
-     * Opens to {@link SearchActivity}.
+     * Opens to {@link com.cyngn.eleven.ui.activities.SearchActivity}.
      * 
      * @param activity The {@link Activity} to use.
      * @param query The search query.

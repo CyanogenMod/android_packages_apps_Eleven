@@ -19,14 +19,17 @@ import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
 import android.content.Intent;
 import android.content.res.Configuration;
+import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.Rect;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Build;
+import android.provider.BaseColumns;
 import android.provider.MediaStore;
 import android.util.Log;
 import android.util.TypedValue;
@@ -298,5 +301,23 @@ public final class ApolloUtils {
         }
 
         return 0;
+    }
+
+    /**
+     * Returns a fancy search query cursor
+     * @param context
+     * @param query query string
+     * @return cursor of the results
+     */
+    public static Cursor createSearchQueryCursor(final Context context, final String query) {
+        final Uri uri = Uri.parse("content://media/external/audio/search/fancy/"
+                + Uri.encode(query));
+        final String[] projection = new String[] {
+                BaseColumns._ID, MediaStore.Audio.Media.MIME_TYPE, MediaStore.Audio.Artists.ARTIST,
+                MediaStore.Audio.Albums.ALBUM, MediaStore.Audio.Media.TITLE, "data1", "data2"
+        };
+
+        // no selection/selection/sort args - they are ignored by fancy search anyways
+        return context.getContentResolver().query(uri, projection, null, null, null);
     }
 }

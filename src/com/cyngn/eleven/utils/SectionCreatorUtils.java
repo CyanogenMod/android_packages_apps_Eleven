@@ -8,6 +8,7 @@ import android.content.Context;
 import com.cyngn.eleven.R;
 import com.cyngn.eleven.model.Album;
 import com.cyngn.eleven.model.Artist;
+import com.cyngn.eleven.model.SearchResult;
 import com.cyngn.eleven.model.Song;
 
 import java.util.List;
@@ -450,5 +451,40 @@ public class SectionCreatorUtils {
         }
 
         return sectionCreator;
+    }
+
+    /**
+     * Returns an song comparison based on the current sort
+     * @param context Context for string generation
+     * @return the song comparison method
+     */
+    public static IItemCompare<SearchResult> createSearchResultComparison(final Context context) {
+        return new IItemCompare<SearchResult>() {
+
+            @Override
+            public String createSectionSeparator(SearchResult first, SearchResult second) {
+                if (first == null || first.mType != second.mType) {
+                    return createLabel(second);
+                }
+
+                return null;
+            }
+
+            @Override
+            public String createLabel(SearchResult item) {
+                switch (item.mType) {
+                    case Artist:
+                        return context.getString(R.string.page_artists);
+                    case Album:
+                        return context.getString(R.string.page_albums);
+                    case Song:
+                        return context.getString(R.string.page_songs);
+                    case Playlist:
+                        return context.getString(R.string.page_playlists);
+                }
+
+                return null;
+            }
+        };
     }
 }

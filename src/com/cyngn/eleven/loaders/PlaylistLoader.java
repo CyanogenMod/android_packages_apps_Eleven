@@ -72,7 +72,7 @@ public class PlaylistLoader extends WrappedAsyncTaskLoader<List<Playlist>> {
                 // Copy the playlist name
                 final String name = mCursor.getString(1);
 
-                final int songCount = getSongCount(getContext(), id);
+                final int songCount = MusicUtils.getSongCountForPlaylist(getContext(), id);
 
                 // Create a new playlist
                 final Playlist playlist = new Playlist(id, name, songCount);
@@ -113,26 +113,5 @@ public class PlaylistLoader extends WrappedAsyncTaskLoader<List<Playlist>> {
                         /* 1 */
                         PlaylistsColumns.NAME
                 }, null, null, MediaStore.Audio.Playlists.DEFAULT_SORT_ORDER);
-    }
-
-    /**
-     * Gets the number of songs for a playlist
-     * @param context The {@link Context} to use.
-     * @param playlistId the id of the playlist
-     * @return the # of songs in the playlist or -1 if not found
-     */
-    public static final int getSongCount(final Context context, final long playlistId) {
-        Cursor c = context.getContentResolver().query(
-                MediaStore.Audio.Playlists.Members.getContentUri("external", playlistId),
-                new String[]{ BaseColumns._ID }, MusicUtils.MUSIC_ONLY_SELECTION, null, null);
-
-        if (c != null && c.moveToFirst()) {
-            int count = c.getCount();
-            c.close();
-            c = null;
-            return count;
-        }
-
-        return -1;
     }
 }

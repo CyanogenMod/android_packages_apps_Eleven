@@ -59,7 +59,12 @@ public class PrefixHighlighter {
      * @param prefix the prefix to look for
      */
     public CharSequence apply(final CharSequence text, final char[] prefix) {
-        final int mIndex = indexOfWordPrefix(text, prefix);
+        int mIndex = indexOfPrefix(text, prefix, true);
+        // prefer word prefix, if not search through the entire word
+        if (mIndex == -1) {
+            mIndex = indexOfPrefix(text, prefix, false);
+        }
+
         if (mIndex != -1) {
             if (mPrefixColorSpan == null) {
                 mPrefixColorSpan = new ForegroundColorSpan(mPrefixHighlightColor);
@@ -73,13 +78,14 @@ public class PrefixHighlighter {
     }
 
     /**
-     * Finds the index of the first word that starts with the given prefix. If
+     * Finds the index of the first character that starts with the given prefix. If
      * not found, returns -1.
      * 
      * @param text the text in which to search for the prefix
      * @param prefix the text to find, in upper case letters
+     * @param wordOnly only search for word prefixes if true
      */
-    private int indexOfWordPrefix(final CharSequence text, final char[] prefix) {
+    private int indexOfPrefix(final CharSequence text, final char[] prefix, boolean wordOnly) {
         if (TextUtils.isEmpty(text) || prefix == null) {
             return -1;
         }
@@ -113,12 +119,15 @@ public class PrefixHighlighter {
                 return i;
             }
 
-            /* Skip this word */
-            while (i < mTextLength && Character.isLetterOrDigit(text.charAt(i))) {
+            if (wordOnly) {
+                /* Skip this word */
+                while (i < mTextLength && Character.isLetterOrDigit(text.charAt(i))) {
+                    i++;
+                }
+            } else {
                 i++;
             }
         }
         return -1;
     }
-
 }

@@ -25,11 +25,20 @@
         <item name="android:listViewStyle">@style/ListView</item>
         <item name="android:actionBarStyle">@style/ActionBar</item>
         <item name="android:actionOverflowButtonStyle">@style/ActionOverFlowButton</item>
-        <!-- this guy is too large - need to get a smaller one -->
-        <!--item name="android:homeAsUpIndicator">@drawable/back_arrow</item-->
+        <item name="android:actionBarWidgetTheme">@style/ActionBarWidgetTheme</item>
+        <item name="android:homeAsUpIndicator">@drawable/ic_action_back</item>
     </style>
 
-    <!-- Make the action bar not take up space - I will remove action bar this upcoming week -->
+    <style name="ActionBarWidgetTheme" parent="@android:style/Theme.Holo">
+        <!-- This is the color of the search text in the action bar -->
+        <item name="android:textColorHint">@android:color/white</item>
+        <item name="android:popupMenuStyle">@style/PopupMenu</item>
+        <item name="android:dropDownListViewStyle">@style/DropDownListView</item>
+        <item name="android:textAppearanceSmallPopupMenu">@style/SmallPopupMenu</item>
+        <item name="android:textAppearanceLargePopupMenu">@style/LargePopupMenu</item>
+    </style>
+
+    <!-- Make the action bar not take up space -->
     <style name="Eleven.Theme.ActionBar.Overlay" parent="@style/Eleven.Theme">
         <item name="android:windowActionBarOverlay">true</item>
     </style>
@@ -39,7 +48,7 @@
         <item name="android:divider">@color/list_item_divider_color</item>
         <item name="android:dividerHeight">1dp</item>
     </style>
-
+    
     <!-- Sets up the pop up menu backgroudn resource -->
     <style name="PopupMenu" parent="@android:style/Widget.Holo.PopupMenu">
         <item name="android:popupBackground">@drawable/menu_background</item>

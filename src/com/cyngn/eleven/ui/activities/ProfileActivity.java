@@ -151,7 +151,8 @@ public class ProfileActivity extends SlidingPanelActivity implements OnPageChang
         });
         // Set up the action bar
         final ActionBar actionBar = getActionBar();
-        actionBar.setDisplayHomeAsUpEnabled(true);
+        actionBar.setIcon(R.drawable.ic_action_back);
+        actionBar.setHomeButtonEnabled(true);
 
         /* Set up the artist profile */
         if (isArtist()) {

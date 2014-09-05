@@ -45,6 +45,7 @@ import com.cyngn.eleven.loaders.LastAddedLoader;
 import com.cyngn.eleven.loaders.PlaylistLoader;
 import com.cyngn.eleven.loaders.SongLoader;
 import com.cyngn.eleven.menu.FragmentMenuItems;
+import com.cyngn.eleven.model.AlbumArtistDetails;
 import com.cyngn.eleven.provider.RecentStore;
 import com.devspark.appmsg.AppMsg;
 
@@ -788,10 +789,10 @@ public final class MusicUtils {
      */
     public static final long getIdForArtist(final Context context, final String name) {
         Cursor cursor = context.getContentResolver().query(
-                MediaStore.Audio.Artists.EXTERNAL_CONTENT_URI, new String[] {
-                    BaseColumns._ID
-                }, ArtistColumns.ARTIST + "=?", new String[] {
-                    name
+                MediaStore.Audio.Artists.EXTERNAL_CONTENT_URI, new String[]{
+                        BaseColumns._ID
+                }, ArtistColumns.ARTIST + "=?", new String[]{
+                        name
                 }, ArtistColumns.ARTIST);
         int id = -1;
         if (cursor != null) {
@@ -1028,6 +1029,59 @@ public final class MusicUtils {
             cursor = null;
         }
         return songCount;
+    }
+
+    /**
+     * Gets the number of songs for a playlist
+     * @param context The {@link Context} to use.
+     * @param playlistId the id of the playlist
+     * @return the # of songs in the playlist
+     */
+    public static final int getSongCountForPlaylist(final Context context, final long playlistId) {
+        Cursor c = context.getContentResolver().query(
+                MediaStore.Audio.Playlists.Members.getContentUri("external", playlistId),
+                new String[]{BaseColumns._ID}, MusicUtils.MUSIC_ONLY_SELECTION, null, null);
+
+        if (c != null && c.moveToFirst()) {
+            int count = c.getCount();
+            c.close();
+            c = null;
+            return count;
+        }
+
+        return 0;
+    }
+
+    public static final AlbumArtistDetails getAlbumArtDetails(final Context context, final long trackId) {
+        final StringBuilder selection = new StringBuilder();
+        selection.append(MediaStore.Audio.AudioColumns.IS_MUSIC + "=1");
+        selection.append(" AND " + BaseColumns._ID + " = '" + trackId + "'");
+
+        Cursor cursor = context.getContentResolver().query(
+            MediaStore.Audio.Media.EXTERNAL_CONTENT_URI,
+            new String[] {
+                    /* 0 */
+                MediaStore.Audio.AudioColumns.ALBUM_ID,
+                    /* 1 */
+                MediaStore.Audio.AudioColumns.ALBUM,
+                    /* 2 */
+                MediaStore.Audio.AlbumColumns.ARTIST,
+            }, selection.toString(), null, null
+        );
+
+        if (!cursor.moveToFirst()) {
+            cursor.close();
+            return null;
+        }
+
+        AlbumArtistDetails result = new AlbumArtistDetails();
+        result.mAudioId = trackId;
+        result.mAlbumId = cursor.getLong(0);
+        result.mAlbumName = cursor.getString(1);
+        result.mArtistName = cursor.getString(2);
+        cursor.close();
+
+        return result;
     }
 
     /**
@@ -1364,6 +1418,38 @@ public final class MusicUtils {
     /**
      * A snippet is taken from MediaStore.Audio.keyFor method
      * This will take a name, removes things like "the", "an", etc
+     * as well as special characters and return it
+     * @param name the string to trim
+     * @return the trimmed name
+     */
+    public static String getTrimmedName(String name) {
+        if (name == null || name.length() == 0) {
+            return name;
+        }
+
+        name = name.trim().toLowerCase();
+        if (name.startsWith("the ")) {
+            name = name.substring(4);
+        }
+        if (name.startsWith("an ")) {
+            name = name.substring(3);
+        }
+        if (name.startsWith("a ")) {
+            name = name.substring(2);
+        }
+        if (name.endsWith(", the") || name.endsWith(",the") ||
+                name.endsWith(", an") || name.endsWith(",an") ||
+                name.endsWith(", a") || name.endsWith(",a")) {
+            name = name.substring(0, name.lastIndexOf(','));
+        }
+        name = name.replaceAll("[\\[\\]\\(\\)\"'.,?!]", "").trim();
+
+        return name;
+    }
+
+    /**
+     * A snippet is taken from MediaStore.Audio.keyFor method
+     * This will take a name, removes things like "the", "an", etc
      * as well as special characters, then find the localized label
      * @param name Name to get the label of
      * @param trimName boolean flag to run the trimmer on the name
@@ -1375,22 +1461,7 @@ public final class MusicUtils {
         }
 
         if (trimName) {
-            name = name.trim().toLowerCase();
-            if (name.startsWith("the ")) {
-                name = name.substring(4);
-            }
-            if (name.startsWith("an ")) {
-                name = name.substring(3);
-            }
-            if (name.startsWith("a ")) {
-                name = name.substring(2);
-            }
-            if (name.endsWith(", the") || name.endsWith(",the") ||
-                    name.endsWith(", an") || name.endsWith(",an") ||
-                    name.endsWith(", a") || name.endsWith(",a")) {
-                name = name.substring(0, name.lastIndexOf(','));
-            }
-            name = name.replaceAll("[\\[\\]\\(\\)\"'.,?!]", "").trim();
+            name = getTrimmedName(name);
         }
 
         if (name.length() > 0) {

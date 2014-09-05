@@ -171,4 +171,14 @@
     <dimen name="list_item_progress_height">45.0dip</dimen>
     <dimen name="list_item_progress_padding_left">10.0dip</dimen>
     <dimen name="list_item_progress_padding_right">17.0dip</dimen>
+
+    <!-- Search Page Settings -->
+    <dimen name="white_note_width">60.0dip</dimen>
+    <dimen name="white_note_height">70.0dip</dimen>
+    <dimen name="white_note_padding_bottom">24.0dip</dimen>
+    <dimen name="no_results_width">260.0dip</dimen>
+    <dimen name="no_results_text_padding_bottom">16.0dip</dimen>
+    <dimen name="no_results_text_height">54.0dip</dimen>
+    <dimen name="search_text_main">20.0sp</dimen>
+    <dimen name="search_text_secondary">14.0sp</dimen>
 </resources>

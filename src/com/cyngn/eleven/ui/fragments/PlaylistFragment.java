@@ -47,6 +47,7 @@ import com.cyngn.eleven.recycler.RecycleHolder;
 import com.cyngn.eleven.ui.activities.BaseActivity;
 import com.cyngn.eleven.ui.activities.ProfileActivity;
 import com.cyngn.eleven.utils.MusicUtils;
+import com.cyngn.eleven.utils.NavUtils;
 
 import java.util.List;
 
@@ -222,21 +223,11 @@ public class PlaylistFragment extends Fragment implements LoaderCallbacks<List<P
         mPlaylist = mAdapter.getItem(position);
         String playlistName;
         if (position == 0) {
-            playlistName = getString(R.string.playlist_last_added);
-            bundle.putString(Config.MIME_TYPE, getString(R.string.playlist_last_added));
+            String lastAdded = getString(R.string.playlist_last_added);
+            NavUtils.openPlaylist(getActivity(), -1, lastAdded, lastAdded);
         } else {
-            // User created
-            playlistName = mPlaylist.mPlaylistName;
-            bundle.putString(Config.MIME_TYPE, MediaStore.Audio.Playlists.CONTENT_TYPE);
-            bundle.putLong(Config.ID, mPlaylist.mPlaylistId);
+            NavUtils.openPlaylist(getActivity(), mPlaylist.mPlaylistId, null, mPlaylist.mPlaylistName);
         }
-
-        bundle.putString(Config.NAME, playlistName);
-
-        // Create the intent to launch the profile activity
-        final Intent intent = new Intent(getActivity(), ProfileActivity.class);
-        intent.putExtras(bundle);
-        startActivity(intent);
     }
 
     /**

@@ -20,6 +20,7 @@ import android.view.ViewGroup;
 
 import com.cyngn.eleven.MusicPlaybackService;
 import com.cyngn.eleven.R;
+import com.cyngn.eleven.model.AlbumArtistDetails;
 import com.cyngn.eleven.utils.ApolloUtils;
 import com.cyngn.eleven.utils.MusicUtils;
 import com.cyngn.eleven.widgets.SquareImageView;
@@ -232,16 +233,6 @@ public class AlbumArtPagerAdapter extends FragmentStatePagerAdapter {
     }
 
     /**
-     * Simple container for the album and artist name as well as album id
-     */
-    private static class AlbumArtistDetails {
-        public long mAudioId;
-        public long mAlbumId;
-        public String mAlbumName;
-        public String mArtistName;
-    }
-
-    /**
      * This looks up the album and artist details for a track
      */
     private static class AlbumArtistLoader extends AsyncTask<Long, Void, AlbumArtistDetails> {
@@ -256,35 +247,7 @@ public class AlbumArtPagerAdapter extends FragmentStatePagerAdapter {
         @Override
         protected AlbumArtistDetails doInBackground(final Long... params) {
             long id = params[0];
-
-            final StringBuilder selection = new StringBuilder();
-            selection.append(MediaStore.Audio.AudioColumns.IS_MUSIC + "=1");
-            selection.append(" AND " + BaseColumns._ID + " = '" + id + "'");
-
-            Cursor cursor = mContext.getContentResolver().query(
-                    MediaStore.Audio.Media.EXTERNAL_CONTENT_URI,
-                    new String[] {
-                            /* 0 */
-                            MediaStore.Audio.AudioColumns.ALBUM_ID,
-                            /* 1 */
-                            MediaStore.Audio.AudioColumns.ALBUM,
-                            /* 2 */
-                            MediaStore.Audio.AlbumColumns.ARTIST,
-                    }, selection.toString(), null, null);
-
-            if (!cursor.moveToFirst()) {
-                cursor.close();
-                return null;
-            }
-
-            AlbumArtistDetails result = new AlbumArtistDetails();
-            result.mAudioId = id;
-            result.mAlbumId = cursor.getLong(0);
-            result.mAlbumName = cursor.getString(1);
-            result.mArtistName = cursor.getString(2);
-            cursor.close();
-
-            return result;
+            return MusicUtils.getAlbumArtDetails(mContext, id);
         }
 
         @Override

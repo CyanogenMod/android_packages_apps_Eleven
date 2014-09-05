@@ -162,6 +162,7 @@
         <!-- Search interface -->
         <activity
             android:name=".ui.activities.SearchActivity"
+            android:windowSoftInputMode="adjustResize"
             android:exported="true"
             android:screenOrientation="portrait">
             <intent-filter>

@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:id="@+id/no_search_results"
+        android:layout_width="@dimen/no_results_width"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:orientation="vertical"
+        android:visibility="gone">
+
+        <ImageView
+            android:layout_width="@dimen/white_note_width"
+            android:layout_height="@dimen/white_note_height"
+            android:layout_gravity="center_horizontal"
+            android:paddingBottom="@dimen/white_note_padding_bottom"
+            android:scaleType="centerInside"
+            android:src="@drawable/white_note" />
+
+        <TextView
+            android:gravity="center"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/empty_search"
+            android:textColor="@color/no_search_results"
+            android:textSize="@dimen/search_text_main"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/no_search_results_text"
+            android:gravity="center"
+            android:ellipsize="end"
+            android:layout_width="fill_parent"
+            android:layout_height="@dimen/no_results_text_height"
+            android:paddingBottom="@dimen/no_results_text_padding_bottom"
+            android:singleLine="true"
+            android:textColor="@color/no_search_results"
+            android:textSize="@dimen/search_text_main"
+            android:textStyle="bold|italic" />
+
+        <TextView
+            android:gravity="center"
+            android:layout_width="fill_parent"
+            android:layout_height="@dimen/no_results_text_height"
+            android:fontFamily="sans-serif-light"
+            android:text="@string/empty_search_check"
+            android:textColor="@color/no_search_results"
+            android:textSize="@dimen/search_text_secondary" />
+    </LinearLayout>
+
+    <include android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        layout="@layout/list_base" />
+
+</RelativeLayout>

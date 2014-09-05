@@ -148,7 +148,7 @@ public class SectionAdapter<TItem,
             return getViewTypeCount() - 1;
         }
 
-        return mUnderlyingAdapter.getItemViewType(position);
+        return mUnderlyingAdapter.getItemViewType(getInternalPosition(position));
     }
 
     /**
@@ -284,6 +284,11 @@ public class SectionAdapter<TItem,
     public void flush() {
         mUnderlyingAdapter.flush();
         notifyDataSetChanged();
+    }
+
+    public void clear() {
+        mUnderlyingAdapter.clear();
+        mSectionHeaders.clear();
     }
 
     /**

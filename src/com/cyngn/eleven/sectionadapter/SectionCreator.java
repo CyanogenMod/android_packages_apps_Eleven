@@ -58,7 +58,7 @@ public class SectionCreator<T> extends WrappedAsyncTaskLoader<SectionListContain
      * {@inheritDoc}
      */
     @Override
-    public SectionListContainer loadInBackground() {
+    public SectionListContainer<T> loadInBackground() {
         List<T> results = mLoader.loadInBackground();
         TreeMap<Integer, String> sectionHeaders = null;
 
@@ -66,6 +66,6 @@ public class SectionCreator<T> extends WrappedAsyncTaskLoader<SectionListContain
             sectionHeaders = SectionCreatorUtils.createSections(results, mComparator);
         }
 
-        return new SectionListContainer(sectionHeaders, results);
+        return new SectionListContainer<T>(sectionHeaders, results);
     }
 }

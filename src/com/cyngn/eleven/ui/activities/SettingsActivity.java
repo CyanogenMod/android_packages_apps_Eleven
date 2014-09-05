@@ -64,7 +64,8 @@ public class SettingsActivity extends PreferenceActivity {
         mImageCache = ImageCache.getInstance(this);
 
         // UP
-        getActionBar().setDisplayHomeAsUpEnabled(true);
+        getActionBar().setIcon(R.drawable.ic_action_back);
+        getActionBar().setHomeButtonEnabled(true);
 
         // Add the preferences
         addPreferencesFromResource(R.xml.settings);
