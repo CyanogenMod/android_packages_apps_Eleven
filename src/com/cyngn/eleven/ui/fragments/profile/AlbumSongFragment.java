@@ -124,6 +124,7 @@ public class AlbumSongFragment extends Fragment implements LoaderCallbacks<List<
         mAdapter = new ProfileSongAdapter(
                 getActivity(),
                 R.layout.list_item_simple,
+                R.layout.faux_carousel,
                 ProfileSongAdapter.DISPLAY_ALBUM_SETTING
         );
     }

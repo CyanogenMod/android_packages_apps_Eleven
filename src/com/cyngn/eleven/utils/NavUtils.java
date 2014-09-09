@@ -23,6 +23,7 @@ import com.cyngn.eleven.Config;
 import com.cyngn.eleven.R;
 import com.cyngn.eleven.ui.activities.ArtistDetailActivity;
 import com.cyngn.eleven.ui.activities.HomeActivity;
+import com.cyngn.eleven.ui.activities.PlaylistDetailActivity;
 import com.cyngn.eleven.ui.activities.ProfileActivity;
 import com.cyngn.eleven.ui.activities.SearchActivity;
 import com.cyngn.eleven.ui.activities.SettingsActivity;
@@ -101,7 +102,7 @@ public final class NavUtils {
         bundle.putString(Config.NAME, playlistName);
 
         // Create the intent to launch the profile activity
-        final Intent intent = new Intent(context, ProfileActivity.class);
+        final Intent intent = new Intent(context, PlaylistDetailActivity.class);
         intent.putExtras(bundle);
         context.startActivity(intent);
     }

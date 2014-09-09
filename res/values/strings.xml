@@ -202,4 +202,8 @@
     <string name="header_5_plus_albums">5+ Albums</string>
 
     <string name="combine_two_strings">%1$s | %2$s</string>
+
+    <string name="duration_mins"><xliff:g id="format">%3$dm %4$ds</xliff:g></string>
+    <string name="duration_hours"><xliff:g id="format">%2$dh %3$dm %4$ds</xliff:g></string>
+    <string name="duration_days"><xliff:g id="format">%1$dd %2$dd %3$dm %4$ds</xliff:g></string>
 </resources>

@@ -12,7 +12,6 @@
 package com.cyngn.eleven.adapters;
 
 import android.app.Activity;
-import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -27,7 +26,7 @@ import com.cyngn.eleven.ui.fragments.profile.AlbumSongFragment;
 import com.cyngn.eleven.ui.fragments.profile.ArtistSongFragment;
 import com.cyngn.eleven.ui.fragments.profile.GenreSongFragment;
 import com.cyngn.eleven.ui.fragments.profile.LastAddedFragment;
-import com.cyngn.eleven.ui.fragments.profile.PlaylistSongFragment;
+import com.cyngn.eleven.ui.activities.PlaylistDetailActivity;
 import com.cyngn.eleven.utils.ApolloUtils;
 import com.cyngn.eleven.utils.Lists;
 import com.cyngn.eleven.utils.MusicUtils;
@@ -37,7 +36,7 @@ import java.util.List;
 /**
  * This {@link ArrayAdapter} is used to display the songs for a particular
  * artist, album, playlist, or genre for {@link ArtistSongFragment},
- * {@link AlbumSongFragment},{@link PlaylistSongFragment},
+ * {@link AlbumSongFragment},{@link PlaylistDetailActivity},
  * {@link GenreSongFragment},{@link LastAddedFragment}.
  * 
  * @author Andrew Neal (andrewdneal@gmail.com)
@@ -116,12 +115,12 @@ public class ProfileSongAdapter extends ArrayAdapter<Song> {
      * @param layoutId The resource Id of the view to inflate.
      * @param setting defines the content of the second line
      */
-    public ProfileSongAdapter(final Activity activity, final int layoutId, final int setting) {
+    public ProfileSongAdapter(final Activity activity, final int layoutId, final int headerId, final int setting) {
         super(activity, 0);
         // Used to create the custom layout
         mInflater = LayoutInflater.from(activity);
         // Cache the header
-        mHeader = mInflater.inflate(R.layout.faux_carousel, null);
+        mHeader = mInflater.inflate(headerId, null);
         // Get the layout Id
         mLayoutId = layoutId;
         // Know what to put in line two
@@ -137,7 +136,7 @@ public class ProfileSongAdapter extends ArrayAdapter<Song> {
      * @param layoutId The resource Id of the view to inflate.
      */
     public ProfileSongAdapter(final Activity activity, final int layoutId) {
-        this(activity, layoutId, DISPLAY_DEFAULT_SETTING);
+        this(activity, layoutId, R.layout.faux_carousel, DISPLAY_DEFAULT_SETTING);
     }
 
     /**
@@ -177,7 +176,7 @@ public class ProfileSongAdapter extends ArrayAdapter<Song> {
                 holder.mLineOneRight.get().setVisibility(View.GONE);
 
                 holder.mLineTwo.get().setText(
-                        MusicUtils.makeTimeString(getContext(), song.mDuration));
+                        MusicUtils.makeShortTimeString(getContext(), song.mDuration));
                 break;
             case DISPLAY_PLAYLIST_SETTING:
                 if (song.mDuration == -1) {
@@ -185,7 +184,7 @@ public class ProfileSongAdapter extends ArrayAdapter<Song> {
                 } else {
                     holder.mLineOneRight.get().setVisibility(View.VISIBLE);
                     holder.mLineOneRight.get().setText(
-                            MusicUtils.makeTimeString(getContext(), song.mDuration));
+                            MusicUtils.makeShortTimeString(getContext(), song.mDuration));
                 }
 
                 final StringBuilder sb = new StringBuilder(song.mArtistName);
@@ -204,7 +203,7 @@ public class ProfileSongAdapter extends ArrayAdapter<Song> {
                 holder.mLineOneRight.get().setVisibility(View.VISIBLE);
 
                 holder.mLineOneRight.get().setText(
-                        MusicUtils.makeTimeString(getContext(), song.mDuration));
+                        MusicUtils.makeShortTimeString(getContext(), song.mDuration));
                 holder.mLineTwo.get().setText(song.mAlbumName);
                 break;
         }

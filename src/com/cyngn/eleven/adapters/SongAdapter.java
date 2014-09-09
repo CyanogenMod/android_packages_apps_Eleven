@@ -162,7 +162,7 @@ public class SongAdapter extends ArrayAdapter<Song> implements SectionAdapter.Ba
             // Song names (line one)
             mData[i].mLineOne = song.mSongName;
             // Song duration (line one, right)
-            mData[i].mLineOneRight = MusicUtils.makeTimeString(getContext(), song.mDuration);
+            mData[i].mLineOneRight = MusicUtils.makeShortTimeString(getContext(), song.mDuration);
             // Album names (line two)
             mData[i].mLineTwo = song.mAlbumName;
         }

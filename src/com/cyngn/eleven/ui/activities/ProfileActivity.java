@@ -39,7 +39,6 @@ import com.cyngn.eleven.ui.fragments.profile.ArtistAlbumFragment;
 import com.cyngn.eleven.ui.fragments.profile.ArtistSongFragment;
 import com.cyngn.eleven.ui.fragments.profile.GenreSongFragment;
 import com.cyngn.eleven.ui.fragments.profile.LastAddedFragment;
-import com.cyngn.eleven.ui.fragments.profile.PlaylistSongFragment;
 import com.cyngn.eleven.utils.ApolloUtils;
 import com.cyngn.eleven.utils.MusicUtils;
 import com.cyngn.eleven.utils.NavUtils;
@@ -191,17 +190,6 @@ public class ProfileActivity extends SlidingPanelActivity implements OnPageChang
             // Action bar title = Last added
             getActionBar().setTitle(mProfileName);
         } else
-        // Set up the user playlist profile
-        if (isPlaylist()) {
-            // Add the carousel images
-            mTabCarousel.setPlaylistOrGenreProfileHeader(this, mProfileName);
-
-            // Playlist profile fragments
-            mPagerAdapter.add(PlaylistSongFragment.class, mArguments);
-
-            // Action bar title = playlist name
-            getActionBar().setTitle(mProfileName);
-        } else
         // Set up the genre profile
         if (isGenre()) {
             // Add the carousel images
@@ -248,7 +236,7 @@ public class ProfileActivity extends SlidingPanelActivity implements OnPageChang
         // Set the shuffle all title to "play all" if a playlist.
         final MenuItem shuffle = menu.findItem(R.id.menu_shuffle);
         String title = null;
-        if (isLastAdded() || isPlaylist()) {
+        if (isLastAdded()) {
             title = getString(R.string.menu_play_all);
         } else {
             title = getString(R.string.menu_shuffle);
@@ -301,9 +289,7 @@ public class ProfileActivity extends SlidingPanelActivity implements OnPageChang
                 } else if (isGenre()) {
                     list = MusicUtils.getSongListForGenre(this, id);
                 }
-                if (isPlaylist()) {
-                    MusicUtils.playPlaylist(this, id);
-                } else if (isLastAdded()) {
+                if (isLastAdded()) {
                     MusicUtils.playLastAdded(this);
                 } else {
                     if (list != null && list.length > 0) {
@@ -617,14 +603,6 @@ public class ProfileActivity extends SlidingPanelActivity implements OnPageChang
      */
     private final boolean isGenre() {
         return mType.equals(MediaStore.Audio.Genres.CONTENT_TYPE);
-    }
-
-    /**
-     * @return True if the MIME type is vnd.android.cursor.dir/playlist, false
-     *         otherwise.
-     */
-    private final boolean isPlaylist() {
-        return mType.equals(MediaStore.Audio.Playlists.CONTENT_TYPE);
     }
 
     /**

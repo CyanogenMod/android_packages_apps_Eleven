@@ -94,6 +94,9 @@
     <dimen name="profile_carousel_label_height">45.0dip</dimen>
     <dimen name="profile_indicator_height">5.0dip</dimen>
     <dimen name="profile_label_padding">16.0dip</dimen>
+    <!-- playlist detail header -->
+    <dimen name="playlist_detail_header_height">240.0dip</dimen>
+    <dimen name="playlist_detail_header_bottom_height">40.0dip</dimen>
 
     <!-- Audio player Buttons (play/pause/shuffle/repeat/next/previous)-->
     <dimen name="audio_player_controls_end_button_width">30.0dip</dimen>

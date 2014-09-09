@@ -356,7 +356,7 @@ public class AudioPlayerFragment extends Fragment implements ServiceConnection {
         mTrackName.setText(MusicUtils.getTrackName());
 
         // Set the total time
-        String totalTime = MusicUtils.makeTimeString(getActivity(), MusicUtils.duration() / 1000);
+        String totalTime = MusicUtils.makeShortTimeString(getActivity(), MusicUtils.duration() / 1000);
         if (!mTotalTime.getText().equals(totalTime)) {
             mTotalTime.setText(totalTime);
         }
@@ -579,7 +579,7 @@ public class AudioPlayerFragment extends Fragment implements ServiceConnection {
     }
 
     private void refreshCurrentTimeText(final long pos) {
-        mCurrentTime.setText(MusicUtils.makeTimeString(getActivity(), pos / 1000));
+        mCurrentTime.setText(MusicUtils.makeShortTimeString(getActivity(), pos / 1000));
     }
 
     /* Used to update the current time string */
