@@ -387,7 +387,7 @@ public class SearchActivity extends FragmentActivity implements LoaderCallbacks<
                 NavUtils.openAlbumProfile(this, item.mAlbum, item.mArtist, item.mId);
                 break;
             case Playlist:
-                NavUtils.openPlaylist(this, item.mId, null, item.mTitle);
+                NavUtils.openPlaylist(this, item.mId, item.mTitle);
                 break;
             case Song:
                 // If it's a song, play it and leave

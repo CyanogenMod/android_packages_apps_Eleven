@@ -18,6 +18,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 
+import com.cyngn.eleven.R;
 import com.cyngn.eleven.cache.ImageFetcher;
 import com.cyngn.eleven.model.Artist;
 import com.cyngn.eleven.model.Song;
@@ -163,8 +164,10 @@ public class SongAdapter extends ArrayAdapter<Song> implements SectionAdapter.Ba
             mData[i].mLineOne = song.mSongName;
             // Song duration (line one, right)
             mData[i].mLineOneRight = MusicUtils.makeShortTimeString(getContext(), song.mDuration);
-            // Album names (line two)
-            mData[i].mLineTwo = song.mAlbumName;
+
+            // Artist Name | Album Name (line two)
+            mData[i].mLineTwo = MusicUtils.makeCombinedString(getContext(), song.mArtistName,
+                    song.mAlbumName);
         }
     }
 

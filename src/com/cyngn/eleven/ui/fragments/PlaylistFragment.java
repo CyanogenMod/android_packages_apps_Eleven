@@ -17,7 +17,6 @@ import android.content.ContentUris;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
-import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -35,7 +34,7 @@ import android.widget.AdapterView.AdapterContextMenuInfo;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 
-import com.cyngn.eleven.Config;
+import com.cyngn.eleven.Config.SmartPlaylistType;
 import com.cyngn.eleven.MusicStateListener;
 import com.cyngn.eleven.R;
 import com.cyngn.eleven.adapters.PlaylistAdapter;
@@ -45,7 +44,6 @@ import com.cyngn.eleven.menu.RenamePlaylist;
 import com.cyngn.eleven.model.Playlist;
 import com.cyngn.eleven.recycler.RecycleHolder;
 import com.cyngn.eleven.ui.activities.BaseActivity;
-import com.cyngn.eleven.ui.activities.ProfileActivity;
 import com.cyngn.eleven.utils.MusicUtils;
 import com.cyngn.eleven.utils.NavUtils;
 
@@ -107,7 +105,7 @@ public class PlaylistFragment extends Fragment implements LoaderCallbacks<List<P
     public void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         // Create the adpater
-        mAdapter = new PlaylistAdapter(getActivity(), R.layout.list_item_simple);
+        mAdapter = new PlaylistAdapter(getActivity(), R.layout.list_item_normal);
     }
 
     /**
@@ -219,14 +217,13 @@ public class PlaylistFragment extends Fragment implements LoaderCallbacks<List<P
     @Override
     public void onItemClick(final AdapterView<?> parent, final View view, final int position,
             final long id) {
-        final Bundle bundle = new Bundle();
         mPlaylist = mAdapter.getItem(position);
-        String playlistName;
-        if (position == 0) {
-            String lastAdded = getString(R.string.playlist_last_added);
-            NavUtils.openPlaylist(getActivity(), -1, lastAdded, lastAdded);
+
+        SmartPlaylistType playlistType = SmartPlaylistType.getTypeById(mPlaylist.mPlaylistId);
+        if (playlistType != null) {
+            NavUtils.openSmartPlaylist(getActivity(), playlistType);
         } else {
-            NavUtils.openPlaylist(getActivity(), mPlaylist.mPlaylistId, null, mPlaylist.mPlaylistName);
+            NavUtils.openPlaylist(getActivity(), mPlaylist.mPlaylistId, mPlaylist.mPlaylistName);
         }
     }
 

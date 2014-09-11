@@ -79,6 +79,7 @@
     <string name="playlist_favorite">Favorite</string>
     <string name="playlist_favorites">Favorites</string>
     <string name="playlist_last_added">Last added</string>
+    <string name="playlist_top_tracks">My Top Tracks</string>
 
     <!-- AlertDialog items -->
     <string name="new_playlist">New playlist</string>
@@ -200,8 +201,6 @@
     <string name="header_1_album">1 Album</string>
     <string name="header_n_albums"><xliff:g id="number">%d</xliff:g> Albums</string>
     <string name="header_5_plus_albums">5+ Albums</string>
-
-    <string name="combine_two_strings">%1$s | %2$s</string>
 
     <string name="duration_mins"><xliff:g id="format">%3$dm %4$ds</xliff:g></string>
     <string name="duration_hours"><xliff:g id="format">%2$dh %3$dm %4$ds</xliff:g></string>

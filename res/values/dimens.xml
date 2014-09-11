@@ -58,6 +58,7 @@
     <dimen name="item_normal_height">70.0dip</dimen>
     <dimen name="list_item_image_height">50.0dip</dimen>
     <dimen name="list_item_image_width">50.0dip</dimen>
+    <dimen name="list_item_top_track_image_size">26.0dip</dimen>
 
     <!-- Bottom Action Bar -->
     <dimen name="bottom_action_bar_height">50.0dip</dimen>

@@ -301,7 +301,7 @@ public class SongFragment extends Fragment implements LoaderCallbacks<SectionLis
     public void onItemClick(final AdapterView<?> parent, final View view, final int position,
             final long id) {
         int internalPosition = mAdapter.getInternalPosition(position);
-        Cursor cursor = SongLoader.makeSongCursor(getActivity());
+        Cursor cursor = SongLoader.makeSongCursor(getActivity(), null);
         final long[] list = MusicUtils.getSongListForCursor(cursor);
         MusicUtils.playAll(getActivity(), list, internalPosition, false);
         cursor.close();

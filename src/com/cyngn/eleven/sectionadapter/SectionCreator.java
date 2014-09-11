@@ -4,6 +4,7 @@
 package com.cyngn.eleven.sectionadapter;
 
 import android.content.Context;
+import android.support.v4.content.AsyncTaskLoader;
 
 import com.cyngn.eleven.loaders.WrappedAsyncTaskLoader;
 import com.cyngn.eleven.utils.SectionCreatorUtils;
@@ -20,22 +21,17 @@ public class SectionCreator<T> extends WrappedAsyncTaskLoader<SectionListContain
      * Simple list loader class that exposes a load method
      * @param <T> type of item to load
      */
-    public static abstract class SimpleListLoader<T> {
+    public static abstract class SimpleListLoader<T> extends WrappedAsyncTaskLoader<List<T>> {
         protected Context mContext;
 
         public SimpleListLoader(Context context) {
+            super(context);
             mContext = context;
         }
 
         public Context getContext() {
             return mContext;
         }
-
-        /**
-         * method to load the list in the background
-         * @return
-         */
-        public abstract List<T> loadInBackground();
     }
 
     private SimpleListLoader<T> mLoader;

@@ -54,6 +54,7 @@ import com.cyngn.eleven.appwidgets.RecentWidgetProvider;
 import com.cyngn.eleven.cache.ImageCache;
 import com.cyngn.eleven.cache.ImageFetcher;
 import com.cyngn.eleven.provider.RecentStore;
+import com.cyngn.eleven.provider.SongPlayCount;
 import com.cyngn.eleven.utils.ApolloUtils;
 import com.cyngn.eleven.utils.Lists;
 import com.cyngn.eleven.utils.MusicUtils;
@@ -484,6 +485,11 @@ public class MusicPlaybackService extends Service {
     private RecentStore mRecentsCache;
 
     /**
+     * The song play count database
+     */
+    private SongPlayCount mSongPlayCountCache;
+
+    /**
      * {@inheritDoc}
      */
     @Override
@@ -540,6 +546,9 @@ public class MusicPlaybackService extends Service {
 
         // Initialize the favorites and recents databases
         mRecentsCache = RecentStore.getInstance(this);
+
+        // gets the song play count cache
+        mSongPlayCountCache = SongPlayCount.getInstance(this);
 
         // Initialize the notification helper
         mNotificationHelper = new NotificationHelper(this);
@@ -1361,6 +1370,8 @@ public class MusicPlaybackService extends Service {
             mRecentsCache.addAlbumId(getAlbumId(), getAlbumName(), getArtistName(),
                     MusicUtils.getSongCountForAlbum(this, getAlbumId()),
                     MusicUtils.getReleaseDateForAlbum(this, getAlbumId()));
+
+            mSongPlayCountCache.bumpSongCount(getAudioId());
         } else if (what.equals(QUEUE_CHANGED)) {
             saveQueue(true);
             if (isPlaying()) {

@@ -47,11 +47,6 @@ public final class SummarySearchAdapter extends ArrayAdapter<SearchResult> imple
     private char[] mPrefix;
 
     /**
-     * Combines two strings
-     */
-    private String mCombineString;
-
-    /**
      * Constructor for <code>SearchAdapter</code>
      *
      * @param context The {@link Activity} to use.
@@ -62,8 +57,6 @@ public final class SummarySearchAdapter extends ArrayAdapter<SearchResult> imple
         mImageFetcher = ApolloUtils.getImageFetcher(context);
         // Create the prefix highlighter
         mHighlighter = new PrefixHighlighter(context);
-
-        mCombineString = getContext().getResources().getString(R.string.combine_two_strings);
     }
 
     /**
@@ -94,7 +87,8 @@ public final class SummarySearchAdapter extends ArrayAdapter<SearchResult> imple
 
                 String songCount = MusicUtils.makeLabel(getContext(), R.plurals.Nsongs, item.mSongCount);
                 String albumCount = MusicUtils.makeLabel(getContext(), R.plurals.Nalbums, item.mAlbumCount);
-                holder.mLineTwo.get().setText(String.format(mCombineString, songCount, albumCount));
+                // Album Name | Artist Name (line two)
+                holder.mLineTwo.get().setText(MusicUtils.makeCombinedString(getContext(), songCount, albumCount));
 
                 break;
             case Album:
@@ -112,7 +106,8 @@ public final class SummarySearchAdapter extends ArrayAdapter<SearchResult> imple
 
                 mHighlighter.setText(holder.mLineOne.get(), item.mTitle, mPrefix);
                 mHighlighter.setText(holder.mLineTwo.get(),
-                        String.format(mCombineString, item.mArtist, item.mAlbum), mPrefix);
+                        MusicUtils.makeCombinedString(getContext(), item.mArtist, item.mAlbum),
+                        mPrefix);
                 break;
             case Playlist:
                 mHighlighter.setText(holder.mLineOne.get(), item.mTitle, mPrefix);

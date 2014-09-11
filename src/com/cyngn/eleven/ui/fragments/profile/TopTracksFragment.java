@@ -11,11 +11,17 @@
 
 package com.cyngn.eleven.ui.fragments.profile;
 
+import android.app.Activity;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.support.v4.content.Loader;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.TextView;
 
-import com.cyngn.eleven.loaders.LastAddedLoader;
+import com.cyngn.eleven.R;
+import com.cyngn.eleven.adapters.SongAdapter;
+import com.cyngn.eleven.loaders.TopTracksLoader;
 import com.cyngn.eleven.model.Song;
 import com.cyngn.eleven.utils.MusicUtils;
 
@@ -27,12 +33,12 @@ import java.util.List;
  *
  * @author Andrew Neal (andrewdneal@gmail.com)
  */
-public class LastAddedFragment extends BasicSongFragment {
+public class TopTracksFragment extends BasicSongFragment {
 
     /**
      * Used to keep context menu items from bleeding into other fragments
      */
-    private static final int GROUP_ID = 7;
+    private static final int GROUP_ID = 6;
 
     /**
      * LoaderCallbacks identifier
@@ -44,7 +50,15 @@ public class LastAddedFragment extends BasicSongFragment {
      */
     @Override
     public Loader<List<Song>> onCreateLoader(final int id, final Bundle args) {
-        return new LastAddedLoader(getActivity());
+        return new TopTracksLoader(getActivity());
+    }
+
+    @Override
+    protected SongAdapter createAdapter() {
+        return new TopTracksAdapter(
+                getActivity(),
+                R.layout.list_item_top_tracks
+        );
     }
 
     @Override
@@ -59,10 +73,24 @@ public class LastAddedFragment extends BasicSongFragment {
 
     @Override
     public void playAll(int position) {
-        Cursor cursor = LastAddedLoader.makeLastAddedCursor(getActivity());
+        Cursor cursor = TopTracksLoader.makeTopTracksCursor(getActivity());
         final long[] list = MusicUtils.getSongListForCursor(cursor);
         MusicUtils.playAll(getActivity(), list, position, false);
         cursor.close();
         cursor = null;
+    }
+
+    public class TopTracksAdapter extends SongAdapter {
+        public TopTracksAdapter (final Activity context, final int layoutId) {
+            super(context, layoutId);
+        }
+
+        @Override
+        public View getView(int position, View convertView, ViewGroup parent) {
+            View view = super.getView(position, convertView, parent);
+            TextView positionText = (TextView) view.findViewById(R.id.position_number);
+            positionText.setText(String.valueOf(position + 1));
+            return view;
+        }
     }
 }

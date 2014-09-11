@@ -12,12 +12,14 @@
 package com.cyngn.eleven.adapters;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 
+import com.cyngn.eleven.Config.SmartPlaylistType;
 import com.cyngn.eleven.R;
 import com.cyngn.eleven.model.Playlist;
 import com.cyngn.eleven.ui.MusicHolder;
@@ -70,8 +72,6 @@ public class PlaylistAdapter extends ArrayAdapter<Playlist> {
         if (convertView == null) {
             convertView = LayoutInflater.from(getContext()).inflate(mLayoutId, parent, false);
             holder = new MusicHolder(convertView);
-            // hide the third line
-            holder.mLineThree.get().setVisibility(View.GONE);
             convertView.setTag(holder);
         } else {
             holder = (MusicHolder)convertView.getTag();
@@ -89,6 +89,28 @@ public class PlaylistAdapter extends ArrayAdapter<Playlist> {
             holder.mLineTwo.get().setVisibility(View.VISIBLE);
             holder.mLineTwo.get().setText(dataHolder.mLineTwo);
         }
+
+        SmartPlaylistType type = SmartPlaylistType.getTypeById(dataHolder.mItemId);
+        if (type != null) {
+            switch (type) {
+                case LastAdded:
+                    // TOOD: Replace with Last Added Icon
+                    holder.mImage.get().setImageResource(R.drawable.recent_icon);
+                    break;
+                case TopTracks:
+                default:
+                    holder.mImage.get().setImageResource(R.drawable.top_tracks_icon);
+                    break;
+            }
+
+            convertView.setBackgroundColor(getContext().getResources().
+                    getColor(R.color.smart_playlist_item_background));
+        } else {
+            holder.mImage.get().setImageResource(R.drawable.default_playlist);
+            convertView.setBackgroundColor(Color.TRANSPARENT);
+        }
+
+
 
         return convertView;
     }

@@ -37,12 +37,12 @@ public class SongLoader extends SectionCreator.SimpleListLoader<Song> {
     /**
      * The result
      */
-    private final ArrayList<Song> mSongList = Lists.newArrayList();
+    protected final ArrayList<Song> mSongList = Lists.newArrayList();
 
     /**
      * The {@link Cursor} used to run the query.
      */
-    private Cursor mCursor;
+    protected Cursor mCursor;
 
     /**
      * Constructor of <code>SongLoader</code>
@@ -59,7 +59,7 @@ public class SongLoader extends SectionCreator.SimpleListLoader<Song> {
     @Override
     public List<Song> loadInBackground() {
         // Create the Cursor
-        mCursor = makeSongCursor(getContext());
+        mCursor = getCursor();
         // Gather the data
         if (mCursor != null && mCursor.moveToFirst()) {
             do {
@@ -103,12 +103,26 @@ public class SongLoader extends SectionCreator.SimpleListLoader<Song> {
     }
 
     /**
+     * Gets the cursor for the loader - can be overriden
+     * @return cursor to load
+     */
+    protected Cursor getCursor() {
+        return makeSongCursor(mContext, null);
+    }
+
+    /**
      * Creates the {@link Cursor} used to run the query.
      * 
      * @param context The {@link Context} to use.
+     * @param selection Additional selection statement to use
      * @return The {@link Cursor} used to run the song query.
      */
-    public static final Cursor makeSongCursor(final Context context) {
+    public static final Cursor makeSongCursor(final Context context, final String selection) {
+        String selectionStatement = MusicUtils.MUSIC_ONLY_SELECTION;
+        if (selection != null && !selection.isEmpty()) {
+            selectionStatement += " AND " + selection;
+        }
+
         return context.getContentResolver().query(MediaStore.Audio.Media.EXTERNAL_CONTENT_URI,
                 new String[] {
                         /* 0 */
@@ -125,7 +139,7 @@ public class SongLoader extends SectionCreator.SimpleListLoader<Song> {
                         AudioColumns.DURATION,
                         /* 6 */
                         AudioColumns.YEAR,
-                }, MusicUtils.MUSIC_ONLY_SELECTION, null,
+                }, selectionStatement, null,
                 PreferenceUtils.getInstance(context).getSongSortOrder());
     }
 }

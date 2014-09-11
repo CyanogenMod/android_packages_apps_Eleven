@@ -63,4 +63,30 @@ public final class Config {
      * Play from search intent
      */
     public static final String PLAY_FROM_SEARCH = "android.media.action.MEDIA_PLAY_FROM_SEARCH";
+
+    /**
+     * The smart playlist type
+     */
+    public static final String SMART_PLAYLIST_TYPE = "smart_playlist_type";
+
+    public static enum SmartPlaylistType {
+        LastAdded(-1),
+        TopTracks(-2);
+
+        public long mId;
+
+        SmartPlaylistType(long id) {
+            mId = id;
+        }
+
+        public static SmartPlaylistType getTypeById(long id) {
+            for (SmartPlaylistType type : SmartPlaylistType.values()) {
+                if (type.mId == id) {
+                    return type;
+                }
+            }
+
+            return null;
+        }
+    }
 }

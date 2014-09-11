@@ -99,11 +99,6 @@ public class ProfileSongAdapter extends ArrayAdapter<Song> {
     private final int mDisplaySetting;
 
     /**
-     * Separator used for separating album/artist strings
-     */
-    private final String SEPARATOR_STRING = " - ";
-
-    /**
      * Used to set the size of the data in the adapter
      */
     private List<Song> mCount = Lists.newArrayList();
@@ -187,10 +182,10 @@ public class ProfileSongAdapter extends ArrayAdapter<Song> {
                             MusicUtils.makeShortTimeString(getContext(), song.mDuration));
                 }
 
-                final StringBuilder sb = new StringBuilder(song.mArtistName);
-                sb.append(SEPARATOR_STRING);
-                sb.append(song.mAlbumName);
-                holder.mLineTwo.get().setText(sb.toString());
+                ;
+
+                holder.mLineTwo.get().setText(MusicUtils.makeCombinedString(getContext(),
+                        song.mArtistName, song.mAlbumName));
 
                 // Asynchronously load the album image
                 if (song.mAlbumId >= 0) {

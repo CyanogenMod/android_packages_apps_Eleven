@@ -47,6 +47,7 @@ import com.cyngn.eleven.loaders.SongLoader;
 import com.cyngn.eleven.menu.FragmentMenuItems;
 import com.cyngn.eleven.model.AlbumArtistDetails;
 import com.cyngn.eleven.provider.RecentStore;
+import com.cyngn.eleven.provider.SongPlayCount;
 import com.devspark.appmsg.AppMsg;
 
 import java.io.File;
@@ -229,6 +230,20 @@ public final class MusicUtils {
 
         final String durationFormat = context.getResources().getString(stringId);
         return String.format(durationFormat, days, hours, mins, secs);
+    }
+
+    /**
+     * Used to combine two strings with some kind of separator in between
+     *
+     * @param context The {@link Context} to use.
+     * @param first string to combine
+     * @param second string to combine
+     * @return the combined string
+     */
+    public static final String makeCombinedString(final Context context, final String first,
+                                                  final String second) {
+        final String formatter = context.getResources().getString(R.string.combine_two_strings);
+        return String.format(formatter, first, second);
     }
 
     /**
@@ -756,7 +771,7 @@ public final class MusicUtils {
      * @param context The {@link Context} to use.
      */
     public static void shuffleAll(final Context context) {
-        Cursor cursor = SongLoader.makeSongCursor(context);
+        Cursor cursor = SongLoader.makeSongCursor(context, null);
         final long[] mTrackList = getSongListForCursor(cursor);
         final int position = 0;
         if (mTrackList.length == 0 || mService == null) {
@@ -1396,6 +1411,8 @@ public final class MusicUtils {
                 // Remove from current playlist
                 final long id = c.getLong(0);
                 removeTrack(id);
+                // Remove the track from the play count
+                SongPlayCount.getInstance(context).removeItem(id);
                 // Remove any items in the recents database
                 RecentStore.getInstance(context).removeItem(c.getLong(2));
                 c.moveToNext();

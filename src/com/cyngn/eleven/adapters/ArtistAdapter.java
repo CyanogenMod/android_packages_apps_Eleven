@@ -172,12 +172,7 @@ public class ArtistAdapter extends ArrayAdapter<Artist> implements SectionAdapte
             String songNumber = MusicUtils.makeLabel(getContext(),
                     R.plurals.Nsongs, artist.mSongNumber);
 
-            final Resources resources = getContext().getResources();
-            // combine the ablum number and song number
-            String combinedString = resources.getString(R.string.combine_two_strings,
-                    albumNumber, songNumber);
-
-            mData[i].mLineTwo = combinedString;
+            mData[i].mLineTwo = MusicUtils.makeCombinedString(getContext(), albumNumber, songNumber);
         }
     }
 

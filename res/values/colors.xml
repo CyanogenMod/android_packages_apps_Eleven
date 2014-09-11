@@ -74,6 +74,7 @@
     <color name="menu_text_color">@color/white</color>
 
     <!-- List view related colors -->
+    <color name="smart_playlist_item_background">#1931353f</color>
     <color name="list_item_background">#4ce4e9ed</color>
     <color name="list_item_header_text_color">#ff3d4049</color>
     <color name="list_item_text_color">@color/default_text_color</color>

@@ -27,6 +27,7 @@ import com.cyngn.eleven.ui.activities.PlaylistDetailActivity;
 import com.cyngn.eleven.ui.activities.ProfileActivity;
 import com.cyngn.eleven.ui.activities.SearchActivity;
 import com.cyngn.eleven.ui.activities.SettingsActivity;
+import com.cyngn.eleven.ui.activities.SmartPlaylistDetailActivity;
 import com.devspark.appmsg.AppMsg;
 
 /**
@@ -82,23 +83,25 @@ public final class NavUtils {
         context.startActivity(intent);
     }
 
+    public static void openSmartPlaylist(final Activity context, final Config.SmartPlaylistType type) {
+        // Create the intent to launch the profile activity
+        final Intent intent = new Intent(context, SmartPlaylistDetailActivity.class);
+        intent.putExtra(Config.SMART_PLAYLIST_TYPE, type.ordinal());
+        context.startActivity(intent);
+    }
+
     /**
      * Opens the playlist view
      *
      * @param context The {@link Activity} to use.
      * @param playlistId the id of the playlist
-     * @param mimeType the mimetype if specified, or the default if null passed in
      * @param playlistName the playlist name
      */
     public static void openPlaylist(final Activity context, final long playlistId,
-                                    final String mimeType, final String playlistName) {
+                                    final String playlistName) {
         final Bundle bundle = new Bundle();
         bundle.putLong(Config.ID, playlistId);
-        if (mimeType != null) {
-            bundle.putString(Config.MIME_TYPE, mimeType);
-        } else {
-            bundle.putString(Config.MIME_TYPE, MediaStore.Audio.Playlists.CONTENT_TYPE);
-        }
+        bundle.putString(Config.MIME_TYPE, MediaStore.Audio.Playlists.CONTENT_TYPE);
         bundle.putString(Config.NAME, playlistName);
 
         // Create the intent to launch the profile activity
