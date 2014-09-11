@@ -1,17 +1,12 @@
 package com.cyngn.eleven.ui.activities;
 
-import android.app.ActionBar;
-import android.graphics.drawable.ColorDrawable;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v4.app.LoaderManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AbsListView;
 import android.widget.ImageView;
 import android.widget.ListView;
 
@@ -21,14 +16,9 @@ import com.cyngn.eleven.adapters.ArtistDetailAlbumAdapter;
 import com.cyngn.eleven.adapters.ArtistDetailSongAdapter;
 import com.cyngn.eleven.cache.ImageFetcher;
 
-import java.util.Locale;
-
-public class ArtistDetailActivity extends SlidingPanelActivity
-implements AbsListView.OnScrollListener {
-    private static final int ACTION_BAR_DEFAULT_OPACITY = 65;
+public class ArtistDetailActivity extends DetailActivity {
     private ImageView mHero;
     private View mHeader;
-    private Drawable mActionBarBackground;
 
     private ListView mSongs;
     private ArtistDetailSongAdapter mSongAdapter;
@@ -84,49 +74,8 @@ implements AbsListView.OnScrollListener {
         mSongs.setAdapter(mSongAdapter);
     }
 
-    private void setupActionBar(String artistName) {
-        ActionBar actionBar = getActionBar();
-        actionBar.setTitle(artistName.toUpperCase(Locale.getDefault()));
-        actionBar.setIcon(R.drawable.ic_action_back);
-        actionBar.setHomeButtonEnabled(true);
-        // change action bar background to a drawable we can control
-        mActionBarBackground = new ColorDrawable(getResources().getColor(R.color.header_action_bar_color));
-        mActionBarBackground.setAlpha(ACTION_BAR_DEFAULT_OPACITY);
-        actionBar.setBackgroundDrawable(mActionBarBackground);
-    }
+    // TODO: change this class to use the same header strategy as PlaylistDetail
+    protected int getHeaderHeight() { return 0; }
 
-    /** cause action bar icon tap to act like back -- boo-urns! */
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case android.R.id.home:
-                finish();
-                return true;
-            default:
-                return super.onOptionsItemSelected(item);
-        }
-    }
-
-    @Override // OnScrollListener
-    public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
-        View child = view.getChildAt(0);
-        if(child == null) { return; }
-
-        float y = -child.getY();
-        if(y < 0) { return; }
-
-        float alpha = 255f;
-        // when the list view hits the top of the screen, y start counting up from 0
-        // again, so we check to see if enough items are on screen that the hero image
-        // is no longer visible, and assume opaque from there on out
-        if(visibleItemCount < 6) {
-            alpha = ACTION_BAR_DEFAULT_OPACITY +
-                    ((255 - ACTION_BAR_DEFAULT_OPACITY) * y/(float)mHero.getHeight());
-            if(alpha > 255f) { alpha = 255f; }
-        }
-        mActionBarBackground.setAlpha((int)alpha);
-    }
-
-    @Override // OnScrollListener
-    public void onScrollStateChanged(AbsListView view, int scrollState) {}
+    protected void setHeaderPosition(float y) {  }
 }

@@ -1,9 +1,6 @@
 package com.cyngn.eleven.ui.activities;
 
-import android.app.ActionBar;
 import android.database.Cursor;
-import android.graphics.drawable.ColorDrawable;
-import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.SystemClock;
@@ -13,12 +10,10 @@ import android.support.v4.app.LoaderManager.LoaderCallbacks;
 import android.support.v4.content.Loader;
 import android.view.ContextMenu;
 import android.view.Menu;
-import android.view.MenuItem;
 import android.view.SubMenu;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AbsListView;
-import android.widget.AbsListView.OnScrollListener;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ImageView;
@@ -27,7 +22,6 @@ import android.widget.TextView;
 import com.cyngn.eleven.Config;
 import com.cyngn.eleven.R;
 import com.cyngn.eleven.adapters.ProfileSongAdapter;
-import com.cyngn.eleven.cache.ImageFetcher;
 import com.cyngn.eleven.dragdrop.DragSortListView;
 import com.cyngn.eleven.dragdrop.DragSortListView.DragScrollProfile;
 import com.cyngn.eleven.dragdrop.DragSortListView.DropListener;
@@ -42,10 +36,9 @@ import com.cyngn.eleven.utils.MusicUtils;
 import com.cyngn.eleven.utils.NavUtils;
 
 import java.util.List;
-import java.util.Locale;
 
-public class PlaylistDetailActivity extends SlidingPanelActivity implements
-        OnScrollListener, LoaderCallbacks<List<Song>>, OnItemClickListener, DropListener,
+public class PlaylistDetailActivity extends DetailActivity implements
+        LoaderCallbacks<List<Song>>, OnItemClickListener, DropListener,
         RemoveListener, DragScrollProfile {
 
     /**
@@ -57,9 +50,6 @@ public class PlaylistDetailActivity extends SlidingPanelActivity implements
      * LoaderCallbacks identifier
      */
     private static final int LOADER = 0;
-
-    private static final int ACTION_BAR_DEFAULT_OPACITY = 65;
-    private Drawable mActionBarBackground;
 
     private DragSortListView mListView;
     private ProfileSongAdapter mAdapter;
@@ -84,11 +74,6 @@ public class PlaylistDetailActivity extends SlidingPanelActivity implements
      * Id of a context menu item
      */
     private long mSelectedId;
-
-    /**
-     * Song, album, and artist name used in the context menu
-     */
-    private String mSongName, mAlbumName, mArtistName;
 
     /**
      * The Id of the playlist the songs belong to
@@ -158,17 +143,6 @@ public class PlaylistDetailActivity extends SlidingPanelActivity implements
         mListView.setPadding(0, 0, 0, 0);
     }
 
-    private void setupActionBar(String playlistName) {
-        ActionBar actionBar = getActionBar();
-        actionBar.setTitle(playlistName.toUpperCase(Locale.getDefault()));
-        actionBar.setIcon(R.drawable.ic_action_back);
-        actionBar.setHomeButtonEnabled(true);
-        // change action bar background to a drawable we can control
-        mActionBarBackground = new ColorDrawable(getResources().getColor(R.color.header_action_bar_color));
-        mActionBarBackground.setAlpha(ACTION_BAR_DEFAULT_OPACITY);
-        actionBar.setBackgroundDrawable(mActionBarBackground);
-    }
-
     /**
      * {@inheritDoc}
      */
@@ -182,9 +156,6 @@ public class PlaylistDetailActivity extends SlidingPanelActivity implements
         // Creat a new song
         mSong = mAdapter.getItem(mSelectedPosition);
         mSelectedId = mSong.mSongId;
-        mSongName = mSong.mSongName;
-        mAlbumName = mSong.mAlbumName;
-        mArtistName = mSong.mArtistName;
 
         // Play the song
         menu.add(GROUP_ID, FragmentMenuItems.PLAY_SELECTION, Menu.NONE,
@@ -251,7 +222,7 @@ public class PlaylistDetailActivity extends SlidingPanelActivity implements
                     }, playlistId);
                     return true;
                 case FragmentMenuItems.MORE_BY_ARTIST:
-                    NavUtils.openArtistProfile(this, mArtistName);
+                    NavUtils.openArtistProfile(this, mSong.mArtistName);
                     return true;
                 case FragmentMenuItems.USE_AS_RINGTONE:
                     MusicUtils.setRingtone(this, mSelectedId);
@@ -339,20 +310,6 @@ public class PlaylistDetailActivity extends SlidingPanelActivity implements
         cursor = null;
     }
 
-    /**
-     * cause action bar icon tap to act like back -- boo-urns!
-     */
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case android.R.id.home:
-                finish();
-                return true;
-            default:
-                return super.onOptionsItemSelected(item);
-        }
-    }
-
     @Override
     public void onScrollStateChanged(AbsListView view, int scrollState) {
         // Pause disk cache access to ensure smoother scrolling
@@ -365,31 +322,9 @@ public class PlaylistDetailActivity extends SlidingPanelActivity implements
         }
     }
 
-    @Override // OnScrollListener
-    public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
-        View firstChild = view.getChildAt(0);
-        if (firstChild == null) {
-            return;
-        }
+    protected int getHeaderHeight() { return mHeaderContainer.getHeight(); }
 
-        float firstChildY = firstChild.getY();
-
-        // if the first fake header is off the screen,
-        // set opaque and header container to be off screen
-        if (firstVisibleItem != 0) {
-            mHeaderContainer.setY(-mHeaderContainer.getHeight());
-            mActionBarBackground.setAlpha(255);
-        } else {
-            // otherwise set the offset and calculate the alpha
-            mHeaderContainer.setY(firstChildY);
-            int alpha = ACTION_BAR_DEFAULT_OPACITY +
-                    (int)((255 - ACTION_BAR_DEFAULT_OPACITY) * -firstChildY /
-                            (float)mHeaderContainer.getHeight());
-
-            alpha = Math.min(255, alpha);
-            mActionBarBackground.setAlpha(alpha);
-        }
-    }
+    protected void setHeaderPosition(float y) { mHeaderContainer.setY(y); }
 
     @Override
     public Loader<List<Song>> onCreateLoader(int i, Bundle bundle) {
