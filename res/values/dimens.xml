@@ -24,6 +24,13 @@
     <dimen name="text_size_x_large">24.0sp</dimen>
     <dimen name="text_size_dayum">36.0sp</dimen>
 
+    <!-- Frequently used spacing between elements in many layouts -->
+    <dimen name="standard_padding">10.0dip</dimen>
+
+    <!-- overflow menu used on page headers and in list items -->
+    <dimen name="overflow_height">30.0dip</dimen>
+    <dimen name="overflow_width">24.0dip</dimen>
+
     <!-- List item section header -->
     <dimen name="list_item_header_height">30.0dip</dimen>
 
@@ -35,8 +42,8 @@
     <dimen name="list_item_padding_top">10.0dip</dimen>
     <dimen name="list_item_padding_bottom">10.0dip</dimen>
     <dimen name="list_item_header_size">16.0sp</dimen>
-    <dimen name="list_item_main_text_size">14.0sp</dimen>
-    <dimen name="list_item_secondary_text_size">12.0sp</dimen>
+    <dimen name="list_item_main_text_size">@dimens/text_size_small</dimen>
+    <dimen name="list_item_secondary_text_size">@dimens/text_size_micro</dimen>
     <dimen name="list_item_queue_text_padding_left">15.0dip</dimen>
 
     <!-- List view fast scroll padding left -->

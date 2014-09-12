@@ -2,14 +2,6 @@
     android:layout_width="match_parent"
     android:layout_height="70dp" >
 
-    <ImageView
-        android:id="@+id/album_art"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentLeft="true"
-        android:layout_margin="@dimen/list_preferred_item_padding" />
-
     <!-- FIXME: hide this until we know what goes in the popup menu -->
     <ImageView
         android:visibility="gone"
@@ -28,18 +20,22 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
         android:layout_toLeftOf="@id/overflow"
-        android:layout_toRightOf="@id/album_art" />
+        android:paddingTop="6dp"
+        android:layout_marginTop="@dimen/list_preferred_item_padding"
+        android:layout_marginLeft="@dimen/list_preferred_item_padding" />
 
     <TextView
-        android:id="@+id/album"
+        android:id="@+id/duration"
         style="@style/ListItemSecondaryText.Single"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/title"
-        android:layout_toRightOf="@id/album_art"
+        android:layout_alignParentLeft="true"
         android:layout_toLeftOf="@id/overflow"
-        android:layout_marginTop="-2dp" />
+        android:layout_marginTop="-2dp"
+        android:layout_marginLeft="@dimen/standard_padding" />
 
     <View
         android:layout_width="match_parent"

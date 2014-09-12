@@ -21,10 +21,10 @@ import android.provider.MediaStore;
 
 import com.cyngn.eleven.Config;
 import com.cyngn.eleven.R;
+import com.cyngn.eleven.ui.activities.AlbumDetailActivity;
 import com.cyngn.eleven.ui.activities.ArtistDetailActivity;
 import com.cyngn.eleven.ui.activities.HomeActivity;
 import com.cyngn.eleven.ui.activities.PlaylistDetailActivity;
-import com.cyngn.eleven.ui.activities.ProfileActivity;
 import com.cyngn.eleven.ui.activities.SearchActivity;
 import com.cyngn.eleven.ui.activities.SettingsActivity;
 import com.cyngn.eleven.ui.activities.SmartPlaylistDetailActivity;
@@ -71,14 +71,15 @@ public final class NavUtils {
         // Create a new bundle to transfer the album info
         final Bundle bundle = new Bundle();
         bundle.putString(Config.ALBUM_YEAR, MusicUtils.getReleaseDateForAlbum(context, albumId));
+        bundle.putInt(Config.SONG_COUNT, MusicUtils.getSongCountForAlbumInt(context, albumId));
         bundle.putString(Config.ARTIST_NAME, artistName);
         bundle.putString(Config.MIME_TYPE, MediaStore.Audio.Albums.CONTENT_TYPE);
         bundle.putLong(Config.ID, albumId);
         bundle.putString(Config.NAME, albumName);
 
         // Create the intent to launch the profile activity
-        final Intent intent = new Intent(context, ProfileActivity.class);
-        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        final Intent intent = new Intent(context, AlbumDetailActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         intent.putExtras(bundle);
         context.startActivity(intent);
     }

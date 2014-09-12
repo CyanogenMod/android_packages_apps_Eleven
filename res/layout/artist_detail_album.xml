@@ -15,7 +15,7 @@
     <ImageView
         android:visibility="gone"
         android:id="@+id/overflow"
-        android:layout_width="24dp"
+        android:layout_width="@dimen/overflow_width"
         android:layout_height="40dp"
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
@@ -26,30 +26,23 @@
 
     <TextView
         android:id="@+id/title"
+        style="@style/ListItemMainText.Single"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/album_art"
         android:layout_toLeftOf="@id/overflow"
         android:layout_alignParentLeft="true"
         android:layout_marginLeft="8dp"
-        android:layout_marginTop="3dp"
-        android:singleLine="true"
-        android:fontFamily="sans-serif"
-        android:textStyle="bold"
-        android:textSize="@dimen/text_size_small"
-        android:textColor="@color/default_text_color" />
+        android:layout_marginTop="3dp" />
 
     <TextView
         android:id="@+id/year"
+        style="@style/ListItemSecondaryText.Single"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/title"
         android:layout_alignParentLeft="true"
         android:layout_toLeftOf="@id/overflow"
         android:layout_marginLeft="8dp"
-        android:layout_marginTop="-4dp"
-        android:singleLine="true"
-        android:fontFamily="sans-serif-light"
-        android:textSize="@dimen/text_size_micro"
-        android:textColor="@color/default_text_color" />
+        android:layout_marginTop="-4dp" />
 </RelativeLayout>

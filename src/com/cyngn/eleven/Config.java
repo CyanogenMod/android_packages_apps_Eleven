@@ -54,6 +54,9 @@ public final class Config {
      */
     public static final String ALBUM_YEAR = "album_year";
 
+    /** number of songs in a album or track list */
+    public static final String SONG_COUNT = "song_count";
+
     /**
      * The MIME type passed to a the profile activity
      */

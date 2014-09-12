@@ -66,6 +66,9 @@
     <color name="header_action_bar_text_color">@color/white</color>
     <color name="bottom_action_bar_text_color">@color/default_text_color_light</color>
 
+    <!-- Background color used on some page headers -->
+    <color name="page_header_background">#fff4f4f4</color>
+
     <!-- Color for background for shadow on playlist page -->
     <color name="header_shadow_color">#ea31353f</color>
 

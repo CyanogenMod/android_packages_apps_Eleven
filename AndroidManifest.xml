@@ -153,6 +153,13 @@
             android:screenOrientation="portrait"
             android:theme="@style/Eleven.Theme.ActionBar.Overlay">
         </activity>
+        <!-- Album Detail Activity -->
+        <activity
+            android:name=".ui.activities.AlbumDetailActivity"
+            android:excludeFromRecents="true"
+            android:screenOrientation="portrait"
+            android:theme="@style/Eleven.Theme.ActionBar.Overlay">
+        </activity>
         <!-- Playlist Detail Activity -->
         <activity
             android:name=".ui.activities.PlaylistDetailActivity"

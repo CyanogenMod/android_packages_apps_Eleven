@@ -22,7 +22,6 @@ import android.content.Intent;
 import android.content.ServiceConnection;
 import android.database.Cursor;
 import android.net.Uri;
-import android.os.AsyncTask;
 import android.os.IBinder;
 import android.os.RemoteException;
 import android.provider.BaseColumns;
@@ -36,7 +35,6 @@ import android.provider.MediaStore.MediaColumns;
 import android.provider.Settings;
 import android.util.Log;
 import android.view.Menu;
-import android.view.SubMenu;
 
 import com.cyngn.eleven.IElevenService;
 import com.cyngn.eleven.MusicPlaybackService;
@@ -52,8 +50,6 @@ import com.devspark.appmsg.AppMsg;
 
 import java.io.File;
 import java.util.Arrays;
-import java.util.Formatter;
-import java.util.Locale;
 import java.util.WeakHashMap;
 
 /**
@@ -1049,12 +1045,17 @@ public final class MusicUtils {
         }
     }
 
+    public static final String getSongCountForAlbum(final Context context, final long id) {
+        Integer i = getSongCountForAlbumInt(context, id);
+        return i == null ? null : Integer.toString(i);
+    }
+
     /**
      * @param context The {@link Context} to use.
      * @param id The id of the album.
      * @return The song count for an album.
      */
-    public static final String getSongCountForAlbum(final Context context, final long id) {
+    public static final Integer getSongCountForAlbumInt(final Context context, final long id) {
         if (id == -1) {
             return null;
         }
@@ -1062,11 +1063,13 @@ public final class MusicUtils {
         Cursor cursor = context.getContentResolver().query(uri, new String[] {
                     AlbumColumns.NUMBER_OF_SONGS
                 }, null, null, null);
-        String songCount = null;
+        Integer songCount = null;
         if (cursor != null) {
             cursor.moveToFirst();
             if (!cursor.isAfterLast()) {
-                songCount = cursor.getString(0);
+                if(!cursor.isNull(0)) {
+                    songCount = cursor.getInt(0);
+                }
             }
             cursor.close();
             cursor = null;
