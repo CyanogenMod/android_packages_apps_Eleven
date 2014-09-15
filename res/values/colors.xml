@@ -99,5 +99,5 @@
     <color name="circular_progress_bar">@color/white</color>
 
     <!-- search no results text color -->
-    <color name="no_search_results">#ff231f20</color>
+    <color name="no_results">#ff231f20</color>
 </resources>

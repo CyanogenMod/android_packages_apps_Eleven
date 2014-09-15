@@ -618,7 +618,9 @@ public class AudioPlayerFragment extends Fragment implements ServiceConnection {
 
             return remaining;
         } catch (final Exception ignored) {
-            Log.e(TAG, ignored.getMessage());
+            if (ignored.getMessage() != null) {
+                Log.e(TAG, ignored.getMessage());
+            }
         }
         return 500;
     }

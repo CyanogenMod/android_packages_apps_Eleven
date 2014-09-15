@@ -284,4 +284,13 @@ public class ProfileSongAdapter extends ArrayAdapter<Song> {
         mCount = data;
     }
 
+    /**
+     * Since we inject headers with this class, to actually determine if it is empty
+     * we need to look at the underlying data
+     * @return true if underlying data is empty
+     */
+    @Override
+    public boolean isEmpty() {
+        return (mCount == null || mCount.size() == 0);
+    }
 }

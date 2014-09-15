@@ -42,8 +42,8 @@
     <dimen name="list_item_padding_top">10.0dip</dimen>
     <dimen name="list_item_padding_bottom">10.0dip</dimen>
     <dimen name="list_item_header_size">16.0sp</dimen>
-    <dimen name="list_item_main_text_size">@dimens/text_size_small</dimen>
-    <dimen name="list_item_secondary_text_size">@dimens/text_size_micro</dimen>
+    <dimen name="list_item_main_text_size">@dimen/text_size_small</dimen>
+    <dimen name="list_item_secondary_text_size">@dimen/text_size_micro</dimen>
     <dimen name="list_item_queue_text_padding_left">15.0dip</dimen>
 
     <!-- List view fast scroll padding left -->
@@ -189,7 +189,6 @@
     <dimen name="white_note_padding_bottom">24.0dip</dimen>
     <dimen name="no_results_width">260.0dip</dimen>
     <dimen name="no_results_text_padding_bottom">16.0dip</dimen>
-    <dimen name="no_results_text_height">54.0dip</dimen>
-    <dimen name="search_text_main">20.0sp</dimen>
-    <dimen name="search_text_secondary">14.0sp</dimen>
+    <dimen name="no_reuslts_text_main">20.0sp</dimen>
+    <dimen name="no_results_text_secondary">14.0sp</dimen>
 </resources>

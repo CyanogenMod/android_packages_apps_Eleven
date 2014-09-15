@@ -174,11 +174,18 @@
     <!-- Empty list / error messages -->
     <string name="no_effects_for_you">The equalizer could not be opened.</string>
     <string name="empty_music">To copy music from your computer to your device, use a USB cable.</string>
-    <string name="empty_last_added">Songs you have added over the last month will be shown here.</string>
     <string name="empty_search">NO SEARCH RESULTS FOR</string>
     <string name="empty_search_check">Please check that you have the correct spelling or try a different keyword.</string>
     <string name="empty_favorite">Songs you mark as favorites will be shown here.</string>
     <string name="empty_recent">Albums you have listened to will show up here. Try playing some music.</string>
+    <string name="empty_playlist_main">NO SONGS IN PLAYLIST</string>
+    <string name="empty_playlist_secondary">To add songs to this playlist, tap the options menu on a song, album or artist and select \"Add to playlist\".</string>
+    <string name="empty_top_tracks_main">NO TOP TRACKS</string>
+    <string name="empty_top_tracks_secondary">The songs you listen to most will be added to this list.</string>
+    <string name="empty_last_added_main">NO SONGS ADDED RECENTLY</string>
+    <string name="empty_last_added">Songs you have added over the last month will be shown here.</string>
+    <string name="empty_generic_main">NO MUSIC FOUND</string>
+    <string name="empty_generic_secondary">To copy music from your computer to your device, use a USB cable.</string>
 
     <!-- Section Headers -->
     <string name="header_unknown_year">Unknown Year</string>

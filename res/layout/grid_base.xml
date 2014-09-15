@@ -22,15 +22,8 @@
     android:paddingRight="@dimen/list_preferred_item_padding"
     android:paddingTop="@dimen/list_preferred_item_padding">
 
-    <TextView
-        android:id="@+id/empty"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_vertical|center"
-        android:textColor="@color/holo_blue_light"
-        android:textSize="@dimen/text_size_large"
-        android:textStyle="bold"
-        android:visibility="gone" />
+    <include
+        layout="@layout/no_results_message" />
 
     <GridView
         android:id="@+id/grid_base"
@@ -44,5 +37,4 @@
         android:scrollbarStyle="outsideOverlay"
         android:scrollbars="vertical"
         android:verticalSpacing="@dimen/grid_item_vertical_spacing" />
-
 </FrameLayout>

@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Copyright (C) 2014 Cyanogen, Inc.
+-->
+
+<com.cyngn.eleven.widgets.NoResultsContainer
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/no_results_container"
+    android:gravity="center_horizontal"
+    android:layout_width="@dimen/no_results_width"
+    android:layout_height="wrap_content"
+    android:layout_centerInParent="true"
+    android:layout_gravity="center"
+    android:orientation="vertical"
+    android:visibility="gone">
+
+    <ImageView
+        android:layout_width="@dimen/white_note_width"
+        android:layout_height="@dimen/white_note_height"
+        android:layout_gravity="center_horizontal"
+        android:paddingBottom="@dimen/white_note_padding_bottom"
+        android:scaleType="centerInside"
+        android:src="@drawable/white_note" />
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:orientation="vertical"
+        android:paddingBottom="@dimen/no_results_text_padding_bottom">
+        <TextView
+            android:id="@+id/no_results_main_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:layout_gravity="center_horizontal"
+            android:maxLines="2"
+            android:textColor="@color/no_results"
+            android:textSize="@dimen/no_reuslts_text_main"
+            android:textStyle="bold"
+            android:text="@string/empty_generic_main" />
+
+        <TextView
+            android:id="@+id/no_results_main_highlight_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:gravity="center_horizontal"
+            android:layout_gravity="center_horizontal"
+            android:maxLines="2"
+            android:textColor="@color/no_results"
+            android:textSize="@dimen/no_reuslts_text_main"
+            android:textStyle="bold|italic"
+            android:visibility="gone" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/no_results_secondary_text"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="sans-serif-light"
+        android:gravity="center_horizontal"
+        android:textColor="@color/no_results"
+        android:textSize="@dimen/no_results_text_secondary"
+        android:text="@string/empty_generic_secondary" />
+</com.cyngn.eleven.widgets.NoResultsContainer>

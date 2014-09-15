@@ -53,6 +53,7 @@ import com.cyngn.eleven.utils.MusicUtils;
 import com.cyngn.eleven.utils.NavUtils;
 import com.cyngn.eleven.utils.PreferenceUtils;
 import com.cyngn.eleven.utils.SectionCreatorUtils;
+import com.cyngn.eleven.widgets.NoResultsContainer;
 import com.viewpagerindicator.TitlePageIndicator;
 
 /**
@@ -287,8 +288,7 @@ public class AlbumFragment extends Fragment implements LoaderCallbacks<SectionLi
         // Check for any errors
         if (data.mListResults.isEmpty()) {
             // Set the empty text
-            final TextView empty = (TextView)mRootView.findViewById(R.id.empty);
-            empty.setText(getString(R.string.empty_music));
+            final NoResultsContainer empty = (NoResultsContainer)mRootView.findViewById(R.id.no_results_container);
             mGridView.setEmptyView(empty);
             return;
         }

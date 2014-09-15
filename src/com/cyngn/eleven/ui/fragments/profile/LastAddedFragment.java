@@ -15,9 +15,11 @@ import android.database.Cursor;
 import android.os.Bundle;
 import android.support.v4.content.Loader;
 
+import com.cyngn.eleven.R;
 import com.cyngn.eleven.loaders.LastAddedLoader;
 import com.cyngn.eleven.model.Song;
 import com.cyngn.eleven.utils.MusicUtils;
+import com.cyngn.eleven.widgets.NoResultsContainer;
 
 import java.util.List;
 
@@ -64,5 +66,13 @@ public class LastAddedFragment extends BasicSongFragment {
         MusicUtils.playAll(getActivity(), list, position, false);
         cursor.close();
         cursor = null;
+    }
+
+    @Override
+    public void setupNoResultsContainer(NoResultsContainer empty) {
+        super.setupNoResultsContainer(empty);
+
+        empty.setMainText(R.string.empty_last_added_main);
+        empty.setSecondaryText(R.string.empty_last_added);
     }
 }

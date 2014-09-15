@@ -38,6 +38,7 @@ import com.cyngn.eleven.model.Song;
 import com.cyngn.eleven.recycler.RecycleHolder;
 import com.cyngn.eleven.utils.MusicUtils;
 import com.cyngn.eleven.utils.NavUtils;
+import com.cyngn.eleven.widgets.NoResultsContainer;
 
 import java.util.List;
 
@@ -137,7 +138,16 @@ public abstract class BasicSongFragment extends Fragment implements LoaderCallba
 
             }
         });
+
         return mRootView;
+    }
+
+    /**
+     * This allows subclasses to customize the look and feel of the no results container
+     * @param empty NoResultsContainer class
+     */
+    public void setupNoResultsContainer(final NoResultsContainer empty) {
+        // do nothing
     }
 
     /**
@@ -265,8 +275,7 @@ public abstract class BasicSongFragment extends Fragment implements LoaderCallba
         // Check for any errors
         if (data.isEmpty()) {
             // Set the empty text
-            final TextView empty = (TextView) mRootView.findViewById(R.id.empty);
-            empty.setText(getString(R.string.empty_last_added));
+            final NoResultsContainer empty = (NoResultsContainer)mRootView.findViewById(R.id.no_results_container);
             mListView.setEmptyView(empty);
             return;
         }

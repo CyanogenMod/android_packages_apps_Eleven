@@ -38,6 +38,7 @@ import com.cyngn.eleven.model.Genre;
 import com.cyngn.eleven.recycler.RecycleHolder;
 import com.cyngn.eleven.ui.activities.ProfileActivity;
 import com.cyngn.eleven.utils.MusicUtils;
+import com.cyngn.eleven.widgets.NoResultsContainer;
 
 import java.util.List;
 
@@ -209,8 +210,7 @@ public class GenreFragment extends Fragment implements LoaderCallbacks<List<Genr
         // Check for any errors
         if (data.isEmpty()) {
             // Set the empty text
-            final TextView empty = (TextView)mRootView.findViewById(R.id.empty);
-            empty.setText(getString(R.string.empty_music));
+            final NoResultsContainer empty = (NoResultsContainer)mRootView.findViewById(R.id.no_results_container);
             mListView.setEmptyView(empty);
             return;
         }

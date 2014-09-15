@@ -34,7 +34,9 @@ import com.cyngn.eleven.model.Song;
 import com.cyngn.eleven.recycler.RecycleHolder;
 import com.cyngn.eleven.utils.MusicUtils;
 import com.cyngn.eleven.utils.NavUtils;
+import com.cyngn.eleven.widgets.NoResultsContainer;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class PlaylistDetailActivity extends DetailActivity implements
@@ -56,6 +58,8 @@ public class PlaylistDetailActivity extends DetailActivity implements
 
     private View mHeaderContainer;
     private ImageView mPlaylistImageView;
+
+    private NoResultsContainer mNoResultsContainer;
 
     private TextView mNumberOfSongs;
     private TextView mDurationOfPlaylist;
@@ -100,6 +104,7 @@ public class PlaylistDetailActivity extends DetailActivity implements
 
         setupHero();
         setupSongList(root);
+        setupNoResultsContainer();
 
         LoaderManager lm = getSupportLoaderManager();
         lm.initLoader(0, arguments, this);
@@ -141,6 +146,12 @@ public class PlaylistDetailActivity extends DetailActivity implements
         mListView.setVerticalScrollBarEnabled(false);
         mListView.setFastScrollEnabled(false);
         mListView.setPadding(0, 0, 0, 0);
+    }
+
+    private void setupNoResultsContainer() {
+        mNoResultsContainer = (NoResultsContainer)findViewById(R.id.no_results_container);
+        mNoResultsContainer.setMainText(R.string.empty_playlist_main);
+        mNoResultsContainer.setSecondaryText(R.string.empty_playlist_secondary);
     }
 
     /**
@@ -333,30 +344,42 @@ public class PlaylistDetailActivity extends DetailActivity implements
 
     @Override
     public void onLoadFinished(final Loader<List<Song>> loader, final List<Song> data) {
-        // Check for any errors
         if (data.isEmpty()) {
-            return;
+            // set the empty view - only do it here so we don't see the empty view by default
+            // while the list is loading
+            mListView.setEmptyView(mNoResultsContainer);
+
+            // hide the header container
+            mHeaderContainer.setVisibility(View.GONE);
+
+            // Start fresh
+            mAdapter.unload();
+            // Return the correct count
+            mAdapter.setCount(new ArrayList<Song>());
+        } else {
+            // show the header container
+            mHeaderContainer.setVisibility(View.VISIBLE);
+
+            // Start fresh
+            mAdapter.unload();
+            // Return the correct count
+            mAdapter.setCount(data);
+            // set the number of songs
+            String numberOfSongs = MusicUtils.makeLabel(this, R.plurals.Nsongs, data.size());
+            mNumberOfSongs.setText(numberOfSongs);
+
+            long duration = 0;
+
+            // Add the data to the adapter
+            for (final Song song : data) {
+                mAdapter.add(song);
+                duration += song.mDuration;
+            }
+
+            // set the duration
+            String durationString = MusicUtils.makeLongTimeString(this, duration);
+            mDurationOfPlaylist.setText(durationString);
         }
-
-        // Start fresh
-        mAdapter.unload();
-        // Return the correct count
-        mAdapter.setCount(data);
-        // set the number of songs
-        String numberOfSongs = MusicUtils.makeLabel(this, R.plurals.Nsongs, data.size());
-        mNumberOfSongs.setText(numberOfSongs);
-
-        long duration = 0;
-
-        // Add the data to the adapter
-        for (final Song song : data) {
-            mAdapter.add(song);
-            duration += song.mDuration;
-        }
-
-        // set the duration
-        String durationString = MusicUtils.makeLongTimeString(this, duration);
-        mDurationOfPlaylist.setText(durationString);
     }
 
     @Override

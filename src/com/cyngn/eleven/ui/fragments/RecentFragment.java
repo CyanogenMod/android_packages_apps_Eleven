@@ -50,6 +50,7 @@ import com.cyngn.eleven.utils.ApolloUtils;
 import com.cyngn.eleven.utils.MusicUtils;
 import com.cyngn.eleven.utils.NavUtils;
 import com.cyngn.eleven.utils.PreferenceUtils;
+import com.cyngn.eleven.widgets.NoResultsContainer;
 
 import java.util.List;
 
@@ -292,8 +293,8 @@ public class RecentFragment extends Fragment implements LoaderCallbacks<List<Alb
         // Check for any errors
         if (data.isEmpty()) {
             // Set the empty text
-            final TextView empty = (TextView)mRootView.findViewById(R.id.empty);
-            empty.setText(getString(R.string.empty_recent));
+            final NoResultsContainer empty = (NoResultsContainer)mRootView.findViewById(R.id.no_results_container);
+            empty.setSecondaryText(R.string.empty_recent);
             mListView.setEmptyView(empty);
             return;
         }

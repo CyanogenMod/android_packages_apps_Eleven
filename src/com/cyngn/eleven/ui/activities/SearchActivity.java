@@ -58,6 +58,7 @@ import com.cyngn.eleven.utils.MusicUtils.ServiceToken;
 import com.cyngn.eleven.utils.NavUtils;
 import com.cyngn.eleven.utils.SectionCreatorUtils;
 import com.cyngn.eleven.utils.SectionCreatorUtils.IItemCompare;
+import com.cyngn.eleven.widgets.NoResultsContainer;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -102,7 +103,7 @@ public class SearchActivity extends FragmentActivity implements LoaderCallbacks<
     /**
      * The view that container the no search results text
      */
-    private View mNoSearchResultsView;
+    private NoResultsContainer mNoResultsContainer;
 
     /**
      * List view adapter
@@ -131,7 +132,7 @@ public class SearchActivity extends FragmentActivity implements LoaderCallbacks<
         mToken = MusicUtils.bindToService(this, this);
 
         // Set the layout
-        setContentView(R.layout.search_layout);
+        setContentView(R.layout.list_base);
 
         // get the input method manager
         mImm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
@@ -145,10 +146,12 @@ public class SearchActivity extends FragmentActivity implements LoaderCallbacks<
         // Set the prefix
         mAdapter.getUnderlyingAdapter().setPrefix(mFilterString);
 
-        initListView();
+        // setup the no results container
+        mNoResultsContainer = (NoResultsContainer)findViewById(R.id.no_results_container);
+        mNoResultsContainer.setMainText(R.string.empty_search);
+        mNoResultsContainer.setSecondaryText(R.string.empty_search_check);
 
-        mNoSearchResultsView = findViewById(R.id.no_search_results);
-        mNoSearchResultsView.setVisibility(View.INVISIBLE);
+        initListView();
 
         if (mFilterString != null && !mFilterString.isEmpty()) {
             // Prepare the loader. Either re-connect with an existing one,
@@ -158,6 +161,10 @@ public class SearchActivity extends FragmentActivity implements LoaderCallbacks<
             // Action bar subtitle
             getActionBar().setSubtitle("\"" + mFilterString + "\"");
         }
+
+        // set the background on the root view
+        getWindow().getDecorView().getRootView().setBackgroundColor(
+                getResources().getColor(R.color.background_color));
     }
 
     /**
@@ -174,7 +181,12 @@ public class SearchActivity extends FragmentActivity implements LoaderCallbacks<
         mListView.setOnItemClickListener(this);
         // To help make scrolling smooth
         mListView.setOnScrollListener(this);
+        // sets the touch listener
         mListView.setOnTouchListener(this);
+        // If we setEmptyView with noResultsContainer it causes a crash in DragSortListView
+        // when updating the search.  For now let's manually toggle visibility and come back
+        // to this later
+        //mListView.setEmptyView(mNoResultsContainer);
     }
 
     /**
@@ -278,22 +290,17 @@ public class SearchActivity extends FragmentActivity implements LoaderCallbacks<
         // Check for any errors
         if (data.mListResults.isEmpty()) {
             // Set the empty text
-            final TextView empty = (TextView)findViewById(R.id.no_search_results_text);
-            empty.setText("\"" + mFilterString + "\"");
+            mNoResultsContainer.setMainHighlightText("\"" + mFilterString + "\"");
 
             // clear the adapter
             mAdapter.clear();
-
-            // hide listview, show no results text
             mListView.setVisibility(View.INVISIBLE);
-            mNoSearchResultsView.setVisibility(View.VISIBLE);
+            mNoResultsContainer.setVisibility(View.VISIBLE);
         } else {
             // Set the data
             mAdapter.setData(data);
-
-            // show listview, hide no results text
             mListView.setVisibility(View.VISIBLE);
-            mNoSearchResultsView.setVisibility(View.INVISIBLE);
+            mNoResultsContainer.setVisibility(View.INVISIBLE);
         }
     }
 
@@ -358,7 +365,7 @@ public class SearchActivity extends FragmentActivity implements LoaderCallbacks<
     public boolean onQueryTextChange(final String newText) {
         if (TextUtils.isEmpty(newText)) {
             mListView.setVisibility(View.INVISIBLE);
-            mNoSearchResultsView.setVisibility(View.INVISIBLE);
+            mNoResultsContainer.setVisibility(View.INVISIBLE);
             mFilterString = "";
             return false;
         }

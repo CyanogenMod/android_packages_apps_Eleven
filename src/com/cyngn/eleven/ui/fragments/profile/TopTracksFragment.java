@@ -24,6 +24,7 @@ import com.cyngn.eleven.adapters.SongAdapter;
 import com.cyngn.eleven.loaders.TopTracksLoader;
 import com.cyngn.eleven.model.Song;
 import com.cyngn.eleven.utils.MusicUtils;
+import com.cyngn.eleven.widgets.NoResultsContainer;
 
 import java.util.List;
 
@@ -92,5 +93,13 @@ public class TopTracksFragment extends BasicSongFragment {
             positionText.setText(String.valueOf(position + 1));
             return view;
         }
+    }
+
+    @Override
+    public void setupNoResultsContainer(NoResultsContainer empty) {
+        super.setupNoResultsContainer(empty);
+
+        empty.setMainText(R.string.empty_top_tracks_main);
+        empty.setSecondaryText(R.string.empty_top_tracks_secondary);
     }
 }

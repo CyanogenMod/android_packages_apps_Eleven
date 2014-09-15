@@ -17,20 +17,10 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/list_base_container"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:paddingTop="@dimen/list_preferred_item_padding"
->
+    android:layout_height="match_parent">
 
-    <TextView
-        android:id="@+id/empty"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_vertical|center"
-        android:padding="@dimen/list_preferred_item_padding"
-        android:textColor="@color/holo_blue_light"
-        android:textSize="@dimen/text_size_large"
-        android:textStyle="bold"
-        android:visibility="gone" />
+    <include
+        layout="@layout/no_results_message" />
 
     <com.cyngn.eleven.dragdrop.DragSortListView
         android:id="@+id/list_base"
@@ -42,5 +32,4 @@
         android:fastScrollEnabled="true"
         android:dividerHeight="1dp"
         android:divider="@drawable/inset_list_divider"/>
-
 </FrameLayout>
