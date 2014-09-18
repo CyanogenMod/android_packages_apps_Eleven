@@ -1533,4 +1533,15 @@ public final class MusicUtils {
 
         return null;
     }
+
+    /** @return true if a string is null, empty, or contains only whitespace */
+    public static boolean isBlank(String s) {
+        if(s == null) { return true; }
+        if(s.isEmpty()) { return true; }
+        for(int i = 0; i < s.length(); i++) {
+            char c = s.charAt(i);
+            if(!Character.isWhitespace(c)) { return false; }
+        }
+        return true;
+    }
 }

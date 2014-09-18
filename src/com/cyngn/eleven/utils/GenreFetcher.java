@@ -40,11 +40,15 @@ public class GenreFetcher implements LoaderCallbacks<Cursor> {
     @Override
     public void onLoadFinished(Loader<Cursor> loader, Cursor cursor) {
         if(mTextView != null && cursor.moveToFirst()) {
-            mTextView.setText(cursor.getString(0));
-            mTextView.setVisibility(View.VISIBLE);
-        } else {
-            mTextView.setVisibility(View.GONE);
+            String genre = cursor.getString(0);
+            if(!MusicUtils.isBlank(genre)) {
+                mTextView.setText(genre);
+                mTextView.setVisibility(View.VISIBLE);
+                return;
+            }
         }
+        // no displayable genre found
+        mTextView.setVisibility(View.GONE);
     }
 
     @Override
