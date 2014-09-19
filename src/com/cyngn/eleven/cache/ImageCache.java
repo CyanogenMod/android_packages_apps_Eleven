@@ -271,12 +271,23 @@ public final class ImageCache {
      * @param bitmap The {@link Bitmap} to cache
      */
     public void addBitmapToCache(final String data, final Bitmap bitmap) {
+        addBitmapToCache(data, bitmap, false);
+    }
+
+    /**
+     * Adds a new image to the memory and disk caches
+     *
+     * @param data The key used to store the image
+     * @param bitmap The {@link Bitmap} to cache
+     * @param replace force a replace even if the bitmap exists in the cache
+     */
+    public void addBitmapToCache(final String data, final Bitmap bitmap, final boolean replace) {
         if (data == null || bitmap == null) {
             return;
         }
 
         // Add to memory cache
-        addBitmapToMemCache(data, bitmap);
+        addBitmapToMemCache(data, bitmap, replace);
 
         // Add to disk cache
         if (mDiskCache != null) {
@@ -284,7 +295,11 @@ public final class ImageCache {
             OutputStream out = null;
             try {
                 final DiskLruCache.Snapshot snapshot = mDiskCache.get(key);
-                if (snapshot == null) {
+                if (snapshot != null) {
+                    snapshot.getInputStream(DISK_CACHE_INDEX).close();
+                }
+
+                if (snapshot == null || replace) {
                     final DiskLruCache.Editor editor = mDiskCache.edit(key);
                     if (editor != null) {
                         out = editor.newOutputStream(DISK_CACHE_INDEX);
@@ -293,8 +308,6 @@ public final class ImageCache {
                         out.close();
                         flush();
                     }
-                } else {
-                    snapshot.getInputStream(DISK_CACHE_INDEX).close();
                 }
             } catch (final IOException e) {
                 Log.e(TAG, "addBitmapToCache - " + e);
@@ -320,11 +333,22 @@ public final class ImageCache {
      * @param bitmap The {@link Bitmap} to cache
      */
     public void addBitmapToMemCache(final String data, final Bitmap bitmap) {
+        addBitmapToMemCache(data, bitmap, false);
+    }
+
+    /**
+     * Called to add a new image to the memory cache
+     *
+     * @param data The key identifier
+     * @param bitmap The {@link Bitmap} to cache
+     * @param replace whether to force a replace if it already exists
+     */
+    public void addBitmapToMemCache(final String data, final Bitmap bitmap, final boolean replace) {
         if (data == null || bitmap == null) {
             return;
         }
         // Add to memory cache
-        if (getBitmapFromMemCache(data) == null) {
+        if (replace || getBitmapFromMemCache(data) == null) {
             mLruCache.put(data, bitmap);
         }
     }

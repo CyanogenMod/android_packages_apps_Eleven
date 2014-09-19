@@ -21,6 +21,7 @@ import android.widget.ArrayAdapter;
 
 import com.cyngn.eleven.Config.SmartPlaylistType;
 import com.cyngn.eleven.R;
+import com.cyngn.eleven.cache.ImageFetcher;
 import com.cyngn.eleven.model.Playlist;
 import com.cyngn.eleven.ui.MusicHolder;
 import com.cyngn.eleven.ui.MusicHolder.DataHolder;
@@ -92,10 +93,13 @@ public class PlaylistAdapter extends ArrayAdapter<Playlist> {
 
         SmartPlaylistType type = SmartPlaylistType.getTypeById(dataHolder.mItemId);
         if (type != null) {
+            // Clear any drawables
+            holder.mImage.get().setBackground(null);
+
+            // Set the image resource based on the icon
             switch (type) {
                 case LastAdded:
-                    // TOOD: Replace with Last Added Icon
-                    holder.mImage.get().setImageResource(R.drawable.recent_icon);
+                    holder.mImage.get().setImageResource(R.drawable.recently_added);
                     break;
                 case TopTracks:
                 default:
@@ -103,10 +107,15 @@ public class PlaylistAdapter extends ArrayAdapter<Playlist> {
                     break;
             }
 
+            // set the special background color
             convertView.setBackgroundColor(getContext().getResources().
                     getColor(R.color.smart_playlist_item_background));
         } else {
-            holder.mImage.get().setImageResource(R.drawable.default_playlist);
+            // load the image
+            ImageFetcher.getInstance(getContext()).loadPlaylistCoverArtImage(
+                    dataHolder.mItemId, holder.mImage.get());
+
+            // clear the background color
             convertView.setBackgroundColor(Color.TRANSPARENT);
         }
 

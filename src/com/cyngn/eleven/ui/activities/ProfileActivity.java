@@ -40,6 +40,7 @@ import com.cyngn.eleven.ui.fragments.profile.ArtistSongFragment;
 import com.cyngn.eleven.ui.fragments.profile.GenreSongFragment;
 import com.cyngn.eleven.ui.fragments.profile.LastAddedFragment;
 import com.cyngn.eleven.utils.ApolloUtils;
+import com.cyngn.eleven.utils.ImageUtils;
 import com.cyngn.eleven.utils.MusicUtils;
 import com.cyngn.eleven.utils.NavUtils;
 import com.cyngn.eleven.utils.PreferenceUtils;
@@ -489,7 +490,7 @@ public class ProfileActivity extends SlidingPanelActivity implements OnPageChang
                         key = ImageFetcher.generateAlbumCacheKey(mProfileName, mArtistName);
                     }
 
-                    final Bitmap bitmap = ImageFetcher.decodeSampledBitmapFromFile(picturePath);
+                    final Bitmap bitmap = ImageUtils.decodeSampledBitmapFromFile(picturePath);
                     mImageFetcher.addBitmapToCache(key, bitmap);
                     if (isAlbum()) {
                         mTabCarousel.getAlbumArt().setImageBitmap(bitmap);

@@ -19,18 +19,16 @@ import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.TransitionDrawable;
-import android.os.AsyncTask;
-import android.support.v7.graphics.Palette;
-import android.support.v7.graphics.PaletteItem;
-import android.support.v8.renderscript.Allocation;
-import android.support.v8.renderscript.Element;
 import android.support.v8.renderscript.RenderScript;
-import android.support.v8.renderscript.ScriptIntrinsicBlur;
+import android.view.View;
 import android.widget.ImageView;
 
 import com.cyngn.eleven.R;
+import com.cyngn.eleven.provider.PlaylistArtworkStore;
 import com.cyngn.eleven.utils.ApolloUtils;
+import com.cyngn.eleven.utils.ImageUtils;
 import com.cyngn.eleven.widgets.BlurScrimImage;
+import com.cyngn.eleven.cache.PlaylistWorkerTask.PlaylistWorkerType;
 
 import java.lang.ref.WeakReference;
 import java.util.concurrent.RejectedExecutionException;
@@ -46,7 +44,7 @@ public abstract class ImageWorker {
     /**
      * Render script
      */
-    private static RenderScript sRenderScript = null;
+    public static RenderScript sRenderScript = null;
 
     /**
      * Default transition drawable fade time
@@ -183,6 +181,10 @@ public abstract class ImageWorker {
                 targetBitmap = mDefaultArtist;
                 break;
 
+            case PLAYLIST:
+                targetBitmap = mDefaultPlaylist;
+                break;
+
             case ALBUM:
             default:
                 targetBitmap = mDefault;
@@ -197,344 +199,38 @@ public abstract class ImageWorker {
         return bitmapDrawable;
     }
 
-    /**
-     * The actual {@link AsyncTask} that will process the image.
-     */
-    private class BitmapWorkerTask extends AsyncTask<String, Void, Object> {
+    public static Bitmap getBitmapInBackground(final Context context, final ImageCache imageCache,
+                                   final String key, final String albumName, final String artistName,
+                                   final long albumId, final ImageType imageType) {
+        // The result
+        Bitmap bitmap = null;
 
-        /**
-         * The {@link ImageView} used to set the result
-         */
-        private final WeakReference<ImageView> mImageReference;
-
-        /**
-         * Type of URL to download
-         */
-        private final ImageType mImageType;
-
-        /**
-         * The key used to store cached entries
-         */
-        private String mKey;
-
-        /**
-         * Artist name param
-         */
-        private String mArtistName;
-
-        /**
-         * Album name parm
-         */
-        private String mAlbumName;
-
-        /**
-         * The album ID used to find the corresponding artwork
-         */
-        private long mAlbumId;
-
-        /**
-         * The URL of an image to download
-         */
-        private String mUrl;
-
-        /**
-         * Layer drawable used to cross fade the result from the worker
-         */
-        protected Drawable mFromDrawable;
-
-        /**
-         * Constructor of <code>BitmapWorkerTask</code>
-         *
-         * @param imageView The {@link ImageView} to use.
-         * @param imageType The type of image URL to fetch for.
-         */
-        @SuppressWarnings("deprecation")
-        public BitmapWorkerTask(final ImageView imageView, final ImageType imageType) {
-            mImageReference = new WeakReference<ImageView>(imageView);
-            mImageType = imageType;
-
-            // A transparent image (layer 0) and the new result (layer 1)
-            mFromDrawable = mTransparentDrawable;
+        // First, check the disk cache for the image
+        if (key != null && imageCache != null) {
+            bitmap = imageCache.getCachedBitmap(key);
         }
 
-        protected Bitmap getBitmapInBackground(final String... params) {
-            // Define the key
-            mKey = params[0];
-
-            // The result
-            Bitmap bitmap = null;
-
-            // First, check the disk cache for the image
-            if (mKey != null && mImageCache != null && !isCancelled()
-                    && getAttachedImageView() != null) {
-                bitmap = mImageCache.getCachedBitmap(mKey);
-            }
-
-            // Define the album id now
-            mAlbumId = Long.valueOf(params[3]);
-
-            // Second, if we're fetching artwork, check the device for the image
-            if (bitmap == null && mImageType.equals(ImageType.ALBUM) && mAlbumId >= 0
-                    && mKey != null && !isCancelled() && getAttachedImageView() != null
-                    && mImageCache != null) {
-                bitmap = mImageCache.getCachedArtwork(mContext, mKey, mAlbumId);
-            }
-
-            // Third, by now we need to download the image
-            if (bitmap == null && ApolloUtils.isOnline(mContext) && !isCancelled()
-                    && getAttachedImageView() != null) {
-                // Now define what the artist name, album name, and url are.
-                mArtistName = params[1];
-                mAlbumName = params[2];
-                mUrl = processImageUrl(mArtistName, mAlbumName, mImageType);
-                if (mUrl != null) {
-                    bitmap = processBitmap(mUrl);
-                }
-            }
-
-            // Fourth, add the new image to the cache
-            if (bitmap != null && mKey != null && mImageCache != null) {
-                addBitmapToCache(mKey, bitmap);
-            }
-
-            return bitmap;
+        // Second, if we're fetching artwork, check the device for the image
+        if (bitmap == null && imageType.equals(ImageType.ALBUM) && albumId >= 0
+                && key != null && imageCache != null) {
+            bitmap = imageCache.getCachedArtwork(context, key, albumId);
         }
 
-        /**
-         * {@inheritDoc}
-         */
-        @Override
-        protected Object doInBackground(final String... params) {
-            final Bitmap bitmap = getBitmapInBackground(params);
-            return createImageTransitionDrawable(mResources, mFromDrawable, bitmap,
-                    FADE_IN_TIME, false, false);
-        }
-
-        /**
-         * {@inheritDoc}
-         */
-        @Override
-        protected void onPostExecute(Object result) {
-            if (isCancelled()) {
-                return;
-            }
-
-            TransitionDrawable transitionDrawable = (TransitionDrawable)result;
-
-            final ImageView imageView = getAttachedImageView();
-            if (transitionDrawable != null && imageView != null) {
-                imageView.setImageDrawable(transitionDrawable);
+        // Third, by now we need to download the image
+        if (bitmap == null && ApolloUtils.isOnline(context)) {
+            // Now define what the artist name, album name, and url are.
+            String url = ImageUtils.processImageUrl(context, artistName, albumName, imageType);
+            if (url != null) {
+                bitmap = ImageUtils.processBitmap(context, url);
             }
         }
 
-        /**
-         * @return The {@link ImageView} associated with this task as long as
-         *         the ImageView's task still points to this task as well.
-         *         Returns null otherwise.
-         */
-        protected ImageView getAttachedImageView() {
-            final ImageView imageView = mImageReference.get();
-            final BitmapWorkerTask bitmapWorkerTask = getBitmapWorkerTask(imageView);
-            if (this == bitmapWorkerTask) {
-                return imageView;
-            }
-            return null;
-        }
-    }
-
-    /**
-     * This will download the image (if needed) and create a blur and set the scrim as well on the
-     * BlurScrimImage
-     */
-    private class BlurBitmapWorkerTask extends BitmapWorkerTask {
-        // if the image is too small, the blur will look bad post scale up so we use the min size
-        // to scale up before bluring
-        private static final int MIN_BITMAP_SIZE = 500;
-        // number of times to run the blur
-        private static final int NUM_BLUR_RUNS = 8;
-        // 25f is the max blur radius possible
-        private static final float BLUR_RADIUS = 25f;
-
-        // container for the result
-        private class ResultContainer {
-            public TransitionDrawable mImageViewBitmapDrawable;
-            public int mPaletteColor;
+        // Fourth, add the new image to the cache
+        if (bitmap != null && key != null && imageCache != null) {
+            imageCache.addBitmapToCache(key, bitmap);
         }
 
-        /**
-         * The {@link BlurScrimImage} used to set the result
-         */
-        private final WeakReference<BlurScrimImage> mBlurScrimImage;
-
-        /**
-         * Constructor of <code>BitmapWorkerTask</code>
-         *
-         * @param blurScrimImage The {@link BlurScrimImage} to use.
-         * @param imageType The type of image URL to fetch for.
-         */
-        @SuppressWarnings("deprecation")
-        public BlurBitmapWorkerTask(final BlurScrimImage blurScrimImage, final ImageType imageType) {
-            super(blurScrimImage.getImageView(), imageType);
-            mBlurScrimImage = new WeakReference<BlurScrimImage>(blurScrimImage);
-
-            // use the existing image as the drawable and if it doesn't exist fallback to transparent
-            mFromDrawable = blurScrimImage.getImageView().getDrawable();
-            if (mFromDrawable == null) {
-                mFromDrawable = mTransparentDrawable;
-            }
-        }
-
-        /**
-         * {@inheritDoc}
-         */
-        @Override
-        protected Object doInBackground(final String... params) {
-            Bitmap bitmap = getBitmapInBackground(params);
-
-            ResultContainer result = new ResultContainer();
-
-            Bitmap output = null;
-
-            if (bitmap != null) {
-                // now create the blur bitmap
-                Bitmap input = bitmap;
-
-                // if the image is too small, scale it up before running through the blur
-                if (input.getWidth() < MIN_BITMAP_SIZE || input.getHeight() < MIN_BITMAP_SIZE) {
-                    float multiplier = Math.max(MIN_BITMAP_SIZE / (float)input.getWidth(),
-                            MIN_BITMAP_SIZE / (float)input.getHeight());
-                    input = input.createScaledBitmap(bitmap, (int)(input.getWidth() * multiplier),
-                            (int)(input.getHeight() * multiplier), true);
-                    // since we created a new bitmap, we can re-use the bitmap for our output
-                    output = input;
-                } else {
-                    // if we aren't creating a new bitmap, create a new output bitmap
-                    output = Bitmap.createBitmap(input.getWidth(), input.getHeight(), input.getConfig());
-                }
-
-                // run the blur multiple times
-                for (int i = 0; i < NUM_BLUR_RUNS; i++) {
-                    final Allocation inputAlloc = Allocation.createFromBitmap(sRenderScript, input);
-                    final Allocation outputAlloc = Allocation.createTyped(sRenderScript,
-                            inputAlloc.getType());
-                    final ScriptIntrinsicBlur script = ScriptIntrinsicBlur.create(sRenderScript,
-                            Element.U8_4(sRenderScript));
-
-                    script.setRadius(BLUR_RADIUS);
-                    script.setInput(inputAlloc);
-                    script.forEach(outputAlloc);
-                    outputAlloc.copyTo(output);
-
-                    // if we run more than 1 blur, the new input should be the old output
-                    input = output;
-                }
-
-                // calculate the palette color
-                result.mPaletteColor = getPaletteColorInBackground(output);
-
-                // create the bitmap transition drawable
-                result.mImageViewBitmapDrawable = createImageTransitionDrawable(mResources, mFromDrawable,
-                        output, FADE_IN_TIME_SLOW, true, true);
-
-                return result;
-            }
-
-            return null;
-        }
-
-        /**
-         * This will get the most vibrant palette color for a bitmap
-         * @param input to process
-         * @return the most vibrant color or transparent if none found
-         */
-        private int getPaletteColorInBackground(Bitmap input) {
-            int color = Color.TRANSPARENT;
-
-            if (input != null) {
-                Palette palette = Palette.generate(input);
-                PaletteItem paletteItem = palette.getVibrantColor();
-
-                // keep walking through the palette items to find a color if we don't have any
-                if (paletteItem == null) {
-                    paletteItem = palette.getVibrantColor();
-                }
-
-                if (paletteItem == null) {
-                    paletteItem = palette.getLightVibrantColor();
-                }
-
-                if (paletteItem == null) {
-                    paletteItem = palette.getLightMutedColor();
-                }
-
-                if (paletteItem == null) {
-                    paletteItem = palette.getLightMutedColor();
-                }
-
-                if (paletteItem == null) {
-                    paletteItem = palette.getDarkVibrantColor();
-                }
-
-                if (paletteItem == null) {
-                    paletteItem = palette.getMutedColor();
-                }
-
-                if (paletteItem == null) {
-                    paletteItem = palette.getDarkMutedColor();
-                }
-
-                if (paletteItem != null) {
-                    // grab the rgb values
-                    color = paletteItem.getRgb() | 0xFFFFFF;
-
-                    // make it 20% opacity
-                    color &= 0x33000000;
-                }
-            }
-
-            return color;
-        }
-
-        /**
-         * {@inheritDoc}
-         */
-        @Override
-        protected void onPostExecute(Object result) {
-            if (isCancelled()) {
-                return;
-            }
-
-            BlurScrimImage blurScrimImage = mBlurScrimImage.get();
-            if (blurScrimImage != null) {
-                if (result == null) {
-                    // if we have no image, then signal the transition to the default state
-                    blurScrimImage.transitionToDefaultState();
-                } else {
-                    ResultContainer resultContainer = (ResultContainer)result;
-
-                    // create the palette transition
-                    TransitionDrawable paletteTransition = createPaletteTransition(blurScrimImage,
-                            resultContainer.mPaletteColor);
-
-                    // set the transition drawable
-                    blurScrimImage.setTransitionDrawable(false,
-                            resultContainer.mImageViewBitmapDrawable, paletteTransition);
-                }
-            }
-        }
-
-        /**
-         * {@inheritDoc}
-         */
-        @Override
-        protected final ImageView getAttachedImageView() {
-            final BlurScrimImage blurImage  = mBlurScrimImage.get();
-            final BitmapWorkerTask bitmapWorkerTask = getBitmapWorkerTask(blurImage);
-            if (this == bitmapWorkerTask) {
-                return blurImage.getImageView();
-            }
-            return null;
-        }
+        return bitmap;
     }
 
     /**
@@ -601,14 +297,20 @@ public abstract class ImageWorker {
     }
 
     /**
-     * Calls {@code cancel()} in the worker task
-     *
-     * @param imageView the {@link ImageView} to use
+     * Cancels and clears out any pending bitmap worker tasks on this image view
+     * @param image ImageView to check
      */
-    public static final void cancelWork(final ImageView imageView) {
-        final BitmapWorkerTask bitmapWorkerTask = getBitmapWorkerTask(imageView);
-        if (bitmapWorkerTask != null) {
-            bitmapWorkerTask.cancel(true);
+    public static final void cancelWork(final ImageView image) {
+        Object tag = image.getTag();
+        if (tag != null && tag instanceof AsyncTaskContainer) {
+            AsyncTaskContainer asyncTaskContainer = (AsyncTaskContainer)tag;
+            BitmapWorkerTask bitmapWorkerTask = asyncTaskContainer.getBitmapWorkerTask();
+            if (bitmapWorkerTask != null) {
+                bitmapWorkerTask.cancel(false);
+            }
+
+            // clear out the tag
+            image.setTag(null);
         }
     }
 
@@ -617,18 +319,8 @@ public abstract class ImageWorker {
      * work in progress on this image view. Returns false if the work in
      * progress deals with the same data. The work is not stopped in that case.
      */
-    public static final boolean executePotentialWork(final Object data, final ImageView imageView) {
-        final BitmapWorkerTask bitmapWorkerTask = getBitmapWorkerTask(imageView);
-        return executePotentialWork(data, bitmapWorkerTask);
-    }
-
-    /**
-     * Returns true if the current work has been canceled or if there was no
-     * work in progress on this image view. Returns false if the work in
-     * progress deals with the same data. The work is not stopped in that case.
-     */
-    public static final boolean executePotentialWork(final Object data, final BlurScrimImage image) {
-        final BitmapWorkerTask bitmapWorkerTask = getBitmapWorkerTask(image);
+    public static final boolean executePotentialWork(final Object data, final View view) {
+        final BitmapWorkerTask bitmapWorkerTask = getBitmapWorkerTask(view);
         return executePotentialWork(data, bitmapWorkerTask);
     }
 
@@ -655,34 +347,16 @@ public abstract class ImageWorker {
      * Used to determine if the current image drawable has an instance of
      * {@link BitmapWorkerTask}
      *
-     * @param imageView Any {@link ImageView}.
+     * @param view Any {@link View} that either is or contains an ImageView.
      * @return Retrieve the currently active work task (if any) associated with
-     *         this {@link ImageView}. null if there is no such task.
+     *         this {@link View}. null if there is no such task.
      */
-    private static final BitmapWorkerTask getBitmapWorkerTask(final ImageView imageView) {
-        if (imageView != null) {
-            final Drawable drawable = imageView.getDrawable();
-            if (drawable instanceof AsyncDrawable) {
-                final AsyncDrawable asyncDrawable = (AsyncDrawable)drawable;
-                return asyncDrawable.getBitmapWorkerTask();
-            }
-        }
-        return null;
-    }
-
-    /**
-     * Used to determine if the current image drawable has an instance of
-     * {@link BitmapWorkerTask}
-     *
-     * @param image Any {@link BlurScrimImage}.
-     * @return Retrieve the currently active work task (if any) associated with
-     *         this {@link BlurScrimImage}. null if there is no such task.
-     */
-    private static final BitmapWorkerTask getBitmapWorkerTask(final BlurScrimImage image) {
-        if (image != null) {
-            final AsyncDrawable asyncDrawable = (AsyncDrawable)image.getTag();
-            if (asyncDrawable != null) {
-                return asyncDrawable.getBitmapWorkerTask();
+    public static final BitmapWorkerTask getBitmapWorkerTask(final View view) {
+        if (view != null) {
+            final Object tag = view.getTag();
+            if (tag instanceof AsyncTaskContainer) {
+                final AsyncTaskContainer asyncTaskContainer = (AsyncTaskContainer)tag;
+                return asyncTaskContainer.getBitmapWorkerTask();
             }
         }
         return null;
@@ -690,21 +364,19 @@ public abstract class ImageWorker {
 
     /**
      * A custom {@link BitmapDrawable} that will be attached to the
-     * {@link ImageView} while the work is in progress. Contains a reference to
-     * the actual worker task, so that it can be stopped if a new binding is
+     * {@link View} which either is or contains an {@link ImageView} while the work is in progress.
+     * Contains a reference to the actual worker task, so that it can be stopped if a new binding is
      * required, and makes sure that only the last started worker process can
      * bind its result, independently of the finish order.
      */
-    private static final class AsyncDrawable extends ColorDrawable {
+    public static final class AsyncTaskContainer {
 
         private final WeakReference<BitmapWorkerTask> mBitmapWorkerTaskReference;
 
         /**
          * Constructor of <code>AsyncDrawable</code>
          */
-        public AsyncDrawable(final Resources res, final Bitmap bitmap,
-                final BitmapWorkerTask mBitmapWorkerTask) {
-            super(Color.TRANSPARENT);
+        public AsyncTaskContainer(final BitmapWorkerTask mBitmapWorkerTask) {
             mBitmapWorkerTaskReference = new WeakReference<BitmapWorkerTask>(mBitmapWorkerTask);
         }
 
@@ -717,7 +389,7 @@ public abstract class ImageWorker {
     }
 
     /**
-     * Called to fetch the artist or ablum art.
+     * Called to fetch the artist or album art.
      *
      * @param key The unique identifier for the image.
      * @param artistName The artist name for the Last.fm API.
@@ -748,26 +420,74 @@ public abstract class ImageWorker {
             if (executePotentialWork(key, imageView)
                     && imageView != null && !mImageCache.isDiskCachePaused()) {
                 // cancel the old task if any
-                final Drawable previousDrawable = imageView.getDrawable();
-                if (previousDrawable != null && previousDrawable instanceof AsyncDrawable) {
-                    BitmapWorkerTask workerTask = ((AsyncDrawable)previousDrawable).getBitmapWorkerTask();
-                    if (workerTask != null) {
-                        workerTask.cancel(false);
-                    }
-                }
+                cancelWork(imageView);
 
                 // Otherwise run the worker task
-                final BitmapWorkerTask bitmapWorkerTask = new BitmapWorkerTask(imageView, imageType);
-                final AsyncDrawable asyncDrawable = new AsyncDrawable(mResources, mDefault,
-                        bitmapWorkerTask);
-                imageView.setImageDrawable(asyncDrawable);
+                final SimpleBitmapWorkerTask bitmapWorkerTask = new SimpleBitmapWorkerTask(key,
+                        imageView, imageType, mTransparentDrawable, mContext);
+                final AsyncTaskContainer asyncTaskContainer = new AsyncTaskContainer(bitmapWorkerTask);
+                imageView.setTag(asyncTaskContainer);
                 try {
-                    ApolloUtils.execute(false, bitmapWorkerTask, key,
+                    ApolloUtils.execute(false, bitmapWorkerTask,
                             artistName, albumName, String.valueOf(albumId));
                 } catch (RejectedExecutionException e) {
-                    // Executor has exhausted queue space, show default artwork
-                    imageView.setImageBitmap(getDefaultArtwork());
+                    // Executor has exhausted queue space
                 }
+            }
+        }
+    }
+
+    /**
+     * Called to fetch a playlist's top artist or cover art
+     * @param playlistId playlist identifier
+     * @param type of work to get (Artist or CoverArt)
+     * @param imageView to set the image to
+     */
+    public void loadPlaylistImage(final long playlistId, final PlaylistWorkerType type,
+                                  final ImageView imageView) {
+        if (mImageCache == null || imageView == null) {
+            return;
+        }
+
+        String key = null;
+        switch (type) {
+            case Artist:
+                key = PlaylistArtworkStore.getArtistCacheKey(playlistId);
+                break;
+            case CoverArt:
+                key = PlaylistArtworkStore.getCoverCacheKey(playlistId);
+                break;
+        }
+
+        // First, check the memory for the image
+        final Bitmap lruBitmap = mImageCache.getBitmapFromMemCache(key);
+        if (lruBitmap != null) {
+            // Bitmap found in memory cache
+            imageView.setImageBitmap(lruBitmap);
+        } else {
+            // if a background drawable hasn't been set, create one so that even if
+            // the disk cache is paused we see something
+            if (imageView.getBackground() == null) {
+                imageView.setBackgroundDrawable(getNewDefaultBitmapDrawable(ImageType.PLAYLIST));
+            }
+        }
+
+        // even though we may have found the image in the cache, we want to check if the playlist
+        // has been updated, or it's been too long since the last update and change the image
+        // accordingly
+        if (executePotentialWork(key, imageView) && !mImageCache.isDiskCachePaused()) {
+            // cancel the old task if any
+            cancelWork(imageView);
+
+            // Otherwise run the worker task
+            final PlaylistWorkerTask bitmapWorkerTask = new PlaylistWorkerTask(key, playlistId, type,
+                    lruBitmap != null, imageView, mTransparentDrawable, mContext);
+            final AsyncTaskContainer asyncTaskContainer = new AsyncTaskContainer(bitmapWorkerTask);
+            imageView.setTag(asyncTaskContainer);
+            try {
+                ApolloUtils.execute(false, bitmapWorkerTask);
+            } catch (RejectedExecutionException e) {
+                // Executor has exhausted queue space
             }
         }
     }
@@ -795,7 +515,7 @@ public abstract class ImageWorker {
         if (executePotentialWork(blurKey, blurScrimImage)
                 && blurScrimImage != null && !mImageCache.isDiskCachePaused()) {
             // cancel the old task if any
-            final AsyncDrawable previousDrawable = (AsyncDrawable)blurScrimImage.getTag();
+            final AsyncTaskContainer previousDrawable = (AsyncTaskContainer)blurScrimImage.getTag();
             if (previousDrawable != null) {
                 BitmapWorkerTask workerTask = previousDrawable.getBitmapWorkerTask();
                 if (workerTask != null) {
@@ -804,14 +524,13 @@ public abstract class ImageWorker {
             }
 
             // Otherwise run the worker task
-            final BlurBitmapWorkerTask blurWorkerTask = new BlurBitmapWorkerTask(blurScrimImage, imageType);
-            final AsyncDrawable asyncDrawable = new AsyncDrawable(mResources, mDefault,
-                    blurWorkerTask);
-            blurScrimImage.setTag(asyncDrawable);
+            final BlurBitmapWorkerTask blurWorkerTask = new BlurBitmapWorkerTask(key, blurScrimImage,
+                    imageType, mTransparentDrawable, mContext, sRenderScript);
+            final AsyncTaskContainer asyncTaskContainer = new AsyncTaskContainer(blurWorkerTask);
+            blurScrimImage.setTag(asyncTaskContainer);
 
             try {
-                ApolloUtils.execute(false, blurWorkerTask, key,
-                        artistName, albumName, String.valueOf(albumId));
+                ApolloUtils.execute(false, blurWorkerTask, artistName, albumName, String.valueOf(albumId));
             } catch (RejectedExecutionException e) {
                 // Executor has exhausted queue space, show default artwork
                 blurScrimImage.transitionToDefaultState();
@@ -820,33 +539,9 @@ public abstract class ImageWorker {
     }
 
     /**
-     * Subclasses should override this to define any processing or work that
-     * must happen to produce the final {@link Bitmap}. This will be executed in
-     * a background thread and be long running.
-     *
-     * @param key The key to identify which image to process, as provided by
-     *            {@link ImageWorker#loadImage(mKey, ImageView)}
-     * @return The processed {@link Bitmap}.
-     */
-    protected abstract Bitmap processBitmap(String key);
-
-    /**
-     * Subclasses should override this to define any processing or work that
-     * must happen to produce the URL needed to fetch the final {@link Bitmap}.
-     *
-     * @param artistName The artist name param used in the Last.fm API.
-     * @param albumName The album name param used in the Last.fm API.
-     * @param imageType The type of image URL to fetch for.
-     * @return The image URL for an artist image or album image.
-     */
-    protected abstract String processImageUrl(String artistName, String albumName,
-            ImageType imageType);
-
-    /**
      * Used to define what type of image URL to fetch for, artist or album.
      */
     public enum ImageType {
-        ARTIST, ALBUM;
+        ARTIST, ALBUM, PLAYLIST;
     }
-
 }

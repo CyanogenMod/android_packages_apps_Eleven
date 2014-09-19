@@ -54,11 +54,11 @@ public class TopTracksLoader extends SongLoader {
 
             selection.append(")");
 
-            // get a list of songs with the data given the selection statemtn
+            // get a list of songs with the data given the selection statment
             Cursor songCursor = makeSongCursor(context, selection.toString());
             if (songCursor != null) {
                 // now return the wrapped TopTracksCursor to handle sorting given order
-                return new TopTracksCursor(songCursor, order);
+                return new SortedCursor(songCursor, order, BaseColumns._ID);
             }
         }
 

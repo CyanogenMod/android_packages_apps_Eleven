@@ -14,6 +14,7 @@ package com.cyngn.eleven.recycler;
 import android.view.View;
 import android.widget.AbsListView.RecyclerListener;
 
+import com.cyngn.eleven.cache.ImageWorker;
 import com.cyngn.eleven.ui.MusicHolder;
 
 /**
@@ -42,6 +43,7 @@ public class RecycleHolder implements RecyclerListener {
 
         // Release mImage's reference
         if (holder.mImage.get() != null) {
+            ImageWorker.cancelWork(holder.mImage.get());
             holder.mImage.get().setImageDrawable(null);
             holder.mImage.get().setImageBitmap(null);
         }

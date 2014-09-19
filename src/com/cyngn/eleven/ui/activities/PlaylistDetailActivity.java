@@ -22,6 +22,7 @@ import android.widget.TextView;
 import com.cyngn.eleven.Config;
 import com.cyngn.eleven.R;
 import com.cyngn.eleven.adapters.ProfileSongAdapter;
+import com.cyngn.eleven.cache.ImageFetcher;
 import com.cyngn.eleven.dragdrop.DragSortListView;
 import com.cyngn.eleven.dragdrop.DragSortListView.DragScrollProfile;
 import com.cyngn.eleven.dragdrop.DragSortListView.DropListener;
@@ -116,8 +117,7 @@ public class PlaylistDetailActivity extends DetailActivity implements
         mNumberOfSongs = (TextView)findViewById(R.id.number_of_songs_text);
         mDurationOfPlaylist = (TextView)findViewById(R.id.duration_text);
 
-        // TODO: Get the top artist image - do this in the next patch
-        // ImageFetcher.getInstance(this).loadCurrentArtwork(mPlaylistImageView);
+        ImageFetcher.getInstance(this).loadPlaylistArtistImage(mPlaylistId, mPlaylistImageView);
     }
 
     private void setupSongList(ViewGroup root) {

@@ -13,41 +13,18 @@ package com.cyngn.eleven.cache;
 
 import android.content.Context;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.text.TextUtils;
 import android.widget.ImageView;
 
 import com.cyngn.eleven.Config;
 import com.cyngn.eleven.MusicPlaybackService;
-import com.cyngn.eleven.lastfm.Album;
-import com.cyngn.eleven.lastfm.Artist;
-import com.cyngn.eleven.lastfm.MusicEntry;
-import com.cyngn.eleven.lastfm.ImageSize;
+import com.cyngn.eleven.cache.PlaylistWorkerTask.PlaylistWorkerType;
 import com.cyngn.eleven.utils.MusicUtils;
-import com.cyngn.eleven.utils.PreferenceUtils;
 import com.cyngn.eleven.widgets.BlurScrimImage;
-
-import java.io.BufferedInputStream;
-import java.io.BufferedOutputStream;
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.net.HttpURLConnection;
-import java.net.URL;
 
 /**
  * A subclass of {@link ImageWorker} that fetches images from a URL.
  */
 public class ImageFetcher extends ImageWorker {
-
-    public static final int IO_BUFFER_SIZE_BYTES = 1024;
-
-    private static final int DEFAULT_MAX_IMAGE_HEIGHT = 1024;
-
-    private static final int DEFAULT_MAX_IMAGE_WIDTH = 1024;
-
-    private static final String DEFAULT_HTTP_CACHE_DIR = "http"; //$NON-NLS-1$
 
     private static ImageFetcher sInstance = null;
 
@@ -74,79 +51,28 @@ public class ImageFetcher extends ImageWorker {
     }
 
     /**
-     * {@inheritDoc}
+     * Loads a playlist's most played song's artist image
+     * @param playlistId id of the playlist
+     * @param imageView imageview to load into
      */
-    @Override
-    protected Bitmap processBitmap(final String url) {
-        if (url == null) {
-            return null;
-        }
-        final File file = downloadBitmapToFile(mContext, url, DEFAULT_HTTP_CACHE_DIR);
-        if (file != null) {
-            // Return a sampled down version
-            final Bitmap bitmap = decodeSampledBitmapFromFile(file.toString());
-            file.delete();
-            if (bitmap != null) {
-                return bitmap;
-            }
-        }
-        return null;
-    }
-
-    private static String getBestImage(MusicEntry e) {
-        final ImageSize[] QUALITY = {ImageSize.EXTRALARGE, ImageSize.LARGE, ImageSize.MEDIUM,
-                ImageSize.SMALL, ImageSize.UNKNOWN};
-        for(ImageSize q : QUALITY) {
-            String url = e.getImageURL(q);
-            if (url != null) {
-                return url;
-            }
-        }
-        return null;
+    public void loadPlaylistArtistImage(final long playlistId, final ImageView imageView) {
+        loadPlaylistImage(playlistId, PlaylistWorkerType.Artist, imageView);
     }
 
     /**
-     * {@inheritDoc}
+     * Loads a playlist's most played songs into a combined image, or show 1 if not enough images
+     * @param playlistId id of the playlist
+     * @param imageView imageview to load into
      */
-    @Override
-    protected String processImageUrl(final String artistName, final String albumName,
-            final ImageType imageType) {
-        switch (imageType) {
-            case ARTIST:
-                if (!TextUtils.isEmpty(artistName)) {
-                    if (PreferenceUtils.getInstance(mContext).downloadMissingArtistImages()) {
-                        final Artist artist = Artist.getInfo(mContext, artistName);
-                        if (artist != null) {
-                            return getBestImage(artist);
-                        }
-                    }
-                }
-                break;
-            case ALBUM:
-                if (!TextUtils.isEmpty(artistName) && !TextUtils.isEmpty(albumName)) {
-                    if (PreferenceUtils.getInstance(mContext).downloadMissingArtwork()) {
-                        final Artist correction = Artist.getCorrection(mContext, artistName);
-                        if (correction != null) {
-                            final Album album = Album.getInfo(mContext, correction.getName(),
-                                    albumName);
-                            if (album != null) {
-                                return getBestImage(album);
-                            }
-                        }
-                    }
-                }
-                break;
-            default:
-                break;
-        }
-        return null;
+    public void loadPlaylistCoverArtImage(final long playlistId, final ImageView imageView) {
+        loadPlaylistImage(playlistId, PlaylistWorkerType.CoverArt, imageView);
     }
 
     /**
      * Used to fetch album images.
      */
     public void loadAlbumImage(final String artistName, final String albumName, final long albumId,
-            final ImageView imageView) {
+                               final ImageView imageView) {
         loadImage(generateAlbumCacheKey(albumName, artistName), artistName, albumName, albumId, imageView,
                 ImageType.ALBUM);
     }
@@ -222,7 +148,7 @@ public class ImageFetcher extends ImageWorker {
     }
 
     /**
-     * @param keyAlbum The key (album name) used to find the album art to return
+     * @param keyAlbum  The key (album name) used to find the album art to return
      * @param keyArtist The key (artist name) used to find the album art to return
      */
     public Bitmap getCachedArtwork(final String keyAlbum, final String keyArtist) {
@@ -231,12 +157,12 @@ public class ImageFetcher extends ImageWorker {
     }
 
     /**
-     * @param keyAlbum The key (album name) used to find the album art to return
+     * @param keyAlbum  The key (album name) used to find the album art to return
      * @param keyArtist The key (artist name) used to find the album art to return
-     * @param keyId The key (album id) used to find the album art to return
+     * @param keyId     The key (album id) used to find the album art to return
      */
     public Bitmap getCachedArtwork(final String keyAlbum, final String keyArtist,
-            final long keyId) {
+                                   final long keyId) {
         if (mImageCache != null) {
             return mImageCache.getCachedArtwork(mContext,
                     generateAlbumCacheKey(keyAlbum, keyArtist),
@@ -249,10 +175,10 @@ public class ImageFetcher extends ImageWorker {
      * Finds cached or downloads album art. Used in {@link MusicPlaybackService}
      * to set the current album art in the notification and lock screen
      *
-     * @param albumName The name of the current album
-     * @param albumId The ID of the current album
+     * @param albumName  The name of the current album
+     * @param albumId    The ID of the current album
      * @param artistName The album artist in case we should have to download
-     *            missing artwork
+     *                   missing artwork
      * @return The album art as an {@link Bitmap}
      */
     public Bitmap getArtwork(final String albumName, final long albumId, final String artistName) {
@@ -274,139 +200,11 @@ public class ImageFetcher extends ImageWorker {
     }
 
     /**
-     * Download a {@link Bitmap} from a URL, write it to a disk and return the
-     * File pointer. This implementation uses a simple disk cache.
-     *
-     * @param context The context to use
-     * @param urlString The URL to fetch
-     * @return A {@link File} pointing to the fetched bitmap
-     */
-    public static final File downloadBitmapToFile(final Context context, final String urlString,
-            final String uniqueName) {
-        final File cacheDir = ImageCache.getDiskCacheDir(context, uniqueName);
-
-        if (!cacheDir.exists()) {
-            cacheDir.mkdir();
-        }
-
-        HttpURLConnection urlConnection = null;
-        BufferedOutputStream out = null;
-
-        try {
-            final File tempFile = File.createTempFile("bitmap", null, cacheDir); //$NON-NLS-1$
-
-            final URL url = new URL(urlString);
-            urlConnection = (HttpURLConnection)url.openConnection();
-            if (urlConnection.getResponseCode() != HttpURLConnection.HTTP_OK) {
-                return null;
-            }
-            final InputStream in = new BufferedInputStream(urlConnection.getInputStream(),
-                    IO_BUFFER_SIZE_BYTES);
-            out = new BufferedOutputStream(new FileOutputStream(tempFile), IO_BUFFER_SIZE_BYTES);
-
-            int oneByte;
-            while ((oneByte = in.read()) != -1) {
-                out.write(oneByte);
-            }
-            return tempFile;
-        } catch (final IOException ignored) {
-        } finally {
-            if (urlConnection != null) {
-                urlConnection.disconnect();
-            }
-            if (out != null) {
-                try {
-                    out.close();
-                } catch (final IOException ignored) {
-                }
-            }
-        }
-        return null;
-    }
-
-    /**
-     * Decode and sample down a {@link Bitmap} from a file to the requested
-     * width and height.
-     *
-     * @param filename The full path of the file to decode
-     * @param reqWidth The requested width of the resulting bitmap
-     * @param reqHeight The requested height of the resulting bitmap
-     * @return A {@link Bitmap} sampled down from the original with the same
-     *         aspect ratio and dimensions that are equal to or greater than the
-     *         requested width and height
-     */
-    public static Bitmap decodeSampledBitmapFromFile(final String filename) {
-
-        // First decode with inJustDecodeBounds=true to check dimensions
-        final BitmapFactory.Options options = new BitmapFactory.Options();
-        options.inJustDecodeBounds = true;
-        BitmapFactory.decodeFile(filename, options);
-
-        // Calculate inSampleSize
-        options.inSampleSize = calculateInSampleSize(options, DEFAULT_MAX_IMAGE_WIDTH,
-                DEFAULT_MAX_IMAGE_HEIGHT);
-
-        // Decode bitmap with inSampleSize set
-        options.inJustDecodeBounds = false;
-        return BitmapFactory.decodeFile(filename, options);
-    }
-
-    /**
-     * Calculate an inSampleSize for use in a
-     * {@link android.graphics.BitmapFactory.Options} object when decoding
-     * bitmaps using the decode* methods from {@link BitmapFactory}. This
-     * implementation calculates the closest inSampleSize that will result in
-     * the final decoded bitmap having a width and height equal to or larger
-     * than the requested width and height. This implementation does not ensure
-     * a power of 2 is returned for inSampleSize which can be faster when
-     * decoding but results in a larger bitmap which isn't as useful for caching
-     * purposes.
-     *
-     * @param options An options object with out* params already populated (run
-     *            through a decode* method with inJustDecodeBounds==true
-     * @param reqWidth The requested width of the resulting bitmap
-     * @param reqHeight The requested height of the resulting bitmap
-     * @return The value to be used for inSampleSize
-     */
-    public static final int calculateInSampleSize(final BitmapFactory.Options options,
-            final int reqWidth, final int reqHeight) {
-        /* Raw height and width of image */
-        final int height = options.outHeight;
-        final int width = options.outWidth;
-        int inSampleSize = 1;
-
-        if (height > reqHeight || width > reqWidth) {
-            if (width > height) {
-                inSampleSize = Math.round((float)height / (float)reqHeight);
-            } else {
-                inSampleSize = Math.round((float)width / (float)reqWidth);
-            }
-
-            // This offers some additional logic in case the image has a strange
-            // aspect ratio. For example, a panorama may have a much larger
-            // width than height. In these cases the total pixels might still
-            // end up being too large to fit comfortably in memory, so we should
-            // be more aggressive with sample down the image (=larger
-            // inSampleSize).
-
-            final float totalPixels = width * height;
-
-            /* More than 2x the requested pixels we'll sample down further */
-            final float totalReqPixelsCap = reqWidth * reqHeight * 2;
-
-            while (totalPixels / (inSampleSize * inSampleSize) > totalReqPixelsCap) {
-                inSampleSize++;
-            }
-        }
-        return inSampleSize;
-    }
-
-    /**
      * Generates key used by album art cache. It needs both album name and artist name
      * to let to select correct image for the case when there are two albums with the
      * same artist.
      *
-     * @param albumName The album name the cache key needs to be generated.
+     * @param albumName  The album name the cache key needs to be generated.
      * @param artistName The artist name the cache key needs to be generated.
      * @return
      */

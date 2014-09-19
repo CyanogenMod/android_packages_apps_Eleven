@@ -5,7 +5,6 @@ package com.cyngn.eleven.loaders;
 
 import android.database.AbstractCursor;
 import android.database.Cursor;
-import android.provider.BaseColumns;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -15,7 +14,7 @@ import java.util.HashMap;
  * contents of the cursor. It wraps the Cursor and simulates the internal cursor being sorted
  * by moving the point to the appropriate spot
  */
-public class TopTracksCursor extends AbstractCursor {
+public class SortedCursor extends AbstractCursor {
     // cursor to wrap
     private final Cursor mCursor;
     // the map of external indices to internal indices
@@ -24,14 +23,15 @@ public class TopTracksCursor extends AbstractCursor {
     /**
      * @param cursor to wrap
      * @param order the list of ids in sorted order to display
+     * @param columnName the column name of the id to look up in the internal cursor
      */
-    public TopTracksCursor(final Cursor cursor, final long[] order) {
+    public SortedCursor(final Cursor cursor, final long[] order, final String columnName) {
         if (cursor == null) {
             throw new IllegalArgumentException("Non-null cursor is needed");
         }
 
         mCursor = cursor;
-        buildCursorPositionMapping(order);
+        buildCursorPositionMapping(order, columnName);
     }
 
     /**
@@ -39,11 +39,11 @@ public class TopTracksCursor extends AbstractCursor {
      * on the order passed in
      * @param order the target order of the internal cursor
      */
-    private void buildCursorPositionMapping(final long[] order) {
+    private void buildCursorPositionMapping(final long[] order, final String columnName) {
         mOrderedPositions = new ArrayList<Integer>(mCursor.getCount());
 
         HashMap<Long, Integer> mapCursorPositions = new HashMap<Long, Integer>(mCursor.getCount());
-        final int idPosition = mCursor.getColumnIndex(BaseColumns._ID);
+        final int idPosition = mCursor.getColumnIndex(columnName);
 
         if (mCursor.moveToFirst()) {
             // first figure out where each of the ids are in the cursor
@@ -59,6 +59,13 @@ public class TopTracksCursor extends AbstractCursor {
                 }
             }
         }
+    }
+
+    @Override
+    public void close() {
+        mCursor.close();
+
+        super.close();
     }
 
     @Override
