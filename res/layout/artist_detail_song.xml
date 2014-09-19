@@ -29,7 +29,8 @@
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_toLeftOf="@id/overflow"
-        android:layout_toRightOf="@id/album_art" />
+        android:layout_toRightOf="@id/album_art"
+        android:layout_marginTop="16dp" />
 
     <TextView
         android:id="@+id/album"

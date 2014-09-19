@@ -15,7 +15,7 @@
      limitations under the License.
 -->
 <inset xmlns:android="http://schemas.android.com/apk/res/android"
-       android:insetLeft="@dimen/list_preferred_item_padding"
+       android:insetLeft="@dimen/drag_and_drop_width"
        android:insetRight="@dimen/list_preferred_item_padding" >
 
     <shape>

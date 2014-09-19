@@ -18,6 +18,8 @@
     android:id="@+id/header"
     android:layout_width="match_parent"
     android:layout_height="@dimen/list_item_header_height"
+    android:paddingLeft="@dimen/list_preferred_item_padding"
+    android:paddingRight="@dimen/list_preferred_item_padding"
     android:background="@null"
     android:gravity="center_vertical"
     android:textColor="@color/list_item_header_text_color"

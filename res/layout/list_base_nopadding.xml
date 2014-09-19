@@ -31,5 +31,5 @@
         android:fadingEdge="vertical"
         android:fastScrollEnabled="true"
         android:dividerHeight="1dp"
-        android:divider="@drawable/inset_list_divider"/>
+        android:divider="@drawable/dnd_list_divider"/>
 </FrameLayout>

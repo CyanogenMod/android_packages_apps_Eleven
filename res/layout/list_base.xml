@@ -17,9 +17,7 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/list_base_container"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:paddingLeft="@dimen/list_preferred_item_padding"
-    android:paddingRight="@dimen/list_preferred_item_padding">
+    android:layout_height="match_parent">
 
     <include
         layout="@layout/no_results_message" />
@@ -31,5 +29,7 @@
         android:cacheColorHint="@color/transparent"
         android:drawSelectorOnTop="false"
         android:fadingEdge="vertical"
-        android:fastScrollEnabled="true" />
+        android:fastScrollEnabled="true"
+        android:dividerHeight="1dp"
+        android:divider="@drawable/inset_list_divider" />
 </FrameLayout>
