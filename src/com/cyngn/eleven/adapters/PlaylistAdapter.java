@@ -101,6 +101,9 @@ public class PlaylistAdapter extends ArrayAdapter<Playlist> {
                 case LastAdded:
                     holder.mImage.get().setImageResource(R.drawable.recently_added);
                     break;
+                case RecentlyPlayed:
+                    holder.mImage.get().setImageResource(R.drawable.recent_icon);
+                    break;
                 case TopTracks:
                 default:
                     holder.mImage.get().setImageResource(R.drawable.top_tracks_icon);

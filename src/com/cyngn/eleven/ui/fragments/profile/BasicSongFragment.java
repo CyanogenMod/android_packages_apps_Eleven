@@ -276,6 +276,9 @@ public abstract class BasicSongFragment extends Fragment implements LoaderCallba
         if (data.isEmpty()) {
             // Set the empty text
             final NoResultsContainer empty = (NoResultsContainer)mRootView.findViewById(R.id.no_results_container);
+            // Setup the container strings
+            setupNoResultsContainer(empty);
+            // set the empty view into the list view
             mListView.setEmptyView(empty);
             return;
         }
@@ -305,7 +308,7 @@ public abstract class BasicSongFragment extends Fragment implements LoaderCallba
     }
 
     /**
-     * If the subclasses want to use a customized SongADapter
+     * If the subclasses want to use a customized SongAdapter
      * @return the Song adapter
      */
     protected SongAdapter createAdapter() {

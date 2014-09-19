@@ -10,6 +10,7 @@ import android.view.MenuItem;
 
 import com.cyngn.eleven.Config;
 import com.cyngn.eleven.R;
+import com.cyngn.eleven.ui.fragments.RecentFragment;
 import com.cyngn.eleven.ui.fragments.profile.LastAddedFragment;
 import com.cyngn.eleven.ui.fragments.profile.TopTracksFragment;
 
@@ -28,6 +29,12 @@ public class SmartPlaylistDetailActivity extends SlidingPanelActivity {
                             .replace(R.id.activity_base_content, new LastAddedFragment()).commit();
 
                     setupActionBar(R.string.playlist_last_added);
+                    break;
+                case RecentlyPlayed:
+                    getSupportFragmentManager().beginTransaction()
+                            .replace(R.id.activity_base_content, new RecentFragment()).commit();
+
+                    setupActionBar(R.string.playlist_recently_played);
                     break;
                 case TopTracks:
                     getSupportFragmentManager().beginTransaction()

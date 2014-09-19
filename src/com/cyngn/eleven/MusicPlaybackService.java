@@ -1361,9 +1361,7 @@ public class MusicPlaybackService extends Service {
 
         if (what.equals(META_CHANGED)) {
             // Add the track to the recently played list.
-            mRecentsCache.addAlbumId(getAlbumId(), getAlbumName(), getArtistName(),
-                    MusicUtils.getSongCountForAlbum(this, getAlbumId()),
-                    MusicUtils.getReleaseDateForAlbum(this, getAlbumId()));
+            mRecentsCache.addSongId(getAudioId());
 
             mSongPlayCountCache.bumpSongCount(getAudioId());
         } else if (what.equals(QUEUE_CHANGED)) {

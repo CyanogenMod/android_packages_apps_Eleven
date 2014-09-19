@@ -19,6 +19,8 @@ public class SortedCursor extends AbstractCursor {
     private final Cursor mCursor;
     // the map of external indices to internal indices
     private ArrayList<Integer> mOrderedPositions;
+    // this contains the ids that weren't found in the underlying cursor
+    private ArrayList<Long> mMissingIds;
 
     /**
      * @param cursor to wrap
@@ -31,15 +33,18 @@ public class SortedCursor extends AbstractCursor {
         }
 
         mCursor = cursor;
-        buildCursorPositionMapping(order, columnName);
+        mMissingIds = buildCursorPositionMapping(order, columnName);
     }
 
     /**
      * This function populates mOrderedPositions with the cursor positions in the order based
      * on the order passed in
      * @param order the target order of the internal cursor
+     * @return returns the ids that aren't found in the underlying cursor
      */
-    private void buildCursorPositionMapping(final long[] order, final String columnName) {
+    private ArrayList<Long> buildCursorPositionMapping(final long[] order, final String columnName) {
+        ArrayList<Long> missingIds = new ArrayList<Long>();
+
         mOrderedPositions = new ArrayList<Integer>(mCursor.getCount());
 
         HashMap<Long, Integer> mapCursorPositions = new HashMap<Long, Integer>(mCursor.getCount());
@@ -56,9 +61,20 @@ public class SortedCursor extends AbstractCursor {
             for (long id : order) {
                 if (mapCursorPositions.containsKey(id)) {
                     mOrderedPositions.add(mapCursorPositions.get(id));
+                } else {
+                    missingIds.add(id);
                 }
             }
         }
+
+        return missingIds;
+    }
+
+    /**
+     * @return the list of ids that weren't found in the underlying cursor
+     */
+    public ArrayList<Long> getMissingIds() {
+        return mMissingIds;
     }
 
     @Override

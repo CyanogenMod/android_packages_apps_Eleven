@@ -74,7 +74,8 @@ public final class Config {
 
     public static enum SmartPlaylistType {
         LastAdded(-1),
-        TopTracks(-2);
+        RecentlyPlayed(-2),
+        TopTracks(-3);
 
         public long mId;
 

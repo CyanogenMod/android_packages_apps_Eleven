@@ -16,28 +16,17 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-import android.text.TextUtils;
 
-/**
- * The {@link RecentlyListenedFragment} is used to display a a grid or list of
- * recently listened to albums. In order to populate the this grid or list with
- * the correct data, we keep a cache of the album ID, name, and time it was
- * played to be retrieved later.
- * <p>
- * In {@link ProfileActivity}, when viewing the profile for an artist, the first
- * image the carousel header is the last album the user listened to for that
- * particular artist. That album is retrieved using
- * {@link #getAlbumName(String)}.
- * 
- * @author Andrew Neal (andrewdneal@gmail.com)
- */
 public class RecentStore extends SQLiteOpenHelper {
 
     /* Version constant to increment when the database should be rebuilt */
     private static final int VERSION = 1;
 
+    /* Maximum # of items in the db */
+    private static final int MAX_ITEMS_IN_DB = 500;
+
     /* Name of database file */
-    public static final String DATABASENAME = "albumhistory.db";
+    public static final String DATABASENAME = "recenthistory.db";
 
     private static RecentStore sInstance = null;
 
@@ -56,10 +45,7 @@ public class RecentStore extends SQLiteOpenHelper {
     @Override
     public void onCreate(final SQLiteDatabase db) {
         db.execSQL("CREATE TABLE IF NOT EXISTS " + RecentStoreColumns.NAME + " ("
-                + RecentStoreColumns.ID + " LONG NOT NULL," + RecentStoreColumns.ALBUMNAME
-                + " TEXT NOT NULL," + RecentStoreColumns.ARTISTNAME + " TEXT NOT NULL,"
-                + RecentStoreColumns.ALBUMSONGCOUNT + " TEXT NOT NULL,"
-                + RecentStoreColumns.ALBUMYEAR + " TEXT," + RecentStoreColumns.TIMEPLAYED
+                + RecentStoreColumns.ID + " LONG NOT NULL," + RecentStoreColumns.TIMEPLAYED
                 + " LONG NOT NULL);");
     }
 
@@ -84,116 +70,94 @@ public class RecentStore extends SQLiteOpenHelper {
     }
 
     /**
-     * Used to store artist IDs in the database.
+     * Used to store song IDs in the database.
      * 
-     * @param albumIDdThe album's ID.
-     * @param albumName The album name.
-     * @param artistName The artist album name.
-     * @param songCount The number of tracks for the album.
-     * @param albumYear The year the album was released.
+     * @param songId The song id to store
      */
-    public void addAlbumId(final Long albumId, final String albumName, final String artistName,
-            final String songCount, final String albumYear) {
-        if (albumId == null || albumName == null || artistName == null || songCount == null) {
-            return;
-        }
-
+    public void addSongId(final long songId) {
         final SQLiteDatabase database = getWritableDatabase();
-        final ContentValues values = new ContentValues(6);
-
         database.beginTransaction();
 
-        values.put(RecentStoreColumns.ID, albumId);
-        values.put(RecentStoreColumns.ALBUMNAME, albumName);
-        values.put(RecentStoreColumns.ARTISTNAME, artistName);
-        values.put(RecentStoreColumns.ALBUMSONGCOUNT, songCount);
-        values.put(RecentStoreColumns.ALBUMYEAR, albumYear);
-        values.put(RecentStoreColumns.TIMEPLAYED, System.currentTimeMillis());
+        try {
+            // see if the most recent item is the same song id, if it is then don't insert
+            Cursor mostRecentItem = null;
+            try {
+                mostRecentItem = queryRecentIds("1");
+                if (mostRecentItem != null && mostRecentItem.moveToFirst()) {
+                    if (songId == mostRecentItem.getLong(0)) {
+                        return;
+                    }
+                }
+            } finally {
+                if (mostRecentItem != null) {
+                    mostRecentItem.close();
+                    mostRecentItem = null;
+                }
+            }
 
+            // add the entry
+            final ContentValues values = new ContentValues(2);
+            values.put(RecentStoreColumns.ID, songId);
+            values.put(RecentStoreColumns.TIMEPLAYED, System.currentTimeMillis());
+            database.insert(RecentStoreColumns.NAME, null, values);
+
+            // if our db is too large, delete the extra items
+            Cursor oldest = null;
+            try {
+                database.query(RecentStoreColumns.NAME,
+                        new String[]{RecentStoreColumns.ID}, null, null, null, null,
+                        RecentStoreColumns.TIMEPLAYED + " ASC");
+
+                if (oldest != null && oldest.getCount() > MAX_ITEMS_IN_DB) {
+                    oldest.moveToPosition(oldest.getCount() - MAX_ITEMS_IN_DB);
+                    long timeOfRecordToKeep = oldest.getLong(0);
+
+                    database.delete(RecentStoreColumns.NAME,
+                            RecentStoreColumns.TIMEPLAYED + " < ?",
+                            new String[] { String.valueOf(timeOfRecordToKeep) });
+
+                }
+            } finally {
+                if (oldest != null) {
+                    oldest.close();
+                    oldest = null;
+                }
+            }
+        } finally {
+            database.setTransactionSuccessful();
+            database.endTransaction();
+        }
+    }
+
+    /**
+     * @param songId to remove.
+     */
+    public void removeItem(final long songId) {
+        final SQLiteDatabase database = getWritableDatabase();
         database.delete(RecentStoreColumns.NAME, RecentStoreColumns.ID + " = ?", new String[] {
-            String.valueOf(albumId)
-        });
-        database.insert(RecentStoreColumns.NAME, null, values);
-        database.setTransactionSuccessful();
-        database.endTransaction();
-
-    }
-
-    /**
-     * Used to retrieve the most recently listened album for an artist.
-     * 
-     * @param key The key to reference.
-     * @return The most recently listened album for an artist.
-     */
-    public String getAlbumName(final String key) {
-        if (TextUtils.isEmpty(key)) {
-            return null;
-        }
-        final SQLiteDatabase database = getReadableDatabase();
-        final String[] projection = new String[] {
-                RecentStoreColumns.ID, RecentStoreColumns.ALBUMNAME, RecentStoreColumns.ARTISTNAME,
-                RecentStoreColumns.TIMEPLAYED
-        };
-        final String selection = RecentStoreColumns.ARTISTNAME + "=?";
-        final String[] having = new String[] {
-            key
-        };
-        Cursor cursor = database.query(RecentStoreColumns.NAME, projection, selection, having,
-                null, null, RecentStoreColumns.TIMEPLAYED + " DESC", null);
-        if (cursor != null && cursor.moveToFirst()) {
-            cursor.moveToFirst();
-            final String album = cursor.getString(cursor
-                    .getColumnIndexOrThrow(RecentStoreColumns.ALBUMNAME));
-            cursor.close();
-            cursor = null;
-            return album;
-        }
-        if (cursor != null && !cursor.isClosed()) {
-            cursor.close();
-            cursor = null;
-        }
-
-        return null;
-    }
-
-    /**
-     * Clear the cache.
-     */
-    public void deleteDatabase() {
-        final SQLiteDatabase database = getReadableDatabase();
-        database.delete(RecentStoreColumns.NAME, null, null);
-    }
-
-    /**
-     * @param item The album Id to remove.
-     */
-    public void removeItem(final long albumId) {
-        final SQLiteDatabase database = getReadableDatabase();
-        database.delete(RecentStoreColumns.NAME, RecentStoreColumns.ID + " = ?", new String[] {
-            String.valueOf(albumId)
+            String.valueOf(songId)
         });
 
+    }
+
+    /**
+     * Gets a cursor to the list of recently played content
+     * @param limit # of songs to limit the result to
+     * @return cursor
+     */
+    public Cursor queryRecentIds(final String limit) {
+        final SQLiteDatabase database = getReadableDatabase();
+        return database.query(RecentStoreColumns.NAME,
+                new String[]{RecentStoreColumns.ID}, null, null, null, null,
+                RecentStoreColumns.TIMEPLAYED + " DESC", limit);
     }
 
     public interface RecentStoreColumns {
-
         /* Table name */
-        public static final String NAME = "albumhistory";
+        public static final String NAME = "recenthistory";
 
         /* Album IDs column */
-        public static final String ID = "albumid";
-
-        /* Album name column */
-        public static final String ALBUMNAME = "itemname";
-
-        /* Artist name column */
-        public static final String ARTISTNAME = "artistname";
-
-        /* Album song count column */
-        public static final String ALBUMSONGCOUNT = "albumsongcount";
-
-        /* Album year column. It's okay for this to be null */
-        public static final String ALBUMYEAR = "albumyear";
+        public static final String ID = "songid";
 
         /* Time played column */
         public static final String TIMEPLAYED = "timeplayed";

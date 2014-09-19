@@ -51,7 +51,7 @@ public class TopTracksFragment extends BasicSongFragment {
      */
     @Override
     public Loader<List<Song>> onCreateLoader(final int id, final Bundle args) {
-        return new TopTracksLoader(getActivity());
+        return new TopTracksLoader(getActivity(), TopTracksLoader.QueryType.TopTracks);
     }
 
     @Override

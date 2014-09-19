@@ -99,6 +99,11 @@ public class PlaylistLoader extends WrappedAsyncTaskLoader<List<Playlist>> {
                 resources.getString(R.string.playlist_last_added), -1);
         mPlaylistList.add(lastAdded);
 
+        /* Recently Played */
+        final Playlist recentlyPlayed = new Playlist(SmartPlaylistType.RecentlyPlayed.mId,
+                resources.getString(R.string.playlist_recently_played), -1);
+        mPlaylistList.add(recentlyPlayed);
+
         /* Top Tracks */
         final Playlist topTracks = new Playlist(SmartPlaylistType.TopTracks.mId,
                 resources.getString(R.string.playlist_top_tracks), -1);

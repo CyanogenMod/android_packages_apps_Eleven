@@ -164,6 +164,13 @@ public class PlaylistDetailActivity extends DetailActivity implements
         // Get the position of the selected item
         final AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) menuInfo;
         mSelectedPosition = info.position - 1;
+
+        // the header has been long-pressed - for now just return, but later if we want
+        // to long-press support for the header, do that logic here
+        if (mSelectedPosition == -1) {
+            return;
+        }
+
         // Creat a new song
         mSong = mAdapter.getItem(mSelectedPosition);
         mSelectedId = mSong.mSongId;

@@ -78,7 +78,8 @@
     <!-- playlist_favorite used in voice search processing only -->
     <string name="playlist_favorite">Favorite</string>
     <string name="playlist_favorites">Favorites</string>
-    <string name="playlist_last_added">Last added</string>
+    <string name="playlist_last_added">Last Added</string>
+    <string name="playlist_recently_played">Recently Played</string>
     <string name="playlist_top_tracks">My Top Tracks</string>
 
     <!-- AlertDialog items -->
@@ -177,7 +178,8 @@
     <string name="empty_search">NO SEARCH RESULTS FOR</string>
     <string name="empty_search_check">Please check that you have the correct spelling or try a different keyword.</string>
     <string name="empty_favorite">Songs you mark as favorites will be shown here.</string>
-    <string name="empty_recent">Albums you have listened to will show up here. Try playing some music.</string>
+    <string name="empty_recent_main">NO RECENT SONGS</string>
+    <string name="empty_recent">Songs you have listened to recently will show up here.</string>
     <string name="empty_playlist_main">NO SONGS IN PLAYLIST</string>
     <string name="empty_playlist_secondary">To add songs to this playlist, tap the options menu on a song, album or artist and select \"Add to playlist\".</string>
     <string name="empty_top_tracks_main">NO TOP TRACKS</string>
