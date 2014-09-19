@@ -19,7 +19,6 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.cyngn.eleven.R;
-import com.cyngn.eleven.appwidgets.RecentWidgetService;
 import com.cyngn.eleven.widgets.PlayPauseProgressButton;
 
 import java.lang.ref.WeakReference;
@@ -165,11 +164,6 @@ public class MusicHolder {
          * @see {@code #getView()} of a specific adapter for more detailed info
          */
         public String mLineThree;
-
-        /**
-         * This is the album art bitmap used in {@link RecentWidgetService}.
-         */
-        public Bitmap mImage;
 
         /**
          * Constructor of <code>DataHolder</code>

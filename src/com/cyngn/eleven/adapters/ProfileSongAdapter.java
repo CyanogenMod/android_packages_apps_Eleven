@@ -22,9 +22,6 @@ import com.cyngn.eleven.cache.ImageFetcher;
 import com.cyngn.eleven.model.Artist;
 import com.cyngn.eleven.model.Song;
 import com.cyngn.eleven.ui.MusicHolder;
-import com.cyngn.eleven.ui.fragments.profile.AlbumSongFragment;
-import com.cyngn.eleven.ui.fragments.profile.ArtistSongFragment;
-import com.cyngn.eleven.ui.fragments.profile.GenreSongFragment;
 import com.cyngn.eleven.ui.fragments.profile.LastAddedFragment;
 import com.cyngn.eleven.ui.activities.PlaylistDetailActivity;
 import com.cyngn.eleven.utils.ApolloUtils;
@@ -35,9 +32,8 @@ import java.util.List;
 
 /**
  * This {@link ArrayAdapter} is used to display the songs for a particular
- * artist, album, playlist, or genre for {@link ArtistSongFragment},
- * {@link AlbumSongFragment},{@link PlaylistDetailActivity},
- * {@link GenreSongFragment},{@link LastAddedFragment}.
+ * artist, album, playlist, or genre for
+ * {@link PlaylistDetailActivity},{@link LastAddedFragment}.
  * 
  * @author Andrew Neal (andrewdneal@gmail.com)
  */
@@ -122,16 +118,6 @@ public class ProfileSongAdapter extends ArrayAdapter<Song> {
         mDisplaySetting = setting;
         // Initialize the cache & image fetcher
         mImageFetcher = ApolloUtils.getImageFetcher(activity);
-    }
-
-    /**
-     * Constructor of <code>ProfileSongAdapter</code>
-     * 
-     * @param activity The {@link Activity} to use
-     * @param layoutId The resource Id of the view to inflate.
-     */
-    public ProfileSongAdapter(final Activity activity, final int layoutId) {
-        this(activity, layoutId, R.layout.faux_carousel, DISPLAY_DEFAULT_SETTING);
     }
 
     /**

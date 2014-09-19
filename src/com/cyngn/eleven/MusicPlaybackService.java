@@ -50,7 +50,6 @@ import android.util.Log;
 import com.cyngn.eleven.appwidgets.AppWidgetLarge;
 import com.cyngn.eleven.appwidgets.AppWidgetLargeAlternate;
 import com.cyngn.eleven.appwidgets.AppWidgetSmall;
-import com.cyngn.eleven.appwidgets.RecentWidgetProvider;
 import com.cyngn.eleven.cache.ImageCache;
 import com.cyngn.eleven.cache.ImageFetcher;
 import com.cyngn.eleven.provider.RecentStore;
@@ -358,11 +357,6 @@ public class MusicPlaybackService extends Service {
      */
     private final AppWidgetLargeAlternate mAppWidgetLargeAlternate = AppWidgetLargeAlternate
             .getInstance();
-
-    /**
-     * Recently listened widget
-     */
-    private final RecentWidgetProvider mRecentWidgetProvider = RecentWidgetProvider.getInstance();
 
     /**
      * The media player
@@ -1389,7 +1383,6 @@ public class MusicPlaybackService extends Service {
         mAppWidgetSmall.notifyChange(this, what);
         mAppWidgetLarge.notifyChange(this, what);
         mAppWidgetLargeAlternate.notifyChange(this, what);
-        mRecentWidgetProvider.notifyChange(this, what);
     }
 
     /**
@@ -2420,9 +2413,6 @@ public class MusicPlaybackService extends Service {
                 final int[] largeAlt = intent
                         .getIntArrayExtra(AppWidgetManager.EXTRA_APPWIDGET_IDS);
                 mAppWidgetLargeAlternate.performUpdate(MusicPlaybackService.this, largeAlt);
-            } else if (RecentWidgetProvider.CMDAPPWIDGETUPDATE.equals(command)) {
-                final int[] recent = intent.getIntArrayExtra(AppWidgetManager.EXTRA_APPWIDGET_IDS);
-                mRecentWidgetProvider.performUpdate(MusicPlaybackService.this, recent);
             } else {
                 handleCommandIntent(intent);
             }

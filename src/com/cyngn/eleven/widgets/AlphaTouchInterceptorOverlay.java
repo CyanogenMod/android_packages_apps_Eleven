@@ -21,8 +21,7 @@ import android.widget.FrameLayout;
  * clicks are intercepted and passed to a listener. Also supports an alpha layer
  * to dim the content underneath. By default, the alpha layer is the same View
  * as the touch-interceptor layer. However, for some use-cases, you want a few
- * Views to not be dimmed, but still have touches intercepted (for example,
- * {@link CarouselTab}'s label appears above the alpha layer). In this case, you
+ * Views to not be dimmed, but still have touches intercepted. In this case, you
  * can specify the View to use as the alpha layer via setAlphaLayer(); in this
  * case you are responsible for managing the z-order of the alpha-layer with
  * respect to your other sub-views. Typically, you would not use this class

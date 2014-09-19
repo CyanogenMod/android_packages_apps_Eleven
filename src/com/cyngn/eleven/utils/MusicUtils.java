@@ -1321,6 +1321,8 @@ public final class MusicUtils {
             try {
                 return mService.position();
             } catch (final RemoteException ignored) {
+            } catch (final IllegalStateException ex) {
+                Log.e(MusicUtils.class.getSimpleName(), ex.getMessage());
             }
         }
         return 0;

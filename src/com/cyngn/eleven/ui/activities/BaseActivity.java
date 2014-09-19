@@ -324,9 +324,6 @@ public abstract class BaseActivity extends FragmentActivity implements ServiceCo
             } else {
                 MusicUtils.shuffleAll(BaseActivity.this);
             }
-            if (BaseActivity.this instanceof ProfileActivity) {
-                finish();
-            }
         }
     };
 

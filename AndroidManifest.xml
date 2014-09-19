@@ -132,13 +132,6 @@
             </intent-filter>
         </activity>
 
-        <!-- Profile phone Activity -->
-        <activity
-            android:name=".ui.activities.ProfileActivity"
-            android:excludeFromRecents="true"
-            android:screenOrientation="portrait"
-            android:theme="@style/Eleven.Theme.ActionBar.Overlay">
-        </activity>
         <!-- Artist Detail Activity -->
         <activity
             android:name=".ui.activities.ArtistDetailActivity"
@@ -241,23 +234,6 @@
                 android:name="android.appwidget.provider"
                 android:resource="@xml/app_widget_large_alternate" />
         </receiver>
-        <!-- Resizable recently listened App Widget -->
-        <receiver
-            android:name="com.cyngn.eleven.appwidgets.RecentWidgetProvider"
-            android:exported="false"
-            android:label="@string/app_widget_recent" >
-            <intent-filter>
-                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
-            </intent-filter>
-            <!-- This specifies the widget provider info -->
-            <meta-data
-                android:name="android.appwidget.provider"
-                android:resource="@xml/app_widget_recents" />
-        </receiver>
-        <!-- The service serving the RemoteViews to the recently listened App Widget -->
-        <service
-            android:name="com.cyngn.eleven.appwidgets.RecentWidgetService"
-            android:permission="android.permission.BIND_REMOTEVIEWS" />
         <!-- Media button receiver -->
         <receiver android:name=".MediaButtonIntentReceiver" >
             <intent-filter>

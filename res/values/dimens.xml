@@ -138,8 +138,6 @@
     <dimen name="app_widget_small_artwork_size">48.0dip</dimen>
     <dimen name="app_widget_small_button_padding">8.0dip</dimen>
     <dimen name="app_widget_small_button_height">48.0dip</dimen>
-    <dimen name="app_widget_recents_action_bar_height">48.0dip</dimen>
-    <dimen name="app_widget_recents_action_bar_item_padding">8.0dip</dimen>
     <dimen name="app_widget_tiny_height">70.0dip</dimen>
     <dimen name="app_widget_tiny_width">70.0dip</dimen>
     <dimen name="app_widget_padding">0.0dip</dimen>

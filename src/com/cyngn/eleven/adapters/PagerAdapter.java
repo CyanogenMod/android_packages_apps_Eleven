@@ -22,9 +22,7 @@ import android.view.ViewGroup;
 import com.cyngn.eleven.R;
 import com.cyngn.eleven.ui.fragments.AlbumFragment;
 import com.cyngn.eleven.ui.fragments.ArtistFragment;
-import com.cyngn.eleven.ui.fragments.GenreFragment;
 import com.cyngn.eleven.ui.fragments.PlaylistFragment;
-import com.cyngn.eleven.ui.fragments.RecentFragment;
 import com.cyngn.eleven.ui.fragments.SongFragment;
 import com.cyngn.eleven.utils.Lists;
 
