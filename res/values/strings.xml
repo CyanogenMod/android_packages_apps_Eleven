@@ -18,7 +18,6 @@
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
 
     <string name="app_name" translatable="false">Music</string>
-    <string name="app_name_uppercase" translatable="false">MUSIC</string>
 
     <!-- Page titles -->
     <string name="page_recent">Recent</string>
@@ -210,6 +209,17 @@
     <string name="header_1_album">1 Album</string>
     <string name="header_n_albums"><xliff:g id="number">%d</xliff:g> Albums</string>
     <string name="header_5_plus_albums">5+ Albums</string>
+
+    <string name="footer_search_artists">Show all artists</string>
+    <string name="footer_search_albums">Show all albums</string>
+    <string name="footer_search_songs">Show all songs</string>
+    <string name="footer_search_playlists">Show all playlists</string>
+
+    <string name="searchHint">Search Music</string>
+    <string name="search_title_artists">All \"%s\" artists</string>
+    <string name="search_title_albums">All \"%s\" albums</string>
+    <string name="search_title_songs">All \"%s\" songs</string>
+    <string name="search_title_playlists">All \"%s\" playlists</string>
 
     <string name="duration_album_mins_only"><xliff:g id="format">%1$dm</xliff:g></string>
     <string name="duration_album_hour_mins"><xliff:g id="format">%1$dh %2$dm</xliff:g></string>

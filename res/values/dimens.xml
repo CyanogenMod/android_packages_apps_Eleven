@@ -31,9 +31,6 @@
     <dimen name="overflow_height">30.0dip</dimen>
     <dimen name="overflow_width">24.0dip</dimen>
 
-    <!-- List item section header -->
-    <dimen name="list_item_header_height">30.0dip</dimen>
-
     <!-- List and grid view padding -->
     <dimen name="list_preferred_item_padding">10.0dip</dimen>
     <dimen name="list_menu_item_padding_right">2.0dip</dimen>
@@ -42,6 +39,7 @@
     <dimen name="list_item_padding_top">10.0dip</dimen>
     <dimen name="list_item_padding_bottom">10.0dip</dimen>
     <dimen name="list_item_header_size">16.0sp</dimen>
+    <dimen name="list_item_footer_size">20.0sp</dimen>
     <dimen name="list_item_main_text_size">@dimen/text_size_small</dimen>
     <dimen name="list_item_secondary_text_size">@dimen/text_size_micro</dimen>
     <dimen name="list_item_queue_text_padding_left">15.0dip</dimen>
@@ -189,4 +187,8 @@
     <dimen name="no_results_text_padding_bottom">16.0dip</dimen>
     <dimen name="no_reuslts_text_main">20.0sp</dimen>
     <dimen name="no_results_text_secondary">14.0sp</dimen>
+
+    <!-- General consensus is to leave dividers at 1px instead of having different
+    partial scaled up values for different resolutions -->
+    <dimen name="divider_height">1px</dimen>
 </resources>

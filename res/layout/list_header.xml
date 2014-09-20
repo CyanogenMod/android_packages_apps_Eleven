@@ -15,13 +15,15 @@
   limitations under the License.
 -->
 <TextView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/header"
+    android:id="@+id/title"
     android:layout_width="match_parent"
-    android:layout_height="@dimen/list_item_header_height"
+    android:layout_height="30dp"
+    android:layout_alignParentBottom="true"
     android:paddingLeft="@dimen/list_preferred_item_padding"
     android:paddingRight="@dimen/list_preferred_item_padding"
     android:background="@null"
     android:gravity="center_vertical"
+    android:textAllCaps="true"
     android:textColor="@color/list_item_header_text_color"
     android:textSize="@dimen/list_item_header_size"
     android:fontFamily="sans-serif-light" />

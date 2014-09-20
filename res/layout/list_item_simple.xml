@@ -20,7 +20,9 @@
     android:gravity="center_vertical"
     android:minHeight="@dimen/item_normal_height"
     android:paddingBottom="@dimen/list_item_padding_bottom"
-    android:paddingTop="@dimen/list_item_padding_top">
+    android:paddingTop="@dimen/list_item_padding_top"
+    android:paddingLeft="@dimen/list_preferred_item_padding"
+    android:paddingRight="@dimen/list_preferred_item_padding">
 
     <!-- center the text views vertically -->
     <LinearLayout

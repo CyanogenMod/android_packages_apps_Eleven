@@ -13,6 +13,8 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import com.cyngn.eleven.R;
+import com.cyngn.eleven.utils.SectionCreatorUtils.Section;
+import com.cyngn.eleven.utils.SectionCreatorUtils.SectionType;
 
 import java.util.TreeMap;
 
@@ -42,9 +44,15 @@ public class SectionAdapter<TItem,
     protected TArrayAdapter mUnderlyingAdapter;
 
     /**
-     * A map of external position to the String to use as the header
+     * A map of external position to the Section type and Identifier
      */
-    protected TreeMap<Integer, String> mSectionHeaders;
+    protected TreeMap<Integer, Section> mSections;
+
+    protected int mHeaderLayoutId;
+    protected boolean mHeaderEnabled;
+
+    protected int mFooterLayoutId;
+    protected boolean mFooterEnabled;
 
     /**
      * {@link Context}
@@ -59,7 +67,10 @@ public class SectionAdapter<TItem,
     public SectionAdapter(final Activity context, final TArrayAdapter underlyingAdapter) {
         mContext = context;
         mUnderlyingAdapter = underlyingAdapter;
-        mSectionHeaders = new TreeMap<Integer, String>();
+        mSections = new TreeMap<Integer, Section>();
+        setupHeaderParameters(R.layout.list_header, false);
+        // since we have no good default footer, just re-use the header layout
+        setupFooterParameters(R.layout.list_header, false);
     }
 
     /**
@@ -75,13 +86,18 @@ public class SectionAdapter<TItem,
      */
     @Override
     public View getView(final int position, View convertView, final ViewGroup parent) {
-        if (isSectionHeader(position)) {
+        if (isSection(position)) {
             if (convertView == null) {
-                convertView = LayoutInflater.from(mContext).inflate(R.layout.list_header, parent, false);
+                int layoutId = mHeaderLayoutId;
+                if (isSectionFooter(position)) {
+                    layoutId = mFooterLayoutId;
+                }
+
+                convertView = LayoutInflater.from(mContext).inflate(layoutId, parent, false);
             }
 
-            TextView header = (TextView)convertView.findViewById(R.id.header);
-            header.setText(mSectionHeaders.get(position));
+            TextView title = (TextView)convertView.findViewById(R.id.title);
+            title.setText(mSections.get(position).mIdentifier);
         } else {
             convertView = mUnderlyingAdapter.getView(getInternalPosition(position), convertView, parent);
         }
@@ -90,11 +106,31 @@ public class SectionAdapter<TItem,
     }
 
     /**
+     * Setup the header parameters
+     * @param layoutId the layout id used to inflate
+     * @param enabled whether clicking is enabled on the header
+     */
+    public void setupHeaderParameters(int layoutId, boolean enabled) {
+        mHeaderLayoutId = layoutId;
+        mHeaderEnabled = enabled;
+    }
+
+    /**
+     * Setup the footer parameters
+     * @param layoutId the layout id used to inflate
+     * @param enabled whether clicking is enabled on the footer
+     */
+    public void setupFooterParameters(int layoutId, boolean enabled) {
+        mFooterLayoutId = layoutId;
+        mFooterEnabled = enabled;
+    }
+
+    /**
      * {@inheritDoc}
      */
     @Override
     public int getCount() {
-        return mSectionHeaders.size() + mUnderlyingAdapter.getCount();
+        return mSections.size() + mUnderlyingAdapter.getCount();
     }
 
     /**
@@ -102,8 +138,8 @@ public class SectionAdapter<TItem,
      */
     @Override
     public Object getItem(int position) {
-        if (isSectionHeader(position)) {
-            return mSectionHeaders.get(position);
+        if (isSection(position)) {
+            return mSections.get(position);
         }
 
         return mUnderlyingAdapter.getItem(getInternalPosition(position));
@@ -115,7 +151,7 @@ public class SectionAdapter<TItem,
      * @return the underlying item or null if a section header is queried
      */
     public TItem getTItem(int position) {
-        if (isSectionHeader(position)) {
+        if (isSection(position)) {
             return null;
         }
 
@@ -146,6 +182,9 @@ public class SectionAdapter<TItem,
         if (isSectionHeader(position)) {
             // use the last view type id as the section header
             return getViewTypeCount() - 1;
+        } else if (isSectionFooter(position)) {
+            // use the last view type id as the section header
+            return getViewTypeCount() - 2;
         }
 
         return mUnderlyingAdapter.getItemViewType(getInternalPosition(position));
@@ -156,8 +195,8 @@ public class SectionAdapter<TItem,
      */
     @Override
     public int getViewTypeCount() {
-        // increment view type count by 1 for section headers
-        return mUnderlyingAdapter.getViewTypeCount() + 1;
+        // increment view type count by 2 for section headers and section footers
+        return mUnderlyingAdapter.getViewTypeCount() + 2;
     }
 
     /**
@@ -185,8 +224,13 @@ public class SectionAdapter<TItem,
      */
     @Override
     public boolean isEnabled(int position) {
-        // don't enable clicking/long press for section headers
-        return !isSectionHeader(position);
+        if (isSectionHeader(position)) {
+            return mHeaderEnabled;
+        } else if (isSectionFooter(position)) {
+            return mFooterEnabled;
+        }
+
+        return true;
     }
 
     /**
@@ -202,8 +246,26 @@ public class SectionAdapter<TItem,
      * @param position position in the overall lis
      * @return true if a section header
      */
-    private boolean isSectionHeader(int position) {
-        return mSectionHeaders.containsKey(position);
+    public boolean isSectionHeader(int position) {
+        return mSections.containsKey(position) && mSections.get(position).mType == SectionType.Header;
+    }
+
+    /**
+     * Determines whether the item at the position is a section footer
+     * @param position position in the overall lis
+     * @return true if a section footer
+     */
+    public boolean isSectionFooter(int position) {
+        return mSections.containsKey(position) && mSections.get(position).mType == SectionType.Footer;
+    }
+
+    /**
+     * Determines whether the item at the position is a section of some type
+     * @param position position in the overall lis
+     * @return true if the item is a section
+     */
+    public boolean isSection(int position) {
+        return mSections.containsKey(position);
     }
 
     /**
@@ -213,13 +275,13 @@ public class SectionAdapter<TItem,
      * @return the internal position
      */
     public int getInternalPosition(int position) {
-        if (isSectionHeader(position)) {
+        if (isSection(position)) {
             return -1;
         }
 
         int countSectionHeaders = 0;
 
-        for (Integer sectionPosition : mSectionHeaders.keySet()) {
+        for (Integer sectionPosition : mSections.keySet()) {
             if (sectionPosition <= position) {
                 countSectionHeaders++;
             } else {
@@ -237,7 +299,7 @@ public class SectionAdapter<TItem,
      */
     public int getExternalPosition(int internalPosition) {
         int externalPosition = internalPosition;
-        for (Integer sectionPosition : mSectionHeaders.keySet()) {
+        for (Integer sectionPosition : mSections.keySet()) {
             // because the section headers are tracking the 'merged' lists, we need to keep bumping
             // our position for each found section header
             if (sectionPosition <= externalPosition) {
@@ -257,10 +319,10 @@ public class SectionAdapter<TItem,
     public void setData(SectionListContainer<TItem> data) {
         mUnderlyingAdapter.unload();
 
-        if (data.mSectionIndices == null) {
-            mSectionHeaders.clear();
+        if (data.mSections == null) {
+            mSections.clear();
         } else {
-            mSectionHeaders = data.mSectionIndices;
+            mSections = data.mSections;
         }
 
         mUnderlyingAdapter.addAll(data.mListResults);
@@ -288,7 +350,7 @@ public class SectionAdapter<TItem,
 
     public void clear() {
         mUnderlyingAdapter.clear();
-        mSectionHeaders.clear();
+        mSections.clear();
     }
 
     /**

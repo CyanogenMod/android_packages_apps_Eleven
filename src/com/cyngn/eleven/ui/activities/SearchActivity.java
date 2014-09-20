@@ -16,8 +16,10 @@ import android.app.SearchManager;
 import android.app.SearchableInfo;
 import android.content.ComponentName;
 import android.content.Context;
+import android.content.Intent;
 import android.content.ServiceConnection;
 import android.database.Cursor;
+import android.graphics.Bitmap;
 import android.media.AudioManager;
 import android.os.Bundle;
 import android.os.IBinder;
@@ -31,16 +33,20 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AbsListView;
 import android.widget.AbsListView.OnScrollListener;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.SearchView;
 import android.widget.SearchView.OnQueryTextListener;
 import android.widget.TextView;
 
+import com.cyngn.eleven.Config;
 import com.cyngn.eleven.IElevenService;
 import com.cyngn.eleven.R;
 import com.cyngn.eleven.adapters.SummarySearchAdapter;
@@ -111,6 +117,17 @@ public class SearchActivity extends FragmentActivity implements LoaderCallbacks<
     private SectionAdapter<SearchResult, SummarySearchAdapter> mAdapter;
 
     /**
+     * boolean tracking whether this is the search level when the user first enters search
+     * or if the user has clicked show all
+     */
+    private boolean mTopLevelSearch;
+
+    /**
+     * If the user has clicked show all, this tells us what type (Artist, Album, etc)
+     */
+    private ResultType mSearchType;
+
+    /**
      * {@inheritDoc}
      */
     @Override
@@ -123,11 +140,6 @@ public class SearchActivity extends FragmentActivity implements LoaderCallbacks<
         // Control the media volume
         setVolumeControlStream(AudioManager.STREAM_MUSIC);
 
-        // Theme the action bar
-        final ActionBar actionBar = getActionBar();
-        actionBar.setTitle(getString(R.string.app_name_uppercase));
-        actionBar.setHomeButtonEnabled(true);
-
         // Bind Apollo's service
         mToken = MusicUtils.bindToService(this, this);
 
@@ -137,14 +149,13 @@ public class SearchActivity extends FragmentActivity implements LoaderCallbacks<
         // get the input method manager
         mImm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
 
-        // Get the query String
-        mFilterString = getIntent().getStringExtra(SearchManager.QUERY);
-
         // Initialize the adapter
         SummarySearchAdapter adapter = new SummarySearchAdapter(this);
         mAdapter = new SectionAdapter<SearchResult, SummarySearchAdapter>(this, adapter);
         // Set the prefix
         mAdapter.getUnderlyingAdapter().setPrefix(mFilterString);
+        mAdapter.setupHeaderParameters(R.layout.list_search_header, false);
+        mAdapter.setupFooterParameters(R.layout.list_search_footer, true);
 
         // setup the no results container
         mNoResultsContainer = (NoResultsContainer)findViewById(R.id.no_results_container);
@@ -153,13 +164,50 @@ public class SearchActivity extends FragmentActivity implements LoaderCallbacks<
 
         initListView();
 
+        // Theme the action bar
+        final ActionBar actionBar = getActionBar();
+        actionBar.setHomeButtonEnabled(true);
+        actionBar.setIcon(R.drawable.ic_action_search);
+
+        // Get the query String
+        mFilterString = getIntent().getStringExtra(SearchManager.QUERY);
+
+        // if we have a non-empty search string, this is a 2nd lvl search
         if (mFilterString != null && !mFilterString.isEmpty()) {
+            mTopLevelSearch = false;
+
+            // get the search type to filter by
+            int type = getIntent().getIntExtra(SearchManager.SEARCH_MODE, -1);
+            if (type >= 0 && type < ResultType.values().length) {
+                mSearchType = ResultType.values()[type];
+            }
+
+            int resourceId = 0;
+            switch (mSearchType) {
+                case Artist:
+                    resourceId = R.string.search_title_artists;
+                    break;
+                case Album:
+                    resourceId = R.string.search_title_albums;
+                    break;
+                case Playlist:
+                    resourceId = R.string.search_title_playlists;
+                    break;
+                case Song:
+                    resourceId = R.string.search_title_songs;
+                    break;
+            }
+            actionBar.setTitle(getString(resourceId, mFilterString).toUpperCase());
+            actionBar.setDisplayHomeAsUpEnabled(true);
+
+            // Set the prefix
+            mAdapter.getUnderlyingAdapter().setPrefix(mFilterString);
+
             // Prepare the loader. Either re-connect with an existing one,
             // or start a new one.
             getSupportLoaderManager().initLoader(0, null, this);
-
-            // Action bar subtitle
-            getActionBar().setSubtitle("\"" + mFilterString + "\"");
+        } else {
+            mTopLevelSearch = true;
         }
 
         // set the background on the root view
@@ -194,8 +242,16 @@ public class SearchActivity extends FragmentActivity implements LoaderCallbacks<
      */
     @Override
     public Loader<SectionListContainer<SearchResult>> onCreateLoader(final int id, final Bundle args) {
-        IItemCompare<SearchResult> comparator = SectionCreatorUtils.createSearchResultComparison(this);
-        return new SectionCreator<SearchResult>(this, new SummarySearchLoader(this, mFilterString),
+        IItemCompare<SearchResult> comparator = null;
+
+        // if we are at the top level, create a comparator to separate the different types into
+        // their own sections (artists, albums, etc)
+        if (mTopLevelSearch) {
+            comparator = SectionCreatorUtils.createSearchResultComparison(this);
+        }
+
+        return new SectionCreator<SearchResult>(this,
+                new SummarySearchLoader(this, mFilterString, mSearchType),
                 comparator);
     }
 
@@ -204,6 +260,11 @@ public class SearchActivity extends FragmentActivity implements LoaderCallbacks<
      */
     @Override
     public boolean onCreateOptionsMenu(final Menu menu) {
+        // if we are not a top level search view, we do not need to create the search fields
+        if (!mTopLevelSearch) {
+            return super.onCreateOptionsMenu(menu);
+        }
+
         // Search view
         getMenuInflater().inflate(R.menu.search, menu);
 
@@ -211,6 +272,17 @@ public class SearchActivity extends FragmentActivity implements LoaderCallbacks<
         MenuItem searchItem = menu.findItem(R.id.menu_search);
         mSearchView = (SearchView)searchItem.getActionView();
         mSearchView.setOnQueryTextListener(this);
+        mSearchView.setQueryHint(getString(R.string.searchHint).toUpperCase());
+
+        // The SearchView has no way for you to customize or get access to the search icon in a
+        // normal fashion, so we need to manually look for the icon and change the
+        // layout params to hide it
+        mSearchView.setIconifiedByDefault(false);
+        mSearchView.setIconified(false);
+        int searchButtonId = getResources().getIdentifier("android:id/search_mag_icon", null, null);
+        ImageView searchIcon = (ImageView)mSearchView.findViewById(searchButtonId);
+        searchIcon.setLayoutParams(new LinearLayout.LayoutParams(0, 0));
+
         searchItem.setOnActionExpandListener(new MenuItem.OnActionExpandListener() {
             @Override
             public boolean onMenuItemActionExpand(MenuItem item) {
@@ -224,14 +296,8 @@ public class SearchActivity extends FragmentActivity implements LoaderCallbacks<
             }
         });
 
-        if (mFilterString == null || mFilterString.isEmpty()) {
-            menu.findItem(R.id.menu_search).expandActionView();
-        }
+        menu.findItem(R.id.menu_search).expandActionView();
 
-        // Add voice search
-        final SearchManager searchManager = (SearchManager)getSystemService(Context.SEARCH_SERVICE);
-        final SearchableInfo searchableInfo = searchManager.getSearchableInfo(getComponentName());
-        mSearchView.setSearchableInfo(searchableInfo);
         return super.onCreateOptionsMenu(menu);
     }
 
@@ -289,9 +355,6 @@ public class SearchActivity extends FragmentActivity implements LoaderCallbacks<
                                final SectionListContainer<SearchResult> data) {
         // Check for any errors
         if (data.mListResults.isEmpty()) {
-            // Set the empty text
-            mNoResultsContainer.setMainHighlightText("\"" + mFilterString + "\"");
-
             // clear the adapter
             mAdapter.clear();
             mListView.setVisibility(View.INVISIBLE);
@@ -335,14 +398,11 @@ public class SearchActivity extends FragmentActivity implements LoaderCallbacks<
     public boolean onQueryTextSubmit(final String query) {
         if (TextUtils.isEmpty(query)) {
             mFilterString = "";
-            getActionBar().setSubtitle("");
             return false;
         }
 
         hideInputManager();
 
-        // Action bar subtitle
-        getActionBar().setSubtitle("\"" + mFilterString + "\"");
         return true;
     }
 
@@ -385,24 +445,34 @@ public class SearchActivity extends FragmentActivity implements LoaderCallbacks<
     @Override
     public void onItemClick(final AdapterView<?> parent, final View view, final int position,
             final long id) {
-        SearchResult item = mAdapter.getTItem(position);
-        switch (item.mType) {
-            case Artist:
-                NavUtils.openArtistProfile(this, item.mArtist);
-                break;
-            case Album:
-                NavUtils.openAlbumProfile(this, item.mAlbum, item.mArtist, item.mId);
-                break;
-            case Playlist:
-                NavUtils.openPlaylist(this, item.mId, item.mTitle);
-                break;
-            case Song:
-                // If it's a song, play it and leave
-                final long[] list = new long[]{
-                        item.mId
-                };
-                MusicUtils.playAll(this, list, 0, false);
-                break;
+        if (mAdapter.isSectionFooter(position)) {
+            // since a footer should be after a list item by definition, let's look up the type
+            // of the previous item
+            SearchResult item = mAdapter.getTItem(position - 1);
+            Intent intent = new Intent(this, SearchActivity.class);
+            intent.putExtra(SearchManager.QUERY, mFilterString);
+            intent.putExtra(SearchManager.SEARCH_MODE, item.mType.ordinal());
+            startActivity(intent);
+        } else {
+            SearchResult item = mAdapter.getTItem(position);
+            switch (item.mType) {
+                case Artist:
+                    NavUtils.openArtistProfile(this, item.mArtist);
+                    break;
+                case Album:
+                    NavUtils.openAlbumProfile(this, item.mAlbum, item.mArtist, item.mId);
+                    break;
+                case Playlist:
+                    NavUtils.openPlaylist(this, item.mId, item.mTitle);
+                    break;
+                case Song:
+                    // If it's a song, play it and leave
+                    final long[] list = new long[]{
+                            item.mId
+                    };
+                    MusicUtils.playAll(this, list, 0, false);
+                    break;
+            }
         }
     }
 
@@ -426,23 +496,119 @@ public class SearchActivity extends FragmentActivity implements LoaderCallbacks<
      * This class loads a search result summary of items
      */
     private static final class SummarySearchLoader extends SimpleListLoader<SearchResult> {
-        private static final int NUM_RESULTS_TO_GET = 3;
-
         private final String mQuery;
+        private final ResultType mSearchType;
 
-        public SummarySearchLoader(final Context context, final String query) {
+        public SummarySearchLoader(final Context context, final String query,
+                                   final ResultType searchType) {
             super(context);
             mQuery = query;
+            mSearchType = searchType;
+        }
+
+        /**
+         * This creates a search result given the data at the cursor position
+         * @param cursor at the position for the item
+         * @param type the type of item to create
+         * @return the search result
+         */
+        protected SearchResult createSearchResult(final Cursor cursor, ResultType type) {
+            SearchResult item = null;
+
+            switch (type) {
+                case Playlist:
+                    item = SearchResult.createPlaylistResult(cursor);
+                    item.mSongCount = MusicUtils.getSongCountForPlaylist(getContext(), item.mId);
+                    break;
+                case Song:
+                    item = SearchResult.createSearchResult(cursor);
+                    if (item != null) {
+                        AlbumArtistDetails details = MusicUtils.getAlbumArtDetails(getContext(), item.mId);
+                        if (details != null) {
+                            item.mArtist = details.mArtistName;
+                            item.mAlbum = details.mAlbumName;
+                            item.mAlbumId = details.mAlbumId;
+                        }
+                    }
+                    break;
+                case Album:
+                case Artist:
+                default:
+                    item = SearchResult.createSearchResult(cursor);
+                    break;
+            }
+
+            return item;
         }
 
         @Override
         public List<SearchResult> loadInBackground() {
+            // if we are doing a specific type search, run that one
+            if (mSearchType != null && mSearchType != ResultType.Unknown) {
+                return runSearchForType();
+            }
+
+            return runGenericSearch();
+        }
+
+        /**
+         * This creates a search for a specific type given a filter string.  This will return the
+         * full list of results that matches those two requirements
+         * @return the results for that search
+         */
+        protected List<SearchResult> runSearchForType() {
+            ArrayList<SearchResult> results = new ArrayList<SearchResult>();
+            Cursor cursor = null;
+            try {
+                if (mSearchType == ResultType.Playlist) {
+                    cursor = makePlaylistSearchCursor(getContext(), mQuery);
+                } else {
+                    cursor = ApolloUtils.createSearchQueryCursor(getContext(), mQuery);
+                }
+
+                // pre-cache this index
+                final int mimeTypeIndex = cursor.getColumnIndex(MediaStore.Audio.Media.MIME_TYPE);
+
+                if (cursor != null && cursor.moveToFirst()) {
+                    do {
+                        boolean addResult = true;
+
+                        if (mSearchType != ResultType.Playlist) {
+                            // get the result type
+                            ResultType type = ResultType.getResultType(cursor, mimeTypeIndex);
+                            if (type != mSearchType) {
+                                addResult = false;
+                            }
+                        }
+
+                        if (addResult) {
+                            results.add(createSearchResult(cursor, mSearchType));
+                        }
+                    } while (cursor.moveToNext());
+                }
+
+            } finally {
+                if (cursor != null) {
+                    cursor.close();
+                    cursor = null;
+                }
+            }
+
+            return results;
+        }
+
+        /**
+         * This will run a search given a filter string and return the top NUM_RESULTS_TO_GET per
+         * type
+         * @return the results for that search
+         */
+        public List<SearchResult> runGenericSearch() {
             ArrayList<SearchResult> results = new ArrayList<SearchResult>();
             // number of types to query for
             final int numTypes = ResultType.getNumTypes();
 
             // number of results we want
-            final int numResultsNeeded = NUM_RESULTS_TO_GET * numTypes;
+            final int numResultsNeeded = Config.SEARCH_NUM_RESULTS_TO_GET * numTypes;
 
             // current number of results we have
             int numResultsAdded = 0;
@@ -455,21 +621,17 @@ public class SearchActivity extends FragmentActivity implements LoaderCallbacks<
             if (playlistCursor != null && playlistCursor.moveToFirst()) {
                 do {
                     // create the item
-                    SearchResult item = SearchResult.createPlaylistResult(playlistCursor);
-                    if (item != null) {
-                        // get the song count
-                        item.mSongCount = MusicUtils.getSongCountForPlaylist(getContext(), item.mId);
-
-                        /// add the results
-                        numResultsAdded++;
-                        results.add(item);
-                    }
-                } while (playlistCursor.moveToNext() && numResultsAdded < NUM_RESULTS_TO_GET);
+                    SearchResult item = createSearchResult(playlistCursor, ResultType.Playlist);
+                    /// add the results
+                    numResultsAdded++;
+                    results.add(item);
+                } while (playlistCursor.moveToNext()
+                        && numResultsAdded < Config.SEARCH_NUM_RESULTS_TO_GET);
 
                 // because we deal with playlists separately,
                 // just mark that we have the full # of playlists
                 // so that logic later can quit out early if full
-                numResultsAdded = NUM_RESULTS_TO_GET;
+                numResultsAdded = Config.SEARCH_NUM_RESULTS_TO_GET;
 
                 // close the cursor
                 playlistCursor.close();
@@ -489,20 +651,11 @@ public class SearchActivity extends FragmentActivity implements LoaderCallbacks<
                     ResultType type = ResultType.getResultType(cursor, mimeTypeIndex);
 
                     // if we still need this type
-                    if (numOfEachType[type.ordinal()] < NUM_RESULTS_TO_GET) {
+                    if (numOfEachType[type.ordinal()] < Config.SEARCH_NUM_RESULTS_TO_GET) {
                         // get the search result
-                        SearchResult item = SearchResult.createSearchResult(cursor);
-                        if (item != null) {
-                            if (item.mType == ResultType.Song) {
-                                // get the album art details
-                                AlbumArtistDetails details = MusicUtils.getAlbumArtDetails(getContext(), item.mId);
-                                if (details != null) {
-                                    item.mArtist = details.mArtistName;
-                                    item.mAlbum = details.mAlbumName;
-                                    item.mAlbumId = details.mAlbumId;
-                                }
-                            }
+                        SearchResult item = createSearchResult(cursor, type);
 
+                        if (item != null) {
                             // add it
                             results.add(item);
                             numOfEachType[type.ordinal()]++;

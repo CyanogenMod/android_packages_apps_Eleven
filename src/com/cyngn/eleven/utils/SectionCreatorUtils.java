@@ -5,6 +5,7 @@ package com.cyngn.eleven.utils;
 
 import android.content.Context;
 
+import com.cyngn.eleven.Config;
 import com.cyngn.eleven.R;
 import com.cyngn.eleven.model.Album;
 import com.cyngn.eleven.model.Artist;
@@ -19,44 +20,95 @@ import java.util.TreeMap;
  * a section should be created
  */
 public class SectionCreatorUtils {
+    public enum SectionType {
+        Header,
+        Footer
+    }
+
+    public static class Section {
+        public SectionType mType;
+        public String mIdentifier;
+
+        public Section(final SectionType type, final String identifier) {
+            mType = type;
+            mIdentifier = identifier;
+        }
+    }
+
     /**
      * Interface to compare two items and create labels
      * @param <T> type of item to compare
      */
-    public static interface IItemCompare<T> {
+    public static class IItemCompare<T> {
         /**
          * Compares to items and returns a section divider T if there should
          * be a section divider between first and second
          * @param first the first element in the list.  If null, it is checking to see
          *              if we need a divider at the beginning of the list
          * @param second the second element in the list.
+         * @param items the source list of items that we are creating headers from
+         * @param firstIndex index of the first item we are looking at
          * @return String the expected separator label or null if none
          */
-        public String createSectionSeparator(T first, T second);
+        public String createSectionHeader(T first, T second, List<T> items, int firstIndex) {
+            return createSectionHeader(first, second);
+        }
+
+        public String createSectionHeader(T first, T second) {
+            return null;
+        }
+
+        /**
+         * Compares to items and returns a section divider T if there should
+         * be a section divider between first and second
+         * @param first the first element in the list.
+         * @param second the second element in the list. If null, it is checking to see if we need
+         *               a divider at the end of the list
+         * @param items the source list of items that we are creating footers from
+         * @param firstIndex index of the first item we are looking at
+         * @return String the expected separator label or null if none
+         */
+        public String createSectionFooter(T first, T second, List<T> items, int firstIndex) {
+            return createSectionFooter(first, second);
+        }
+
+        public String createSectionFooter(T first, T second) {
+            return null;
+        }
 
         /**
          * Returns the section label that corresponds to this item
          * @param item the item
          * @return the section label that this label falls under
          */
-        public String createLabel(T item);
-    }
+        public String createHeaderLabel(T item) {
+            return null;
+        }
 
+        /**
+         * Returns the section label that corresponds to this item
+         * @param item the item
+         * @return the section label that this label falls under
+         */
+        public String createFooterLabel(T item) {
+            return null;
+        }
+    }
 
     /**
      * A localized String comparison implementation of IItemCompare
      * @param <T> the type of item to compare
      */
-    public static abstract class LocalizedCompare<T> implements IItemCompare<T> {
+    public static abstract class LocalizedCompare<T> extends IItemCompare<T> {
         @Override
-        public String createSectionSeparator(T first, T second) {
-            String secondLabel = createLabel(second);
+        public String createSectionHeader(T first, T second) {
+            String secondLabel = createHeaderLabel(second);
             // if we can't determine a good label then don't bother creating a section
             if (secondLabel == null) {
                 return null;
             }
 
-            if (first == null || !secondLabel.equals(createLabel(first))) {
+            if (first == null || !secondLabel.equals(createHeaderLabel(first))) {
                 return secondLabel;
             }
 
@@ -64,7 +116,7 @@ public class SectionCreatorUtils {
         }
 
         @Override
-        public String createLabel(T item) {
+        public String createHeaderLabel(T item) {
             return MusicUtils.getLocalizedBucketLetter(getString(item), trimName());
         }
 
@@ -83,18 +135,18 @@ public class SectionCreatorUtils {
      * A simple int comparison implementation of IItemCompare
      * @param <T> the type of item to compare
      */
-    public static abstract class IntCompare<T> implements IItemCompare<T> {
+    public static abstract class IntCompare<T> extends IItemCompare<T> {
         @Override
-        public String createSectionSeparator(T first, T second) {
+        public String createSectionHeader(T first, T second) {
             if (first == null || getInt(first) != getInt(second)) {
-                return createLabel(second);
+                return createHeaderLabel(second);
             }
 
             return null;
         }
 
         @Override
-        public String createLabel(T item) {
+        public String createHeaderLabel(T item) {
             return String.valueOf(getInt(item));
         }
 
@@ -117,7 +169,7 @@ public class SectionCreatorUtils {
         protected abstract int getStringId(int value);
 
         @Override
-        public String createSectionSeparator(T first, T second) {
+        public String createSectionHeader(T first, T second) {
             int secondStringId = getStringId(getInt(second));
             if (first == null || getStringId(getInt(first)) != secondStringId) {
                 return createLabel(secondStringId, second);
@@ -131,7 +183,7 @@ public class SectionCreatorUtils {
         }
 
         @Override
-        public String createLabel(T item) {
+        public String createHeaderLabel(T item) {
             return createLabel(getStringId(getInt(item)), item);
         }
     }
@@ -217,7 +269,7 @@ public class SectionCreatorUtils {
         }
 
         @Override
-        public String createSectionSeparator(T first, T second) {
+        public String createSectionHeader(T first, T second) {
             boolean returnSeparator = false;
             if (first == null) {
                 returnSeparator = true;
@@ -226,14 +278,14 @@ public class SectionCreatorUtils {
                 // not greater than 5 albums
                 int firstInt = getInt(first);
                 int secondInt = getInt(second);
-                if (firstInt != secondInt && 
+                if (firstInt != secondInt &&
                         !(firstInt >= 5 && secondInt >= 5)) {
                     returnSeparator = true;
                 }
             }
 
             if (returnSeparator) {
-                return createLabel(second);
+                return createHeaderLabel(second);
             }
 
             return null;
@@ -256,22 +308,34 @@ public class SectionCreatorUtils {
      * @param <T> the type of item to compare
      * @return Creates a TreeMap of indices (if the headers were part of the list) to section labels
      */
-    public static <T> TreeMap<Integer, String> createSections(final List<T> list,
+    public static <T> TreeMap<Integer, Section> createSections(final List<T> list,
                                                               final IItemCompare<T> comparator) {
         if (list != null && list.size() > 0) {
-            TreeMap<Integer, String> sectionHeaders = new TreeMap<Integer, String>();
-            for (int i = 0; i < list.size(); i++) {
+            TreeMap<Integer, Section> sections = new TreeMap<Integer, Section>();
+            for (int i = 0; i < list.size() + 1; i++) {
                 T first = (i == 0 ? null : list.get(i - 1));
-                T second = list.get(i);
+                T second = (i == list.size() ? null : list.get(i));
 
-                String separator = comparator.createSectionSeparator(first, second);
-                if (separator != null) {
-                    // add sectionHeaders.size() to store the indices of the combined list
-                    sectionHeaders.put(sectionHeaders.size() + i, separator);
+                // create the footer first because if we need both it should be footer,header,item
+                // not header,footer,item
+                if (first != null) {
+                    String footer = comparator.createSectionFooter(first, second, list, i - 1);
+                    if (footer != null) {
+                        // add sectionHeaders.size() to store the indices of the combined list
+                        sections.put(sections.size() + i, new Section(SectionType.Footer, footer));
+                    }
+                }
+
+                if (second != null) {
+                    String header = comparator.createSectionHeader(first, second, list, i - 1);
+                    if (header != null) {
+                        // add sectionHeaders.size() to store the indices of the combined list
+                        sections.put(sections.size() + i, new Section(SectionType.Header, header));
+                    }
                 }
             }
 
-            return sectionHeaders;
+            return sections;
         }
 
         return null;
@@ -371,7 +435,7 @@ public class SectionCreatorUtils {
                 }
 
                 @Override
-                public String createLabel(Album item) {
+                public String createHeaderLabel(Album item) {
                     if (MusicUtils.isInvalidYear(getInt(item))) {
                         return context.getString(R.string.header_unknown_year);
                     }
@@ -438,14 +502,14 @@ public class SectionCreatorUtils {
                 }
 
                 @Override
-                public String createLabel(Song item) {
+                public String createHeaderLabel(Song item) {
                     // I have seen tracks in my library where it would return 0 or 2
                     // so have this check to return a more friendly label in that case
                     if (MusicUtils.isInvalidYear(item.mYear)) {
                         return context.getString(R.string.header_unknown_year);
                     }
 
-                    return super.createLabel(item);
+                    return super.createHeaderLabel(item);
                 }
             };
         }
@@ -462,16 +526,16 @@ public class SectionCreatorUtils {
         return new IItemCompare<SearchResult>() {
 
             @Override
-            public String createSectionSeparator(SearchResult first, SearchResult second) {
+            public String createSectionHeader(SearchResult first, SearchResult second) {
                 if (first == null || first.mType != second.mType) {
-                    return createLabel(second);
+                    return createHeaderLabel(second);
                 }
 
                 return null;
             }
 
             @Override
-            public String createLabel(SearchResult item) {
+            public String createHeaderLabel(SearchResult item) {
                 switch (item.mType) {
                     case Artist:
                         return context.getString(R.string.page_artists);
@@ -481,6 +545,45 @@ public class SectionCreatorUtils {
                         return context.getString(R.string.page_songs);
                     case Playlist:
                         return context.getString(R.string.page_playlists);
+                }
+
+                return null;
+            }
+
+            @Override
+            public String createSectionFooter(SearchResult first, SearchResult second,
+                                              List<SearchResult> items, int firstIndex) {
+                if (second == null ||
+                        (first != null && first.mType != second.mType)) {
+                    // if we don't have SEARCH_NUM_RESULTS_TO_GET # of the same type of items
+                    // then we don't have enough to show the footer.  For example, if we show 5
+                    // items but only the last 2 items are artists, that means we only have 2
+                    // so there is no point in showing the "Show All" footer
+                    // We start from 1 because we don't need to count
+                    // the first item itself
+                    for (int i = 1; i < Config.SEARCH_NUM_RESULTS_TO_GET; i++) {
+                        if (firstIndex - i < 0 || items.get(firstIndex - i).mType != first.mType) {
+                            return null;
+                        }
+                    }
+
+                    return createFooterLabel(first);
+                }
+
+                return null;
+            }
+
+            @Override
+            public String createFooterLabel(SearchResult item) {
+                switch (item.mType) {
+                    case Artist:
+                        return context.getString(R.string.footer_search_artists);
+                    case Album:
+                        return context.getString(R.string.footer_search_albums);
+                    case Song:
+                        return context.getString(R.string.footer_search_songs);
+                    case Playlist:
+                        return context.getString(R.string.footer_search_playlists);
                 }
 
                 return null;

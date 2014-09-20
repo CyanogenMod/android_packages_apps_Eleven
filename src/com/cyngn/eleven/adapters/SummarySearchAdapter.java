@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.TextView;
 
 import com.cyngn.eleven.R;
 import com.cyngn.eleven.cache.ImageFetcher;
@@ -27,7 +28,7 @@ import java.util.Locale;
 public final class SummarySearchAdapter extends ArrayAdapter<SearchResult> implements SectionAdapter.BasicAdapter {
 
     /**
-     * Number of views (ImageView and TextView)
+     * no-image list item type and with image type
      */
     private static final int VIEW_TYPE_COUNT = 2;
 
@@ -83,7 +84,7 @@ public final class SummarySearchAdapter extends ArrayAdapter<SearchResult> imple
                 // Asynchronously load the artist image into the adapter
                 mImageFetcher.loadArtistImage(item.mArtist, holder.mImage.get());
 
-                mHighlighter.setText(holder.mLineOne.get(), item.mArtist, mPrefix);
+                setText(holder.mLineOne.get(), item.mArtist);
 
                 String songCount = MusicUtils.makeLabel(getContext(), R.plurals.Nsongs, item.mSongCount);
                 String albumCount = MusicUtils.makeLabel(getContext(), R.plurals.Nalbums, item.mAlbumCount);
@@ -96,21 +97,20 @@ public final class SummarySearchAdapter extends ArrayAdapter<SearchResult> imple
                 mImageFetcher.loadAlbumImage(item.mArtist, item.mAlbum,
                         item.mId, holder.mImage.get());
 
-                mHighlighter.setText(holder.mLineOne.get(), item.mAlbum, mPrefix);
-                mHighlighter.setText(holder.mLineTwo.get(), item.mArtist, mPrefix);
+                setText(holder.mLineOne.get(), item.mAlbum);
+                setText(holder.mLineTwo.get(), item.mArtist);
                 break;
             case Song:
                 // Asynchronously load the album images into the adapter
                 mImageFetcher.loadAlbumImage(item.mArtist, item.mAlbum,
                         item.mAlbumId, holder.mImage.get());
 
-                mHighlighter.setText(holder.mLineOne.get(), item.mTitle, mPrefix);
-                mHighlighter.setText(holder.mLineTwo.get(),
-                        MusicUtils.makeCombinedString(getContext(), item.mArtist, item.mAlbum),
-                        mPrefix);
+                setText(holder.mLineOne.get(), item.mTitle);
+                setText(holder.mLineTwo.get(),
+                        MusicUtils.makeCombinedString(getContext(), item.mArtist, item.mAlbum));
                 break;
             case Playlist:
-                mHighlighter.setText(holder.mLineOne.get(), item.mTitle, mPrefix);
+                setText(holder.mLineOne.get(), item.mTitle);
                 String songs = MusicUtils.makeLabel(getContext(), R.plurals.Nsongs, item.mSongCount);
                 holder.mLineTwo.get().setText(songs);
                 holder.mLineThree.get().setVisibility(View.GONE);
@@ -118,6 +118,19 @@ public final class SummarySearchAdapter extends ArrayAdapter<SearchResult> imple
         }
 
         return convertView;
+    }
+
+    /**
+     * Sets the text onto the textview with highlighting if a prefix is defined
+     * @param textView
+     * @param text
+     */
+    private void setText(final TextView textView, final String text) {
+        if (mPrefix == null) {
+            textView.setText(text);
+        } else {
+            mHighlighter.setText(textView, text, mPrefix);
+        }
     }
 
     /**

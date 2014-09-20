@@ -30,8 +30,8 @@
     </style>
 
     <style name="ActionBarWidgetTheme" parent="@android:style/Theme.Holo">
-        <!-- This is the color of the search text in the action bar -->
-        <item name="android:textColorHint">@android:color/white</item>
+        <!-- This is the color of the search text hint in the action bar -->
+        <item name="android:textColorHint">@color/search_hint_color</item>
         <item name="android:popupMenuStyle">@style/PopupMenu</item>
         <item name="android:dropDownListViewStyle">@style/DropDownListView</item>
         <item name="android:textAppearanceSmallPopupMenu">@style/SmallPopupMenu</item>
@@ -46,7 +46,7 @@
     <!-- Set the default list view divider color and size -->
     <style name="ListView" parent="@android:style/Widget.Holo.ListView">
         <item name="android:divider">@color/list_item_divider_color</item>
-        <item name="android:dividerHeight">1dp</item>
+        <item name="android:dividerHeight">@dimen/divider_height</item>
     </style>
     
     <!-- Sets up the pop up menu backgroudn resource -->
@@ -57,7 +57,7 @@
     <!-- Sets up the pop up menu divider color and height -->
     <style name="DropDownListView" parent="@android:style/Widget.Holo.ListView.DropDown">
         <item name="android:divider">@color/menu_divider_color</item>
-        <item name="android:dividerHeight">1dp</item>
+        <item name="android:dividerHeight">@dimen/divider_height</item>
     </style>
 
     <!-- Sets up the pop up menu text color and size -->

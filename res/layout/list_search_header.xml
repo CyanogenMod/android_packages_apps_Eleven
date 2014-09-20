@@ -14,22 +14,21 @@
   See the License for the specific language governing permissions and
   limitations under the License.
 -->
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/list_base_container"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
-
-    <include
-        layout="@layout/no_results_message" />
-
-    <com.cyngn.eleven.dragdrop.DragSortListView
-        android:id="@+id/list_base"
+    android:layout_height="46dp"
+    android:background="@null">
+    <TextView
+        android:id="@+id/title"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:cacheColorHint="@color/transparent"
-        android:drawSelectorOnTop="false"
-        android:fadingEdge="vertical"
-        android:fastScrollEnabled="true"
-        android:dividerHeight="@dimen/divider_height"
-        android:divider="@drawable/dnd_list_divider"/>
-</FrameLayout>
+        android:layout_height="20dp"
+        android:layout_alignParentBottom="true"
+        android:paddingLeft="@dimen/list_preferred_item_padding"
+        android:paddingRight="@dimen/list_preferred_item_padding"
+        android:background="@null"
+        android:gravity="center_vertical"
+        android:textAllCaps="true"
+        android:textColor="@color/list_item_header_text_color"
+        android:textSize="@dimen/list_item_header_size"
+        android:fontFamily="sans-serif-light" />
+</RelativeLayout>

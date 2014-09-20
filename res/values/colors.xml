@@ -80,6 +80,7 @@
     <color name="smart_playlist_item_background">#1931353f</color>
     <color name="list_item_background">#4ce4e9ed</color>
     <color name="list_item_header_text_color">#ff3d4049</color>
+    <color name="list_item_search_footer_text_color">#ff41a4f4</color>
     <color name="list_item_text_color">@color/default_text_color</color>
     <color name="list_item_text_color_light">@color/default_text_color_light</color>
     <color name="list_item_divider_color">#4c231f20</color>
@@ -90,6 +91,8 @@
     <color name="tpi_text_color">#bf3d4049</color>
     <color name="tpi_selected_text_color">#bf3d4049</color>
 
+    <!-- Search Colors -->
+    <color name="search_hint_color">#4cffffff</color>
 
     <!-- Color for the text on the audio player -->
     <color name="audio_player_text_color">@color/default_text_color_light</color>

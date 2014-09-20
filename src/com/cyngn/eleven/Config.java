@@ -72,6 +72,11 @@ public final class Config {
      */
     public static final String SMART_PLAYLIST_TYPE = "smart_playlist_type";
 
+    /**
+     * Number of search results to show at the top level search
+     */
+    public static final int SEARCH_NUM_RESULTS_TO_GET = 3;
+
     public static enum SmartPlaylistType {
         LastAdded(-1),
         RecentlyPlayed(-2),
