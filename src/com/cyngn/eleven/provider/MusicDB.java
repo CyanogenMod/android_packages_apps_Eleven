@@ -41,6 +41,7 @@ public class MusicDB extends SQLiteOpenHelper {
         PlaylistArtworkStore.getInstance(mContext).onCreate(db);
         RecentStore.getInstance(mContext).onCreate(db);
         SongPlayCount.getInstance(mContext).onCreate(db);
+        SearchHistory.getInstance(mContext).onCreate(db);
     }
 
     @Override
@@ -48,5 +49,6 @@ public class MusicDB extends SQLiteOpenHelper {
         PlaylistArtworkStore.getInstance(mContext).onUpgrade(db, oldVersion, newVersion);
         RecentStore.getInstance(mContext).onUpgrade(db, oldVersion, newVersion);
         SongPlayCount.getInstance(mContext).onUpgrade(db, oldVersion, newVersion);
+        SearchHistory.getInstance(mContext).onUpgrade(db, oldVersion, newVersion);
     }
 }

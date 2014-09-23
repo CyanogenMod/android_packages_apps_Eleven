@@ -13,15 +13,14 @@ package com.cyngn.eleven.ui.activities;
 
 import android.app.ActionBar;
 import android.app.SearchManager;
-import android.app.SearchableInfo;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.ServiceConnection;
 import android.database.Cursor;
-import android.graphics.Bitmap;
 import android.media.AudioManager;
 import android.os.Bundle;
+import android.os.Handler;
 import android.os.IBinder;
 import android.provider.BaseColumns;
 import android.provider.MediaStore;
@@ -33,26 +32,27 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AbsListView;
 import android.widget.AbsListView.OnScrollListener;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.SearchView;
 import android.widget.SearchView.OnQueryTextListener;
-import android.widget.TextView;
 
 import com.cyngn.eleven.Config;
 import com.cyngn.eleven.IElevenService;
 import com.cyngn.eleven.R;
 import com.cyngn.eleven.adapters.SummarySearchAdapter;
+import com.cyngn.eleven.loaders.WrappedAsyncTaskLoader;
 import com.cyngn.eleven.model.AlbumArtistDetails;
 import com.cyngn.eleven.model.SearchResult;
 import com.cyngn.eleven.model.SearchResult.ResultType;
+import com.cyngn.eleven.provider.SearchHistory;
 import com.cyngn.eleven.recycler.RecycleHolder;
 import com.cyngn.eleven.sectionadapter.SectionAdapter;
 import com.cyngn.eleven.sectionadapter.SectionCreator;
@@ -78,9 +78,25 @@ import static com.cyngn.eleven.utils.MusicUtils.mService;
  * 
  * @author Andrew Neal (andrewdneal@gmail.com)
  */
-public class SearchActivity extends FragmentActivity implements LoaderCallbacks<SectionListContainer<SearchResult>>,
+public class SearchActivity extends FragmentActivity implements
+        LoaderCallbacks<SectionListContainer<SearchResult>>,
         OnScrollListener, OnQueryTextListener, OnItemClickListener, ServiceConnection,
         OnTouchListener {
+    /**
+     * Loading delay of 500ms so we don't flash the screen too much when loading new searches
+     */
+    private static int LOADING_DELAY = 500;
+
+    /**
+     * Identifier for the search loader
+     */
+    private static int SEARCH_LOADER = 0;
+
+    /**
+     * Identifier for the search history loader
+     */
+    private static int HISTORY_LOADER = 1;
+
     /**
      * The service token
      */
@@ -128,6 +144,43 @@ public class SearchActivity extends FragmentActivity implements LoaderCallbacks<
     private ResultType mSearchType;
 
     /**
+     * Search History loader callback
+     */
+    private SearchHistoryCallback mSearchHistoryCallback;
+
+    /**
+     * List view
+     */
+    private ListView mSearchHistoryListView;
+
+    /**
+     * This tracks our current visible state between the different views
+      */
+    enum VisibleState {
+        SearchHistory,
+        Empty,
+        SearchResults,
+        Loading,
+    }
+
+    private VisibleState mCurrentState;
+
+    /**
+     * Handler for posting runnables
+     */
+    private Handler mHandler;
+
+    /**
+     * A runnable to show the loading view that will be posted with a delay to prevent flashing
+     */
+    private Runnable mLoadingRunnable;
+
+    /**
+     * Flag used to track if we are quitting so we don't flash loaders while finishing the activity
+     */
+    private boolean mQuitting = false;
+
+    /**
      * {@inheritDoc}
      */
     @Override
@@ -144,7 +197,7 @@ public class SearchActivity extends FragmentActivity implements LoaderCallbacks<
         mToken = MusicUtils.bindToService(this, this);
 
         // Set the layout
-        setContentView(R.layout.list_base);
+        setContentView(R.layout.activity_search);
 
         // get the input method manager
         mImm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
@@ -164,6 +217,15 @@ public class SearchActivity extends FragmentActivity implements LoaderCallbacks<
 
         initListView();
 
+        // setup handler and runnable
+        mHandler = new Handler();
+        mLoadingRunnable = new Runnable() {
+            @Override
+            public void run() {
+                setState(VisibleState.Loading);
+            }
+        };
+
         // Theme the action bar
         final ActionBar actionBar = getActionBar();
         actionBar.setHomeButtonEnabled(true);
@@ -173,7 +235,7 @@ public class SearchActivity extends FragmentActivity implements LoaderCallbacks<
         mFilterString = getIntent().getStringExtra(SearchManager.QUERY);
 
         // if we have a non-empty search string, this is a 2nd lvl search
-        if (mFilterString != null && !mFilterString.isEmpty()) {
+        if (!TextUtils.isEmpty(mFilterString)) {
             mTopLevelSearch = false;
 
             // get the search type to filter by
@@ -203,11 +265,14 @@ public class SearchActivity extends FragmentActivity implements LoaderCallbacks<
             // Set the prefix
             mAdapter.getUnderlyingAdapter().setPrefix(mFilterString);
 
-            // Prepare the loader. Either re-connect with an existing one,
-            // or start a new one.
-            getSupportLoaderManager().initLoader(0, null, this);
+            // Start the loader for the query
+            getSupportLoaderManager().initLoader(SEARCH_LOADER, null, this);
         } else {
             mTopLevelSearch = true;
+            mSearchHistoryCallback = new SearchHistoryCallback();
+
+            // Start the loader for the search history
+            getSupportLoaderManager().initLoader(HISTORY_LOADER, null, mSearchHistoryCallback);
         }
 
         // set the background on the root view
@@ -235,14 +300,32 @@ public class SearchActivity extends FragmentActivity implements LoaderCallbacks<
         // when updating the search.  For now let's manually toggle visibility and come back
         // to this later
         //mListView.setEmptyView(mNoResultsContainer);
+
+        // load the search history list view
+        mSearchHistoryListView = (ListView)findViewById(R.id.list_search_history);
+        mSearchHistoryListView.setOnItemClickListener(new OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                String searchItem = (String)mSearchHistoryListView.getAdapter().getItem(position);
+                mSearchView.setQuery(searchItem, true);
+            }
+        });
+        mSearchHistoryListView.setOnTouchListener(this);
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public Loader<SectionListContainer<SearchResult>> onCreateLoader(final int id, final Bundle args) {
+    public Loader<SectionListContainer<SearchResult>> onCreateLoader(final int id,
+                                                                     final Bundle args) {
         IItemCompare<SearchResult> comparator = null;
+
+        // prep the loader in case the query takes a long time
+        setLoading();
+
+        // set the no results string ahead of time in case the user changes the string whiel loading
+        mNoResultsContainer.setMainHighlightText("\"" + mFilterString + "\"");
 
         // if we are at the top level, create a comparator to separate the different types into
         // their own sections (artists, albums, etc)
@@ -291,14 +374,19 @@ public class SearchActivity extends FragmentActivity implements LoaderCallbacks<
 
             @Override
             public boolean onMenuItemActionCollapse(MenuItem item) {
-                finish();
-                return true;
+                quit();
+                return false;
             }
         });
 
         menu.findItem(R.id.menu_search).expandActionView();
 
         return super.onCreateOptionsMenu(menu);
+    }
+
+    private void quit() {
+        mQuitting = true;
+        finish();
     }
 
     /**
@@ -339,7 +427,7 @@ public class SearchActivity extends FragmentActivity implements LoaderCallbacks<
     public boolean onOptionsItemSelected(final MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:
-                finish();
+                quit();
                 return true;
             default:
                 break;
@@ -357,13 +445,13 @@ public class SearchActivity extends FragmentActivity implements LoaderCallbacks<
         if (data.mListResults.isEmpty()) {
             // clear the adapter
             mAdapter.clear();
-            mListView.setVisibility(View.INVISIBLE);
-            mNoResultsContainer.setVisibility(View.VISIBLE);
+            // show the empty state
+            setState(VisibleState.Empty);
         } else {
             // Set the data
             mAdapter.setData(data);
-            mListView.setVisibility(View.VISIBLE);
-            mNoResultsContainer.setVisibility(View.INVISIBLE);
+            // show the search results
+            setState(VisibleState.SearchResults);
         }
     }
 
@@ -372,8 +460,6 @@ public class SearchActivity extends FragmentActivity implements LoaderCallbacks<
      */
     @Override
     public void onLoaderReset(final Loader<SectionListContainer<SearchResult>> loader) {
-        // Clear the data in the adapter
-        mAdapter.unload();
     }
 
     /**
@@ -396,11 +482,9 @@ public class SearchActivity extends FragmentActivity implements LoaderCallbacks<
      */
     @Override
     public boolean onQueryTextSubmit(final String query) {
-        if (TextUtils.isEmpty(query)) {
-            mFilterString = "";
-            return false;
-        }
-
+        // simulate an on query text change
+        onQueryTextChange(query);
+        // hide the input manager
         hideInputManager();
 
         return true;
@@ -408,13 +492,64 @@ public class SearchActivity extends FragmentActivity implements LoaderCallbacks<
 
     public void hideInputManager() {
         // When the search is "committed" by the user, then hide the keyboard so
-        // the user can
-        // more easily browse the list of results.
+        // the user can more easily browse the list of results.
         if (mSearchView != null) {
             if (mImm != null && mImm.isImeShowing()) {
                 mImm.hideSoftInputFromWindow(mSearchView.getWindowToken(), 0);
             }
             mSearchView.clearFocus();
+
+            // add our search string
+            SearchHistory.getInstance(this).addSearchString(mFilterString);
+        }
+    }
+
+    /**
+     * This posts a delayed for showing the loading screen.  The reason for the delayed is we
+     * don't want to flash the loading icon very often since searches usually are pretty fast
+     */
+    public void setLoading() {
+        if (mCurrentState != VisibleState.Loading) {
+            if (!mHandler.hasCallbacks(mLoadingRunnable)) {
+                mHandler.postDelayed(mLoadingRunnable, LOADING_DELAY);
+            }
+        }
+    }
+
+    /**
+     * Sets the currently visible view
+     * @param state the current visible state
+     */
+    public void setState(VisibleState state) {
+        // remove any delayed runnables.  This has to be before mCurrentState == state
+        // in case the state doesn't change but we've created a loading runnable
+        mHandler.removeCallbacks(mLoadingRunnable);
+
+        // if we are already looking at view already, just quit
+        if (mCurrentState == state) {
+            return;
+        }
+
+        mCurrentState = state;
+
+        mSearchHistoryListView.setVisibility(View.INVISIBLE);
+        mListView.setVisibility(View.INVISIBLE);
+        mNoResultsContainer.setVisibility(View.INVISIBLE);
+
+        switch (mCurrentState) {
+            case SearchHistory:
+                mSearchHistoryListView.setVisibility(View.VISIBLE);
+                break;
+            case SearchResults:
+                mListView.setVisibility(View.VISIBLE);
+                break;
+            case Empty:
+                mNoResultsContainer.setVisibility(View.VISIBLE);
+                break;
+            default:
+                // Don't show anything for now - we need a loading screen
+                // see bug: https://cyanogen.atlassian.net/browse/MUSIC-63
+                break;
         }
     }
 
@@ -423,19 +558,34 @@ public class SearchActivity extends FragmentActivity implements LoaderCallbacks<
      */
     @Override
     public boolean onQueryTextChange(final String newText) {
-        if (TextUtils.isEmpty(newText)) {
-            mListView.setVisibility(View.INVISIBLE);
-            mNoResultsContainer.setVisibility(View.INVISIBLE);
-            mFilterString = "";
-            return false;
+        if (mQuitting) {
+            return true;
         }
+
+        if (TextUtils.isEmpty(newText)) {
+            if (!TextUtils.isEmpty(mFilterString)) {
+                mFilterString = "";
+                getSupportLoaderManager().restartLoader(HISTORY_LOADER, null,
+                        mSearchHistoryCallback);
+                getSupportLoaderManager().destroyLoader(SEARCH_LOADER);
+            }
+
+            return true;
+        }
+
+        // if the strings are the same, return
+        if (newText.equals(mFilterString)) {
+            return true;
+        }
+
         // Called when the action bar search text has changed. Update
         // the search filter, and restart the loader to do a new query
         // with this filter.
-        mFilterString = !TextUtils.isEmpty(newText) ? newText : null;
+        mFilterString = newText;
         // Set the prefix
         mAdapter.getUnderlyingAdapter().setPrefix(mFilterString);
-        getSupportLoaderManager().restartLoader(0, null, this);
+        getSupportLoaderManager().restartLoader(SEARCH_LOADER, null, this);
+        getSupportLoaderManager().destroyLoader(HISTORY_LOADER);
         return true;
     }
 
@@ -523,7 +673,8 @@ public class SearchActivity extends FragmentActivity implements LoaderCallbacks<
                 case Song:
                     item = SearchResult.createSearchResult(cursor);
                     if (item != null) {
-                        AlbumArtistDetails details = MusicUtils.getAlbumArtDetails(getContext(), item.mId);
+                        AlbumArtistDetails details = MusicUtils.getAlbumArtDetails(getContext(),
+                                item.mId);
                         if (details != null) {
                             item.mArtist = details.mArtistName;
                             item.mAlbum = details.mAlbumName;
@@ -681,14 +832,14 @@ public class SearchActivity extends FragmentActivity implements LoaderCallbacks<
 
         public static Cursor makePlaylistSearchCursor(final Context context,
                                                       final String searchTerms) {
-            if (searchTerms == null || searchTerms.isEmpty()) {
+            if (TextUtils.isEmpty(searchTerms)) {
                 return null;
             }
 
             // trim out special characters like % or \ as well as things like "a" "and" etc
             String trimmedSearchTerms = MusicUtils.getTrimmedName(searchTerms);
 
-            if (trimmedSearchTerms == null || trimmedSearchTerms.isEmpty()) {
+            if (TextUtils.isEmpty(trimmedSearchTerms)) {
                 return null;
             }
 
@@ -710,7 +861,8 @@ public class SearchActivity extends FragmentActivity implements LoaderCallbacks<
                 }
             }
 
-            return context.getContentResolver().query(MediaStore.Audio.Playlists.EXTERNAL_CONTENT_URI,
+            return context.getContentResolver().query(
+                    MediaStore.Audio.Playlists.EXTERNAL_CONTENT_URI,
                     new String[]{
                         /* 0 */
                             BaseColumns._ID,
@@ -720,7 +872,50 @@ public class SearchActivity extends FragmentActivity implements LoaderCallbacks<
         }
     }
 
+    /**
+     * Loads the search history in the background and creates an array adapter
+     */
+    public static class SearchHistoryLoader extends WrappedAsyncTaskLoader<ArrayAdapter<String>> {
+        public SearchHistoryLoader(Context context) {
+            super(context);
+        }
 
+        @Override
+        public ArrayAdapter<String> loadInBackground() {
+            ArrayList<String> strings = SearchHistory.getInstance(getContext()).getRecentSearches();
+            ArrayAdapter<String> adapter = new ArrayAdapter<String>(getContext(),
+                    R.layout.list_item_search_history, R.id.line_one);
+            adapter.addAll(strings);
+            return adapter;
+        }
+    }
+
+    /**
+     * This handles the Loader callbacks for the search history
+     */
+    public class SearchHistoryCallback implements LoaderCallbacks<ArrayAdapter<String>> {
+        @Override
+        public Loader<ArrayAdapter<String>> onCreateLoader(int i, Bundle bundle) {
+            // prep the loader in case the query takes a long time
+            setLoading();
+
+            return new SearchHistoryLoader(SearchActivity.this);
+        }
+
+        @Override
+        public void onLoadFinished(Loader<ArrayAdapter<String>> searchHistoryAdapterLoader,
+                                   ArrayAdapter<String> searchHistoryAdapter) {
+            // show the search history
+            setState(VisibleState.SearchHistory);
+
+            mSearchHistoryListView.setAdapter(searchHistoryAdapter);
+        }
+
+        @Override
+        public void onLoaderReset(Loader<ArrayAdapter<String>> cursorAdapterLoader) {
+
+        }
+    }
 
     /**
      * {@inheritDoc}

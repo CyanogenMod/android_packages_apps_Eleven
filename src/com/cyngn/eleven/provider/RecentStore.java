@@ -91,7 +91,7 @@ public class RecentStore {
             Cursor oldest = null;
             try {
                 database.query(RecentStoreColumns.NAME,
-                        new String[]{RecentStoreColumns.ID}, null, null, null, null,
+                        new String[]{RecentStoreColumns.TIMEPLAYED}, null, null, null, null,
                         RecentStoreColumns.TIMEPLAYED + " ASC");
 
                 if (oldest != null && oldest.getCount() > MAX_ITEMS_IN_DB) {

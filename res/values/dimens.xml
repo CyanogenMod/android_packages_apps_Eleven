@@ -61,6 +61,7 @@
     <dimen name="grid_bottom_height">40dip</dimen>
     <!-- Grid and list item normal height -->
     <dimen name="item_normal_height">70.0dip</dimen>
+    <dimen name="item_short_height">60.0dip</dimen>
     <dimen name="list_item_image_height">50.0dip</dimen>
     <dimen name="list_item_image_width">50.0dip</dimen>
     <dimen name="list_item_top_track_image_size">26.0dip</dimen>

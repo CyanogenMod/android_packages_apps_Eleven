@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Copyright (C) 2014 Cyanogen, Inc.
+-->
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ListView
+        android:id="@+id/list_search_history"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:cacheColorHint="@color/transparent"
+        android:drawSelectorOnTop="false"
+        android:fastScrollEnabled="true"
+        android:dividerHeight="@dimen/divider_height"
+        android:divider="@drawable/inset_list_divider"/>
+
+    <include
+        layout="@layout/list_base" />
+</FrameLayout>
