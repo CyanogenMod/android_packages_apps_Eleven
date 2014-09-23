@@ -8,26 +8,20 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.database.sqlite.SQLiteOpenHelper;
 import android.view.animation.AccelerateInterpolator;
 import android.view.animation.Interpolator;
 
 import java.util.HashSet;
 import java.util.Iterator;
-import java.util.Set;
 
 /**
  * This database tracks the number of play counts for an individual song.  This is used to drive
  * the top played tracks as well as the playlist images
  */
-public class SongPlayCount extends SQLiteOpenHelper {
-    /* Version constant to increment when the database should be rebuilt */
-    private static final int VERSION = 1;
-
-    /* Name of database file */
-    public static final String DATABASENAME = "songplaycount.db";
-
+public class SongPlayCount {
     private static SongPlayCount sInstance = null;
+
+    private MusicDB mMusicDatabase = null;
 
     // interpolator curve applied for measuring the curve
     private static Interpolator sInterpolator = new AccelerateInterpolator(1.5f);
@@ -57,7 +51,7 @@ public class SongPlayCount extends SQLiteOpenHelper {
      * @param context The {@link android.content.Context} to use
      */
     public SongPlayCount(final Context context) {
-        super(context, DATABASENAME, null, VERSION);
+        mMusicDatabase = MusicDB.getInstance(context);
 
         long msSinceEpoch = System.currentTimeMillis();
         mNumberOfWeeksSinceEpoch = (int)(msSinceEpoch / ONE_WEEK_IN_MS);
@@ -65,10 +59,6 @@ public class SongPlayCount extends SQLiteOpenHelper {
         mDatabaseUpdated = false;
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
     public void onCreate(final SQLiteDatabase db) {
         // create the play count table
         // WARNING: If you change the order of these columns
@@ -94,10 +84,6 @@ public class SongPlayCount extends SQLiteOpenHelper {
         db.execSQL(builder.toString());
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
     public void onUpgrade(final SQLiteDatabase db, final int oldVersion, final int newVersion) {
         // If we ever have upgrade, this code should be changed to handle this more gracefully
         db.execSQL("DROP TABLE IF EXISTS " + SongPlayCountColumns.NAME);
@@ -124,7 +110,7 @@ public class SongPlayCount extends SQLiteOpenHelper {
             return;
         }
 
-        final SQLiteDatabase database = getWritableDatabase();
+        final SQLiteDatabase database = mMusicDatabase.getWritableDatabase();
         updateExistingRow(database, songId, true);
     }
 
@@ -261,7 +247,7 @@ public class SongPlayCount extends SQLiteOpenHelper {
     public Cursor getTopPlayedResults(int numResults) {
         updateResults();
 
-        final SQLiteDatabase database = getReadableDatabase();
+        final SQLiteDatabase database = mMusicDatabase.getReadableDatabase();
         return database.query(SongPlayCountColumns.NAME, new String[] { SongPlayCountColumns.ID },
                 null, null, null, null, SongPlayCountColumns.PLAYCOUNTSCORE + " DESC",
                 (numResults <= 0 ? null : String.valueOf(numResults)));
@@ -313,7 +299,7 @@ public class SongPlayCount extends SQLiteOpenHelper {
         long[] sortedList = new long[uniqueIds.size()];
 
         // now query for the songs
-        final SQLiteDatabase database = getReadableDatabase();
+        final SQLiteDatabase database = mMusicDatabase.getReadableDatabase();
         Cursor topSongsCursor = null;
         int idx = 0;
 
@@ -355,7 +341,7 @@ public class SongPlayCount extends SQLiteOpenHelper {
             return;
         }
 
-        final SQLiteDatabase database = getWritableDatabase();
+        final SQLiteDatabase database = mMusicDatabase.getWritableDatabase();
 
         database.beginTransaction();
 
@@ -388,7 +374,7 @@ public class SongPlayCount extends SQLiteOpenHelper {
      * @param songId The song Id to remove.
      */
     public void removeItem(final long songId) {
-        final SQLiteDatabase database = getWritableDatabase();
+        final SQLiteDatabase database = mMusicDatabase.getWritableDatabase();
         deleteEntry(database, String.valueOf(songId));
     }
 

@@ -7,7 +7,6 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.database.sqlite.SQLiteOpenHelper;
 
 import com.cyngn.eleven.utils.MusicUtils;
 
@@ -15,16 +14,12 @@ import com.cyngn.eleven.utils.MusicUtils;
  * This db stores the details to generate the playlist artwork including when it was
  * last updated and the # of songs in the playlist when it last updated
  */
-public class PlaylistArtworkStore extends SQLiteOpenHelper {
-    /* Version constant to increment when the database should be rebuilt */
-    private static final int VERSION = 1;
-
+public class PlaylistArtworkStore {
     private static final long ONE_DAY_IN_MS = 1000 * 60 * 60 * 24;
 
-    /* Name of database file */
-    public static final String DATABASENAME = "playlistdetail.db";
-
     private static PlaylistArtworkStore sInstance = null;
+
+    private MusicDB mMusicDatabase = null;
 
     /**
      * @param context The {@link android.content.Context} to use
@@ -61,15 +56,11 @@ public class PlaylistArtworkStore extends SQLiteOpenHelper {
      * @param context The {@link android.content.Context} to use
      */
     public PlaylistArtworkStore(final Context context) {
-        super(context, DATABASENAME, null, VERSION);
+        mMusicDatabase = MusicDB.getInstance(context);
 
         mContext = context;
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
     public void onCreate(final SQLiteDatabase db) {
         // create the table
         StringBuilder builder = new StringBuilder();
@@ -94,10 +85,6 @@ public class PlaylistArtworkStore extends SQLiteOpenHelper {
         db.execSQL(builder.toString());
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
     public void onUpgrade(final SQLiteDatabase db, final int oldVersion, final int newVersion) {
         // If we ever have upgrade, this code should be changed to handle this more gracefully
         db.execSQL("DROP TABLE IF EXISTS " + PlaylistArtworkStoreColumns.NAME);
@@ -149,7 +136,7 @@ public class PlaylistArtworkStore extends SQLiteOpenHelper {
      * @param countColumnName the column to set the # of songs to based on the playlist
      */
     private void updateOrInsertTime(final long playlistId, final String columnName, final String countColumnName) {
-        SQLiteDatabase database = getWritableDatabase();
+        SQLiteDatabase database = mMusicDatabase.getWritableDatabase();
 
         database.beginTransaction();
 
@@ -231,7 +218,7 @@ public class PlaylistArtworkStore extends SQLiteOpenHelper {
      * @return cursor
      */
     private Cursor getEntry(final long playlistId) {
-        SQLiteDatabase db = getReadableDatabase();
+        SQLiteDatabase db = mMusicDatabase.getReadableDatabase();
         return db.query(PlaylistArtworkStoreColumns.NAME, null,
                 PlaylistArtworkStoreColumns.ID + "=" + playlistId, null, null, null, null);
     }

@@ -15,20 +15,14 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.database.sqlite.SQLiteOpenHelper;
 
-public class RecentStore extends SQLiteOpenHelper {
-
-    /* Version constant to increment when the database should be rebuilt */
-    private static final int VERSION = 1;
-
+public class RecentStore {
     /* Maximum # of items in the db */
     private static final int MAX_ITEMS_IN_DB = 500;
 
-    /* Name of database file */
-    public static final String DATABASENAME = "recenthistory.db";
-
     private static RecentStore sInstance = null;
+
+    private MusicDB mMusicDatabase = null;
 
     /**
      * Constructor of <code>RecentStore</code>
@@ -36,23 +30,15 @@ public class RecentStore extends SQLiteOpenHelper {
      * @param context The {@link Context} to use
      */
     public RecentStore(final Context context) {
-        super(context, DATABASENAME, null, VERSION);
+        mMusicDatabase = MusicDB.getInstance(context);
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
     public void onCreate(final SQLiteDatabase db) {
         db.execSQL("CREATE TABLE IF NOT EXISTS " + RecentStoreColumns.NAME + " ("
                 + RecentStoreColumns.ID + " LONG NOT NULL," + RecentStoreColumns.TIMEPLAYED
                 + " LONG NOT NULL);");
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
     public void onUpgrade(final SQLiteDatabase db, final int oldVersion, final int newVersion) {
         db.execSQL("DROP TABLE IF EXISTS " + RecentStoreColumns.NAME);
         onCreate(db);
@@ -75,7 +61,7 @@ public class RecentStore extends SQLiteOpenHelper {
      * @param songId The song id to store
      */
     public void addSongId(final long songId) {
-        final SQLiteDatabase database = getWritableDatabase();
+        final SQLiteDatabase database = mMusicDatabase.getWritableDatabase();
         database.beginTransaction();
 
         try {
@@ -133,7 +119,7 @@ public class RecentStore extends SQLiteOpenHelper {
      * @param songId to remove.
      */
     public void removeItem(final long songId) {
-        final SQLiteDatabase database = getWritableDatabase();
+        final SQLiteDatabase database = mMusicDatabase.getWritableDatabase();
         database.delete(RecentStoreColumns.NAME, RecentStoreColumns.ID + " = ?", new String[] {
             String.valueOf(songId)
         });
@@ -146,7 +132,7 @@ public class RecentStore extends SQLiteOpenHelper {
      * @return cursor
      */
     public Cursor queryRecentIds(final String limit) {
-        final SQLiteDatabase database = getReadableDatabase();
+        final SQLiteDatabase database = mMusicDatabase.getReadableDatabase();
         return database.query(RecentStoreColumns.NAME,
                 new String[]{RecentStoreColumns.ID}, null, null, null, null,
                 RecentStoreColumns.TIMEPLAYED + " DESC", limit);
