@@ -12,9 +12,9 @@
         android:layout_height="match_parent"
         android:cacheColorHint="@color/transparent"
         android:drawSelectorOnTop="false"
-        android:fastScrollEnabled="true"
-        android:dividerHeight="@dimen/divider_height"
-        android:divider="@drawable/inset_list_divider"/>
+        android:divider="@null"
+        android:dividerHeight="0dp"
+        android:fastScrollEnabled="true" />
 
     <include
         layout="@layout/list_base" />

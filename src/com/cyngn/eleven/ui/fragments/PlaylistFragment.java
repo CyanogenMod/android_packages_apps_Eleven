@@ -105,7 +105,7 @@ public class PlaylistFragment extends Fragment implements LoaderCallbacks<List<P
     public void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         // Create the adpater
-        mAdapter = new PlaylistAdapter(getActivity(), R.layout.list_item_normal);
+        mAdapter = new PlaylistAdapter(getActivity());
     }
 
     /**

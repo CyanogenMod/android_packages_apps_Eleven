@@ -42,12 +42,10 @@
         android:layout_toLeftOf="@id/overflow"
         android:layout_marginTop="-2dp" />
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
+    <ImageView
+        android:id="@+id/divider"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true"
-        android:layout_marginLeft="@dimen/list_preferred_item_padding"
-        android:layout_marginRight="@dimen/list_preferred_item_padding"
-        android:background="@color/list_item_divider_color" />
+        android:src="@drawable/inset_list_divider" />
 </RelativeLayout>

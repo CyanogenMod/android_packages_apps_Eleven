@@ -68,11 +68,6 @@ public class ArtistAdapter extends ArrayAdapter<Artist> implements SectionAdapte
     private DataHolder[] mData;
 
     /**
-     * Loads line three and the background image if the user decides to.
-     */
-    private boolean mLoadExtraData = false;
-
-    /**
      * Constructor of <code>ArtistAdapter</code>
      * 
      * @param context The {@link Context} to use.
@@ -113,23 +108,6 @@ public class ArtistAdapter extends ArrayAdapter<Artist> implements SectionAdapte
         // Asynchronously load the artist image into the adapter
         mImageFetcher.loadArtistImage(dataHolder.mLineOne, holder.mImage.get());
 
-        TextView lineThree = holder.mLineThree.get();
-        if (mLoadExtraData) {
-            // Make sure the background layer gets set
-            holder.mOverlay.get().setBackgroundColor(mOverlay);
-            if (lineThree != null) {
-                // Set the number of songs (line three)
-                lineThree.setText(dataHolder.mLineThree);
-                lineThree.setVisibility(View.VISIBLE);
-            }
-
-            // Set the background image
-            mImageFetcher.loadArtistImage(dataHolder.mLineOne, holder.mBackground.get());
-            // Play the artist when the artwork is touched
-            playArtist(holder.mImage.get(), position);
-        } else if (lineThree != null) {
-            lineThree.setVisibility(View.GONE);
-        }
         return convertView;
     }
 
@@ -242,13 +220,5 @@ public class ArtistAdapter extends ArrayAdapter<Artist> implements SectionAdapte
         }
 
         return  -1;
-    }
-
-    /**
-     * @param extra True to load line three and the background image, false
-     *            otherwise.
-     */
-    public void setLoadExtraData(final boolean extra) {
-        mLoadExtraData = extra;
     }
 }

@@ -13,6 +13,7 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import com.cyngn.eleven.R;
+import com.cyngn.eleven.ui.MusicHolder;
 import com.cyngn.eleven.utils.SectionCreatorUtils.Section;
 import com.cyngn.eleven.utils.SectionCreatorUtils.SectionType;
 
@@ -99,7 +100,23 @@ public class SectionAdapter<TItem,
             TextView title = (TextView)convertView.findViewById(R.id.title);
             title.setText(mSections.get(position).mIdentifier);
         } else {
-            convertView = mUnderlyingAdapter.getView(getInternalPosition(position), convertView, parent);
+            convertView = mUnderlyingAdapter.getView(
+                    getInternalPosition(position), convertView, parent);
+
+            Object tag = convertView.getTag();
+            if (tag instanceof MusicHolder) {
+                MusicHolder holder = (MusicHolder)tag;
+                View divider = holder.mDivider.get();
+                if (divider != null) {
+                    // if it is the last item in the list, or it is an item before a section divider
+                    // then hide the divider, otherwise show it
+                    if (position == getCount() - 1 || isSection(position + 1)) {
+                        divider.setVisibility(View.INVISIBLE);
+                    } else {
+                        divider.setVisibility(View.VISIBLE);
+                    }
+                }
+            }
         }
 
         return convertView;

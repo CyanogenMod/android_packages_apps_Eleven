@@ -113,7 +113,6 @@ public final class SummarySearchAdapter extends ArrayAdapter<SearchResult> imple
                 setText(holder.mLineOne.get(), item.mTitle);
                 String songs = MusicUtils.makeLabel(getContext(), R.plurals.Nsongs, item.mSongCount);
                 holder.mLineTwo.get().setText(songs);
-                holder.mLineThree.get().setVisibility(View.GONE);
                 break;
         }
 

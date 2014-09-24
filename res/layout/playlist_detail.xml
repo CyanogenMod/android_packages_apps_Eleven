@@ -14,7 +14,7 @@
         android:layout_height="match_parent"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
-        layout="@layout/list_base_nopadding" />
+        layout="@layout/list_base" />
 
     <include
         android:id="@+id/playlist_header"

@@ -95,4 +95,10 @@ public class Playlist {
         return mPlaylistName;
     }
 
+    /**
+     * @return true if this is a smart playlist
+     */
+    public boolean isSmartPlaylist() {
+        return mPlaylistId < 0;
+    }
 }

@@ -28,8 +28,8 @@
         android:layout_height="match_parent"
         android:cacheColorHint="@color/transparent"
         android:drawSelectorOnTop="false"
+        android:divider="@null"
+        android:dividerHeight="0dp"
         android:fadingEdge="vertical"
-        android:fastScrollEnabled="true"
-        android:dividerHeight="@dimen/divider_height"
-        android:divider="@drawable/inset_list_divider" />
+        android:fastScrollEnabled="true" />
 </FrameLayout>

@@ -136,10 +136,6 @@ public class ProfileSongAdapter extends ArrayAdapter<Song> {
         if (convertView == null) {
             convertView = LayoutInflater.from(getContext()).inflate(mLayoutId, parent, false);
             holder = new MusicHolder(convertView);
-            // Hide the third line of text
-            if (holder.mLineThree.get() != null) {
-                holder.mLineThree.get().setVisibility(View.GONE);
-            }
             convertView.setTag(holder);
         } else {
             holder = (MusicHolder)convertView.getTag();

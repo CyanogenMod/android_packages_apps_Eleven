@@ -59,11 +59,6 @@ public class AlbumAdapter extends ArrayAdapter<Album> implements SectionAdapter.
     private final int mOverlay;
 
     /**
-     * Determines if the grid or list should be the default style
-     */
-    private boolean mLoadExtraData = false;
-
-    /**
      * Sets the album art on click listener to start playing them album when
      * touched.
      */
@@ -118,22 +113,6 @@ public class AlbumAdapter extends ArrayAdapter<Album> implements SectionAdapter.
         mImageFetcher.loadAlbumImage(dataHolder.mLineTwo, dataHolder.mLineOne, dataHolder.mItemId,
                 holder.mImage.get());
 
-        TextView lineThree = holder.mLineThree.get();
-        // List view only items
-        if (mLoadExtraData) {
-            // Make sure the background layer gets set
-            holder.mOverlay.get().setBackgroundColor(mOverlay);
-            if (lineThree != null) {
-                // Set the number of songs (line three)
-                lineThree.setText(dataHolder.mLineThree);
-                lineThree.setVisibility(View.VISIBLE);
-            }
-            // Asynchronously load the artist image on the background view
-            mImageFetcher.loadArtistImage(dataHolder.mLineTwo, holder.mBackground.get());
-        } else if (lineThree != null) {
-            lineThree.setVisibility(View.GONE);
-        }
-
         if (mTouchPlay) {
             // Play the album when the artwork is touched
             playAlbum(holder.mImage.get(), position);
@@ -176,9 +155,6 @@ public class AlbumAdapter extends ArrayAdapter<Album> implements SectionAdapter.
             mData[i].mLineOne = album.mAlbumName;
             // Album artist names (line two)
             mData[i].mLineTwo = album.mArtistName;
-            // Number of songs for each album (line three)
-            mData[i].mLineThree = MusicUtils.makeLabel(getContext(),
-                    R.plurals.Nsongs, album.mSongNumber);
         }
     }
 
@@ -248,15 +224,6 @@ public class AlbumAdapter extends ArrayAdapter<Album> implements SectionAdapter.
         }
 
         return  -1;
-    }
-
-    /**
-     * @param extra True to load line three and the background image, false
-     *            otherwise.
-     */
-    public void setLoadExtraData(final boolean extra) {
-        mLoadExtraData = extra;
-        setTouchPlay(true);
     }
 
     /**

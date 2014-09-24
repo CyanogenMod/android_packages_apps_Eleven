@@ -37,14 +37,14 @@ import com.cyngn.eleven.utils.MusicUtils;
 public class PlaylistAdapter extends ArrayAdapter<Playlist> {
 
     /**
-     * Number of views (TextView)
+     * Smart playlists and normal playlists
      */
-    private static final int VIEW_TYPE_COUNT = 1;
+    private static final int VIEW_TYPE_COUNT = 2;
 
     /**
-     * The resource Id of the layout to inflate
+     * Used to identify the view type
      */
-    private final int mLayoutId;
+    private static final int SMART_PLAYLIST_VIEW_TYPE = 1;
 
     /**
      * Used to cache the playlist info
@@ -55,12 +55,9 @@ public class PlaylistAdapter extends ArrayAdapter<Playlist> {
      * Constructor of <code>PlaylistAdapter</code>
      * 
      * @param context The {@link Context} to use.
-     * @param layoutId The resource Id of the view to inflate.
      */
-    public PlaylistAdapter(final Context context, final int layoutId) {
+    public PlaylistAdapter(final Context context) {
         super(context, 0);
-        // Get the layout Id
-        mLayoutId = layoutId;
     }
 
     /**
@@ -71,7 +68,13 @@ public class PlaylistAdapter extends ArrayAdapter<Playlist> {
         // Recycle ViewHolder's items
         MusicHolder holder;
         if (convertView == null) {
-            convertView = LayoutInflater.from(getContext()).inflate(mLayoutId, parent, false);
+            int layoutId = R.layout.list_item_normal;
+
+            if (getItemViewType(position) == SMART_PLAYLIST_VIEW_TYPE) {
+                layoutId = R.layout.list_item_smart_playlist;
+            }
+
+            convertView = LayoutInflater.from(getContext()).inflate(layoutId, parent, false);
             holder = new MusicHolder(convertView);
             convertView.setTag(holder);
         } else {
@@ -93,9 +96,6 @@ public class PlaylistAdapter extends ArrayAdapter<Playlist> {
 
         SmartPlaylistType type = SmartPlaylistType.getTypeById(dataHolder.mItemId);
         if (type != null) {
-            // Clear any drawables
-            holder.mImage.get().setBackground(null);
-
             // Set the image resource based on the icon
             switch (type) {
                 case LastAdded:
@@ -109,17 +109,10 @@ public class PlaylistAdapter extends ArrayAdapter<Playlist> {
                     holder.mImage.get().setImageResource(R.drawable.top_tracks_icon);
                     break;
             }
-
-            // set the special background color
-            convertView.setBackgroundColor(getContext().getResources().
-                    getColor(R.color.smart_playlist_item_background));
         } else {
             // load the image
             ImageFetcher.getInstance(getContext()).loadPlaylistCoverArtImage(
                     dataHolder.mItemId, holder.mImage.get());
-
-            // clear the background color
-            convertView.setBackgroundColor(Color.TRANSPARENT);
         }
 
 
@@ -141,6 +134,18 @@ public class PlaylistAdapter extends ArrayAdapter<Playlist> {
     @Override
     public int getViewTypeCount() {
         return VIEW_TYPE_COUNT;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public int getItemViewType(int position) {
+        if (getItem(position).isSmartPlaylist()) {
+            return SMART_PLAYLIST_VIEW_TYPE;
+        }
+
+        return 0;
     }
 
     /**

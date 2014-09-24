@@ -27,7 +27,6 @@
     <!-- Adpater lines -->
     <color name="line_one">@color/white</color>
     <color name="line_two">@color/transparent_white</color>
-    <color name="line_three">@color/transparent_white</color>
 
     <!-- Now playing -->
     <color name="audio_player_current_time">@color/white</color>

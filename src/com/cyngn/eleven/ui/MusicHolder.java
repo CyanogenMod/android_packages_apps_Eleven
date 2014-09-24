@@ -38,11 +38,6 @@ public class MusicHolder {
     public WeakReference<RelativeLayout> mOverlay;
 
     /**
-     * This is the background artist, playlist, or genre image
-     */
-    public WeakReference<ImageView> mBackground;
-
-    /**
      * This is the artist or album image
      */
     public WeakReference<ImageView> mImage;
@@ -69,13 +64,6 @@ public class MusicHolder {
     public WeakReference<TextView> mLineTwo;
 
     /**
-     * This is the third line displayed in the list or grid
-     * 
-     * @see {@code #getView()} of a specific adapter for more detailed info
-     */
-    public WeakReference<TextView> mLineThree;
-
-    /**
      * The container for the circular progress bar and play/pause button
      *
      * @see {@code #getView()} of a specific adapter for more detailed info
@@ -88,20 +76,17 @@ public class MusicHolder {
     public WeakReference<View> mPlayPauseProgressContainer;
 
     /**
+     * The divider for the list item
+     */
+    public WeakReference<View> mDivider;
+
+    /**
      * Constructor of <code>ViewHolder</code>
      * 
      * @param context The {@link Context} to use.
      */
     public MusicHolder(final View view) {
         super();
-        // Initialize mOverlay
-        mOverlay = new WeakReference<RelativeLayout>(
-                (RelativeLayout)view.findViewById(R.id.image_background));
-
-        // Initialize mBackground
-        mBackground = new WeakReference<ImageView>(
-                (ImageView)view.findViewById(R.id.list_item_background));
-
         // Initialize mImage
         mImage = new WeakReference<ImageView>((ImageView)view.findViewById(R.id.image));
 
@@ -115,9 +100,6 @@ public class MusicHolder {
         // Initialize mLineTwo
         mLineTwo = new WeakReference<TextView>((TextView)view.findViewById(R.id.line_two));
 
-        // Initialize mLineThree
-        mLineThree = new WeakReference<TextView>((TextView)view.findViewById(R.id.line_three));
-
         // Initialize Circular progress bar container
         mPlayPauseProgressButton = new WeakReference<PlayPauseProgressButton>(
                 (PlayPauseProgressButton)view.findViewById(R.id.playPauseProgressButton));
@@ -125,6 +107,9 @@ public class MusicHolder {
         // Get the padding container for the progress bar
         mPlayPauseProgressContainer = new WeakReference<View>(
                 view.findViewById(R.id.play_pause_container));
+
+        // Get the divider for the list item
+        mDivider = new WeakReference<View>(view.findViewById(R.id.divider));
     }
 
     /**
@@ -157,13 +142,6 @@ public class MusicHolder {
          * @see {@code #getView()} of a specific adapter for more detailed info
          */
         public String mLineTwo;
-
-        /**
-         * This is the third line displayed in the list or grid
-         * 
-         * @see {@code #getView()} of a specific adapter for more detailed info
-         */
-        public String mLineThree;
 
         /**
          * Constructor of <code>DataHolder</code>

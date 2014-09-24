@@ -35,12 +35,6 @@ public class RecycleHolder implements RecyclerListener {
             view.setTag(holder);
         }
 
-        // Release mBackground's reference
-        if (holder.mBackground.get() != null) {
-            holder.mBackground.get().setImageDrawable(null);
-            holder.mBackground.get().setImageBitmap(null);
-        }
-
         // Release mImage's reference
         if (holder.mImage.get() != null) {
             ImageWorker.cancelWork(holder.mImage.get());
@@ -56,11 +50,6 @@ public class RecycleHolder implements RecyclerListener {
         // Release mLineTwo's reference
         if (holder.mLineTwo.get() != null) {
             holder.mLineTwo.get().setText(null);
-        }
-
-        // Release mLineThree's reference
-        if (holder.mLineThree.get() != null) {
-            holder.mLineThree.get().setText(null);
         }
 
         // Stop the play pause button logic
