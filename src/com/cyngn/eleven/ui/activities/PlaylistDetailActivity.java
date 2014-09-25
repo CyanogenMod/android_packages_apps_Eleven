@@ -8,9 +8,6 @@ import android.provider.MediaStore;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.app.LoaderManager.LoaderCallbacks;
 import android.support.v4.content.Loader;
-import android.view.ContextMenu;
-import android.view.Menu;
-import android.view.SubMenu;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AbsListView;
@@ -28,13 +25,13 @@ import com.cyngn.eleven.dragdrop.DragSortListView.DragScrollProfile;
 import com.cyngn.eleven.dragdrop.DragSortListView.DropListener;
 import com.cyngn.eleven.dragdrop.DragSortListView.RemoveListener;
 import com.cyngn.eleven.loaders.PlaylistSongLoader;
-import com.cyngn.eleven.menu.CreateNewPlaylist;
 import com.cyngn.eleven.menu.DeleteDialog;
 import com.cyngn.eleven.menu.FragmentMenuItems;
 import com.cyngn.eleven.model.Song;
 import com.cyngn.eleven.recycler.RecycleHolder;
 import com.cyngn.eleven.utils.MusicUtils;
-import com.cyngn.eleven.utils.NavUtils;
+import com.cyngn.eleven.utils.PopupMenuHelper;
+import com.cyngn.eleven.widgets.IPopupMenuCallback;
 import com.cyngn.eleven.widgets.NoResultsContainer;
 
 import java.util.ArrayList;
@@ -66,24 +63,14 @@ public class PlaylistDetailActivity extends DetailActivity implements
     private TextView mDurationOfPlaylist;
 
     /**
-     * Represents a song
-     */
-    private Song mSong;
-
-    /**
-     * Position of a context menu item
-     */
-    private int mSelectedPosition;
-
-    /**
-     * Id of a context menu item
-     */
-    private long mSelectedId;
-
-    /**
      * The Id of the playlist the songs belong to
      */
     private long mPlaylistId;
+
+    /**
+     * Pop up menu helper
+     */
+    private PopupMenuHelper mPopupMenuHelper;
 
     @Override
     protected int getLayoutToInflate() {
@@ -93,6 +80,76 @@ public class PlaylistDetailActivity extends DetailActivity implements
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        mPopupMenuHelper = new PopupMenuHelper(this, getSupportFragmentManager()) {
+            /**
+             * Represents a song
+             */
+            private Song mSong;
+
+            @Override
+            protected PopupMenuType onPreparePopupMenu(int position) {
+                // the header has been long-pressed - for now just return, but later if we want
+                // to long-press support for the header, do that logic here
+                if (position == 0) {
+                    return null;
+                }
+
+                // Create a new song
+                mSong = mAdapter.getItem(position - 1);
+
+                return PopupMenuType.Song;
+            }
+
+            @Override
+            protected void getAdditionalIds(PopupMenuType type, ArrayList<Integer> list) {
+                super.getAdditionalIds(type, list);
+
+                list.add(FragmentMenuItems.REMOVE_FROM_PLAYLIST);
+            }
+
+            @Override
+            protected long[] getIdList() {
+                return new long[] { mSong.mSongId };
+            }
+
+            @Override
+            protected int getGroupId() {
+                return GROUP_ID;
+            }
+
+            @Override
+            protected long getId() {
+                return mSong.mSongId;
+            }
+
+            @Override
+            protected String getArtistName() {
+                return mSong.mArtistName;
+            }
+
+            @Override
+            protected void onDeleteClicked() {
+                DeleteDialog.newInstance(mSong.mSongName, getIdList(), null)
+                        .show(getSupportFragmentManager(), "DeleteDialog");
+                SystemClock.sleep(10);
+                mAdapter.notifyDataSetChanged();
+                getSupportLoaderManager().restartLoader(LOADER, null, PlaylistDetailActivity.this);
+            }
+
+            @Override
+            protected void setShouldRefresh() {
+                // do nothing here since we restart the loader ourselves
+            }
+
+            @Override
+            protected void removeFromPlaylist() {
+                mAdapter.remove(mSong);
+                mAdapter.notifyDataSetChanged();
+                MusicUtils.removeFromPlaylist(PlaylistDetailActivity.this, mSong.mSongId, mPlaylistId);
+                getSupportLoaderManager().restartLoader(LOADER, null, PlaylistDetailActivity.this);
+            }
+        };
 
         Bundle arguments = getIntent().getExtras();
         String playlistName = arguments.getString(Config.NAME);
@@ -129,11 +186,15 @@ public class PlaylistDetailActivity extends DetailActivity implements
                 R.layout.faux_playlist_header,
                 ProfileSongAdapter.DISPLAY_PLAYLIST_SETTING
         );
+        mAdapter.setPopupMenuClickedListener(new IPopupMenuCallback.IListener() {
+            @Override
+            public void onPopupMenuClicked(View v, int position) {
+                mPopupMenuHelper.showPopupMenu(v, position);
+            }
+        });
         mListView.setAdapter(mAdapter);
         // Release any references to the recycled Views
         mListView.setRecyclerListener(new RecycleHolder());
-        // Listen for ContextMenus to be created
-        mListView.setOnCreateContextMenuListener(this);
         // Play the selected song
         mListView.setOnItemClickListener(this);
         // Set the drop listener
@@ -158,118 +219,6 @@ public class PlaylistDetailActivity extends DetailActivity implements
      * {@inheritDoc}
      */
     @Override
-    public void onCreateContextMenu(final ContextMenu menu, final View v,
-                                    final ContextMenu.ContextMenuInfo menuInfo) {
-        super.onCreateContextMenu(menu, v, menuInfo);
-        // Get the position of the selected item
-        final AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) menuInfo;
-        mSelectedPosition = info.position - 1;
-
-        // the header has been long-pressed - for now just return, but later if we want
-        // to long-press support for the header, do that logic here
-        if (mSelectedPosition == -1) {
-            return;
-        }
-
-        // Creat a new song
-        mSong = mAdapter.getItem(mSelectedPosition);
-        mSelectedId = mSong.mSongId;
-
-        // Play the song
-        menu.add(GROUP_ID, FragmentMenuItems.PLAY_SELECTION, Menu.NONE,
-                getString(R.string.context_menu_play_selection));
-
-        // Play next
-        menu.add(GROUP_ID, FragmentMenuItems.PLAY_NEXT, Menu.NONE,
-                getString(R.string.context_menu_play_next));
-
-        // Add the song to the queue
-        menu.add(GROUP_ID, FragmentMenuItems.ADD_TO_QUEUE, Menu.NONE,
-                getString(R.string.add_to_queue));
-
-        // Add the song to a playlist
-        final SubMenu subMenu = menu.addSubMenu(GROUP_ID, FragmentMenuItems.ADD_TO_PLAYLIST,
-                Menu.NONE, R.string.add_to_playlist);
-        MusicUtils.makePlaylistMenu(this, GROUP_ID, subMenu);
-
-        // View more content by the song artist
-        menu.add(GROUP_ID, FragmentMenuItems.MORE_BY_ARTIST, Menu.NONE,
-                getString(R.string.context_menu_more_by_artist));
-
-        // Make the song a ringtone
-        menu.add(GROUP_ID, FragmentMenuItems.USE_AS_RINGTONE, Menu.NONE,
-                getString(R.string.context_menu_use_as_ringtone));
-
-        // Remove the song from playlist
-        menu.add(GROUP_ID, FragmentMenuItems.REMOVE_FROM_PLAYLIST, Menu.NONE,
-                getString(R.string.context_menu_remove_from_playlist));
-
-        // Delete the song
-        menu.add(GROUP_ID, FragmentMenuItems.DELETE, Menu.NONE,
-                getString(R.string.context_menu_delete));
-    }
-
-    @Override
-    public boolean onContextItemSelected(final android.view.MenuItem item) {
-        if (item.getGroupId() == GROUP_ID) {
-            switch (item.getItemId()) {
-                case FragmentMenuItems.PLAY_SELECTION:
-                    MusicUtils.playAll(this, new long[]{
-                            mSelectedId
-                    }, 0, false);
-                    return true;
-                case FragmentMenuItems.PLAY_NEXT:
-                    MusicUtils.playNext(new long[]{
-                            mSelectedId
-                    });
-                    return true;
-                case FragmentMenuItems.ADD_TO_QUEUE:
-                    MusicUtils.addToQueue(this, new long[]{
-                            mSelectedId
-                    });
-                    return true;
-                case FragmentMenuItems.NEW_PLAYLIST:
-                    CreateNewPlaylist.getInstance(new long[]{
-                            mSelectedId
-                    }).show(getSupportFragmentManager(), "CreatePlaylist");
-                    return true;
-                case FragmentMenuItems.PLAYLIST_SELECTED:
-                    final long playlistId = item.getIntent().getLongExtra("playlist", 0);
-                    MusicUtils.addToPlaylist(this, new long[]{
-                            mSelectedId
-                    }, playlistId);
-                    return true;
-                case FragmentMenuItems.MORE_BY_ARTIST:
-                    NavUtils.openArtistProfile(this, mSong.mArtistName);
-                    return true;
-                case FragmentMenuItems.USE_AS_RINGTONE:
-                    MusicUtils.setRingtone(this, mSelectedId);
-                    return true;
-                case FragmentMenuItems.DELETE:
-                    DeleteDialog.newInstance(mSong.mSongName, new long[]{
-                            mSelectedId
-                    }, null).show(getSupportFragmentManager(), "DeleteDialog");
-                    SystemClock.sleep(10);
-                    mAdapter.notifyDataSetChanged();
-                    getSupportLoaderManager().restartLoader(LOADER, null, this);
-                    return true;
-                case FragmentMenuItems.REMOVE_FROM_PLAYLIST:
-                    mAdapter.remove(mSong);
-                    mAdapter.notifyDataSetChanged();
-                    MusicUtils.removeFromPlaylist(this, mSong.mSongId, mPlaylistId);
-                    getSupportLoaderManager().restartLoader(LOADER, null, this);
-                    return true;
-                default:
-                    break;
-            }
-        }
-        return super.onContextItemSelected(item);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
     public float getSpeed(final float w, final long t) {
         if (w > 0.8f) {
             return mAdapter.getCount() / 0.001f;
@@ -283,12 +232,12 @@ public class PlaylistDetailActivity extends DetailActivity implements
      */
     @Override
     public void remove(final int which) {
-        mSong = mAdapter.getItem(which - 1);
-        mAdapter.remove(mSong);
+        Song song = mAdapter.getItem(which - 1);
+        mAdapter.remove(song);
         mAdapter.notifyDataSetChanged();
         final Uri uri = MediaStore.Audio.Playlists.Members.getContentUri("external", mPlaylistId);
         getContentResolver().delete(uri,
-                MediaStore.Audio.Playlists.Members.AUDIO_ID + "=" + mSong.mSongId,
+                MediaStore.Audio.Playlists.Members.AUDIO_ID + "=" + song.mSongId,
                 null);
     }
 
@@ -303,9 +252,9 @@ public class PlaylistDetailActivity extends DetailActivity implements
         }
         final int realFrom = from - 1;
         final int realTo = to - 1;
-        mSong = mAdapter.getItem(realFrom);
-        mAdapter.remove(mSong);
-        mAdapter.insert(mSong, realTo);
+        Song song = mAdapter.getItem(realFrom);
+        mAdapter.remove(song);
+        mAdapter.insert(song, realTo);
         mAdapter.notifyDataSetChanged();
         MediaStore.Audio.Playlists.Members.moveItem(getContentResolver(),
                 mPlaylistId, realFrom, realTo);

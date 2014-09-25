@@ -19,7 +19,7 @@
             android:layout_alignParentRight="true"
             android:layout_marginBottom="40dp"
             android:gravity="center"
-            android:src="@drawable/menu_item_button" />
+            android:src="@drawable/menu_button" />
 
         <ImageView
             android:id="@+id/album_art"

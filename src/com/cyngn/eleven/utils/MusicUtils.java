@@ -36,12 +36,16 @@ import android.provider.Settings;
 import android.util.Log;
 import android.view.Menu;
 
+import com.cyngn.eleven.Config;
+import com.cyngn.eleven.Config.SmartPlaylistType;
 import com.cyngn.eleven.IElevenService;
 import com.cyngn.eleven.MusicPlaybackService;
 import com.cyngn.eleven.R;
 import com.cyngn.eleven.loaders.LastAddedLoader;
 import com.cyngn.eleven.loaders.PlaylistLoader;
+import com.cyngn.eleven.loaders.PlaylistSongLoader;
 import com.cyngn.eleven.loaders.SongLoader;
+import com.cyngn.eleven.loaders.TopTracksLoader;
 import com.cyngn.eleven.menu.FragmentMenuItems;
 import com.cyngn.eleven.model.AlbumArtistDetails;
 import com.cyngn.eleven.provider.RecentStore;
@@ -723,7 +727,7 @@ public final class MusicUtils {
      */
     public static void playAll(final Context context, final long[] list, int position,
             final boolean forceShuffle) {
-        if (list.length == 0 || mService == null) {
+        if (list == null || list.length == 0 || mService == null) {
             return;
         }
         try {
@@ -1188,13 +1192,7 @@ public final class MusicUtils {
      * @return The track list for a playlist
      */
     public static final long[] getSongListForPlaylist(final Context context, final long playlistId) {
-        final String[] projection = new String[] {
-            MediaStore.Audio.Playlists.Members.AUDIO_ID
-        };
-        Cursor cursor = context.getContentResolver().query(
-                MediaStore.Audio.Playlists.Members.getContentUri("external",
-                        Long.valueOf(playlistId)), projection, null, null,
-                MediaStore.Audio.Playlists.Members.DEFAULT_SORT_ORDER);
+        Cursor cursor = PlaylistSongLoader.makePlaylistSongCursor(context, playlistId);
 
         if (cursor != null) {
             final long[] list = getSongListForCursor(cursor);
@@ -1220,29 +1218,43 @@ public final class MusicUtils {
 
     /**
      * @param context The {@link Context} to use
+     * @param type The Smart Playlist Type
      * @return The song list for the last added playlist
      */
-    public static final long[] getSongListForLastAdded(final Context context) {
-        final Cursor cursor = LastAddedLoader.makeLastAddedCursor(context);
-        if (cursor != null) {
-            final int count = cursor.getCount();
-            final long[] list = new long[count];
-            for (int i = 0; i < count; i++) {
-                cursor.moveToNext();
-                list[i] = cursor.getLong(0);
+    public static final long[] getSongListForSmartPlaylist(final Context context,
+                                                           final SmartPlaylistType type) {
+        Cursor cursor = null;
+        try {
+            switch (type) {
+                case LastAdded:
+                    cursor = LastAddedLoader.makeLastAddedCursor(context);
+                    break;
+                case RecentlyPlayed:
+                    cursor = TopTracksLoader.makeRecentTracksCursor(context);
+                    break;
+                case TopTracks:
+                    cursor = TopTracksLoader.makeTopTracksCursor(context);
+                    break;
             }
-            return list;
+            return MusicUtils.getSongListForCursor(cursor);
+        } finally {
+            if (cursor != null) {
+                cursor.close();
+                cursor = null;
+            }
         }
-        return sEmptyList;
     }
 
     /**
-     * Plays the last added songs from the past two weeks.
-     *
+     * Plays the smart playlist
      * @param context The {@link Context} to use
+     * @param position the position to start playing from
+     * @param type The Smart Playlist Type
      */
-    public static void playLastAdded(final Context context) {
-        playAll(context, getSongListForLastAdded(context), 0, false);
+    public static void playSmartPlaylist(final Context context, final int position,
+                                         final SmartPlaylistType type) {
+        final long[] list = getSongListForSmartPlaylist(context, type);
+        MusicUtils.playAll(context, list, position, false);
     }
 
     /**

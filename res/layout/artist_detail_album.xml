@@ -22,7 +22,7 @@
         android:layout_marginBottom="1dp"
         android:layout_marginRight="-2dp"
         android:gravity="center"
-        android:src="@drawable/menu_item_button" />
+        android:src="@drawable/menu_button" />
 
     <TextView
         android:id="@+id/title"

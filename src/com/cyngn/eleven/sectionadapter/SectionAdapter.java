@@ -16,6 +16,7 @@ import com.cyngn.eleven.R;
 import com.cyngn.eleven.ui.MusicHolder;
 import com.cyngn.eleven.utils.SectionCreatorUtils.Section;
 import com.cyngn.eleven.utils.SectionCreatorUtils.SectionType;
+import com.cyngn.eleven.widgets.IPopupMenuCallback;
 
 import java.util.TreeMap;
 
@@ -27,8 +28,8 @@ import java.util.TreeMap;
  * @param <TArrayAdapter> the arrayadapter that contains TItem and implements BasicAdapter
  */
 public class SectionAdapter<TItem,
-        TArrayAdapter extends ArrayAdapter<TItem> & SectionAdapter.BasicAdapter>
-        extends BaseAdapter {
+        TArrayAdapter extends ArrayAdapter<TItem> & SectionAdapter.BasicAdapter & IPopupMenuCallback>
+        extends BaseAdapter implements IPopupMenuCallback, IPopupMenuCallback.IListener {
     /**
      * Basic interface that the adapters implement
      */
@@ -56,6 +57,11 @@ public class SectionAdapter<TItem,
     protected boolean mFooterEnabled;
 
     /**
+     * Popup menu click listener
+     */
+    protected IListener mListener;
+
+    /**
      * {@link Context}
      */
     protected final Context mContext;
@@ -68,6 +74,7 @@ public class SectionAdapter<TItem,
     public SectionAdapter(final Activity context, final TArrayAdapter underlyingAdapter) {
         mContext = context;
         mUnderlyingAdapter = underlyingAdapter;
+        mUnderlyingAdapter.setPopupMenuClickedListener(this);
         mSections = new TreeMap<Integer, Section>();
         setupHeaderParameters(R.layout.list_header, false);
         // since we have no good default footer, just re-use the header layout
@@ -382,5 +389,17 @@ public class SectionAdapter<TItem,
         }
 
         return -1;
+    }
+
+    @Override
+    public void setPopupMenuClickedListener(IListener listener) {
+        mListener = listener;
+    }
+
+    @Override
+    public void onPopupMenuClicked(View v, int position) {
+        if (mListener != null) {
+            mListener.onPopupMenuClicked(v, getExternalPosition(position));
+        }
     }
 }

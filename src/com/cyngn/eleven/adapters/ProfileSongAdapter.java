@@ -27,6 +27,7 @@ import com.cyngn.eleven.ui.activities.PlaylistDetailActivity;
 import com.cyngn.eleven.utils.ApolloUtils;
 import com.cyngn.eleven.utils.Lists;
 import com.cyngn.eleven.utils.MusicUtils;
+import com.cyngn.eleven.widgets.IPopupMenuCallback;
 
 import java.util.List;
 
@@ -37,7 +38,7 @@ import java.util.List;
  * 
  * @author Andrew Neal (andrewdneal@gmail.com)
  */
-public class ProfileSongAdapter extends ArrayAdapter<Song> {
+public class ProfileSongAdapter extends ArrayAdapter<Song> implements IPopupMenuCallback {
 
     /**
      * Default display setting: title/album
@@ -100,6 +101,11 @@ public class ProfileSongAdapter extends ArrayAdapter<Song> {
     private List<Song> mCount = Lists.newArrayList();
 
     /**
+     * Used to listen to the pop up menu callbacks
+     */
+    private IListener mListener;
+
+    /**
      * Constructor of <code>ProfileSongAdapter</code>
      * 
      * @param activity The {@link Activity} to use
@@ -137,12 +143,18 @@ public class ProfileSongAdapter extends ArrayAdapter<Song> {
             convertView = LayoutInflater.from(getContext()).inflate(mLayoutId, parent, false);
             holder = new MusicHolder(convertView);
             convertView.setTag(holder);
+
+            // set the pop up menu listener
+            holder.mPopupMenuButton.get().setPopupMenuClickedListener(mListener);
         } else {
             holder = (MusicHolder)convertView.getTag();
         }
 
         // Retrieve the album
         final Song song = getItem(position - 1);
+
+        // because of recycling, we need to set the position each time
+        holder.mPopupMenuButton.get().setPosition(position);
 
         // Set each track name (line one)
         holder.mLineOne.get().setText(song.mSongName);
@@ -163,8 +175,6 @@ public class ProfileSongAdapter extends ArrayAdapter<Song> {
                     holder.mLineOneRight.get().setText(
                             MusicUtils.makeShortTimeString(getContext(), song.mDuration));
                 }
-
-                ;
 
                 holder.mLineTwo.get().setText(MusicUtils.makeCombinedString(getContext(),
                         song.mArtistName, song.mAlbumName));
@@ -274,5 +284,10 @@ public class ProfileSongAdapter extends ArrayAdapter<Song> {
     @Override
     public boolean isEmpty() {
         return (mCount == null || mCount.size() == 0);
+    }
+
+    @Override
+    public void setPopupMenuClickedListener(IPopupMenuCallback.IListener listener) {
+        mListener = listener;
     }
 }

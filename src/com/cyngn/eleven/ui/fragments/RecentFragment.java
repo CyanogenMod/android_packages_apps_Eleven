@@ -11,28 +11,23 @@
 
 package com.cyngn.eleven.ui.fragments;
 
-import android.app.Activity;
-import android.database.Cursor;
 import android.os.Bundle;
 import android.support.v4.content.Loader;
 import android.view.Menu;
-import android.view.MenuItem;
-import android.view.View;
-import android.view.ContextMenu;
-import android.view.ContextMenu.ContextMenuInfo;
 
+import com.cyngn.eleven.Config;
 import com.cyngn.eleven.MusicStateListener;
 import com.cyngn.eleven.R;
 import com.cyngn.eleven.loaders.TopTracksLoader;
 import com.cyngn.eleven.menu.FragmentMenuItems;
 import com.cyngn.eleven.model.Song;
-import com.cyngn.eleven.provider.RecentStore;
-import com.cyngn.eleven.ui.activities.BaseActivity;
+import com.cyngn.eleven.sectionadapter.SectionCreator;
+import com.cyngn.eleven.sectionadapter.SectionListContainer;
 import com.cyngn.eleven.ui.fragments.profile.BasicSongFragment;
 import com.cyngn.eleven.utils.MusicUtils;
 import com.cyngn.eleven.widgets.NoResultsContainer;
 
-import java.util.List;
+import java.util.ArrayList;
 
 /**
  * This class is used to display all of the recently listened to songs by the
@@ -52,72 +47,19 @@ public class RecentFragment extends BasicSongFragment implements MusicStateListe
      */
     private static final int LOADER = 0;
 
-    /**
-     * True if the list should execute {@code #restartLoader()}.
-     */
-    private boolean mShouldRefresh = false;
-
-    /**
-     * {@inheritDoc}
-     */
     @Override
-    public void onAttach(final Activity activity) {
-        super.onAttach(activity);
-        // Register the music status listener
-        ((BaseActivity)activity).setMusicStateListenerListener(this);
+    protected void getAdditionaIdsForType(ArrayList<Integer> list) {
+        list.add(FragmentMenuItems.REMOVE_FROM_RECENT);
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public void onCreateContextMenu(final ContextMenu menu, final View v,
-                                    final ContextMenuInfo menuInfo) {
-        super.onCreateContextMenu(menu, v, menuInfo);
-
-        // Remove the album from the list
-        menu.add(GROUP_ID, FragmentMenuItems.REMOVE_FROM_RECENT, Menu.NONE,
-                getString(R.string.context_menu_remove_from_recent));
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public boolean onContextItemSelected(final MenuItem item) {
-        // Avoid leaking context menu selections
-        if (item.getGroupId() == GROUP_ID) {
-            switch (item.getItemId()) {
-                case FragmentMenuItems.REMOVE_FROM_RECENT:
-                    mShouldRefresh = true;
-                    RecentStore.getInstance(getActivity()).removeItem(mSelectedId);
-                    MusicUtils.refresh();
-                    return true;
-                default:
-                    break;
-            }
-        }
-        return super.onContextItemSelected(item);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public Loader<List<Song>> onCreateLoader(final int id, final Bundle args) {
-        return new TopTracksLoader(getActivity(), TopTracksLoader.QueryType.RecentSongs);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void restartLoader() {
-        // Update the list when the user deletes any items
-        if (mShouldRefresh) {
-            getLoaderManager().restartLoader(LOADER, null, this);
-        }
-        mShouldRefresh = false;
+    public Loader<SectionListContainer<Song>> onCreateLoader(final int id, final Bundle args) {
+        TopTracksLoader loader = new TopTracksLoader(getActivity(),
+                TopTracksLoader.QueryType.RecentSongs);
+        return new SectionCreator<Song>(getActivity(), loader, null);
     }
 
     /**
@@ -125,6 +67,7 @@ public class RecentFragment extends BasicSongFragment implements MusicStateListe
      */
     @Override
     public void onMetaChanged() {
+        // refresh the list since a track playing means it should be recently played
         getLoaderManager().restartLoader(LOADER, null, this);
     }
 
@@ -140,11 +83,8 @@ public class RecentFragment extends BasicSongFragment implements MusicStateListe
 
     @Override
     public void playAll(int position) {
-        Cursor cursor = TopTracksLoader.makeRecentTracksCursor(getActivity());
-        final long[] list = MusicUtils.getSongListForCursor(cursor);
-        MusicUtils.playAll(getActivity(), list, position, false);
-        cursor.close();
-        cursor = null;
+        MusicUtils.playSmartPlaylist(getActivity(), position,
+                Config.SmartPlaylistType.RecentlyPlayed);
     }
 
     @Override

@@ -11,17 +11,17 @@
 
 package com.cyngn.eleven.ui.fragments.profile;
 
-import android.database.Cursor;
 import android.os.Bundle;
 import android.support.v4.content.Loader;
 
+import com.cyngn.eleven.Config;
 import com.cyngn.eleven.R;
 import com.cyngn.eleven.loaders.LastAddedLoader;
 import com.cyngn.eleven.model.Song;
+import com.cyngn.eleven.sectionadapter.SectionCreator;
+import com.cyngn.eleven.sectionadapter.SectionListContainer;
 import com.cyngn.eleven.utils.MusicUtils;
 import com.cyngn.eleven.widgets.NoResultsContainer;
-
-import java.util.List;
 
 /**
  * This class is used to display all of the songs the user put on their device
@@ -45,8 +45,9 @@ public class LastAddedFragment extends BasicSongFragment {
      * {@inheritDoc}
      */
     @Override
-    public Loader<List<Song>> onCreateLoader(final int id, final Bundle args) {
-        return new LastAddedLoader(getActivity());
+    public Loader<SectionListContainer<Song>> onCreateLoader(final int id, final Bundle args) {
+        LastAddedLoader loader = new LastAddedLoader(getActivity());
+        return new SectionCreator<Song>(getActivity(), loader, null);
     }
 
     @Override
@@ -61,11 +62,8 @@ public class LastAddedFragment extends BasicSongFragment {
 
     @Override
     public void playAll(int position) {
-        Cursor cursor = LastAddedLoader.makeLastAddedCursor(getActivity());
-        final long[] list = MusicUtils.getSongListForCursor(cursor);
-        MusicUtils.playAll(getActivity(), list, position, false);
-        cursor.close();
-        cursor = null;
+        MusicUtils.playSmartPlaylist(getActivity(), position,
+                Config.SmartPlaylistType.LastAdded);
     }
 
     @Override

@@ -29,6 +29,7 @@ import com.cyngn.eleven.ui.MusicHolder;
 import com.cyngn.eleven.ui.MusicHolder.DataHolder;
 import com.cyngn.eleven.utils.ApolloUtils;
 import com.cyngn.eleven.utils.MusicUtils;
+import com.cyngn.eleven.widgets.IPopupMenuCallback;
 
 /**
  * This {@link ArrayAdapter} is used to display all of the albums on a user's
@@ -36,7 +37,8 @@ import com.cyngn.eleven.utils.MusicUtils;
  * 
  * @author Andrew Neal (andrewdneal@gmail.com)
  */
-public class AlbumAdapter extends ArrayAdapter<Album> implements SectionAdapter.BasicAdapter {
+public class AlbumAdapter extends ArrayAdapter<Album>
+        implements SectionAdapter.BasicAdapter, IPopupMenuCallback {
 
     /**
      * Number of views (ImageView and TextView)
@@ -70,6 +72,11 @@ public class AlbumAdapter extends ArrayAdapter<Album> implements SectionAdapter.
     private DataHolder[] mData;
 
     /**
+     * Used to listen to the pop up menu callbacks
+     */
+    private IPopupMenuCallback.IListener mListener;
+
+    /**
      * Constructor of <code>AlbumAdapter</code>
      * 
      * @param context The {@link Context} to use.
@@ -98,6 +105,8 @@ public class AlbumAdapter extends ArrayAdapter<Album> implements SectionAdapter.
             convertView = LayoutInflater.from(getContext()).inflate(mLayoutId, parent, false);
             holder = new MusicHolder(convertView);
             convertView.setTag(holder);
+            // set the pop up menu listener
+            holder.mPopupMenuButton.get().setPopupMenuClickedListener(mListener);
         } else {
             holder = (MusicHolder)convertView.getTag();
         }
@@ -105,6 +114,8 @@ public class AlbumAdapter extends ArrayAdapter<Album> implements SectionAdapter.
         // Retrieve the data holder
         final DataHolder dataHolder = mData[position];
 
+        // Sets the position each time because of recycling
+        holder.mPopupMenuButton.get().setPosition(position);
         // Set each album name (line one)
         holder.mLineOne.get().setText(dataHolder.mLineOne);
         // Set the artist name (line two)
@@ -232,5 +243,10 @@ public class AlbumAdapter extends ArrayAdapter<Album> implements SectionAdapter.
      */
     public void setTouchPlay(final boolean play) {
         mTouchPlay = play;
+    }
+
+    @Override
+    public void setPopupMenuClickedListener(IPopupMenuCallback.IListener listener) {
+        mListener = listener;
     }
 }

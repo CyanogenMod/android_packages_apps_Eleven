@@ -43,7 +43,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"
-        android:layout_alignParentRight="true"
+        android:layout_toLeftOf="@+id/popup_menu_button"
         android:paddingLeft="@dimen/list_item_progress_padding_left"
         android:paddingRight="@dimen/list_item_progress_padding_right">
         <include
@@ -52,4 +52,12 @@
             android:layout_centerVertical="true"
             layout="@layout/play_pause_progress_button"/>
     </FrameLayout>
+
+    <com.cyngn.eleven.widgets.PopupMenuButton
+        android:id="@id/popup_menu_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:src="@drawable/menu_button_light" />
 </RelativeLayout>

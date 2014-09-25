@@ -20,6 +20,7 @@ import android.widget.TextView;
 
 import com.cyngn.eleven.R;
 import com.cyngn.eleven.widgets.PlayPauseProgressButton;
+import com.cyngn.eleven.widgets.PopupMenuButton;
 
 import java.lang.ref.WeakReference;
 
@@ -81,6 +82,11 @@ public class MusicHolder {
     public WeakReference<View> mDivider;
 
     /**
+     * The divider for the list item
+     */
+    public WeakReference<PopupMenuButton> mPopupMenuButton;
+
+    /**
      * Constructor of <code>ViewHolder</code>
      * 
      * @param context The {@link Context} to use.
@@ -110,6 +116,10 @@ public class MusicHolder {
 
         // Get the divider for the list item
         mDivider = new WeakReference<View>(view.findViewById(R.id.divider));
+
+        // Get the pop up menu button
+        mPopupMenuButton = new WeakReference<PopupMenuButton>(
+                (PopupMenuButton)view.findViewById(R.id.popup_menu_button));
     }
 
     /**

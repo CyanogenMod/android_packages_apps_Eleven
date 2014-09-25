@@ -56,7 +56,7 @@
             android:layout_width="match_parent"
             android:layout_height="@dimen/list_item_image_height"
             android:layout_toRightOf="@+id/position_contanier"
-            android:layout_toLeftOf="@+id/line_one_right"
+            android:layout_toLeftOf="@+id/popup_menu_button"
             android:gravity="center_vertical"
             android:minHeight="@dimen/item_normal_height"
             android:paddingLeft="@dimen/list_preferred_item_padding" >
@@ -75,13 +75,13 @@
                 android:layout_below="@+id/line_one" />
         </RelativeLayout>
 
-        <TextView
-            android:id="@+id/line_one_right"
-            style="@style/ListItemSecondaryText.Single"
+        <com.cyngn.eleven.widgets.PopupMenuButton
+            android:id="@id/popup_menu_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
-            android:layout_centerVertical="true" />
+            android:layout_centerVertical="true"
+            android:src="@drawable/menu_button" />
     </RelativeLayout>
 
     <ImageView

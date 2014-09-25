@@ -14,23 +14,19 @@ package com.cyngn.eleven.ui.fragments;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.ContentUris;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.app.LoaderManager.LoaderCallbacks;
 import android.support.v4.content.Loader;
-import android.view.ContextMenu;
-import android.view.ContextMenu.ContextMenuInfo;
 import android.view.LayoutInflater;
-import android.view.Menu;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.AdapterView.AdapterContextMenuInfo;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 
@@ -39,13 +35,13 @@ import com.cyngn.eleven.MusicStateListener;
 import com.cyngn.eleven.R;
 import com.cyngn.eleven.adapters.PlaylistAdapter;
 import com.cyngn.eleven.loaders.PlaylistLoader;
-import com.cyngn.eleven.menu.FragmentMenuItems;
-import com.cyngn.eleven.menu.RenamePlaylist;
 import com.cyngn.eleven.model.Playlist;
 import com.cyngn.eleven.recycler.RecycleHolder;
 import com.cyngn.eleven.ui.activities.BaseActivity;
 import com.cyngn.eleven.utils.MusicUtils;
 import com.cyngn.eleven.utils.NavUtils;
+import com.cyngn.eleven.utils.PopupMenuHelper;
+import com.cyngn.eleven.widgets.IPopupMenuCallback;
 
 import java.util.List;
 
@@ -78,9 +74,14 @@ public class PlaylistFragment extends Fragment implements LoaderCallbacks<List<P
     private ListView mListView;
 
     /**
-     * Represents a playlist
+     * True if the list should execute {@code #restartLoader()}.
      */
-    private Playlist mPlaylist;
+    private boolean mShouldRefresh = false;
+
+    /**
+     * Pop up menu helper
+     */
+    private PopupMenuHelper mPopupMenuHelper;
 
     /**
      * Empty constructor as per the {@link Fragment} documentation
@@ -104,8 +105,62 @@ public class PlaylistFragment extends Fragment implements LoaderCallbacks<List<P
     @Override
     public void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        mPopupMenuHelper = new PopupMenuHelper(getActivity(), getFragmentManager()) {
+            /**
+             * Represents a playlist
+             */
+            private Playlist mPlaylist;
+
+            @Override
+            protected PopupMenuType onPreparePopupMenu(int position) {
+                // Create a new playlist
+                mPlaylist = mAdapter.getItem(position);
+
+                return mPlaylist.isSmartPlaylist() ?
+                        PopupMenuType.SmartPlaylist : PopupMenuType.Playlist;
+            }
+
+            @Override
+            protected long[] getIdList() {
+                if (mPlaylist.isSmartPlaylist()) {
+                    return MusicUtils.getSongListForSmartPlaylist(getActivity(),
+                            SmartPlaylistType.getTypeById(mPlaylist.mPlaylistId));
+                } else {
+                    return MusicUtils.getSongListForPlaylist(getActivity(),
+                            mPlaylist.mPlaylistId);
+                }
+            }
+
+            @Override
+            protected int getGroupId() {
+                return GROUP_ID;
+            }
+
+            @Override
+            protected void onDeleteClicked() {
+                mShouldRefresh = true;
+                buildDeleteDialog(getId(), mPlaylist.mPlaylistName).show();
+            }
+
+            @Override
+            protected void setShouldRefresh() {
+                mShouldRefresh = true;
+            }
+
+            @Override
+            protected long getId() {
+                return mPlaylist.mPlaylistId;
+            }
+        };
+
         // Create the adpater
         mAdapter = new PlaylistAdapter(getActivity());
+        mAdapter.setPopupMenuClickedListener(new IPopupMenuCallback.IListener() {
+            @Override
+            public void onPopupMenuClicked(View v, int position) {
+                mPopupMenuHelper.showPopupMenu(v, position);
+            }
+        });
     }
 
     /**
@@ -122,8 +177,6 @@ public class PlaylistFragment extends Fragment implements LoaderCallbacks<List<P
         mListView.setAdapter(mAdapter);
         // Release any references to the recycled Views
         mListView.setRecyclerListener(new RecycleHolder());
-        // Listen for ContextMenus to be created
-        mListView.setOnCreateContextMenuListener(this);
         // Play the selected song
         mListView.setOnItemClickListener(this);
         return rootView;
@@ -145,85 +198,15 @@ public class PlaylistFragment extends Fragment implements LoaderCallbacks<List<P
      * {@inheritDoc}
      */
     @Override
-    public void onCreateContextMenu(final ContextMenu menu, final View v,
-            final ContextMenuInfo menuInfo) {
-        super.onCreateContextMenu(menu, v, menuInfo);
-
-        // Get the position of the selected item
-        final AdapterContextMenuInfo info = (AdapterContextMenuInfo)menuInfo;
-        final int mPosition = info.position;
-        // Create a new playlist
-        mPlaylist = mAdapter.getItem(mPosition);
-
-        // Play the playlist
-        menu.add(GROUP_ID, FragmentMenuItems.PLAY_SELECTION, Menu.NONE,
-                R.string.context_menu_play_selection);
-
-        // Add the playlist to the queue
-        menu.add(GROUP_ID, FragmentMenuItems.ADD_TO_QUEUE, Menu.NONE, R.string.add_to_queue);
-
-        // Delete and rename (user made playlists)
-        if (info.position > 1) {
-            menu.add(GROUP_ID, FragmentMenuItems.RENAME_PLAYLIST, Menu.NONE,
-                    R.string.context_menu_rename_playlist);
-
-            menu.add(GROUP_ID, FragmentMenuItems.DELETE, Menu.NONE, R.string.context_menu_delete);
-
-        }
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public boolean onContextItemSelected(final android.view.MenuItem item) {
-        if (item.getGroupId() == GROUP_ID) {
-            final AdapterContextMenuInfo info = (AdapterContextMenuInfo)item.getMenuInfo();
-            switch (item.getItemId()) {
-                case FragmentMenuItems.PLAY_SELECTION:
-                    if (info.position == 0) {
-                        MusicUtils.playLastAdded(getActivity());
-                    } else {
-                        MusicUtils.playPlaylist(getActivity(), mPlaylist.mPlaylistId);
-                    }
-                    return true;
-                case FragmentMenuItems.ADD_TO_QUEUE:
-                    long[] list = null;
-                    if (info.position == 0) {
-                        list = MusicUtils.getSongListForLastAdded(getActivity());
-                    } else {
-                        list = MusicUtils.getSongListForPlaylist(getActivity(),
-                                mPlaylist.mPlaylistId);
-                    }
-                    MusicUtils.addToQueue(getActivity(), list);
-                    return true;
-                case FragmentMenuItems.RENAME_PLAYLIST:
-                    RenamePlaylist.getInstance(mPlaylist.mPlaylistId).show(
-                            getFragmentManager(), "RenameDialog");
-                    return true;
-                case FragmentMenuItems.DELETE:
-                    buildDeleteDialog().show();
-                    return true;
-                default:
-                    break;
-            }
-        }
-        return super.onContextItemSelected(item);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
     public void onItemClick(final AdapterView<?> parent, final View view, final int position,
             final long id) {
-        mPlaylist = mAdapter.getItem(position);
+        Playlist playlist = mAdapter.getItem(position);
 
-        SmartPlaylistType playlistType = SmartPlaylistType.getTypeById(mPlaylist.mPlaylistId);
+        SmartPlaylistType playlistType = SmartPlaylistType.getTypeById(playlist.mPlaylistId);
         if (playlistType != null) {
             NavUtils.openSmartPlaylist(getActivity(), playlistType);
         } else {
-            NavUtils.openPlaylist(getActivity(), mPlaylist.mPlaylistId, mPlaylist.mPlaylistName);
+            NavUtils.openPlaylist(getActivity(), playlist.mPlaylistId, playlist.mPlaylistName);
         }
     }
 
@@ -269,8 +252,10 @@ public class PlaylistFragment extends Fragment implements LoaderCallbacks<List<P
      */
     @Override
     public void restartLoader() {
-        // Refresh the list when a playlist is deleted or renamed
-        getLoaderManager().restartLoader(LOADER, null, this);
+        if (mShouldRefresh) {
+            getLoaderManager().restartLoader(LOADER, null, this);
+        }
+        mShouldRefresh = false;
     }
 
     /**
@@ -284,21 +269,20 @@ public class PlaylistFragment extends Fragment implements LoaderCallbacks<List<P
     /**
      * Create a new {@link AlertDialog} for easy playlist deletion
      * 
-     * @param context The {@link Context} to use
-     * @param title The title of the playlist being deleted
-     * @param id The ID of the playlist being deleted
+     * @param playlistName The title of the playlist being deleted
+     * @param playlistId The ID of the playlist being deleted
      * @return A new {@link AlertDialog} used to delete playlists
      */
-    private final AlertDialog buildDeleteDialog() {
+    private final AlertDialog buildDeleteDialog(final long playlistId, final String playlistName) {
         return new AlertDialog.Builder(getActivity())
-                .setTitle(getString(R.string.delete_dialog_title, mPlaylist.mPlaylistName))
+                .setTitle(getString(R.string.delete_dialog_title, playlistName))
                 .setPositiveButton(R.string.context_menu_delete, new OnClickListener() {
 
                     @Override
                     public void onClick(final DialogInterface dialog, final int which) {
                         final Uri mUri = ContentUris.withAppendedId(
                                 MediaStore.Audio.Playlists.EXTERNAL_CONTENT_URI,
-                                mPlaylist.mPlaylistId);
+                                playlistId);
                         getActivity().getContentResolver().delete(mUri, null, null);
                         MusicUtils.refresh();
                     }

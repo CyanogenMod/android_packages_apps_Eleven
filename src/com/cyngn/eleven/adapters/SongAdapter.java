@@ -29,6 +29,7 @@ import com.cyngn.eleven.ui.fragments.QueueFragment;
 import com.cyngn.eleven.ui.fragments.SongFragment;
 import com.cyngn.eleven.utils.ApolloUtils;
 import com.cyngn.eleven.utils.MusicUtils;
+import com.cyngn.eleven.widgets.IPopupMenuCallback;
 import com.cyngn.eleven.widgets.PlayPauseProgressButton;
 
 /**
@@ -38,7 +39,8 @@ import com.cyngn.eleven.widgets.PlayPauseProgressButton;
  * 
  * @author Andrew Neal (andrewdneal@gmail.com)
  */
-public class SongAdapter extends ArrayAdapter<Song> implements SectionAdapter.BasicAdapter {
+public class SongAdapter extends ArrayAdapter<Song>
+        implements SectionAdapter.BasicAdapter, IPopupMenuCallback {
 
     /**
      * Number of views (TextView)
@@ -66,6 +68,11 @@ public class SongAdapter extends ArrayAdapter<Song> implements SectionAdapter.Ba
     private DataHolder[] mData;
 
     /**
+     * Used to listen to the pop up menu callbacks
+     */
+    private IPopupMenuCallback.IListener mListener;
+
+    /**
      * Constructor of <code>SongAdapter</code>
      * 
      * @param context The {@link Context} to use.
@@ -90,6 +97,8 @@ public class SongAdapter extends ArrayAdapter<Song> implements SectionAdapter.Ba
             convertView = LayoutInflater.from(getContext()).inflate(mLayoutId, parent, false);
             holder = new MusicHolder(convertView);
             convertView.setTag(holder);
+
+            holder.mPopupMenuButton.get().setPopupMenuClickedListener(mListener);
         } else {
             holder = (MusicHolder)convertView.getTag();
         }
@@ -97,6 +106,8 @@ public class SongAdapter extends ArrayAdapter<Song> implements SectionAdapter.Ba
         // Retrieve the data holder
         final DataHolder dataHolder = mData[position];
 
+        // Sets the position each time because of recycling
+        holder.mPopupMenuButton.get().setPosition(position);
         // Set each song name (line one)
         holder.mLineOne.get().setText(dataHolder.mLineOne);
         // Set the album name (line two)
@@ -225,5 +236,10 @@ public class SongAdapter extends ArrayAdapter<Song> implements SectionAdapter.Ba
 
             notifyDataSetChanged();
         }
+    }
+
+    @Override
+    public void setPopupMenuClickedListener(IListener listener) {
+        mListener = listener;
     }
 }

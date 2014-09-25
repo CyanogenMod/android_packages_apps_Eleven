@@ -49,6 +49,7 @@ import com.cyngn.eleven.IElevenService;
 import com.cyngn.eleven.R;
 import com.cyngn.eleven.adapters.SummarySearchAdapter;
 import com.cyngn.eleven.loaders.WrappedAsyncTaskLoader;
+import com.cyngn.eleven.menu.FragmentMenuItems;
 import com.cyngn.eleven.model.AlbumArtistDetails;
 import com.cyngn.eleven.model.SearchResult;
 import com.cyngn.eleven.model.SearchResult.ResultType;
@@ -62,8 +63,10 @@ import com.cyngn.eleven.utils.ApolloUtils;
 import com.cyngn.eleven.utils.MusicUtils;
 import com.cyngn.eleven.utils.MusicUtils.ServiceToken;
 import com.cyngn.eleven.utils.NavUtils;
+import com.cyngn.eleven.utils.PopupMenuHelper;
 import com.cyngn.eleven.utils.SectionCreatorUtils;
 import com.cyngn.eleven.utils.SectionCreatorUtils.IItemCompare;
+import com.cyngn.eleven.widgets.IPopupMenuCallback;
 import com.cyngn.eleven.widgets.NoResultsContainer;
 
 import java.util.ArrayList;
@@ -86,6 +89,11 @@ public class SearchActivity extends FragmentActivity implements
      * Loading delay of 500ms so we don't flash the screen too much when loading new searches
      */
     private static int LOADING_DELAY = 500;
+
+    /**
+     * Used to keep context menu items from bleeding into other fragments
+     */
+    private static final int GROUP_ID = 5;
 
     /**
      * Identifier for the search loader
@@ -181,11 +189,75 @@ public class SearchActivity extends FragmentActivity implements
     private boolean mQuitting = false;
 
     /**
+     * Pop up menu helper
+     */
+    private PopupMenuHelper mPopupMenuHelper;
+
+    /**
      * {@inheritDoc}
      */
     @Override
     public void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        mPopupMenuHelper = new PopupMenuHelper(this, getSupportFragmentManager()) {
+            private SearchResult mSelectedItem;
+
+            @Override
+            protected PopupMenuType onPreparePopupMenu(int position) {
+                mSelectedItem = mAdapter.getTItem(position);
+
+                return PopupMenuType.SearchResult;
+            }
+
+            @Override
+            protected long[] getIdList() {
+                switch (mSelectedItem.mType) {
+                    case Artist:
+                        return MusicUtils.getSongListForArtist(SearchActivity.this,
+                                mSelectedItem.mId);
+                    case Album:
+                        return MusicUtils.getSongListForAlbum(SearchActivity.this,
+                                mSelectedItem.mId);
+                    case Song:
+                        return new long[] { mSelectedItem.mId };
+                    case Playlist:
+                        return MusicUtils.getSongListForPlaylist(SearchActivity.this,
+                                mSelectedItem.mId);
+                    default:
+                        return null;
+                }
+            }
+
+            @Override
+            protected void getAdditionalIds(PopupMenuType type, ArrayList<Integer> list) {
+                super.getAdditionalIds(type, list);
+
+                if (mSelectedItem.mType == ResultType.Album) {
+                    list.add(FragmentMenuItems.MORE_BY_ARTIST);
+                }
+            }
+
+            @Override
+            protected String getArtistName() {
+                return mSelectedItem.mArtist;
+            }
+
+            @Override
+            protected int getGroupId() {
+                return GROUP_ID;
+            }
+
+            @Override
+            protected void onDeleteClicked() {
+                // do nothing
+            }
+
+            @Override
+            protected void setShouldRefresh() {
+                // do nothing
+            }
+        };
 
         // Fade it in
         overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
@@ -209,6 +281,12 @@ public class SearchActivity extends FragmentActivity implements
         mAdapter.getUnderlyingAdapter().setPrefix(mFilterString);
         mAdapter.setupHeaderParameters(R.layout.list_search_header, false);
         mAdapter.setupFooterParameters(R.layout.list_search_footer, true);
+        mAdapter.setPopupMenuClickedListener(new IPopupMenuCallback.IListener() {
+            @Override
+            public void onPopupMenuClicked(View v, int position) {
+                mPopupMenuHelper.showPopupMenu(v, position);
+            }
+        });
 
         // setup the no results container
         mNoResultsContainer = (NoResultsContainer)findViewById(R.id.no_results_container);

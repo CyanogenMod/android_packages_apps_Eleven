@@ -79,7 +79,7 @@
                 android:layout_height="@dimen/audio_player_controls_top_button_height"
                 android:layout_weight="0"
                 android:scaleType="centerInside"
-                android:src="@drawable/menu_button" />
+                android:src="@drawable/menu_button_light" />
         </LinearLayout>
 
         <RelativeLayout

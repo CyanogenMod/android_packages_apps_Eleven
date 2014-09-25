@@ -33,14 +33,24 @@
             style="@style/ListItemMainText.Grid.Single"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignParentTop="true" />
+            android:layout_alignParentTop="true"
+            android:layout_toLeftOf="@+id/popup_menu_button"/>
 
         <TextView
             android:id="@+id/line_two"
             style="@style/ListItemSecondaryText.Grid.Single"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/line_one" />
+            android:layout_below="@+id/line_one"
+            android:layout_toLeftOf="@id/popup_menu_button" />
+
+        <com.cyngn.eleven.widgets.PopupMenuButton
+            android:id="@id/popup_menu_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:src="@drawable/menu_button" />
     </RelativeLayout>
 
 </RelativeLayout>

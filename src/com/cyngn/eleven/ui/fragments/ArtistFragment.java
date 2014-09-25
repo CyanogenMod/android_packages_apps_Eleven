@@ -16,48 +16,37 @@ import android.content.Context;
 import android.os.Bundle;
 import android.os.SystemClock;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.app.LoaderManager.LoaderCallbacks;
 import android.support.v4.content.Loader;
-import android.text.TextUtils;
-import android.view.ContextMenu;
-import android.view.ContextMenu.ContextMenuInfo;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.SubMenu;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AbsListView;
 import android.widget.AbsListView.OnScrollListener;
 import android.widget.AdapterView;
-import android.widget.AdapterView.AdapterContextMenuInfo;
 import android.widget.AdapterView.OnItemClickListener;
-import android.widget.GridView;
 import android.widget.ListView;
-import android.widget.TextView;
 
 import com.cyngn.eleven.MusicStateListener;
 import com.cyngn.eleven.R;
 import com.cyngn.eleven.adapters.ArtistAdapter;
 import com.cyngn.eleven.loaders.ArtistLoader;
-import com.cyngn.eleven.menu.CreateNewPlaylist;
 import com.cyngn.eleven.menu.DeleteDialog;
-import com.cyngn.eleven.menu.FragmentMenuItems;
 import com.cyngn.eleven.model.Artist;
 import com.cyngn.eleven.recycler.RecycleHolder;
 import com.cyngn.eleven.sectionadapter.SectionAdapter;
 import com.cyngn.eleven.sectionadapter.SectionCreator;
 import com.cyngn.eleven.sectionadapter.SectionListContainer;
 import com.cyngn.eleven.ui.activities.BaseActivity;
-import com.cyngn.eleven.utils.ApolloUtils;
 import com.cyngn.eleven.utils.MusicUtils;
 import com.cyngn.eleven.utils.NavUtils;
-import com.cyngn.eleven.utils.PreferenceUtils;
+import com.cyngn.eleven.utils.PopupMenuHelper;
 import com.cyngn.eleven.utils.SectionCreatorUtils;
 import com.cyngn.eleven.utils.SectionCreatorUtils.IItemCompare;
+import com.cyngn.eleven.widgets.IPopupMenuCallback;
 import com.cyngn.eleven.widgets.NoResultsContainer;
 import com.viewpagerindicator.TitlePageIndicator;
-
-import java.util.List;
 
 /**
  * This class is used to display all of the artists on a user's device.
@@ -71,11 +60,6 @@ public class ArtistFragment extends Fragment implements LoaderCallbacks<SectionL
      * Used to keep context menu items from bleeding into other fragments
      */
     private static final int GROUP_ID = 2;
-
-    /**
-     * Grid view column count. ONE - list, TWO - normal grid, FOUR - landscape
-     */
-    private static final int ONE = 1, TWO = 2, FOUR = 4;
 
     /**
      * LoaderCallbacks identifier
@@ -93,29 +77,19 @@ public class ArtistFragment extends Fragment implements LoaderCallbacks<SectionL
     private SectionAdapter<Artist, ArtistAdapter> mAdapter;
 
     /**
-     * The grid view
-     */
-    private GridView mGridView;
-
-    /**
      * The list view
      */
     private ListView mListView;
 
     /**
-     * Artist song list
-     */
-    private long[] mArtistList;
-
-    /**
-     * Represents an artist
-     */
-    private Artist mArtist;
-
-    /**
      * True if the list should execute {@code #restartLoader()}.
      */
     private boolean mShouldRefresh = false;
+
+    /**
+     * Pop up menu helper
+     */
+    private PopupMenuHelper mPopupMenuHelper;
 
     /**
      * Empty constructor as per the {@link Fragment} documentation
@@ -139,10 +113,55 @@ public class ArtistFragment extends Fragment implements LoaderCallbacks<SectionL
     @Override
     public void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        // Create the adpater
+
+        mPopupMenuHelper = new PopupMenuHelper(getActivity(), getFragmentManager()) {
+            /**
+             * Represents an artist
+             */
+            private Artist mArtist;
+
+            @Override
+            protected PopupMenuType onPreparePopupMenu(int position) {
+                // Create a new model
+                mArtist = mAdapter.getTItem(position);
+
+                return PopupMenuType.Artist;
+            }
+
+            @Override
+            protected long[] getIdList() {
+                return MusicUtils.getSongListForArtist(getActivity(), mArtist.mArtistId);
+            }
+
+            @Override
+            protected int getGroupId() {
+                return GROUP_ID;
+            }
+
+            @Override
+            protected void onDeleteClicked() {
+                mShouldRefresh = true;
+                final String artist = mArtist.mArtistName;
+                DeleteDialog.newInstance(artist, getIdList(), artist).show(
+                        getFragmentManager(), "DeleteDialog");
+            }
+
+            @Override
+            protected void setShouldRefresh() {
+                mShouldRefresh = true;
+            }
+        };
+
+        // Create the adapter
         final int layout = R.layout.list_item_normal;
         ArtistAdapter adapter = new ArtistAdapter(getActivity(), layout);
         mAdapter = new SectionAdapter<Artist, ArtistAdapter>(getActivity(), adapter);
+        mAdapter.setPopupMenuClickedListener(new IPopupMenuCallback.IListener() {
+            @Override
+            public void onPopupMenuClicked(View v, int position) {
+                mPopupMenuHelper.showPopupMenu(v, position);
+            }
+        });
     }
 
     /**
@@ -182,74 +201,6 @@ public class ArtistFragment extends Fragment implements LoaderCallbacks<SectionL
      * {@inheritDoc}
      */
     @Override
-    public void onCreateContextMenu(final ContextMenu menu, final View v,
-            final ContextMenuInfo menuInfo) {
-        super.onCreateContextMenu(menu, v, menuInfo);
-
-        // Get the position of the selected item
-        final AdapterContextMenuInfo info = (AdapterContextMenuInfo)menuInfo;
-        // Creat a new model
-        mArtist = mAdapter.getTItem(info.position);
-        // Create a list of the artist's songs
-        mArtistList = MusicUtils.getSongListForArtist(getActivity(), mArtist.mArtistId);
-
-        // Play the artist
-        menu.add(GROUP_ID, FragmentMenuItems.PLAY_SELECTION, Menu.NONE,
-                getString(R.string.context_menu_play_selection));
-
-        // Add the artist to the queue
-        menu.add(GROUP_ID, FragmentMenuItems.ADD_TO_QUEUE, Menu.NONE,
-                getString(R.string.add_to_queue));
-
-        // Add the artist to a playlist
-        final SubMenu subMenu = menu.addSubMenu(GROUP_ID, FragmentMenuItems.ADD_TO_PLAYLIST,
-                Menu.NONE, R.string.add_to_playlist);
-        MusicUtils.makePlaylistMenu(getActivity(), GROUP_ID, subMenu);
-
-        // Delete the artist
-        menu.add(GROUP_ID, FragmentMenuItems.DELETE, Menu.NONE,
-                getString(R.string.context_menu_delete));
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public boolean onContextItemSelected(final android.view.MenuItem item) {
-        // Avoid leaking context menu selections
-        if (item.getGroupId() == GROUP_ID) {
-            switch (item.getItemId()) {
-                case FragmentMenuItems.PLAY_SELECTION:
-                    MusicUtils.playAll(getActivity(), mArtistList, 0, true);
-                    return true;
-                case FragmentMenuItems.ADD_TO_QUEUE:
-                    MusicUtils.addToQueue(getActivity(), mArtistList);
-                    return true;
-                case FragmentMenuItems.NEW_PLAYLIST:
-                    CreateNewPlaylist.getInstance(mArtistList).show(getFragmentManager(),
-                            "CreatePlaylist");
-                    return true;
-                case FragmentMenuItems.PLAYLIST_SELECTED:
-                    final long id = item.getIntent().getLongExtra("playlist", 0);
-                    MusicUtils.addToPlaylist(getActivity(), mArtistList, id);
-                    return true;
-                case FragmentMenuItems.DELETE:
-                    mShouldRefresh = true;
-                    final String artist = mArtist.mArtistName;
-                    DeleteDialog.newInstance(artist, mArtistList, artist).show(
-                            getFragmentManager(), "DeleteDialog");
-                    return true;
-                default:
-                    break;
-            }
-        }
-        return super.onContextItemSelected(item);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
     public void onScrollStateChanged(final AbsListView view, final int scrollState) {
         // Pause disk cache access to ensure smoother scrolling
         if (scrollState == AbsListView.OnScrollListener.SCROLL_STATE_FLING
@@ -267,8 +218,8 @@ public class ArtistFragment extends Fragment implements LoaderCallbacks<SectionL
     @Override
     public void onItemClick(final AdapterView<?> parent, final View view, final int position,
             final long id) {
-        mArtist = mAdapter.getTItem(position);
-        NavUtils.openArtistProfile(getActivity(), mArtist.mArtistName);
+        Artist artist = mAdapter.getTItem(position);
+        NavUtils.openArtistProfile(getActivity(), artist.mArtistName);
     }
 
     /**
@@ -386,8 +337,6 @@ public class ArtistFragment extends Fragment implements LoaderCallbacks<SectionL
     private void initAbsListView(final AbsListView list) {
         // Release any references to the recycled Views
         list.setRecyclerListener(new RecycleHolder());
-        // Listen for ContextMenus to be created
-        list.setOnCreateContextMenuListener(this);
         // Show the albums and songs from the selected artist
         list.setOnItemClickListener(this);
         // To help make scrolling smooth

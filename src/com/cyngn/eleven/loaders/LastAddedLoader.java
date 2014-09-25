@@ -18,6 +18,7 @@ import android.provider.MediaStore;
 import android.provider.MediaStore.Audio.AudioColumns;
 
 import com.cyngn.eleven.model.Song;
+import com.cyngn.eleven.sectionadapter.SectionCreator;
 import com.cyngn.eleven.utils.Lists;
 
 import java.util.ArrayList;
@@ -29,7 +30,7 @@ import java.util.List;
  * 
  * @author Andrew Neal (andrewdneal@gmail.com)
  */
-public class LastAddedLoader extends WrappedAsyncTaskLoader<List<Song>> {
+public class LastAddedLoader extends SectionCreator.SimpleListLoader<Song> {
 
     /**
      * The result

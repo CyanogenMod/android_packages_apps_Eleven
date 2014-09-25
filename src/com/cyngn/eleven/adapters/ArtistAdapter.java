@@ -26,10 +26,12 @@ import com.cyngn.eleven.R;
 import com.cyngn.eleven.cache.ImageFetcher;
 import com.cyngn.eleven.model.Artist;
 import com.cyngn.eleven.sectionadapter.SectionAdapter;
+import com.cyngn.eleven.sectionadapter.SectionAdapter.BasicAdapter;
 import com.cyngn.eleven.ui.MusicHolder;
 import com.cyngn.eleven.ui.MusicHolder.DataHolder;
 import com.cyngn.eleven.utils.ApolloUtils;
 import com.cyngn.eleven.utils.MusicUtils;
+import com.cyngn.eleven.widgets.IPopupMenuCallback;
 
 /**
  * This {@link ArrayAdapter} is used to display all of the artists on a user's
@@ -40,7 +42,7 @@ import com.cyngn.eleven.utils.MusicUtils;
 /**
  * @author Andrew Neal (andrewdneal@gmail.com)
  */
-public class ArtistAdapter extends ArrayAdapter<Artist> implements SectionAdapter.BasicAdapter {
+public class ArtistAdapter extends ArrayAdapter<Artist> implements BasicAdapter, IPopupMenuCallback {
 
     /**
      * Number of views (ImageView and TextView)
@@ -66,6 +68,11 @@ public class ArtistAdapter extends ArrayAdapter<Artist> implements SectionAdapte
      * Used to cache the artist info
      */
     private DataHolder[] mData;
+
+    /**
+     * Used to listen to the pop up menu callbacks
+     */
+    private IListener mListener;
 
     /**
      * Constructor of <code>ArtistAdapter</code>
@@ -94,6 +101,9 @@ public class ArtistAdapter extends ArrayAdapter<Artist> implements SectionAdapte
             convertView = LayoutInflater.from(getContext()).inflate(mLayoutId, parent, false);
             holder = new MusicHolder(convertView);
             convertView.setTag(holder);
+
+            // set the pop up menu listener
+            holder.mPopupMenuButton.get().setPopupMenuClickedListener(mListener);
         } else {
             holder = (MusicHolder)convertView.getTag();
         }
@@ -107,6 +117,8 @@ public class ArtistAdapter extends ArrayAdapter<Artist> implements SectionAdapte
         holder.mLineTwo.get().setText(dataHolder.mLineTwo);
         // Asynchronously load the artist image into the adapter
         mImageFetcher.loadArtistImage(dataHolder.mLineOne, holder.mImage.get());
+        // because of recycling, we need to set the position each time
+        holder.mPopupMenuButton.get().setPosition(position);
 
         return convertView;
     }
@@ -220,5 +232,10 @@ public class ArtistAdapter extends ArrayAdapter<Artist> implements SectionAdapte
         }
 
         return  -1;
+    }
+
+    @Override
+    public void setPopupMenuClickedListener(IListener listener) {
+        mListener = listener;
     }
 }

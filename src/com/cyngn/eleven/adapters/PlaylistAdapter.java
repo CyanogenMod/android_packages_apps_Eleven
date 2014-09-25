@@ -27,6 +27,7 @@ import com.cyngn.eleven.ui.MusicHolder;
 import com.cyngn.eleven.ui.MusicHolder.DataHolder;
 import com.cyngn.eleven.ui.fragments.PlaylistFragment;
 import com.cyngn.eleven.utils.MusicUtils;
+import com.cyngn.eleven.widgets.IPopupMenuCallback;
 
 /**
  * This {@link ArrayAdapter} is used to display all of the playlists on a user's
@@ -34,7 +35,7 @@ import com.cyngn.eleven.utils.MusicUtils;
  * 
  * @author Andrew Neal (andrewdneal@gmail.com)
  */
-public class PlaylistAdapter extends ArrayAdapter<Playlist> {
+public class PlaylistAdapter extends ArrayAdapter<Playlist> implements IPopupMenuCallback {
 
     /**
      * Smart playlists and normal playlists
@@ -50,6 +51,11 @@ public class PlaylistAdapter extends ArrayAdapter<Playlist> {
      * Used to cache the playlist info
      */
     private DataHolder[] mData;
+
+    /**
+     * Used to listen to the pop up menu callbacks
+     */
+    protected IListener mListener;
 
     /**
      * Constructor of <code>PlaylistAdapter</code>
@@ -77,12 +83,18 @@ public class PlaylistAdapter extends ArrayAdapter<Playlist> {
             convertView = LayoutInflater.from(getContext()).inflate(layoutId, parent, false);
             holder = new MusicHolder(convertView);
             convertView.setTag(holder);
+
+            // set the pop up menu listener
+            holder.mPopupMenuButton.get().setPopupMenuClickedListener(mListener);
         } else {
             holder = (MusicHolder)convertView.getTag();
         }
 
         // Retrieve the data holder
         final DataHolder dataHolder = mData[position];
+
+        // because of recycling, we need to set the position each time
+        holder.mPopupMenuButton.get().setPosition(position);
 
         // Set each playlist name (line one)
         holder.mLineOne.get().setText(dataHolder.mLineOne);
@@ -181,4 +193,8 @@ public class PlaylistAdapter extends ArrayAdapter<Playlist> {
         mData = null;
     }
 
+    @Override
+    public void setPopupMenuClickedListener(IListener listener) {
+        mListener = listener;
+    }
 }

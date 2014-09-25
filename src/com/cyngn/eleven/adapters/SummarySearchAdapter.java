@@ -19,13 +19,15 @@ import com.cyngn.eleven.sectionadapter.SectionAdapter;
 import com.cyngn.eleven.ui.MusicHolder;
 import com.cyngn.eleven.utils.ApolloUtils;
 import com.cyngn.eleven.utils.MusicUtils;
+import com.cyngn.eleven.widgets.IPopupMenuCallback;
 
 import java.util.Locale;
 
 /**
  * Used to populate the list view with the search results.
  */
-public final class SummarySearchAdapter extends ArrayAdapter<SearchResult> implements SectionAdapter.BasicAdapter {
+public final class SummarySearchAdapter extends ArrayAdapter<SearchResult>
+        implements SectionAdapter.BasicAdapter, IPopupMenuCallback {
 
     /**
      * no-image list item type and with image type
@@ -46,6 +48,11 @@ public final class SummarySearchAdapter extends ArrayAdapter<SearchResult> imple
      * The prefix that's highlighted
      */
     private char[] mPrefix;
+
+    /**
+     * Used to listen to the pop up menu callbacks
+     */
+    private IListener mListener;
 
     /**
      * Constructor for <code>SearchAdapter</code>
@@ -73,9 +80,14 @@ public final class SummarySearchAdapter extends ArrayAdapter<SearchResult> imple
                     getViewResourceId(position), parent, false);
             holder = new MusicHolder(convertView);
             convertView.setTag(holder);
+            // set the pop up menu listener
+            holder.mPopupMenuButton.get().setPopupMenuClickedListener(mListener);
         } else {
             holder = (MusicHolder)convertView.getTag();
         }
+
+        // Sets the position each time because of recycling
+        holder.mPopupMenuButton.get().setPosition(position);
 
         final SearchResult item = getItem(position);
 
@@ -90,7 +102,6 @@ public final class SummarySearchAdapter extends ArrayAdapter<SearchResult> imple
                 String albumCount = MusicUtils.makeLabel(getContext(), R.plurals.Nalbums, item.mAlbumCount);
                 // Album Name | Artist Name (line two)
                 holder.mLineTwo.get().setText(MusicUtils.makeCombinedString(getContext(), songCount, albumCount));
-
                 break;
             case Album:
                 // Asynchronously load the album images into the adapter
@@ -230,5 +241,10 @@ public final class SummarySearchAdapter extends ArrayAdapter<SearchResult> imple
         }
 
         return  -1;
+    }
+
+    @Override
+    public void setPopupMenuClickedListener(IListener listener) {
+        mListener = listener;
     }
 }

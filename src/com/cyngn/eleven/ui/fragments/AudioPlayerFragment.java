@@ -283,6 +283,7 @@ public class AudioPlayerFragment extends Fragment implements ServiceConnection {
             @Override
             public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
                 MusicUtils.makePlaylistMenu(getActivity(), GROUP_ID, menu);
+                menu.setHeaderTitle(R.string.add_to_playlist);
             }
         });
 

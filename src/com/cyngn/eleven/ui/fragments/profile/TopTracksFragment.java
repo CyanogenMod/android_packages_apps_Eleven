@@ -12,21 +12,22 @@
 package com.cyngn.eleven.ui.fragments.profile;
 
 import android.app.Activity;
-import android.database.Cursor;
 import android.os.Bundle;
 import android.support.v4.content.Loader;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.cyngn.eleven.Config;
 import com.cyngn.eleven.R;
 import com.cyngn.eleven.adapters.SongAdapter;
 import com.cyngn.eleven.loaders.TopTracksLoader;
 import com.cyngn.eleven.model.Song;
+import com.cyngn.eleven.sectionadapter.SectionAdapter;
+import com.cyngn.eleven.sectionadapter.SectionCreator;
+import com.cyngn.eleven.sectionadapter.SectionListContainer;
 import com.cyngn.eleven.utils.MusicUtils;
 import com.cyngn.eleven.widgets.NoResultsContainer;
-
-import java.util.List;
 
 /**
  * This class is used to display all of the songs the user put on their device
@@ -50,15 +51,19 @@ public class TopTracksFragment extends BasicSongFragment {
      * {@inheritDoc}
      */
     @Override
-    public Loader<List<Song>> onCreateLoader(final int id, final Bundle args) {
-        return new TopTracksLoader(getActivity(), TopTracksLoader.QueryType.TopTracks);
+    public Loader<SectionListContainer<Song>> onCreateLoader(final int id, final Bundle args) {
+        TopTracksLoader loader = new TopTracksLoader(getActivity(),
+                TopTracksLoader.QueryType.TopTracks);
+        return new SectionCreator<Song>(getActivity(), loader, null);
     }
 
     @Override
-    protected SongAdapter createAdapter() {
-        return new TopTracksAdapter(
-                getActivity(),
-                R.layout.list_item_top_tracks
+    protected SectionAdapter<Song, SongAdapter> createAdapter() {
+        return new SectionAdapter(getActivity(),
+                new TopTracksAdapter(
+                        getActivity(),
+                        R.layout.list_item_top_tracks
+                )
         );
     }
 
@@ -74,11 +79,8 @@ public class TopTracksFragment extends BasicSongFragment {
 
     @Override
     public void playAll(int position) {
-        Cursor cursor = TopTracksLoader.makeTopTracksCursor(getActivity());
-        final long[] list = MusicUtils.getSongListForCursor(cursor);
-        MusicUtils.playAll(getActivity(), list, position, false);
-        cursor.close();
-        cursor = null;
+        MusicUtils.playSmartPlaylist(getActivity(), position,
+                Config.SmartPlaylistType.TopTracks);
     }
 
     public class TopTracksAdapter extends SongAdapter {
