@@ -3,7 +3,6 @@ package com.cyngn.eleven.ui.activities;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.SystemClock;
 import android.provider.MediaStore;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.app.LoaderManager.LoaderCallbacks;
@@ -17,6 +16,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.cyngn.eleven.Config;
+import com.cyngn.eleven.MusicStateListener;
 import com.cyngn.eleven.R;
 import com.cyngn.eleven.adapters.ProfileSongAdapter;
 import com.cyngn.eleven.cache.ImageFetcher;
@@ -25,26 +25,22 @@ import com.cyngn.eleven.dragdrop.DragSortListView.DragScrollProfile;
 import com.cyngn.eleven.dragdrop.DragSortListView.DropListener;
 import com.cyngn.eleven.dragdrop.DragSortListView.RemoveListener;
 import com.cyngn.eleven.loaders.PlaylistSongLoader;
-import com.cyngn.eleven.menu.DeleteDialog;
 import com.cyngn.eleven.menu.FragmentMenuItems;
 import com.cyngn.eleven.model.Song;
 import com.cyngn.eleven.recycler.RecycleHolder;
 import com.cyngn.eleven.utils.MusicUtils;
 import com.cyngn.eleven.utils.PopupMenuHelper;
+import com.cyngn.eleven.utils.SongPopupMenuHelper;
 import com.cyngn.eleven.widgets.IPopupMenuCallback;
 import com.cyngn.eleven.widgets.NoResultsContainer;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.TreeSet;
 
 public class PlaylistDetailActivity extends DetailActivity implements
         LoaderCallbacks<List<Song>>, OnItemClickListener, DropListener,
-        RemoveListener, DragScrollProfile {
-
-    /**
-     * Used to keep context menu items from bleeding into other fragments
-     */
-    private static final int GROUP_ID = 8;
+        RemoveListener, DragScrollProfile, MusicStateListener {
 
     /**
      * LoaderCallbacks identifier
@@ -81,65 +77,21 @@ public class PlaylistDetailActivity extends DetailActivity implements
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        mPopupMenuHelper = new PopupMenuHelper(this, getSupportFragmentManager()) {
-            /**
-             * Represents a song
-             */
-            private Song mSong;
-
+        mPopupMenuHelper = new SongPopupMenuHelper(this, getSupportFragmentManager()) {
             @Override
-            protected PopupMenuType onPreparePopupMenu(int position) {
-                // the header has been long-pressed - for now just return, but later if we want
-                // to long-press support for the header, do that logic here
+            public Song getSong(int position) {
                 if (position == 0) {
                     return null;
                 }
 
-                // Create a new song
-                mSong = mAdapter.getItem(position - 1);
-
-                return PopupMenuType.Song;
+                return mAdapter.getItem(position - 1);
             }
 
             @Override
-            protected void getAdditionalIds(PopupMenuType type, ArrayList<Integer> list) {
-                super.getAdditionalIds(type, list);
+            protected void updateMenuIds(PopupMenuType type, TreeSet<Integer> set) {
+                super.updateMenuIds(type, set);
 
-                list.add(FragmentMenuItems.REMOVE_FROM_PLAYLIST);
-            }
-
-            @Override
-            protected long[] getIdList() {
-                return new long[] { mSong.mSongId };
-            }
-
-            @Override
-            protected int getGroupId() {
-                return GROUP_ID;
-            }
-
-            @Override
-            protected long getId() {
-                return mSong.mSongId;
-            }
-
-            @Override
-            protected String getArtistName() {
-                return mSong.mArtistName;
-            }
-
-            @Override
-            protected void onDeleteClicked() {
-                DeleteDialog.newInstance(mSong.mSongName, getIdList(), null)
-                        .show(getSupportFragmentManager(), "DeleteDialog");
-                SystemClock.sleep(10);
-                mAdapter.notifyDataSetChanged();
-                getSupportLoaderManager().restartLoader(LOADER, null, PlaylistDetailActivity.this);
-            }
-
-            @Override
-            protected void setShouldRefresh() {
-                // do nothing here since we restart the loader ourselves
+                set.add(FragmentMenuItems.REMOVE_FROM_PLAYLIST);
             }
 
             @Override
@@ -166,6 +118,9 @@ public class PlaylistDetailActivity extends DetailActivity implements
 
         LoaderManager lm = getSupportLoaderManager();
         lm.initLoader(0, arguments, this);
+
+        // listen to music state changes
+        setMusicStateListenerListener(this);
     }
 
     private void setupHero() {
@@ -308,10 +263,10 @@ public class PlaylistDetailActivity extends DetailActivity implements
             // hide the header container
             mHeaderContainer.setVisibility(View.GONE);
 
-            // Start fresh
-            mAdapter.unload();
             // Return the correct count
             mAdapter.setCount(new ArrayList<Song>());
+            // Start fresh
+            mAdapter.unload();
         } else {
             // show the header container
             mHeaderContainer.setVisibility(View.VISIBLE);
@@ -342,5 +297,15 @@ public class PlaylistDetailActivity extends DetailActivity implements
     public void onLoaderReset(final Loader<List<Song>> loader) {
         // Clear the data in the adapter
         mAdapter.unload();
+    }
+
+    @Override
+    public void restartLoader() {
+        getSupportLoaderManager().restartLoader(0, getIntent().getExtras(), this);
+    }
+
+    @Override
+    public void onMetaChanged() {
+
     }
 }

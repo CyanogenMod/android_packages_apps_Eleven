@@ -33,11 +33,6 @@ import com.viewpagerindicator.TitlePageIndicator;
 public class SongFragment extends BasicSongFragment {
 
     /**
-     * Used to keep context menu items from bleeding into other fragments
-     */
-    private static final int GROUP_ID = 4;
-
-    /**
      * LoaderCallbacks identifier
      */
     private static final int LOADER = 0;
@@ -72,11 +67,6 @@ public class SongFragment extends BasicSongFragment {
         return new SectionCreator<Song>(context, songLoader, songComparison);
     }
 
-
-    @Override
-    public int getGroupId() {
-        return GROUP_ID;
-    }
 
     @Override
     public int getLoaderId() {

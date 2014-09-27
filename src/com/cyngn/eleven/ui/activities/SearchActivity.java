@@ -72,6 +72,7 @@ import com.cyngn.eleven.widgets.NoResultsContainer;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.TreeSet;
 
 import static android.view.View.OnTouchListener;
 import static com.cyngn.eleven.utils.MusicUtils.mService;
@@ -89,11 +90,6 @@ public class SearchActivity extends FragmentActivity implements
      * Loading delay of 500ms so we don't flash the screen too much when loading new searches
      */
     private static int LOADING_DELAY = 500;
-
-    /**
-     * Used to keep context menu items from bleeding into other fragments
-     */
-    private static final int GROUP_ID = 5;
 
     /**
      * Identifier for the search loader
@@ -230,32 +226,17 @@ public class SearchActivity extends FragmentActivity implements
             }
 
             @Override
-            protected void getAdditionalIds(PopupMenuType type, ArrayList<Integer> list) {
-                super.getAdditionalIds(type, list);
+            protected void updateMenuIds(PopupMenuType type, TreeSet<Integer> set) {
+                super.updateMenuIds(type, set);
 
                 if (mSelectedItem.mType == ResultType.Album) {
-                    list.add(FragmentMenuItems.MORE_BY_ARTIST);
+                    set.add(FragmentMenuItems.MORE_BY_ARTIST);
                 }
             }
 
             @Override
             protected String getArtistName() {
                 return mSelectedItem.mArtist;
-            }
-
-            @Override
-            protected int getGroupId() {
-                return GROUP_ID;
-            }
-
-            @Override
-            protected void onDeleteClicked() {
-                // do nothing
-            }
-
-            @Override
-            protected void setShouldRefresh() {
-                // do nothing
             }
         };
 

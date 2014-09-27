@@ -2,9 +2,7 @@
     android:layout_width="match_parent"
     android:layout_height="70dp" >
 
-    <!-- FIXME: hide this until we know what goes in the popup menu -->
-    <ImageView
-        android:visibility="gone"
+    <com.cyngn.eleven.widgets.PopupMenuButton
         android:id="@+id/overflow"
         android:layout_width="@dimen/overflow_width"
         android:layout_height="68dp"

@@ -57,11 +57,6 @@ public class ArtistFragment extends Fragment implements LoaderCallbacks<SectionL
         OnScrollListener, OnItemClickListener, MusicStateListener {
 
     /**
-     * Used to keep context menu items from bleeding into other fragments
-     */
-    private static final int GROUP_ID = 2;
-
-    /**
      * LoaderCallbacks identifier
      */
     private static final int LOADER = 0;
@@ -80,11 +75,6 @@ public class ArtistFragment extends Fragment implements LoaderCallbacks<SectionL
      * The list view
      */
     private ListView mListView;
-
-    /**
-     * True if the list should execute {@code #restartLoader()}.
-     */
-    private boolean mShouldRefresh = false;
 
     /**
      * Pop up menu helper
@@ -134,21 +124,10 @@ public class ArtistFragment extends Fragment implements LoaderCallbacks<SectionL
             }
 
             @Override
-            protected int getGroupId() {
-                return GROUP_ID;
-            }
-
-            @Override
             protected void onDeleteClicked() {
-                mShouldRefresh = true;
                 final String artist = mArtist.mArtistName;
                 DeleteDialog.newInstance(artist, getIdList(), artist).show(
                         getFragmentManager(), "DeleteDialog");
-            }
-
-            @Override
-            protected void setShouldRefresh() {
-                mShouldRefresh = true;
             }
         };
 
@@ -315,10 +294,7 @@ public class ArtistFragment extends Fragment implements LoaderCallbacks<SectionL
     @Override
     public void restartLoader() {
         // Update the list when the user deletes any items
-        if (mShouldRefresh) {
-            getLoaderManager().restartLoader(LOADER, null, this);
-        }
-        mShouldRefresh = false;
+        getLoaderManager().restartLoader(LOADER, null, this);
     }
 
     /**

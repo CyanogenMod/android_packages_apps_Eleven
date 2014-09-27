@@ -11,12 +11,24 @@ import android.widget.ImageView;
 import android.widget.ListView;
 
 import com.cyngn.eleven.Config;
+import com.cyngn.eleven.MusicStateListener;
 import com.cyngn.eleven.R;
 import com.cyngn.eleven.adapters.ArtistDetailAlbumAdapter;
 import com.cyngn.eleven.adapters.ArtistDetailSongAdapter;
+import com.cyngn.eleven.adapters.IEmptyAdapterCallback;
 import com.cyngn.eleven.cache.ImageFetcher;
+import com.cyngn.eleven.menu.FragmentMenuItems;
+import com.cyngn.eleven.model.Album;
+import com.cyngn.eleven.model.Song;
+import com.cyngn.eleven.utils.AlbumPopupMenuHelper;
+import com.cyngn.eleven.utils.SongPopupMenuHelper;
+import com.cyngn.eleven.widgets.IPopupMenuCallback;
 
-public class ArtistDetailActivity extends DetailActivity {
+import java.util.TreeSet;
+
+public class ArtistDetailActivity extends DetailActivity implements MusicStateListener {
+    private final int ALBUM_LOADER_ID = 0;
+    private final int SONG_LOADER_ID = 1;
     private ImageView mHero;
     private View mHeader;
 
@@ -25,6 +37,9 @@ public class ArtistDetailActivity extends DetailActivity {
 
     private RecyclerView mAlbums;
     private ArtistDetailAlbumAdapter mAlbumAdapter;
+
+    private SongPopupMenuHelper mSongPopupMenuHelper;
+    private AlbumPopupMenuHelper mAlbumPopupMenuHelper;
 
     @Override
     protected int getLayoutToInflate() { return R.layout.activity_artist_detail; }
@@ -41,13 +56,16 @@ public class ArtistDetailActivity extends DetailActivity {
         ViewGroup root = (ViewGroup)findViewById(R.id.activity_base_content);
         root.setPadding(0, 0, 0, 0); // clear default padding
 
+        setupPopupMenuHelpers();
         setupSongList(root);
         setupAlbumList();
         setupHero(artistName);
 
         LoaderManager lm = getSupportLoaderManager();
-        lm.initLoader(0, arguments, mAlbumAdapter);
-        lm.initLoader(1, arguments, mSongAdapter);
+        lm.initLoader(ALBUM_LOADER_ID, arguments, mAlbumAdapter);
+        lm.initLoader(SONG_LOADER_ID, arguments, mSongAdapter);
+
+        setMusicStateListenerListener(this);
     }
 
     private void setupHero(String artistName) {
@@ -61,6 +79,12 @@ public class ArtistDetailActivity extends DetailActivity {
         mAlbums.setHasFixedSize(true);
         mAlbums.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
         mAlbumAdapter = new ArtistDetailAlbumAdapter(this);
+        mAlbumAdapter.setPopupMenuClickedListener(new IPopupMenuCallback.IListener() {
+            @Override
+            public void onPopupMenuClicked(View v, int position) {
+                mAlbumPopupMenuHelper.showPopupMenu(v, position);
+            }
+        });
         mAlbums.setAdapter(mAlbumAdapter);
     }
 
@@ -71,12 +95,70 @@ public class ArtistDetailActivity extends DetailActivity {
         mSongs.addHeaderView(mHeader);
         mSongs.setOnScrollListener(this);
         mSongAdapter = new ArtistDetailSongAdapter(this);
+        mSongAdapter.setOnEmptyAdapterListener(new IEmptyAdapterCallback() {
+            @Override
+            public void onEmptyAdapter() {
+                // no results - because the user deleted the last item
+                finish();
+            }
+        });
+        mSongAdapter.setPopupMenuClickedListener(new IPopupMenuCallback.IListener() {
+            @Override
+            public void onPopupMenuClicked(View v, int position) {
+                mSongPopupMenuHelper.showPopupMenu(v, position);
+            }
+        });
         mSongs.setAdapter(mSongAdapter);
         mSongs.setOnItemClickListener(mSongAdapter);
+    }
+
+    private void setupPopupMenuHelpers() {
+        mSongPopupMenuHelper = new SongPopupMenuHelper(this, getSupportFragmentManager()) {
+            @Override
+            public Song getSong(int position) {
+                return mSongAdapter.getItem(position);
+            }
+
+            @Override
+            protected void updateMenuIds(PopupMenuType type, TreeSet<Integer> set) {
+                super.updateMenuIds(type, set);
+
+                // since we are already on the artist page, this item doesn't make sense
+                set.remove(FragmentMenuItems.MORE_BY_ARTIST);
+            }
+        };
+
+        mAlbumPopupMenuHelper = new AlbumPopupMenuHelper(this, getSupportFragmentManager()) {
+            @Override
+            public Album getAlbum(int position) {
+                return mAlbumAdapter.getItem(position);
+            }
+
+            @Override
+            protected void updateMenuIds(PopupMenuType type, TreeSet<Integer> set) {
+                super.updateMenuIds(type, set);
+
+                // since we are already on the artist page, this item doesn't make sense
+                set.remove(FragmentMenuItems.MORE_BY_ARTIST);
+            }
+        };
     }
 
     // TODO: change this class to use the same header strategy as PlaylistDetail
     protected int getHeaderHeight() { return 0; }
 
     protected void setHeaderPosition(float y) {  }
+
+    @Override
+    public void restartLoader() {
+        Bundle arguments = getIntent().getExtras();
+        LoaderManager lm = getSupportLoaderManager();
+        lm.restartLoader(ALBUM_LOADER_ID, arguments, mAlbumAdapter);
+        lm.restartLoader(SONG_LOADER_ID, arguments, mSongAdapter);
+    }
+
+    @Override
+    public void onMetaChanged() {
+
+    }
 }

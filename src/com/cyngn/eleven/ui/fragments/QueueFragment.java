@@ -62,11 +62,6 @@ public class QueueFragment extends Fragment implements LoaderCallbacks<List<Song
         OnItemClickListener, DropListener, RemoveListener, DragScrollProfile, ServiceConnection {
 
     /**
-     * Used to keep context menu items from bleeding into other fragments
-     */
-    private static final int GROUP_ID = 13;
-
-    /**
      * LoaderCallbacks identifier
      */
     private static final int LOADER = 0;
@@ -126,16 +121,6 @@ public class QueueFragment extends Fragment implements LoaderCallbacks<List<Song
             }
 
             @Override
-            protected int getGroupId() {
-                return GROUP_ID;
-            }
-
-            @Override
-            protected long getId() {
-                return mSong.mSongId;
-            }
-
-            @Override
             protected String getArtistName() {
                 return mSong.mArtistName;
             }
@@ -144,11 +129,6 @@ public class QueueFragment extends Fragment implements LoaderCallbacks<List<Song
             protected void onDeleteClicked() {
                 DeleteDialog.newInstance(mSong.mSongName,
                         new long[] { getId() }, null).show(getFragmentManager(), "DeleteDialog");
-            }
-
-            @Override
-            protected void setShouldRefresh() {
-                // do nothing
             }
 
             @Override

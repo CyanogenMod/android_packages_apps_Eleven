@@ -19,6 +19,7 @@ import com.cyngn.eleven.menu.RenamePlaylist;
 import com.cyngn.eleven.provider.RecentStore;
 
 import java.util.ArrayList;
+import java.util.TreeSet;
 
 /**
  * Simple helper class that does most of the popup menu inflating and handling
@@ -84,18 +85,16 @@ public abstract class PopupMenuHelper implements PopupMenu.OnMenuItemClickListen
     /**
      * @return the group id to be used for pop up menu inflating
      */
-    protected abstract int getGroupId();
+    protected int getGroupId() {
+        return 0;
+    }
 
     /**
-     * called when the delete item is pressed.  Since delete is different from class to class
-     * it is not implemented in this class and relies on the contaning classes to implement
+     * called when the delete item is pressed.
      */
-    protected abstract void onDeleteClicked();
-
-    /**
-     * Tells the containing class that it should probably mark their loaders for refresh
-     */
-    protected abstract void setShouldRefresh();
+    protected void onDeleteClicked() {
+        throw new UnsupportedOperationException("Method Not Implemented!");
+    }
 
     /**
      * @return the artist name (when needed) for "more by this artist"
@@ -108,6 +107,11 @@ public abstract class PopupMenuHelper implements PopupMenu.OnMenuItemClickListen
      * @return the single id that is needed for the "set as my ringtone"
      */
     protected long getId() {
+        long[] idList = getIdList();
+        if (idList.length == 1) {
+            return idList[0];
+        }
+
         throw new UnsupportedOperationException("Method Not Implemented!");
     }
 
@@ -137,18 +141,19 @@ public abstract class PopupMenuHelper implements PopupMenu.OnMenuItemClickListen
      * @param menu Menu to use for adding to
      */
     protected void createPopupMenu(final Menu menu) {
+        TreeSet<Integer> menuItems = new TreeSet<Integer>();
+
         // get the default items and add them
-        int[] menuItems = getIdsForType(mType);
-        if (menuItems != null) {
-            for (int id : menuItems) {
-                addToMenu(menu, id, getStringResourceForId(id));
+        int[] defaultItems = getIdsForType(mType);
+        if (defaultItems != null) {
+            for (int id : defaultItems) {
+                menuItems.add(id);
             }
         }
 
-        // if the containing class wants to add additional items, do it here
-        ArrayList<Integer> additionalItems = new ArrayList<Integer>();
-        getAdditionalIds(mType, additionalItems);
-        for (int id : additionalItems) {
+        updateMenuIds(mType, menuItems);
+
+        for (int id : menuItems) {
             addToMenu(menu, id, getAdditionalStringResourceForId(id));
         }
     }
@@ -218,11 +223,11 @@ public abstract class PopupMenuHelper implements PopupMenu.OnMenuItemClickListen
     }
 
     /**
-     * Gets the additional menu items to inflate
+     * Allows containing classes to add/remove ids to the menu
      * @param type the pop up menu type
-     * @param list the list to add menu items to
+     * @param set the treeset to add/remove menu items
      */
-    protected void getAdditionalIds(PopupMenuType type, ArrayList<Integer> list) {
+    protected void updateMenuIds(PopupMenuType type, TreeSet<Integer> set) {
         // do nothing
     }
 
@@ -290,7 +295,6 @@ public abstract class PopupMenuHelper implements PopupMenu.OnMenuItemClickListen
         if (item.getGroupId() == getGroupId()) {
             switch (item.getItemId()) {
                 case FragmentMenuItems.REMOVE_FROM_RECENT:
-                    setShouldRefresh();
                     RecentStore.getInstance(mActivity).removeItem(getId());
                     MusicUtils.refresh();
                     return true;
@@ -322,7 +326,6 @@ public abstract class PopupMenuHelper implements PopupMenu.OnMenuItemClickListen
                             mFragmentManager, "CreatePlaylist");
                     return true;
                 case FragmentMenuItems.RENAME_PLAYLIST:
-                    setShouldRefresh();
                     RenamePlaylist.getInstance(getId()).show(
                             mFragmentManager, "RenameDialog");
                     return true;
@@ -334,18 +337,15 @@ public abstract class PopupMenuHelper implements PopupMenu.OnMenuItemClickListen
                     NavUtils.openArtistProfile(mActivity, getArtistName());
                     return true;
                 case FragmentMenuItems.DELETE:
-                    setShouldRefresh();
                     onDeleteClicked();
                     return true;
                 case FragmentMenuItems.USE_AS_RINGTONE:
                     MusicUtils.setRingtone(mActivity, getId());
                     return true;
                 case FragmentMenuItems.REMOVE_FROM_PLAYLIST:
-                    setShouldRefresh();
                     removeFromPlaylist();
                     return true;
                 case FragmentMenuItems.REMOVE_FROM_QUEUE:
-                    setShouldRefresh();
                     removeFromQueue();
                     return true;
                 case FragmentMenuItems.PLAY_NEXT:

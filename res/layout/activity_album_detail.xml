@@ -11,7 +11,7 @@
         android:layout_alignParentLeft="true"
         android:background="@color/page_header_background" >
 
-        <ImageView
+        <com.cyngn.eleven.widgets.PopupMenuButton
             android:id="@+id/overflow"
             android:layout_width="@dimen/overflow_width"
             android:layout_height="@dimen/overflow_width"

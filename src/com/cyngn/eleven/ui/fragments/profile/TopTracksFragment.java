@@ -38,11 +38,6 @@ import com.cyngn.eleven.widgets.NoResultsContainer;
 public class TopTracksFragment extends BasicSongFragment {
 
     /**
-     * Used to keep context menu items from bleeding into other fragments
-     */
-    private static final int GROUP_ID = 6;
-
-    /**
      * LoaderCallbacks identifier
      */
     private static final int LOADER = 0;
@@ -65,11 +60,6 @@ public class TopTracksFragment extends BasicSongFragment {
                         R.layout.list_item_top_tracks
                 )
         );
-    }
-
-    @Override
-    public int getGroupId() {
-        return GROUP_ID;
     }
 
     @Override

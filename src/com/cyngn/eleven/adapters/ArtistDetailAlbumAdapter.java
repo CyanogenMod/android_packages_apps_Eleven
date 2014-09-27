@@ -19,13 +19,15 @@ import com.cyngn.eleven.loaders.ArtistAlbumLoader;
 import com.cyngn.eleven.model.Album;
 import com.cyngn.eleven.utils.ApolloUtils;
 import com.cyngn.eleven.utils.NavUtils;
+import com.cyngn.eleven.widgets.IPopupMenuCallback;
+import com.cyngn.eleven.widgets.PopupMenuButton;
 
 import java.util.Collections;
 import java.util.List;
 
 public class ArtistDetailAlbumAdapter
 extends RecyclerView.Adapter<ArtistDetailAlbumAdapter.ViewHolder>
-implements LoaderCallbacks<List<Album>> {
+implements LoaderCallbacks<List<Album>>, IPopupMenuCallback {
     private static final int TYPE_FIRST = 1;
     private static final int TYPE_MIDDLE = 2;
     private static final int TYPE_LAST = 3;
@@ -34,6 +36,7 @@ implements LoaderCallbacks<List<Album>> {
     private final ImageFetcher mImageFetcher;
     private final LayoutInflater mInflater;
     private List<Album> mAlbums = Collections.emptyList();
+    private IListener mListener;
 
     public ArtistDetailAlbumAdapter(final Activity activity) {
         mActivity = activity;
@@ -67,6 +70,8 @@ implements LoaderCallbacks<List<Album>> {
         holder.year.setText(a.mYear);
         mImageFetcher.loadAlbumImage(
             a.mArtistName, a.mAlbumName, a.mAlbumId, holder.art);
+        holder.popupbutton.setPopupMenuClickedListener(mListener);
+        holder.popupbutton.setPosition(position);
         addAction(holder.itemView, a);
     }
 
@@ -83,15 +88,26 @@ implements LoaderCallbacks<List<Album>> {
     @Override
     public int getItemCount() { return mAlbums.size(); }
 
+    public Album getItem(int position) {
+        return mAlbums.get(position);
+    }
+
+    @Override
+    public void setPopupMenuClickedListener(IListener listener) {
+        mListener = listener;
+    }
+
     public static class ViewHolder extends RecyclerView.ViewHolder {
         public ImageView art;
         public TextView title;
         public TextView year;
+        public PopupMenuButton popupbutton;
         public ViewHolder(View root) {
             super(root);
             art = (ImageView)root.findViewById(R.id.album_art);
             title = (TextView)root.findViewById(R.id.title);
             year = (TextView)root.findViewById(R.id.year);
+            popupbutton = (PopupMenuButton)root.findViewById(R.id.overflow);
         }
     }
 

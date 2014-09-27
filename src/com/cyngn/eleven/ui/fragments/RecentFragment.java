@@ -28,6 +28,7 @@ import com.cyngn.eleven.utils.MusicUtils;
 import com.cyngn.eleven.widgets.NoResultsContainer;
 
 import java.util.ArrayList;
+import java.util.TreeSet;
 
 /**
  * This class is used to display all of the recently listened to songs by the
@@ -35,12 +36,7 @@ import java.util.ArrayList;
  *
  * @author Andrew Neal (andrewdneal@gmail.com)
  */
-public class RecentFragment extends BasicSongFragment implements MusicStateListener {
-
-    /**
-     * Used to keep context menu items from bleeding into other fragments
-     */
-    private static final int GROUP_ID = 1;
+public class RecentFragment extends BasicSongFragment {
 
     /**
      * LoaderCallbacks identifier
@@ -48,8 +44,8 @@ public class RecentFragment extends BasicSongFragment implements MusicStateListe
     private static final int LOADER = 0;
 
     @Override
-    protected void getAdditionaIdsForType(ArrayList<Integer> list) {
-        list.add(FragmentMenuItems.REMOVE_FROM_RECENT);
+    protected void updateMenuIds(TreeSet<Integer> set) {
+        set.add(FragmentMenuItems.REMOVE_FROM_RECENT);
     }
 
     /**
@@ -69,11 +65,6 @@ public class RecentFragment extends BasicSongFragment implements MusicStateListe
     public void onMetaChanged() {
         // refresh the list since a track playing means it should be recently played
         getLoaderManager().restartLoader(LOADER, null, this);
-    }
-
-    @Override
-    public int getGroupId() {
-        return GROUP_ID;
     }
 
     @Override

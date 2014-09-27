@@ -16,16 +16,20 @@ import com.cyngn.eleven.cache.ImageFetcher;
 import com.cyngn.eleven.model.Song;
 import com.cyngn.eleven.utils.ApolloUtils;
 import com.cyngn.eleven.utils.MusicUtils;
+import com.cyngn.eleven.widgets.IPopupMenuCallback;
+import com.cyngn.eleven.widgets.PopupMenuButton;
 
 import java.util.Collections;
 import java.util.List;
 
 public abstract class DetailSongAdapter extends BaseAdapter
-implements LoaderCallbacks<List<Song>>, OnItemClickListener {
+implements LoaderCallbacks<List<Song>>, OnItemClickListener, IPopupMenuCallback {
     protected final Activity mActivity;
     private final ImageFetcher mImageFetcher;
     private final LayoutInflater mInflater;
     private List<Song> mSongs = Collections.emptyList();
+    private IListener mListener;
+    private IEmptyAdapterCallback mEmptyCallback;
 
     public DetailSongAdapter(final Activity activity) {
         mActivity = activity;
@@ -53,6 +57,8 @@ implements LoaderCallbacks<List<Song>>, OnItemClickListener {
 
         Song song = getItem(pos);
         holder.update(song);
+        holder.popupMenuButton.setPopupMenuClickedListener(mListener);
+        holder.popupMenuButton.setPosition(pos);
 
         return convertView;
     }
@@ -74,7 +80,13 @@ implements LoaderCallbacks<List<Song>>, OnItemClickListener {
 
     @Override // LoaderCallbacks
     public void onLoadFinished(Loader<List<Song>> loader, List<Song> songs) {
-        if (songs.isEmpty()) { return; }
+        if (songs.isEmpty()) {
+            if (mEmptyCallback != null) {
+                mEmptyCallback.onEmptyAdapter();
+            }
+
+            return;
+        }
         mSongs = songs;
         notifyDataSetChanged();
     }
@@ -86,15 +98,26 @@ implements LoaderCallbacks<List<Song>>, OnItemClickListener {
         mImageFetcher.flush();
     }
 
+    @Override
+    public void setPopupMenuClickedListener(IListener listener) {
+        mListener = listener;
+    }
+
+    public void setOnEmptyAdapterListener(IEmptyAdapterCallback callback) {
+        mEmptyCallback = callback;
+    }
+
     protected abstract Holder newHolder(View root, ImageFetcher fetcher);
 
     protected static abstract class Holder {
         protected ImageFetcher fetcher;
         protected TextView title;
+        protected PopupMenuButton popupMenuButton;
 
         protected Holder(View root, ImageFetcher fetcher) {
             this.fetcher = fetcher;
             title = (TextView)root.findViewById(R.id.title);
+            popupMenuButton = (PopupMenuButton)root.findViewById(R.id.overflow);
         }
 
         protected abstract void update(Song song);

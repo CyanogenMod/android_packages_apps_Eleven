@@ -39,6 +39,7 @@ import com.cyngn.eleven.sectionadapter.SectionAdapter;
 import com.cyngn.eleven.sectionadapter.SectionCreator;
 import com.cyngn.eleven.sectionadapter.SectionListContainer;
 import com.cyngn.eleven.ui.activities.BaseActivity;
+import com.cyngn.eleven.utils.AlbumPopupMenuHelper;
 import com.cyngn.eleven.utils.ApolloUtils;
 import com.cyngn.eleven.utils.MusicUtils;
 import com.cyngn.eleven.utils.NavUtils;
@@ -54,11 +55,6 @@ import com.viewpagerindicator.TitlePageIndicator;
  */
 public class AlbumFragment extends Fragment implements LoaderCallbacks<SectionListContainer<Album>>,
         OnScrollListener, OnItemClickListener, MusicStateListener {
-
-    /**
-     * Used to keep context menu items from bleeding into other fragments
-     */
-    private static final int GROUP_ID = 3;
 
     /**
      * Grid view column count. ONE - list, TWO - normal grid, FOUR - landscape
@@ -86,11 +82,6 @@ public class AlbumFragment extends Fragment implements LoaderCallbacks<SectionLi
     private GridView mGridView;
 
     /**
-     * True if the list should execute {@code #restartLoader()}.
-     */
-    private boolean mShouldRefresh = false;
-
-    /**
      * Pop up menu helper
      */
     private PopupMenuHelper mPopupMenuHelper;
@@ -112,47 +103,9 @@ public class AlbumFragment extends Fragment implements LoaderCallbacks<SectionLi
     public void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        mPopupMenuHelper = new PopupMenuHelper(getActivity(), getFragmentManager()) {
-            /**
-             * Represents an album
-             */
-            private Album mAlbum;
-
-            @Override
-            protected PopupMenuType onPreparePopupMenu(int position) {
-                // Create a new album
-                mAlbum = mAdapter.getTItem(position);
-
-                return PopupMenuType.Album;
-            }
-
-            @Override
-            protected long[] getIdList() {
-                return MusicUtils.getSongListForAlbum(getActivity(), mAlbum.mAlbumId);
-            }
-
-            @Override
-            protected int getGroupId() {
-                return GROUP_ID;
-            }
-
-            @Override
-            protected void onDeleteClicked() {
-                mShouldRefresh = true;
-                final String album = mAlbum.mAlbumName;
-                DeleteDialog.newInstance(album, getIdList(),
-                        ImageFetcher.generateAlbumCacheKey(album,mAlbum.mArtistName))
-                        .show(getFragmentManager(), "DeleteDialog");
-            }
-
-            @Override
-            protected void setShouldRefresh() {
-                mShouldRefresh = true;
-            }
-
-            @Override
-            protected String getArtistName() {
-                return mAlbum.mArtistName;
+        mPopupMenuHelper = new AlbumPopupMenuHelper(getActivity(), getFragmentManager()) {
+            public Album getAlbum(int position) {
+                return mAdapter.getTItem(position);
             }
         };
 
@@ -318,10 +271,7 @@ public class AlbumFragment extends Fragment implements LoaderCallbacks<SectionLi
     @Override
     public void restartLoader() {
         // Update the list when the user deletes any items
-        if (mShouldRefresh) {
-            getLoaderManager().restartLoader(LOADER, null, this);
-        }
-        mShouldRefresh = false;
+        getLoaderManager().restartLoader(LOADER, null, this);
     }
 
     /**

@@ -32,11 +32,6 @@ import com.cyngn.eleven.widgets.NoResultsContainer;
 public class LastAddedFragment extends BasicSongFragment {
 
     /**
-     * Used to keep context menu items from bleeding into other fragments
-     */
-    private static final int GROUP_ID = 7;
-
-    /**
      * LoaderCallbacks identifier
      */
     private static final int LOADER = 0;
@@ -48,11 +43,6 @@ public class LastAddedFragment extends BasicSongFragment {
     public Loader<SectionListContainer<Song>> onCreateLoader(final int id, final Bundle args) {
         LastAddedLoader loader = new LastAddedLoader(getActivity());
         return new SectionCreator<Song>(getActivity(), loader, null);
-    }
-
-    @Override
-    public int getGroupId() {
-        return GROUP_ID;
     }
 
     @Override

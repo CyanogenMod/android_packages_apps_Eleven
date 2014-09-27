@@ -28,17 +28,17 @@ import android.widget.ListView;
 import com.cyngn.eleven.MusicStateListener;
 import com.cyngn.eleven.R;
 import com.cyngn.eleven.adapters.SongAdapter;
-import com.cyngn.eleven.menu.DeleteDialog;
 import com.cyngn.eleven.model.Song;
 import com.cyngn.eleven.recycler.RecycleHolder;
 import com.cyngn.eleven.sectionadapter.SectionAdapter;
 import com.cyngn.eleven.sectionadapter.SectionListContainer;
 import com.cyngn.eleven.ui.activities.BaseActivity;
 import com.cyngn.eleven.utils.PopupMenuHelper;
+import com.cyngn.eleven.utils.SongPopupMenuHelper;
 import com.cyngn.eleven.widgets.IPopupMenuCallback;
 import com.cyngn.eleven.widgets.NoResultsContainer;
 
-import java.util.ArrayList;
+import java.util.TreeSet;
 
 /**
  * This class is used to display all of the songs
@@ -62,11 +62,6 @@ public abstract class BasicSongFragment extends Fragment implements
      * The list view
      */
     protected ListView mListView;
-
-    /**
-     * True if the list should execute {@code #restartLoader()}.
-     */
-    protected boolean mShouldRefresh = false;
 
     /**
      * Pop up menu helper
@@ -95,56 +90,16 @@ public abstract class BasicSongFragment extends Fragment implements
     @Override
     public void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mPopupMenuHelper = new PopupMenuHelper(getActivity(), getFragmentManager()) {
-            /**
-             * Represents a song
-             */
-            protected Song mSong;
-
+        mPopupMenuHelper = new SongPopupMenuHelper(getActivity(), getFragmentManager()) {
             @Override
-            protected PopupMenuHelper.PopupMenuType onPreparePopupMenu(int position) {
-                // Create a new song
-                mSong = mAdapter.getTItem(position);
-
-                return PopupMenuType.Song;
+            public Song getSong(int position) {
+                return mAdapter.getTItem(position);
             }
 
             @Override
-            protected void getAdditionalIds(PopupMenuType type, ArrayList<Integer> list) {
-                super.getAdditionalIds(type, list);
-                BasicSongFragment.this.getAdditionaIdsForType(list);
-            }
-
-            @Override
-            protected long[] getIdList() {
-                return new long[] { mSong.mSongId };
-            }
-
-            @Override
-            protected int getGroupId() {
-                return BasicSongFragment.this.getGroupId();
-            }
-
-            @Override
-            protected void onDeleteClicked() {
-                mShouldRefresh = true;
-                DeleteDialog.newInstance(mSong.mSongName, getIdList(), null).show(
-                        getFragmentManager(), "DeleteDialog");
-            }
-
-            @Override
-            protected void setShouldRefresh() {
-                mShouldRefresh = true;
-            }
-
-            @Override
-            protected long getId() {
-                return mSong.mSongId;
-            }
-
-            @Override
-            protected String getArtistName() {
-                return mSong.mArtistName;
+            protected void updateMenuIds(PopupMenuType type, TreeSet<Integer> set) {
+                super.updateMenuIds(type, set);
+                BasicSongFragment.this.updateMenuIds(set);
             }
         };
 
@@ -158,7 +113,7 @@ public abstract class BasicSongFragment extends Fragment implements
         });
     }
 
-    protected void getAdditionaIdsForType(ArrayList<Integer> list) {
+    protected void updateMenuIds(TreeSet<Integer> set) {
         // do nothing - let subclasses override
     }
 
@@ -265,10 +220,7 @@ public abstract class BasicSongFragment extends Fragment implements
     @Override
     public void restartLoader() {
         // Update the list when the user deletes any items
-        if (mShouldRefresh) {
-            getLoaderManager().restartLoader(getLoaderId(), null, this);
-        }
-        mShouldRefresh = false;
+        getLoaderManager().restartLoader(getLoaderId(), null, this);
     }
 
     /**
@@ -297,11 +249,6 @@ public abstract class BasicSongFragment extends Fragment implements
     public void onMetaChanged() {
         // do nothing
     }
-
-    /**
-     * Used to keep context menu items from bleeding into other fragments
-     */
-    public abstract int getGroupId();
 
     /**
      * LoaderCallbacks identifier

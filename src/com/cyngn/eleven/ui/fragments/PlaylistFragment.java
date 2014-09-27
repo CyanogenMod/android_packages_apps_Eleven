@@ -54,11 +54,6 @@ public class PlaylistFragment extends Fragment implements LoaderCallbacks<List<P
         OnItemClickListener, MusicStateListener {
 
     /**
-     * Used to keep context menu items from bleeding into other fragments
-     */
-    private static final int GROUP_ID = 0;
-
-    /**
      * LoaderCallbacks identifier
      */
     private static final int LOADER = 0;
@@ -72,11 +67,6 @@ public class PlaylistFragment extends Fragment implements LoaderCallbacks<List<P
      * The list view
      */
     private ListView mListView;
-
-    /**
-     * True if the list should execute {@code #restartLoader()}.
-     */
-    private boolean mShouldRefresh = false;
 
     /**
      * Pop up menu helper
@@ -132,19 +122,8 @@ public class PlaylistFragment extends Fragment implements LoaderCallbacks<List<P
             }
 
             @Override
-            protected int getGroupId() {
-                return GROUP_ID;
-            }
-
-            @Override
             protected void onDeleteClicked() {
-                mShouldRefresh = true;
                 buildDeleteDialog(getId(), mPlaylist.mPlaylistName).show();
-            }
-
-            @Override
-            protected void setShouldRefresh() {
-                mShouldRefresh = true;
             }
 
             @Override
@@ -252,10 +231,7 @@ public class PlaylistFragment extends Fragment implements LoaderCallbacks<List<P
      */
     @Override
     public void restartLoader() {
-        if (mShouldRefresh) {
-            getLoaderManager().restartLoader(LOADER, null, this);
-        }
-        mShouldRefresh = false;
+        getLoaderManager().restartLoader(LOADER, null, this);
     }
 
     /**
