@@ -88,6 +88,7 @@ public class AlbumDetailActivity extends SlidingPanelActivity {
         mSongs = (ListView)root.findViewById(R.id.songs);
         mSongAdapter = new AlbumDetailSongAdapter(this);
         mSongs.setAdapter(mSongAdapter);
+        mSongs.setOnItemClickListener(mSongAdapter);
     }
 
     @Override

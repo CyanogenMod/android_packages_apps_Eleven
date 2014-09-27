@@ -167,25 +167,6 @@ public class ArtistAdapter extends ArrayAdapter<Artist> implements BasicAdapter,
     }
 
     /**
-     * Starts playing an artist if the user touches the artist image in the
-     * list.
-     * 
-     * @param artist The {@link ImageView} holding the aritst image
-     * @param position The position of the artist to play.
-     */
-    private void playArtist(final ImageView artist, final int position) {
-        artist.setOnClickListener(new OnClickListener() {
-
-            @Override
-            public void onClick(final View v) {
-                final long id = getItem(position).mArtistId;
-                final long[] list = MusicUtils.getSongListForArtist(getContext(), id);
-                MusicUtils.playAll(getContext(), list, 0, false);
-            }
-        });
-    }
-
-    /**
      * Method that unloads and clears the items in the adapter
      */
     public void unload() {

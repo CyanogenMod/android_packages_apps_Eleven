@@ -72,6 +72,7 @@ public class ArtistDetailActivity extends DetailActivity {
         mSongs.setOnScrollListener(this);
         mSongAdapter = new ArtistDetailSongAdapter(this);
         mSongs.setAdapter(mSongAdapter);
+        mSongs.setOnItemClickListener(mSongAdapter);
     }
 
     // TODO: change this class to use the same header strategy as PlaylistDetail
