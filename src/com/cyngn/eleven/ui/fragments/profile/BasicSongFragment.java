@@ -250,6 +250,11 @@ public abstract class BasicSongFragment extends Fragment implements
         // do nothing
     }
 
+    @Override
+    public void onPlaylistChanged() {
+        // Nothing to do
+    }
+
     /**
      * LoaderCallbacks identifier
      */

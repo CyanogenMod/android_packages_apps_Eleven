@@ -282,6 +282,11 @@ public class AlbumFragment extends Fragment implements LoaderCallbacks<SectionLi
         // Nothing to do
     }
 
+    @Override
+    public void onPlaylistChanged() {
+        // Nothing to do
+    }
+
     /**
      * Sets up various helpers for both the list and grid
      * 

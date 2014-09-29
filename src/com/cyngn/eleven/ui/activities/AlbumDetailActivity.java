@@ -15,7 +15,6 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.cyngn.eleven.Config;
-import com.cyngn.eleven.MusicStateListener;
 import com.cyngn.eleven.R;
 import com.cyngn.eleven.adapters.AlbumDetailSongAdapter;
 import com.cyngn.eleven.adapters.DetailSongAdapter;
@@ -34,7 +33,7 @@ import com.cyngn.eleven.widgets.PopupMenuButton;
 import java.util.List;
 import java.util.Locale;
 
-public class AlbumDetailActivity extends SlidingPanelActivity implements MusicStateListener {
+public class AlbumDetailActivity extends SlidingPanelActivity {
     private static final int LOADER_ID = 1;
 
     private ListView mSongs;
@@ -65,9 +64,6 @@ public class AlbumDetailActivity extends SlidingPanelActivity implements MusicSt
 
         LoaderManager lm = getSupportLoaderManager();
         lm.initLoader(LOADER_ID, arguments, mSongAdapter);
-
-        // listen to music state changes
-        setMusicStateListenerListener(this);
     }
 
     private void setupHeader(View root, String artist, Bundle arguments) {
@@ -194,11 +190,8 @@ public class AlbumDetailActivity extends SlidingPanelActivity implements MusicSt
 
     @Override
     public void restartLoader() {
+        super.restartLoader();
+
         getSupportLoaderManager().restartLoader(LOADER_ID, getIntent().getExtras(), mSongAdapter);
-    }
-
-    @Override
-    public void onMetaChanged() {
-
     }
 }

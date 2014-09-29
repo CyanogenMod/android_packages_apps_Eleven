@@ -29,9 +29,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.SearchView;
-import android.widget.SearchView.OnQueryTextListener;
 import android.widget.TextView;
 
 import com.cyngn.eleven.IElevenService;
@@ -43,10 +40,7 @@ import com.cyngn.eleven.utils.Lists;
 import com.cyngn.eleven.utils.MusicUtils;
 import com.cyngn.eleven.utils.MusicUtils.ServiceToken;
 import com.cyngn.eleven.utils.NavUtils;
-import com.cyngn.eleven.widgets.PlayPauseButton;
 import com.cyngn.eleven.widgets.PlayPauseProgressButton;
-import com.cyngn.eleven.widgets.RepeatButton;
-import com.cyngn.eleven.widgets.ShuffleButton;
 
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
@@ -59,7 +53,8 @@ import java.util.ArrayList;
  * 
  * @author Andrew Neal (andrewdneal@gmail.com)
  */
-public abstract class BaseActivity extends FragmentActivity implements ServiceConnection {
+public abstract class BaseActivity extends FragmentActivity implements ServiceConnection,
+        MusicStateListener {
 
     /**
      * Playstate and meta change listener
@@ -142,7 +137,7 @@ public abstract class BaseActivity extends FragmentActivity implements ServiceCo
         // Set the playback drawables
         updatePlaybackControls();
         // Current info
-        updateMetaInfo();
+        onMetaChanged();
     }
 
     /**
@@ -196,7 +191,7 @@ public abstract class BaseActivity extends FragmentActivity implements ServiceCo
         // Set the playback drawables
         updatePlaybackControls();
         // Current info
-        updateMetaInfo();
+        onMetaChanged();
     }
 
     /**
@@ -212,6 +207,8 @@ public abstract class BaseActivity extends FragmentActivity implements ServiceCo
         filter.addAction(MusicPlaybackService.META_CHANGED);
         // Update a list, probably the playlist fragment's
         filter.addAction(MusicPlaybackService.REFRESH);
+        // If a playlist has changed, notify us
+        filter.addAction(MusicPlaybackService.PLAYLIST_CHANGED);
         registerReceiver(mPlaybackStatus, filter);
 
         mPlayPauseProgressButton.resume();
@@ -351,25 +348,51 @@ public abstract class BaseActivity extends FragmentActivity implements ServiceCo
         @Override
         public void onReceive(final Context context, final Intent intent) {
             final String action = intent.getAction();
-            if (action.equals(MusicPlaybackService.META_CHANGED)) {
-                // Current info
-                mReference.get().updateMetaInfo();
-                // Let the listener know to the meta chnaged
-                for (final MusicStateListener listener : mReference.get().mMusicStateListener) {
-                    if (listener != null) {
-                        listener.onMetaChanged();
-                    }
+            BaseActivity baseActivity = mReference.get();
+            if (baseActivity != null) {
+                if (action.equals(MusicPlaybackService.META_CHANGED)) {
+                    baseActivity.onMetaChanged();
+                } else if (action.equals(MusicPlaybackService.PLAYSTATE_CHANGED)) {
+                    // Set the play and pause image
+                    baseActivity.mPlayPauseProgressButton.getPlayPauseButton().updateState();
+                } else if (action.equals(MusicPlaybackService.REFRESH)) {
+                    baseActivity.restartLoader();
+                } else if (action.equals(MusicPlaybackService.PLAYLIST_CHANGED)) {
+                    baseActivity.onPlaylistChanged();
                 }
-            } else if (action.equals(MusicPlaybackService.PLAYSTATE_CHANGED)) {
-                // Set the play and pause image
-                mReference.get().mPlayPauseProgressButton.getPlayPauseButton().updateState();
-            } else if (action.equals(MusicPlaybackService.REFRESH)) {
-                // Let the listener know to update a list
-                for (final MusicStateListener listener : mReference.get().mMusicStateListener) {
-                    if (listener != null) {
-                        listener.restartLoader();
-                    }
-                }
+            }
+        }
+    }
+
+    @Override
+    public void onMetaChanged() {
+        // update action bar info
+        updateBottomActionBarInfo();
+
+        // Let the listener know to the meta chnaged
+        for (final MusicStateListener listener : mMusicStateListener) {
+            if (listener != null) {
+                listener.onMetaChanged();
+            }
+        }
+    }
+
+    @Override
+    public void restartLoader() {
+        // Let the listener know to update a list
+        for (final MusicStateListener listener : mMusicStateListener) {
+            if (listener != null) {
+                listener.restartLoader();
+            }
+        }
+    }
+
+    @Override
+    public void onPlaylistChanged() {
+        // Let the listener know to update a list
+        for (final MusicStateListener listener : mMusicStateListener) {
+            if (listener != null) {
+                listener.onPlaylistChanged();
             }
         }
     }
@@ -378,6 +401,10 @@ public abstract class BaseActivity extends FragmentActivity implements ServiceCo
      * @param status The {@link MusicStateListener} to use
      */
     public void setMusicStateListenerListener(final MusicStateListener status) {
+        if (status == this) {
+            throw new UnsupportedOperationException("Override the method, don't add a listener");
+        }
+
         if (status != null) {
             mMusicStateListener.add(status);
         }

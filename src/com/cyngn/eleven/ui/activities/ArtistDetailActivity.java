@@ -11,7 +11,6 @@ import android.widget.ImageView;
 import android.widget.ListView;
 
 import com.cyngn.eleven.Config;
-import com.cyngn.eleven.MusicStateListener;
 import com.cyngn.eleven.R;
 import com.cyngn.eleven.adapters.ArtistDetailAlbumAdapter;
 import com.cyngn.eleven.adapters.ArtistDetailSongAdapter;
@@ -26,7 +25,7 @@ import com.cyngn.eleven.widgets.IPopupMenuCallback;
 
 import java.util.TreeSet;
 
-public class ArtistDetailActivity extends DetailActivity implements MusicStateListener {
+public class ArtistDetailActivity extends DetailActivity {
     private final int ALBUM_LOADER_ID = 0;
     private final int SONG_LOADER_ID = 1;
     private ImageView mHero;
@@ -64,8 +63,6 @@ public class ArtistDetailActivity extends DetailActivity implements MusicStateLi
         LoaderManager lm = getSupportLoaderManager();
         lm.initLoader(ALBUM_LOADER_ID, arguments, mAlbumAdapter);
         lm.initLoader(SONG_LOADER_ID, arguments, mSongAdapter);
-
-        setMusicStateListenerListener(this);
     }
 
     private void setupHero(String artistName) {
@@ -151,14 +148,11 @@ public class ArtistDetailActivity extends DetailActivity implements MusicStateLi
 
     @Override
     public void restartLoader() {
+        super.restartLoader();
+
         Bundle arguments = getIntent().getExtras();
         LoaderManager lm = getSupportLoaderManager();
         lm.restartLoader(ALBUM_LOADER_ID, arguments, mAlbumAdapter);
         lm.restartLoader(SONG_LOADER_ID, arguments, mSongAdapter);
-    }
-
-    @Override
-    public void onMetaChanged() {
-
     }
 }

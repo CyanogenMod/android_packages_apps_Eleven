@@ -16,7 +16,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.cyngn.eleven.Config;
-import com.cyngn.eleven.MusicStateListener;
 import com.cyngn.eleven.R;
 import com.cyngn.eleven.adapters.ProfileSongAdapter;
 import com.cyngn.eleven.cache.ImageFetcher;
@@ -40,7 +39,7 @@ import java.util.TreeSet;
 
 public class PlaylistDetailActivity extends DetailActivity implements
         LoaderCallbacks<List<Song>>, OnItemClickListener, DropListener,
-        RemoveListener, DragScrollProfile, MusicStateListener {
+        RemoveListener, DragScrollProfile {
 
     /**
      * LoaderCallbacks identifier
@@ -118,9 +117,6 @@ public class PlaylistDetailActivity extends DetailActivity implements
 
         LoaderManager lm = getSupportLoaderManager();
         lm.initLoader(0, arguments, this);
-
-        // listen to music state changes
-        setMusicStateListenerListener(this);
     }
 
     private void setupHero() {
@@ -301,11 +297,8 @@ public class PlaylistDetailActivity extends DetailActivity implements
 
     @Override
     public void restartLoader() {
+        super.restartLoader();
+
         getSupportLoaderManager().restartLoader(0, getIntent().getExtras(), this);
-    }
-
-    @Override
-    public void onMetaChanged() {
-
     }
 }

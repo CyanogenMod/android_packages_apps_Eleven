@@ -96,6 +96,11 @@ public class MusicPlaybackService extends Service {
     public static final String QUEUE_CHANGED = "com.cyngn.eleven.queuechanged";
 
     /**
+     * Indicates the queue has been updated
+     */
+    public static final String PLAYLIST_CHANGED = "com.cyngn.eleven.playlistchanged";
+
+    /**
      * Indicates the repeat mode chaned
      */
     public static final String REPEATMODE_CHANGED = "com.cyngn.eleven.repeatmodechanged";
@@ -2393,6 +2398,13 @@ public class MusicPlaybackService extends Service {
         notifyChange(REFRESH);
     }
 
+    /**
+     * Called when one of the playlists have changed (renamed, added/removed tracks)
+     */
+    public void playlistChanged() {
+        notifyChange(PLAYLIST_CHANGED);
+    }
+
     private final BroadcastReceiver mIntentReceiver = new BroadcastReceiver() {
         /**
          * {@inheritDoc}
@@ -2932,6 +2944,14 @@ public class MusicPlaybackService extends Service {
         @Override
         public void refresh() throws RemoteException {
             mService.get().refresh();
+        }
+
+        /**
+         * {@inheritDoc}
+         */
+        @Override
+        public void playlistChanged() throws RemoteException {
+            mService.get().playlistChanged();
         }
 
         /**

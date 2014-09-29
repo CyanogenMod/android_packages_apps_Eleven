@@ -9,11 +9,13 @@ import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Rect;
+import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.TransitionDrawable;
 import android.provider.MediaStore;
 import android.widget.ImageView;
 
+import com.cyngn.eleven.R;
 import com.cyngn.eleven.cache.ImageWorker.ImageType;
 import com.cyngn.eleven.loaders.PlaylistSongLoader;
 import com.cyngn.eleven.loaders.SortedCursor;
@@ -109,12 +111,33 @@ public class PlaylistWorkerTask extends BitmapWorkerTask<Void, Void, TransitionD
             // get the top songs for our playlist
             sortedCursor = getTopSongsForPlaylist();
 
-            if (sortedCursor == null || sortedCursor.getCount() == 0 || isCancelled()) {
+            if (isCancelled()) {
                 return null;
             }
 
-            // run the appropriate logic
-            if (mWorkerType == PlaylistWorkerType.Artist) {
+            if (sortedCursor == null || sortedCursor.getCount() == 0) {
+                // if all songs were removed from the playlist, update the last updated time
+                // and reset to the default art
+                if (mWorkerType == PlaylistWorkerType.Artist) {
+                    // update the timestamp
+                    mPlaylistStore.updateArtistArt(mPlaylistId);
+                    // remove the cached image
+                    mImageCache.removeFromCache(PlaylistArtworkStore.getArtistCacheKey(mPlaylistId));
+                    // go back to the default image
+                    BitmapDrawable drawable =
+                            (BitmapDrawable) mResources.getDrawable(R.drawable.default_artist);
+                    bitmap = drawable.getBitmap();
+                } else if (mWorkerType == PlaylistWorkerType.CoverArt) {
+                    // update the timestamp
+                    mPlaylistStore.updateCoverArt(mPlaylistId);
+                    // remove the cached image
+                    mImageCache.removeFromCache(PlaylistArtworkStore.getCoverCacheKey(mPlaylistId));
+                    // go back to the default image
+                    BitmapDrawable drawable =
+                            (BitmapDrawable) mResources.getDrawable(R.drawable.default_playlist);
+                    bitmap = drawable.getBitmap();
+                }
+            } else if (mWorkerType == PlaylistWorkerType.Artist) {
                 bitmap = loadTopArtist(sortedCursor);
             } else {
                 bitmap = loadTopSongs(sortedCursor);

@@ -974,6 +974,7 @@ public final class MusicUtils {
         final String message = context.getResources().getQuantityString(
                 R.plurals.NNNtrackstoplaylist, numinserted, numinserted);
         AppMsg.makeText((Activity)context, message, AppMsg.STYLE_CONFIRM).show();
+        playlistChanged();
     }
 
     /**
@@ -992,6 +993,7 @@ public final class MusicUtils {
         final String message = context.getResources().getQuantityString(
                 R.plurals.NNNtracksfromplaylist, 1, 1);
         AppMsg.makeText((Activity)context, message, AppMsg.STYLE_CONFIRM).show();
+        playlistChanged();
     }
 
     /**
@@ -1295,6 +1297,18 @@ public final class MusicUtils {
         try {
             if (mService != null) {
                 mService.refresh();
+            }
+        } catch (final RemoteException ignored) {
+        }
+    }
+
+    /**
+     * Called when one of playlists have changed
+     */
+    public static void playlistChanged() {
+        try {
+            if (mService != null) {
+                mService.playlistChanged();
             }
         } catch (final RemoteException ignored) {
         }

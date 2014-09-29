@@ -234,6 +234,11 @@ public class PlaylistFragment extends Fragment implements LoaderCallbacks<List<P
         getLoaderManager().restartLoader(LOADER, null, this);
     }
 
+    @Override
+    public void onPlaylistChanged() {
+        restartLoader();
+    }
+
     /**
      * {@inheritDoc}
      */

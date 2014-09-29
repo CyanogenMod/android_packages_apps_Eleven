@@ -12,6 +12,11 @@ public interface MusicStateListener {
     public void restartLoader();
 
     /**
+     * Called when {@link MusicPlaybackService#PLAYLIST_CHANGED} is invoked
+     */
+    public void onPlaylistChanged();
+
+    /**
      * Called when {@link MusicPlaybackService#META_CHANGED} is invoked
      */
     public void onMetaChanged();

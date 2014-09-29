@@ -17,6 +17,7 @@ interface IElevenService
     void setRepeatMode(int repeatmode);
     void moveQueueItem(int from, int to);
     void refresh();
+    void playlistChanged();
     boolean isPlaying();
     long [] getQueue();
     int getQueuePosition();

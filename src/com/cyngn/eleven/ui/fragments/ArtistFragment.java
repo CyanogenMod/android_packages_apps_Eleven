@@ -305,6 +305,11 @@ public class ArtistFragment extends Fragment implements LoaderCallbacks<SectionL
         // Nothing to do
     }
 
+    @Override
+    public void onPlaylistChanged() {
+        // Nothing to do
+    }
+
     /**
      * Sets up various helpers for both the list and grid
      * 

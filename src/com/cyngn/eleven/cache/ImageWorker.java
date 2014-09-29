@@ -479,7 +479,11 @@ public abstract class ImageWorker {
             // if a background drawable hasn't been set, create one so that even if
             // the disk cache is paused we see something
             if (imageView.getBackground() == null) {
-                imageView.setBackgroundDrawable(getNewDefaultBitmapDrawable(ImageType.PLAYLIST));
+                if (type == PlaylistWorkerType.Artist) {
+                    imageView.setBackground(getNewDefaultBitmapDrawable(ImageType.ARTIST));
+                } else if (type == PlaylistWorkerType.CoverArt) {
+                    imageView.setBackground(getNewDefaultBitmapDrawable(ImageType.PLAYLIST));
+                }
             }
         }
 
@@ -490,9 +494,17 @@ public abstract class ImageWorker {
             // cancel the old task if any
             cancelWork(imageView);
 
+            // since a playlist's image can change based on changes to the playlist
+            // set the from drawable to be the existing image (if it exists) instead of transparent
+            // and fade from there
+            Drawable fromDrawable = imageView.getDrawable();
+            if (fromDrawable == null) {
+                fromDrawable = mTransparentDrawable;
+            }
+
             // Otherwise run the worker task
             final PlaylistWorkerTask bitmapWorkerTask = new PlaylistWorkerTask(key, playlistId, type,
-                    lruBitmap != null, imageView, mTransparentDrawable, mContext);
+                    lruBitmap != null, imageView, fromDrawable, mContext);
             final AsyncTaskContainer asyncTaskContainer = new AsyncTaskContainer(bitmapWorkerTask);
             imageView.setTag(asyncTaskContainer);
             try {
