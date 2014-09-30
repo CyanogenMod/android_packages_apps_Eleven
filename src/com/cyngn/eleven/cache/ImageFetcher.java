@@ -81,7 +81,7 @@ public class ImageFetcher extends ImageWorker {
      * Used to fetch the current artwork.
      */
     public void loadCurrentArtwork(final ImageView imageView) {
-        loadImage(generateAlbumCacheKey(MusicUtils.getAlbumName(), MusicUtils.getArtistName()),
+        loadImage(getCurrentCacheKey(),
                 MusicUtils.getArtistName(), MusicUtils.getAlbumName(), MusicUtils.getCurrentAlbumId(),
                 imageView, ImageType.ALBUM);
     }
@@ -90,9 +90,13 @@ public class ImageFetcher extends ImageWorker {
      * Used to fetch the current artwork blurred.
      */
     public void loadCurrentBlurredArtwork(final BlurScrimImage image) {
-        loadBlurImage(generateAlbumCacheKey(MusicUtils.getAlbumName(), MusicUtils.getArtistName()),
+        loadBlurImage(getCurrentCacheKey(),
                 MusicUtils.getArtistName(), MusicUtils.getAlbumName(), MusicUtils.getCurrentAlbumId(),
                 image, ImageType.ALBUM);
+    }
+
+    public static String getCurrentCacheKey() {
+        return generateAlbumCacheKey(MusicUtils.getAlbumName(), MusicUtils.getArtistName());
     }
 
     /**

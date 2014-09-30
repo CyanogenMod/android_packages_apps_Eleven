@@ -21,6 +21,8 @@ public class BlurScrimImage extends FrameLayout {
 
     private boolean mUsingDefaultBlur;
 
+    private String mLastLoadedKey;
+
     public BlurScrimImage(Context context, AttributeSet attrs) {
         super(context, attrs);
 
@@ -79,6 +81,10 @@ public class BlurScrimImage extends FrameLayout {
      * @param imageFetcher an ImageFetcher instance
      */
     public void loadBlurImage(ImageFetcher imageFetcher) {
-        imageFetcher.loadCurrentBlurredArtwork(this);
+        final String key = imageFetcher.getCurrentCacheKey();
+        if (mLastLoadedKey == null || !mLastLoadedKey.equals(key)) {
+            mLastLoadedKey = key;
+            imageFetcher.loadCurrentBlurredArtwork(this);
+        }
     }
 }

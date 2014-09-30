@@ -11,11 +11,8 @@
 
 package com.cyngn.eleven.ui.fragments;
 
-import android.app.Activity;
 import android.os.Bundle;
 import android.os.SystemClock;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
 import android.support.v4.app.LoaderManager.LoaderCallbacks;
 import android.support.v4.content.Loader;
 import android.view.LayoutInflater;
@@ -30,15 +27,15 @@ import android.widget.GridView;
 import com.cyngn.eleven.MusicStateListener;
 import com.cyngn.eleven.R;
 import com.cyngn.eleven.adapters.AlbumAdapter;
-import com.cyngn.eleven.cache.ImageFetcher;
+import com.cyngn.eleven.adapters.PagerAdapter;
 import com.cyngn.eleven.loaders.AlbumLoader;
-import com.cyngn.eleven.menu.DeleteDialog;
 import com.cyngn.eleven.model.Album;
 import com.cyngn.eleven.recycler.RecycleHolder;
 import com.cyngn.eleven.sectionadapter.SectionAdapter;
 import com.cyngn.eleven.sectionadapter.SectionCreator;
 import com.cyngn.eleven.sectionadapter.SectionListContainer;
 import com.cyngn.eleven.ui.activities.BaseActivity;
+import com.cyngn.eleven.ui.fragments.phone.MusicBrowserFragment;
 import com.cyngn.eleven.utils.AlbumPopupMenuHelper;
 import com.cyngn.eleven.utils.ApolloUtils;
 import com.cyngn.eleven.utils.MusicUtils;
@@ -53,18 +50,14 @@ import com.viewpagerindicator.TitlePageIndicator;
  * 
  * @author Andrew Neal (andrewdneal@gmail.com)
  */
-public class AlbumFragment extends Fragment implements LoaderCallbacks<SectionListContainer<Album>>,
-        OnScrollListener, OnItemClickListener, MusicStateListener {
+public class AlbumFragment extends MusicBrowserFragment implements
+        LoaderCallbacks<SectionListContainer<Album>>, OnScrollListener,
+        OnItemClickListener, MusicStateListener {
 
     /**
      * Grid view column count. ONE - list, TWO - normal grid, FOUR - landscape
      */
     private static final int ONE = 1, TWO = 2, FOUR = 4;
-
-    /**
-     * LoaderCallbacks identifier
-     */
-    private static final int LOADER = 0;
 
     /**
      * Fragment UI
@@ -86,14 +79,9 @@ public class AlbumFragment extends Fragment implements LoaderCallbacks<SectionLi
      */
     private PopupMenuHelper mPopupMenuHelper;
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
-    public void onAttach(final Activity activity) {
-        super.onAttach(activity);
-        // Register the music status listener
-        ((BaseActivity)activity).setMusicStateListenerListener(this);
+    public int getLoaderId() {
+        return PagerAdapter.MusicFragments.ALBUM.ordinal();
     }
 
     /**
@@ -129,6 +117,10 @@ public class AlbumFragment extends Fragment implements LoaderCallbacks<SectionLi
             final Bundle savedInstanceState) {
         mRootView = (ViewGroup)inflater.inflate(R.layout.grid_base, null);
         initGridView();
+
+        // Register the music status listener
+        ((BaseActivity)getActivity()).setMusicStateListenerListener(this);
+
         return mRootView;
     }
 
@@ -141,8 +133,16 @@ public class AlbumFragment extends Fragment implements LoaderCallbacks<SectionLi
         // Enable the options menu
         setHasOptionsMenu(true);
         // Start the loader
-        getLoaderManager().initLoader(LOADER, null, this);
+        initLoader(null, this);
     }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+
+        ((BaseActivity)getActivity()).removeMusicStateListenerListener(this);
+    }
+
 
     /**
      * {@inheritDoc}
@@ -253,7 +253,7 @@ public class AlbumFragment extends Fragment implements LoaderCallbacks<SectionLi
     public void refresh() {
         // Wait a moment for the preference to change.
         SystemClock.sleep(10);
-        getLoaderManager().restartLoader(LOADER, null, this);
+        restartLoader(null, this);
     }
 
     /**
@@ -271,7 +271,7 @@ public class AlbumFragment extends Fragment implements LoaderCallbacks<SectionLi
     @Override
     public void restartLoader() {
         // Update the list when the user deletes any items
-        getLoaderManager().restartLoader(LOADER, null, this);
+        restartLoader(null, this);
     }
 
     /**

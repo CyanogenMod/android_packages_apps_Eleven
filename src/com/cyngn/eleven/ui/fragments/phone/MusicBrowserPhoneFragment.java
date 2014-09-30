@@ -14,21 +14,18 @@ package com.cyngn.eleven.ui.fragments.phone;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.View;
-import android.view.ViewGroup;
 
 import com.cyngn.eleven.R;
 import com.cyngn.eleven.adapters.PagerAdapter;
 import com.cyngn.eleven.adapters.PagerAdapter.MusicFragments;
 import com.cyngn.eleven.ui.fragments.AlbumFragment;
 import com.cyngn.eleven.ui.fragments.ArtistFragment;
+import com.cyngn.eleven.ui.fragments.BaseFragment;
 import com.cyngn.eleven.ui.fragments.SongFragment;
 import com.cyngn.eleven.utils.MusicUtils;
-import com.cyngn.eleven.utils.NavUtils;
 import com.cyngn.eleven.utils.PreferenceUtils;
 import com.cyngn.eleven.utils.SortOrder;
 import com.viewpagerindicator.TitlePageIndicator;
@@ -46,7 +43,7 @@ import com.viewpagerindicator.TitlePageIndicator.OnCenterItemClickListener;
  *        Apollo for a couple of weeks or so before merging it with CM.
  * @author Andrew Neal (andrewdneal@gmail.com)
  */
-public class MusicBrowserPhoneFragment extends Fragment implements
+public class MusicBrowserPhoneFragment extends BaseFragment implements
         OnCenterItemClickListener {
 
     /**
@@ -67,6 +64,16 @@ public class MusicBrowserPhoneFragment extends Fragment implements
     public MusicBrowserPhoneFragment() {
     }
 
+    @Override
+    protected int getLayoutToInflate() {
+        return R.layout.fragment_music_browser_phone;
+    }
+
+    @Override
+    protected String getTitle() {
+        return getString(R.string.app_name);
+    }
+
     /**
      * {@inheritDoc}
      */
@@ -77,25 +84,21 @@ public class MusicBrowserPhoneFragment extends Fragment implements
         mPreferences = PreferenceUtils.getInstance(getActivity());
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
-    public View onCreateView(final LayoutInflater inflater, final ViewGroup container,
-            final Bundle savedInstanceState) {
-        // The View for the fragment's UI
-        final ViewGroup rootView = (ViewGroup)inflater.inflate(
-                R.layout.fragment_music_browser_phone, container, false);
+    protected void onViewCreated() {
+        super.onViewCreated();
 
-        // Initialize the adapter
-        mPagerAdapter = new PagerAdapter(getActivity());
-        final MusicFragments[] mFragments = MusicFragments.values();
-        for (final MusicFragments mFragment : mFragments) {
-            mPagerAdapter.add(mFragment.getFragmentClass(), null);
+        if (mPagerAdapter == null) {
+            // Initialize the adapter
+            mPagerAdapter = new PagerAdapter(getActivity(), getChildFragmentManager());
+            final MusicFragments[] mFragments = MusicFragments.values();
+            for (final MusicFragments mFragment : mFragments) {
+                mPagerAdapter.add(mFragment.getFragmentClass(), null);
+            }
         }
 
         // Initialize the ViewPager
-        mViewPager = (ViewPager)rootView.findViewById(R.id.fragment_home_phone_pager);
+        mViewPager = (ViewPager)mRootView.findViewById(R.id.fragment_home_phone_pager);
         // Attch the adapter
         mViewPager.setAdapter(mPagerAdapter);
         // Offscreen pager loading limit
@@ -104,13 +107,12 @@ public class MusicBrowserPhoneFragment extends Fragment implements
         mViewPager.setCurrentItem(mPreferences.getStartPage());
 
         // Initialze the TPI
-        final TitlePageIndicator pageIndicator = (TitlePageIndicator)rootView
+        final TitlePageIndicator pageIndicator = (TitlePageIndicator)mRootView
                 .findViewById(R.id.fragment_home_phone_pager_titles);
         // Attach the ViewPager
         pageIndicator.setViewPager(mViewPager);
         // Scroll to the current artist, album, or song
         pageIndicator.setOnCenterItemClickListener(this);
-        return rootView;
     }
 
     /**
@@ -290,5 +292,10 @@ public class MusicBrowserPhoneFragment extends Fragment implements
 
     private SongFragment getSongFragment() {
         return (SongFragment)mPagerAdapter.getFragment(MusicFragments.SONG.ordinal());
+    }
+
+    @Override
+    public void restartLoader() {
+        // do nothing
     }
 }

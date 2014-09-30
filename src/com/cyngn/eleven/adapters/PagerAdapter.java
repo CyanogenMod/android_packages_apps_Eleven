@@ -12,9 +12,11 @@
 package com.cyngn.eleven.adapters;
 
 import android.app.Activity;
+import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.util.SparseArray;
 import android.view.ViewGroup;
@@ -40,19 +42,18 @@ public class PagerAdapter extends FragmentPagerAdapter {
 
     private final List<Holder> mHolderList = Lists.newArrayList();
 
-    private final FragmentActivity mFragmentActivity;
+    private final Context mContext;
 
     private int mCurrentPage;
 
     /**
      * Constructor of <code>PagerAdatper<code>
      * 
-     * @param fragmentActivity The {@link Activity} of the
-     *            {@link Fragment}.
+     * @param fragmentManager The supporting fragment manager
      */
-    public PagerAdapter(final FragmentActivity fragmentActivity) {
-        super(fragmentActivity.getSupportFragmentManager());
-        mFragmentActivity = fragmentActivity;
+    public PagerAdapter(final Context context, final FragmentManager fragmentManager) {
+        super(fragmentManager);
+        mContext = context;
     }
 
     /**
@@ -108,7 +109,7 @@ public class PagerAdapter extends FragmentPagerAdapter {
     @Override
     public Fragment getItem(final int position) {
         final Holder mCurrentHolder = mHolderList.get(position);
-        final Fragment mFragment = Fragment.instantiate(mFragmentActivity,
+        final Fragment mFragment = Fragment.instantiate(mContext,
                 mCurrentHolder.mClassName, mCurrentHolder.mParams);
         return mFragment;
     }
@@ -138,7 +139,7 @@ public class PagerAdapter extends FragmentPagerAdapter {
      */
     @Override
     public CharSequence getPageTitle(final int position) {
-        return mFragmentActivity.getResources().getStringArray(R.array.page_titles)[position]
+        return mContext.getResources().getStringArray(R.array.page_titles)[position]
                 .toUpperCase(Locale.getDefault());
     }
 

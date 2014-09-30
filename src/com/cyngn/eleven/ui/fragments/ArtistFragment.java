@@ -11,12 +11,10 @@
 
 package com.cyngn.eleven.ui.fragments;
 
-import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
 import android.os.SystemClock;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
 import android.support.v4.app.LoaderManager.LoaderCallbacks;
 import android.support.v4.content.Loader;
 import android.view.LayoutInflater;
@@ -31,6 +29,7 @@ import android.widget.ListView;
 import com.cyngn.eleven.MusicStateListener;
 import com.cyngn.eleven.R;
 import com.cyngn.eleven.adapters.ArtistAdapter;
+import com.cyngn.eleven.adapters.PagerAdapter;
 import com.cyngn.eleven.loaders.ArtistLoader;
 import com.cyngn.eleven.menu.DeleteDialog;
 import com.cyngn.eleven.model.Artist;
@@ -39,6 +38,7 @@ import com.cyngn.eleven.sectionadapter.SectionAdapter;
 import com.cyngn.eleven.sectionadapter.SectionCreator;
 import com.cyngn.eleven.sectionadapter.SectionListContainer;
 import com.cyngn.eleven.ui.activities.BaseActivity;
+import com.cyngn.eleven.ui.fragments.phone.MusicBrowserFragment;
 import com.cyngn.eleven.utils.MusicUtils;
 import com.cyngn.eleven.utils.NavUtils;
 import com.cyngn.eleven.utils.PopupMenuHelper;
@@ -53,13 +53,9 @@ import com.viewpagerindicator.TitlePageIndicator;
  * 
  * @author Andrew Neal (andrewdneal@gmail.com)
  */
-public class ArtistFragment extends Fragment implements LoaderCallbacks<SectionListContainer<Artist>>,
+public class ArtistFragment extends MusicBrowserFragment implements
+        LoaderCallbacks<SectionListContainer<Artist>>,
         OnScrollListener, OnItemClickListener, MusicStateListener {
-
-    /**
-     * LoaderCallbacks identifier
-     */
-    private static final int LOADER = 0;
 
     /**
      * Fragment UI
@@ -87,14 +83,9 @@ public class ArtistFragment extends Fragment implements LoaderCallbacks<SectionL
     public ArtistFragment() {
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
-    public void onAttach(final Activity activity) {
-        super.onAttach(activity);
-        // Register the music status listener
-        ((BaseActivity)activity).setMusicStateListenerListener(this);
+    public int getLoaderId() {
+        return PagerAdapter.MusicFragments.ARTIST.ordinal();
     }
 
     /**
@@ -152,8 +143,20 @@ public class ArtistFragment extends Fragment implements LoaderCallbacks<SectionL
         // The View for the fragment's UI
         mRootView = (ViewGroup)inflater.inflate(R.layout.list_base, null);
         initListView();
+
+        // Register the music status listener
+        ((BaseActivity)getActivity()).setMusicStateListenerListener(this);
+
         return mRootView;
     }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+
+        ((BaseActivity)getActivity()).removeMusicStateListenerListener(this);
+    }
+
 
     /**
      * {@inheritDoc}
@@ -164,7 +167,7 @@ public class ArtistFragment extends Fragment implements LoaderCallbacks<SectionL
         // Enable the options menu
         setHasOptionsMenu(true);
         // Start the loader
-        getLoaderManager().initLoader(LOADER, null, this);
+        initLoader(null, this);
     }
 
     /**
@@ -276,7 +279,7 @@ public class ArtistFragment extends Fragment implements LoaderCallbacks<SectionL
     public void refresh() {
         // Wait a moment for the preference to change.
         SystemClock.sleep(10);
-        getLoaderManager().restartLoader(LOADER, null, this);
+        restartLoader(null, this);
     }
 
     /**
@@ -294,7 +297,7 @@ public class ArtistFragment extends Fragment implements LoaderCallbacks<SectionL
     @Override
     public void restartLoader() {
         // Update the list when the user deletes any items
-        getLoaderManager().restartLoader(LOADER, null, this);
+        restartLoader(null, this);
     }
 
     /**

@@ -13,18 +13,20 @@ package com.cyngn.eleven.ui.activities;
 
 import static com.cyngn.eleven.utils.MusicUtils.mService;
 
-import android.app.SearchManager;
-import android.app.SearchableInfo;
+import android.app.ActionBar;
 import android.content.BroadcastReceiver;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.ServiceConnection;
+import android.graphics.drawable.ColorDrawable;
+import android.graphics.drawable.Drawable;
 import android.media.AudioManager;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.support.v4.app.FragmentActivity;
+import android.util.TypedValue;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -61,6 +63,8 @@ public abstract class BaseActivity extends FragmentActivity implements ServiceCo
      */
     private final ArrayList<MusicStateListener> mMusicStateListener = Lists.newArrayList();
 
+    private int mActionBarHeight;
+
     /**
      * The service token
      */
@@ -91,10 +95,7 @@ public abstract class BaseActivity extends FragmentActivity implements ServiceCo
      */
     private PlaybackStatus mPlaybackStatus;
 
-    /**
-     * Keeps track of the back button being used
-     */
-    private boolean mIsBackPressed = false;
+    private Drawable mActionBarBackground;
 
     /**
      * {@inheritDoc}
@@ -117,13 +118,20 @@ public abstract class BaseActivity extends FragmentActivity implements ServiceCo
 
         getActionBar().setTitle(getString(R.string.app_name).toUpperCase());
 
+        // Calculate ActionBar height
+        TypedValue value = new TypedValue();
+        if (getTheme().resolveAttribute(android.R.attr.actionBarSize, value, true))
+        {
+            mActionBarHeight = TypedValue.complexToDimensionPixelSize(value.data,
+                    getResources().getDisplayMetrics());
+        }
+
         // Set the layout
         setContentView(setContentView());
 
         // set the background on the root view
         getWindow().getDecorView().getRootView().setBackgroundColor(
                 getResources().getColor(R.color.background_color));
-
         // Initialze the bottom action bar
         initBottomActionBar();
     }
@@ -174,7 +182,11 @@ public abstract class BaseActivity extends FragmentActivity implements ServiceCo
 
             case R.id.menu_search:
                 NavUtils.openSearch(BaseActivity.this, "");
-                break;
+                return true;
+
+            case android.R.id.home:
+                getSupportFragmentManager().popBackStack();
+                return true;
 
             default:
                 break;
@@ -251,13 +263,28 @@ public abstract class BaseActivity extends FragmentActivity implements ServiceCo
         mMusicStateListener.clear();
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void onBackPressed() {
-        super.onBackPressed();
-        mIsBackPressed = true;
+    public void setupActionBar(int resId) {
+        setupActionBar(getString(resId));
+    }
+
+    public void setupActionBar(String title) {
+        ActionBar actionBar = getActionBar();
+        actionBar.setTitle(title.toUpperCase());
+
+        if (mActionBarBackground == null) {
+            final int actionBarColor = getResources().getColor(R.color.header_action_bar_color);
+            mActionBarBackground = new ColorDrawable(actionBarColor);
+            actionBar.setBackgroundDrawable(mActionBarBackground);
+        }
+    }
+
+    public void setActionBarAlpha(int alpha) {
+        mActionBarBackground.setAlpha(alpha);
+    }
+
+    public void setFragmentPadding(boolean enablePadding) {
+        final int height = enablePadding ? mActionBarHeight : 0;
+        findViewById(R.id.activity_base_content).setPadding(0, height, 0, 0);
     }
 
     /**
@@ -400,6 +427,15 @@ public abstract class BaseActivity extends FragmentActivity implements ServiceCo
 
         if (status != null) {
             mMusicStateListener.add(status);
+        }
+    }
+
+    /**
+     * @param status The {@link MusicStateListener} to use
+     */
+    public void removeMusicStateListenerListener(final MusicStateListener status) {
+        if (status != null) {
+            mMusicStateListener.remove(status);
         }
     }
 

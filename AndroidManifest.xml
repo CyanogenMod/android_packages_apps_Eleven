@@ -63,7 +63,7 @@
         <activity
             android:name=".ui.activities.HomeActivity"
             android:windowSoftInputMode="adjustPan"
-            android:launchMode="singleTask"
+            android:launchMode="singleTop"
             android:exported="true"
             android:screenOrientation="portrait"
             android:theme="@style/Eleven.Theme.ActionBar.Overlay">
@@ -132,34 +132,6 @@
             </intent-filter>
         </activity>
 
-        <!-- Artist Detail Activity -->
-        <activity
-            android:name=".ui.activities.ArtistDetailActivity"
-            android:excludeFromRecents="true"
-            android:screenOrientation="portrait"
-            android:theme="@style/Eleven.Theme.ActionBar.Overlay">
-        </activity>
-        <!-- Smart Playlist Detail Activity -->
-        <activity
-            android:name=".ui.activities.SmartPlaylistDetailActivity"
-            android:excludeFromRecents="true"
-            android:screenOrientation="portrait"
-            android:theme="@style/Eleven.Theme.ActionBar.Overlay">
-        </activity>
-        <!-- Album Detail Activity -->
-        <activity
-            android:name=".ui.activities.AlbumDetailActivity"
-            android:excludeFromRecents="true"
-            android:screenOrientation="portrait"
-            android:theme="@style/Eleven.Theme.ActionBar.Overlay">
-        </activity>
-        <!-- Playlist Detail Activity -->
-        <activity
-            android:name=".ui.activities.PlaylistDetailActivity"
-            android:excludeFromRecents="true"
-            android:screenOrientation="portrait"
-            android:theme="@style/Eleven.Theme.ActionBar.Overlay">
-        </activity>
         <!-- Shortcut launcher Activity -->
         <activity
             android:name=".ui.activities.ShortcutActivity"

@@ -12,15 +12,17 @@ import com.cyngn.eleven.R;
 import com.cyngn.eleven.cache.ImageFetcher;
 import com.cyngn.eleven.loaders.AlbumSongLoader;
 import com.cyngn.eleven.model.Song;
-import com.cyngn.eleven.ui.activities.AlbumDetailActivity;
+import com.cyngn.eleven.ui.fragments.AlbumDetailFragment;
 import com.cyngn.eleven.utils.MusicUtils;
 
 import java.util.List;
 
 public class AlbumDetailSongAdapter extends DetailSongAdapter {
+    private AlbumDetailFragment mFragment;
 
-    public AlbumDetailSongAdapter(Activity activity) {
+    public AlbumDetailSongAdapter(Activity activity, AlbumDetailFragment fragment) {
         super(activity);
+        mFragment = fragment;
     }
 
     protected int rowLayoutId() { return R.layout.album_detail_song; }
@@ -33,7 +35,7 @@ public class AlbumDetailSongAdapter extends DetailSongAdapter {
     @Override // LoaderCallbacks
     public void onLoadFinished(Loader<List<Song>> loader, List<Song> songs) {
         super.onLoadFinished(loader, songs);
-        ((AlbumDetailActivity)mActivity).update(songs);
+        mFragment.update(songs);
     }
 
     protected Holder newHolder(View root, ImageFetcher fetcher) {

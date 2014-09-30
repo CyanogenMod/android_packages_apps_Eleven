@@ -1,4 +1,4 @@
-package com.cyngn.eleven.ui.activities;
+package com.cyngn.eleven.ui.fragments;
 
 import android.os.Bundle;
 import android.support.v4.app.LoaderManager;
@@ -16,6 +16,7 @@ import com.cyngn.eleven.adapters.ArtistDetailAlbumAdapter;
 import com.cyngn.eleven.adapters.ArtistDetailSongAdapter;
 import com.cyngn.eleven.adapters.IEmptyAdapterCallback;
 import com.cyngn.eleven.cache.ImageFetcher;
+import com.cyngn.eleven.lastfm.Artist;
 import com.cyngn.eleven.menu.FragmentMenuItems;
 import com.cyngn.eleven.model.Album;
 import com.cyngn.eleven.model.Song;
@@ -25,7 +26,7 @@ import com.cyngn.eleven.widgets.IPopupMenuCallback;
 
 import java.util.TreeSet;
 
-public class ArtistDetailActivity extends DetailActivity {
+public class ArtistDetailFragment extends DetailFragment {
     private final int ALBUM_LOADER_ID = 0;
     private final int SONG_LOADER_ID = 1;
     private ImageView mHero;
@@ -44,23 +45,25 @@ public class ArtistDetailActivity extends DetailActivity {
     protected int getLayoutToInflate() { return R.layout.activity_artist_detail; }
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+    protected String getTitle() {
+        return getArguments().getString(Config.ARTIST_NAME);
+    }
 
-        Bundle arguments = getIntent().getExtras();
+    @Override
+    protected void onViewCreated() {
+        super.onViewCreated();
+
+        getContainingActivity().setFragmentPadding(false);
+
+        Bundle arguments = getArguments();
         String artistName = arguments.getString(Config.ARTIST_NAME);
 
-        setupActionBar(artistName);
-
-        ViewGroup root = (ViewGroup)findViewById(R.id.activity_base_content);
-        root.setPadding(0, 0, 0, 0); // clear default padding
-
         setupPopupMenuHelpers();
-        setupSongList(root);
+        setupSongList();
         setupAlbumList();
         setupHero(artistName);
 
-        LoaderManager lm = getSupportLoaderManager();
+        LoaderManager lm = getLoaderManager();
         lm.initLoader(ALBUM_LOADER_ID, arguments, mAlbumAdapter);
         lm.initLoader(SONG_LOADER_ID, arguments, mSongAdapter);
     }
@@ -68,14 +71,14 @@ public class ArtistDetailActivity extends DetailActivity {
     private void setupHero(String artistName) {
         mHero = (ImageView)mHeader.findViewById(R.id.hero);
         mHero.setContentDescription(artistName);
-        ImageFetcher.getInstance(this).loadArtistImage(artistName, mHero);
+        ImageFetcher.getInstance(getActivity()).loadArtistImage(artistName, mHero);
     }
 
     private void setupAlbumList() {
         mAlbums = (RecyclerView) mHeader.findViewById(R.id.albums);
         mAlbums.setHasFixedSize(true);
-        mAlbums.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
-        mAlbumAdapter = new ArtistDetailAlbumAdapter(this);
+        mAlbums.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false));
+        mAlbumAdapter = new ArtistDetailAlbumAdapter(getActivity());
         mAlbumAdapter.setPopupMenuClickedListener(new IPopupMenuCallback.IListener() {
             @Override
             public void onPopupMenuClicked(View v, int position) {
@@ -85,18 +88,19 @@ public class ArtistDetailActivity extends DetailActivity {
         mAlbums.setAdapter(mAlbumAdapter);
     }
 
-    private void setupSongList(ViewGroup root) {
-        mSongs = (ListView)root.findViewById(R.id.songs);
-        mHeader = (ViewGroup)LayoutInflater.from(this).
+    private void setupSongList() {
+        mSongs = (ListView)mRootView.findViewById(R.id.songs);
+        mHeader = (ViewGroup)LayoutInflater.from(getActivity()).
                 inflate(R.layout.artist_detail_header, mSongs, false);
         mSongs.addHeaderView(mHeader);
         mSongs.setOnScrollListener(this);
-        mSongAdapter = new ArtistDetailSongAdapter(this);
+        mSongAdapter = new ArtistDetailSongAdapter(getActivity());
         mSongAdapter.setOnEmptyAdapterListener(new IEmptyAdapterCallback() {
             @Override
             public void onEmptyAdapter() {
-                // no results - because the user deleted the last item
-                finish();
+                // no results - because the user deleted the last item - pop our fragment
+                // from the stack
+                getContainingActivity().postRemoveFragment(ArtistDetailFragment.this);
             }
         });
         mSongAdapter.setPopupMenuClickedListener(new IPopupMenuCallback.IListener() {
@@ -110,7 +114,7 @@ public class ArtistDetailActivity extends DetailActivity {
     }
 
     private void setupPopupMenuHelpers() {
-        mSongPopupMenuHelper = new SongPopupMenuHelper(this, getSupportFragmentManager()) {
+        mSongPopupMenuHelper = new SongPopupMenuHelper(getActivity(), getChildFragmentManager()) {
             @Override
             public Song getSong(int position) {
                 return mSongAdapter.getItem(position);
@@ -125,7 +129,7 @@ public class ArtistDetailActivity extends DetailActivity {
             }
         };
 
-        mAlbumPopupMenuHelper = new AlbumPopupMenuHelper(this, getSupportFragmentManager()) {
+        mAlbumPopupMenuHelper = new AlbumPopupMenuHelper(getActivity(), getChildFragmentManager()) {
             @Override
             public Album getAlbum(int position) {
                 return mAlbumAdapter.getItem(position);
@@ -148,10 +152,8 @@ public class ArtistDetailActivity extends DetailActivity {
 
     @Override
     public void restartLoader() {
-        super.restartLoader();
-
-        Bundle arguments = getIntent().getExtras();
-        LoaderManager lm = getSupportLoaderManager();
+        Bundle arguments = getArguments();
+        LoaderManager lm = getLoaderManager();
         lm.restartLoader(ALBUM_LOADER_ID, arguments, mAlbumAdapter);
         lm.restartLoader(SONG_LOADER_ID, arguments, mSongAdapter);
     }

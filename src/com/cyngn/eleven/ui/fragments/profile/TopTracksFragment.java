@@ -26,6 +26,8 @@ import com.cyngn.eleven.model.Song;
 import com.cyngn.eleven.sectionadapter.SectionAdapter;
 import com.cyngn.eleven.sectionadapter.SectionCreator;
 import com.cyngn.eleven.sectionadapter.SectionListContainer;
+import com.cyngn.eleven.ui.activities.BaseActivity;
+import com.cyngn.eleven.ui.fragments.ISetupActionBar;
 import com.cyngn.eleven.utils.MusicUtils;
 import com.cyngn.eleven.widgets.NoResultsContainer;
 
@@ -35,7 +37,7 @@ import com.cyngn.eleven.widgets.NoResultsContainer;
  *
  * @author Andrew Neal (andrewdneal@gmail.com)
  */
-public class TopTracksFragment extends BasicSongFragment {
+public class TopTracksFragment extends BasicSongFragment implements ISetupActionBar {
 
     /**
      * LoaderCallbacks identifier
@@ -71,6 +73,11 @@ public class TopTracksFragment extends BasicSongFragment {
     public void playAll(int position) {
         MusicUtils.playSmartPlaylist(getActivity(), position,
                 Config.SmartPlaylistType.TopTracks);
+    }
+
+    @Override
+    public void setupActionBar() {
+        ((BaseActivity)getActivity()).setupActionBar(R.string.playlist_top_tracks);
     }
 
     public class TopTracksAdapter extends SongAdapter {

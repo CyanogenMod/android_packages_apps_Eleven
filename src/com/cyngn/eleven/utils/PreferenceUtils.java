@@ -21,7 +21,6 @@ import com.cyngn.eleven.ui.fragments.AlbumFragment;
 import com.cyngn.eleven.ui.fragments.ArtistFragment;
 import com.cyngn.eleven.ui.fragments.SongFragment;
 import com.cyngn.eleven.ui.fragments.phone.MusicBrowserPhoneFragment;
-import com.cyngn.eleven.ui.activities.ArtistDetailActivity;
 
 /**
  * A collection of helpers designed to get and set various preferences across
@@ -236,7 +235,7 @@ public final class PreferenceUtils {
 
     /**
      * @return The sort order used for the artist album list in
-     *         {@link ArtistDetailActivity}
+     *         {@link com.cyngn.eleven.ui.fragments.ArtistDetailFragment}
      */
     public final String getArtistAlbumSortOrder() {
         return mPreferences.getString(ARTIST_ALBUM_SORT_ORDER,

@@ -97,18 +97,6 @@ public class SlidingPanelActivity extends BaseActivity {
 
         // get the blur scrim image
         mBlurScrimImage = (BlurScrimImage)findViewById(R.id.blurScrimImage);
-
-        if (getLayoutToInflate() != 0) {
-            ViewStub contentStub = (ViewStub) findViewById(R.id.content_stub);
-            if (contentStub != null) {
-                contentStub.setLayoutResource(getLayoutToInflate());
-                contentStub.inflate();
-            }
-        }
-    }
-
-    protected int getLayoutToInflate() {
-        return 0;
     }
 
     private void setupFirstPanel() {

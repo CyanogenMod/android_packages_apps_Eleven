@@ -11,7 +11,6 @@
 
 package com.cyngn.eleven.ui.fragments;
 
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.ContentUris;
 import android.content.DialogInterface;
@@ -20,7 +19,6 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
 import android.support.v4.app.LoaderManager.LoaderCallbacks;
 import android.support.v4.content.Loader;
 import android.view.LayoutInflater;
@@ -33,11 +31,13 @@ import android.widget.ListView;
 import com.cyngn.eleven.Config.SmartPlaylistType;
 import com.cyngn.eleven.MusicStateListener;
 import com.cyngn.eleven.R;
+import com.cyngn.eleven.adapters.PagerAdapter;
 import com.cyngn.eleven.adapters.PlaylistAdapter;
 import com.cyngn.eleven.loaders.PlaylistLoader;
 import com.cyngn.eleven.model.Playlist;
 import com.cyngn.eleven.recycler.RecycleHolder;
 import com.cyngn.eleven.ui.activities.BaseActivity;
+import com.cyngn.eleven.ui.fragments.phone.MusicBrowserFragment;
 import com.cyngn.eleven.utils.MusicUtils;
 import com.cyngn.eleven.utils.NavUtils;
 import com.cyngn.eleven.utils.PopupMenuHelper;
@@ -50,13 +50,9 @@ import java.util.List;
  * 
  * @author Andrew Neal (andrewdneal@gmail.com)
  */
-public class PlaylistFragment extends Fragment implements LoaderCallbacks<List<Playlist>>,
+public class PlaylistFragment extends MusicBrowserFragment implements
+        LoaderCallbacks<List<Playlist>>,
         OnItemClickListener, MusicStateListener {
-
-    /**
-     * LoaderCallbacks identifier
-     */
-    private static final int LOADER = 0;
 
     /**
      * The adapter for the list
@@ -79,14 +75,9 @@ public class PlaylistFragment extends Fragment implements LoaderCallbacks<List<P
     public PlaylistFragment() {
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
-    public void onAttach(final Activity activity) {
-        super.onAttach(activity);
-        // Register the music status listener
-        ((BaseActivity)activity).setMusicStateListenerListener(this);
+    public int getLoaderId() {
+        return PagerAdapter.MusicFragments.PLAYLIST.ordinal();
     }
 
     /**
@@ -158,8 +149,20 @@ public class PlaylistFragment extends Fragment implements LoaderCallbacks<List<P
         mListView.setRecyclerListener(new RecycleHolder());
         // Play the selected song
         mListView.setOnItemClickListener(this);
+
+        // Register the music status listener
+        ((BaseActivity)getActivity()).setMusicStateListenerListener(this);
+
         return rootView;
     }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+
+        ((BaseActivity)getActivity()).removeMusicStateListenerListener(this);
+    }
+
 
     /**
      * {@inheritDoc}
@@ -170,7 +173,7 @@ public class PlaylistFragment extends Fragment implements LoaderCallbacks<List<P
         // Enable the options menu
         setHasOptionsMenu(true);
         // Start the loader
-        getLoaderManager().initLoader(LOADER, null, this);
+        initLoader(null, this);
     }
 
     /**
@@ -231,7 +234,7 @@ public class PlaylistFragment extends Fragment implements LoaderCallbacks<List<P
      */
     @Override
     public void restartLoader() {
-        getLoaderManager().restartLoader(LOADER, null, this);
+        restartLoader(null, this);
     }
 
     @Override

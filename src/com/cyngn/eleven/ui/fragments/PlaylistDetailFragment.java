@@ -1,4 +1,4 @@
-package com.cyngn.eleven.ui.activities;
+package com.cyngn.eleven.ui.fragments;
 
 import android.database.Cursor;
 import android.net.Uri;
@@ -8,7 +8,6 @@ import android.support.v4.app.LoaderManager;
 import android.support.v4.app.LoaderManager.LoaderCallbacks;
 import android.support.v4.content.Loader;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
@@ -37,7 +36,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.TreeSet;
 
-public class PlaylistDetailActivity extends DetailActivity implements
+public class PlaylistDetailFragment extends DetailFragment implements
         LoaderCallbacks<List<Song>>, OnItemClickListener, DropListener,
         RemoveListener, DragScrollProfile {
 
@@ -68,15 +67,37 @@ public class PlaylistDetailActivity extends DetailActivity implements
     private PopupMenuHelper mPopupMenuHelper;
 
     @Override
+    protected String getTitle() {
+        return getArguments().getString(Config.NAME);
+    }
+
+    @Override
     protected int getLayoutToInflate() {
         return R.layout.playlist_detail;
     }
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onViewCreated() {
+        super.onViewCreated();
+
+        setupHero();
+        setupSongList();
+        setupNoResultsContainer();
+    }
+
+    @Override
+    public void onActivityCreated(Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+
+        LoaderManager lm = getLoaderManager();
+        lm.initLoader(0, getArguments(), this);
+    }
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        mPopupMenuHelper = new SongPopupMenuHelper(this, getSupportFragmentManager()) {
+        mPopupMenuHelper = new SongPopupMenuHelper(getActivity(), getFragmentManager()) {
             @Override
             public Song getSong(int position) {
                 if (position == 0) {
@@ -97,42 +118,30 @@ public class PlaylistDetailActivity extends DetailActivity implements
             protected void removeFromPlaylist() {
                 mAdapter.remove(mSong);
                 mAdapter.notifyDataSetChanged();
-                MusicUtils.removeFromPlaylist(PlaylistDetailActivity.this, mSong.mSongId, mPlaylistId);
-                getSupportLoaderManager().restartLoader(LOADER, null, PlaylistDetailActivity.this);
+                MusicUtils.removeFromPlaylist(getActivity(), mSong.mSongId, mPlaylistId);
+                getLoaderManager().restartLoader(LOADER, null, PlaylistDetailFragment.this);
             }
         };
 
-        Bundle arguments = getIntent().getExtras();
-        String playlistName = arguments.getString(Config.NAME);
-        mPlaylistId = arguments.getLong(Config.ID);
-
-        setupActionBar(playlistName);
-
-        ViewGroup root = (ViewGroup) findViewById(R.id.activity_base_content);
-        root.setPadding(0, 0, 0, 0); // clear default padding
-
-        setupHero();
-        setupSongList(root);
-        setupNoResultsContainer();
-
-        LoaderManager lm = getSupportLoaderManager();
-        lm.initLoader(0, arguments, this);
+        mPlaylistId = getArguments().getLong(Config.ID);
     }
 
     private void setupHero() {
-        mPlaylistImageView = (ImageView)findViewById(R.id.image);
-        mHeaderContainer = findViewById(R.id.playlist_header);
-        mNumberOfSongs = (TextView)findViewById(R.id.number_of_songs_text);
-        mDurationOfPlaylist = (TextView)findViewById(R.id.duration_text);
+        mPlaylistImageView = (ImageView)mRootView.findViewById(R.id.image);
+        mHeaderContainer = mRootView.findViewById(R.id.playlist_header);
+        mNumberOfSongs = (TextView)mRootView.findViewById(R.id.number_of_songs_text);
+        mDurationOfPlaylist = (TextView)mRootView.findViewById(R.id.duration_text);
 
-        ImageFetcher.getInstance(this).loadPlaylistArtistImage(mPlaylistId, mPlaylistImageView);
+        final ImageFetcher imageFetcher = ImageFetcher.getInstance(getActivity());
+        imageFetcher.loadPlaylistArtistImage(mPlaylistId, mPlaylistImageView);
     }
 
-    private void setupSongList(ViewGroup root) {
-        mListView = (DragSortListView) root.findViewById(R.id.list_base);
-        mListView.setOnScrollListener(this);
+    private void setupSongList() {
+        mListView = (DragSortListView) mRootView.findViewById(R.id.list_base);
+        mListView.setOnScrollListener(PlaylistDetailFragment.this);
+
         mAdapter = new ProfileSongAdapter(
-                this,
+                getActivity(),
                 R.layout.edit_track_list_item,
                 R.layout.faux_playlist_header,
                 ProfileSongAdapter.DISPLAY_PLAYLIST_SETTING
@@ -161,7 +170,7 @@ public class PlaylistDetailActivity extends DetailActivity implements
     }
 
     private void setupNoResultsContainer() {
-        mNoResultsContainer = (NoResultsContainer)findViewById(R.id.no_results_container);
+        mNoResultsContainer = (NoResultsContainer)mRootView.findViewById(R.id.no_results_container);
         mNoResultsContainer.setMainText(R.string.empty_playlist_main);
         mNoResultsContainer.setSecondaryText(R.string.empty_playlist_secondary);
     }
@@ -187,7 +196,7 @@ public class PlaylistDetailActivity extends DetailActivity implements
         mAdapter.remove(song);
         mAdapter.notifyDataSetChanged();
         final Uri uri = MediaStore.Audio.Playlists.Members.getContentUri("external", mPlaylistId);
-        getContentResolver().delete(uri,
+        getActivity().getContentResolver().delete(uri,
                 MediaStore.Audio.Playlists.Members.AUDIO_ID + "=" + song.mSongId,
                 null);
     }
@@ -207,7 +216,7 @@ public class PlaylistDetailActivity extends DetailActivity implements
         mAdapter.remove(song);
         mAdapter.insert(song, realTo);
         mAdapter.notifyDataSetChanged();
-        MediaStore.Audio.Playlists.Members.moveItem(getContentResolver(),
+        MediaStore.Audio.Playlists.Members.moveItem(getActivity().getContentResolver(),
                 mPlaylistId, realFrom, realTo);
     }
 
@@ -220,17 +229,18 @@ public class PlaylistDetailActivity extends DetailActivity implements
         if (position == 0) {
             return;
         }
-        Cursor cursor = PlaylistSongLoader.makePlaylistSongCursor(this,
+        Cursor cursor = PlaylistSongLoader.makePlaylistSongCursor(getActivity(),
                 mPlaylistId);
         final long[] list = MusicUtils.getSongListForCursor(cursor);
-        MusicUtils.playAll(this, list, position - 1, false);
+        MusicUtils.playAll(getActivity(), list, position - 1, false);
         cursor.close();
         cursor = null;
     }
 
     @Override
     public void onScrollStateChanged(AbsListView view, int scrollState) {
-        // Pause disk cache access to ensure smoother scrolling
+        super.onScrollStateChanged(view, scrollState);
+
         if (scrollState == AbsListView.OnScrollListener.SCROLL_STATE_FLING
                 || scrollState == AbsListView.OnScrollListener.SCROLL_STATE_TOUCH_SCROLL) {
             mAdapter.setPauseDiskCache(true);
@@ -246,7 +256,7 @@ public class PlaylistDetailActivity extends DetailActivity implements
 
     @Override
     public Loader<List<Song>> onCreateLoader(int i, Bundle bundle) {
-        return new PlaylistSongLoader(this, mPlaylistId);
+        return new PlaylistSongLoader(getActivity(), mPlaylistId);
     }
 
     @Override
@@ -272,7 +282,8 @@ public class PlaylistDetailActivity extends DetailActivity implements
             // Return the correct count
             mAdapter.setCount(data);
             // set the number of songs
-            String numberOfSongs = MusicUtils.makeLabel(this, R.plurals.Nsongs, data.size());
+            String numberOfSongs = MusicUtils.makeLabel(getActivity(), R.plurals.Nsongs,
+                    data.size());
             mNumberOfSongs.setText(numberOfSongs);
 
             long duration = 0;
@@ -284,7 +295,7 @@ public class PlaylistDetailActivity extends DetailActivity implements
             }
 
             // set the duration
-            String durationString = MusicUtils.makeLongTimeString(this, duration);
+            String durationString = MusicUtils.makeLongTimeString(getActivity(), duration);
             mDurationOfPlaylist.setText(durationString);
         }
     }
@@ -297,8 +308,6 @@ public class PlaylistDetailActivity extends DetailActivity implements
 
     @Override
     public void restartLoader() {
-        super.restartLoader();
-
-        getSupportLoaderManager().restartLoader(0, getIntent().getExtras(), this);
+        getLoaderManager().restartLoader(0, getArguments(), this);
     }
 }

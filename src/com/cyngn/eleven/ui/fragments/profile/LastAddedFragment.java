@@ -11,6 +11,7 @@
 
 package com.cyngn.eleven.ui.fragments.profile;
 
+import android.app.Activity;
 import android.os.Bundle;
 import android.support.v4.content.Loader;
 
@@ -20,6 +21,8 @@ import com.cyngn.eleven.loaders.LastAddedLoader;
 import com.cyngn.eleven.model.Song;
 import com.cyngn.eleven.sectionadapter.SectionCreator;
 import com.cyngn.eleven.sectionadapter.SectionListContainer;
+import com.cyngn.eleven.ui.activities.BaseActivity;
+import com.cyngn.eleven.ui.fragments.ISetupActionBar;
 import com.cyngn.eleven.utils.MusicUtils;
 import com.cyngn.eleven.widgets.NoResultsContainer;
 
@@ -29,7 +32,7 @@ import com.cyngn.eleven.widgets.NoResultsContainer;
  *
  * @author Andrew Neal (andrewdneal@gmail.com)
  */
-public class LastAddedFragment extends BasicSongFragment {
+public class LastAddedFragment extends BasicSongFragment implements ISetupActionBar {
 
     /**
      * LoaderCallbacks identifier
@@ -62,5 +65,10 @@ public class LastAddedFragment extends BasicSongFragment {
 
         empty.setMainText(R.string.empty_last_added_main);
         empty.setSecondaryText(R.string.empty_last_added);
+    }
+
+    @Override
+    public void setupActionBar() {
+        ((BaseActivity)getActivity()).setupActionBar(R.string.playlist_last_added);
     }
 }

@@ -15,6 +15,7 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.os.SystemClock;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.LoaderManager;
 import android.support.v4.app.LoaderManager.LoaderCallbacks;
 import android.support.v4.content.Loader;
 import android.view.LayoutInflater;
@@ -78,16 +79,6 @@ public abstract class BasicSongFragment extends Fragment implements
      * {@inheritDoc}
      */
     @Override
-    public void onAttach(final Activity activity) {
-        super.onAttach(activity);
-        // Register the music status listener
-        ((BaseActivity)activity).setMusicStateListenerListener(this);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
     public void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mPopupMenuHelper = new SongPopupMenuHelper(getActivity(), getFragmentManager()) {
@@ -125,6 +116,8 @@ public abstract class BasicSongFragment extends Fragment implements
                              final Bundle savedInstanceState) {
         // The View for the fragment's UI
         mRootView = (ViewGroup) inflater.inflate(R.layout.list_base, null);
+        // set the background on the root view
+        mRootView.setBackgroundColor(getResources().getColor(R.color.background_color));
         // Initialize the list
         mListView = (ListView) mRootView.findViewById(R.id.list_base);
         // Set the data behind the list
@@ -153,7 +146,17 @@ public abstract class BasicSongFragment extends Fragment implements
             }
         });
 
+        // Register the music status listener
+        ((BaseActivity)getActivity()).setMusicStateListenerListener(this);
+
         return mRootView;
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+
+        ((BaseActivity)getActivity()).removeMusicStateListenerListener(this);
     }
 
     /**
@@ -171,7 +174,7 @@ public abstract class BasicSongFragment extends Fragment implements
     public void onActivityCreated(final Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         // Start the loader
-        getLoaderManager().initLoader(getLoaderId(), null, this);
+        getFragmentLoaderManager().initLoader(getLoaderId(), null, this);
     }
 
     /**
@@ -211,7 +214,7 @@ public abstract class BasicSongFragment extends Fragment implements
     public void refresh() {
         // Wait a moment for the preference to change.
         SystemClock.sleep(10);
-        getLoaderManager().restartLoader(getLoaderId(), null, this);
+        getFragmentLoaderManager().restartLoader(getLoaderId(), null, this);
     }
 
     /**
@@ -220,7 +223,7 @@ public abstract class BasicSongFragment extends Fragment implements
     @Override
     public void restartLoader() {
         // Update the list when the user deletes any items
-        getLoaderManager().restartLoader(getLoaderId(), null, this);
+        getFragmentLoaderManager().restartLoader(getLoaderId(), null, this);
     }
 
     /**
@@ -243,6 +246,14 @@ public abstract class BasicSongFragment extends Fragment implements
                     R.layout.list_item_normal
                 )
         );
+    }
+
+    /**
+     * Allow subclasses to specify a different loader manager
+     * @return Loader Manager to use
+     */
+    public LoaderManager getFragmentLoaderManager() {
+        return getLoaderManager();
     }
 
     @Override

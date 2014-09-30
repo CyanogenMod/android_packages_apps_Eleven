@@ -13,21 +13,19 @@ package com.cyngn.eleven.ui.fragments;
 
 import android.os.Bundle;
 import android.support.v4.content.Loader;
-import android.view.Menu;
 
 import com.cyngn.eleven.Config;
-import com.cyngn.eleven.MusicStateListener;
 import com.cyngn.eleven.R;
 import com.cyngn.eleven.loaders.TopTracksLoader;
 import com.cyngn.eleven.menu.FragmentMenuItems;
 import com.cyngn.eleven.model.Song;
 import com.cyngn.eleven.sectionadapter.SectionCreator;
 import com.cyngn.eleven.sectionadapter.SectionListContainer;
+import com.cyngn.eleven.ui.activities.BaseActivity;
 import com.cyngn.eleven.ui.fragments.profile.BasicSongFragment;
 import com.cyngn.eleven.utils.MusicUtils;
 import com.cyngn.eleven.widgets.NoResultsContainer;
 
-import java.util.ArrayList;
 import java.util.TreeSet;
 
 /**
@@ -36,7 +34,7 @@ import java.util.TreeSet;
  *
  * @author Andrew Neal (andrewdneal@gmail.com)
  */
-public class RecentFragment extends BasicSongFragment {
+public class RecentFragment extends BasicSongFragment implements ISetupActionBar {
 
     /**
      * LoaderCallbacks identifier
@@ -84,6 +82,11 @@ public class RecentFragment extends BasicSongFragment {
 
         empty.setMainText(R.string.empty_recent_main);
         empty.setSecondaryText(R.string.empty_recent);
+    }
+
+    @Override
+    public void setupActionBar() {
+        ((BaseActivity)getActivity()).setupActionBar(R.string.playlist_recently_played);
     }
 }
 

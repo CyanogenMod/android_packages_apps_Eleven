@@ -21,13 +21,9 @@ import android.provider.MediaStore;
 
 import com.cyngn.eleven.Config;
 import com.cyngn.eleven.R;
-import com.cyngn.eleven.ui.activities.AlbumDetailActivity;
-import com.cyngn.eleven.ui.activities.ArtistDetailActivity;
 import com.cyngn.eleven.ui.activities.HomeActivity;
-import com.cyngn.eleven.ui.activities.PlaylistDetailActivity;
 import com.cyngn.eleven.ui.activities.SearchActivity;
 import com.cyngn.eleven.ui.activities.SettingsActivity;
-import com.cyngn.eleven.ui.activities.SmartPlaylistDetailActivity;
 import com.devspark.appmsg.AppMsg;
 
 /**
@@ -51,8 +47,8 @@ public final class NavUtils {
         bundle.putString(Config.ARTIST_NAME, artistName);
 
         // Create the intent to launch the profile activity
-        final Intent intent = new Intent(context, ArtistDetailActivity.class);
-        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        final Intent intent = new Intent(context, HomeActivity.class);
+        intent.setAction(HomeActivity.ACTION_VIEW_ARTIST_DETAILS);
         intent.putExtras(bundle);
         context.startActivity(intent);
     }
@@ -78,15 +74,16 @@ public final class NavUtils {
         bundle.putString(Config.NAME, albumName);
 
         // Create the intent to launch the profile activity
-        final Intent intent = new Intent(context, AlbumDetailActivity.class);
-        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        final Intent intent = new Intent(context, HomeActivity.class);
+        intent.setAction(HomeActivity.ACTION_VIEW_ALBUM_DETAILS);
         intent.putExtras(bundle);
         context.startActivity(intent);
     }
 
     public static void openSmartPlaylist(final Activity context, final Config.SmartPlaylistType type) {
         // Create the intent to launch the profile activity
-        final Intent intent = new Intent(context, SmartPlaylistDetailActivity.class);
+        final Intent intent = new Intent(context, HomeActivity.class);
+        intent.setAction(HomeActivity.ACTION_VIEW_SMART_PLAYLIST);
         intent.putExtra(Config.SMART_PLAYLIST_TYPE, type.ordinal());
         context.startActivity(intent);
     }
@@ -106,7 +103,8 @@ public final class NavUtils {
         bundle.putString(Config.NAME, playlistName);
 
         // Create the intent to launch the profile activity
-        final Intent intent = new Intent(context, PlaylistDetailActivity.class);
+        final Intent intent = new Intent(context, HomeActivity.class);
+        intent.setAction(HomeActivity.ACTION_VIEW_PLAYLIST_DETAILS);
         intent.putExtras(bundle);
         context.startActivity(intent);
     }

@@ -14,8 +14,10 @@ package com.cyngn.eleven.ui.fragments;
 import android.content.Context;
 import android.database.Cursor;
 import android.os.Bundle;
+import android.support.v4.app.LoaderManager;
 import android.support.v4.content.Loader;
 
+import com.cyngn.eleven.adapters.PagerAdapter;
 import com.cyngn.eleven.loaders.SongLoader;
 import com.cyngn.eleven.model.Song;
 import com.cyngn.eleven.sectionadapter.SectionCreator;
@@ -31,11 +33,6 @@ import com.viewpagerindicator.TitlePageIndicator;
  * @author Andrew Neal (andrewdneal@gmail.com)
  */
 public class SongFragment extends BasicSongFragment {
-
-    /**
-     * LoaderCallbacks identifier
-     */
-    private static final int LOADER = 0;
 
     /**
      * {@inheritDoc}
@@ -70,7 +67,7 @@ public class SongFragment extends BasicSongFragment {
 
     @Override
     public int getLoaderId() {
-        return LOADER;
+        return PagerAdapter.MusicFragments.SONG.ordinal();
     }
 
     /**
@@ -103,5 +100,10 @@ public class SongFragment extends BasicSongFragment {
         }
 
         return position;
+    }
+
+    @Override
+    public LoaderManager getFragmentLoaderManager() {
+        return getParentFragment().getLoaderManager();
     }
 }
