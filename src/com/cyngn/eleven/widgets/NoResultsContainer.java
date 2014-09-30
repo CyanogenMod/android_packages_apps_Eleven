@@ -48,4 +48,10 @@ public class NoResultsContainer extends LinearLayout {
     public void setSecondaryText(final int resId) {
         ((TextView)findViewById(R.id.no_results_secondary_text)).setText(resId);
     }
+
+    public void setTextColor(int color) {
+        ((TextView)findViewById(R.id.no_results_main_text)).setTextColor(color);
+        ((TextView)findViewById(R.id.no_results_main_highlight_text)).setTextColor(color);
+        ((TextView)findViewById(R.id.no_results_secondary_text)).setTextColor(color);
+    }
 }

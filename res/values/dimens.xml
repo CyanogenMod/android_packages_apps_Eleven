@@ -186,7 +186,7 @@
     <dimen name="white_note_padding_bottom">24.0dip</dimen>
     <dimen name="no_results_width">260.0dip</dimen>
     <dimen name="no_results_text_padding_bottom">16.0dip</dimen>
-    <dimen name="no_reuslts_text_main">20.0sp</dimen>
+    <dimen name="no_results_text_main">20.0sp</dimen>
     <dimen name="no_results_text_secondary">14.0sp</dimen>
 
     <!-- General consensus is to leave dividers at 1px instead of having different

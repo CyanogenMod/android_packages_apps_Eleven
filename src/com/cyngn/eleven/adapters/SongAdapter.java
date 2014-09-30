@@ -18,7 +18,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 
-import com.cyngn.eleven.R;
 import com.cyngn.eleven.cache.ImageFetcher;
 import com.cyngn.eleven.model.Artist;
 import com.cyngn.eleven.model.Song;
@@ -42,6 +41,8 @@ import com.cyngn.eleven.widgets.PlayPauseProgressButton;
 public class SongAdapter extends ArrayAdapter<Song>
         implements SectionAdapter.BasicAdapter, IPopupMenuCallback {
 
+    public static final int NOTHING_PLAYING = -1;
+
     /**
      * Number of views (TextView)
      */
@@ -60,7 +61,7 @@ public class SongAdapter extends ArrayAdapter<Song>
     /**
      * The index of the item that is currently playing
      */
-    private long mCurrentlyPlayingSongId = -1;
+    private long mCurrentlyPlayingSongId = NOTHING_PLAYING;
 
     /**
      * Used to cache the song info

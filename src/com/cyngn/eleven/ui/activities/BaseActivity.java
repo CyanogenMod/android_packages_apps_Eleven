@@ -288,6 +288,10 @@ public abstract class BaseActivity extends FragmentActivity implements ServiceCo
         updateBottomActionBarInfo();
     }
 
+    protected void clearMetaInfo() {
+        mAlbumArt.setImageResource(R.drawable.default_artwork);
+    }
+
     /**
      * Sets the track name, album name, and album art.
      */

@@ -103,4 +103,5 @@
 
     <!-- search no results text color -->
     <color name="no_results">#ff231f20</color>
+    <color name="no_results_light">@color/white</color>
 </resources>

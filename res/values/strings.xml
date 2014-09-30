@@ -187,6 +187,8 @@
     <string name="empty_last_added">Songs you have added over the last month will be shown here.</string>
     <string name="empty_generic_main">NO MUSIC FOUND</string>
     <string name="empty_generic_secondary">To copy music from your computer to your device, use a USB cable.</string>
+    <string name="empty_queue_main">NO SONGS IN PLAY QUEUE</string>
+    <string name="empty_queue_secondary">To add songs to your Play Queue, tap the options menu on a song, album, or artist and select &#8220;Add to queue&#8221;.</string>
 
     <!-- Section Headers -->
     <string name="header_unknown_year">Unknown Year</string>

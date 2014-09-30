@@ -11,27 +11,21 @@
 
 package com.cyngn.eleven.ui.activities;
 
-import android.content.BroadcastReceiver;
-import android.content.Context;
-import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.view.View;
 import android.view.ViewStub;
-import android.widget.ImageView;
-
 import android.widget.LinearLayout;
+
 import com.cyngn.eleven.R;
 import com.cyngn.eleven.slidinguppanel.SlidingUpPanelLayout;
 import com.cyngn.eleven.slidinguppanel.SlidingUpPanelLayout.SimplePanelSlideListener;
 import com.cyngn.eleven.ui.HeaderBar;
 import com.cyngn.eleven.ui.fragments.AudioPlayerFragment;
-import com.cyngn.eleven.ui.fragments.phone.MusicBrowserPhoneFragment;
 import com.cyngn.eleven.utils.ApolloUtils;
 import com.cyngn.eleven.utils.MusicUtils;
-import com.cyngn.eleven.utils.NavUtils;
 import com.cyngn.eleven.widgets.BlurScrimImage;
 
 /**
@@ -52,7 +46,6 @@ public class SlidingPanelActivity extends BaseActivity {
     private SlidingUpPanelLayout mFirstPanel;
     private HeaderBar mFirstHeaderBar;
     private SlidingUpPanelLayout mSecondPanel;
-    private HeaderBar mSecondHeaderBar;
     protected Panel mTargetNavigatePanel;
 
     private final ShowPanelClickListener mShowBrowse = new ShowPanelClickListener(Panel.Browse);
@@ -172,7 +165,7 @@ public class SlidingPanelActivity extends BaseActivity {
         });
 
         // setup the header bar
-        mSecondHeaderBar = setupHeaderBar(R.id.secondHeaderBar, R.string.page_play_queue,
+        setupHeaderBar(R.id.secondHeaderBar, R.string.page_play_queue,
                 R.drawable.btn_playback_icon, mShowMusicPlayer, mShowMusicPlayer);
 
         // set the drag view offset to allow the panel to go past the top of the viewport
@@ -182,8 +175,6 @@ public class SlidingPanelActivity extends BaseActivity {
         slideOffset -= ApolloUtils.getActionBarHeight(this);
         mSecondPanel.setSlidePanelOffset(slideOffset);
     }
-
-
 
     @Override
     protected void onPause() {
@@ -265,6 +256,12 @@ public class SlidingPanelActivity extends BaseActivity {
         } else {
             return Panel.Browse;
         }
+    }
+
+    public void clearMetaInfo() {
+        super.clearMetaInfo();
+        mBlurScrimImage.transitionToDefaultState();
+        mFirstHeaderBar.setTitleText("");
     }
 
     @Override
