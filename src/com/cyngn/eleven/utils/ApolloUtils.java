@@ -50,6 +50,9 @@ import com.cyngn.eleven.widgets.ColorPickerView;
 import com.cyngn.eleven.widgets.ColorSchemeDialog;
 import com.devspark.appmsg.AppMsg;
 
+import java.util.concurrent.RejectedExecutionHandler;
+import java.util.concurrent.ThreadPoolExecutor;
+
 /**
  * Mostly general and UI helpers.
  * 
@@ -61,6 +64,28 @@ public final class ApolloUtils {
      * The threshold used calculate if a color is light or dark
      */
     private static final int BRIGHTNESS_THRESHOLD = 130;
+
+    /**
+     * Because cancelled tasks are not automatically removed from the queue, we can easily
+     * run over the queue limit - so here we will have a purge policy to purge those tasks
+     */
+    public static class PurgePolicy implements RejectedExecutionHandler {
+        public void rejectedExecution(Runnable r, ThreadPoolExecutor e) {
+            // try purging all cancelled work items and re-executing
+            if (!e.isShutdown()) {
+                Log.d(PurgePolicy.class.getSimpleName(), "Before Purge: " + e.getQueue().size());
+                e.purge();
+                Log.d(PurgePolicy.class.getSimpleName(), "After Purge: " + e.getQueue().size());
+                e.execute(r);
+            }
+        }
+    };
+
+    static {
+        ((ThreadPoolExecutor)AsyncTask.THREAD_POOL_EXECUTOR).setRejectedExecutionHandler(
+                new PurgePolicy()
+        );
+    }
 
     /* This class is never initiated */
     public ApolloUtils() {

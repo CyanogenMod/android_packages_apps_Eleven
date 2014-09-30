@@ -26,6 +26,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.concurrent.atomic.AtomicInteger;
 
 public class ImageUtils {
     private static final String DEFAULT_HTTP_CACHE_DIR = "http"; //$NON-NLS-1$
@@ -35,6 +36,8 @@ public class ImageUtils {
     private static final int DEFAULT_MAX_IMAGE_HEIGHT = 1024;
 
     private static final int DEFAULT_MAX_IMAGE_WIDTH = 1024;
+
+    private static AtomicInteger sInteger = new AtomicInteger(0);
 
     /**
      * Gets the image url based on the imageType
@@ -208,7 +211,11 @@ public class ImageUtils {
         BufferedOutputStream out = null;
 
         try {
-            final File tempFile = File.createTempFile("bitmap", null, cacheDir); //$NON-NLS-1$
+            // increment the number to not collisions on the temp file name.  A collision can
+            // potentially cause up to 50s on the first creation of the temp file but not on
+            // subsequent ones for some reason.
+            int number = sInteger.getAndIncrement() % 10;
+            final File tempFile = File.createTempFile("bitmap" + number, null, cacheDir); //$NON-NLS-1$
 
             final URL url = new URL(urlString);
             urlConnection = (HttpURLConnection)url.openConnection();

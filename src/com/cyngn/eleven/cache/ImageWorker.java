@@ -31,6 +31,9 @@ import com.cyngn.eleven.widgets.BlurScrimImage;
 import com.cyngn.eleven.cache.PlaylistWorkerTask.PlaylistWorkerType;
 
 import java.lang.ref.WeakReference;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.concurrent.RejectedExecutionException;
 
 /**
@@ -45,6 +48,12 @@ public abstract class ImageWorker {
      * Render script
      */
     public static RenderScript sRenderScript = null;
+
+    /**
+     * Tracks which images we've tried to download and prevents it from trying again
+     * In the future we might want to throw this into a db
+     */
+    public static Set<String> sKeys = Collections.synchronizedSet(new HashSet<String>());
 
     /**
      * Default transition drawable fade time
@@ -217,7 +226,7 @@ public abstract class ImageWorker {
         }
 
         // Third, by now we need to download the image
-        if (bitmap == null && ApolloUtils.isOnline(context)) {
+        if (bitmap == null && ApolloUtils.isOnline(context) && !sKeys.contains(key)) {
             // Now define what the artist name, album name, and url are.
             String url = ImageUtils.processImageUrl(context, artistName, albumName, imageType);
             if (url != null) {
@@ -229,6 +238,8 @@ public abstract class ImageWorker {
         if (bitmap != null && key != null && imageCache != null) {
             imageCache.addBitmapToCache(key, bitmap);
         }
+
+        sKeys.add(key);
 
         return bitmap;
     }
