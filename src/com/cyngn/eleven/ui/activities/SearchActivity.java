@@ -553,7 +553,7 @@ public class SearchActivity extends FragmentActivity implements
         // When the search is "committed" by the user, then hide the keyboard so
         // the user can more easily browse the list of results.
         if (mSearchView != null) {
-            if (mImm != null && mImm.isImeShowing()) {
+            if (mImm != null) {
                 mImm.hideSoftInputFromWindow(mSearchView.getWindowToken(), 0);
             }
             mSearchView.clearFocus();
