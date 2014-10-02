@@ -265,8 +265,8 @@ public class SlidingPanelActivity extends BaseActivity {
     }
 
     @Override
-    protected void updateMetaInfo() {
-        super.updateMetaInfo();
+    public void onMetaChanged() {
+        super.onMetaChanged();
 
         // load the blurred image
         mBlurScrimImage.loadBlurImage(ApolloUtils.getImageFetcher(this));

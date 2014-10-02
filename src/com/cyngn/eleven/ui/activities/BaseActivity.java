@@ -278,13 +278,6 @@ public abstract class BaseActivity extends FragmentActivity implements ServiceCo
         mAlbumArt.setOnClickListener(mOpenCurrentAlbumProfile);
     }
 
-    /**
-     * Sets the track name, album name, and album art.  This is protected to enable overriding
-     */
-    protected void updateMetaInfo() {
-        updateBottomActionBarInfo();
-    }
-
     protected void clearMetaInfo() {
         mAlbumArt.setImageResource(R.drawable.default_artwork);
     }
