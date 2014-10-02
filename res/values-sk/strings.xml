@@ -25,7 +25,7 @@
   <string name="page_genres">Žánre</string>
   <string name="menu_settings">Nastavenia</string>
   <string name="menu_search">Hľadať</string>
-  <string name="menu_shuffle">Náhodne prehrať všetko</string>
+  <string name="menu_shuffle_all">Náhodne prehrať všetko</string>
   <string name="menu_play_all">Prehrať všetko</string>
   <string name="menu_sort_by">Zoradiť podľa</string>
   <string name="menu_shop">Obchod s témami</string>

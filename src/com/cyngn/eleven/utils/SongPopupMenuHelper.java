@@ -20,7 +20,7 @@ public abstract class SongPopupMenuHelper extends PopupMenuHelper {
     public abstract Song getSong(int position);
 
     @Override
-    protected PopupMenuHelper.PopupMenuType onPreparePopupMenu(int position) {
+    public PopupMenuHelper.PopupMenuType onPreparePopupMenu(int position) {
         mSong = getSong(position);
 
         if (mSong == null) {

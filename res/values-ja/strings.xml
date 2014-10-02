@@ -25,7 +25,7 @@
   <string name="page_genres">ジャンル</string>
   <string name="menu_settings">設定</string>
   <string name="menu_search">検索</string>
-  <string name="menu_shuffle">すべてシャッフル</string>
+  <string name="menu_shuffle_all">すべてシャッフル</string>
   <string name="menu_play_all">すべて再生</string>
   <string name="menu_sort_by">並べ替え</string>
   <string name="menu_shop">テーマショップ</string>

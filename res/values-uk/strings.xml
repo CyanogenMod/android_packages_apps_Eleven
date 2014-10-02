@@ -25,7 +25,7 @@
   <string name="page_genres">Жанри</string>
   <string name="menu_settings">Налаштування</string>
   <string name="menu_search">Пошук</string>
-  <string name="menu_shuffle">Перемішати</string>
+  <string name="menu_shuffle_all">Перемішати</string>
   <string name="menu_play_all">Грати все</string>
   <string name="menu_sort_by">Сортувати по</string>
   <string name="menu_shop">Теми</string>

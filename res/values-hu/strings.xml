@@ -25,7 +25,7 @@
   <string name="page_genres">Műfajok</string>
   <string name="menu_settings">Beállítások</string>
   <string name="menu_search">Keresés</string>
-  <string name="menu_shuffle">Véletlen sorrend</string>
+  <string name="menu_shuffle_all">Véletlen sorrend</string>
   <string name="menu_play_all">Összes lejátszása</string>
   <string name="menu_sort_by">Rendezés</string>
   <string name="menu_shop">Témák keresése</string>

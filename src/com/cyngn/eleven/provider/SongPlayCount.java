@@ -181,7 +181,6 @@ public class SongPlayCount {
                     // time is shifted backwards (by user) - nor typical behavior but we
                     // will still handle it
 
-
                     // since weekDiff is -ve, NUM_WEEKS + weekDiff is the real # of weeks we have to
                     // transfer.  Then we transfer the old week i - weekDiff to week i
                     // for example if the user shifted back 2 weeks, ie -2, then for 0 to
@@ -240,6 +239,11 @@ public class SongPlayCount {
 
         database.setTransactionSuccessful();
         database.endTransaction();
+    }
+
+    public void deleteAll() {
+        final SQLiteDatabase database = mMusicDatabase.getWritableDatabase();
+        database.delete(SongPlayCountColumns.NAME, null, null);
     }
 
     /**

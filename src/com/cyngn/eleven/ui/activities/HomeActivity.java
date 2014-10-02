@@ -68,6 +68,9 @@ public class HomeActivity extends SlidingPanelActivity {
             public void onBackStackChanged() {
                 Fragment topFragment = getTopFragment();
                 if (topFragment != null) {
+                    // the fragment that has come back to the top should now have its menu items
+                    // added to the action bar -- so tell it to make it menu items visible
+                    topFragment.setMenuVisibility(true);
                     ISetupActionBar setupActionBar = (ISetupActionBar) topFragment;
                     setupActionBar.setupActionBar();
 
@@ -151,6 +154,11 @@ public class HomeActivity extends SlidingPanelActivity {
                     getActionBar().setIcon(R.drawable.ic_action_back);
                     getActionBar().setHomeButtonEnabled(true);
                 }
+                // the current top fragment is about to be hidden by what we are replacing
+                // it with -- so tell that fragment not to make its action bar menu items visible
+                Fragment oldTop = getTopFragment();
+                if(oldTop != null) { oldTop.setMenuVisibility(false); }
+
                 transaction.commit();
             }
         }

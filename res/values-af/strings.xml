@@ -25,7 +25,7 @@
   <string name="page_genres">Genres</string>
   <string name="menu_settings">Instellings</string>
   <string name="menu_search">Soek</string>
-  <string name="menu_shuffle">Skommel almal</string>
+  <string name="menu_shuffle_all">Skommel almal</string>
   <string name="menu_play_all">Speel almal</string>
   <string name="menu_sort_by">Sorteer volgens</string>
   <string name="menu_shop">Koop temas</string>

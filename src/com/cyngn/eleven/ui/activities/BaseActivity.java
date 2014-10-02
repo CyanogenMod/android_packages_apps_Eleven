@@ -268,14 +268,18 @@ public abstract class BaseActivity extends FragmentActivity implements ServiceCo
     }
 
     public void setupActionBar(String title) {
-        ActionBar actionBar = getActionBar();
-        actionBar.setTitle(title.toUpperCase());
+        setActionBarTitle(title);
 
         if (mActionBarBackground == null) {
             final int actionBarColor = getResources().getColor(R.color.header_action_bar_color);
             mActionBarBackground = new ColorDrawable(actionBarColor);
-            actionBar.setBackgroundDrawable(mActionBarBackground);
+            getActionBar().setBackgroundDrawable(mActionBarBackground);
         }
+    }
+
+    public void setActionBarTitle(String title) {
+        ActionBar actionBar = getActionBar();
+        actionBar.setTitle(title.toUpperCase());
     }
 
     public void setActionBarAlpha(int alpha) {

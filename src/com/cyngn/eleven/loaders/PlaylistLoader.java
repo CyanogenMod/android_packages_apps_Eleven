@@ -19,7 +19,6 @@ import android.provider.MediaStore;
 import android.provider.MediaStore.Audio.PlaylistsColumns;
 
 import com.cyngn.eleven.Config.SmartPlaylistType;
-import com.cyngn.eleven.R;
 import com.cyngn.eleven.model.Playlist;
 import com.cyngn.eleven.utils.Lists;
 import com.cyngn.eleven.utils.MusicUtils;
@@ -96,17 +95,17 @@ public class PlaylistLoader extends WrappedAsyncTaskLoader<List<Playlist>> {
 
         /* Last added list */
         final Playlist lastAdded = new Playlist(SmartPlaylistType.LastAdded.mId,
-                resources.getString(R.string.playlist_last_added), -1);
+                resources.getString(SmartPlaylistType.LastAdded.mTitleId), -1);
         mPlaylistList.add(lastAdded);
 
         /* Recently Played */
         final Playlist recentlyPlayed = new Playlist(SmartPlaylistType.RecentlyPlayed.mId,
-                resources.getString(R.string.playlist_recently_played), -1);
+                resources.getString(SmartPlaylistType.RecentlyPlayed.mTitleId), -1);
         mPlaylistList.add(recentlyPlayed);
 
         /* Top Tracks */
         final Playlist topTracks = new Playlist(SmartPlaylistType.TopTracks.mId,
-                resources.getString(R.string.playlist_top_tracks), -1);
+                resources.getString(SmartPlaylistType.TopTracks.mTitleId), -1);
         mPlaylistList.add(topTracks);
     }
 

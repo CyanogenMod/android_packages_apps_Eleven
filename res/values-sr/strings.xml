@@ -25,7 +25,7 @@
   <string name="page_genres">Жанрови</string>
   <string name="menu_settings">Подешавања</string>
   <string name="menu_search">Претрага</string>
-  <string name="menu_shuffle">Репродукуј све насумично</string>
+  <string name="menu_shuffle_all">Репродукуј све насумично</string>
   <string name="menu_play_all">Пусти све</string>
   <string name="menu_sort_by">Сортирај по</string>
   <string name="menu_shop">Купи тему</string>

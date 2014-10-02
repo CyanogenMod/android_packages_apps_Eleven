@@ -25,7 +25,7 @@
   <string name="page_genres">類型</string>
   <string name="menu_settings">設定</string>
   <string name="menu_search">搜尋</string>
-  <string name="menu_shuffle">全部隨機播放</string>
+  <string name="menu_shuffle_all">全部隨機播放</string>
   <string name="menu_play_all">全部播放</string>
   <string name="menu_sort_by">排序</string>
   <string name="menu_shop">購買主題</string>

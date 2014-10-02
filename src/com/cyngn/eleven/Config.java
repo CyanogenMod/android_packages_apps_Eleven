@@ -78,14 +78,16 @@ public final class Config {
     public static final int SEARCH_NUM_RESULTS_TO_GET = 3;
 
     public static enum SmartPlaylistType {
-        LastAdded(-1),
-        RecentlyPlayed(-2),
-        TopTracks(-3);
+        LastAdded(-1, R.string.playlist_last_added),
+        RecentlyPlayed(-2, R.string.playlist_recently_played),
+        TopTracks(-3, R.string.playlist_top_tracks);
 
         public long mId;
+        public int mTitleId;
 
-        SmartPlaylistType(long id) {
+        SmartPlaylistType(long id, int titleId) {
             mId = id;
+            mTitleId = titleId;
         }
 
         public static SmartPlaylistType getTypeById(long id) {

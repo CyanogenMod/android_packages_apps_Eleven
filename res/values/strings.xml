@@ -37,10 +37,18 @@
     <!-- Option menu items -->
     <string name="menu_settings">Settings</string>
     <string name="menu_search">Search</string>
-    <string name="menu_shuffle">Shuffle all</string>
+    <string name="menu_shuffle_item">Shuffle</string>
+    <string name="menu_shuffle_all">Shuffle all</string>
+    <string name="menu_shuffle_playlist">Shuffle playlist</string>
+    <string name="menu_shuffle_album">Shuffle album</string>
+    <string name="menu_shuffle_artist">Shuffle artist</string>
+    <string name="menu_shuffle_top_tracks">Shuffle top tracks</string>
+    <string name="menu_shuffle_recent">Shuffle recently played</string>
+    <string name="menu_shuffle_last_added">Shuffle last added</string>
     <string name="menu_play_all">Play all</string>
     <string name="menu_sort_by">Sort by</string>
     <string name="menu_shop">Shop for themes</string>
+    <string name="menu_clear_list">Clear list</string>
     <string name="menu_clear_recents">Clear recent</string>
     <string name="menu_clear_queue">Clear queue</string>
     <string name="menu_save_queue">Save queue</string>
@@ -86,9 +94,13 @@
     <string name="save">Save</string>
     <string name="cancel">Cancel</string>
     <string name="overwrite">Overwrite</string>
+    <string name="clear">Clear</string>
     <string name="new_playlist_name_template">Playlist <xliff:g id="number">%d</xliff:g></string>
     <string name="create_playlist_prompt">Playlist name</string>
     <string name="delete_dialog_title">Delete <xliff:g id="item" example="album">%s</xliff:g>?</string>
+    <string name="clear_top_tracks_title">Clear top tracks?</string>
+    <string name="clear_recent_title">Clear recently played?</string>
+    <string name="clear_last_added">Clear last added?</string>
     <string name="cannot_be_undone">This cannot be undone</string>
     <string name="delete_warning">This will permanently delete the cached image entries</string>
     <string name="new_photo">Choose photo from Gallery</string>

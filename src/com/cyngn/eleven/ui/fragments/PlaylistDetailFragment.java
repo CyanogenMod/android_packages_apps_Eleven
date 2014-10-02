@@ -24,10 +24,13 @@ import com.cyngn.eleven.dragdrop.DragSortListView.DropListener;
 import com.cyngn.eleven.dragdrop.DragSortListView.RemoveListener;
 import com.cyngn.eleven.loaders.PlaylistSongLoader;
 import com.cyngn.eleven.menu.FragmentMenuItems;
+import com.cyngn.eleven.model.Playlist;
 import com.cyngn.eleven.model.Song;
 import com.cyngn.eleven.recycler.RecycleHolder;
 import com.cyngn.eleven.utils.MusicUtils;
+import com.cyngn.eleven.utils.PlaylistPopupMenuHelper;
 import com.cyngn.eleven.utils.PopupMenuHelper;
+import com.cyngn.eleven.utils.PopupMenuHelper.PopupMenuType;
 import com.cyngn.eleven.utils.SongPopupMenuHelper;
 import com.cyngn.eleven.widgets.IPopupMenuCallback;
 import com.cyngn.eleven.widgets.LoadingEmptyContainer;
@@ -36,7 +39,7 @@ import com.cyngn.eleven.widgets.NoResultsContainer;
 import java.util.List;
 import java.util.TreeSet;
 
-public class PlaylistDetailFragment extends DetailFragment implements
+public class PlaylistDetailFragment extends FadingBarFragment implements
         LoaderCallbacks<List<Song>>, OnItemClickListener, DropListener,
         RemoveListener, DragScrollProfile {
 
@@ -60,6 +63,7 @@ public class PlaylistDetailFragment extends DetailFragment implements
      * The Id of the playlist the songs belong to
      */
     private long mPlaylistId;
+    private String mPlaylistName;
 
     /**
      * Pop up menu helper
@@ -67,9 +71,7 @@ public class PlaylistDetailFragment extends DetailFragment implements
     private PopupMenuHelper mPopupMenuHelper;
 
     @Override
-    protected String getTitle() {
-        return getArguments().getString(Config.NAME);
-    }
+    protected String getTitle() { return mPlaylistName; }
 
     @Override
     protected int getLayoutToInflate() {
@@ -79,9 +81,30 @@ public class PlaylistDetailFragment extends DetailFragment implements
     @Override
     protected void onViewCreated() {
         super.onViewCreated();
-
         setupHero();
         setupSongList();
+    }
+
+    private void lookupName() {
+        mPlaylistName = MusicUtils.getNameForPlaylist(getActivity(), mPlaylistId);
+    }
+
+    @Override // DetailFragment
+    protected PopupMenuHelper createActionMenuHelper() {
+        return new PlaylistPopupMenuHelper(
+                getActivity(), getChildFragmentManager(), PopupMenuType.Playlist) {
+            public Playlist getPlaylist(int position) {
+                return new Playlist(mPlaylistId, getTitle(), 0);
+            }
+        };
+    }
+
+    @Override // DetailFragment
+    protected int getShuffleTitleId() { return R.string.menu_shuffle_playlist; }
+
+    @Override // DetailFragment
+    protected void playShuffled() {
+        MusicUtils.playPlaylist(getActivity(), mPlaylistId, true);
     }
 
     @Override
@@ -133,6 +156,7 @@ public class PlaylistDetailFragment extends DetailFragment implements
         };
 
         mPlaylistId = getArguments().getLong(Config.ID);
+        lookupName();
     }
 
     private void setupHero() {
@@ -334,7 +358,16 @@ public class PlaylistDetailFragment extends DetailFragment implements
     public void restartLoader() {
         // unload the adapter - this will also get the loading progress bar to show
         mAdapter.unload();
-
+        lookupName(); // playlist name may have changed
+        if(mPlaylistName == null) {
+            // if name is null, we've been deleted, so close the this fragment
+            getContainingActivity().postRemoveFragment(this);
+            return;
+        }
+        // update action bar title and popup menu handler
+        ((PlaylistPopupMenuHelper)mActionMenuHelper).updateName(mPlaylistName);
+        getContainingActivity().setActionBarTitle(mPlaylistName);
+        // and reload the song list
         getLoaderManager().restartLoader(0, getArguments(), this);
     }
 

@@ -66,6 +66,9 @@ public final class PreferenceUtils {
     // Key used to set the overall theme color
     public static final String DEFAULT_THEME_COLOR = "default_theme_color";
 
+    // datetime cutoff for determining which songs go in last added playlist
+    public static final String LAST_ADDED_CUTOFF = "last_added_cutoff";
+
     private static PreferenceUtils sInstance;
 
     private final SharedPreferences mPreferences;
@@ -290,5 +293,14 @@ public final class PreferenceUtils {
      */
     public final String getSongSortOrder() {
         return mPreferences.getString(SONG_SORT_ORDER, SortOrder.SongSortOrder.SONG_A_Z);
+    }
+
+    /** @parm lastAddedMillis timestamp in millis used as a cutoff for last added playlist */
+    public void setLastAddedCutoff(long lastAddedMillis) {
+        mPreferences.edit().putLong(LAST_ADDED_CUTOFF, lastAddedMillis).commit();
+    }
+
+    public long getLastAddedCutoff() {
+        return mPreferences.getLong(LAST_ADDED_CUTOFF, 0L);
     }
 }

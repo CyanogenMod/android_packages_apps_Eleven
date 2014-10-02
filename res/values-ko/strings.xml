@@ -25,7 +25,7 @@
   <string name="page_genres">장르</string>
   <string name="menu_settings">설정</string>
   <string name="menu_search">검색</string>
-  <string name="menu_shuffle">모두 임의 재생</string>
+  <string name="menu_shuffle_all">모두 임의 재생</string>
   <string name="menu_play_all">모두 재생</string>
   <string name="menu_sort_by">정렬</string>
   <string name="menu_shop">테마 샵</string>

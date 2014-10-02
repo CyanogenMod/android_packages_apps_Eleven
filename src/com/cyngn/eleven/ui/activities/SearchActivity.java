@@ -201,7 +201,7 @@ public class SearchActivity extends FragmentActivity implements
             private SearchResult mSelectedItem;
 
             @Override
-            protected PopupMenuType onPreparePopupMenu(int position) {
+            public PopupMenuType onPreparePopupMenu(int position) {
                 mSelectedItem = mAdapter.getTItem(position);
 
                 return PopupMenuType.SearchResult;

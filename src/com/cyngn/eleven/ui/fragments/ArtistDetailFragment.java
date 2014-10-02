@@ -17,18 +17,25 @@ import com.cyngn.eleven.adapters.ArtistDetailSongAdapter;
 import com.cyngn.eleven.cache.ImageFetcher;
 import com.cyngn.eleven.menu.FragmentMenuItems;
 import com.cyngn.eleven.model.Album;
+import com.cyngn.eleven.model.Artist;
 import com.cyngn.eleven.model.Song;
 import com.cyngn.eleven.utils.AlbumPopupMenuHelper;
+import com.cyngn.eleven.utils.ArtistPopupMenuHelper;
 import com.cyngn.eleven.utils.MusicUtils;
+import com.cyngn.eleven.utils.PopupMenuHelper;
 import com.cyngn.eleven.utils.SongPopupMenuHelper;
 import com.cyngn.eleven.widgets.IPopupMenuCallback;
 import com.cyngn.eleven.widgets.LoadingEmptyContainer;
 
 import java.util.TreeSet;
 
-public class ArtistDetailFragment extends DetailFragment {
+public class ArtistDetailFragment extends FadingBarFragment {
     private final int ALBUM_LOADER_ID = 0;
     private final int SONG_LOADER_ID = 1;
+
+    private long mArtistId;
+    private String mArtistName;
+
     private ImageView mHero;
     private View mHeader;
 
@@ -38,8 +45,8 @@ public class ArtistDetailFragment extends DetailFragment {
     private RecyclerView mAlbums;
     private ArtistDetailAlbumAdapter mAlbumAdapter;
 
-    private SongPopupMenuHelper mSongPopupMenuHelper;
-    private AlbumPopupMenuHelper mAlbumPopupMenuHelper;
+    private PopupMenuHelper mSongPopupMenuHelper;
+    private PopupMenuHelper mAlbumPopupMenuHelper;
 
     private LoadingEmptyContainer mLoadingEmptyContainer;
 
@@ -62,16 +69,34 @@ public class ArtistDetailFragment extends DetailFragment {
         getContainingActivity().setFragmentPadding(false);
 
         Bundle arguments = getArguments();
-        String artistName = arguments.getString(Config.ARTIST_NAME);
+        mArtistName = arguments.getString(Config.ARTIST_NAME);
+        mArtistId = arguments.getLong(Config.ID);
 
         setupPopupMenuHelpers();
         setupSongList();
         setupAlbumList();
-        setupHero(artistName);
+        setupHero(mArtistName);
 
         LoaderManager lm = getLoaderManager();
         lm.initLoader(ALBUM_LOADER_ID, arguments, mAlbumAdapter);
         lm.initLoader(SONG_LOADER_ID, arguments, mSongAdapter);
+    }
+
+    @Override // DetailFragment
+    protected PopupMenuHelper createActionMenuHelper() {
+        return new ArtistPopupMenuHelper(getActivity(), getChildFragmentManager()) {
+            public Artist getArtist(int position) {
+                return new Artist(mArtistId, mArtistName, 0, 0);
+            }
+        };
+    }
+
+    @Override // DetailFragment
+    protected int getShuffleTitleId() { return R.string.menu_shuffle_artist; }
+
+    @Override // DetailFragment
+    protected void playShuffled() {
+        MusicUtils.playArtist(getActivity(), mArtistId, -1, true);
     }
 
     private void setupHero(String artistName) {

@@ -131,6 +131,11 @@ public class RecentStore {
 
     }
 
+    public void deleteAll() {
+        final SQLiteDatabase database = mMusicDatabase.getWritableDatabase();
+        database.delete(RecentStoreColumns.NAME, null, null);
+    }
+
     /**
      * Gets a cursor to the list of recently played content
      * @param limit # of songs to limit the result to

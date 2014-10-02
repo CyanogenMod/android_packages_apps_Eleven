@@ -11,11 +11,11 @@
 
 package com.cyngn.eleven.ui.fragments.profile;
 
-import android.app.Activity;
 import android.os.Bundle;
 import android.support.v4.content.Loader;
 
 import com.cyngn.eleven.Config;
+import com.cyngn.eleven.Config.SmartPlaylistType;
 import com.cyngn.eleven.R;
 import com.cyngn.eleven.loaders.LastAddedLoader;
 import com.cyngn.eleven.model.Song;
@@ -32,12 +32,7 @@ import com.cyngn.eleven.widgets.NoResultsContainer;
  *
  * @author Andrew Neal (andrewdneal@gmail.com)
  */
-public class LastAddedFragment extends BasicSongFragment implements ISetupActionBar {
-
-    /**
-     * LoaderCallbacks identifier
-     */
-    private static final int LOADER = 0;
+public class LastAddedFragment extends SmartPlaylistFragment implements ISetupActionBar {
 
     /**
      * {@inheritDoc}
@@ -49,17 +44,6 @@ public class LastAddedFragment extends BasicSongFragment implements ISetupAction
 
         LastAddedLoader loader = new LastAddedLoader(getActivity());
         return new SectionCreator<Song>(getActivity(), loader, null);
-    }
-
-    @Override
-    public int getLoaderId() {
-        return LOADER;
-    }
-
-    @Override
-    public void playAll(int position) {
-        MusicUtils.playSmartPlaylist(getActivity(), position,
-                Config.SmartPlaylistType.LastAdded);
     }
 
     @Override
@@ -80,8 +64,16 @@ public class LastAddedFragment extends BasicSongFragment implements ISetupAction
         return Config.SmartPlaylistType.LastAdded.mId;
     }
 
-    @Override
-    protected Config.IdType getFragmentSourceType() {
-        return Config.IdType.Playlist;
+    protected SmartPlaylistType getSmartPlaylistType() {
+        return Config.SmartPlaylistType.LastAdded;
     }
+
+    @Override
+    protected int getShuffleTitleId() { return R.string.menu_shuffle_last_added; }
+
+    @Override
+    protected int getClearTitleId() { return R.string.clear_last_added; }
+
+    @Override
+    protected void clearList() { MusicUtils.clearLastAdded(getActivity()); }
 }

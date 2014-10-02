@@ -21,20 +21,17 @@ import com.cyngn.eleven.utils.PopupMenuHelper;
 import com.cyngn.eleven.utils.SongPopupMenuHelper;
 import com.cyngn.eleven.widgets.IPopupMenuCallback;
 import com.cyngn.eleven.widgets.LoadingEmptyContainer;
-import com.cyngn.eleven.widgets.PopupMenuButton;
 
 import java.util.List;
 
-public class AlbumDetailFragment extends BaseFragment {
+public class AlbumDetailFragment extends DetailFragment {
     private static final int LOADER_ID = 1;
 
     private ListView mSongs;
     private DetailSongAdapter mSongAdapter;
     private TextView mAlbumDuration;
     private TextView mGenre;
-    private PopupMenuHelper mPopupMenuHelper;
-    private PopupMenuButton mPopupMenuButton;
-    private PopupMenuHelper mHeaderPopupMenuHelper;
+    private PopupMenuHelper mSongMenuHelper;
     private long mAlbumId;
     private String mArtistName;
     private String mAlbumName;
@@ -65,6 +62,23 @@ public class AlbumDetailFragment extends BaseFragment {
         lm.initLoader(LOADER_ID, arguments, mSongAdapter);
     }
 
+    @Override // DetailFragment
+    protected PopupMenuHelper createActionMenuHelper() {
+        return new AlbumPopupMenuHelper(getActivity(), getChildFragmentManager()) {
+            public Album getAlbum(int position) {
+                return new Album(mAlbumId, mAlbumName, mArtistName, -1, null);
+            }
+        };
+    }
+
+    @Override // DetailFragment
+    protected int getShuffleTitleId() { return R.string.menu_shuffle_album; }
+
+    @Override // DetailFragment
+    protected void playShuffled() {
+        MusicUtils.playAlbum(getActivity(), mAlbumId, -1, true);
+    }
+
     private void setupHeader(String artist, Bundle arguments) {
         mAlbumId = arguments.getLong(Config.ID);
         mArtistName = artist;
@@ -84,14 +98,6 @@ public class AlbumDetailFragment extends BaseFragment {
         // will be updated once we have song data
         mAlbumDuration = (TextView)mRootView.findViewById(R.id.duration);
         mGenre = (TextView)mRootView.findViewById(R.id.genre);
-
-        mPopupMenuButton = (PopupMenuButton)mRootView.findViewById(R.id.overflow);
-        mPopupMenuButton.setPopupMenuClickedListener(new IPopupMenuCallback.IListener() {
-            @Override
-            public void onPopupMenuClicked(View v, int position) {
-                mHeaderPopupMenuHelper.showPopupMenu(v, position);
-            }
-        });
     }
 
     private void setupCountAndYear(View root, String year, int songCount) {
@@ -110,7 +116,7 @@ public class AlbumDetailFragment extends BaseFragment {
     }
 
     private void setupPopupMenuHelper() {
-        mPopupMenuHelper = new SongPopupMenuHelper(getActivity(), getChildFragmentManager()) {
+        mSongMenuHelper = new SongPopupMenuHelper(getActivity(), getChildFragmentManager()) {
             @Override
             public Song getSong(int position) {
                 return mSongAdapter.getItem(position);
@@ -124,12 +130,6 @@ public class AlbumDetailFragment extends BaseFragment {
             @Override
             protected Config.IdType getSourceType() {
                 return Config.IdType.Album;
-            }
-        };
-
-        mHeaderPopupMenuHelper = new AlbumPopupMenuHelper(getActivity(), getChildFragmentManager()) {
-            public Album getAlbum(int position) {
-                return new Album(mAlbumId, mAlbumName, mArtistName, -1, null);
             }
         };
     }
@@ -150,7 +150,7 @@ public class AlbumDetailFragment extends BaseFragment {
         mSongAdapter.setPopupMenuClickedListener(new IPopupMenuCallback.IListener() {
             @Override
             public void onPopupMenuClicked(View v, int position) {
-                mPopupMenuHelper.showPopupMenu(v, position);
+                mSongMenuHelper.showPopupMenu(v, position);
             }
         });
         mSongs.setAdapter(mSongAdapter);

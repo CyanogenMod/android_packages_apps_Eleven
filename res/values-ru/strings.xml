@@ -25,7 +25,7 @@
   <string name="page_genres">Жанры</string>
   <string name="menu_settings">Настройки</string>
   <string name="menu_search">Поиск</string>
-  <string name="menu_shuffle">Перемешать все</string>
+  <string name="menu_shuffle_all">Перемешать все</string>
   <string name="menu_play_all">Воспроизвести все</string>
   <string name="menu_sort_by">Сортировать по</string>
   <string name="menu_shop">Темы в Play Маркете</string>

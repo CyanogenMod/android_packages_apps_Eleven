@@ -25,7 +25,7 @@
   <string name="page_genres">Genre</string>
   <string name="menu_settings">Pengaturan</string>
   <string name="menu_search">Cari</string>
-  <string name="menu_shuffle">Acak semua</string>
+  <string name="menu_shuffle_all">Acak semua</string>
   <string name="menu_play_all">Putar semua</string>
   <string name="menu_sort_by">Urut berdasarkan</string>
   <string name="menu_shop">Beli tema</string>

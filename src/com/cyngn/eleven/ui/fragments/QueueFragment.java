@@ -121,7 +121,7 @@ public class QueueFragment extends Fragment implements LoaderCallbacks<List<Song
             private MusicPlaybackTrack mSelectedTrack;
 
             @Override
-            protected PopupMenuType onPreparePopupMenu(int position) {
+            public PopupMenuType onPreparePopupMenu(int position) {
                 mSelectedPosition = position;
                 mSong = mAdapter.getItem(mSelectedPosition);
                 mSelectedTrack = MusicUtils.getTrack(mSelectedPosition);

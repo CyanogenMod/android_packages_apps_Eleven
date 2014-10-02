@@ -25,7 +25,7 @@
   <string name="page_genres">Genres</string>
   <string name="menu_settings">Einstellungen</string>
   <string name="menu_search">Suchen</string>
-  <string name="menu_shuffle">Alle zufällig anordnen</string>
+  <string name="menu_shuffle_all">Alle zufällig anordnen</string>
   <string name="menu_play_all">Alle wiedergeben</string>
   <string name="menu_sort_by">Sortieren</string>
   <string name="menu_shop">Designs beziehen</string>

@@ -1,54 +1,54 @@
 package com.cyngn.eleven.ui.fragments;
 
-import android.view.View;
-import android.widget.AbsListView;
-import android.widget.AbsListView.OnScrollListener;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 
-public abstract class DetailFragment extends BaseFragment implements OnScrollListener {
-    protected static final int ACTION_BAR_DEFAULT_OPACITY = 65;
+import com.cyngn.eleven.R;
+import com.cyngn.eleven.utils.PopupMenuHelper;
+
+public abstract class DetailFragment extends BaseFragment {
+    protected PopupMenuHelper mActionMenuHelper;
+
+    /** create the popup menu helper used by the type of item
+     *  for which this is a detail screen */
+    protected abstract PopupMenuHelper createActionMenuHelper();
+    /** menu title for the shuffle option for this screen */
+    protected abstract int getShuffleTitleId();
+    /** action to take if the shuffle menu is selected */
+    protected abstract void playShuffled();
 
     @Override
-    public void setupActionBar() {
-        super.setupActionBar();
-
-        getContainingActivity().setActionBarAlpha(ACTION_BAR_DEFAULT_OPACITY);
-        getContainingActivity().setFragmentPadding(false);
+    protected void onViewCreated() {
+        super.onViewCreated();
+        setHasOptionsMenu(true);
     }
 
-    protected abstract int getHeaderHeight();
+    @Override
+    public void onCreateOptionsMenu(final Menu menu, final MenuInflater inflater) {
+        inflater.inflate(R.menu.shuffle_item, menu);
+        menu.findItem(R.id.menu_shuffle_item).setTitle(getShuffleTitleId());
 
-    protected abstract void setHeaderPosition(float y);
+        // use the same popup menu to provide actions for the item
+        // represented by this detail screen as would be used elsewhere
+        mActionMenuHelper = createActionMenuHelper();
+        mActionMenuHelper.onPreparePopupMenu(0);
+        mActionMenuHelper.createPopupMenu(menu);
 
-    @Override // OnScrollListener
-    public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
-        View firstChild = view.getChildAt(0);
-        if (firstChild == null) {
-            return;
-        }
-
-        float firstChildY = firstChild.getY();
-
-        int alpha = 255;
-        if (firstVisibleItem == 0) {
-            // move header to current top of list
-            setHeaderPosition(firstChildY);
-            // calculate alpha for the action bar
-            alpha = ACTION_BAR_DEFAULT_OPACITY +
-                    (int)((255 - ACTION_BAR_DEFAULT_OPACITY) * -firstChildY /
-                            (float)getHeaderHeight());
-            if(alpha > 255) { alpha = 255; }
-        } else {
-            // header off screen
-            setHeaderPosition(-getHeaderHeight());
-        }
-
-        if (getContainingActivity().getTopFragment() == this) {
-            getContainingActivity().setActionBarAlpha(alpha);
-        }
+        super.onCreateOptionsMenu(menu, inflater);
     }
 
-    @Override // OnScrollListener
-    public void onScrollStateChanged(AbsListView view, int scrollState) {
+    @Override
+    public boolean onOptionsItemSelected(final MenuItem item) {
+        if(item.getItemId() == R.id.menu_shuffle_item) {
+            playShuffled();
+            return true;
+        }
 
+        // delegate to the popup menu that represents the item
+        // for which this is a detail screen
+        if(mActionMenuHelper.onMenuItemClick(item)) { return true; }
+
+        return super.onOptionsItemSelected(item);
     }
 }

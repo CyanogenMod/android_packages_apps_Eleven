@@ -688,10 +688,10 @@ public final class MusicUtils {
      * @param artistId The artist Id.
      * @param position Specify where to start.
      */
-    public static void playArtist(final Context context, final long artistId, int position) {
+    public static void playArtist(final Context context, final long artistId, int position, boolean shuffle) {
         final long[] artistList = getSongListForArtist(context, artistId);
         if (artistList != null) {
-            playAll(context, artistList, position, artistId, IdType.Artist, false);
+            playAll(context, artistList, position, artistId, IdType.Artist, shuffle);
         }
     }
 
@@ -851,6 +851,25 @@ public final class MusicUtils {
         return id;
     }
 
+    /** @param context The {@link Context} to use.
+     *  @param id The id of the playlist.
+     *  @return The name for a playlist. */
+    public static final String getNameForPlaylist(final Context context, final long id) {
+        Cursor cursor = context.getContentResolver().query(
+                MediaStore.Audio.Playlists.EXTERNAL_CONTENT_URI,
+                new String[] { PlaylistsColumns.NAME },
+                BaseColumns._ID + "=?",
+                new String[] { Long.toString(id) },
+                null);
+        if (cursor != null) {
+            try {
+                if(cursor.moveToFirst()) { return cursor.getString(0); }
+            } finally { cursor.close(); }
+        }
+        // nothing found
+        return null;
+    }
+
     /**
      * Returns the Id for an artist.
      *
@@ -912,10 +931,10 @@ public final class MusicUtils {
      * @param albumId The album Id.
      * @param position Specify where to start.
      */
-    public static void playAlbum(final Context context, final long albumId, int position) {
+    public static void playAlbum(final Context context, final long albumId, int position, boolean shuffle) {
         final long[] albumList = getSongListForAlbum(context, albumId);
         if (albumList != null) {
-            playAll(context, albumList, position, albumId, IdType.Album, false);
+            playAll(context, albumList, position, albumId, IdType.Album, shuffle);
         }
     }
 
@@ -975,6 +994,22 @@ public final class MusicUtils {
         final Uri uri = MediaStore.Audio.Playlists.Members.getContentUri("external", playlistId);
         context.getContentResolver().delete(uri, null, null);
         return;
+    }
+
+    /** remove all backing data for top tracks playlist */
+    public static void clearTopTracks(Context context) {
+        SongPlayCount.getInstance(context).deleteAll();
+    }
+
+    /** remove all backing data for top tracks playlist */
+    public static void clearRecent(Context context) {
+        RecentStore.getInstance(context).deleteAll();
+    }
+
+    /** move up cutoff for last added songs so playlist will be cleared */
+    public static void clearLastAdded(Context context) {
+        PreferenceUtils.getInstance(context)
+            .setLastAddedCutoff(System.currentTimeMillis());
     }
 
     /**
@@ -1240,10 +1275,10 @@ public final class MusicUtils {
      * @param context The {@link Context} to use.
      * @param playlistId The playlist Id.
      */
-    public static void playPlaylist(final Context context, final long playlistId) {
+    public static void playPlaylist(final Context context, final long playlistId, boolean shuffle) {
         final long[] playlistList = getSongListForPlaylist(context, playlistId);
         if (playlistList != null) {
-            playAll(context, playlistList, -1, playlistId, IdType.Playlist, false);
+            playAll(context, playlistList, -1, playlistId, IdType.Playlist, shuffle);
         }
     }
 
@@ -1283,9 +1318,9 @@ public final class MusicUtils {
      * @param type The Smart Playlist Type
      */
     public static void playSmartPlaylist(final Context context, final int position,
-                                         final SmartPlaylistType type) {
+                                         final SmartPlaylistType type, final boolean shuffle) {
         final long[] list = getSongListForSmartPlaylist(context, type);
-        MusicUtils.playAll(context, list, position, type.mId, IdType.Playlist, false);
+        MusicUtils.playAll(context, list, position, type.mId, IdType.Playlist, shuffle);
     }
 
     /**

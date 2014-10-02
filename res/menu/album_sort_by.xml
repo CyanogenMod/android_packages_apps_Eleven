@@ -19,6 +19,7 @@
     <item
         android:id="@+id/menu_sort_by"
         android:showAsAction="never"
+        android:orderInCategory="120"
         android:title="@string/menu_sort_by">
         <menu>
             <item

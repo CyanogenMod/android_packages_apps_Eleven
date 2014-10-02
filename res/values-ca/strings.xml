@@ -25,7 +25,7 @@
   <string name="page_genres">Gèneres</string>
   <string name="menu_settings">Configuració</string>
   <string name="menu_search">Cerca</string>
-  <string name="menu_shuffle">Barreja-ho tot</string>
+  <string name="menu_shuffle_all">Barreja-ho tot</string>
   <string name="menu_play_all">Reprodueix tot</string>
   <string name="menu_sort_by">Ordena per</string>
   <string name="menu_shop">Compra per temes</string>

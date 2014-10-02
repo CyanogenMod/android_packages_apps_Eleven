@@ -19,6 +19,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.cyngn.eleven.Config;
+import com.cyngn.eleven.Config.SmartPlaylistType;
 import com.cyngn.eleven.R;
 import com.cyngn.eleven.adapters.SongAdapter;
 import com.cyngn.eleven.loaders.TopTracksLoader;
@@ -37,12 +38,13 @@ import com.cyngn.eleven.widgets.NoResultsContainer;
  *
  * @author Andrew Neal (andrewdneal@gmail.com)
  */
-public class TopTracksFragment extends BasicSongFragment implements ISetupActionBar {
+public class TopTracksFragment extends SmartPlaylistFragment
+implements ISetupActionBar {
 
-    /**
-     * LoaderCallbacks identifier
-     */
-    private static final int LOADER = 0;
+    @Override
+    protected SmartPlaylistType getSmartPlaylistType() {
+        return Config.SmartPlaylistType.TopTracks;
+    }
 
     /**
      * {@inheritDoc}
@@ -63,17 +65,6 @@ public class TopTracksFragment extends BasicSongFragment implements ISetupAction
             getActivity(),
             R.layout.list_item_top_tracks
         );
-    }
-
-    @Override
-    public int getLoaderId() {
-        return LOADER;
-    }
-
-    @Override
-    public void playAll(int position) {
-        MusicUtils.playSmartPlaylist(getActivity(), position,
-                Config.SmartPlaylistType.TopTracks);
     }
 
     @Override
@@ -108,8 +99,11 @@ public class TopTracksFragment extends BasicSongFragment implements ISetupAction
         return Config.SmartPlaylistType.TopTracks.mId;
     }
 
+    protected int getShuffleTitleId() { return R.string.menu_shuffle_top_tracks; }
+
     @Override
-    protected Config.IdType getFragmentSourceType() {
-        return Config.IdType.Playlist;
-    }
+    protected int getClearTitleId() { return R.string.clear_top_tracks_title; }
+
+    @Override
+    protected void clearList() { MusicUtils.clearTopTracks(getActivity()); }
 }

@@ -25,7 +25,7 @@
   <string name="page_genres">Είδη</string>
   <string name="menu_settings">Ρυθμίσεις</string>
   <string name="menu_search">Αναζήτηση</string>
-  <string name="menu_shuffle">Τυχαία αναπαραγωγή όλων</string>
+  <string name="menu_shuffle_all">Τυχαία αναπαραγωγή όλων</string>
   <string name="menu_play_all">Αναπαραγωγή όλων</string>
   <string name="menu_sort_by">Ταξινόμηση κατά</string>
   <string name="menu_shop">Κατάστημα για θέματα</string>

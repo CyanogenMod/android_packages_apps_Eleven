@@ -25,7 +25,7 @@
   <string name="page_genres">Tyylilajit</string>
   <string name="menu_settings">Asetukset</string>
   <string name="menu_search">Haku</string>
-  <string name="menu_shuffle">Sekoita kaikki</string>
+  <string name="menu_shuffle_all">Sekoita kaikki</string>
   <string name="menu_play_all">Toista kaikki</string>
   <string name="menu_sort_by">Lajittelujärjestys</string>
   <string name="menu_shop">Osta teemoja</string>

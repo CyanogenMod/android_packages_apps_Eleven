@@ -16,6 +16,7 @@ import android.os.Bundle;
 import android.support.v4.content.Loader;
 
 import com.cyngn.eleven.Config;
+import com.cyngn.eleven.Config.SmartPlaylistType;
 import com.cyngn.eleven.R;
 import com.cyngn.eleven.adapters.SongAdapter;
 import com.cyngn.eleven.loaders.TopTracksLoader;
@@ -24,7 +25,7 @@ import com.cyngn.eleven.model.Song;
 import com.cyngn.eleven.sectionadapter.SectionCreator;
 import com.cyngn.eleven.sectionadapter.SectionListContainer;
 import com.cyngn.eleven.ui.activities.BaseActivity;
-import com.cyngn.eleven.ui.fragments.profile.BasicSongFragment;
+import com.cyngn.eleven.ui.fragments.profile.SmartPlaylistFragment;
 import com.cyngn.eleven.utils.MusicUtils;
 import com.cyngn.eleven.widgets.NoResultsContainer;
 
@@ -36,12 +37,12 @@ import java.util.TreeSet;
  *
  * @author Andrew Neal (andrewdneal@gmail.com)
  */
-public class RecentFragment extends BasicSongFragment implements ISetupActionBar {
+public class RecentFragment extends SmartPlaylistFragment implements ISetupActionBar {
 
-    /**
-     * LoaderCallbacks identifier
-     */
-    private static final int LOADER = 0;
+    @Override
+    protected SmartPlaylistType getSmartPlaylistType() {
+        return Config.SmartPlaylistType.RecentlyPlayed;
+    }
 
     @Override
     protected void updateMenuIds(TreeSet<Integer> set) {
@@ -73,17 +74,6 @@ public class RecentFragment extends BasicSongFragment implements ISetupActionBar
     }
 
     @Override
-    public int getLoaderId() {
-        return LOADER;
-    }
-
-    @Override
-    public void playAll(int position) {
-        MusicUtils.playSmartPlaylist(getActivity(), position,
-                Config.SmartPlaylistType.RecentlyPlayed);
-    }
-
-    @Override
     public void setupNoResultsContainer(NoResultsContainer empty) {
         super.setupNoResultsContainer(empty);
 
@@ -99,11 +89,6 @@ public class RecentFragment extends BasicSongFragment implements ISetupActionBar
     @Override
     protected long getFragmentSourceId() {
         return Config.SmartPlaylistType.RecentlyPlayed.mId;
-    }
-
-    @Override
-    protected Config.IdType getFragmentSourceType() {
-        return Config.IdType.Playlist;
     }
 
     @Override
@@ -126,5 +111,13 @@ public class RecentFragment extends BasicSongFragment implements ISetupActionBar
             return position == 0 && super.showNowPlayingIndicator(song, position);
         }
     }
-}
 
+    @Override
+    protected int getShuffleTitleId() { return R.string.menu_shuffle_recent; }
+
+    @Override
+    protected int getClearTitleId() { return R.string.clear_recent_title; }
+
+    @Override
+    protected void clearList() { MusicUtils.clearRecent(getActivity()); }
+}

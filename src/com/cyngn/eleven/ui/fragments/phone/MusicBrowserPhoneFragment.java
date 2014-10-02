@@ -21,6 +21,7 @@ import android.view.MenuItem;
 import com.cyngn.eleven.R;
 import com.cyngn.eleven.adapters.PagerAdapter;
 import com.cyngn.eleven.adapters.PagerAdapter.MusicFragments;
+import com.cyngn.eleven.menu.CreateNewPlaylist;
 import com.cyngn.eleven.ui.fragments.AlbumFragment;
 import com.cyngn.eleven.ui.fragments.ArtistFragment;
 import com.cyngn.eleven.ui.fragments.BaseFragment;
@@ -149,14 +150,16 @@ public class MusicBrowserPhoneFragment extends BaseFragment implements
     @Override
     public void onCreateOptionsMenu(final Menu menu, final MenuInflater inflater) {
         super.onCreateOptionsMenu(menu, inflater);
-        // Shuffle all
-        inflater.inflate(R.menu.shuffle, menu);
+
+        inflater.inflate(R.menu.shuffle_all, menu); // Shuffle all
         if (isArtistPage()) {
             inflater.inflate(R.menu.artist_sort_by, menu);
         } else if (isAlbumPage()) {
             inflater.inflate(R.menu.album_sort_by, menu);
         } else if (isSongPage()) {
             inflater.inflate(R.menu.song_sort_by, menu);
+        } else if (isPlaylistPage()) {
+            inflater.inflate(R.menu.new_playlist, menu);
         }
     }
 
@@ -166,7 +169,7 @@ public class MusicBrowserPhoneFragment extends BaseFragment implements
     @Override
     public boolean onOptionsItemSelected(final MenuItem item) {
         switch (item.getItemId()) {
-            case R.id.menu_shuffle:
+            case R.id.menu_shuffle_all:
                 // Shuffle all the songs
                 MusicUtils.shuffleAll(getActivity());
                 return true;
@@ -247,6 +250,11 @@ public class MusicBrowserPhoneFragment extends BaseFragment implements
                     getSongFragment().refresh();
                 }
                 return true;
+            case R.id.menu_new_playlist:
+                if(isPlaylistPage()) {
+                    CreateNewPlaylist.getInstance(new long[0]).show(getFragmentManager(), "CreatePlaylist");
+                }
+                return true;
             default:
                 break;
         }
@@ -297,5 +305,9 @@ public class MusicBrowserPhoneFragment extends BaseFragment implements
     @Override
     public void restartLoader() {
         // do nothing
+    }
+
+    private boolean isPlaylistPage() {
+        return mViewPager.getCurrentItem() == MusicFragments.PLAYLIST.ordinal();
     }
 }

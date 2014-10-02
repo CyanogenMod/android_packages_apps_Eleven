@@ -25,7 +25,7 @@
   <string name="page_genres">Genuri</string>
   <string name="menu_settings">Setări</string>
   <string name="menu_search">Căutare</string>
-  <string name="menu_shuffle">Amestecă tot</string>
+  <string name="menu_shuffle_all">Amestecă tot</string>
   <string name="menu_play_all">Redă tot</string>
   <string name="menu_sort_by">Sortare după</string>
   <string name="menu_shop">Magazin pentru teme</string>

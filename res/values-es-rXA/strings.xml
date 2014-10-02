@@ -25,7 +25,7 @@
   <string name="page_genres">Xéneros</string>
   <string name="menu_settings">Axustes</string>
   <string name="menu_search">Guetar</string>
-  <string name="menu_shuffle">Reproducción aleatoria</string>
+  <string name="menu_shuffle_all">Reproducción aleatoria</string>
   <string name="menu_play_all">Reproducir too</string>
   <string name="menu_sort_by">Ordenar por</string>
   <string name="menu_shop">Descargar temes</string>

@@ -25,7 +25,7 @@
   <string name="page_genres">Generoak</string>
   <string name="menu_settings">Ezarpenak</string>
   <string name="menu_search">Bilatu</string>
-  <string name="menu_shuffle">Ausazko erreprodukzioa</string>
+  <string name="menu_shuffle_all">Ausazko erreprodukzioa</string>
   <string name="menu_play_all">Dena erreproduzitu</string>
   <string name="menu_sort_by">Honela ordenatu</string>
   <string name="menu_shop">Gaiak deskargatu</string>

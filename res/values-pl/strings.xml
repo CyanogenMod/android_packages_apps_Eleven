@@ -25,7 +25,7 @@
   <string name="page_genres">Gatunki</string>
   <string name="menu_settings">Ustawienia</string>
   <string name="menu_search">Szukaj</string>
-  <string name="menu_shuffle">Losuj wszystko</string>
+  <string name="menu_shuffle_all">Losuj wszystko</string>
   <string name="menu_play_all">Odtwórz wszystko</string>
   <string name="menu_sort_by">Sortuj wg</string>
   <string name="menu_shop">Szukaj motywów w sklepie</string>

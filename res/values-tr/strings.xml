@@ -25,7 +25,7 @@
   <string name="page_genres">Türler</string>
   <string name="menu_settings">Ayarlar</string>
   <string name="menu_search">Arama</string>
-  <string name="menu_shuffle">Hepsini karıştır</string>
+  <string name="menu_shuffle_all">Hepsini karıştır</string>
   <string name="menu_play_all">Hepsini oynat</string>
   <string name="menu_sort_by">Sırala...</string>
   <string name="menu_shop">Tema satın al</string>

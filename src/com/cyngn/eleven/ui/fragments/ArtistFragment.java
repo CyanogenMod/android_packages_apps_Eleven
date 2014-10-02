@@ -26,13 +26,11 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 
-import com.cyngn.eleven.Config;
 import com.cyngn.eleven.MusicStateListener;
 import com.cyngn.eleven.R;
 import com.cyngn.eleven.adapters.ArtistAdapter;
 import com.cyngn.eleven.adapters.PagerAdapter;
 import com.cyngn.eleven.loaders.ArtistLoader;
-import com.cyngn.eleven.menu.DeleteDialog;
 import com.cyngn.eleven.model.Artist;
 import com.cyngn.eleven.recycler.RecycleHolder;
 import com.cyngn.eleven.sectionadapter.SectionAdapter;
@@ -40,6 +38,7 @@ import com.cyngn.eleven.sectionadapter.SectionCreator;
 import com.cyngn.eleven.sectionadapter.SectionListContainer;
 import com.cyngn.eleven.ui.activities.BaseActivity;
 import com.cyngn.eleven.ui.fragments.phone.MusicBrowserFragment;
+import com.cyngn.eleven.utils.ArtistPopupMenuHelper;
 import com.cyngn.eleven.utils.MusicUtils;
 import com.cyngn.eleven.utils.NavUtils;
 import com.cyngn.eleven.utils.PopupMenuHelper;
@@ -47,7 +46,6 @@ import com.cyngn.eleven.utils.SectionCreatorUtils;
 import com.cyngn.eleven.utils.SectionCreatorUtils.IItemCompare;
 import com.cyngn.eleven.widgets.IPopupMenuCallback;
 import com.cyngn.eleven.widgets.LoadingEmptyContainer;
-import com.cyngn.eleven.widgets.NoResultsContainer;
 import com.viewpagerindicator.TitlePageIndicator;
 
 /**
@@ -102,40 +100,10 @@ public class ArtistFragment extends MusicBrowserFragment implements
     public void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        mPopupMenuHelper = new PopupMenuHelper(getActivity(), getFragmentManager()) {
-            /**
-             * Represents an artist
-             */
-            private Artist mArtist;
-
+        mPopupMenuHelper = new ArtistPopupMenuHelper(getActivity(), getFragmentManager()) {
             @Override
-            protected PopupMenuType onPreparePopupMenu(int position) {
-                // Create a new model
-                mArtist = mAdapter.getTItem(position);
-
-                return PopupMenuType.Artist;
-            }
-
-            @Override
-            protected long[] getIdList() {
-                return MusicUtils.getSongListForArtist(getActivity(), mArtist.mArtistId);
-            }
-
-            @Override
-            protected long getSourceId() {
-                return mArtist.mArtistId;
-            }
-
-            @Override
-            protected Config.IdType getSourceType() {
-                return Config.IdType.Artist;
-            }
-
-            @Override
-            protected void onDeleteClicked() {
-                final String artist = mArtist.mArtistName;
-                DeleteDialog.newInstance(artist, getIdList(), artist).show(
-                        getFragmentManager(), "DeleteDialog");
+            public Artist getArtist(int position) {
+                return mAdapter.getTItem(position);
             }
         };
 

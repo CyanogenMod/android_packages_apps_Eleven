@@ -20,6 +20,7 @@ import android.provider.MediaStore.Audio.AudioColumns;
 import com.cyngn.eleven.model.Song;
 import com.cyngn.eleven.sectionadapter.SectionCreator;
 import com.cyngn.eleven.utils.Lists;
+import com.cyngn.eleven.utils.PreferenceUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -104,12 +105,19 @@ public class LastAddedLoader extends SectionCreator.SimpleListLoader<Song> {
      * @return The {@link Cursor} used to run the song query.
      */
     public static final Cursor makeLastAddedCursor(final Context context) {
-        final int fourWeeks = 4 * 3600 * 24 * 7;
+        // timestamp of four weeks ago
+        long fourWeeksAgo = (System.currentTimeMillis() / 1000) - (4 * 3600 * 24 * 7);
+        // possible saved timestamp caused by user "clearing" the last added playlist
+        long cutoff = PreferenceUtils.getInstance(context).getLastAddedCutoff() / 1000;
+        // use the most recent of the two timestamps
+        if(cutoff < fourWeeksAgo) { cutoff = fourWeeksAgo; }
+
         final StringBuilder selection = new StringBuilder();
         selection.append(AudioColumns.IS_MUSIC + "=1");
         selection.append(" AND " + AudioColumns.TITLE + " != ''"); //$NON-NLS-2$
         selection.append(" AND " + MediaStore.Audio.Media.DATE_ADDED + ">"); //$NON-NLS-2$
-        selection.append(System.currentTimeMillis() / 1000 - fourWeeks);
+        selection.append(cutoff);
+
         return context.getContentResolver().query(MediaStore.Audio.Media.EXTERNAL_CONTENT_URI,
                 new String[] {
                         /* 0 */

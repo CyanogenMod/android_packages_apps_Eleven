@@ -25,7 +25,7 @@
   <string name="page_genres">Gêneros</string>
   <string name="menu_settings">Configurações</string>
   <string name="menu_search">Pesquisa</string>
-  <string name="menu_shuffle">Todas aleatório</string>
+  <string name="menu_shuffle_all">Todas aleatório</string>
   <string name="menu_play_all">Reproduzir todas</string>
   <string name="menu_sort_by">Ordenar por</string>
   <string name="menu_shop">Loja de temas</string>

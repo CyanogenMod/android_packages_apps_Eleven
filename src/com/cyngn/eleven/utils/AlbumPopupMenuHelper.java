@@ -3,7 +3,6 @@
  */
 package com.cyngn.eleven.utils;
 
-
 import android.app.Activity;
 import android.support.v4.app.FragmentManager;
 
@@ -17,12 +16,13 @@ public abstract class AlbumPopupMenuHelper extends PopupMenuHelper {
 
     public AlbumPopupMenuHelper(Activity activity, FragmentManager fragmentManager) {
         super(activity, fragmentManager);
+        mType = PopupMenuType.Album;
     }
 
     public abstract Album getAlbum(int position);
 
     @Override
-    protected PopupMenuType onPreparePopupMenu(int position) {
+    public PopupMenuType onPreparePopupMenu(int position) {
         mAlbum = getAlbum(position);
 
         if (mAlbum == null) {

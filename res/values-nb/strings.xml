@@ -25,7 +25,7 @@
   <string name="page_genres">Sjangrer</string>
   <string name="menu_settings">Innstillinger</string>
   <string name="menu_search">Søk</string>
-  <string name="menu_shuffle">Bland alle</string>
+  <string name="menu_shuffle_all">Bland alle</string>
   <string name="menu_play_all">Spill alle</string>
   <string name="menu_sort_by">Sorter etter</string>
   <string name="menu_shop">Se etter nye tema</string>

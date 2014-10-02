@@ -25,7 +25,7 @@
   <string name="page_genres">Žanrovi</string>
   <string name="menu_settings">Postavke</string>
   <string name="menu_search">Pretraga</string>
-  <string name="menu_shuffle">Miješaj sve</string>
+  <string name="menu_shuffle_all">Miješaj sve</string>
   <string name="menu_play_all">Sviraj sve</string>
   <string name="menu_sort_by">Sortiraj po</string>
   <string name="menu_shop">Trgovina za teme</string>

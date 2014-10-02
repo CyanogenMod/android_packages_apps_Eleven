@@ -25,7 +25,7 @@
   <string name="page_genres">ප්‍රභේද</string>
   <string name="menu_settings">සැකසීම්</string>
   <string name="menu_search">සොයන්න</string>
-  <string name="menu_shuffle">සියල්ල කලවම් කරන්න</string>
+  <string name="menu_shuffle_all">සියල්ල කලවම් කරන්න</string>
   <string name="menu_play_all">සියල්ල ධාවනය කරන්න</string>
   <string name="menu_sort_by">මඟින් සුබෙදන්න</string>
   <string name="menu_shop">තේමා සඳහා සාප්පු යන්න</string>

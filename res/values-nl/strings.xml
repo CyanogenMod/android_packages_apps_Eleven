@@ -25,7 +25,7 @@
   <string name="page_genres">Genres</string>
   <string name="menu_settings">Instellingen</string>
   <string name="menu_search">Zoeken</string>
-  <string name="menu_shuffle">Alles shufflen</string>
+  <string name="menu_shuffle_all">Alles shufflen</string>
   <string name="menu_play_all">Alles afspelen</string>
   <string name="menu_sort_by">Sorteren op</string>
   <string name="menu_shop">Zoeken naar thema\'s</string>

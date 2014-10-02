@@ -17,8 +17,9 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android" >
 
     <item
-        android:id="@+id/menu_shuffle"
+        android:id="@+id/clear_list"
         android:showAsAction="never"
-        android:title="@string/menu_shuffle"/>
+        android:orderInCategory="110"
+        android:title="@string/menu_clear_list"/>
 
 </menu>

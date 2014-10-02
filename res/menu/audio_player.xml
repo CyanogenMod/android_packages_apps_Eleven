@@ -19,18 +19,22 @@
     <item
         android:id="@+id/menu_audio_player_share"
         android:showAsAction="never"
+        android:orderInCategory="40"
         android:title="@string/menu_share"/>
     <item
         android:id="@+id/menu_audio_player_equalizer"
         android:showAsAction="never"
+        android:orderInCategory="41"
         android:title="@string/menu_equalizer"/>
     <item
         android:id="@+id/menu_audio_player_ringtone"
         android:showAsAction="never"
+        android:orderInCategory="42"
         android:title="@string/context_menu_use_as_ringtone"/>
     <item
         android:id="@+id/menu_audio_player_delete"
         android:showAsAction="never"
+        android:orderInCategory="43"
         android:title="@string/context_menu_delete"/>
 
 </menu>

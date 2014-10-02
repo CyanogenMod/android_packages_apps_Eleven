@@ -25,7 +25,7 @@
   <string name="page_genres">Žánry</string>
   <string name="menu_settings">Nastavení</string>
   <string name="menu_search">Vyhledávat</string>
-  <string name="menu_shuffle">Vše náhodně</string>
+  <string name="menu_shuffle_all">Vše náhodně</string>
   <string name="menu_play_all">Přehrát vše</string>
   <string name="menu_sort_by">Řadit podle\u2026</string>
   <string name="menu_shop">Obchod s motivy</string>

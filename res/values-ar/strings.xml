@@ -25,7 +25,7 @@
   <string name="page_genres">أنواع</string>
   <string name="menu_settings">إعدادات</string>
   <string name="menu_search">بحث</string>
-  <string name="menu_shuffle">خلْط الكل</string>
+  <string name="menu_shuffle_all">خلْط الكل</string>
   <string name="menu_play_all">تشغيل الكل</string>
   <string name="menu_sort_by">الترتيب حسب</string>
   <string name="menu_shop">متجر للمواضيع</string>

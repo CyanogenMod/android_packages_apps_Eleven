@@ -444,21 +444,21 @@ public class AudioPlayerFragment extends Fragment implements ServiceConnection {
         } else if (Playlists.CONTENT_TYPE.equals(mimeType)) {
             long id = parseIdFromIntent(intent, "playlistId", "playlist", -1);
             if (id >= 0) {
-                MusicUtils.playPlaylist(getActivity(), id);
+                MusicUtils.playPlaylist(getActivity(), id, false);
                 handled = true;
             }
         } else if (Albums.CONTENT_TYPE.equals(mimeType)) {
             long id = parseIdFromIntent(intent, "albumId", "album", -1);
             if (id >= 0) {
                 int position = intent.getIntExtra("position", 0);
-                MusicUtils.playAlbum(getActivity(), id, position);
+                MusicUtils.playAlbum(getActivity(), id, position, false);
                 handled = true;
             }
         } else if (Artists.CONTENT_TYPE.equals(mimeType)) {
             long id = parseIdFromIntent(intent, "artistId", "artist", -1);
             if (id >= 0) {
                 int position = intent.getIntExtra("position", 0);
-                MusicUtils.playArtist(getActivity(), id, position);
+                MusicUtils.playArtist(getActivity(), id, position, false);
                 handled = true;
             }
         }
@@ -696,7 +696,7 @@ public class AudioPlayerFragment extends Fragment implements ServiceConnection {
             final MenuInflater inflater = mPopupMenu.getMenuInflater();
 
             // Shuffle all
-            inflater.inflate(R.menu.shuffle, menu);
+            inflater.inflate(R.menu.shuffle_all, menu);
             // Share, ringtone, and equalizer
             inflater.inflate(R.menu.audio_player, menu);
             // save queue/clear queue
@@ -711,7 +711,7 @@ public class AudioPlayerFragment extends Fragment implements ServiceConnection {
 
     public boolean onPopupMenuItemClick(final MenuItem item) {
         switch (item.getItemId()) {
-            case R.id.menu_shuffle:
+            case R.id.menu_shuffle_all:
                 // Shuffle all the songs
                 MusicUtils.shuffleAll(getActivity());
                 return true;
