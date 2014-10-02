@@ -23,13 +23,12 @@ import java.util.Collections;
 import java.util.List;
 
 public abstract class DetailSongAdapter extends BaseAdapter
-implements LoaderCallbacks<List<Song>>, OnItemClickListener, IPopupMenuCallback {
+        implements LoaderCallbacks<List<Song>>, OnItemClickListener, IPopupMenuCallback {
     protected final Activity mActivity;
     private final ImageFetcher mImageFetcher;
     private final LayoutInflater mInflater;
     private List<Song> mSongs = Collections.emptyList();
     private IListener mListener;
-    private IEmptyAdapterCallback mEmptyCallback;
 
     public DetailSongAdapter(final Activity activity) {
         mActivity = activity;
@@ -64,6 +63,8 @@ implements LoaderCallbacks<List<Song>>, OnItemClickListener, IPopupMenuCallback 
     }
 
     protected abstract int rowLayoutId();
+    protected abstract void onLoading();
+    protected abstract void onNoResults();
 
     @Override // OnItemClickListener
     public void onItemClick(AdapterView<?> parent, View view, int pos, long id) {
@@ -81,10 +82,7 @@ implements LoaderCallbacks<List<Song>>, OnItemClickListener, IPopupMenuCallback 
     @Override // LoaderCallbacks
     public void onLoadFinished(Loader<List<Song>> loader, List<Song> songs) {
         if (songs.isEmpty()) {
-            if (mEmptyCallback != null) {
-                mEmptyCallback.onEmptyAdapter();
-            }
-
+            onNoResults();
             return;
         }
         mSongs = songs;
@@ -101,10 +99,6 @@ implements LoaderCallbacks<List<Song>>, OnItemClickListener, IPopupMenuCallback 
     @Override
     public void setPopupMenuClickedListener(IListener listener) {
         mListener = listener;
-    }
-
-    public void setOnEmptyAdapterListener(IEmptyAdapterCallback callback) {
-        mEmptyCallback = callback;
     }
 
     protected abstract Holder newHolder(View root, ImageFetcher fetcher);

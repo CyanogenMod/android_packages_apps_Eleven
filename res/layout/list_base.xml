@@ -20,7 +20,7 @@
     android:layout_height="match_parent">
 
     <include
-        layout="@layout/no_results_message" />
+        layout="@layout/loading_empty_container" />
 
     <com.cyngn.eleven.dragdrop.DragSortListView
         android:id="@+id/list_base"

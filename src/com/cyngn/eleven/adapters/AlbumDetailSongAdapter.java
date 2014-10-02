@@ -17,7 +17,7 @@ import com.cyngn.eleven.utils.MusicUtils;
 
 import java.util.List;
 
-public class AlbumDetailSongAdapter extends DetailSongAdapter {
+public abstract class AlbumDetailSongAdapter extends DetailSongAdapter {
     private AlbumDetailFragment mFragment;
 
     public AlbumDetailSongAdapter(Activity activity, AlbumDetailFragment fragment) {
@@ -29,6 +29,7 @@ public class AlbumDetailSongAdapter extends DetailSongAdapter {
 
     @Override // LoaderCallbacks
     public Loader<List<Song>> onCreateLoader(int id, Bundle args) {
+        onLoading();
         return new AlbumSongLoader(mActivity, args.getLong(Config.ID));
     }
 

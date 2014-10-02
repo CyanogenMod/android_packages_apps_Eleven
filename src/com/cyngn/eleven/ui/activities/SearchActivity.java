@@ -67,6 +67,7 @@ import com.cyngn.eleven.utils.PopupMenuHelper;
 import com.cyngn.eleven.utils.SectionCreatorUtils;
 import com.cyngn.eleven.utils.SectionCreatorUtils.IItemCompare;
 import com.cyngn.eleven.widgets.IPopupMenuCallback;
+import com.cyngn.eleven.widgets.LoadingEmptyContainer;
 import com.cyngn.eleven.widgets.NoResultsContainer;
 
 import java.util.ArrayList;
@@ -127,9 +128,9 @@ public class SearchActivity extends FragmentActivity implements
     private InputMethodManager mImm;
 
     /**
-     * The view that container the no search results text
+     * The view that container the no search results text and the loading progress bar
      */
-    private NoResultsContainer mNoResultsContainer;
+    private LoadingEmptyContainer mLoadingEmptyContainer;
 
     /**
      * List view adapter
@@ -269,10 +270,11 @@ public class SearchActivity extends FragmentActivity implements
             }
         });
 
+        mLoadingEmptyContainer = (LoadingEmptyContainer) findViewById(R.id.loading_empty_container);
         // setup the no results container
-        mNoResultsContainer = (NoResultsContainer)findViewById(R.id.no_results_container);
-        mNoResultsContainer.setMainText(R.string.empty_search);
-        mNoResultsContainer.setSecondaryText(R.string.empty_search_check);
+        NoResultsContainer noResults = mLoadingEmptyContainer.getNoResultsContainer();
+        noResults.setMainText(R.string.empty_search);
+        noResults.setSecondaryText(R.string.empty_search_check);
 
         initListView();
 
@@ -355,10 +357,10 @@ public class SearchActivity extends FragmentActivity implements
         mListView.setOnScrollListener(this);
         // sets the touch listener
         mListView.setOnTouchListener(this);
-        // If we setEmptyView with noResultsContainer it causes a crash in DragSortListView
+        // If we setEmptyView with mLoadingEmptyContainer it causes a crash in DragSortListView
         // when updating the search.  For now let's manually toggle visibility and come back
         // to this later
-        //mListView.setEmptyView(mNoResultsContainer);
+        //mListView.setEmptyView(mLoadingEmptyContainer);
 
         // load the search history list view
         mSearchHistoryListView = (ListView)findViewById(R.id.list_search_history);
@@ -384,7 +386,8 @@ public class SearchActivity extends FragmentActivity implements
         setLoading();
 
         // set the no results string ahead of time in case the user changes the string whiel loading
-        mNoResultsContainer.setMainHighlightText("\"" + mFilterString + "\"");
+        NoResultsContainer noResults = mLoadingEmptyContainer.getNoResultsContainer();
+        noResults.setMainHighlightText("\"" + mFilterString + "\"");
 
         // if we are at the top level, create a comparator to separate the different types into
         // their own sections (artists, albums, etc)
@@ -519,6 +522,7 @@ public class SearchActivity extends FragmentActivity implements
      */
     @Override
     public void onLoaderReset(final Loader<SectionListContainer<SearchResult>> loader) {
+        mAdapter.unload();
     }
 
     /**
@@ -593,7 +597,7 @@ public class SearchActivity extends FragmentActivity implements
 
         mSearchHistoryListView.setVisibility(View.INVISIBLE);
         mListView.setVisibility(View.INVISIBLE);
-        mNoResultsContainer.setVisibility(View.INVISIBLE);
+        mLoadingEmptyContainer.setVisibility(View.INVISIBLE);
 
         switch (mCurrentState) {
             case SearchHistory:
@@ -603,11 +607,12 @@ public class SearchActivity extends FragmentActivity implements
                 mListView.setVisibility(View.VISIBLE);
                 break;
             case Empty:
-                mNoResultsContainer.setVisibility(View.VISIBLE);
+                mLoadingEmptyContainer.setVisibility(View.VISIBLE);
+                mLoadingEmptyContainer.showNoResults();
                 break;
-            default:
-                // Don't show anything for now - we need a loading screen
-                // see bug: https://cyanogen.atlassian.net/browse/MUSIC-63
+            case Loading:
+                mLoadingEmptyContainer.setVisibility(View.VISIBLE);
+                mLoadingEmptyContainer.showLoading();
                 break;
         }
     }
@@ -972,7 +977,7 @@ public class SearchActivity extends FragmentActivity implements
 
         @Override
         public void onLoaderReset(Loader<ArrayAdapter<String>> cursorAdapterLoader) {
-
+            ((ArrayAdapter)mSearchHistoryListView.getAdapter()).clear();
         }
     }
 

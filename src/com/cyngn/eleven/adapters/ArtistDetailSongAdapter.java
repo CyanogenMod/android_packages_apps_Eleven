@@ -15,7 +15,7 @@ import com.cyngn.eleven.model.Song;
 
 import java.util.List;
 
-public class ArtistDetailSongAdapter extends DetailSongAdapter {
+public abstract class ArtistDetailSongAdapter extends DetailSongAdapter {
 
     public ArtistDetailSongAdapter(Activity activity) {
         super(activity);
@@ -25,6 +25,7 @@ public class ArtistDetailSongAdapter extends DetailSongAdapter {
 
     @Override // LoaderCallbacks
     public Loader<List<Song>> onCreateLoader(int id, Bundle args) {
+        onLoading();
         return new ArtistSongLoader(mActivity, args.getLong(Config.ID));
     }
 

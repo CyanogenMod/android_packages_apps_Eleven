@@ -45,6 +45,7 @@ import com.cyngn.eleven.utils.PopupMenuHelper;
 import com.cyngn.eleven.utils.SectionCreatorUtils;
 import com.cyngn.eleven.utils.SectionCreatorUtils.IItemCompare;
 import com.cyngn.eleven.widgets.IPopupMenuCallback;
+import com.cyngn.eleven.widgets.LoadingEmptyContainer;
 import com.cyngn.eleven.widgets.NoResultsContainer;
 import com.viewpagerindicator.TitlePageIndicator;
 
@@ -76,6 +77,11 @@ public class ArtistFragment extends MusicBrowserFragment implements
      * Pop up menu helper
      */
     private PopupMenuHelper mPopupMenuHelper;
+
+    /**
+     * Loading container and no results container
+     */
+    private LoadingEmptyContainer mLoadingEmptyContainer;
 
     /**
      * Empty constructor as per the {@link Fragment} documentation
@@ -209,6 +215,7 @@ public class ArtistFragment extends MusicBrowserFragment implements
      */
     @Override
     public Loader<SectionListContainer<Artist>> onCreateLoader(final int id, final Bundle args) {
+        mLoadingEmptyContainer.showLoading();
         final Context context = getActivity();
         IItemCompare<Artist> comparator = SectionCreatorUtils.createArtistComparison(context);
         return new SectionCreator<Artist>(getActivity(), new ArtistLoader(context), comparator);
@@ -222,9 +229,7 @@ public class ArtistFragment extends MusicBrowserFragment implements
                                final SectionListContainer<Artist> data) {
         // Check for any errors
         if (data.mListResults.isEmpty()) {
-            // Set the empty text
-            final NoResultsContainer empty = (NoResultsContainer)mRootView.findViewById(R.id.no_results_container);
-            mListView.setEmptyView(empty);
+            mLoadingEmptyContainer.showNoResults();
             return;
         }
 
@@ -279,7 +284,7 @@ public class ArtistFragment extends MusicBrowserFragment implements
     public void refresh() {
         // Wait a moment for the preference to change.
         SystemClock.sleep(10);
-        restartLoader(null, this);
+        restartLoader();
     }
 
     /**
@@ -335,6 +340,9 @@ public class ArtistFragment extends MusicBrowserFragment implements
         mListView = (ListView)mRootView.findViewById(R.id.list_base);
         // Set the data behind the list
         mListView.setAdapter(mAdapter);
+        // set the loading and empty view container
+        mLoadingEmptyContainer = (LoadingEmptyContainer)mRootView.findViewById(R.id.loading_empty_container);
+        mListView.setEmptyView(mLoadingEmptyContainer);
         // Set up the helpers
         initAbsListView(mListView);
     }

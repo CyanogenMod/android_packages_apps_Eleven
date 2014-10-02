@@ -42,6 +42,7 @@ import com.cyngn.eleven.utils.MusicUtils;
 import com.cyngn.eleven.utils.NavUtils;
 import com.cyngn.eleven.utils.PopupMenuHelper;
 import com.cyngn.eleven.widgets.IPopupMenuCallback;
+import com.cyngn.eleven.widgets.LoadingEmptyContainer;
 import com.cyngn.eleven.widgets.NoResultsContainer;
 import com.viewpagerindicator.TitlePageIndicator;
 
@@ -78,6 +79,11 @@ public class AlbumFragment extends MusicBrowserFragment implements
      * Pop up menu helper
      */
     private PopupMenuHelper mPopupMenuHelper;
+
+    /**
+     * This holds the loading progress bar as well as the no results message
+     */
+    private LoadingEmptyContainer mLoadingEmptyContainer;
 
     @Override
     public int getLoaderId() {
@@ -183,6 +189,7 @@ public class AlbumFragment extends MusicBrowserFragment implements
      */
     @Override
     public Loader<SectionListContainer<Album>> onCreateLoader(final int id, final Bundle args) {
+        mLoadingEmptyContainer.showLoading();
         // if we ever decide to add section headers for grid items, we can pass a compartor
         // instead of null
         return new SectionCreator<Album>(getActivity(), new AlbumLoader(getActivity()), null);
@@ -196,9 +203,7 @@ public class AlbumFragment extends MusicBrowserFragment implements
                                final SectionListContainer<Album> data) {
         // Check for any errors
         if (data.mListResults.isEmpty()) {
-            // Set the empty text
-            final NoResultsContainer empty = (NoResultsContainer)mRootView.findViewById(R.id.no_results_container);
-            mGridView.setEmptyView(empty);
+            mLoadingEmptyContainer.showNoResults();
             return;
         }
 
@@ -253,7 +258,7 @@ public class AlbumFragment extends MusicBrowserFragment implements
     public void refresh() {
         // Wait a moment for the preference to change.
         SystemClock.sleep(10);
-        restartLoader(null, this);
+        restartLoader();
     }
 
     /**
@@ -316,5 +321,9 @@ public class AlbumFragment extends MusicBrowserFragment implements
         } else {
             mGridView.setNumColumns(TWO);
         }
+
+        // Show progress bar
+        mLoadingEmptyContainer = (LoadingEmptyContainer)mRootView.findViewById(R.id.loading_empty_container);
+        mGridView.setEmptyView(mLoadingEmptyContainer);
     }
 }

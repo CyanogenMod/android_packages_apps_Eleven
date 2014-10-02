@@ -14,15 +14,14 @@ import com.cyngn.eleven.Config;
 import com.cyngn.eleven.R;
 import com.cyngn.eleven.adapters.ArtistDetailAlbumAdapter;
 import com.cyngn.eleven.adapters.ArtistDetailSongAdapter;
-import com.cyngn.eleven.adapters.IEmptyAdapterCallback;
 import com.cyngn.eleven.cache.ImageFetcher;
-import com.cyngn.eleven.lastfm.Artist;
 import com.cyngn.eleven.menu.FragmentMenuItems;
 import com.cyngn.eleven.model.Album;
 import com.cyngn.eleven.model.Song;
 import com.cyngn.eleven.utils.AlbumPopupMenuHelper;
 import com.cyngn.eleven.utils.SongPopupMenuHelper;
 import com.cyngn.eleven.widgets.IPopupMenuCallback;
+import com.cyngn.eleven.widgets.LoadingEmptyContainer;
 
 import java.util.TreeSet;
 
@@ -40,6 +39,8 @@ public class ArtistDetailFragment extends DetailFragment {
 
     private SongPopupMenuHelper mSongPopupMenuHelper;
     private AlbumPopupMenuHelper mAlbumPopupMenuHelper;
+
+    private LoadingEmptyContainer mLoadingEmptyContainer;
 
     @Override
     protected int getLayoutToInflate() { return R.layout.activity_artist_detail; }
@@ -94,15 +95,19 @@ public class ArtistDetailFragment extends DetailFragment {
                 inflate(R.layout.artist_detail_header, mSongs, false);
         mSongs.addHeaderView(mHeader);
         mSongs.setOnScrollListener(this);
-        mSongAdapter = new ArtistDetailSongAdapter(getActivity());
-        mSongAdapter.setOnEmptyAdapterListener(new IEmptyAdapterCallback() {
+        mSongAdapter = new ArtistDetailSongAdapter(getActivity()) {
             @Override
-            public void onEmptyAdapter() {
+            protected void onLoading() {
+                mLoadingEmptyContainer.showLoading();
+            }
+
+            @Override
+            protected void onNoResults() {
                 // no results - because the user deleted the last item - pop our fragment
                 // from the stack
                 getContainingActivity().postRemoveFragment(ArtistDetailFragment.this);
             }
-        });
+        };
         mSongAdapter.setPopupMenuClickedListener(new IPopupMenuCallback.IListener() {
             @Override
             public void onPopupMenuClicked(View v, int position) {
@@ -111,6 +116,9 @@ public class ArtistDetailFragment extends DetailFragment {
         });
         mSongs.setAdapter(mSongAdapter);
         mSongs.setOnItemClickListener(mSongAdapter);
+        mLoadingEmptyContainer =
+                (LoadingEmptyContainer)mRootView.findViewById(R.id.loading_empty_container);
+        mSongs.setEmptyView(mLoadingEmptyContainer);
     }
 
     private void setupPopupMenuHelpers() {

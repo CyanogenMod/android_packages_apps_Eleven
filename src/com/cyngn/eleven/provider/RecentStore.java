@@ -90,7 +90,7 @@ public class RecentStore {
             // if our db is too large, delete the extra items
             Cursor oldest = null;
             try {
-                database.query(RecentStoreColumns.NAME,
+                oldest = database.query(RecentStoreColumns.NAME,
                         new String[]{RecentStoreColumns.TIMEPLAYED}, null, null, null, null,
                         RecentStoreColumns.TIMEPLAYED + " ASC");
 

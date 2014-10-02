@@ -3,6 +3,9 @@
     android:layout_height="match_parent"
     android:background="@color/background_color" >
 
+    <include
+        layout="@layout/loading_empty_container" />
+
     <ListView
         android:id="@+id/songs"
         android:layout_width="match_parent"

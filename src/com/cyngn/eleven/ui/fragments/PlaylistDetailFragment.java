@@ -30,6 +30,7 @@ import com.cyngn.eleven.utils.MusicUtils;
 import com.cyngn.eleven.utils.PopupMenuHelper;
 import com.cyngn.eleven.utils.SongPopupMenuHelper;
 import com.cyngn.eleven.widgets.IPopupMenuCallback;
+import com.cyngn.eleven.widgets.LoadingEmptyContainer;
 import com.cyngn.eleven.widgets.NoResultsContainer;
 
 import java.util.ArrayList;
@@ -51,7 +52,7 @@ public class PlaylistDetailFragment extends DetailFragment implements
     private View mHeaderContainer;
     private ImageView mPlaylistImageView;
 
-    private NoResultsContainer mNoResultsContainer;
+    private LoadingEmptyContainer mLoadingEmptyContainer;
 
     private TextView mNumberOfSongs;
     private TextView mDurationOfPlaylist;
@@ -82,7 +83,6 @@ public class PlaylistDetailFragment extends DetailFragment implements
 
         setupHero();
         setupSongList();
-        setupNoResultsContainer();
     }
 
     @Override
@@ -167,12 +167,21 @@ public class PlaylistDetailFragment extends DetailFragment implements
         mListView.setVerticalScrollBarEnabled(false);
         mListView.setFastScrollEnabled(false);
         mListView.setPadding(0, 0, 0, 0);
+
+        // Adjust the progress bar padding to account for the header
+        int padTop = getResources().getDimensionPixelSize(R.dimen.playlist_detail_header_height);
+        mRootView.findViewById(R.id.progressbar).setPadding(0, padTop, 0, 0);
+
+        // set the loading and empty view container
+        mLoadingEmptyContainer =
+                (LoadingEmptyContainer)mRootView.findViewById(R.id.loading_empty_container);
+        setupNoResultsContainer(mLoadingEmptyContainer.getNoResultsContainer());
+        mListView.setEmptyView(mLoadingEmptyContainer);
     }
 
-    private void setupNoResultsContainer() {
-        mNoResultsContainer = (NoResultsContainer)mRootView.findViewById(R.id.no_results_container);
-        mNoResultsContainer.setMainText(R.string.empty_playlist_main);
-        mNoResultsContainer.setSecondaryText(R.string.empty_playlist_secondary);
+    private void setupNoResultsContainer(final NoResultsContainer container) {
+        container.setMainText(R.string.empty_playlist_main);
+        container.setSecondaryText(R.string.empty_playlist_secondary);
     }
 
     /**
@@ -256,18 +265,18 @@ public class PlaylistDetailFragment extends DetailFragment implements
 
     @Override
     public Loader<List<Song>> onCreateLoader(int i, Bundle bundle) {
+        mLoadingEmptyContainer.showLoading();
+
         return new PlaylistSongLoader(getActivity(), mPlaylistId);
     }
 
     @Override
     public void onLoadFinished(final Loader<List<Song>> loader, final List<Song> data) {
         if (data.isEmpty()) {
-            // set the empty view - only do it here so we don't see the empty view by default
-            // while the list is loading
-            mListView.setEmptyView(mNoResultsContainer);
+            mLoadingEmptyContainer.showNoResults();
 
             // hide the header container
-            mHeaderContainer.setVisibility(View.GONE);
+            mHeaderContainer.setVisibility(View.INVISIBLE);
 
             // Return the correct count
             mAdapter.setCount(new ArrayList<Song>());
@@ -308,6 +317,9 @@ public class PlaylistDetailFragment extends DetailFragment implements
 
     @Override
     public void restartLoader() {
+        // unload the adapter - this will also get the loading progress bar to show
+        mAdapter.unload();
+
         getLoaderManager().restartLoader(0, getArguments(), this);
     }
 }

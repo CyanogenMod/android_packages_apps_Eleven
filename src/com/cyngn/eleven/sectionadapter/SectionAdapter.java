@@ -360,6 +360,7 @@ public class SectionAdapter<TItem,
      * unloads the underlying adapter
      */
     public void unload() {
+        mSections.clear();
         mUnderlyingAdapter.unload();
         notifyDataSetChanged();
     }
@@ -373,6 +374,7 @@ public class SectionAdapter<TItem,
     }
 
     public void clear() {
+        mSections.clear();
         mUnderlyingAdapter.clear();
         mSections.clear();
     }

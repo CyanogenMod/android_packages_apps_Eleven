@@ -23,7 +23,7 @@
     android:paddingTop="@dimen/list_preferred_item_padding">
 
     <include
-        layout="@layout/no_results_message" />
+        layout="@layout/loading_empty_container" />
 
     <GridView
         android:id="@+id/grid_base"

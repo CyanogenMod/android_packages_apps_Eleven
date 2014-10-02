@@ -90,6 +90,9 @@
             android:textColor="@color/default_text_color" />
     </RelativeLayout>
 
+    <include
+        layout="@layout/loading_empty_container" />
+
     <ListView
         android:id="@+id/songs"
         android:layout_width="match_parent"

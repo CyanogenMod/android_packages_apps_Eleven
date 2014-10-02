@@ -42,6 +42,7 @@ import com.cyngn.eleven.utils.MusicUtils;
 import com.cyngn.eleven.utils.NavUtils;
 import com.cyngn.eleven.utils.PopupMenuHelper;
 import com.cyngn.eleven.widgets.IPopupMenuCallback;
+import com.cyngn.eleven.widgets.LoadingEmptyContainer;
 
 import java.util.List;
 
@@ -68,6 +69,11 @@ public class PlaylistFragment extends MusicBrowserFragment implements
      * Pop up menu helper
      */
     private PopupMenuHelper mPopupMenuHelper;
+
+    /**
+     * This holds the loading progress bar as well as the no results message
+     */
+    private LoadingEmptyContainer mLoadingEmptyContainer;
 
     /**
      * Empty constructor as per the {@link Fragment} documentation
@@ -149,6 +155,10 @@ public class PlaylistFragment extends MusicBrowserFragment implements
         mListView.setRecyclerListener(new RecycleHolder());
         // Play the selected song
         mListView.setOnItemClickListener(this);
+        // Setup the loading and empty state
+        mLoadingEmptyContainer =
+                (LoadingEmptyContainer)rootView.findViewById(R.id.loading_empty_container);
+        mListView.setEmptyView(mLoadingEmptyContainer);
 
         // Register the music status listener
         ((BaseActivity)getActivity()).setMusicStateListenerListener(this);
@@ -197,6 +207,8 @@ public class PlaylistFragment extends MusicBrowserFragment implements
      */
     @Override
     public Loader<List<Playlist>> onCreateLoader(final int id, final Bundle args) {
+        // show the loading progress bar
+        mLoadingEmptyContainer.showLoading();
         return new PlaylistLoader(getActivity());
     }
 
@@ -207,6 +219,7 @@ public class PlaylistFragment extends MusicBrowserFragment implements
     public void onLoadFinished(final Loader<List<Playlist>> loader, final List<Playlist> data) {
         // Check for any errors
         if (data.isEmpty()) {
+            mLoadingEmptyContainer.showNoResults();
             return;
         }
 

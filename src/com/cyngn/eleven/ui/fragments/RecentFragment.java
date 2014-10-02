@@ -51,6 +51,9 @@ public class RecentFragment extends BasicSongFragment implements ISetupActionBar
      */
     @Override
     public Loader<SectionListContainer<Song>> onCreateLoader(final int id, final Bundle args) {
+        // show the loading progress bar
+        mLoadingEmptyContainer.showLoading();
+
         TopTracksLoader loader = new TopTracksLoader(getActivity(),
                 TopTracksLoader.QueryType.RecentSongs);
         return new SectionCreator<Song>(getActivity(), loader, null);
@@ -62,7 +65,7 @@ public class RecentFragment extends BasicSongFragment implements ISetupActionBar
     @Override
     public void onMetaChanged() {
         // refresh the list since a track playing means it should be recently played
-        getLoaderManager().restartLoader(LOADER, null, this);
+        restartLoader();
     }
 
     @Override

@@ -29,6 +29,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.ProgressBar;
 
 import com.cyngn.eleven.MusicPlaybackService;
 import com.cyngn.eleven.R;
@@ -47,6 +48,7 @@ import com.cyngn.eleven.utils.MusicUtils;
 import com.cyngn.eleven.utils.PopupMenuHelper;
 import com.cyngn.eleven.widgets.IPopupMenuCallback;
 import com.cyngn.eleven.widgets.NoResultsContainer;
+import com.cyngn.eleven.widgets.LoadingEmptyContainer;
 import com.cyngn.eleven.widgets.PlayPauseProgressButton;
 
 import java.lang.ref.WeakReference;
@@ -90,7 +92,15 @@ public class QueueFragment extends Fragment implements LoaderCallbacks<List<Song
      */
     private PopupMenuHelper mPopupMenuHelper;
 
+    /**
+     * Root view
+     */
     private ViewGroup mRootView;
+
+    /**
+     * This holds the loading progress bar as well as the no results message
+     */
+    private LoadingEmptyContainer mLoadingEmptyContainer;
 
     /**
      * Empty constructor as per the {@link Fragment} documentation
@@ -184,6 +194,12 @@ public class QueueFragment extends Fragment implements LoaderCallbacks<List<Song
         mListView.setDragScrollProfile(this);
         // Enable fast scroll bars
         mListView.setFastScrollEnabled(true);
+        // Setup the loading and empty state
+        mLoadingEmptyContainer =
+                (LoadingEmptyContainer)mRootView.findViewById(R.id.loading_empty_container);
+        // Setup the container strings
+        setupNoResultsContainer(mLoadingEmptyContainer.getNoResultsContainer());
+        mListView.setEmptyView(mLoadingEmptyContainer);
         return mRootView;
     }
 
@@ -252,8 +268,8 @@ public class QueueFragment extends Fragment implements LoaderCallbacks<List<Song
                  i <= mListView.getLastVisiblePosition(); i++) {
                 View childView = mListView.getChildAt(i);
                 if (childView != null) {
-                    PlayPauseProgressButton button = (PlayPauseProgressButton) childView.findViewById(R.id.playPauseProgressButton);
-
+                    PlayPauseProgressButton button =
+                            (PlayPauseProgressButton) childView.findViewById(R.id.playPauseProgressButton);
                     // pause or resume based on the flag
                     if (pause) {
                         button.pause();
@@ -298,6 +314,7 @@ public class QueueFragment extends Fragment implements LoaderCallbacks<List<Song
      */
     @Override
     public Loader<List<Song>> onCreateLoader(final int id, final Bundle args) {
+        mLoadingEmptyContainer.showLoading();
         return new QueueLoader(getActivity());
     }
 
@@ -309,13 +326,7 @@ public class QueueFragment extends Fragment implements LoaderCallbacks<List<Song
         mAdapter.unload(); // Start fresh
 
         if (data.isEmpty()) {
-            // No songs found, bring up the empty view
-            final NoResultsContainer empty =
-                    (NoResultsContainer)mRootView.findViewById(R.id.no_results_container);
-            // Setup the container strings
-            setupNoResultsContainer(empty);
-            // set the empty view into the list view
-            mListView.setEmptyView(empty);
+            mLoadingEmptyContainer.showNoResults();
             mAdapter.setCurrentlyPlayingSongId(SongAdapter.NOTHING_PLAYING);
             ((SlidingPanelActivity)getActivity()).clearMetaInfo();
         } else {

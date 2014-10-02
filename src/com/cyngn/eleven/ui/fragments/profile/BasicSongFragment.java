@@ -37,6 +37,7 @@ import com.cyngn.eleven.ui.activities.BaseActivity;
 import com.cyngn.eleven.utils.PopupMenuHelper;
 import com.cyngn.eleven.utils.SongPopupMenuHelper;
 import com.cyngn.eleven.widgets.IPopupMenuCallback;
+import com.cyngn.eleven.widgets.LoadingEmptyContainer;
 import com.cyngn.eleven.widgets.NoResultsContainer;
 
 import java.util.TreeSet;
@@ -67,7 +68,12 @@ public abstract class BasicSongFragment extends Fragment implements
     /**
      * Pop up menu helper
      */
-    private PopupMenuHelper mPopupMenuHelper;
+    protected PopupMenuHelper mPopupMenuHelper;
+
+    /**
+     * This holds the loading progress bar as well as the no results message
+     */
+    protected LoadingEmptyContainer mLoadingEmptyContainer;
 
     /**
      * Empty constructor as per the {@link Fragment} documentation
@@ -146,6 +152,12 @@ public abstract class BasicSongFragment extends Fragment implements
             }
         });
 
+        // Show progress bar
+        mLoadingEmptyContainer = (LoadingEmptyContainer)mRootView.findViewById(R.id.loading_empty_container);
+        // Setup the container strings
+        setupNoResultsContainer(mLoadingEmptyContainer.getNoResultsContainer());
+        mListView.setEmptyView(mLoadingEmptyContainer);
+
         // Register the music status listener
         ((BaseActivity)getActivity()).setMusicStateListenerListener(this);
 
@@ -194,13 +206,7 @@ public abstract class BasicSongFragment extends Fragment implements
                                final SectionListContainer<Song> data) {
         // Check for any errors
         if (data.mListResults.isEmpty()) {
-            // Set the empty text
-            final NoResultsContainer empty =
-                    (NoResultsContainer)mRootView.findViewById(R.id.no_results_container);
-            // Setup the container strings
-            setupNoResultsContainer(empty);
-            // set the empty view into the list view
-            mListView.setEmptyView(empty);
+            mLoadingEmptyContainer.showNoResults();
             return;
         }
 
@@ -214,7 +220,7 @@ public abstract class BasicSongFragment extends Fragment implements
     public void refresh() {
         // Wait a moment for the preference to change.
         SystemClock.sleep(10);
-        getFragmentLoaderManager().restartLoader(getLoaderId(), null, this);
+        restartLoader();
     }
 
     /**

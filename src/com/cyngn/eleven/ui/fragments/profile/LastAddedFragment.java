@@ -44,6 +44,9 @@ public class LastAddedFragment extends BasicSongFragment implements ISetupAction
      */
     @Override
     public Loader<SectionListContainer<Song>> onCreateLoader(final int id, final Bundle args) {
+        // show the loading progress bar
+        mLoadingEmptyContainer.showLoading();
+
         LastAddedLoader loader = new LastAddedLoader(getActivity());
         return new SectionCreator<Song>(getActivity(), loader, null);
     }

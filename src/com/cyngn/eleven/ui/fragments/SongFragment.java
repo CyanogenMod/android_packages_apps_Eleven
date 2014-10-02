@@ -51,6 +51,9 @@ public class SongFragment extends BasicSongFragment {
      */
     @Override
     public Loader<SectionListContainer<Song>> onCreateLoader(final int id, final Bundle args) {
+        // show the loading progress bar
+        mLoadingEmptyContainer.showLoading();
+
         // get the context
         Context context = getActivity();
 

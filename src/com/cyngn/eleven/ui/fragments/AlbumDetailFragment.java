@@ -19,6 +19,7 @@ import com.cyngn.eleven.utils.GenreFetcher;
 import com.cyngn.eleven.utils.PopupMenuHelper;
 import com.cyngn.eleven.utils.SongPopupMenuHelper;
 import com.cyngn.eleven.widgets.IPopupMenuCallback;
+import com.cyngn.eleven.widgets.LoadingEmptyContainer;
 import com.cyngn.eleven.widgets.PopupMenuButton;
 
 import java.util.List;
@@ -36,6 +37,7 @@ public class AlbumDetailFragment extends BaseFragment {
     private long mAlbumId;
     private String mArtistName;
     private String mAlbumName;
+    private LoadingEmptyContainer mLoadingEmptyContainer;
 
     @Override
     protected int getLayoutToInflate() {
@@ -123,7 +125,17 @@ public class AlbumDetailFragment extends BaseFragment {
 
     private void setupSongList() {
         mSongs = (ListView)mRootView.findViewById(R.id.songs);
-        mSongAdapter = new AlbumDetailSongAdapter(getActivity(), this);
+        mSongAdapter = new AlbumDetailSongAdapter(getActivity(), this) {
+            @Override
+            protected void onLoading() {
+                mLoadingEmptyContainer.showLoading();
+            }
+
+            @Override
+            protected void onNoResults() {
+                getContainingActivity().postRemoveFragment(AlbumDetailFragment.this);
+            }
+        };
         mSongAdapter.setPopupMenuClickedListener(new IPopupMenuCallback.IListener() {
             @Override
             public void onPopupMenuClicked(View v, int position) {
@@ -132,6 +144,9 @@ public class AlbumDetailFragment extends BaseFragment {
         });
         mSongs.setAdapter(mSongAdapter);
         mSongs.setOnItemClickListener(mSongAdapter);
+        mLoadingEmptyContainer =
+                (LoadingEmptyContainer)mRootView.findViewById(R.id.loading_empty_container);
+        mSongs.setEmptyView(mLoadingEmptyContainer);
     }
 
     /** called back by song loader */
@@ -143,10 +158,7 @@ public class AlbumDetailFragment extends BaseFragment {
 
         /** use the first song on the album to get a genre */
         if(!songs.isEmpty()) {
-            GenreFetcher.fetch(getActivity(), (int)songs.get(0).mSongId, mGenre);
-        } else {
-            // no songs, remove from stack
-            getContainingActivity().postRemoveFragment(this);
+            GenreFetcher.fetch(getActivity(), (int) songs.get(0).mSongId, mGenre);
         }
     }
 

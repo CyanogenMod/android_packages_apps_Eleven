@@ -49,6 +49,9 @@ public class TopTracksFragment extends BasicSongFragment implements ISetupAction
      */
     @Override
     public Loader<SectionListContainer<Song>> onCreateLoader(final int id, final Bundle args) {
+        // show the loading progress bar
+        mLoadingEmptyContainer.showLoading();
+
         TopTracksLoader loader = new TopTracksLoader(getActivity(),
                 TopTracksLoader.QueryType.TopTracks);
         return new SectionCreator<Song>(getActivity(), loader, null);
