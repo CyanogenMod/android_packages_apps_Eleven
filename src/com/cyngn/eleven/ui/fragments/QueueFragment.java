@@ -327,7 +327,7 @@ public class QueueFragment extends Fragment implements LoaderCallbacks<List<Song
 
         if (data.isEmpty()) {
             mLoadingEmptyContainer.showNoResults();
-            mAdapter.setCurrentlyPlayingSongId(SongAdapter.NOTHING_PLAYING);
+            mAdapter.setCurrentQueuePosition(SongAdapter.NOTHING_PLAYING);
             ((SlidingPanelActivity)getActivity()).clearMetaInfo();
         } else {
             // Add the songs found to the adapter
@@ -335,7 +335,7 @@ public class QueueFragment extends Fragment implements LoaderCallbacks<List<Song
             // Build the cache
             mAdapter.buildCache();
             // Set the currently playing audio
-            mAdapter.setCurrentlyPlayingSongId(MusicUtils.getCurrentAudioId());
+            mAdapter.setCurrentQueuePosition(MusicUtils.getQueuePosition());
         }
     }
 
@@ -425,7 +425,7 @@ public class QueueFragment extends Fragment implements LoaderCallbacks<List<Song
             // TODO: Invalid options menu if opened?
             final String action = intent.getAction();
             if (action.equals(MusicPlaybackService.META_CHANGED)) {
-                mReference.get().mAdapter.setCurrentlyPlayingSongId(MusicUtils.getCurrentAudioId());
+                mReference.get().mAdapter.setCurrentQueuePosition(MusicUtils.getQueuePosition());
             } else if (action.equals(MusicPlaybackService.PLAYSTATE_CHANGED)) {
                 mReference.get().mAdapter.notifyDataSetChanged();
             } else if (action.equals(MusicPlaybackService.QUEUE_CHANGED)) {

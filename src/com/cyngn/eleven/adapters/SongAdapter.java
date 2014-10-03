@@ -61,7 +61,7 @@ public class SongAdapter extends ArrayAdapter<Song>
     /**
      * The index of the item that is currently playing
      */
-    private long mCurrentlyPlayingSongId = NOTHING_PLAYING;
+    private long mCurrentQueuePosition = NOTHING_PLAYING;
 
     /**
      * Used to cache the song info
@@ -127,7 +127,7 @@ public class SongAdapter extends ArrayAdapter<Song>
         if (playPauseProgressButton != null) {
             View playPauseContainer = holder.mPlayPauseProgressContainer.get();
 
-            if (mCurrentlyPlayingSongId == dataHolder.mItemId) {
+            if (mCurrentQueuePosition == position) {
                 // make it visible
                 playPauseProgressButton.enableAndShow();
                 playPauseContainer.setVisibility(View.VISIBLE);
@@ -231,9 +231,9 @@ public class SongAdapter extends ArrayAdapter<Song>
         return  -1;
     }
 
-    public void setCurrentlyPlayingSongId(long songId) {
-        if (mCurrentlyPlayingSongId != songId) {
-            mCurrentlyPlayingSongId = songId;
+    public void setCurrentQueuePosition(long queuePosition) {
+        if (mCurrentQueuePosition != queuePosition) {
+            mCurrentQueuePosition = queuePosition;
 
             notifyDataSetChanged();
         }
