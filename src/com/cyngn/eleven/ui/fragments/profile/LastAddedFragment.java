@@ -74,4 +74,14 @@ public class LastAddedFragment extends BasicSongFragment implements ISetupAction
     public void setupActionBar() {
         ((BaseActivity)getActivity()).setupActionBar(R.string.playlist_last_added);
     }
+
+    @Override
+    protected long getFragmentSourceId() {
+        return Config.SmartPlaylistType.LastAdded.mId;
+    }
+
+    @Override
+    protected Config.IdType getFragmentSourceType() {
+        return Config.IdType.Playlist;
+    }
 }

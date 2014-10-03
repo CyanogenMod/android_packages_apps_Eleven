@@ -86,7 +86,11 @@ public class PlaylistArtworkStore {
     }
 
     public void onUpgrade(final SQLiteDatabase db, final int oldVersion, final int newVersion) {
-        // If we ever have upgrade, this code should be changed to handle this more gracefully
+        // No upgrade path needed yet
+    }
+
+    public void onDowngrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+        // If we ever have downgrade, drop the table to be safe
         db.execSQL("DROP TABLE IF EXISTS " + PlaylistArtworkStoreColumns.NAME);
         onCreate(db);
     }

@@ -29,6 +29,11 @@ public class SearchHistory {
     }
 
     public void onUpgrade(final SQLiteDatabase db, final int oldVersion, final int newVersion) {
+        // No upgrade path needed yet
+    }
+
+    public void onDowngrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+        // If we ever have downgrade, drop the table to be safe
         db.execSQL("DROP TABLE IF EXISTS " + SearchHistoryColumns.NAME);
         onCreate(db);
     }

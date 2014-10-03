@@ -27,10 +27,15 @@ public abstract class AlbumDetailSongAdapter extends DetailSongAdapter {
 
     protected int rowLayoutId() { return R.layout.album_detail_song; }
 
+    protected Config.IdType getSourceType() {
+        return Config.IdType.Album;
+    }
+
     @Override // LoaderCallbacks
     public Loader<List<Song>> onCreateLoader(int id, Bundle args) {
         onLoading();
-        return new AlbumSongLoader(mActivity, args.getLong(Config.ID));
+        setSourceId(args.getLong(Config.ID));
+        return new AlbumSongLoader(mActivity, getSourceId());
     }
 
     @Override // LoaderCallbacks

@@ -36,7 +36,7 @@ import android.provider.Settings;
 import android.util.Log;
 import android.view.Menu;
 
-import com.cyngn.eleven.Config;
+import com.cyngn.eleven.Config.IdType;
 import com.cyngn.eleven.Config.SmartPlaylistType;
 import com.cyngn.eleven.IElevenService;
 import com.cyngn.eleven.MusicPlaybackService;
@@ -50,6 +50,7 @@ import com.cyngn.eleven.menu.FragmentMenuItems;
 import com.cyngn.eleven.model.AlbumArtistDetails;
 import com.cyngn.eleven.provider.RecentStore;
 import com.cyngn.eleven.provider.SongPlayCount;
+import com.cyngn.eleven.service.MusicPlaybackTrack;
 import com.devspark.appmsg.AppMsg;
 
 import java.io.File;
@@ -464,6 +465,32 @@ public final class MusicUtils {
     }
 
     /**
+     * @return The current Music Playback Track
+     */
+    public static final MusicPlaybackTrack getCurrentTrack() {
+        if (mService != null) {
+            try {
+                return mService.getCurrentTrack();
+            } catch (final RemoteException ignored) {
+            }
+        }
+        return null;
+    }
+
+    /**
+     * @return The Music Playback Track at the specified index
+     */
+    public static final MusicPlaybackTrack getTrack(int index) {
+        if (mService != null) {
+            try {
+                return mService.getTrack(index);
+            } catch (final RemoteException ignored) {
+            }
+        }
+        return null;
+    }
+
+    /**
      * @return The next song Id.
      */
     public static final long getNextAudioId() {
@@ -664,7 +691,7 @@ public final class MusicUtils {
     public static void playArtist(final Context context, final long artistId, int position) {
         final long[] artistList = getSongListForArtist(context, artistId);
         if (artistList != null) {
-            playAll(context, artistList, position, false);
+            playAll(context, artistList, position, artistId, IdType.Artist, false);
         }
     }
 
@@ -726,7 +753,8 @@ public final class MusicUtils {
      * @param forceShuffle True to force a shuffle, false otherwise.
      */
     public static void playAll(final Context context, final long[] list, int position,
-            final boolean forceShuffle) {
+                               final long sourceId, final IdType sourceType,
+                               final boolean forceShuffle) {
         if (list == null || list.length == 0 || mService == null) {
             return;
         }
@@ -748,7 +776,7 @@ public final class MusicUtils {
             if (position < 0) {
                 position = 0;
             }
-            mService.open(list, forceShuffle ? -1 : position);
+            mService.open(list, forceShuffle ? -1 : position, sourceId, sourceType.mId);
             mService.play();
         } catch (final RemoteException ignored) {
         }
@@ -757,12 +785,12 @@ public final class MusicUtils {
     /**
      * @param list The list to enqueue.
      */
-    public static void playNext(final long[] list) {
+    public static void playNext(final long[] list, final long sourceId, final IdType sourceType) {
         if (mService == null) {
             return;
         }
         try {
-            mService.enqueue(list, MusicPlaybackService.NEXT);
+            mService.enqueue(list, MusicPlaybackService.NEXT, sourceId, sourceType.mId);
         } catch (final RemoteException ignored) {
         }
     }
@@ -789,7 +817,7 @@ public final class MusicUtils {
                     return;
                 }
             }
-            mService.open(mTrackList, -1);
+            mService.open(mTrackList, -1, -1, IdType.NA.mId);
             mService.play();
             cursor.close();
             cursor = null;
@@ -887,7 +915,7 @@ public final class MusicUtils {
     public static void playAlbum(final Context context, final long albumId, int position) {
         final long[] albumList = getSongListForAlbum(context, albumId);
         if (albumList != null) {
-            playAll(context, albumList, position, false);
+            playAll(context, albumList, position, albumId, IdType.Album, false);
         }
     }
 
@@ -1000,12 +1028,13 @@ public final class MusicUtils {
      * @param context The {@link Context} to use.
      * @param list The list to enqueue.
      */
-    public static void addToQueue(final Context context, final long[] list) {
+    public static void addToQueue(final Context context, final long[] list, long sourceId,
+                                  IdType sourceType) {
         if (mService == null) {
             return;
         }
         try {
-            mService.enqueue(list, MusicPlaybackService.LAST);
+            mService.enqueue(list, MusicPlaybackService.LAST, sourceId, sourceType.mId);
             final String message = makeLabel(context, R.plurals.NNNtrackstoqueue, list.length);
             AppMsg.makeText((Activity)context, message, AppMsg.STYLE_CONFIRM).show();
         } catch (final RemoteException ignored) {
@@ -1214,7 +1243,7 @@ public final class MusicUtils {
     public static void playPlaylist(final Context context, final long playlistId) {
         final long[] playlistList = getSongListForPlaylist(context, playlistId);
         if (playlistList != null) {
-            playAll(context, playlistList, -1, false);
+            playAll(context, playlistList, -1, playlistId, IdType.Playlist, false);
         }
     }
 
@@ -1256,7 +1285,7 @@ public final class MusicUtils {
     public static void playSmartPlaylist(final Context context, final int position,
                                          final SmartPlaylistType type) {
         final long[] list = getSongListForSmartPlaylist(context, type);
-        MusicUtils.playAll(context, list, position, false);
+        MusicUtils.playAll(context, list, position, type.mId, IdType.Playlist, false);
     }
 
     /**

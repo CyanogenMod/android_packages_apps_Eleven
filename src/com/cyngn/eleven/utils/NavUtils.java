@@ -84,7 +84,7 @@ public final class NavUtils {
         // Create the intent to launch the profile activity
         final Intent intent = new Intent(context, HomeActivity.class);
         intent.setAction(HomeActivity.ACTION_VIEW_SMART_PLAYLIST);
-        intent.putExtra(Config.SMART_PLAYLIST_TYPE, type.ordinal());
+        intent.putExtra(Config.SMART_PLAYLIST_TYPE, type.mId);
         context.startActivity(intent);
     }
 

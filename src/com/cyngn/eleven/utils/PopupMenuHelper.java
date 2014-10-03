@@ -12,13 +12,13 @@ import android.widget.PopupMenu;
 
 import com.android.internal.view.menu.ContextMenuBuilder;
 import com.android.internal.view.menu.MenuBuilder;
+import com.cyngn.eleven.Config;
 import com.cyngn.eleven.R;
 import com.cyngn.eleven.menu.CreateNewPlaylist;
 import com.cyngn.eleven.menu.FragmentMenuItems;
 import com.cyngn.eleven.menu.RenamePlaylist;
 import com.cyngn.eleven.provider.RecentStore;
 
-import java.util.ArrayList;
 import java.util.TreeSet;
 
 /**
@@ -82,6 +82,9 @@ public abstract class PopupMenuHelper implements PopupMenu.OnMenuItemClickListen
      */
     protected abstract long[] getIdList();
 
+    protected abstract long getSourceId();
+    protected abstract Config.IdType getSourceType();
+
     /**
      * @return the group id to be used for pop up menu inflating
      */
@@ -133,7 +136,7 @@ public abstract class PopupMenuHelper implements PopupMenu.OnMenuItemClickListen
      * Called when the user clicks "play next".  Has a default implementation
      */
     protected void playNext() {
-        MusicUtils.playNext(getIdList());
+        MusicUtils.playNext(getIdList(), getSourceId(), getSourceType());
     }
 
     /**
@@ -299,10 +302,11 @@ public abstract class PopupMenuHelper implements PopupMenu.OnMenuItemClickListen
                     MusicUtils.refresh();
                     return true;
                 case FragmentMenuItems.PLAY_SELECTION:
-                    MusicUtils.playAll(mActivity, getIdList(), 0, false);
+                    MusicUtils.playAll(mActivity, getIdList(), 0, getSourceId(), getSourceType(),
+                            false);
                     return true;
                 case FragmentMenuItems.ADD_TO_QUEUE:
-                    MusicUtils.addToQueue(mActivity, getIdList());
+                    MusicUtils.addToQueue(mActivity, getIdList(), getSourceId(), getSourceType());
                     return true;
                 case FragmentMenuItems.ADD_TO_PLAYLIST:
                     ContextMenuBuilder builder = new ContextMenuBuilder(mActivity);

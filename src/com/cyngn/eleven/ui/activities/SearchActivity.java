@@ -227,6 +227,16 @@ public class SearchActivity extends FragmentActivity implements
             }
 
             @Override
+            protected long getSourceId() {
+                return mSelectedItem.mId;
+            }
+
+            @Override
+            protected Config.IdType getSourceType() {
+                return mSelectedItem.mType.getSourceType();
+            }
+
+            @Override
             protected void updateMenuIds(PopupMenuType type, TreeSet<Integer> set) {
                 super.updateMenuIds(type, set);
 
@@ -684,7 +694,7 @@ public class SearchActivity extends FragmentActivity implements
                     final long[] list = new long[]{
                             item.mId
                     };
-                    MusicUtils.playAll(this, list, 0, false);
+                    MusicUtils.playAll(this, list, 0, -1, Config.IdType.NA, false);
                     break;
             }
         }

@@ -18,10 +18,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 
+import com.cyngn.eleven.Config;
 import com.cyngn.eleven.cache.ImageFetcher;
 import com.cyngn.eleven.model.Artist;
 import com.cyngn.eleven.model.Song;
 import com.cyngn.eleven.sectionadapter.SectionAdapter;
+import com.cyngn.eleven.service.MusicPlaybackTrack;
 import com.cyngn.eleven.ui.MusicHolder;
 import com.cyngn.eleven.ui.MusicHolder.DataHolder;
 import com.cyngn.eleven.ui.fragments.QueueFragment;
@@ -74,17 +76,34 @@ public class SongAdapter extends ArrayAdapter<Song>
     private IPopupMenuCallback.IListener mListener;
 
     /**
+     * Current music track
+     */
+    protected MusicPlaybackTrack mCurrentlyPlayingTrack;
+
+    /**
+     * Source id and type
+     */
+    protected long mSourceId;
+    protected Config.IdType mSourceType;
+
+    /**
      * Constructor of <code>SongAdapter</code>
      * 
      * @param context The {@link Context} to use.
      * @param layoutId The resource Id of the view to inflate.
+     * @param sourceId The source id that the adapter is created from
+     * @param sourceType The source type that the adapter is created from
      */
-    public SongAdapter(final Activity context, final int layoutId) {
+    public SongAdapter(final Activity context, final int layoutId, final long sourceId,
+                       final Config.IdType sourceType) {
         super(context, 0);
         // Get the layout Id
         mLayoutId = layoutId;
         // Initialize the cache & image fetcher
         mImageFetcher = ApolloUtils.getImageFetcher(context);
+        // set the source id and type
+        mSourceId = sourceId;
+        mSourceType = sourceType;
     }
 
     /**
@@ -138,7 +157,33 @@ public class SongAdapter extends ArrayAdapter<Song>
             }
         }
 
+        View nowPlayingIndicator = holder.mNowPlayingIndicator.get();
+        if (nowPlayingIndicator != null) {
+            if (showNowPlayingIndicator(item, position)) {
+                nowPlayingIndicator.setVisibility(View.VISIBLE);
+            } else {
+                nowPlayingIndicator.setVisibility(View.GONE);
+            }
+        }
+
         return convertView;
+    }
+
+    /**
+     * Determines whether the song at the position should show the currently playing indicator
+     * @param song the song in question
+     * @param position the position of the song
+     * @return true if we want to show the indicator
+     */
+    protected boolean showNowPlayingIndicator(final Song song, final int position) {
+        if (mCurrentlyPlayingTrack != null
+                && mCurrentlyPlayingTrack.mSourceId == mSourceId
+                && mCurrentlyPlayingTrack.mSourceType == mSourceType
+                && mCurrentlyPlayingTrack.mId == song.mSongId) {
+            return true;
+        }
+
+        return false;
     }
 
     /**
@@ -167,6 +212,11 @@ public class SongAdapter extends ArrayAdapter<Song>
         for (int i = 0; i < getCount(); i++) {
             // Build the song
             final Song song = getItem(i);
+
+            // skip special placeholders
+            if (song.mSongId == -1) {
+                continue;
+            }
 
             // Build the data holder
             mData[i] = new DataHolder();
@@ -242,5 +292,21 @@ public class SongAdapter extends ArrayAdapter<Song>
     @Override
     public void setPopupMenuClickedListener(IListener listener) {
         mListener = listener;
+    }
+
+    /**
+     * Sets the currently playing track for the adapter to know when to show indicators
+     * @param currentTrack the currently playing track
+     * @return true if the current track is different
+     */
+    public boolean setCurrentlyPlayingTrack(MusicPlaybackTrack currentTrack) {
+        if (mCurrentlyPlayingTrack == null || !mCurrentlyPlayingTrack.equals(currentTrack)) {
+            mCurrentlyPlayingTrack = currentTrack;
+
+            notifyDataSetChanged();
+            return true;
+        }
+
+        return false;
     }
 }

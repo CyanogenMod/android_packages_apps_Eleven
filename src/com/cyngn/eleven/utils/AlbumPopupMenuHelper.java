@@ -7,6 +7,7 @@ package com.cyngn.eleven.utils;
 import android.app.Activity;
 import android.support.v4.app.FragmentManager;
 
+import com.cyngn.eleven.Config;
 import com.cyngn.eleven.cache.ImageFetcher;
 import com.cyngn.eleven.menu.DeleteDialog;
 import com.cyngn.eleven.model.Album;
@@ -34,6 +35,16 @@ public abstract class AlbumPopupMenuHelper extends PopupMenuHelper {
     @Override
     protected long[] getIdList() {
         return MusicUtils.getSongListForAlbum(mActivity, mAlbum.mAlbumId);
+    }
+
+    @Override
+    protected long getSourceId() {
+        return mAlbum.mAlbumId;
+    }
+
+    @Override
+    protected Config.IdType getSourceType() {
+        return Config.IdType.Album;
     }
 
     @Override

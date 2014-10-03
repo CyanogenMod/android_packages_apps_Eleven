@@ -58,12 +58,10 @@ public class TopTracksFragment extends BasicSongFragment implements ISetupAction
     }
 
     @Override
-    protected SectionAdapter<Song, SongAdapter> createAdapter() {
-        return new SectionAdapter(getActivity(),
-                new TopTracksAdapter(
-                        getActivity(),
-                        R.layout.list_item_top_tracks
-                )
+    protected SongAdapter createAdapter() {
+        return new TopTracksAdapter(
+            getActivity(),
+            R.layout.list_item_top_tracks
         );
     }
 
@@ -85,7 +83,7 @@ public class TopTracksFragment extends BasicSongFragment implements ISetupAction
 
     public class TopTracksAdapter extends SongAdapter {
         public TopTracksAdapter (final Activity context, final int layoutId) {
-            super(context, layoutId);
+            super(context, layoutId, getFragmentSourceId(), getFragmentSourceType());
         }
 
         @Override
@@ -103,5 +101,15 @@ public class TopTracksFragment extends BasicSongFragment implements ISetupAction
 
         empty.setMainText(R.string.empty_top_tracks_main);
         empty.setSecondaryText(R.string.empty_top_tracks_secondary);
+    }
+
+    @Override
+    protected long getFragmentSourceId() {
+        return Config.SmartPlaylistType.TopTracks.mId;
+    }
+
+    @Override
+    protected Config.IdType getFragmentSourceType() {
+        return Config.IdType.Playlist;
     }
 }

@@ -33,7 +33,6 @@ import com.cyngn.eleven.widgets.IPopupMenuCallback;
 import com.cyngn.eleven.widgets.LoadingEmptyContainer;
 import com.cyngn.eleven.widgets.NoResultsContainer;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.TreeSet;
 
@@ -104,7 +103,7 @@ public class PlaylistDetailFragment extends DetailFragment implements
                     return null;
                 }
 
-                return mAdapter.getItem(position - 1);
+                return mAdapter.getItem(position);
             }
 
             @Override
@@ -112,6 +111,16 @@ public class PlaylistDetailFragment extends DetailFragment implements
                 super.updateMenuIds(type, set);
 
                 set.add(FragmentMenuItems.REMOVE_FROM_PLAYLIST);
+            }
+
+            @Override
+            protected long getSourceId() {
+                return mPlaylistId;
+            }
+
+            @Override
+            protected Config.IdType getSourceType() {
+                return Config.IdType.Playlist;
             }
 
             @Override
@@ -141,10 +150,10 @@ public class PlaylistDetailFragment extends DetailFragment implements
         mListView.setOnScrollListener(PlaylistDetailFragment.this);
 
         mAdapter = new ProfileSongAdapter(
+                mPlaylistId,
                 getActivity(),
                 R.layout.edit_track_list_item,
-                R.layout.faux_playlist_header,
-                ProfileSongAdapter.DISPLAY_PLAYLIST_SETTING
+                R.layout.faux_playlist_header
         );
         mAdapter.setPopupMenuClickedListener(new IPopupMenuCallback.IListener() {
             @Override
@@ -201,8 +210,13 @@ public class PlaylistDetailFragment extends DetailFragment implements
      */
     @Override
     public void remove(final int which) {
-        Song song = mAdapter.getItem(which - 1);
+        if (which == 0) {
+            return;
+        }
+
+        Song song = mAdapter.getItem(which);
         mAdapter.remove(song);
+        mAdapter.buildCache();
         mAdapter.notifyDataSetChanged();
         final Uri uri = MediaStore.Audio.Playlists.Members.getContentUri("external", mPlaylistId);
         getActivity().getContentResolver().delete(uri,
@@ -214,17 +228,18 @@ public class PlaylistDetailFragment extends DetailFragment implements
      * {@inheritDoc}
      */
     @Override
-    public void drop(final int from, final int to) {
-        if (from == 0 || to == 0) {
-            mAdapter.notifyDataSetChanged();
-            return;
-        }
-        final int realFrom = from - 1;
-        final int realTo = to - 1;
-        Song song = mAdapter.getItem(realFrom);
+    public void drop(int from, int to) {
+        from = Math.max(ProfileSongAdapter.NUM_HEADERS, from);
+        to = Math.max(ProfileSongAdapter.NUM_HEADERS, to);
+
+        Song song = mAdapter.getItem(from);
         mAdapter.remove(song);
-        mAdapter.insert(song, realTo);
+        mAdapter.insert(song, to);
+        mAdapter.buildCache();
         mAdapter.notifyDataSetChanged();
+
+        final int realFrom = from - ProfileSongAdapter.NUM_HEADERS;
+        final int realTo = to - ProfileSongAdapter.NUM_HEADERS;
         MediaStore.Audio.Playlists.Members.moveItem(getActivity().getContentResolver(),
                 mPlaylistId, realFrom, realTo);
     }
@@ -241,7 +256,8 @@ public class PlaylistDetailFragment extends DetailFragment implements
         Cursor cursor = PlaylistSongLoader.makePlaylistSongCursor(getActivity(),
                 mPlaylistId);
         final long[] list = MusicUtils.getSongListForCursor(cursor);
-        MusicUtils.playAll(getActivity(), list, position - 1, false);
+        MusicUtils.playAll(getActivity(), list, position - ProfileSongAdapter.NUM_HEADERS,
+                mPlaylistId, Config.IdType.Playlist, false);
         cursor.close();
         cursor = null;
     }
@@ -278,8 +294,6 @@ public class PlaylistDetailFragment extends DetailFragment implements
             // hide the header container
             mHeaderContainer.setVisibility(View.INVISIBLE);
 
-            // Return the correct count
-            mAdapter.setCount(new ArrayList<Song>());
             // Start fresh
             mAdapter.unload();
         } else {
@@ -289,7 +303,9 @@ public class PlaylistDetailFragment extends DetailFragment implements
             // Start fresh
             mAdapter.unload();
             // Return the correct count
-            mAdapter.setCount(data);
+            mAdapter.addAll(data);
+            // build the cache
+            mAdapter.buildCache();
             // set the number of songs
             String numberOfSongs = MusicUtils.makeLabel(getActivity(), R.plurals.Nsongs,
                     data.size());
@@ -299,7 +315,6 @@ public class PlaylistDetailFragment extends DetailFragment implements
 
             // Add the data to the adapter
             for (final Song song : data) {
-                mAdapter.add(song);
                 duration += song.mDuration;
             }
 
@@ -321,5 +336,19 @@ public class PlaylistDetailFragment extends DetailFragment implements
         mAdapter.unload();
 
         getLoaderManager().restartLoader(0, getArguments(), this);
+    }
+
+    @Override
+    public void onMetaChanged() {
+        super.onMetaChanged();
+
+        mAdapter.setCurrentlyPlayingTrack(MusicUtils.getCurrentTrack());
+    }
+
+    @Override
+    public void onPlaylistChanged() {
+        super.onPlaylistChanged();
+
+        restartLoader();
     }
 }

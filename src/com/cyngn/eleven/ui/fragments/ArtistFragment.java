@@ -26,6 +26,7 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 
+import com.cyngn.eleven.Config;
 import com.cyngn.eleven.MusicStateListener;
 import com.cyngn.eleven.R;
 import com.cyngn.eleven.adapters.ArtistAdapter;
@@ -118,6 +119,16 @@ public class ArtistFragment extends MusicBrowserFragment implements
             @Override
             protected long[] getIdList() {
                 return MusicUtils.getSongListForArtist(getActivity(), mArtist.mArtistId);
+            }
+
+            @Override
+            protected long getSourceId() {
+                return mArtist.mArtistId;
+            }
+
+            @Override
+            protected Config.IdType getSourceType() {
+                return Config.IdType.Artist;
             }
 
             @Override

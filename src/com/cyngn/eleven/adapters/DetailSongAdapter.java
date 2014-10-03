@@ -9,11 +9,14 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.cyngn.eleven.Config;
 import com.cyngn.eleven.R;
 import com.cyngn.eleven.cache.ImageFetcher;
 import com.cyngn.eleven.model.Song;
+import com.cyngn.eleven.service.MusicPlaybackTrack;
 import com.cyngn.eleven.utils.ApolloUtils;
 import com.cyngn.eleven.utils.MusicUtils;
 import com.cyngn.eleven.widgets.IPopupMenuCallback;
@@ -29,6 +32,8 @@ public abstract class DetailSongAdapter extends BaseAdapter
     private final LayoutInflater mInflater;
     private List<Song> mSongs = Collections.emptyList();
     private IListener mListener;
+    private long mSourceId = -1;
+    private MusicPlaybackTrack mCurrentlyPlayingTrack;
 
     public DetailSongAdapter(final Activity activity) {
         mActivity = activity;
@@ -45,6 +50,16 @@ public abstract class DetailSongAdapter extends BaseAdapter
     @Override
     public long getItemId(int pos) { return pos; }
 
+    protected long getSourceId() { return mSourceId; }
+    protected void setSourceId(long id) { mSourceId = id; }
+
+    public void setCurrentlyPlayingTrack(MusicPlaybackTrack currentTrack) {
+        if (mCurrentlyPlayingTrack == null || !mCurrentlyPlayingTrack.equals(currentTrack)) {
+            mCurrentlyPlayingTrack = currentTrack;
+            notifyDataSetChanged();
+        }
+    }
+
     @Override
     public View getView(int pos, View convertView, ViewGroup parent) {
         if(convertView == null) {
@@ -59,12 +74,22 @@ public abstract class DetailSongAdapter extends BaseAdapter
         holder.popupMenuButton.setPopupMenuClickedListener(mListener);
         holder.popupMenuButton.setPosition(pos);
 
+        if (mCurrentlyPlayingTrack != null
+                && mCurrentlyPlayingTrack.mSourceId == getSourceId()
+                && mCurrentlyPlayingTrack.mSourceType == getSourceType()
+                && mCurrentlyPlayingTrack.mId == song.mSongId) {
+            holder.playIcon.setVisibility(View.VISIBLE);
+        } else {
+            holder.playIcon.setVisibility(View.GONE);
+        }
+
         return convertView;
     }
 
     protected abstract int rowLayoutId();
     protected abstract void onLoading();
     protected abstract void onNoResults();
+    protected abstract Config.IdType getSourceType();
 
     @Override // OnItemClickListener
     public void onItemClick(AdapterView<?> parent, View view, int pos, long id) {
@@ -76,7 +101,7 @@ public abstract class DetailSongAdapter extends BaseAdapter
         for(int i = 0; i < toPlay.length; i++) {
             toPlay[i] = getItem(position + i).mSongId;
         }
-        MusicUtils.playAll(mActivity, toPlay, -1, false);
+        MusicUtils.playAll(mActivity, toPlay, -1, getSourceId(), getSourceType(), false);
     }
 
     @Override // LoaderCallbacks
@@ -107,11 +132,13 @@ public abstract class DetailSongAdapter extends BaseAdapter
         protected ImageFetcher fetcher;
         protected TextView title;
         protected PopupMenuButton popupMenuButton;
+        protected ImageView playIcon;
 
         protected Holder(View root, ImageFetcher fetcher) {
             this.fetcher = fetcher;
             title = (TextView)root.findViewById(R.id.title);
             popupMenuButton = (PopupMenuButton)root.findViewById(R.id.overflow);
+            playIcon = (ImageView)root.findViewById(R.id.now_playing);
         }
 
         protected abstract void update(Song song);

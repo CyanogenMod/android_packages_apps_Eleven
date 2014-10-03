@@ -17,6 +17,7 @@ import android.os.Bundle;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.Loader;
 
+import com.cyngn.eleven.Config;
 import com.cyngn.eleven.adapters.PagerAdapter;
 import com.cyngn.eleven.loaders.SongLoader;
 import com.cyngn.eleven.model.Song;
@@ -41,7 +42,7 @@ public class SongFragment extends BasicSongFragment {
         int internalPosition = mAdapter.getInternalPosition(position);
         Cursor cursor = SongLoader.makeSongCursor(getActivity(), null);
         final long[] list = MusicUtils.getSongListForCursor(cursor);
-        MusicUtils.playAll(getActivity(), list, internalPosition, false);
+        MusicUtils.playAll(getActivity(), list, internalPosition, -1, Config.IdType.NA, false);
         cursor.close();
         cursor = null;
     }

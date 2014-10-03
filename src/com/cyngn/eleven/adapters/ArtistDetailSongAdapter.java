@@ -16,17 +16,21 @@ import com.cyngn.eleven.model.Song;
 import java.util.List;
 
 public abstract class ArtistDetailSongAdapter extends DetailSongAdapter {
-
     public ArtistDetailSongAdapter(Activity activity) {
         super(activity);
     }
 
     protected int rowLayoutId() { return R.layout.artist_detail_song; }
 
+    protected Config.IdType getSourceType() {
+        return Config.IdType.Artist;
+    }
+
     @Override // LoaderCallbacks
     public Loader<List<Song>> onCreateLoader(int id, Bundle args) {
         onLoading();
-        return new ArtistSongLoader(mActivity, args.getLong(Config.ID));
+        setSourceId(args.getLong(Config.ID));
+        return new ArtistSongLoader(mActivity, getSourceId());
     }
 
     protected Holder newHolder(View root, ImageFetcher fetcher) {

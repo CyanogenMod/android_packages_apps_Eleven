@@ -28,6 +28,7 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 
+import com.cyngn.eleven.Config;
 import com.cyngn.eleven.Config.SmartPlaylistType;
 import com.cyngn.eleven.MusicStateListener;
 import com.cyngn.eleven.R;
@@ -116,6 +117,16 @@ public class PlaylistFragment extends MusicBrowserFragment implements
                     return MusicUtils.getSongListForPlaylist(getActivity(),
                             mPlaylist.mPlaylistId);
                 }
+            }
+
+            @Override
+            protected long getSourceId() {
+                return mPlaylist.mPlaylistId;
+            }
+
+            @Override
+            protected Config.IdType getSourceType() {
+                return Config.IdType.Playlist;
             }
 
             @Override

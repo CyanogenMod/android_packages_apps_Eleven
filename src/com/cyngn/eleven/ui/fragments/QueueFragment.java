@@ -29,8 +29,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
-import android.widget.ProgressBar;
 
+import com.cyngn.eleven.Config;
 import com.cyngn.eleven.MusicPlaybackService;
 import com.cyngn.eleven.R;
 import com.cyngn.eleven.adapters.SongAdapter;
@@ -43,6 +43,7 @@ import com.cyngn.eleven.loaders.QueueLoader;
 import com.cyngn.eleven.menu.DeleteDialog;
 import com.cyngn.eleven.model.Song;
 import com.cyngn.eleven.recycler.RecycleHolder;
+import com.cyngn.eleven.service.MusicPlaybackTrack;
 import com.cyngn.eleven.ui.activities.SlidingPanelActivity;
 import com.cyngn.eleven.utils.MusicUtils;
 import com.cyngn.eleven.utils.PopupMenuHelper;
@@ -117,11 +118,13 @@ public class QueueFragment extends Fragment implements LoaderCallbacks<List<Song
         mPopupMenuHelper = new PopupMenuHelper(getActivity(), getFragmentManager()) {
             private Song mSong;
             private int mSelectedPosition;
+            private MusicPlaybackTrack mSelectedTrack;
 
             @Override
             protected PopupMenuType onPreparePopupMenu(int position) {
                 mSelectedPosition = position;
                 mSong = mAdapter.getItem(mSelectedPosition);
+                mSelectedTrack = MusicUtils.getTrack(mSelectedPosition);
 
                 return PopupMenuType.Queue;
             }
@@ -129,6 +132,24 @@ public class QueueFragment extends Fragment implements LoaderCallbacks<List<Song
             @Override
             protected long[] getIdList() {
                 return new long[] { mSong.mSongId };
+            }
+
+            @Override
+            protected long getSourceId() {
+                if (mSelectedTrack == null) {
+                    return -1;
+                }
+
+                return mSelectedTrack.mSourceId;
+            }
+
+            @Override
+            protected Config.IdType getSourceType() {
+                if (mSelectedTrack == null) {
+                    return Config.IdType.NA;
+                }
+
+                return mSelectedTrack.mSourceType;
             }
 
             @Override
@@ -149,7 +170,7 @@ public class QueueFragment extends Fragment implements LoaderCallbacks<List<Song
                 queue.removeItem(mSelectedPosition);
                 queue.close();
                 queue = null;
-                MusicUtils.playNext(getIdList());
+                MusicUtils.playNext(getIdList(), getSourceId(), getSourceType());
                 refreshQueue();
             }
 
@@ -161,7 +182,8 @@ public class QueueFragment extends Fragment implements LoaderCallbacks<List<Song
         };
 
         // Create the adapter
-        mAdapter = new SongAdapter(getActivity(), R.layout.edit_queue_list_item);
+        mAdapter = new SongAdapter(getActivity(), R.layout.edit_queue_list_item,
+                -1, Config.IdType.NA);
         mAdapter.setPopupMenuClickedListener(new IPopupMenuCallback.IListener() {
             @Override
             public void onPopupMenuClicked(View v, int position) {

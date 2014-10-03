@@ -7,6 +7,7 @@ import android.database.Cursor;
 import android.provider.MediaStore;
 import android.util.Log;
 
+import com.cyngn.eleven.Config;
 import com.cyngn.eleven.utils.MusicUtils;
 
 import java.util.Comparator;
@@ -58,6 +59,20 @@ public class SearchResult {
                         cursor.getColumnIndexOrThrow(MediaStore.Audio.Media.MIME_TYPE));
             } catch(IllegalArgumentException ex) {
                 return Unknown;
+            }
+        }
+
+        public Config.IdType getSourceType() {
+            switch (this) {
+                case Artist:
+                    return Config.IdType.Artist;
+                case Album:
+                    return Config.IdType.Album;
+                case Playlist:
+                    return Config.IdType.Playlist;
+                case Song:
+                default:
+                    return Config.IdType.NA;
             }
         }
     };

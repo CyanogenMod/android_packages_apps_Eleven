@@ -31,7 +31,6 @@ import java.util.List;
  * @author Andrew Neal (andrewdneal@gmail.com)
  */
 public class LastAddedLoader extends SectionCreator.SimpleListLoader<Song> {
-
     /**
      * The result
      */

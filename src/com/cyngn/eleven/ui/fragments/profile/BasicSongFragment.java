@@ -11,7 +11,6 @@
 
 package com.cyngn.eleven.ui.fragments.profile;
 
-import android.app.Activity;
 import android.os.Bundle;
 import android.os.SystemClock;
 import android.support.v4.app.Fragment;
@@ -26,6 +25,7 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 
+import com.cyngn.eleven.Config;
 import com.cyngn.eleven.MusicStateListener;
 import com.cyngn.eleven.R;
 import com.cyngn.eleven.adapters.SongAdapter;
@@ -33,7 +33,9 @@ import com.cyngn.eleven.model.Song;
 import com.cyngn.eleven.recycler.RecycleHolder;
 import com.cyngn.eleven.sectionadapter.SectionAdapter;
 import com.cyngn.eleven.sectionadapter.SectionListContainer;
+import com.cyngn.eleven.service.MusicPlaybackTrack;
 import com.cyngn.eleven.ui.activities.BaseActivity;
+import com.cyngn.eleven.utils.MusicUtils;
 import com.cyngn.eleven.utils.PopupMenuHelper;
 import com.cyngn.eleven.utils.SongPopupMenuHelper;
 import com.cyngn.eleven.widgets.IPopupMenuCallback;
@@ -94,6 +96,16 @@ public abstract class BasicSongFragment extends Fragment implements
             }
 
             @Override
+            protected long getSourceId() {
+                return getFragmentSourceId();
+            }
+
+            @Override
+            protected Config.IdType getSourceType() {
+                return getFragmentSourceType();
+            }
+
+            @Override
             protected void updateMenuIds(PopupMenuType type, TreeSet<Integer> set) {
                 super.updateMenuIds(type, set);
                 BasicSongFragment.this.updateMenuIds(set);
@@ -101,13 +113,21 @@ public abstract class BasicSongFragment extends Fragment implements
         };
 
         // Create the adapter
-        mAdapter = createAdapter();
+        mAdapter = new SectionAdapter(getActivity(), createAdapter());
         mAdapter.setPopupMenuClickedListener(new IPopupMenuCallback.IListener() {
             @Override
             public void onPopupMenuClicked(View v, int position) {
                 mPopupMenuHelper.showPopupMenu(v, position);
             }
         });
+    }
+
+    protected long getFragmentSourceId() {
+        return -1;
+    }
+
+    protected Config.IdType getFragmentSourceType() {
+        return Config.IdType.NA;
     }
 
     protected void updateMenuIds(TreeSet<Integer> set) {
@@ -245,12 +265,12 @@ public abstract class BasicSongFragment extends Fragment implements
      * If the subclasses want to use a customized SongAdapter they can override this method
      * @return the Song adapter
      */
-    protected SectionAdapter<Song, SongAdapter> createAdapter() {
-        return new SectionAdapter(getActivity(),
-                new SongAdapter(
-                    getActivity(),
-                    R.layout.list_item_normal
-                )
+    protected SongAdapter createAdapter() {
+        return new SongAdapter(
+            getActivity(),
+            R.layout.list_item_normal,
+            getFragmentSourceId(),
+            getFragmentSourceType()
         );
     }
 
@@ -264,7 +284,10 @@ public abstract class BasicSongFragment extends Fragment implements
 
     @Override
     public void onMetaChanged() {
-        // do nothing
+        MusicPlaybackTrack currentTrack = MusicUtils.getCurrentTrack();
+        if (mAdapter.getUnderlyingAdapter().setCurrentlyPlayingTrack(currentTrack)) {
+            mAdapter.notifyDataSetChanged();
+        }
     }
 
     @Override

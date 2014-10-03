@@ -16,6 +16,7 @@ import com.cyngn.eleven.model.Album;
 import com.cyngn.eleven.model.Song;
 import com.cyngn.eleven.utils.AlbumPopupMenuHelper;
 import com.cyngn.eleven.utils.GenreFetcher;
+import com.cyngn.eleven.utils.MusicUtils;
 import com.cyngn.eleven.utils.PopupMenuHelper;
 import com.cyngn.eleven.utils.SongPopupMenuHelper;
 import com.cyngn.eleven.widgets.IPopupMenuCallback;
@@ -114,6 +115,16 @@ public class AlbumDetailFragment extends BaseFragment {
             public Song getSong(int position) {
                 return mSongAdapter.getItem(position);
             }
+
+            @Override
+            protected long getSourceId() {
+                return mAlbumId;
+            }
+
+            @Override
+            protected Config.IdType getSourceType() {
+                return Config.IdType.Album;
+            }
         };
 
         mHeaderPopupMenuHelper = new AlbumPopupMenuHelper(getActivity(), getChildFragmentManager()) {
@@ -177,5 +188,12 @@ public class AlbumDetailFragment extends BaseFragment {
     @Override
     public void restartLoader() {
         getLoaderManager().restartLoader(LOADER_ID, getArguments(), mSongAdapter);
+    }
+
+    @Override
+    public void onMetaChanged() {
+        super.onMetaChanged();
+
+        mSongAdapter.setCurrentlyPlayingTrack(MusicUtils.getCurrentTrack());
     }
 }

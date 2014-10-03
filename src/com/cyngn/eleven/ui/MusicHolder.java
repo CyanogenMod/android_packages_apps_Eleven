@@ -77,6 +77,11 @@ public class MusicHolder {
     public WeakReference<View> mPlayPauseProgressContainer;
 
     /**
+     * The song indicator for the currently playing track
+     */
+    public WeakReference<View> mNowPlayingIndicator;
+
+    /**
      * The divider for the list item
      */
     public WeakReference<View> mDivider;
@@ -113,6 +118,8 @@ public class MusicHolder {
         // Get the padding container for the progress bar
         mPlayPauseProgressContainer = new WeakReference<View>(
                 view.findViewById(R.id.play_pause_container));
+
+        mNowPlayingIndicator = new WeakReference<View>(view.findViewById(R.id.now_playing));
 
         // Get the divider for the list item
         mDivider = new WeakReference<View>(view.findViewById(R.id.divider));

@@ -1,17 +1,17 @@
 package com.cyngn.eleven;
 
-import android.graphics.Bitmap;
+import com.cyngn.eleven.service.MusicPlaybackTrack;
 
 interface IElevenService
 {
     void openFile(String path);
-    void open(in long [] list, int position);
+    void open(in long [] list, int position, long sourceId, int sourceType);
     void stop();
     void pause();
     void play();
     void prev(boolean forcePrevious);
     void next();
-    void enqueue(in long [] list, int action);
+    void enqueue(in long [] list, int action, long sourceId, int sourceType);
     void setQueuePosition(int index);
     void setShuffleMode(int shufflemode);
     void setRepeatMode(int repeatmode);
@@ -27,6 +27,8 @@ interface IElevenService
     long position();
     long seek(long pos);
     long getAudioId();
+    MusicPlaybackTrack getCurrentTrack();
+    MusicPlaybackTrack getTrack(int index);
     long getNextAudioId();
     long getPreviousAudioId();
     long getArtistId();

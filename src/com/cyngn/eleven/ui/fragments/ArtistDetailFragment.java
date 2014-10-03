@@ -19,6 +19,7 @@ import com.cyngn.eleven.menu.FragmentMenuItems;
 import com.cyngn.eleven.model.Album;
 import com.cyngn.eleven.model.Song;
 import com.cyngn.eleven.utils.AlbumPopupMenuHelper;
+import com.cyngn.eleven.utils.MusicUtils;
 import com.cyngn.eleven.utils.SongPopupMenuHelper;
 import com.cyngn.eleven.widgets.IPopupMenuCallback;
 import com.cyngn.eleven.widgets.LoadingEmptyContainer;
@@ -48,6 +49,10 @@ public class ArtistDetailFragment extends DetailFragment {
     @Override
     protected String getTitle() {
         return getArguments().getString(Config.ARTIST_NAME);
+    }
+
+    protected long getArtistId() {
+        return getArguments().getLong(Config.ID);
     }
 
     @Override
@@ -129,6 +134,16 @@ public class ArtistDetailFragment extends DetailFragment {
             }
 
             @Override
+            protected long getSourceId() {
+                return getArtistId();
+            }
+
+            @Override
+            protected Config.IdType getSourceType() {
+                return Config.IdType.Artist;
+            }
+
+            @Override
             protected void updateMenuIds(PopupMenuType type, TreeSet<Integer> set) {
                 super.updateMenuIds(type, set);
 
@@ -164,5 +179,12 @@ public class ArtistDetailFragment extends DetailFragment {
         LoaderManager lm = getLoaderManager();
         lm.restartLoader(ALBUM_LOADER_ID, arguments, mAlbumAdapter);
         lm.restartLoader(SONG_LOADER_ID, arguments, mSongAdapter);
+    }
+
+    @Override
+    public void onMetaChanged() {
+        super.onMetaChanged();
+
+        mSongAdapter.setCurrentlyPlayingTrack(MusicUtils.getCurrentTrack());
     }
 }

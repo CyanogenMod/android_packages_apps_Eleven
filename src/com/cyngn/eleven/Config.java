@@ -98,4 +98,31 @@ public final class Config {
             return null;
         }
     }
+
+    /**
+     * This helps identify where an id has come from.  Mainly used to determine when a user
+     * clicks a song where that song came from (artist/album/playlist)
+     */
+    public static enum IdType {
+        NA(0),
+        Artist(1),
+        Album(2),
+        Playlist(3);
+
+        public final int mId;
+
+        IdType(final int id) {
+            mId = id;
+        }
+
+        public static IdType getTypeById(int id) {
+            for (IdType type : values()) {
+                if (type.mId == id) {
+                    return type;
+                }
+            }
+
+            throw new IllegalArgumentException("Unrecognized id: " + id);
+        }
+    }
 }

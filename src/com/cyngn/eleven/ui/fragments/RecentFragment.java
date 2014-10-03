@@ -11,11 +11,13 @@
 
 package com.cyngn.eleven.ui.fragments;
 
+import android.app.Activity;
 import android.os.Bundle;
 import android.support.v4.content.Loader;
 
 import com.cyngn.eleven.Config;
 import com.cyngn.eleven.R;
+import com.cyngn.eleven.adapters.SongAdapter;
 import com.cyngn.eleven.loaders.TopTracksLoader;
 import com.cyngn.eleven.menu.FragmentMenuItems;
 import com.cyngn.eleven.model.Song;
@@ -64,6 +66,8 @@ public class RecentFragment extends BasicSongFragment implements ISetupActionBar
      */
     @Override
     public void onMetaChanged() {
+        super.onMetaChanged();
+
         // refresh the list since a track playing means it should be recently played
         restartLoader();
     }
@@ -90,6 +94,37 @@ public class RecentFragment extends BasicSongFragment implements ISetupActionBar
     @Override
     public void setupActionBar() {
         ((BaseActivity)getActivity()).setupActionBar(R.string.playlist_recently_played);
+    }
+
+    @Override
+    protected long getFragmentSourceId() {
+        return Config.SmartPlaylistType.RecentlyPlayed.mId;
+    }
+
+    @Override
+    protected Config.IdType getFragmentSourceType() {
+        return Config.IdType.Playlist;
+    }
+
+    @Override
+    protected SongAdapter createAdapter() {
+        return new RecentAdapter(
+            getActivity(),
+            R.layout.list_item_normal,
+            getFragmentSourceId(),
+            getFragmentSourceType()
+        );
+    }
+
+    private class RecentAdapter extends SongAdapter {
+        public RecentAdapter(Activity context, int layoutId, long sourceId, Config.IdType sourceType) {
+            super(context, layoutId, sourceId, sourceType);
+        }
+
+        @Override
+        protected boolean showNowPlayingIndicator(Song song, int position) {
+            return position == 0 && super.showNowPlayingIndicator(song, position);
+        }
     }
 }
 

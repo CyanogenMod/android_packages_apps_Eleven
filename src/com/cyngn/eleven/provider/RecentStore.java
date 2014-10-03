@@ -18,7 +18,7 @@ import android.database.sqlite.SQLiteDatabase;
 
 public class RecentStore {
     /* Maximum # of items in the db */
-    private static final int MAX_ITEMS_IN_DB = 500;
+    private static final int MAX_ITEMS_IN_DB = 100;
 
     private static RecentStore sInstance = null;
 
@@ -40,6 +40,11 @@ public class RecentStore {
     }
 
     public void onUpgrade(final SQLiteDatabase db, final int oldVersion, final int newVersion) {
+        // No upgrade path needed yet
+    }
+
+    public void onDowngrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+        // If we ever have downgrade, drop the table to be safe
         db.execSQL("DROP TABLE IF EXISTS " + RecentStoreColumns.NAME);
         onCreate(db);
     }

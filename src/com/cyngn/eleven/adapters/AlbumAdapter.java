@@ -21,6 +21,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.cyngn.eleven.Config;
 import com.cyngn.eleven.R;
 import com.cyngn.eleven.cache.ImageFetcher;
 import com.cyngn.eleven.model.Album;
@@ -182,7 +183,7 @@ public class AlbumAdapter extends ArrayAdapter<Album>
             public void onClick(final View v) {
                 final long id = getItem(position).mAlbumId;
                 final long[] list = MusicUtils.getSongListForAlbum(getContext(), id);
-                MusicUtils.playAll(getContext(), list, 0, false);
+                MusicUtils.playAll(getContext(), list, 0, id, Config.IdType.Album, false);
             }
         });
     }
