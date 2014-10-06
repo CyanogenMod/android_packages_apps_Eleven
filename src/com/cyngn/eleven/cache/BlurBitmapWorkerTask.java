@@ -9,8 +9,6 @@ import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.TransitionDrawable;
-import android.support.v7.graphics.Palette;
-import android.support.v7.graphics.PaletteItem;
 import android.support.v8.renderscript.Allocation;
 import android.support.v8.renderscript.Element;
 import android.support.v8.renderscript.RenderScript;
@@ -121,8 +119,8 @@ public class BlurBitmapWorkerTask extends BitmapWorkerTask<String, Void, BlurBit
                 input = output;
             }
 
-            // calculate the palette color
-            result.mPaletteColor = getPaletteColorInBackground(output);
+            // Set the scrim color to be 50% gray
+            result.mPaletteColor = 0x7f000000;
 
             // create the bitmap transition drawable
             result.mImageViewBitmapDrawable = createImageTransitionDrawable(output,
@@ -132,55 +130,6 @@ public class BlurBitmapWorkerTask extends BitmapWorkerTask<String, Void, BlurBit
         }
 
         return null;
-    }
-
-    /**
-     * This will get the most vibrant palette color for a bitmap
-     * @param input to process
-     * @return the most vibrant color or transparent if none found
-     */
-    private int getPaletteColorInBackground(Bitmap input) {
-        int color = Color.TRANSPARENT;
-
-        if (input != null) {
-            Palette palette = Palette.generate(input);
-            PaletteItem paletteItem = palette.getVibrantColor();
-
-            // keep walking through the palette items to find a color if we don't have any
-            if (paletteItem == null) {
-                paletteItem = palette.getLightVibrantColor();
-            }
-
-            if (paletteItem == null) {
-                paletteItem = palette.getLightMutedColor();
-            }
-
-            if (paletteItem == null) {
-                paletteItem = palette.getLightMutedColor();
-            }
-
-            if (paletteItem == null) {
-                paletteItem = palette.getDarkVibrantColor();
-            }
-
-            if (paletteItem == null) {
-                paletteItem = palette.getMutedColor();
-            }
-
-            if (paletteItem == null) {
-                paletteItem = palette.getDarkMutedColor();
-            }
-
-            if (paletteItem != null) {
-                // grab the rgb values
-                color = paletteItem.getRgb() | 0xFFFFFF;
-
-                // make it 20% opacity
-                color &= 0x33000000;
-            }
-        }
-
-        return color;
     }
 
     /**

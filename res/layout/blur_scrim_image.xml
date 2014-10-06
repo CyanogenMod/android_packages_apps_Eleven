@@ -17,5 +17,6 @@
     <LinearLayout
         android:id="@+id/blurScrim"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="match_parent"
+        android:orientation="vertical"/>
 </com.cyngn.eleven.widgets.BlurScrimImage>

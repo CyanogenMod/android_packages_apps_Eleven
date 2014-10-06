@@ -31,21 +31,8 @@ import com.cyngn.eleven.widgets.theme.HoloSelector;
  * @author Andrew Neal (andrewdneal@gmail.com)
  */
 public class RepeatButton extends ImageButton implements OnClickListener, OnLongClickListener {
-
-    /**
-     * Repeat one theme resource
-     */
-    private static final String REPEAT_ALL = "btn_playback_repeat_all";
-
-    /**
-     * Repeat one theme resource
-     */
-    private static final String REPEAT_CURRENT = "btn_playback_repeat_one";
-
-    /**
-     * Repeat one theme resource
-     */
-    private static final String REPEAT_NONE = "btn_playback_repeat";
+    public static float ACTIVE_ALPHA = 1.0f;
+    public static float INACTIVE_ALPHA = 0.4f;
 
     /**
      * @param context The {@link Context} to use
@@ -92,14 +79,17 @@ public class RepeatButton extends ImageButton implements OnClickListener, OnLong
             case MusicPlaybackService.REPEAT_ALL:
                 setContentDescription(getResources().getString(R.string.accessibility_repeat_all));
                 setImageDrawable(getResources().getDrawable(R.drawable.btn_playback_repeat_all));
+                setAlpha(ACTIVE_ALPHA);
                 break;
             case MusicPlaybackService.REPEAT_CURRENT:
                 setContentDescription(getResources().getString(R.string.accessibility_repeat_one));
                 setImageDrawable(getResources().getDrawable(R.drawable.btn_playback_repeat_one));
+                setAlpha(ACTIVE_ALPHA);
                 break;
             case MusicPlaybackService.REPEAT_NONE:
                 setContentDescription(getResources().getString(R.string.accessibility_repeat));
-                setImageDrawable(getResources().getDrawable(R.drawable.btn_playback_repeat));
+                setImageDrawable(getResources().getDrawable(R.drawable.btn_playback_repeat_all));
+                setAlpha(INACTIVE_ALPHA);
                 break;
             default:
                 break;

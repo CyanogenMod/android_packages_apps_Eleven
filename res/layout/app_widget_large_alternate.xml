@@ -85,7 +85,7 @@
             android:contentDescription="@string/accessibility_shuffle"
             android:padding="@dimen/notification_expanded_button_padding"
             android:scaleType="fitCenter"
-            android:src="@drawable/btn_playback_shuffle" />
+            android:src="@drawable/btn_playback_shuffle_all" />
 
         <ImageButton
             android:id="@+id/app_widget_large_alternate_previous"
@@ -128,7 +128,7 @@
             android:contentDescription="@string/accessibility_repeat"
             android:padding="@dimen/notification_expanded_button_padding"
             android:scaleType="fitCenter"
-            android:src="@drawable/btn_playback_repeat" />
+            android:src="@drawable/btn_playback_repeat_all" />
     </LinearLayout>
 
 </GridLayout>

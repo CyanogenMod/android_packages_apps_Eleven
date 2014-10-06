@@ -134,7 +134,7 @@
                     android:layout_alignLeft="@id/audio_player_current_time"
                     android:contentDescription="@string/accessibility_shuffle"
                     android:scaleType="center"
-                    android:src="@drawable/btn_playback_shuffle" />
+                    android:src="@drawable/btn_playback_shuffle_all" />
             </RelativeLayout>
 
             <!-- This is the right side of the progress bar - it has the next
@@ -173,7 +173,7 @@
                     android:contentDescription="@string/accessibility_repeat"
                     android:focusable="true"
                     android:scaleType="center"
-                    android:src="@drawable/btn_playback_repeat" />
+                    android:src="@drawable/btn_playback_repeat_all" />
 
             </RelativeLayout>
 

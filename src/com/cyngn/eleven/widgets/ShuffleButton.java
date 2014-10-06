@@ -29,16 +29,8 @@ import com.cyngn.eleven.widgets.theme.HoloSelector;
  * @author Andrew Neal (andrewdneal@gmail.com)
  */
 public class ShuffleButton extends ImageButton implements OnClickListener, OnLongClickListener {
-
-    /**
-     * Shuffle theme resource
-     */
-    private static final String SHUFFLE = "btn_playback_shuffle";
-
-    /**
-     * Shuffle all theme resource
-     */
-    private static final String SHUFFLE_ALL = "btn_playback_shuffle_all";
+    public static float ACTIVE_ALPHA = 1.0f;
+    public static float INACTIVE_ALPHA = 0.4f;
 
     /**
      * @param context The {@link Context} to use
@@ -84,15 +76,15 @@ public class ShuffleButton extends ImageButton implements OnClickListener, OnLon
         switch (MusicUtils.getShuffleMode()) {
             case MusicPlaybackService.SHUFFLE_NORMAL:
                 setContentDescription(getResources().getString(R.string.accessibility_shuffle_all));
-                setImageDrawable(getResources().getDrawable(R.drawable.btn_playback_shuffle_all));
+                setAlpha(ACTIVE_ALPHA);
                 break;
             case MusicPlaybackService.SHUFFLE_AUTO:
                 setContentDescription(getResources().getString(R.string.accessibility_shuffle_all));
-                setImageDrawable(getResources().getDrawable(R.drawable.btn_playback_shuffle_all));
+                setAlpha(ACTIVE_ALPHA);
                 break;
             case MusicPlaybackService.SHUFFLE_NONE:
                 setContentDescription(getResources().getString(R.string.accessibility_shuffle));
-                setImageDrawable(getResources().getDrawable(R.drawable.btn_playback_shuffle));
+                setAlpha(INACTIVE_ALPHA);
                 break;
             default:
                 break;

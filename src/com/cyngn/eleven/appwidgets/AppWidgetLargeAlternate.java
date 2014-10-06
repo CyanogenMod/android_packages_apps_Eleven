@@ -25,6 +25,8 @@ import com.cyngn.eleven.R;
 import com.cyngn.eleven.ui.activities.HomeActivity;
 import com.cyngn.eleven.ui.fragments.AudioPlayerFragment;
 import com.cyngn.eleven.utils.ApolloUtils;
+import com.cyngn.eleven.widgets.RepeatButton;
+import com.cyngn.eleven.widgets.ShuffleButton;
 
 /**
  * 4x2 App-Widget
@@ -147,14 +149,20 @@ public class AppWidgetLargeAlternate extends AppWidgetBase {
             case MusicPlaybackService.REPEAT_ALL:
                 appWidgetView.setImageViewResource(R.id.app_widget_large_alternate_repeat,
                         R.drawable.btn_playback_repeat_all);
+                appWidgetView.setInt(R.id.app_widget_large_alternate_repeat, "setAlpha",
+                        (int)(RepeatButton.ACTIVE_ALPHA * 255));
                 break;
             case MusicPlaybackService.REPEAT_CURRENT:
                 appWidgetView.setImageViewResource(R.id.app_widget_large_alternate_repeat,
                         R.drawable.btn_playback_repeat_one);
+                appWidgetView.setInt(R.id.app_widget_large_alternate_repeat, "setAlpha",
+                        (int)(RepeatButton.ACTIVE_ALPHA * 255));
                 break;
             default:
                 appWidgetView.setImageViewResource(R.id.app_widget_large_alternate_repeat,
-                        R.drawable.btn_playback_repeat);
+                        R.drawable.btn_playback_repeat_all);
+                appWidgetView.setInt(R.id.app_widget_large_alternate_repeat, "setAlpha",
+                        (int)(RepeatButton.INACTIVE_ALPHA * 255));
                 break;
         }
 
@@ -162,15 +170,17 @@ public class AppWidgetLargeAlternate extends AppWidgetBase {
         switch (service.getShuffleMode()) {
             case MusicPlaybackService.SHUFFLE_NONE:
                 appWidgetView.setImageViewResource(R.id.app_widget_large_alternate_shuffle,
-                        R.drawable.btn_playback_shuffle);
+                        R.drawable.btn_playback_shuffle_all);
+                appWidgetView.setInt(R.id.app_widget_large_alternate_shuffle, "setAlpha",
+                        (int)(ShuffleButton.INACTIVE_ALPHA * 255));
                 break;
             case MusicPlaybackService.SHUFFLE_AUTO:
-                appWidgetView.setImageViewResource(R.id.app_widget_large_alternate_shuffle,
-                        R.drawable.btn_playback_shuffle_all);
-                break;
+            case MusicPlaybackService.SHUFFLE_NORMAL:
             default:
                 appWidgetView.setImageViewResource(R.id.app_widget_large_alternate_shuffle,
                         R.drawable.btn_playback_shuffle_all);
+                appWidgetView.setInt(R.id.app_widget_large_alternate_shuffle, "setAlpha",
+                        (int)(ShuffleButton.ACTIVE_ALPHA * 255));
                 break;
         }
 

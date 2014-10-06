@@ -9,6 +9,7 @@ import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.TransitionDrawable;
 import android.util.AttributeSet;
+import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 
@@ -18,6 +19,7 @@ import com.cyngn.eleven.cache.ImageWorker;
 
 public class BlurScrimImage extends FrameLayout {
     private ImageView mImageView;
+    private View mBlurScrim;
 
     private boolean mUsingDefaultBlur;
 
@@ -34,6 +36,7 @@ public class BlurScrimImage extends FrameLayout {
         super.onFinishInflate();
 
         mImageView = (ImageView)findViewById(R.id.blurImage);
+        mBlurScrim = findViewById(R.id.blurScrim);
     }
 
     public ImageView getImageView() {
@@ -71,7 +74,7 @@ public class BlurScrimImage extends FrameLayout {
             return;
         }
 
-        setBackground(paletteTransition);
+        mBlurScrim.setBackground(paletteTransition);
         mImageView.setImageDrawable(imageTransition);
         mUsingDefaultBlur = defaultBlur;
     }
