@@ -64,9 +64,9 @@ public class ProfileSongAdapter extends ArrayAdapter<Song> implements IPopupMenu
     private static final int ITEM_VIEW_TYPE_MUSIC = 1;
 
     /**
-     * Number of views (ImageView, TextView, header)
+     * Number of views (List Items, header)
      */
-    private static final int VIEW_TYPE_COUNT = 3;
+    private static final int VIEW_TYPE_COUNT = 2;
 
     /**
      * LayoutInflater
@@ -74,9 +74,9 @@ public class ProfileSongAdapter extends ArrayAdapter<Song> implements IPopupMenu
     private final LayoutInflater mInflater;
 
     /**
-     * Fake header
+     * Fake header Id
      */
-    private final View mHeader;
+    private final int mHeaderId;
 
     /**
      * The resource Id of the layout to inflate
@@ -115,7 +115,7 @@ public class ProfileSongAdapter extends ArrayAdapter<Song> implements IPopupMenu
         // Used to create the custom layout
         mInflater = LayoutInflater.from(activity);
         // Cache the header
-        mHeader = mInflater.inflate(headerId, null);
+        mHeaderId = headerId;
         // Get the layout Id
         mLayoutId = layoutId;
         // Know what to put in line two
@@ -132,7 +132,11 @@ public class ProfileSongAdapter extends ArrayAdapter<Song> implements IPopupMenu
 
         // Return a faux header at position 0
         if (position == 0) {
-            return mHeader;
+            if (convertView == null) {
+                convertView = LayoutInflater.from(getContext()).inflate(mHeaderId, parent, false);
+            }
+
+            return convertView;
         }
 
         // Recycle MusicHolder's items
