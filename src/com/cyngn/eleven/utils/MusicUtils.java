@@ -1337,7 +1337,10 @@ public final class MusicUtils {
                 return mService.position();
             } catch (final RemoteException ignored) {
             } catch (final IllegalStateException ex) {
-                Log.e(MusicUtils.class.getSimpleName(), ex.getMessage());
+                // Illegal State Exception message is empty so logging will actually throw an
+                // exception.  We should come back and figure out why we get an exception in the
+                // first place and make sure we understand it completely.  I will use
+                // https://cyanogen.atlassian.net/browse/MUSIC-125 to track investigating this more
             }
         }
         return 0;
@@ -1352,6 +1355,10 @@ public final class MusicUtils {
                 return mService.duration();
             } catch (final RemoteException ignored) {
             } catch (final IllegalStateException ignored) {
+                // Illegal State Exception message is empty so logging will actually throw an
+                // exception.  We should come back and figure out why we get an exception in the
+                // first place and make sure we understand it completely.  I will use
+                // https://cyanogen.atlassian.net/browse/MUSIC-125 to track investigating this more
             }
         }
         return 0;

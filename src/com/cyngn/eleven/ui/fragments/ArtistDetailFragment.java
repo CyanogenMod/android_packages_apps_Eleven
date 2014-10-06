@@ -154,7 +154,7 @@ public class ArtistDetailFragment extends DetailFragment {
     }
 
     // TODO: change this class to use the same header strategy as PlaylistDetail
-    protected int getHeaderHeight() { return 0; }
+    protected int getHeaderHeight() { return mHero.getHeight(); }
 
     protected void setHeaderPosition(float y) {  }
 
