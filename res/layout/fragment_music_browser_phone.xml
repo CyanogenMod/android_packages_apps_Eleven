@@ -43,6 +43,4 @@
             android:layout_below="@+id/fragment_home_phone_pager_titles" />
     </RelativeLayout>
 
-    <include layout="@layout/top_shadow" />
-
 </FrameLayout>
