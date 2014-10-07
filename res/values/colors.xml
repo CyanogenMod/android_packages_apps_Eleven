@@ -84,6 +84,7 @@
     <color name="list_item_text_color">@color/default_text_color</color>
     <color name="list_item_text_color_light">@color/default_text_color_light</color>
     <color name="list_item_divider_color">#4c231f20</color>
+    <color name="list_item_divider_color_light">#34ffffff</color>
     <color name="grid_list_item_text_color">#b3231f20</color>
 
     <!-- Top title page colors -->
