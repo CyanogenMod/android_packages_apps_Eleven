@@ -23,18 +23,11 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent" >
 
-        <com.viewpagerindicator.TitlePageIndicator
-            xmlns:tpi="http://schemas.android.com/apk/res-auto"
+        <com.viewpagerindicator.TabPageIndicator
             android:id="@+id/fragment_home_phone_pager_titles"
             android:background="@color/tpi_background_color"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/tpi_height"
-            android:textColor="@color/tpi_text_color"
-            tpi:boldAll="true"
-            tpi:selectedColor="@color/tpi_selected_text_color"
-            tpi:footerLineHeight="@dimen/tpi_footer_line_height"
-            tpi:footerIndicatorHeight="@dimen/tpi_footer_indicator_height"
-            android:textSize="@dimen/tpi_text_size" />
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/tpi_height" />
 
         <android.support.v4.view.ViewPager
             android:id="@+id/fragment_home_phone_pager"

@@ -27,6 +27,7 @@
         <item name="android:actionOverflowButtonStyle">@style/ActionOverFlowButton</item>
         <item name="android:actionBarWidgetTheme">@style/ActionBarWidgetTheme</item>
         <item name="android:homeAsUpIndicator">@drawable/ic_action_back</item>
+        <item name="vpiTabPageIndicatorStyle">@style/Eleven.TabPageIndicator</item>
     </style>
 
     <style name="ActionBarWidgetTheme" parent="@android:style/Theme.Holo">
@@ -225,8 +226,18 @@
         <item name="android:scaleType">centerInside</item>
     </style>
 
-    <style name="BottomActionBarItem.Play" parent="@style/BottomActionBarItem">
-
+    <style name="Eleven.TabPageIndicator" parent="@style/Widget">
+        <item name="android:gravity">center</item>
+        <item name="android:background">@drawable/tabpageindicator</item>
+        <item name="android:paddingLeft">22dp</item>
+        <item name="android:paddingRight">22dp</item>
+        <item name="android:textAppearance">@style/Eleven.TextAppearance.TabPageIndicator</item>
+        <item name="android:textSize">@dimen/tpi_text_size</item>
+        <item name="android:maxLines">1</item>
     </style>
 
+    <style name="Eleven.TextAppearance.TabPageIndicator" parent="Widget">
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@color/tpi_text_color</item>
+    </style>
 </resources>

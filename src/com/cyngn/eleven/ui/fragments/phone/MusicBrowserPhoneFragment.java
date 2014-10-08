@@ -29,8 +29,7 @@ import com.cyngn.eleven.ui.fragments.SongFragment;
 import com.cyngn.eleven.utils.MusicUtils;
 import com.cyngn.eleven.utils.PreferenceUtils;
 import com.cyngn.eleven.utils.SortOrder;
-import com.viewpagerindicator.TitlePageIndicator;
-import com.viewpagerindicator.TitlePageIndicator.OnCenterItemClickListener;
+import com.viewpagerindicator.TabPageIndicator;
 
 /**
  * This class is used to hold the {@link ViewPager} used for swiping between the
@@ -44,8 +43,7 @@ import com.viewpagerindicator.TitlePageIndicator.OnCenterItemClickListener;
  *        Apollo for a couple of weeks or so before merging it with CM.
  * @author Andrew Neal (andrewdneal@gmail.com)
  */
-public class MusicBrowserPhoneFragment extends BaseFragment implements
-        OnCenterItemClickListener {
+public class MusicBrowserPhoneFragment extends BaseFragment {
 
     /**
      * Pager
@@ -108,12 +106,10 @@ public class MusicBrowserPhoneFragment extends BaseFragment implements
         mViewPager.setCurrentItem(mPreferences.getStartPage());
 
         // Initialze the TPI
-        final TitlePageIndicator pageIndicator = (TitlePageIndicator)mRootView
+        final TabPageIndicator pageIndicator = (TabPageIndicator)mRootView
                 .findViewById(R.id.fragment_home_phone_pager_titles);
         // Attach the ViewPager
         pageIndicator.setViewPager(mViewPager);
-        // Scroll to the current artist, album, or song
-        pageIndicator.setOnCenterItemClickListener(this);
     }
 
     /**
@@ -259,23 +255,6 @@ public class MusicBrowserPhoneFragment extends BaseFragment implements
                 break;
         }
         return super.onOptionsItemSelected(item);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void onCenterItemClick(final int position) {
-        // If on the artist fragment, scrolls to the current artist
-        if (position == MusicFragments.ARTIST.ordinal()) {
-            getArtistFragment().scrollToCurrentArtist();
-            // If on the album fragment, scrolls to the current album
-        } else if (position == MusicFragments.ALBUM.ordinal()) {
-            getAlbumFragment().scrollToCurrentAlbum();
-            // If on the song fragment, scrolls to the current song
-        } else if (position == MusicFragments.SONG.ordinal()) {
-            getSongFragment().scrollToCurrentSong();
-        }
     }
 
     private boolean isArtistPage() {
