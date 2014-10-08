@@ -28,21 +28,12 @@
   <string name="menu_shuffle_all">Sekoita kaikki</string>
   <string name="menu_play_all">Toista kaikki</string>
   <string name="menu_sort_by">Lajittelujärjestys</string>
-  <string name="menu_shop">Osta teemoja</string>
   <string name="menu_clear_recents">Tyhjennä äskettäin kuunnellut</string>
   <string name="menu_clear_queue">Tyhjennä jono</string>
   <string name="menu_save_queue">Tallenna jono</string>
-  <string name="menu_share">Jaa</string>
-  <string name="menu_add_to_homescreen">Lisää kotinäytölle</string>
   <string name="menu_equalizer">Taajuuskorjain</string>
-  <string name="menu_simple">Yksinkertainen</string>
-  <string name="menu_detailed">Yksityiskohtainen</string>
-  <string name="menu_grid">Ruudukko</string>
-  <string name="menu_view_as">Näytä</string>
   <string name="add_to_playlist">Lisää soittolistalle</string>
-  <string name="add_to_favorites">Lisää suosikkeihin</string>
   <string name="add_to_queue">Lisää jonoon</string>
-  <string name="remove_from_favorites">Poista suosikeista</string>
   <string name="remove_from_recent">Poista äskettäin kuunnelluista</string>
   <string name="remove_from_queue">Poista jonosta</string>
   <string name="sort_order_entry_az">A-Z</string>
@@ -56,8 +47,6 @@
   <string name="sort_order_entry_number_of_songs">Kappaleiden määrä</string>
   <string name="sort_order_entry_number_of_albums">Albumeiden määrä</string>
   <string name="sort_order_entry_filename">Tiedostonimi</string>
-  <string name="playlist_favorite">Suosikki</string>
-  <string name="playlist_favorites">Suosikit</string>
   <string name="playlist_last_added">Viimeksi lisätyt</string>
   <string name="new_playlist">Uusi soittolista</string>
   <string name="save">Tallenna</string>
@@ -79,7 +68,6 @@
   <string name="context_menu_delete">Poista</string>
   <string name="context_menu_fetch_album_art">Hae albumin kansikuva</string>
   <string name="context_menu_fetch_artist_image">Hae esittäjän kuva</string>
-  <string name="context_menu_open_in_play_store">Avaa Play-kaupassa</string>
   <string name="context_menu_remove_from_recent">Poista äskettäin kuunnelluista</string>
   <string name="context_menu_use_as_ringtone">Käytä soittoäänenä</string>
   <string name="context_menu_remove_from_playlist">Poista soittolistalta</string>
@@ -92,35 +80,17 @@
   <string name="accessibility_repeat">Uudelleentoisto</string>
   <string name="accessibility_repeat_all">Uudelleentoista kaikki</string>
   <string name="accessibility_repeat_one">Uudelleentoista yksi</string>
-  <string name="pinned_to_home_screen"><xliff:g id="name">%s</xliff:g> lisätty kotinäytölle</string>
-  <string name="could_not_be_pinned_to_home_screen"><xliff:g id="name">%s</xliff:g> - ei voitu lisätä kotinäytölle</string>
   <string name="set_as_ringtone">\'<xliff:g id="name" example="Alarm Bell">%s</xliff:g>\' asetettu soittoääneksi</string>
   <string name="playlist_renamed">Soittolista nimetty uudelleen</string>
-  <string name="theme_set"><xliff:g id="name">%s</xliff:g> asetettu teemaksi</string>
   <string name="settings_ui_category">Käyttöliittymä</string>
   <string name="settings_storage_category">Tallennustila</string>
   <string name="settings_data_category">Tiedot</string>
-  <string name="settings_about_category">Tietoja</string>
-  <string name="settings_author_title">Tekijä</string>
-  <string name="settings_about_apollo">Tietoja Apollosta</string>
-  <string name="settings_special_thanks">Erityiskiitokset</string>
-  <string name="settings_lopez_summary">Kuvakkeen ja Play-kaupan bannerin suunnittelu</string>
-  <string name="settings_color_scheme_title">Valitse Apollon oletusväriteema</string>
-  <string name="settings_color_scheme_summary">Vaihtaa Apollon väriteemaa</string>
-  <string name="settings_theme_chooser_title">Teemanvalitsin</string>
   <string name="settings_delete_cache_title">Poista välimuisti</string>
   <string name="settings_delete_cache_summary">Poista kaikki välimuistissa olevat kuvat</string>
   <string name="settings_download_only_on_wifi_title">Lataa vain Wi-Fi-yhteydellä </string>
   <string name="settings_download_only_on_wifi_summary">Kuvia ei ladata mobiiliverkon kautta</string>
   <string name="settings_download_missing_artwork_title">Lataa albumin puuttuva kansikuva</string>
   <string name="settings_download_artist_images_title">Lataa puuttuvat esittäjän kuvat</string>
-  <string name="settings_open_source_licenses">Avoimen lähdekoodin lisenssit</string>
-  <string name="settings_version_title">Versionumero</string>
-  <string name="now_listening_to">#NowPlaying <xliff:g id="title">%1$s</xliff:g> esittäjältä <xliff:g id="artist">%2$s</xliff:g> #Apollo</string>
-  <string name="share_track_using">Jaa kappale palvelussa:</string>
-  <string name="color_picker_title">Väriteema</string>
-  <string name="current_color">Nykyinen</string>
-  <string name="new_color">Uusi</string>
   <string name="app_widget_large_alt">Apollo: 4×2 (vaihtoehtoinen)</string>
   <string name="app_widget_recent">Apollo: äskettäin kuunneltu</string>
   <string name="no_effects_for_you">Taajuuskorjainta ei voitu avata.</string>

@@ -28,21 +28,12 @@
   <string name="menu_shuffle_all">Bland alle</string>
   <string name="menu_play_all">Spill alle</string>
   <string name="menu_sort_by">Sorter etter</string>
-  <string name="menu_shop">Se etter nye tema</string>
   <string name="menu_clear_recents">Slett siste</string>
   <string name="menu_clear_queue">Slett kø</string>
   <string name="menu_save_queue">Lagre køen</string>
-  <string name="menu_share">Del</string>
-  <string name="menu_add_to_homescreen">Fest til hjemmeskjermen</string>
   <string name="menu_equalizer">Equalizer</string>
-  <string name="menu_simple">Enkel</string>
-  <string name="menu_detailed">Detaljert</string>
-  <string name="menu_grid">Rutenett</string>
-  <string name="menu_view_as">Vis som</string>
   <string name="add_to_playlist">Legg til i spilleliste</string>
-  <string name="add_to_favorites">Legg til som favoritt</string>
   <string name="add_to_queue">Legg til i køen</string>
-  <string name="remove_from_favorites">Fjern fra favoritter</string>
   <string name="remove_from_recent">Fjern fra siste</string>
   <string name="remove_from_queue">Fjern fra køen</string>
   <string name="sort_order_entry_az">A-Å</string>
@@ -56,8 +47,6 @@
   <string name="sort_order_entry_number_of_songs">Antall sanger</string>
   <string name="sort_order_entry_number_of_albums">Antall album</string>
   <string name="sort_order_entry_filename">Filnavn</string>
-  <string name="playlist_favorite">Favoritt</string>
-  <string name="playlist_favorites">Favoritter</string>
   <string name="playlist_last_added">Nylige</string>
   <string name="new_playlist">Ny spilleliste</string>
   <string name="save">Lagre</string>
@@ -79,7 +68,6 @@
   <string name="context_menu_delete">Slett</string>
   <string name="context_menu_fetch_album_art">Hent albumcover</string>
   <string name="context_menu_fetch_artist_image">Hent artistbilder</string>
-  <string name="context_menu_open_in_play_store">Åpne i Google Play</string>
   <string name="context_menu_remove_from_recent">Fjern fra nylige</string>
   <string name="context_menu_use_as_ringtone">Bruk som ringetone</string>
   <string name="context_menu_remove_from_playlist">Fjern fra spillelisten</string>
@@ -92,35 +80,17 @@
   <string name="accessibility_repeat">Gjenta</string>
   <string name="accessibility_repeat_all">Gjenta alle</string>
   <string name="accessibility_repeat_one">Gjenta én</string>
-  <string name="pinned_to_home_screen"><xliff:g id="name">%s</xliff:g> ble festet til hjemmeskjermen</string>
-  <string name="could_not_be_pinned_to_home_screen"><xliff:g id="name">%s</xliff:g> kunne ikke festes til hjemmeskjermen</string>
   <string name="set_as_ringtone">\'<xliff:g id="name" example="Alarm Bell">%s</xliff:g>\' ble satt som ringetone</string>
   <string name="playlist_renamed">Spillelisten fikk et nytt navn</string>
-  <string name="theme_set"><xliff:g id="name">%s</xliff:g> satt som tema</string>
   <string name="settings_ui_category">Grensesnitt</string>
   <string name="settings_storage_category">Lagring</string>
   <string name="settings_data_category">Data</string>
-  <string name="settings_about_category">Om</string>
-  <string name="settings_author_title">Skrevet av</string>
-  <string name="settings_about_apollo">Om Apollo</string>
-  <string name="settings_special_thanks">Spesielt takk til</string>
-  <string name="settings_lopez_summary">Ikon og Google Play banner design</string>
-  <string name="settings_color_scheme_title">Velg Apollo\'s standard fargevalg</string>
-  <string name="settings_color_scheme_summary">Endre hovedfargen i Apollo</string>
-  <string name="settings_theme_chooser_title">Temavelger</string>
   <string name="settings_delete_cache_title">Slett mellomlager</string>
   <string name="settings_delete_cache_summary">Slett alle mellomlagrede bilder</string>
   <string name="settings_download_only_on_wifi_title">Last ned kun med Wi-Fi</string>
   <string name="settings_download_only_on_wifi_summary">For å redusere operatøravgifter, ikke last ned over mobilnett</string>
   <string name="settings_download_missing_artwork_title">Last ned manglende albumcover</string>
   <string name="settings_download_artist_images_title">Last ned manglende artist bilder</string>
-  <string name="settings_open_source_licenses">Åpen kildekode-lisenser</string>
-  <string name="settings_version_title">Versjonsnummer</string>
-  <string name="now_listening_to">#NowPlaying <xliff:g id="title">%1$s</xliff:g> by <xliff:g id="artist">%2$s</xliff:g> #Apollo</string>
-  <string name="share_track_using">Del spor med:</string>
-  <string name="color_picker_title">Fargevalg</string>
-  <string name="current_color">Nåværende</string>
-  <string name="new_color">Ny</string>
   <string name="app_widget_large_alt">Apollo: 4×2 (alternativ)</string>
   <string name="app_widget_recent">Apollo: nylig lyttet til</string>
   <string name="no_effects_for_you">Equalizeren kan ikke åpnes.</string>

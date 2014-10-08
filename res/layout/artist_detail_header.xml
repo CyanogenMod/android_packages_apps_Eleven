@@ -17,6 +17,7 @@
         android:layout_below="@id/hero"
         android:gravity="center_vertical"
         android:fontFamily="sans-serif-light"
+        android:textAllCaps="true"
         android:textColor="@color/list_item_header_text_color"
         android:textSize="@dimen/text_size_medium"
         android:text="@string/header_albums" />
@@ -36,6 +37,7 @@
         android:layout_below="@id/albums"
         android:gravity="bottom"
         android:fontFamily="sans-serif-light"
+        android:textAllCaps="true"
         android:textColor="@color/list_item_header_text_color"
         android:textSize="@dimen/text_size_medium"
         android:text="@string/header_all_songs" />

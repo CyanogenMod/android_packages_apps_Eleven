@@ -28,21 +28,12 @@
   <string name="menu_shuffle_all">Ausazko erreprodukzioa</string>
   <string name="menu_play_all">Dena erreproduzitu</string>
   <string name="menu_sort_by">Honela ordenatu</string>
-  <string name="menu_shop">Gaiak deskargatu</string>
   <string name="menu_clear_recents">Berrikiak garbitu</string>
   <string name="menu_clear_queue">Ilara garbitu</string>
   <string name="menu_save_queue">Ilara gorde</string>
-  <string name="menu_share">Elkarbanatu</string>
-  <string name="menu_add_to_homescreen">Mahaigainera gehitu</string>
   <string name="menu_equalizer">Ekualizadorea</string>
-  <string name="menu_simple">Sinplea</string>
-  <string name="menu_detailed">Zehaztua</string>
-  <string name="menu_grid">Mosaikoa</string>
-  <string name="menu_view_as">Diseinua</string>
   <string name="add_to_playlist">Zerrendara gehitu</string>
-  <string name="add_to_favorites">Gogokoetara gehitu</string>
   <string name="add_to_queue">Ilarara gehitu</string>
-  <string name="remove_from_favorites">Gogokoetatik kendu</string>
   <string name="remove_from_recent">Berrikietatik kendu</string>
   <string name="remove_from_queue">Ilaratik kendu</string>
   <string name="sort_order_entry_az">A-Z</string>
@@ -56,8 +47,6 @@
   <string name="sort_order_entry_number_of_songs">Abesti kantitatea</string>
   <string name="sort_order_entry_number_of_albums">Album kantitatea</string>
   <string name="sort_order_entry_filename">Fitxategi izena</string>
-  <string name="playlist_favorite">Gogokoa</string>
-  <string name="playlist_favorites">Gogokoak</string>
   <string name="playlist_last_added">Berriki gehituak</string>
   <string name="new_playlist">Zerrenda berria</string>
   <string name="save">Gorde</string>
@@ -79,7 +68,6 @@
   <string name="context_menu_delete">Ezabatu</string>
   <string name="context_menu_fetch_album_art">Albumaren karatula lortu</string>
   <string name="context_menu_fetch_artist_image">Artistaren argazkia lortu</string>
-  <string name="context_menu_open_in_play_store">Play Store-n ireki</string>
   <string name="context_menu_remove_from_recent">Berrikietatik kendu</string>
   <string name="context_menu_use_as_ringtone">Dei doinu bezala erabili</string>
   <string name="context_menu_remove_from_playlist">Zerrendatik kendu</string>
@@ -92,35 +80,17 @@
   <string name="accessibility_repeat">Errepikatu</string>
   <string name="accessibility_repeat_all">Dena errepikatu</string>
   <string name="accessibility_repeat_one">Bat errepikatu</string>
-  <string name="pinned_to_home_screen"><xliff:g id="name">%s</xliff:g> mahaigainera gehituta</string>
-  <string name="could_not_be_pinned_to_home_screen">Ezin izan da <xliff:g id="name">%s</xliff:g> mahaigainera gehitu</string>
   <string name="set_as_ringtone">\u00AB<xliff:g id="name" example="Alarm Bell">%s</xliff:g>\u00BB dei doinu bezala ezarrita</string>
   <string name="playlist_renamed">Zerrenda berrizendatua</string>
-  <string name="theme_set"><xliff:g id="name">%s</xliff:g> gai bezala ezarria</string>
   <string name="settings_ui_category">Itxura</string>
   <string name="settings_storage_category">Biltegiratzea</string>
   <string name="settings_data_category">Datuak</string>
-  <string name="settings_about_category">Honi buruz</string>
-  <string name="settings_author_title">Autorea</string>
-  <string name="settings_about_apollo">Apollo-ri buruz</string>
-  <string name="settings_special_thanks">Eskerrak</string>
-  <string name="settings_lopez_summary">Ikonoak eta diseinuak Play Store-n</string>
-  <string name="settings_color_scheme_title">Kolore eskema</string>
-  <string name="settings_color_scheme_summary">Kolore bat aukeratu Apolloren diseinurako</string>
-  <string name="settings_theme_chooser_title">Gaiak</string>
   <string name="settings_delete_cache_title">Katxea ezabatu</string>
   <string name="settings_delete_cache_summary">Katxean gordetako irudiak ezabatu</string>
   <string name="settings_download_only_on_wifi_title">Wi-Fi bidez bakarrik deskargatu</string>
   <string name="settings_download_only_on_wifi_summary">Ez deskargatu datu mugikorren bidez operadorearen zordunketa murrizteko</string>
   <string name="settings_download_missing_artwork_title">Falta diren karatulak lortu</string>
   <string name="settings_download_artist_images_title">Falta diren artisten argazkiak lortu</string>
-  <string name="settings_open_source_licenses">Software askearen lizentziak</string>
-  <string name="settings_version_title">Bertsioa</string>
-  <string name="now_listening_to"><xliff:g id="title">%1$s</xliff:g> de <xliff:g id="artist">%2$s</xliff:g> #Entzuten #Apollo</string>
-  <string name="share_track_using">Abestia honela elkarbanatu:</string>
-  <string name="color_picker_title">Kolore eskema</string>
-  <string name="current_color">Oraingoa</string>
-  <string name="new_color">Berria</string>
   <string name="app_widget_large_alt">Apollo: 4×2 (alt.)</string>
   <string name="app_widget_recent">Apollo: Berrikiak</string>
   <string name="no_effects_for_you">Ezin izan da ekualizadorea ireki.</string>

@@ -17,11 +17,6 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android" >
 
     <item
-        android:id="@+id/menu_audio_player_share"
-        android:showAsAction="never"
-        android:orderInCategory="40"
-        android:title="@string/menu_share"/>
-    <item
         android:id="@+id/menu_audio_player_equalizer"
         android:showAsAction="never"
         android:orderInCategory="41"

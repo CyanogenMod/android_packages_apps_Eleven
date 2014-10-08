@@ -31,7 +31,6 @@ import com.cyngn.eleven.cache.ImageCache;
 import com.cyngn.eleven.utils.ApolloUtils;
 import com.cyngn.eleven.utils.MusicUtils;
 import com.cyngn.eleven.utils.PreferenceUtils;
-import com.cyngn.eleven.widgets.ColorSchemeDialog;
 
 /**
  * Settings.

@@ -627,23 +627,6 @@ public class AudioPlayerFragment extends Fragment implements ServiceConnection {
     }
 
     /**
-     * /** Used to shared what the user is currently listening to
-     */
-    private void shareCurrentTrack() {
-        if (MusicUtils.getTrackName() == null || MusicUtils.getArtistName() == null) {
-            return;
-        }
-        final Intent shareIntent = new Intent();
-        final String shareMessage = getString(R.string.now_listening_to,
-                MusicUtils.getTrackName(), MusicUtils.getArtistName());
-
-        shareIntent.setAction(Intent.ACTION_SEND);
-        shareIntent.setType("text/plain");
-        shareIntent.putExtra(Intent.EXTRA_TEXT, shareMessage);
-        startActivity(Intent.createChooser(shareIntent, getString(R.string.share_track_using)));
-    }
-
-    /**
      * Used to scan backwards through the track
      */
     private final RepeatingImageButton.RepeatListener mRewindListener = new RepeatingImageButton.RepeatListener() {
@@ -697,7 +680,7 @@ public class AudioPlayerFragment extends Fragment implements ServiceConnection {
 
             // Shuffle all
             inflater.inflate(R.menu.shuffle_all, menu);
-            // Share, ringtone, and equalizer
+            // ringtone, and equalizer
             inflater.inflate(R.menu.audio_player, menu);
             // save queue/clear queue
             inflater.inflate(R.menu.queue, menu);
@@ -718,10 +701,6 @@ public class AudioPlayerFragment extends Fragment implements ServiceConnection {
             case R.id.menu_audio_player_ringtone:
                 // Set the current track as a ringtone
                 MusicUtils.setRingtone(getActivity(), MusicUtils.getCurrentAudioId());
-                return true;
-            case R.id.menu_audio_player_share:
-                // Share the current meta data
-                shareCurrentTrack();
                 return true;
             case R.id.menu_audio_player_equalizer:
                 // Sound effects

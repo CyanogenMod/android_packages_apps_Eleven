@@ -28,21 +28,12 @@
   <string name="menu_shuffle_all">모두 임의 재생</string>
   <string name="menu_play_all">모두 재생</string>
   <string name="menu_sort_by">정렬</string>
-  <string name="menu_shop">테마 샵</string>
   <string name="menu_clear_recents">최근 목록 비우기</string>
   <string name="menu_clear_queue">대기목록 비우기</string>
   <string name="menu_save_queue">대기목록 저장</string>
-  <string name="menu_share">공유</string>
-  <string name="menu_add_to_homescreen">홈 화면에 추가</string>
   <string name="menu_equalizer">이퀄라이저</string>
-  <string name="menu_simple">간단하게</string>
-  <string name="menu_detailed">자세히...</string>
-  <string name="menu_grid">격자</string>
-  <string name="menu_view_as">보기</string>
   <string name="add_to_playlist">재생목록에 추가</string>
-  <string name="add_to_favorites">즐겨찾기에 추가</string>
   <string name="add_to_queue">대기목록에 추가</string>
-  <string name="remove_from_favorites">즐겨찾기에서 제거</string>
   <string name="remove_from_recent">최근 목록에서 제거</string>
   <string name="remove_from_queue">대기목록에서 제거</string>
   <string name="sort_order_entry_az">오름차순</string>
@@ -56,8 +47,6 @@
   <string name="sort_order_entry_number_of_songs">노래 수</string>
   <string name="sort_order_entry_number_of_albums">앨범 수</string>
   <string name="sort_order_entry_filename">파일명</string>
-  <string name="playlist_favorite">즐겨찾기</string>
-  <string name="playlist_favorites">즐겨찾기</string>
   <string name="playlist_last_added">최근에 추가한 곡</string>
   <string name="new_playlist">새 재생목록</string>
   <string name="save">저장</string>
@@ -79,7 +68,6 @@
   <string name="context_menu_delete">삭제</string>
   <string name="context_menu_fetch_album_art">앨범 아트 받아오기</string>
   <string name="context_menu_fetch_artist_image">아티스트 이미지 받아오기</string>
-  <string name="context_menu_open_in_play_store">Play 스토어에서 열기</string>
   <string name="context_menu_remove_from_recent">최근 목록에서 제거</string>
   <string name="context_menu_use_as_ringtone">벨소리로 지정</string>
   <string name="context_menu_remove_from_playlist">재생목록에서 제거</string>
@@ -92,35 +80,17 @@
   <string name="accessibility_repeat">반복</string>
   <string name="accessibility_repeat_all">모두 반복</string>
   <string name="accessibility_repeat_one">한 곡 반복</string>
-  <string name="pinned_to_home_screen"><xliff:g id="name">%s</xliff:g>을(를) 홈 화면에 추가했습니다</string>
-  <string name="could_not_be_pinned_to_home_screen"><xliff:g id="name">%s</xliff:g>을(를) 홈 화면에 추가하지 못했습니다</string>
   <string name="set_as_ringtone">\'<xliff:g id="name" example="Alarm Bell">%s</xliff:g>\'을(를) 벨소리로 지정했습니다</string>
   <string name="playlist_renamed">재생목록의 이름을 변경했습니다</string>
-  <string name="theme_set"><xliff:g id="name">%s</xliff:g>을(를) 테마로 설정했습니다</string>
   <string name="settings_ui_category">인터페이스</string>
   <string name="settings_storage_category">저장소</string>
   <string name="settings_data_category">데이터</string>
-  <string name="settings_about_category">정보</string>
-  <string name="settings_author_title">만든이</string>
-  <string name="settings_about_apollo">Apollo 정보</string>
-  <string name="settings_special_thanks">도움 주신 분</string>
-  <string name="settings_lopez_summary">아이콘과 Play 스토어 배너 디자인</string>
-  <string name="settings_color_scheme_title">Apollo의 기본 색상 설정</string>
-  <string name="settings_color_scheme_summary">Apollo의 강조색을 변경합니다</string>
-  <string name="settings_theme_chooser_title">테마 선택기</string>
   <string name="settings_delete_cache_title">캐시 제거</string>
   <string name="settings_delete_cache_summary">임시 저장된 모든 이미지 제거</string>
   <string name="settings_download_only_on_wifi_title">Wi-Fi를 통해서만 다운로드</string>
   <string name="settings_download_only_on_wifi_summary">데이터 과금을 막기 위해 모바일 네트워크를 통해 다운로드하지 않음</string>
   <string name="settings_download_missing_artwork_title">앨범 아트가 없으면 다운로드</string>
   <string name="settings_download_artist_images_title">아티스트 이미지가 없으면 다운로드</string>
-  <string name="settings_open_source_licenses">오픈 소스 라이센스</string>
-  <string name="settings_version_title">버전</string>
-  <string name="now_listening_to">#NowPlaying <xliff:g id="title">%1$s</xliff:g> by <xliff:g id="artist">%2$s</xliff:g> #Apollo</string>
-  <string name="share_track_using">이 트랙을 공유:</string>
-  <string name="color_picker_title">색 구성</string>
-  <string name="current_color">현재</string>
-  <string name="new_color">새로운</string>
   <string name="app_widget_large_alt">Apollo: 4×2 (다른 배치)</string>
   <string name="app_widget_recent">Apollo: 최근 목록</string>
   <string name="no_effects_for_you">이퀄라이저를 열 수 없습니다.</string>

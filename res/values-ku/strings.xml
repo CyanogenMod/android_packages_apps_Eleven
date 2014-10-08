@@ -28,21 +28,12 @@
   <string name="menu_shuffle_all">هه‌ڕه‌مه‌کی</string>
   <string name="menu_play_all">لێدانی هه‌مووی</string>
   <string name="menu_sort_by">ڕیزکردن به‌پێی</string>
-  <string name="menu_shop">کڕینی باکگراوه‌ند</string>
   <string name="menu_clear_recents">پاککردنه‌وه‌ی تازه‌کان</string>
   <string name="menu_clear_queue">پاککردنه‌وه‌ی ڕیزه‌کان</string>
   <string name="menu_save_queue">پاشه‌که‌وتکردنی ڕیزه‌کان</string>
-  <string name="menu_share">به‌شداریپێکردن</string>
-  <string name="menu_add_to_homescreen">ده‌مبوس لێدان بۆ سه‌ر ڕوونما</string>
   <string name="menu_equalizer">یه‌کسانکه‌ری ده‌نگ</string>
-  <string name="menu_simple">ساده‌</string>
-  <string name="menu_detailed">لێکدراو</string>
-  <string name="menu_grid">هێڵکاری</string>
-  <string name="menu_view_as">بینین به‌ پێی</string>
   <string name="add_to_playlist">زیادکردن بۆ لێدراوه‌کان</string>
-  <string name="add_to_favorites">زیادکردن بۆ په‌سه‌ندکراوه‌کان</string>
   <string name="add_to_queue">زیادکردن بۆ ڕیزکراوه‌کان</string>
-  <string name="remove_from_favorites">سڕینه‌وه‌ له‌ په‌سه‌ندکراوه‌کان</string>
   <string name="remove_from_recent">سڕینه‌وه‌ له‌ تازه‌کان</string>
   <string name="remove_from_queue">سڕینه‌وه‌ له‌ ڕیزه‌کان</string>
   <string name="sort_order_entry_az">A-Z</string>
@@ -56,8 +47,6 @@
   <string name="sort_order_entry_number_of_songs">ژماره‌ی گۆرانییه‌کان</string>
   <string name="sort_order_entry_number_of_albums">ژماره‌ی ئه‌لبومه‌کان</string>
   <string name="sort_order_entry_filename">ناوی په‌ڕگه‌</string>
-  <string name="playlist_favorite">په‌سه‌ندکراو</string>
-  <string name="playlist_favorites">په‌سه‌ندکراوه‌کان</string>
   <string name="playlist_last_added">دوایین زیادکردن</string>
   <string name="new_playlist">لیستی لێدانی تازه‌</string>
   <string name="save">پاشەکەوتکردن</string>
@@ -79,7 +68,6 @@
   <string name="context_menu_delete">سڕینه‌وه‌</string>
   <string name="context_menu_fetch_album_art">ده‌رهێنانی هونه‌ری ئه‌لبوم</string>
   <string name="context_menu_fetch_artist_image">ده‌رهێنانی وێنه‌ی هونه‌رمه‌ند</string>
-  <string name="context_menu_open_in_play_store">کردنه‌وه‌ له‌ پله‌ی ستۆر</string>
   <string name="context_menu_remove_from_recent">سڕینه‌وه‌ له‌ تازه‌کان</string>
   <string name="context_menu_use_as_ringtone">خستنه‌ سه‌ر زه‌نگ</string>
   <string name="context_menu_remove_from_playlist">سڕینه‌وه‌ له‌ لیستی لێدراوه‌کان</string>
@@ -92,35 +80,17 @@
   <string name="accessibility_repeat">دوبارەکردنەوە</string>
   <string name="accessibility_repeat_all">دووباره‌کردنه‌وه‌ی هه‌مووی</string>
   <string name="accessibility_repeat_one">دووباره‌کردنه‌وه‌ی یه‌کدانه‌</string>
-  <string name="pinned_to_home_screen"><xliff:g id="name">%s</xliff:g> کرایه‌ سه‌ر ڕوونماکه‌ت</string>
-  <string name="could_not_be_pinned_to_home_screen"><xliff:g id="name">%s</xliff:g> ناتوانرێ بخرێته‌ سه‌ر ڕوونماکه‌ت</string>
   <string name="set_as_ringtone">\'<xliff:g id="name" example="Alarm Bell">%s</xliff:g>\' خستنه‌ سه‌ر زه‌نگ</string>
   <string name="playlist_renamed">ناوی لیستی لێدان گۆڕا</string>
-  <string name="theme_set"><xliff:g id="name">%s</xliff:g> خستنه‌ سه‌ر باکگراوه‌ند</string>
   <string name="settings_ui_category">ڕووکار</string>
   <string name="settings_storage_category">بیرگەی</string>
   <string name="settings_data_category">داتا</string>
-  <string name="settings_about_category">دەربارەی</string>
-  <string name="settings_author_title">دانه‌ر</string>
-  <string name="settings_about_apollo">ده‌رباره‌ی Apollo</string>
-  <string name="settings_special_thanks">سوپاسی تایبه‌ت</string>
-  <string name="settings_lopez_summary">دیزاینی وێنۆچکه‌ و پله‌ی ستۆر </string>
-  <string name="settings_color_scheme_title">هه‌ڵبژاردنی ڕه‌نگی ئه‌پۆڵۆ</string>
-  <string name="settings_color_scheme_summary">گۆڕینی ڕه‌نگی جه‌خت له‌ ئه‌پۆڵۆ</string>
-  <string name="settings_theme_chooser_title">گۆڕه‌ری باکگراوه‌ند</string>
   <string name="settings_delete_cache_title">سڕینه‌وه‌ی حه‌شارگه‌</string>
   <string name="settings_delete_cache_summary">سڕینه‌وه‌ی هه‌موو وێنه‌ حه‌شارگه‌کان</string>
   <string name="settings_download_only_on_wifi_title">دابه‌زاندن ته‌نیا له‌ڕێگه‌ی وایه‌رلێسه‌وه‌</string>
   <string name="settings_download_only_on_wifi_summary">بۆ باڵانس نه‌بردنی سیمکارته‌که‌ت ، دابه‌زاندن مه‌که‌ له‌ڕێگه‌ی سیمکارته‌وه‌</string>
   <string name="settings_download_missing_artwork_title">دابه‌زاندنی ئه‌لبومه‌ هونه‌رییه‌ ونبوه‌کان</string>
   <string name="settings_download_artist_images_title">دابه‌زاندنی وێنه‌ هونه‌رمه‌نده‌ ونبوه‌کان</string>
-  <string name="settings_open_source_licenses">Open source licenses</string>
-  <string name="settings_version_title">ژماره‌ی وه‌شان</string>
-  <string name="now_listening_to">ئێشتا <xliff:g id="title">%1$s</xliff:g> by <xliff:g id="artist">%2$s</xliff:g> لێده‌درێت</string>
-  <string name="share_track_using">به‌شاریکردنی تراک به‌ به‌کارهێنانی:</string>
-  <string name="color_picker_title">نه‌خشه‌ی ڕه‌نگ</string>
-  <string name="current_color">هه‌نووکه‌</string>
-  <string name="new_color">نوێ</string>
   <string name="app_widget_large_alt">Apollo: 4×2 (alternate)</string>
   <string name="app_widget_recent">ئه‌پۆڵۆ:تازه‌ترین که‌ گوێلێگیراون</string>
   <string name="no_effects_for_you">یه‌کسانکه‌ری ده‌نگ ناکرێته‌وه‌.</string>
