@@ -110,8 +110,8 @@ public class HomeActivity extends SlidingPanelActivity {
             FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
 
             if (action.equals(ACTION_VIEW_SMART_PLAYLIST)) {
-                int playlistType = intent.getExtras().getInt(Config.SMART_PLAYLIST_TYPE);
-                switch (Config.SmartPlaylistType.values()[playlistType]) {
+                long playlistId = intent.getExtras().getLong(Config.SMART_PLAYLIST_TYPE);
+                switch (Config.SmartPlaylistType.getTypeById(playlistId)) {
                     case LastAdded:
                         targetFragment = new LastAddedFragment();
                         break;
