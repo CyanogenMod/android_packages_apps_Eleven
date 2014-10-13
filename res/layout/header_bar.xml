@@ -30,7 +30,8 @@
         android:singleLine="true"
         android:textAllCaps="true"
         android:textColor="@color/header_action_bar_text_color"
-        android:textSize="@dimen/text_size_large" />
+        android:textSize="@dimen/text_size_medium"
+        android:textStyle="bold" />
 
     <ImageView
         android:id="@+id/header_bar_custom_button"

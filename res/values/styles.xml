@@ -84,6 +84,8 @@
     <!-- Sets the action bar title text color -->
     <style name="ActionBar.TitleText" parent="@android:style/TextAppearance.Holo.Widget.ActionBar.Title">
         <item name="android:textColor">@color/header_action_bar_text_color</item>
+        <item name="android:textSize">@dimen/text_size_medium</item>
+        <item name="android:textStyle">bold</item>
     </style>
 
     <style name="ActionBar.SubtitleText" parent="@android:style/TextAppearance.Holo.Widget.ActionBar.Subtitle">
