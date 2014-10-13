@@ -206,31 +206,26 @@ public final class MusicUtils {
     }
 
     /**
-     * * Used to create a formatted time string in the format of #d #h #m #s
+     * Used to create a formatted time string in the format of #h #m or #m if there is only minutes
      *
      * @param context The {@link Context} to use.
      * @param secs The duration seconds.
-     * @return Duration properly formatted in #d #h #m #s format
+     * @return Duration properly formatted in #h #m format
      */
     public static final String makeLongTimeString(final Context context, long secs) {
-        long days, hours, mins;
+        long hours, mins;
 
-        days = secs / (3600 * 24);
-        secs %= (3600 * 24);
         hours = secs / 3600;
         secs %= 3600;
         mins = secs / 60;
-        secs %= 60;
 
         int stringId = R.string.duration_mins;
-        if (days != 0) {
-            stringId = R.string.duration_days;
-        } else if (hours != 0) {
+        if (hours != 0) {
             stringId = R.string.duration_hours;
         }
 
         final String durationFormat = context.getResources().getString(stringId);
-        return String.format(durationFormat, days, hours, mins, secs);
+        return String.format(durationFormat, hours, mins);
     }
 
     /**

@@ -235,10 +235,6 @@
     <string name="search_title_songs">All \"%s\" songs</string>
     <string name="search_title_playlists">All \"%s\" playlists</string>
 
-    <string name="duration_album_mins_only"><xliff:g id="format">%1$dm</xliff:g></string>
-    <string name="duration_album_hour_mins"><xliff:g id="format">%1$dh %2$dm</xliff:g></string>
-
-    <string name="duration_mins"><xliff:g id="format">%3$dm %4$ds</xliff:g></string>
-    <string name="duration_hours"><xliff:g id="format">%2$dh %3$dm %4$ds</xliff:g></string>
-    <string name="duration_days"><xliff:g id="format">%1$dd %2$dd %3$dm %4$ds</xliff:g></string>
+    <string name="duration_mins"><xliff:g id="format">%2$dm</xliff:g></string>
+    <string name="duration_hours"><xliff:g id="format">%1$dh %2$dm</xliff:g></string>
 </resources>

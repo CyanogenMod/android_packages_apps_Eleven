@@ -165,24 +165,12 @@ public class AlbumDetailFragment extends DetailFragment {
         /** compute total run time for album */
         int duration = 0;
         for(Song s : songs) { duration += s.mDuration; }
-        updateDuration(duration);
+        mAlbumDuration.setText(MusicUtils.makeLongTimeString(getActivity(), duration));
 
         /** use the first song on the album to get a genre */
         if(!songs.isEmpty()) {
             GenreFetcher.fetch(getActivity(), (int) songs.get(0).mSongId, mGenre);
         }
-    }
-
-    public void updateDuration(int duration) {
-        int mins = Math.round(duration/60);
-        int hours = mins/60;
-        mins %= 60;
-
-        String durationText = (hours == 0)
-            ? getString(R.string.duration_album_mins_only, mins)
-            : getString(R.string.duration_album_hour_mins, hours, mins);
-
-        mAlbumDuration.setText(durationText);
     }
 
     @Override
