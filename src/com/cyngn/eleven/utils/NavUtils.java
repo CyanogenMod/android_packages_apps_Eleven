@@ -24,7 +24,6 @@ import com.cyngn.eleven.R;
 import com.cyngn.eleven.ui.activities.HomeActivity;
 import com.cyngn.eleven.ui.activities.SearchActivity;
 import com.cyngn.eleven.ui.activities.SettingsActivity;
-import com.devspark.appmsg.AppMsg;
 
 /**
  * Various navigation helpers.
@@ -120,8 +119,7 @@ public final class NavUtils {
             effects.putExtra(AudioEffect.EXTRA_AUDIO_SESSION, MusicUtils.getAudioSessionId());
             context.startActivity(effects);
         } catch (final ActivityNotFoundException notFound) {
-            AppMsg.makeText(context, context.getString(R.string.no_effects_for_you),
-                    AppMsg.STYLE_ALERT);
+            CustomToast.makeText(context, context.getString(R.string.no_effects_for_you), CustomToast.LENGTH_SHORT).show();
         }
     }
 

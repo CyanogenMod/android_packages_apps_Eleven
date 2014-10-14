@@ -48,7 +48,6 @@ import com.cyngn.eleven.cache.ImageFetcher;
 import com.cyngn.eleven.ui.activities.ShortcutActivity;
 import com.cyngn.eleven.widgets.ColorPickerView;
 import com.cyngn.eleven.widgets.ColorSchemeDialog;
-import com.devspark.appmsg.AppMsg;
 
 import java.util.concurrent.RejectedExecutionHandler;
 import java.util.concurrent.ThreadPoolExecutor;
