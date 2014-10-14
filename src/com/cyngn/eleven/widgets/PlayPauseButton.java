@@ -87,7 +87,7 @@ public class PlayPauseButton extends ImageButton implements OnClickListener, OnL
             setImageDrawable(getResources().getDrawable(R.drawable.btn_playback_pause_med));
         } else {
             setContentDescription(getResources().getString(R.string.accessibility_play));
-            setImageDrawable(getResources().getDrawable(R.drawable.btn_playback_play_med));
+            setImageDrawable(getResources().getDrawable(R.drawable.btn_playback_play));
         }
     }
 
