@@ -19,7 +19,7 @@
     <item
         android:id="@+id/clear_list"
         android:showAsAction="never"
-        android:orderInCategory="110"
+        android:orderInCategory="150"
         android:title="@string/menu_clear_list"/>
 
 </menu>

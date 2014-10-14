@@ -225,25 +225,6 @@ public abstract class PopupMenuHelper implements PopupMenu.OnMenuItemClickListen
         return null;
     }
 
-    // FIXME: after merging http://gerrit.cyngn.com/#/c/4056/ remove this
-    // method and change the FragmentMenuItem IDs to so they can also double
-    // as the order values - changing addToMenu below as well
-    private int getMenuItemOrder(int menuId) {
-        switch(menuId) {
-            case FragmentMenuItems.PLAY_SELECTION: return 10;
-            case FragmentMenuItems.PLAY_NEXT: return 20;
-            // order 30 is reserved for SHUFFLE items
-            case FragmentMenuItems.ADD_TO_QUEUE: return 40;
-            case FragmentMenuItems.ADD_TO_PLAYLIST: return 50;
-            case FragmentMenuItems.REMOVE_FROM_QUEUE: return 60;
-            case FragmentMenuItems.RENAME_PLAYLIST: return 70;
-            case FragmentMenuItems.MORE_BY_ARTIST: return 80;
-            case FragmentMenuItems.USE_AS_RINGTONE: return 90;
-            case FragmentMenuItems.DELETE: return 100;
-            default: return 110;
-        }
-    }
-
     /**
      * Allows containing classes to add/remove ids to the menu
      * @param type the pop up menu type
@@ -309,7 +290,7 @@ public abstract class PopupMenuHelper implements PopupMenu.OnMenuItemClickListen
      * Simple helper function for adding an item to the menu
      */
     public void addToMenu(final Menu menu, final int id, final int resourceId) {
-        menu.add(getGroupId(), id, getMenuItemOrder(id), mActivity.getString(resourceId));
+        menu.add(getGroupId(), id, id /*as order*/, mActivity.getString(resourceId));
     }
 
     @Override

@@ -134,6 +134,7 @@ public class PlaylistDetailFragment extends FadingBarFragment implements
                 super.updateMenuIds(type, set);
 
                 set.add(FragmentMenuItems.REMOVE_FROM_PLAYLIST);
+                set.remove(FragmentMenuItems.DELETE);
             }
 
             @Override
