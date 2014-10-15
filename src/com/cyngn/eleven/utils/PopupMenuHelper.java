@@ -9,13 +9,14 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.PopupMenu;
-
+import android.widget.Toast;
 import com.android.internal.view.menu.ContextMenuBuilder;
 import com.android.internal.view.menu.MenuBuilder;
 import com.cyngn.eleven.Config;
 import com.cyngn.eleven.R;
 import com.cyngn.eleven.menu.CreateNewPlaylist;
 import com.cyngn.eleven.menu.FragmentMenuItems;
+import com.cyngn.eleven.menu.PhotoSelectionDialog;
 import com.cyngn.eleven.menu.RenamePlaylist;
 import com.cyngn.eleven.provider.RecentStore;
 
@@ -174,6 +175,7 @@ public abstract class PopupMenuHelper implements PopupMenu.OnMenuItemClickListen
                     FragmentMenuItems.ADD_TO_QUEUE,
                     FragmentMenuItems.ADD_TO_PLAYLIST,
                     FragmentMenuItems.DELETE,
+                    FragmentMenuItems.CHANGE_IMAGE,
                 };
             case Album:
                 return new int[] {
@@ -182,6 +184,7 @@ public abstract class PopupMenuHelper implements PopupMenu.OnMenuItemClickListen
                         FragmentMenuItems.ADD_TO_PLAYLIST,
                         FragmentMenuItems.MORE_BY_ARTIST,
                         FragmentMenuItems.DELETE,
+                        FragmentMenuItems.CHANGE_IMAGE,
                 };
             case Song:
                 return new int[] {
@@ -281,6 +284,8 @@ public abstract class PopupMenuHelper implements PopupMenu.OnMenuItemClickListen
                 return R.string.remove_from_queue;
             case FragmentMenuItems.PLAY_NEXT:
                 return R.string.context_menu_play_next;
+            case FragmentMenuItems.CHANGE_IMAGE:
+                return R.string.context_menu_change_image;
         }
 
         return 0;

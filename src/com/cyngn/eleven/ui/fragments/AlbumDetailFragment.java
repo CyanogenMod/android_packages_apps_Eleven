@@ -6,7 +6,6 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
-
 import com.cyngn.eleven.Config;
 import com.cyngn.eleven.R;
 import com.cyngn.eleven.adapters.AlbumDetailSongAdapter;
@@ -14,6 +13,7 @@ import com.cyngn.eleven.adapters.DetailSongAdapter;
 import com.cyngn.eleven.cache.ImageFetcher;
 import com.cyngn.eleven.model.Album;
 import com.cyngn.eleven.model.Song;
+import com.cyngn.eleven.ui.activities.BaseActivity;
 import com.cyngn.eleven.utils.AlbumPopupMenuHelper;
 import com.cyngn.eleven.utils.GenreFetcher;
 import com.cyngn.eleven.utils.MusicUtils;
@@ -31,6 +31,7 @@ public class AlbumDetailFragment extends DetailFragment {
     private DetailSongAdapter mSongAdapter;
     private TextView mAlbumDuration;
     private TextView mGenre;
+    private ImageView mAlbumArt;
     private PopupMenuHelper mSongMenuHelper;
     private long mAlbumId;
     private String mArtistName;
@@ -86,9 +87,9 @@ public class AlbumDetailFragment extends DetailFragment {
         String year = arguments.getString(Config.ALBUM_YEAR);
         int songCount = arguments.getInt(Config.SONG_COUNT);
 
-        ImageView albumArt = (ImageView)mRootView.findViewById(R.id.album_art);
-        albumArt.setContentDescription(mAlbumName);
-        ImageFetcher.getInstance(getActivity()).loadAlbumImage(artist, mAlbumName, mAlbumId, albumArt);
+        mAlbumArt = (ImageView)mRootView.findViewById(R.id.album_art);
+        mAlbumArt.setContentDescription(mAlbumName);
+        ImageFetcher.getInstance(getActivity()).loadAlbumImage(artist, mAlbumName, mAlbumId, mAlbumArt);
 
         TextView title = (TextView)mRootView.findViewById(R.id.title);
         title.setText(mAlbumName);
@@ -176,6 +177,8 @@ public class AlbumDetailFragment extends DetailFragment {
     @Override
     public void restartLoader() {
         getLoaderManager().restartLoader(LOADER_ID, getArguments(), mSongAdapter);
+        ImageFetcher.getInstance(getActivity()).loadAlbumImage(mArtistName, mAlbumName, mAlbumId,
+                mAlbumArt);
     }
 
     @Override

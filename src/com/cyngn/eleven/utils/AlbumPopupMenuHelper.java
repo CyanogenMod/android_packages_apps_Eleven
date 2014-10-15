@@ -6,9 +6,12 @@ package com.cyngn.eleven.utils;
 import android.app.Activity;
 import android.support.v4.app.FragmentManager;
 
+import android.view.MenuItem;
 import com.cyngn.eleven.Config;
 import com.cyngn.eleven.cache.ImageFetcher;
 import com.cyngn.eleven.menu.DeleteDialog;
+import com.cyngn.eleven.menu.FragmentMenuItems;
+import com.cyngn.eleven.menu.PhotoSelectionDialog;
 import com.cyngn.eleven.model.Album;
 
 public abstract class AlbumPopupMenuHelper extends PopupMenuHelper {
@@ -58,5 +61,23 @@ public abstract class AlbumPopupMenuHelper extends PopupMenuHelper {
     @Override
     protected String getArtistName() {
         return mAlbum.mArtistName;
+    }
+
+    @Override
+    public boolean onMenuItemClick(MenuItem item) {
+        boolean handled = super.onMenuItemClick(item);
+        if (!handled && item.getGroupId() == getGroupId()) {
+            switch (item.getItemId()) {
+                case FragmentMenuItems.CHANGE_IMAGE:
+                    String key = ImageFetcher.generateAlbumCacheKey(mAlbum.mAlbumName,
+                            getArtistName());
+                    PhotoSelectionDialog.newInstance(mAlbum.mAlbumName,
+                            PhotoSelectionDialog.ProfileType.ALBUM, key)
+                            .show(mFragmentManager, "PhotoSelectionDialog");
+                    return true;
+            }
+        }
+
+        return handled;
     }
 }

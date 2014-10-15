@@ -9,7 +9,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.ListView;
-
 import com.cyngn.eleven.Config;
 import com.cyngn.eleven.R;
 import com.cyngn.eleven.adapters.ArtistDetailAlbumAdapter;
@@ -19,6 +18,7 @@ import com.cyngn.eleven.menu.FragmentMenuItems;
 import com.cyngn.eleven.model.Album;
 import com.cyngn.eleven.model.Artist;
 import com.cyngn.eleven.model.Song;
+import com.cyngn.eleven.ui.activities.BaseActivity;
 import com.cyngn.eleven.utils.AlbumPopupMenuHelper;
 import com.cyngn.eleven.utils.ArtistPopupMenuHelper;
 import com.cyngn.eleven.utils.MusicUtils;
@@ -204,6 +204,8 @@ public class ArtistDetailFragment extends FadingBarFragment {
         LoaderManager lm = getLoaderManager();
         lm.restartLoader(ALBUM_LOADER_ID, arguments, mAlbumAdapter);
         lm.restartLoader(SONG_LOADER_ID, arguments, mSongAdapter);
+
+        ImageFetcher.getInstance(getActivity()).loadArtistImage(mArtistName, mHero);
     }
 
     @Override

@@ -3,8 +3,11 @@ package com.cyngn.eleven.utils;
 import android.app.Activity;
 import android.support.v4.app.FragmentManager;
 
+import android.view.MenuItem;
 import com.cyngn.eleven.Config;
 import com.cyngn.eleven.menu.DeleteDialog;
+import com.cyngn.eleven.menu.FragmentMenuItems;
+import com.cyngn.eleven.menu.PhotoSelectionDialog;
 import com.cyngn.eleven.model.Artist;
 
 public abstract class ArtistPopupMenuHelper extends PopupMenuHelper {
@@ -43,5 +46,26 @@ public abstract class ArtistPopupMenuHelper extends PopupMenuHelper {
         final String artist = mArtist.mArtistName;
         DeleteDialog.newInstance(artist, getIdList(), artist)
             .show(mFragmentManager, "DeleteDialog");
+    }
+
+    @Override
+    protected String getArtistName() {
+        return mArtist.mArtistName;
+    }
+
+    @Override
+    public boolean onMenuItemClick(MenuItem item) {
+        boolean handled = super.onMenuItemClick(item);
+        if (!handled && item.getGroupId() == getGroupId()) {
+            switch (item.getItemId()) {
+                case FragmentMenuItems.CHANGE_IMAGE:
+                    PhotoSelectionDialog.newInstance(getArtistName(),
+                            PhotoSelectionDialog.ProfileType.ARTIST, getArtistName())
+                            .show(mFragmentManager, "PhotoSelectionDialog");
+                    return true;
+            }
+        }
+
+        return handled;
     }
 }

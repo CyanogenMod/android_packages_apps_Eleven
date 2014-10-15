@@ -31,6 +31,7 @@ public interface FragmentMenuItems {
     int DELETE              = 120; // delete track from device
     int NEW_PLAYLIST        = 130; // create new playlist - also in res/menu!
     int PLAYLIST_SELECTED   = 140; // this is used for existing playlists
+    int CHANGE_IMAGE        = 150; // set new art for artist/album
 
     // not currently in use
     int FETCH_ARTIST_IMAGE  = 200;

@@ -261,7 +261,7 @@ public class MusicBrowserPhoneFragment extends BaseFragment {
         return mViewPager.getCurrentItem() == MusicFragments.ARTIST.ordinal();
     }
 
-    private ArtistFragment getArtistFragment() {
+    public ArtistFragment getArtistFragment() {
         return (ArtistFragment)mPagerAdapter.getFragment(MusicFragments.ARTIST.ordinal());
     }
 
@@ -269,7 +269,7 @@ public class MusicBrowserPhoneFragment extends BaseFragment {
         return mViewPager.getCurrentItem() == MusicFragments.ALBUM.ordinal();
     }
 
-    private AlbumFragment getAlbumFragment() {
+    public AlbumFragment getAlbumFragment() {
         return (AlbumFragment)mPagerAdapter.getFragment(MusicFragments.ALBUM.ordinal());
     }
 
@@ -277,7 +277,7 @@ public class MusicBrowserPhoneFragment extends BaseFragment {
         return mViewPager.getCurrentItem() == MusicFragments.SONG.ordinal();
     }
 
-    private SongFragment getSongFragment() {
+    public SongFragment getSongFragment() {
         return (SongFragment)mPagerAdapter.getFragment(MusicFragments.SONG.ordinal());
     }
 

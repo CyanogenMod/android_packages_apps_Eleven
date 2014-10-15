@@ -24,6 +24,7 @@ import android.database.Cursor;
 import android.net.Uri;
 import android.os.IBinder;
 import android.os.RemoteException;
+import android.os.SystemClock;
 import android.provider.BaseColumns;
 import android.provider.MediaStore;
 import android.provider.MediaStore.Audio.AlbumColumns;
@@ -41,6 +42,7 @@ import com.cyngn.eleven.Config.SmartPlaylistType;
 import com.cyngn.eleven.IElevenService;
 import com.cyngn.eleven.MusicPlaybackService;
 import com.cyngn.eleven.R;
+import com.cyngn.eleven.cache.ImageFetcher;
 import com.cyngn.eleven.loaders.LastAddedLoader;
 import com.cyngn.eleven.loaders.PlaylistLoader;
 import com.cyngn.eleven.loaders.PlaylistSongLoader;
@@ -1625,5 +1627,24 @@ public final class MusicUtils {
             if(!Character.isWhitespace(c)) { return false; }
         }
         return true;
+    }
+
+    /**
+     * Removes the header image from the cache.
+     */
+    public static void removeFromCache(Activity activity, String key) {
+        ImageFetcher imageFetcher = ApolloUtils.getImageFetcher(activity);
+        imageFetcher.removeFromCache(key);
+        // Give the disk cache a little time before requesting a new image.
+        SystemClock.sleep(80);
+    }
+
+    /**
+     * Removes image from cache so that the stock image is retrieved on reload
+     */
+    public static void selectOldPhoto(Activity activity, String key) {
+        // First remove the old image
+        removeFromCache(activity, key);
+        MusicUtils.refresh();
     }
 }

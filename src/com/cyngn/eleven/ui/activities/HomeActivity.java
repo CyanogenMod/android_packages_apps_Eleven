@@ -16,14 +16,17 @@
 package com.cyngn.eleven.ui.activities;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
-
+import android.text.TextUtils;
 import com.cyngn.eleven.Config;
 import com.cyngn.eleven.R;
+import com.cyngn.eleven.cache.ImageFetcher;
 import com.cyngn.eleven.ui.fragments.AlbumDetailFragment;
 import com.cyngn.eleven.ui.fragments.ArtistDetailFragment;
 import com.cyngn.eleven.ui.fragments.ISetupActionBar;
@@ -32,6 +35,8 @@ import com.cyngn.eleven.ui.fragments.RecentFragment;
 import com.cyngn.eleven.ui.fragments.phone.MusicBrowserPhoneFragment;
 import com.cyngn.eleven.ui.fragments.profile.LastAddedFragment;
 import com.cyngn.eleven.ui.fragments.profile.TopTracksFragment;
+import com.cyngn.eleven.utils.ApolloUtils;
+import com.cyngn.eleven.utils.MusicUtils;
 
 public class HomeActivity extends SlidingPanelActivity {
     private static final String ACTION_PREFIX = HomeActivity.class.getName();
@@ -43,6 +48,9 @@ public class HomeActivity extends SlidingPanelActivity {
     public static final String ACTION_VIEW_PLAYLIST_DETAILS = ACTION_PREFIX + ".view.PlaylistDetails";
     public static final String ACTION_VIEW_SMART_PLAYLIST = ACTION_PREFIX + ".view.SmartPlaylist";
 
+    private static final int NEW_PHOTO = 1;
+
+    private String mKey;
     private boolean mLoadedBaseFragment = false;
     private Handler mHandler = new Handler();
 
@@ -162,5 +170,34 @@ public class HomeActivity extends SlidingPanelActivity {
                 transaction.commit();
             }
         }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == NEW_PHOTO && !TextUtils.isEmpty(mKey)) {
+            if (resultCode == RESULT_OK) {
+                MusicUtils.removeFromCache(this, mKey);
+                final Uri selectedImage = data.getData();
+                Bitmap bitmap = ImageFetcher.decodeSampledBitmapFromUri(getContentResolver(),
+                        selectedImage);
+
+                ImageFetcher imageFetcher = ApolloUtils.getImageFetcher(this);
+                imageFetcher.addBitmapToCache(mKey, bitmap);
+
+                MusicUtils.refresh();
+            }
+        }
+    }
+
+    /**
+     * Starts an activity for result that returns an image from the Gallery.
+     */
+    public void selectNewPhoto(String key) {
+        mKey = key;
+        // Now open the gallery
+        final Intent intent = new Intent(Intent.ACTION_GET_CONTENT, null);
+        intent.setType("image/*");
+        startActivityForResult(intent, NEW_PHOTO);
     }
 }
