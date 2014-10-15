@@ -9,7 +9,8 @@
         android:layout_alignParentRight="true"
         android:layout_centerVertical="true"
         android:gravity="center_vertical"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:layout_marginRight="@dimen/list_item_general_margin" >
         <ImageView
             android:id="@+id/now_playing"
             android:layout_width="wrap_content"
@@ -35,7 +36,7 @@
         android:layout_toLeftOf="@id/right_container"
         android:paddingTop="6dp"
         android:layout_marginTop="@dimen/list_preferred_item_padding"
-        android:layout_marginLeft="@dimen/list_preferred_item_padding" />
+        android:layout_marginLeft="@dimen/list_item_general_margin" />
 
     <TextView
         android:id="@+id/duration"
@@ -46,7 +47,7 @@
         android:layout_alignParentLeft="true"
         android:layout_toLeftOf="@id/right_container"
         android:layout_marginTop="-2dp"
-        android:layout_marginLeft="@dimen/standard_padding" />
+        android:layout_marginLeft="@dimen/list_item_general_margin" />
 
     <ImageView
         android:id="@+id/divider"

@@ -34,6 +34,7 @@
     <!-- List and grid view padding -->
     <dimen name="list_preferred_item_padding">10.0dip</dimen>
     <dimen name="list_menu_item_padding_right">2.0dip</dimen>
+    <dimen name="list_item_general_margin">16.0dip</dimen>
     <dimen name="list_item_menu_button_width">24.0dip</dimen>
     <dimen name="list_item_menu_button_height">30.0dip</dimen>
     <dimen name="list_item_padding_top">10.0dip</dimen>

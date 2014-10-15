@@ -54,7 +54,8 @@
             android:fontFamily="sans-serif-light"
             android:textSize="@dimen/text_size_micro"
             android:textColor="@color/default_text_color"
-            android:visibility="gone" />
+            android:visibility="gone"
+            android:layout_marginTop="4dp" />
 
         <ImageView
             android:id="@+id/duration_icon"
@@ -62,7 +63,7 @@
             android:layout_height="12dp"
             android:layout_below="@id/song_count_and_year"
             android:layout_toRightOf="@id/genre"
-            android:layout_marginTop="2dp"
+            android:layout_marginTop="6dp"
             android:layout_marginRight="4dp"
             android:gravity="center"
             android:src="@drawable/stopwatch_icon_small_grey" />
@@ -76,7 +77,8 @@
             android:singleLine="true"
             android:fontFamily="sans-serif-light"
             android:textSize="@dimen/text_size_micro"
-            android:textColor="@color/default_text_color" />
+            android:textColor="@color/default_text_color"
+            android:layout_marginTop="4dp" />
     </RelativeLayout>
 
     <include
