@@ -15,22 +15,20 @@ import android.app.Activity;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.ImageView;
-import android.widget.TextView;
+import android.widget.BaseAdapter;
 
-import com.cyngn.eleven.Config;
 import com.cyngn.eleven.R;
 import com.cyngn.eleven.cache.ImageFetcher;
 import com.cyngn.eleven.model.Album;
-import com.cyngn.eleven.sectionadapter.SectionAdapter;
 import com.cyngn.eleven.ui.MusicHolder;
 import com.cyngn.eleven.ui.MusicHolder.DataHolder;
 import com.cyngn.eleven.utils.ApolloUtils;
-import com.cyngn.eleven.utils.MusicUtils;
 import com.cyngn.eleven.widgets.IPopupMenuCallback;
+
+import java.util.Collections;
+import java.util.List;
 
 /**
  * This {@link ArrayAdapter} is used to display all of the albums on a user's
@@ -38,13 +36,14 @@ import com.cyngn.eleven.widgets.IPopupMenuCallback;
  * 
  * @author Andrew Neal (andrewdneal@gmail.com)
  */
-public class AlbumAdapter extends ArrayAdapter<Album>
-        implements SectionAdapter.BasicAdapter, IPopupMenuCallback {
+public class AlbumAdapter extends BaseAdapter implements IPopupMenuCallback {
 
     /**
      * Number of views (ImageView and TextView)
      */
     private static final int VIEW_TYPE_COUNT = 2;
+    private static final int VIEW_TYPE_HEADER = 0;
+    private static final int VIEW_TYPE_ITEM = 1;
 
     /**
      * The resource Id of the layout to inflate
@@ -57,25 +56,21 @@ public class AlbumAdapter extends ArrayAdapter<Album>
     private final ImageFetcher mImageFetcher;
 
     /**
-     * Semi-transparent overlay
-     */
-    private final int mOverlay;
-
-    /**
-     * Sets the album art on click listener to start playing them album when
-     * touched.
-     */
-    private boolean mTouchPlay = false;
-
-    /**
      * Used to cache the album info
      */
-    private DataHolder[] mData;
+    private DataHolder[] mData = new DataHolder[0];
+    private List<Album> mAlbums = Collections.emptyList();
 
     /**
      * Used to listen to the pop up menu callbacks
      */
     private IPopupMenuCallback.IListener mListener;
+
+    /** number of columns of containing grid view,
+     *  used to determine how many headers to show */
+    private int mColumns;
+
+    private Context mContext;
 
     /**
      * Constructor of <code>AlbumAdapter</code>
@@ -86,13 +81,11 @@ public class AlbumAdapter extends ArrayAdapter<Album>
      *            load.
      */
     public AlbumAdapter(final Activity context, final int layoutId) {
-        super(context, 0);
+        mContext = context;
         // Get the layout Id
         mLayoutId = layoutId;
         // Initialize the cache & image fetcher
         mImageFetcher = ApolloUtils.getImageFetcher(context);
-        // Cache the transparent overlay
-        mOverlay = context.getResources().getColor(R.color.list_item_background);
     }
 
     /**
@@ -100,10 +93,17 @@ public class AlbumAdapter extends ArrayAdapter<Album>
      */
     @Override
     public View getView(final int position, View convertView, final ViewGroup parent) {
+        if(getItemViewType(position) == VIEW_TYPE_HEADER) {
+            if(convertView != null) {
+                return convertView;
+            }
+            return LayoutInflater.from(mContext).inflate(R.layout.grid_header, parent, false);
+        }
+
         // Recycle ViewHolder's items
         MusicHolder holder;
         if (convertView == null) {
-            convertView = LayoutInflater.from(getContext()).inflate(mLayoutId, parent, false);
+            convertView = LayoutInflater.from(mContext).inflate(mLayoutId, parent, false);
             holder = new MusicHolder(convertView);
             convertView.setTag(holder);
             // set the pop up menu listener
@@ -113,7 +113,7 @@ public class AlbumAdapter extends ArrayAdapter<Album>
         }
 
         // Retrieve the data holder
-        final DataHolder dataHolder = mData[position];
+        final DataHolder dataHolder = mData[position - mColumns];
 
         // Sets the position each time because of recycling
         holder.mPopupMenuButton.get().setPosition(position);
@@ -125,10 +125,6 @@ public class AlbumAdapter extends ArrayAdapter<Album>
         mImageFetcher.loadAlbumImage(dataHolder.mLineTwo, dataHolder.mLineOne, dataHolder.mItemId,
                 holder.mImage.get());
 
-        if (mTouchPlay) {
-            // Play the album when the artwork is touched
-            playAlbum(holder.mImage.get(), position);
-        }
         return convertView;
     }
 
@@ -148,52 +144,66 @@ public class AlbumAdapter extends ArrayAdapter<Album>
         return VIEW_TYPE_COUNT;
     }
 
+    @Override
+    public int getItemViewType(int position) {
+        if(position < mColumns) {
+            return VIEW_TYPE_HEADER;
+        } else {
+            return VIEW_TYPE_ITEM;
+        }
+    }
+
+    @Override
+    public boolean isEnabled(int position) {
+        return getItemViewType(position) == VIEW_TYPE_ITEM;
+    }
+
+    @Override
+    public int getCount() {
+        return mAlbums.size() + mColumns; // data items plus headers
+    }
+
+    @Override
+    public Album getItem(int pos) {
+        if(pos < mColumns) {
+            return null; // header position
+        } else {
+            return mAlbums.get(pos - mColumns);
+        }
+    }
+
+    @Override
+    public long getItemId(int pos) { return pos; }
+
     /**
      * Method used to cache the data used to populate the list or grid. The idea
      * is to cache everything before {@code #getView(int, View, ViewGroup)} is
      * called.
      */
     public void buildCache() {
-        mData = new DataHolder[getCount()];
-        for (int i = 0; i < getCount(); i++) {
-            // Build the album
-            final Album album = getItem(i);
-
-            // Build the data holder
+        mData = new DataHolder[mAlbums.size()];
+        int i = 0;
+        for (Album album : mAlbums) {
             mData[i] = new DataHolder();
-            // Album Id
             mData[i].mItemId = album.mAlbumId;
-            // Album names (line one)
             mData[i].mLineOne = album.mAlbumName;
-            // Album artist names (line two)
             mData[i].mLineTwo = album.mArtistName;
+            i++;
         }
     }
 
-    /**
-     * Starts playing an album if the user touches the artwork in the list.
-     * 
-     * @param album The {@link ImageView} holding the album
-     * @param position The position of the album to play.
-     */
-    private void playAlbum(final ImageView album, final int position) {
-        album.setOnClickListener(new OnClickListener() {
-
-            @Override
-            public void onClick(final View v) {
-                final long id = getItem(position).mAlbumId;
-                final long[] list = MusicUtils.getSongListForAlbum(getContext(), id);
-                MusicUtils.playAll(getContext(), list, 0, id, Config.IdType.Album, false);
-            }
-        });
+    public void setData(List<Album> albums) {
+        mAlbums = albums;
+        buildCache();
+        notifyDataSetChanged();
     }
 
-    /**
-     * Method that unloads and clears the items in the adapter
-     */
+    public void setNumColumns(int columns) {
+        mColumns = columns;
+    }
+
     public void unload() {
-        clear();
-        mData = null;
+        setData(Collections.<Album>emptyList());
     }
 
     /**
@@ -227,23 +237,16 @@ public class AlbumAdapter extends ArrayAdapter<Album>
      * @param id identifies the object
      * @return the position if found, -1 otherwise
      */
-    @Override
     public int getItemPosition(long id) {
-        for (int i = 0; i < getCount(); i++) {
-            if (getItem(i).mAlbumId == id) {
-                return i;
+        int i = 0;
+        for (Album album : mAlbums) {
+            if (album.mAlbumId == id) {
+                return mColumns + i;
             }
+            i++;
         }
 
-        return  -1;
-    }
-
-    /**
-     * @param play True to play the album when the artwork is touched, false
-     *            otherwise.
-     */
-    public void setTouchPlay(final boolean play) {
-        mTouchPlay = play;
+        return -1;
     }
 
     @Override

@@ -31,7 +31,6 @@ import com.cyngn.eleven.adapters.PagerAdapter;
 import com.cyngn.eleven.loaders.AlbumLoader;
 import com.cyngn.eleven.model.Album;
 import com.cyngn.eleven.recycler.RecycleHolder;
-import com.cyngn.eleven.sectionadapter.SectionAdapter;
 import com.cyngn.eleven.sectionadapter.SectionCreator;
 import com.cyngn.eleven.sectionadapter.SectionListContainer;
 import com.cyngn.eleven.ui.activities.BaseActivity;
@@ -43,7 +42,6 @@ import com.cyngn.eleven.utils.NavUtils;
 import com.cyngn.eleven.utils.PopupMenuHelper;
 import com.cyngn.eleven.widgets.IPopupMenuCallback;
 import com.cyngn.eleven.widgets.LoadingEmptyContainer;
-import com.cyngn.eleven.widgets.NoResultsContainer;
 import com.viewpagerindicator.TitlePageIndicator;
 
 /**
@@ -58,7 +56,7 @@ public class AlbumFragment extends MusicBrowserFragment implements
     /**
      * Grid view column count. ONE - list, TWO - normal grid, FOUR - landscape
      */
-    private static final int ONE = 1, TWO = 2, FOUR = 4;
+    private static final int TWO = 2, FOUR = 4;
 
     /**
      * Fragment UI
@@ -68,7 +66,7 @@ public class AlbumFragment extends MusicBrowserFragment implements
     /**
      * The adapter for the grid
      */
-    private SectionAdapter<Album, AlbumAdapter> mAdapter;
+    private AlbumAdapter mAdapter;
 
     /**
      * The grid view
@@ -99,14 +97,13 @@ public class AlbumFragment extends MusicBrowserFragment implements
 
         mPopupMenuHelper = new AlbumPopupMenuHelper(getActivity(), getFragmentManager()) {
             public Album getAlbum(int position) {
-                return mAdapter.getTItem(position);
+                return mAdapter.getItem(position);
             }
         };
 
         int layout = R.layout.grid_items_normal;
 
-        AlbumAdapter adapter = new AlbumAdapter(getActivity(), layout);
-        mAdapter = new SectionAdapter<Album, AlbumAdapter>(getActivity(), adapter);
+        mAdapter = new AlbumAdapter(getActivity(), layout);
         mAdapter.setPopupMenuClickedListener(new IPopupMenuCallback.IListener() {
             @Override
             public void onPopupMenuClicked(View v, int position) {
@@ -167,9 +164,9 @@ public class AlbumFragment extends MusicBrowserFragment implements
         // Pause disk cache access to ensure smoother scrolling
         if (scrollState == AbsListView.OnScrollListener.SCROLL_STATE_FLING
                 || scrollState == AbsListView.OnScrollListener.SCROLL_STATE_TOUCH_SCROLL) {
-            mAdapter.getUnderlyingAdapter().setPauseDiskCache(true);
+            mAdapter.setPauseDiskCache(true);
         } else {
-            mAdapter.getUnderlyingAdapter().setPauseDiskCache(false);
+            mAdapter.setPauseDiskCache(false);
             mAdapter.notifyDataSetChanged();
         }
     }
@@ -180,7 +177,7 @@ public class AlbumFragment extends MusicBrowserFragment implements
     @Override
     public void onItemClick(final AdapterView<?> parent, final View view, final int position,
             final long id) {
-        Album album = mAdapter.getTItem(position);
+        Album album = mAdapter.getItem(position);
         NavUtils.openAlbumProfile(getActivity(), album.mAlbumName, album.mArtistName, album.mAlbumId);
     }
 
@@ -207,8 +204,7 @@ public class AlbumFragment extends MusicBrowserFragment implements
             return;
         }
 
-        // Set the data
-        mAdapter.setData(data);
+        mAdapter.setData(data.mListResults);
     }
 
     /**
@@ -310,17 +306,15 @@ public class AlbumFragment extends MusicBrowserFragment implements
      * Sets up the grid view
      */
     private void initGridView() {
+        int columns = ApolloUtils.isLandscape(getActivity()) ? FOUR : TWO;
+        mAdapter.setNumColumns(columns);
         // Initialize the grid
         mGridView = (GridView)mRootView.findViewById(R.id.grid_base);
         // Set the data behind the grid
         mGridView.setAdapter(mAdapter);
         // Set up the helpers
         initAbsListView(mGridView);
-        if (ApolloUtils.isLandscape(getActivity())) {
-            mGridView.setNumColumns(FOUR);
-        } else {
-            mGridView.setNumColumns(TWO);
-        }
+        mGridView.setNumColumns(columns);
 
         // Show progress bar
         mLoadingEmptyContainer = (LoadingEmptyContainer)mRootView.findViewById(R.id.loading_empty_container);

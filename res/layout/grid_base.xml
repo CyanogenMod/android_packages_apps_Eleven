@@ -17,10 +17,7 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/grid_base_container"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:paddingLeft="@dimen/list_preferred_item_padding"
-    android:paddingRight="@dimen/list_preferred_item_padding"
-    android:paddingTop="@dimen/list_preferred_item_padding">
+    android:layout_height="match_parent">
 
     <include
         layout="@layout/loading_empty_container" />
@@ -29,6 +26,8 @@
         android:id="@+id/grid_base"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:paddingLeft="@dimen/list_outer_edge_padding"
+        android:paddingRight="@dimen/list_outer_edge_padding"
         android:cacheColorHint="@color/transparent"
         android:drawSelectorOnTop="true"
         android:fadingEdge="vertical"

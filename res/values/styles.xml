@@ -115,6 +115,7 @@
     </style>
 
     <style name="ListItemMainText.Grid.Single" parent="ListItemMainText.Single">
+        <item name="android:textSize">@dimen/text_size_micro</item>
         <item name="android:textColor">@color/grid_list_item_text_color</item>
     </style>
 
@@ -132,6 +133,7 @@
     </style>
 
     <style name="ListItemSecondaryText.Grid.Single" parent="ListItemSecondaryText.Single">
+        <item name="android:textSize">@dimen/text_size_extra_micro</item>
         <item name="android:textColor">@color/grid_list_item_text_color</item>
     </style>
 
