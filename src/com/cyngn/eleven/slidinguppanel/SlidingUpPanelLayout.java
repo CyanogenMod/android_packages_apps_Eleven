@@ -8,7 +8,6 @@ import android.graphics.Paint;
 import android.graphics.PixelFormat;
 import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
-import android.os.Build;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.support.v4.view.MotionEventCompat;
@@ -19,9 +18,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.accessibility.AccessibilityEvent;
-
 import com.cyngn.eleven.R;
-import com.nineoldandroids.view.animation.AnimatorProxy;
 
 public class SlidingUpPanelLayout extends ViewGroup {
 
@@ -1028,11 +1025,7 @@ public class SlidingUpPanelLayout extends ViewGroup {
                 mainViewOffset = (int)(getDirectionalSlideOffset() * mSlideRange);
             }
 
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
-                mMainView.setTranslationY(mainViewOffset);
-            } else {
-                AnimatorProxy.wrap(mMainView).setTranslationY(mainViewOffset);
-            }
+            mMainView.setTranslationY(mainViewOffset);
         }
 
         // Dispatch the slide event
