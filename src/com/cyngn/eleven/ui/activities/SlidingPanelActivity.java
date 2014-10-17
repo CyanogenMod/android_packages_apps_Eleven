@@ -16,7 +16,6 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.view.View;
-import android.view.ViewStub;
 import android.widget.LinearLayout;
 
 import com.cyngn.eleven.R;
@@ -36,7 +35,7 @@ import com.cyngn.eleven.widgets.BlurScrimImage;
  */
 public class SlidingPanelActivity extends BaseActivity {
 
-    enum Panel {
+    public enum Panel {
         Browse,
         MusicPlayer,
         Queue,
@@ -44,7 +43,6 @@ public class SlidingPanelActivity extends BaseActivity {
     }
 
     private SlidingUpPanelLayout mFirstPanel;
-    private HeaderBar mFirstHeaderBar;
     private SlidingUpPanelLayout mSecondPanel;
     protected Panel mTargetNavigatePanel;
 
@@ -122,9 +120,7 @@ public class SlidingPanelActivity extends BaseActivity {
             }
         });
 
-        // setup the header bar
-        mFirstHeaderBar = setupHeaderBar(R.id.firstHeaderBar, R.string.page_now_playing,
-                R.drawable.btn_queue_icon, mShowQueue, mShowBrowse);
+
     }
 
     private void setupSecondPanel() {
@@ -203,7 +199,7 @@ public class SlidingPanelActivity extends BaseActivity {
         showPanel(Panel.MusicPlayer);
     }
 
-    protected void showPanel(Panel panel) {
+    public void showPanel(Panel panel) {
         // TODO: Add ability to do this instantaneously as opposed to animate
         switch (panel) {
             case Browse:
@@ -249,7 +245,6 @@ public class SlidingPanelActivity extends BaseActivity {
     public void clearMetaInfo() {
         super.clearMetaInfo();
         mBlurScrimImage.transitionToDefaultState();
-        mFirstHeaderBar.setTitleText("");
     }
 
     @Override
@@ -258,9 +253,6 @@ public class SlidingPanelActivity extends BaseActivity {
 
         // load the blurred image
         mBlurScrimImage.loadBlurImage(ApolloUtils.getImageFetcher(this));
-
-        // Set the artist name
-        mFirstHeaderBar.setTitleText(MusicUtils.getArtistName());
     }
 
     protected AudioPlayerFragment getAudioPlayerFragment() {

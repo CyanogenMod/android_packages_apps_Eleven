@@ -32,16 +32,6 @@ import com.cyngn.eleven.widgets.theme.HoloSelector;
  */
 public class RepeatingImageButton extends ImageButton implements OnClickListener {
 
-    /**
-     * Next button theme resource
-     */
-    private static final String NEXT = "btn_playback_next";
-
-    /**
-     * Previous button theme resource
-     */
-    private static final String PREVIOUS = "btn_playback_previous";
-
     private static final long sInterval = 400;
 
     private long mStartTime;
@@ -58,6 +48,7 @@ public class RepeatingImageButton extends ImageButton implements OnClickListener
     public RepeatingImageButton(final Context context, final AttributeSet attrs) {
         super(context, attrs);
         // Theme the selector
+        setPadding(0, 0, 0, 0);
         setBackgroundDrawable(new HoloSelector(context));
         setFocusable(true);
         setLongClickable(true);

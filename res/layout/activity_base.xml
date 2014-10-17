@@ -67,10 +67,6 @@
 
                     <include layout="@layout/bottom_action_bar" />
 
-                    <include
-                        android:id="@+id/firstHeaderBar"
-                        layout="@layout/header_bar" />
-
                     <fragment
                         android:id="@+id/audioPlayerFragment"
                         class="com.cyngn.eleven.ui.fragments.AudioPlayerFragment"

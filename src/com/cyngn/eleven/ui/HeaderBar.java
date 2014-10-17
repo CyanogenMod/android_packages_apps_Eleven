@@ -172,7 +172,7 @@ public class HeaderBar extends LinearLayout implements View.OnClickListener,
     }
 
     /**
-     * @param text set the title text
+     * @param resId set the title text
      */
     public void setTitleText(int resId) {
         mTitleText.setText(resId);

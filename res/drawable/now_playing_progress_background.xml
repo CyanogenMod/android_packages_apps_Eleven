@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Copyright (C) 2014 Cyanogen, Inc.
+-->
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:innerRadiusRatio="2.601"
+    android:thicknessRatio="8.666"
+    android:shape="ring">
+    <solid android:color="@color/circular_progress_bar_background" />
+</shape>

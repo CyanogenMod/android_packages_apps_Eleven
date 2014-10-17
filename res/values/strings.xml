@@ -119,6 +119,8 @@
     <string name="accessibility_repeat">Repeat</string>
     <string name="accessibility_repeat_all">Repeat all</string>
     <string name="accessibility_repeat_one">Repeat one</string>
+    <string name="accessibility_queue">Open Queue</string>
+    <string name="accessibility_browse">Browse Music</string>
 
     <!-- Toast messages -->
     <string name="set_as_ringtone">\'<xliff:g id="name" example="Alarm Bell">%s</xliff:g>\' set as ringtone</string>

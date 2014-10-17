@@ -12,66 +12,28 @@
 package com.cyngn.eleven.widgets;
 
 import android.content.Context;
-import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.view.View;
-import android.view.View.OnClickListener;
-import android.view.View.OnLongClickListener;
-import android.widget.ImageButton;
 
 import com.cyngn.eleven.MusicPlaybackService;
 import com.cyngn.eleven.R;
-import com.cyngn.eleven.utils.ApolloUtils;
 import com.cyngn.eleven.utils.MusicUtils;
-import com.cyngn.eleven.widgets.theme.HoloSelector;
 
 /**
  * @author Andrew Neal (andrewdneal@gmail.com)
  */
-public class ShuffleButton extends ImageButton implements OnClickListener, OnLongClickListener {
-    public static float ACTIVE_ALPHA = 1.0f;
-    public static float INACTIVE_ALPHA = 0.4f;
-
-    /**
-     * @param context The {@link Context} to use
-     * @param attrs The attributes of the XML tag that is inflating the view.
-     */
-    @SuppressWarnings("deprecation")
+public class ShuffleButton extends AudioButton {
     public ShuffleButton(final Context context, final AttributeSet attrs) {
         super(context, attrs);
-        // Theme the selector
-        setBackgroundDrawable(new HoloSelector(context));
-        // Control playback (cycle shuffle)
-        setOnClickListener(this);
-        // Show the cheat sheet
-        setOnLongClickListener(this);
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public void onClick(final View v) {
         MusicUtils.cycleShuffle();
         updateShuffleState();
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public boolean onLongClick(final View view) {
-        if (TextUtils.isEmpty(view.getContentDescription())) {
-            return false;
-        } else {
-            ApolloUtils.showCheatSheet(view);
-            return true;
-        }
-    }
-
-    /**
-     * Sets the correct drawable for the shuffle state.
-     */
+    /** Sets the correct drawable for the shuffle state. */
     public void updateShuffleState() {
         switch (MusicUtils.getShuffleMode()) {
             case MusicPlaybackService.SHUFFLE_NORMAL:
@@ -90,5 +52,4 @@ public class ShuffleButton extends ImageButton implements OnClickListener, OnLon
                 break;
         }
     }
-
 }

@@ -5,6 +5,7 @@ package com.cyngn.eleven.widgets;
 
 import android.content.Context;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.widget.FrameLayout;
 import android.widget.ProgressBar;
 
@@ -49,7 +50,8 @@ public class PlayPauseProgressButton extends FrameLayout {
         // Make the play pause button size dependent on the container size
         int horizontalPadding = getMeasuredWidth() / 4;
         int verticalPadding = getMeasuredHeight() / 4;
-        mPlayPauseButton.setPadding(horizontalPadding, horizontalPadding,
+        mPlayPauseButton.setPadding(
+                horizontalPadding, horizontalPadding,
                 verticalPadding, verticalPadding);
 
         // rotate the progress bar 90 degrees counter clockwise so that the
