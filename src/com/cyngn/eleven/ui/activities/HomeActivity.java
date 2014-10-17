@@ -179,13 +179,19 @@ public class HomeActivity extends SlidingPanelActivity {
             if (resultCode == RESULT_OK) {
                 MusicUtils.removeFromCache(this, mKey);
                 final Uri selectedImage = data.getData();
-                Bitmap bitmap = ImageFetcher.decodeSampledBitmapFromUri(getContentResolver(),
-                        selectedImage);
 
-                ImageFetcher imageFetcher = ApolloUtils.getImageFetcher(this);
-                imageFetcher.addBitmapToCache(mKey, bitmap);
+                new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        Bitmap bitmap = ImageFetcher.decodeSampledBitmapFromUri(getContentResolver(),
+                                selectedImage);
 
-                MusicUtils.refresh();
+                        ImageFetcher imageFetcher = ApolloUtils.getImageFetcher(HomeActivity.this);
+                        imageFetcher.addBitmapToCache(mKey, bitmap);
+
+                        MusicUtils.refresh();
+                    }
+                }).start();
             }
         }
     }
