@@ -245,4 +245,39 @@ public class ImageUtils {
         }
         return null;
     }
+
+    /**
+     * Scale the bitmap to an image view. The bitmap will fill the image view bounds. The bitmap will be scaled
+     * while maintaining the aspect ratio and cropped if it exceeds the image-view bounds.
+     */
+    public static Bitmap scaleBitmapForImageView(Bitmap src, ImageView imageView) {
+        if (src == null || imageView == null) {
+            return src;
+        }
+        // get bitmap properties
+        int srcHeight = src.getHeight();
+        int srcWidth = src.getWidth();
+
+        // get image view bounds
+        int viewHeight = imageView.getHeight();
+        int viewWidth = imageView.getWidth();
+
+        int deltaWidth = viewWidth - srcWidth;
+        int deltaHeight = viewHeight - srcHeight;
+
+        if (deltaWidth <= 0 && deltaWidth <= 0)     // nothing to do if src bitmap is bigger than image-view
+            return src;
+
+        // scale bitmap along the dimension that is lacking the greatest
+        float scale = Math.max( ((float)viewWidth) / srcWidth, ((float)viewHeight) / srcHeight);
+
+        // calculate the new bitmap dimensions
+        int dstHeight = (int) Math.ceil(srcHeight * scale);
+        int dstWidth = (int) Math.ceil(srcWidth * scale);
+        Bitmap scaledBitmap =  Bitmap.createScaledBitmap(src, dstWidth, dstHeight, false);
+        Bitmap croppedBitmap = Bitmap.createBitmap(scaledBitmap, 0, 0, viewWidth, viewHeight);
+
+        return croppedBitmap;
+
+    }
 }

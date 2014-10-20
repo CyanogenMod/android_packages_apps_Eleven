@@ -1,5 +1,6 @@
 package com.cyngn.eleven.ui.fragments;
 
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.LoaderManager;
 import android.support.v7.widget.LinearLayoutManager;
@@ -7,6 +8,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewTreeObserver;
 import android.widget.ImageView;
 import android.widget.ListView;
 import com.cyngn.eleven.Config;
@@ -102,7 +104,21 @@ public class ArtistDetailFragment extends FadingBarFragment {
     private void setupHero(String artistName) {
         mHero = (ImageView)mHeader.findViewById(R.id.hero);
         mHero.setContentDescription(artistName);
-        ImageFetcher.getInstance(getActivity()).loadArtistImage(artistName, mHero);
+        // initiate loading the artist image
+        // since the artist image needs to be scaled to the image view bounds, we need to wait till the first layout
+        // traversal to be able to get the image view dimensions in the helper method that scales the image
+        mHero.getViewTreeObserver().addOnGlobalLayoutListener( new ViewTreeObserver.OnGlobalLayoutListener() {
+            @Override
+            public void onGlobalLayout() {
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
+                    mHero.getViewTreeObserver().removeOnGlobalLayoutListener(this);
+                } else {
+                    mHero.getViewTreeObserver().removeGlobalOnLayoutListener(this);
+                }
+                ImageFetcher.getInstance(getActivity()).loadArtistImage(mArtistName, mHero, true);
+            }
+        });
+
     }
 
     private void setupAlbumList() {

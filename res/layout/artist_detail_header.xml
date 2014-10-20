@@ -7,7 +7,7 @@
         android:id="@+id/hero"
         android:layout_width="match_parent"
         android:layout_height="220dp"
-        android:scaleType="centerCrop" />
+        android:gravity="center" />
 
     <TextView
         android:id="@+id/albums_label"

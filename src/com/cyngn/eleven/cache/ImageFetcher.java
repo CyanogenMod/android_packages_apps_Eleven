@@ -117,6 +117,13 @@ public class ImageFetcher extends ImageWorker {
     }
 
     /**
+     * Used to fetch artist images. It also scales the image to fit the image view, if necessary.
+     */
+    public void loadArtistImage(final String key, final ImageView imageView, boolean scaleImgToView) {
+        loadImage(key, key, null, -1, imageView, ImageType.ARTIST, scaleImgToView);
+    }
+
+    /**
      * Used to fetch the current artist image.
      */
     public void loadCurrentArtistImage(final ImageView imageView) {

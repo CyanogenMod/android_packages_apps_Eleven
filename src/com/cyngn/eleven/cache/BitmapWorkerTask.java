@@ -41,6 +41,8 @@ public abstract class BitmapWorkerTask<Params, Progress, Result>
 
     protected final Resources mResources;
 
+    protected boolean mScaleImgToView;
+
     /**
      * The key used to store cached entries
      */
@@ -55,6 +57,19 @@ public abstract class BitmapWorkerTask<Params, Progress, Result>
      */
     public BitmapWorkerTask(final String key, final ImageView imageView, final ImageType imageType,
                             final Drawable fromDrawable, final Context context) {
+        this(key, imageView, imageType, fromDrawable, context, false);
+    }
+
+    /**
+     * Constructor of <code>BitmapWorkerTask</code>
+     * @param key used for caching the image
+     * @param imageView The {@link ImageView} to use.
+     * @param imageType The type of image URL to fetch for.
+     * @param fromDrawable what drawable to transition from
+     * @param scaleImgToView flag to scale the bitmap to the image view bounds
+     */
+    public BitmapWorkerTask(final String key, final ImageView imageView, final ImageType imageType,
+                            final Drawable fromDrawable, final Context context, final boolean scaleImgToView) {
         mKey = key;
 
         mContext = context;
@@ -66,6 +81,8 @@ public abstract class BitmapWorkerTask<Params, Progress, Result>
 
         // A transparent image (layer 0) and the new result (layer 1)
         mFromDrawable = fromDrawable;
+
+        mScaleImgToView = scaleImgToView;
     }
 
     /**

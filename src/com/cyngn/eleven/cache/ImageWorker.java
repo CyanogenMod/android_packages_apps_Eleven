@@ -449,6 +449,60 @@ public abstract class ImageWorker {
     }
 
     /**
+     * Called to fetch the artist or album art.
+     *
+     * @param key The unique identifier for the image.
+     * @param artistName The artist name for the Last.fm API.
+     * @param albumName The album name for the Last.fm API.
+     * @param albumId The album art index, to check for missing artwork.
+     * @param imageView The {@link ImageView} used to set the cached
+     *            {@link Bitmap}.
+     * @param imageType The type of image URL to fetch for.
+     * @param scaleImgToView config option to scale the image to the image view's dimensions
+     */
+    protected void loadImage(final String key, final String artistName, final String albumName,
+                             final long albumId, final ImageView imageView, final ImageType imageType, boolean scaleImgToView) {
+        if (key == null || mImageCache == null || imageView == null) {
+            return;
+        }
+
+        // First, check the memory for the image
+        final Bitmap lruBitmap = mImageCache.getBitmapFromMemCache(key);
+        if (lruBitmap != null && imageView != null) {   // Bitmap found in memory cache
+            // scale image if necessary
+            if (scaleImgToView)
+                imageView.setImageBitmap( ImageUtils.scaleBitmapForImageView(lruBitmap, imageView) );
+            else
+                imageView.setImageBitmap(lruBitmap);
+        } else {
+            // if a background drawable hasn't been set, create one so that even if
+            // the disk cache is paused we see something
+            if (imageView.getBackground() == null) {
+                imageView.setBackgroundDrawable(getNewDefaultBitmapDrawable(imageType));
+            }
+
+            if (executePotentialWork(key, imageView)
+                    && imageView != null && !mImageCache.isDiskCachePaused()) {
+                // cancel the old task if any
+                cancelWork(imageView);
+
+                // Otherwise run the worker task
+                final SimpleBitmapWorkerTask bitmapWorkerTask = new SimpleBitmapWorkerTask(key,
+                        imageView, imageType, mTransparentDrawable, mContext, scaleImgToView);
+                final AsyncTaskContainer asyncTaskContainer = new AsyncTaskContainer(bitmapWorkerTask);
+                imageView.setTag(asyncTaskContainer);
+                try {
+                    ApolloUtils.execute(false, bitmapWorkerTask,
+                            artistName, albumName, String.valueOf(albumId));
+                } catch (RejectedExecutionException e) {
+                    // Executor has exhausted queue space
+                }
+            }
+        }
+    }
+
+
+    /**
      * Called to fetch a playlist's top artist or cover art
      * @param playlistId playlist identifier
      * @param type of work to get (Artist or CoverArt)
