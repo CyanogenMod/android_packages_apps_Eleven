@@ -48,7 +48,7 @@
                 android:contentDescription="@string/accessibility_play"
                 android:focusable="true"
                 android:scaleType="centerCrop"
-                android:src="@drawable/btn_playback_play_med" />
+                android:src="@drawable/btn_playback_play" />
 
             <ProgressBar
                 android:id="@+id/progressBarBackground"

@@ -81,7 +81,7 @@
         android:layout_gravity="fill_horizontal"
         android:layout_height="1dp"
         android:layout_columnSpan="2"
-        android:background="@color/transparent_white" />
+        android:background="@color/widget_divider" />
 
     <LinearLayout
         android:id="@+id/app_widget_small_info_container"
@@ -100,7 +100,7 @@
             android:layout_height="wrap_content"
             android:ellipsize="none"
             android:singleLine="true"
-            android:textColor="@color/white"
+            android:textColor="@color/widget_text"
             android:textSize="@dimen/text_size_small"
             android:textStyle="bold" />
 
@@ -113,9 +113,9 @@
             android:paddingRight="5dp"
             android:singleLine="true"
             android:text="@string/app_widget_text_separator"
-            android:textColor="@color/transparent_white"
-            android:textSize="@dimen/text_size_small"
-            android:textStyle="bold" />
+            android:fontFamily="sans-serif-light"
+            android:textColor="@color/widget_text"
+            android:textSize="@dimen/text_size_small" />
 
         <TextView
             android:id="@+id/app_widget_small_line_two"
@@ -123,7 +123,8 @@
             android:layout_height="wrap_content"
             android:ellipsize="marquee"
             android:singleLine="true"
-            android:textColor="@color/transparent_white"
+            android:textColor="@color/widget_text"
+            android:fontFamily="sans-serif-light"
             android:textSize="@dimen/text_size_small" />
     </LinearLayout>
 

@@ -106,4 +106,9 @@
     <color name="no_results_light">@color/white</color>
 
     <color name="now_playing_divider">#40ffffff</color>
+
+    <!-- App widget colors -->
+    <color name="widget_divider">#569fd7</color>
+    <!-- 80% opacity white -->
+    <color name="widget_text">#ccffffff</color>
 </resources>

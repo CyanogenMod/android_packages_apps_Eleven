@@ -43,34 +43,36 @@
         <TextView
             android:id="@+id/app_widget_large_line_one"
             style="@style/NotificationText"
-            android:textColor="@color/white"
+            android:textColor="@color/widget_text"
             android:textSize="@dimen/text_size_medium"
             android:textStyle="bold" />
 
         <TextView
             android:id="@+id/app_widget_large_line_two"
             style="@style/NotificationText"
-            android:textColor="@color/transparent_white"
+            android:textColor="@color/widget_text"
+            android:fontFamily="sans-serif-light"
             android:textSize="@dimen/text_size_small" />
 
         <TextView
             android:id="@+id/app_widget_large_line_three"
             style="@style/NotificationText"
-            android:textColor="@color/transparent_white"
+            android:textColor="@color/widget_text"
+            android:fontFamily="sans-serif-light"
             android:textSize="@dimen/text_size_small" />
     </LinearLayout>
 
-    <ImageView
-        android:layout_width="0dp"
+    <LinearLayout
         android:layout_gravity="fill_horizontal"
-        android:background="?android:dividerHorizontal" />
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:background="@color/widget_divider" />
 
     <LinearLayout
         android:id="@+id/app_widget_large_buttons"
         android:layout_width="0dp"
         android:layout_gravity="fill_horizontal"
         android:layout_marginBottom="@dimen/app_widget_bottom_margin"
-        android:divider="?android:listDivider"
         android:dividerPadding="@dimen/notification_expanded_buttons_divider_padding"
         android:gravity="center_vertical"
         android:orientation="horizontal"
