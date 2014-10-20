@@ -26,8 +26,8 @@
         android:gravity="center_vertical"
         android:paddingTop="@dimen/list_item_padding_top"
         android:paddingBottom="@dimen/list_item_padding_bottom"
-        android:paddingLeft="@dimen/list_preferred_item_padding"
-        android:paddingRight="@dimen/list_preferred_item_padding" >
+        android:paddingLeft="@dimen/list_item_general_margin"
+        android:paddingRight="@dimen/list_item_general_margin" >
 
         <FrameLayout
             android:id="@+id/position_contanier"

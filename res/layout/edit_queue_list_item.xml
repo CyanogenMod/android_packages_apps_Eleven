@@ -33,7 +33,7 @@
         android:layout_height="wrap_content"
         android:layout_toRightOf="@+id/edit_track_list_item_handle"
         android:gravity="center_vertical"
-        android:paddingRight="@dimen/list_preferred_item_padding" >
+        android:paddingRight="@dimen/list_item_general_margin" >
 
         <include layout="@layout/list_item_queue" />
     </FrameLayout>

@@ -8,7 +8,10 @@
         android:layout_height="50dp"
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
-        android:layout_margin="@dimen/list_preferred_item_padding" />
+        android:layout_marginTop="@dimen/list_preferred_item_padding"
+        android:layout_marginBottom="@dimen/list_preferred_item_padding"
+        android:layout_marginRight="@dimen/list_preferred_item_padding"
+        android:layout_marginLeft="@dimen/list_item_general_margin" />
 
     <LinearLayout
         android:id="@+id/right_container"
@@ -17,7 +20,8 @@
         android:layout_alignParentRight="true"
         android:layout_centerVertical="true"
         android:gravity="center_vertical"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:layout_marginRight="@dimen/list_item_general_margin">
         <ImageView
             android:id="@+id/now_playing"
             android:layout_width="wrap_content"
