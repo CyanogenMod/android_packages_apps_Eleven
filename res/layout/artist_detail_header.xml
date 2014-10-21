@@ -6,14 +6,14 @@
     <ImageView
         android:id="@+id/hero"
         android:layout_width="match_parent"
-        android:layout_height="220dp"
+        android:layout_height="222dp"
         android:gravity="center" />
 
     <TextView
         android:id="@+id/albums_label"
         android:layout_width="wrap_content"
         android:layout_height="40dp"
-        android:layout_marginLeft="10dp"
+        android:layout_marginLeft="@dimen/list_item_general_margin"
         android:layout_below="@id/hero"
         android:gravity="center_vertical"
         android:fontFamily="sans-serif-light"
@@ -26,14 +26,14 @@
         android:id="@+id/albums"
         android:scrollbars="none"
         android:layout_width="match_parent"
-        android:layout_height="161dp"
+        android:layout_height="148dp"
         android:layout_below="@id/albums_label" />
 
     <TextView
         android:id="@+id/songs_label"
         android:layout_width="wrap_content"
         android:layout_height="30dp"
-        android:layout_marginLeft="10dp"
+        android:layout_marginLeft="@dimen/list_item_general_margin"
         android:layout_below="@id/albums"
         android:gravity="bottom"
         android:fontFamily="sans-serif-light"

@@ -17,7 +17,8 @@
             android:layout_height="108dp"
             android:layout_marginRight="@dimen/standard_padding"
             android:layout_alignParentTop="true"
-            android:layout_alignParentLeft="true" />
+            android:layout_alignParentLeft="true"
+            android:scaleType="centerCrop" />
 
         <RelativeLayout
             android:id="@+id/header_info"

@@ -1,47 +1,49 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="120dp"
-    android:layout_height="161dp"
-    android:layout_marginRight="4dp"
+    android:layout_width="104dp"
+    android:layout_height="148dp"
+    android:layout_marginRight="8dp"
     android:background="@drawable/cardcontainer" >
 
     <ImageView
         android:id="@+id/album_art"
-        android:layout_width="120dp"
-        android:layout_height="120dp"
+        android:layout_width="104dp"
+        android:layout_height="104dp"
         android:layout_alignParentTop="true"
-        android:layout_alignParentLeft="true" />
+        android:layout_alignParentLeft="true"
+        android:scaleType="centerCrop" />
 
-    <!-- FIXME: hide this until we know what goes in the popup menu -->
     <com.cyngn.eleven.widgets.PopupMenuButton
         android:id="@+id/overflow"
         android:layout_width="@dimen/overflow_width"
-        android:layout_height="40dp"
-        android:layout_alignParentBottom="true"
+        android:layout_height="match_parent"
+        android:layout_below="@id/album_art"
         android:layout_alignParentRight="true"
         android:layout_marginBottom="1dp"
-        android:layout_marginRight="-2dp"
-        android:gravity="center"
+        android:gravity="center_vertical"
         android:src="@drawable/menu_button" />
 
-    <TextView
-        android:id="@+id/title"
-        style="@style/ListItemMainText.Single"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:gravity="center_vertical"
         android:layout_below="@id/album_art"
         android:layout_toLeftOf="@id/overflow"
         android:layout_alignParentLeft="true"
-        android:layout_marginLeft="8dp"
-        android:layout_marginTop="3dp" />
+        android:layout_marginLeft="8dp" >
 
-    <TextView
-        android:id="@+id/year"
-        style="@style/ListItemSecondaryText.Single"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/title"
-        android:layout_alignParentLeft="true"
-        android:layout_toLeftOf="@id/overflow"
-        android:layout_marginLeft="8dp"
-        android:layout_marginTop="-4dp" />
+        <TextView
+            android:id="@+id/title"
+            style="@style/ListItemMainText.Single"
+            android:textSize="@dimen/text_size_micro"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:id="@+id/year"
+            style="@style/ListItemSecondaryText.Single"
+            android:textSize="@dimen/text_size_extra_micro"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
 </RelativeLayout>

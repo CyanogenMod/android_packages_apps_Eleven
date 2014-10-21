@@ -37,11 +37,14 @@ implements LoaderCallbacks<List<Album>>, IPopupMenuCallback {
     private final LayoutInflater mInflater;
     private List<Album> mAlbums = Collections.emptyList();
     private IListener mListener;
+    private int mListMargin;
 
     public ArtistDetailAlbumAdapter(final Activity activity) {
         mActivity = activity;
         mImageFetcher = ApolloUtils.getImageFetcher(activity);
         mInflater = LayoutInflater.from(activity);
+        mListMargin = activity.getResources().
+            getDimensionPixelSize(R.dimen.list_item_general_margin);
     }
 
     @Override
@@ -58,8 +61,8 @@ implements LoaderCallbacks<List<Album>>, IPopupMenuCallback {
         View v = mInflater.inflate(R.layout.artist_detail_album, parent, false);
         // add extra margin to the first and last elements
         ViewGroup.MarginLayoutParams params = (ViewGroup.MarginLayoutParams)v.getLayoutParams();
-        if     (viewType == TYPE_FIRST) { params.leftMargin = 30; }
-        else if(viewType == TYPE_LAST)  { params.rightMargin = 30; }
+        if     (viewType == TYPE_FIRST) { params.leftMargin = mListMargin; }
+        else if(viewType == TYPE_LAST)  { params.rightMargin = mListMargin; }
         return new ViewHolder(v);
     }
 
