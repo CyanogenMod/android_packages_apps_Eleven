@@ -4,10 +4,12 @@
 
 <com.cyngn.eleven.ui.HeaderBar xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
-    android:layout_height="?android:attr/actionBarSize"
+    android:layout_height="@dimen/header_bar_height"
     android:enabled="false"
     android:gravity="center_vertical"
     android:orientation="horizontal"
+    android:paddingStart="@dimen/drag_and_drop_width"
+    android:paddingEnd="@dimen/header_bar_padding_right"
     android:background="@color/header_action_bar_color">
 
     <ImageView
@@ -16,8 +18,7 @@
         android:layout_height="@dimen/header_bar_up_height"
         android:layout_gravity="center_vertical"
         android:layout_weight="0"
-        android:paddingLeft="@dimen/header_bar_button_padding_small"
-        android:paddingRight="@dimen/header_bar_button_padding_small"
+        android:layout_marginRight="@dimen/header_bar_button_padding"
         android:scaleType="centerCrop"
         android:src="@drawable/btn_header_collapse"/>
 
@@ -34,14 +35,15 @@
         android:textStyle="bold" />
 
     <ImageView
-        android:id="@+id/header_bar_custom_button"
+        android:id="@+id/header_bar_search_button"
         android:layout_width="@dimen/header_bar_custom_button_width"
         android:layout_height="@dimen/header_bar_custom_button_height"
         android:layout_gravity="center_vertical"
         android:layout_weight="0"
-        android:paddingLeft="@dimen/header_bar_button_padding_small"
-        android:paddingRight="@dimen/header_bar_button_padding_large"
-        android:scaleType="centerCrop" />
+        android:layout_marginStart="@dimen/header_bar_button_padding"
+        android:layout_marginEnd="@dimen/header_bar_button_padding"
+        android:src="@drawable/ic_action_search"
+        android:scaleType="centerInside" />
 
     <ImageView
         android:id="@+id/header_bar_menu_button"
@@ -49,9 +51,8 @@
         android:layout_height="@dimen/header_bar_menu_button_height"
         android:layout_gravity="center_vertical"
         android:layout_weight="0"
-        android:paddingLeft="@dimen/header_bar_button_padding_small"
-        android:paddingRight="@dimen/header_bar_button_padding_large"
-        android:scaleType="centerCrop"
+        android:scaleType="centerInside"
+        android:layout_marginStart="@dimen/header_bar_button_padding"
         android:src="@drawable/menu_button_light"/>
 
 </com.cyngn.eleven.ui.HeaderBar>

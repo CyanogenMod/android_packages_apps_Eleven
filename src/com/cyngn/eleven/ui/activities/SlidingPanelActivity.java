@@ -23,6 +23,7 @@ import com.cyngn.eleven.slidinguppanel.SlidingUpPanelLayout;
 import com.cyngn.eleven.slidinguppanel.SlidingUpPanelLayout.SimplePanelSlideListener;
 import com.cyngn.eleven.ui.HeaderBar;
 import com.cyngn.eleven.ui.fragments.AudioPlayerFragment;
+import com.cyngn.eleven.ui.fragments.QueueFragment;
 import com.cyngn.eleven.utils.ApolloUtils;
 import com.cyngn.eleven.utils.MusicUtils;
 import com.cyngn.eleven.widgets.BlurScrimImage;
@@ -48,7 +49,6 @@ public class SlidingPanelActivity extends BaseActivity {
 
     private final ShowPanelClickListener mShowBrowse = new ShowPanelClickListener(Panel.Browse);
     private final ShowPanelClickListener mShowMusicPlayer = new ShowPanelClickListener(Panel.MusicPlayer);
-    private final ShowPanelClickListener mShowQueue = new ShowPanelClickListener(Panel.Queue);
 
     // this is the blurred image that goes behind the now playing and queue fragments
     private BlurScrimImage mBlurScrimImage;
@@ -119,8 +119,6 @@ public class SlidingPanelActivity extends BaseActivity {
                 checkTargetNavigation();
             }
         });
-
-
     }
 
     private void setupSecondPanel() {
@@ -149,8 +147,7 @@ public class SlidingPanelActivity extends BaseActivity {
         });
 
         // setup the header bar
-        setupHeaderBar(R.id.secondHeaderBar, R.string.page_play_queue,
-                R.drawable.btn_playback_icon, mShowMusicPlayer, mShowMusicPlayer);
+        setupHeaderBar(R.id.secondHeaderBar, R.string.page_play_queue, mShowMusicPlayer);
 
         // set the drag view offset to allow the panel to go past the top of the viewport
         // since the previous view's is hiding the slide offset, we need to subtract that
@@ -259,12 +256,15 @@ public class SlidingPanelActivity extends BaseActivity {
         return (AudioPlayerFragment)getSupportFragmentManager().findFragmentById(R.id.audioPlayerFragment);
     }
 
+    protected QueueFragment getQueueFragment() {
+        return (QueueFragment)getSupportFragmentManager().findFragmentById(R.id.queueFragment);
+    }
+
     protected HeaderBar setupHeaderBar(final int containerId, final int textId,
-                                       final int customIconId, final View.OnClickListener customListener,
-                                        final View.OnClickListener headerClickListener) {
+                                       final View.OnClickListener headerClickListener) {
         final HeaderBar headerBar = (HeaderBar) findViewById(containerId);
+        headerBar.setFragment(getQueueFragment());
         headerBar.setTitleText(textId);
-        headerBar.setupCustomButton(customIconId, customListener);
         headerBar.setBackgroundColor(Color.TRANSPARENT);
         headerBar.setBackListener(mShowBrowse);
         headerBar.setHeaderClickListener(headerClickListener);

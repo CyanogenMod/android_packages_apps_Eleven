@@ -48,8 +48,8 @@ import com.cyngn.eleven.ui.activities.SlidingPanelActivity;
 import com.cyngn.eleven.utils.MusicUtils;
 import com.cyngn.eleven.utils.PopupMenuHelper;
 import com.cyngn.eleven.widgets.IPopupMenuCallback;
-import com.cyngn.eleven.widgets.NoResultsContainer;
 import com.cyngn.eleven.widgets.LoadingEmptyContainer;
+import com.cyngn.eleven.widgets.NoResultsContainer;
 import com.cyngn.eleven.widgets.PlayPauseProgressButton;
 
 import java.lang.ref.WeakReference;
