@@ -13,7 +13,6 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ImageView;
 import android.widget.TextView;
-
 import com.cyngn.eleven.Config;
 import com.cyngn.eleven.R;
 import com.cyngn.eleven.adapters.ProfileSongAdapter;
@@ -197,10 +196,6 @@ public class PlaylistDetailFragment extends FadingBarFragment implements
         mListView.setRemoveListener(this);
         // Quick scroll while dragging
         mListView.setDragScrollProfile(this);
-        // Remove the scrollbars and padding for the fast scroll
-        mListView.setVerticalScrollBarEnabled(false);
-        mListView.setFastScrollEnabled(false);
-        mListView.setPadding(0, 0, 0, 0);
 
         // Adjust the progress bar padding to account for the header
         int padTop = getResources().getDimensionPixelSize(R.dimen.playlist_detail_header_height);
@@ -302,7 +297,11 @@ public class PlaylistDetailFragment extends FadingBarFragment implements
 
     protected int getHeaderHeight() { return mHeaderContainer.getHeight(); }
 
-    protected void setHeaderPosition(float y) { mHeaderContainer.setY(y); }
+    protected void setHeaderPosition(float y) {
+        // Offset the header height to account for the faux header
+        y = y - getResources().getDimension(R.dimen.header_bar_height);
+        mHeaderContainer.setY(y);
+    }
 
     @Override
     public Loader<List<Song>> onCreateLoader(int i, Bundle bundle) {

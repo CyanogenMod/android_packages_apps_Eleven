@@ -20,7 +20,6 @@ import com.cyngn.eleven.menu.FragmentMenuItems;
 import com.cyngn.eleven.model.Album;
 import com.cyngn.eleven.model.Artist;
 import com.cyngn.eleven.model.Song;
-import com.cyngn.eleven.ui.activities.BaseActivity;
 import com.cyngn.eleven.utils.AlbumPopupMenuHelper;
 import com.cyngn.eleven.utils.ArtistPopupMenuHelper;
 import com.cyngn.eleven.utils.MusicUtils;

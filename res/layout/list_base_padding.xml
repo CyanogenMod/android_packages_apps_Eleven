@@ -15,12 +15,23 @@
   limitations under the License.
 -->
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/list_base_container"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content" >
+    android:layout_height="match_parent">
 
-    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                    android:visibility="invisible"
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/faux_playlist_detail_header_height">
-    </RelativeLayout>
+    <include
+        layout="@layout/loading_empty_container" />
+
+    <com.cyngn.eleven.dragdrop.DragSortListView
+        android:id="@+id/list_base"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:cacheColorHint="@color/transparent"
+        android:drawSelectorOnTop="false"
+        android:divider="@null"
+        android:dividerHeight="0dp"
+        android:fadingEdge="vertical"
+        android:clipToPadding="false"
+        android:paddingTop="@dimen/header_bar_height"
+        android:fastScrollEnabled="true" />
 </FrameLayout>

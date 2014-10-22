@@ -105,6 +105,7 @@
     <dimen name="profile_label_padding">16.0dip</dimen>
     <!-- playlist detail header -->
     <dimen name="playlist_detail_header_height">240.0dip</dimen>
+    <dimen name="faux_playlist_detail_header_height">190.0dip</dimen>
     <dimen name="playlist_detail_header_bottom_height">40.0dip</dimen>
 
     <!-- Audio player Buttons (play/pause/shuffle/repeat/next/previous)-->

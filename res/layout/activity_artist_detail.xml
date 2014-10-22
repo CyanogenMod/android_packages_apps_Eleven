@@ -13,6 +13,5 @@
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
         android:divider="@null"
-        android:dividerHeight="0dp"
-        android:scrollbars="none" />
+        android:dividerHeight="0dp"/>
 </RelativeLayout>

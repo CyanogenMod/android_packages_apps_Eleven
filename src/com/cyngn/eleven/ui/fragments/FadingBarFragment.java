@@ -35,7 +35,7 @@ public abstract class FadingBarFragment extends DetailFragment implements OnScro
             // calculate alpha for the action bar
             alpha = ACTION_BAR_DEFAULT_OPACITY +
                     (int)((255 - ACTION_BAR_DEFAULT_OPACITY) * -firstChildY /
-                            (float)getHeaderHeight());
+                            (float)(firstChild.getHeight()));
             if(alpha > 255) { alpha = 255; }
         } else {
             // header off screen
