@@ -41,6 +41,16 @@
         <item quantity="other"><xliff:g id="count">%d</xliff:g> genres</item>
     </plurals>
 
+    <!-- Used to show a shortened version of hours-->
+    <plurals name="Nhours">
+        <item quantity="other"><xliff:g id="hours">%d</xliff:g>h</item>
+    </plurals>
+
+    <!-- Used to show a shortened version of minutes -->
+    <plurals name="Nminutes">
+        <item quantity="other"><xliff:g id="minutes">%d</xliff:g>m</item>
+    </plurals>
+
     <!-- Toasts after adding song(s) to playlists -->
     <plurals name="NNNtrackstoplaylist">
         <item quantity="one"><xliff:g id="number" example="1">%d</xliff:g> song added to playlist.</item>
@@ -61,8 +71,8 @@
 
     <!-- Toasts after adding song(s) to the favorites list -->
     <plurals name="NNNtrackstofavorites">
-        <item quantity="one"><xliff:g id="number" example="1">%d</xliff:g> song added to Favorites.</item>
-        <item quantity="other"><xliff:g id="number" example="27">%d</xliff:g> songs added to Favorites.</item>
+        <item quantity="one"><xliff:g id="number" example="1">%d</xliff:g> song added to favorites.</item>
+        <item quantity="other"><xliff:g id="number" example="27">%d</xliff:g> songs added to favorites.</item>
     </plurals>
 
     <!-- Toast confirming that song(s) was/were deleted. -->
@@ -70,5 +80,4 @@
         <item quantity="one"><xliff:g id="songs_to_delete" example="1">%d</xliff:g> song was deleted.</item>
         <item quantity="other"><xliff:g id="songs_to_delete">%d</xliff:g> songs were deleted.</item>
     </plurals>
-
 </resources>

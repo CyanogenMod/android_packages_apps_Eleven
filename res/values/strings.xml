@@ -17,7 +17,7 @@
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
 
-    <string name="app_name" translatable="false">Music</string>
+    <string name="app_name">Music</string>
 
     <!-- Page titles -->
     <string name="page_recent">Recent</string>
@@ -73,9 +73,9 @@
     <string name="sort_order_entry_filename">Filename</string>
 
     <!-- Default playlist names -->
-    <string name="playlist_last_added">Last Added</string>
-    <string name="playlist_recently_played">Recently Played</string>
-    <string name="playlist_top_tracks">My Top Tracks</string>
+    <string name="playlist_last_added">Last added</string>
+    <string name="playlist_recently_played">Recently played</string>
+    <string name="playlist_top_tracks">My top tracks</string>
 
     <!-- AlertDialog items -->
     <string name="new_playlist">New playlist</string>
@@ -119,8 +119,8 @@
     <string name="accessibility_repeat">Repeat</string>
     <string name="accessibility_repeat_all">Repeat all</string>
     <string name="accessibility_repeat_one">Repeat one</string>
-    <string name="accessibility_queue">Open Queue</string>
-    <string name="accessibility_browse">Browse Music</string>
+    <string name="accessibility_queue">Open queue</string>
+    <string name="accessibility_browse">Browse music</string>
 
     <!-- Toast messages -->
     <string name="set_as_ringtone">\'<xliff:g id="name" example="Alarm Bell">%s</xliff:g>\' set as ringtone</string>
@@ -138,9 +138,9 @@
     <string name="settings_download_artist_images_title">Download missing artist images</string>
 
     <!-- App widget -->
-    <string name="app_widget_small" translatable="false">Music: 4×1</string>
-    <string name="app_widget_large" translatable="false">Music: 4×2</string>
-    <string name="app_widget_large_alt">Music: 4×2 (alternate)</string>
+    <string name="app_widget_small">Music: 4 \u00d7 1</string>
+    <string name="app_widget_large">Music: 4 \u00d7 2</string>
+    <string name="app_widget_large_alt">Music: 4 \u00d7 2 (alternate)</string>
     <string name="app_widget_recent">Music: recently listened</string>
     <string name="app_widget_text_separator" translatable="false">-</string>
 
@@ -161,7 +161,7 @@
     <string name="empty_generic_main">No music found</string>
     <string name="empty_generic_secondary">To copy music from your computer to your device, use a USB cable.</string>
     <string name="empty_queue_main">No songs in play queue</string>
-    <string name="empty_queue_secondary">To add songs to your Play Queue, tap the options menu on a song, album, or artist and select &#8220;Add to queue&#8221;.</string>
+    <string name="empty_queue_secondary">To add songs to your Play Queue, tap the options menu on a song, album, or artist and select \"Add to queue\".</string>
 
     <!-- Section Headers -->
     <string name="header_unknown_year">Unknown Year</string>
@@ -176,26 +176,26 @@
     <string name="header_30_to_60_minutes">30 - 60 minutes</string>
     <string name="header_greater_than_60_minutes">More than 60 minutes</string>
 
-    <string name="header_1_song">1 Song</string>
-    <string name="header_2_to_4_songs">2 - 4 Songs</string>
-    <string name="header_5_to_9_songs">5 - 9 Songs</string>
-    <string name="header_10_plus_songs">10+ Songs</string>
+    <string name="header_1_song">1 song</string>
+    <string name="header_2_to_4_songs">2 - 4 songs</string>
+    <string name="header_5_to_9_songs">5 - 9 songs</string>
+    <string name="header_10_plus_songs">10+ songs</string>
 
-    <string name="header_1_album">1 Album</string>
-    <string name="header_n_albums"><xliff:g id="number">%d</xliff:g> Albums</string>
-    <string name="header_5_plus_albums">5+ Albums</string>
+    <string name="header_1_album">1 album</string>
+    <string name="header_n_albums"><xliff:g id="number">%d</xliff:g> albums</string>
+    <string name="header_5_plus_albums">5+ albums</string>
 
     <string name="footer_search_artists">Show all artists</string>
     <string name="footer_search_albums">Show all albums</string>
     <string name="footer_search_songs">Show all songs</string>
     <string name="footer_search_playlists">Show all playlists</string>
 
-    <string name="searchHint">Search Music</string>
+    <string name="searchHint">Search music</string>
     <string name="search_title_artists">All \"%s\" artists</string>
     <string name="search_title_albums">All \"%s\" albums</string>
     <string name="search_title_songs">All \"%s\" songs</string>
     <string name="search_title_playlists">All \"%s\" playlists</string>
 
-    <string name="duration_mins"><xliff:g id="format">%2$dm</xliff:g></string>
-    <string name="duration_hours"><xliff:g id="format">%1$dh %2$dm</xliff:g></string>
+    <string name="duration_format"><xliff:g id="hours">%1$s</xliff:g> <xliff:g id="minutes">%2$s</xliff:g></string>
+
 </resources>

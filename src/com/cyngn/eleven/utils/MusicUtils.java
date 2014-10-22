@@ -220,13 +220,17 @@ public final class MusicUtils {
         secs %= 3600;
         mins = secs / 60;
 
-        int stringId = R.string.duration_mins;
-        if (hours != 0) {
-            stringId = R.string.duration_hours;
+        String hoursString = MusicUtils.makeLabel(context, R.plurals.Nhours, (int)hours);
+        String minutesString = MusicUtils.makeLabel(context, R.plurals.Nminutes, (int)mins);
+
+        if (hours == 0) {
+            return minutesString;
+        } else if (mins == 0) {
+            return hoursString;
         }
 
-        final String durationFormat = context.getResources().getString(stringId);
-        return String.format(durationFormat, hours, mins);
+        final String durationFormat = context.getResources().getString(R.string.duration_format);
+        return String.format(durationFormat, hoursString, minutesString);
     }
 
     /**
