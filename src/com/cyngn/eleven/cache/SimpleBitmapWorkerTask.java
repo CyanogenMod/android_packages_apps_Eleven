@@ -4,7 +4,6 @@
 package com.cyngn.eleven.cache;
 
 import android.content.Context;
-import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.TransitionDrawable;
@@ -70,6 +69,8 @@ public class SimpleBitmapWorkerTask extends BitmapWorkerTask<String, Void, Trans
         final ImageView imageView = getAttachedImageView();
         if (transitionDrawable != null && imageView != null) {
             imageView.setImageDrawable(transitionDrawable);
+        } else if (imageView != null) {
+            imageView.setImageDrawable(mFromDrawable);
         }
     }
 }
