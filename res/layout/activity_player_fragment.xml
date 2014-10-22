@@ -24,10 +24,15 @@
         android:id="@+id/audio_player_header"
         layout="@layout/audio_player_header_bar" />
 
-    <com.cyngn.eleven.widgets.SquareViewPager
-        android:id="@+id/audio_player_album_art_viewpager"
+    <com.cyngn.eleven.widgets.SquareFrame
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent">
+        <com.cyngn.eleven.widgets.SquareViewPager
+            android:id="@+id/audio_player_album_art_viewpager"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+        <include layout="@layout/loading_empty_container" />
+    </com.cyngn.eleven.widgets.SquareFrame>
 
     <RelativeLayout
         android:layout_width="fill_parent"

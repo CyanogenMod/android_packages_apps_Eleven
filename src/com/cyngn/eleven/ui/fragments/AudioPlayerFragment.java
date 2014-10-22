@@ -31,6 +31,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.PopupMenu;
 import android.widget.TextView;
+
 import com.cyngn.eleven.MusicPlaybackService;
 import com.cyngn.eleven.R;
 import com.cyngn.eleven.adapters.AlbumArtPagerAdapter;
@@ -44,6 +45,8 @@ import com.cyngn.eleven.utils.ApolloUtils;
 import com.cyngn.eleven.utils.MusicUtils;
 import com.cyngn.eleven.utils.NavUtils;
 import com.cyngn.eleven.widgets.BrowseButton;
+import com.cyngn.eleven.widgets.LoadingEmptyContainer;
+import com.cyngn.eleven.widgets.NoResultsContainer;
 import com.cyngn.eleven.widgets.PlayPauseProgressButton;
 import com.cyngn.eleven.widgets.QueueButton;
 import com.cyngn.eleven.widgets.RepeatButton;
@@ -102,6 +105,7 @@ public class AudioPlayerFragment extends Fragment implements ServiceConnection {
 
     // Album art ListView
     private ViewPager mAlbumArtViewPager;
+    private LoadingEmptyContainer mQueueEmpty;
 
     private AlbumArtPagerAdapter mAlbumArtPagerAdapter;
 
@@ -359,6 +363,9 @@ public class AudioPlayerFragment extends Fragment implements ServiceConnection {
                 }
             }
         });
+        // view to show in place of album art if queue is empty
+        mQueueEmpty = (LoadingEmptyContainer)mRootView.findViewById(R.id.loading_empty_container);
+        setupNoResultsContainer(mQueueEmpty.getNoResultsContainer());
 
         // Current time
         mCurrentTime = (TextView)mRootView.findViewById(R.id.audio_player_current_time);
@@ -371,6 +378,13 @@ public class AudioPlayerFragment extends Fragment implements ServiceConnection {
         mNextButton.setRepeatListener(mFastForwardListener);
 
         mPlayPauseProgressButton.enableAndShow();
+    }
+
+    private void setupNoResultsContainer(NoResultsContainer empty) {
+        int color = getResources().getColor(R.color.no_results_light);
+        empty.setTextColor(color);
+        empty.setMainText(R.string.empty_queue_main);
+        empty.setSecondaryText(R.string.empty_queue_secondary);
     }
 
     /**
@@ -412,13 +426,14 @@ public class AudioPlayerFragment extends Fragment implements ServiceConnection {
         int repeatMode = MusicUtils.getRepeatMode();
         int targetSize = 0;
         int targetIndex = 0;
+        int queueSize = MusicUtils.getQueue().length;
 
         if (repeatMode == MusicPlaybackService.REPEAT_CURRENT) {
             targetSize = 1;
             targetIndex = 0;
         } else if (MusicUtils.getShuffleMode() == MusicPlaybackService.SHUFFLE_NONE) {
             // if we aren't shuffling, use the queue to determine where we are
-            targetSize = MusicUtils.getQueue().length;
+            targetSize = queueSize;
             targetIndex = MusicUtils.getQueuePosition();
         } else {
             // otherwise, set it to the max history size
@@ -429,6 +444,14 @@ public class AudioPlayerFragment extends Fragment implements ServiceConnection {
         mAlbumArtPagerAdapter.setPlaylistLength(targetSize);
         mAlbumArtViewPager.setAdapter(mAlbumArtPagerAdapter);
         mAlbumArtViewPager.setCurrentItem(targetIndex);
+
+        if(queueSize == 0) {
+            mAlbumArtViewPager.setVisibility(View.GONE);
+            mQueueEmpty.showNoResults();
+        } else {
+            mAlbumArtViewPager.setVisibility(View.VISIBLE);
+            mQueueEmpty.hideAll();
+        }
     }
 
     private long parseIdFromIntent(Intent intent, String longKey,
