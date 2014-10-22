@@ -24,6 +24,7 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.database.Cursor;
+import android.database.MatrixCursor;
 import android.graphics.Bitmap;
 import android.media.AudioManager;
 import android.media.AudioManager.OnAudioFocusChangeListener;
@@ -44,6 +45,7 @@ import android.os.SystemClock;
 import android.provider.MediaStore;
 import android.provider.MediaStore.Audio.AlbumColumns;
 import android.provider.MediaStore.Audio.AudioColumns;
+import android.text.TextUtils;
 import android.util.Log;
 
 import com.cyngn.eleven.Config.IdType;
@@ -1538,45 +1540,132 @@ public class MusicPlaybackService extends Service {
             // If mCursor is null, try to associate path with a database cursor
             if (mCursor == null) {
                 Uri uri = Uri.parse(path);
+                boolean shouldAddToPlaylist = true;     // should try adding audio info to playlist
                 long id = -1;
-                try  {
+                try {
                     id = Long.valueOf(uri.getLastPathSegment());
                 } catch (NumberFormatException ex) {
                     // Ignore
                 }
 
-                if (id != -1 && path.startsWith(MediaStore.Audio.Media.
-                        EXTERNAL_CONTENT_URI.toString())) {
+                if (id != -1 && path.startsWith(
+                                    MediaStore.Audio.Media.EXTERNAL_CONTENT_URI.toString())) {
                     updateCursor(uri);
 
-                } else if (id != -1 && path.startsWith(MediaStore.Files.getContentUri(
-                        "external").toString())) {
+                } else if (id != -1 && path.startsWith(
+                                    MediaStore.Files.getContentUri("external").toString())) {
                     updateCursor(id);
 
+                // handle downloaded media files
+                } else if ( path.startsWith("content://downloads/") ) {
+
+                    // extract MediaProvider(MP) uri , if available
+                    // Downloads.Impl.COLUMN_MEDIAPROVIDER_URI
+                    String mpUri = getValueForDownloadedFile(this, uri, "mediaprovider_uri");
+                    if (D) Log.i(TAG, "Downloaded file's MP uri : " + mpUri);
+                    if ( !TextUtils.isEmpty(mpUri) ) {
+                        // if mpUri is valid, play that URI instead
+                        return openFile(mpUri);
+                    } else {
+                        // create phantom cursor with download info, if a MP uri wasn't found
+                        updateCursorForDownloadedFile(this, uri);
+                        shouldAddToPlaylist = false;    // song info isn't available in MediaStore
+                    }
+
                 } else {
+                    // assuming a "file://" uri by this point ...
                     String where = MediaStore.Audio.Media.DATA + "=?";
-                    String[] selectionArgs = new String[] {path};
+                    String[] selectionArgs = new String[]{path};
                     updateCursor(where, selectionArgs);
                 }
                 try {
-                    if (mCursor != null) {
+                    if (mCursor != null && shouldAddToPlaylist) {
                         mPlaylist.clear();
-                        mPlaylist.add(new MusicPlaybackTrack(mCursor.getLong(IDCOLIDX), -1, IdType.NA, -1));
+                        mPlaylist.add(new MusicPlaybackTrack(
+                                                mCursor.getLong(IDCOLIDX), -1, IdType.NA, -1));
                         mPlayPos = 0;
                         mHistory.clear();
                     }
                 } catch (final UnsupportedOperationException ex) {
+                    // Ignore
                 }
             }
+
             mFileToPlay = path;
             mPlayer.setDataSource(mFileToPlay);
             if (mPlayer.isInitialized()) {
                 mOpenFailedCounter = 0;
+                notifyChange(META_CHANGED);     // notify impending change in track
                 return true;
             }
             stop(true);
             return false;
         }
+    }
+
+    /*
+        Columns for a pseudo cursor we are creating for downloaded songs
+        Modeled after mCursor to be able to respond to respond to the same queries as it
+     */
+    private static final String[] PROJECTION_MATRIX = new String[] {
+            "_id", MediaStore.Audio.Media.ARTIST, MediaStore.Audio.Media.ALBUM,
+            MediaStore.Audio.Media.TITLE, MediaStore.Audio.Media.DATA,
+            MediaStore.Audio.Media.MIME_TYPE, MediaStore.Audio.Media.ALBUM_ID,
+            MediaStore.Audio.Media.ARTIST_ID
+    };
+
+    /**
+     * Creates a pseudo cursor for downloaded audio files with minimal info
+     * @param context needed to query the download uri
+     * @param uri the uri of the downloaded file
+     */
+    private void updateCursorForDownloadedFile(Context context, Uri uri) {
+        synchronized (this) {
+            closeCursor();  // clear mCursor
+            MatrixCursor cursor = new MatrixCursor(PROJECTION_MATRIX);
+            // get title of the downloaded file ; Downloads.Impl.COLUMN_TITLE
+            String title = getValueForDownloadedFile(this, uri, "title" );
+            // populating the cursor with bare minimum info
+            cursor.addRow(new Object[] {
+                    null ,
+                    null ,
+                    null ,
+                    title ,
+                    null ,
+                    null ,
+                    null ,
+                    null
+            });
+            mCursor = cursor;
+            mCursor.moveToFirst();
+        }
+    }
+
+    /**
+     * Query the DownloadProvider to get the value in the specified column
+     * @param context
+     * @param uri the uri of the downloaded file
+     * @param column
+     * @return
+     */
+    private String getValueForDownloadedFile(Context context, Uri uri, String column) {
+
+        Cursor cursor = null;
+        final String[] projection = {
+                column
+        };
+
+        try {
+            cursor = context.getContentResolver().query(uri, projection, null, null, null);
+            if (cursor != null && cursor.moveToFirst()) {
+                return cursor.getString(0);
+            }
+        } finally {
+            if (cursor != null) {
+                cursor.close();
+            }
+        }
+        return null;
     }
 
     /**
