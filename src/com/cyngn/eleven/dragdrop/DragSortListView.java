@@ -1465,7 +1465,7 @@ public class DragSortListView extends ListView {
 
             mBlockLayoutRequests = true;
 
-            if (updatePositions()) {
+            if (getChildCount() > 0 && updatePositions()) {
                 adjustAllItems();
             }
 
