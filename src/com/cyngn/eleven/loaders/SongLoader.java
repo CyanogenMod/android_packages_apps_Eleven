@@ -22,6 +22,8 @@ import com.cyngn.eleven.sectionadapter.SectionCreator;
 import com.cyngn.eleven.utils.Lists;
 import com.cyngn.eleven.utils.MusicUtils;
 import com.cyngn.eleven.utils.PreferenceUtils;
+import com.cyngn.eleven.utils.SortOrder;
+import com.cyngn.eleven.utils.SortUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -37,7 +39,7 @@ public class SongLoader extends SectionCreator.SimpleListLoader<Song> {
     /**
      * The result
      */
-    protected final ArrayList<Song> mSongList = Lists.newArrayList();
+    protected ArrayList<Song> mSongList = Lists.newArrayList();
 
     /**
      * The {@link Cursor} used to run the query.
@@ -60,6 +62,7 @@ public class SongLoader extends SectionCreator.SimpleListLoader<Song> {
     public List<Song> loadInBackground() {
         // Create the Cursor
         mCursor = getCursor();
+
         // Gather the data
         if (mCursor != null && mCursor.moveToFirst()) {
             do {
@@ -88,9 +91,9 @@ public class SongLoader extends SectionCreator.SimpleListLoader<Song> {
                 final int year = mCursor.getInt(6);
 
                 // Create a new song
-                final Song song = new Song(id, songName, artist, album, albumId, durationInSecs, year);
+                final Song song = new Song(id, songName, artist, album, albumId,
+                                            durationInSecs, year);
 
-                // Add everything up
                 mSongList.add(song);
             } while (mCursor.moveToNext());
         }
@@ -99,7 +102,29 @@ public class SongLoader extends SectionCreator.SimpleListLoader<Song> {
             mCursor.close();
             mCursor = null;
         }
+
+        // requested ordering of songs
+        String songSortOrder = PreferenceUtils.getInstance(mContext).getSongSortOrder();
+
+        // run a custom localized sort to try to fit items in to header buckets more nicely
+        if (shouldEvokeCustomSortRoutine(songSortOrder)) {
+            mSongList = SortUtils.localizeSortList(mSongList, songSortOrder);
+        }
+
         return mSongList;
+    }
+
+    /**
+     * We are choosing to custom sort the song list for a cleaner look on the UI side for a few
+     * sort options
+     * @param sortOrder the song ordering preference selected by the user
+     * @return
+     */
+    private boolean shouldEvokeCustomSortRoutine(String sortOrder) {
+        return sortOrder.equals(SortOrder.SongSortOrder.SONG_A_Z) ||
+               sortOrder.equals(SortOrder.SongSortOrder.SONG_Z_A) ||
+               sortOrder.equals(SortOrder.SongSortOrder.SONG_ALBUM) ||
+               sortOrder.equals(SortOrder.SongSortOrder.SONG_ARTIST);
     }
 
     /**

@@ -49,7 +49,10 @@ import com.cyngn.eleven.loaders.PlaylistSongLoader;
 import com.cyngn.eleven.loaders.SongLoader;
 import com.cyngn.eleven.loaders.TopTracksLoader;
 import com.cyngn.eleven.menu.FragmentMenuItems;
+import com.cyngn.eleven.model.Album;
 import com.cyngn.eleven.model.AlbumArtistDetails;
+import com.cyngn.eleven.model.Artist;
+import com.cyngn.eleven.model.Song;
 import com.cyngn.eleven.provider.RecentStore;
 import com.cyngn.eleven.provider.SongPlayCount;
 import com.cyngn.eleven.service.MusicPlaybackTrack;
@@ -896,10 +899,10 @@ public final class MusicUtils {
      */
     public static final long getIdForPlaylist(final Context context, final String name) {
         Cursor cursor = context.getContentResolver().query(
-                MediaStore.Audio.Playlists.EXTERNAL_CONTENT_URI, new String[] {
-                    BaseColumns._ID
-                }, PlaylistsColumns.NAME + "=?", new String[] {
-                    name
+                MediaStore.Audio.Playlists.EXTERNAL_CONTENT_URI, new String[]{
+                        BaseColumns._ID
+                }, PlaylistsColumns.NAME + "=?", new String[]{
+                        name
                 }, PlaylistsColumns.NAME);
         int id = -1;
         if (cursor != null) {
@@ -1688,7 +1691,7 @@ public final class MusicUtils {
             // not quite sorted
             if (lbl != null && lbl.length() > 0) {
                 char ch = lbl.charAt(0);
-                if (ch < 'A' && ch > 'Z' && ch != '#') {
+                if ((ch < 'A' || ch > 'Z') && ch != '#') {
                     return null;
                 }
             }
@@ -1729,5 +1732,56 @@ public final class MusicUtils {
         // First remove the old image
         removeFromCache(activity, key);
         MusicUtils.refresh();
+    }
+
+    /**
+     * Determines the correct item attribute to use for a given sort request and generates the
+     * localized bucket for that attribute
+     * @param item
+     * @param sortOrder
+     * @param <T>
+     * @return
+     */
+    public static <T> String getLocalizedBucketLetterByAttribute(T item, String sortOrder) {
+        if (item instanceof Song) {
+            // we aren't 'trimming' certain attributes - a flag for such attributes
+            boolean trimName = true;
+            String attributeToLocalize = ((Song)item).mSongName;
+
+            // select Song attribute based on the sort order
+            if (sortOrder.equals(SortOrder.SongSortOrder.SONG_ARTIST) ) {
+                attributeToLocalize = ((Song)item).mArtistName;
+                trimName = false;
+            } else if (sortOrder.equals(SortOrder.SongSortOrder.SONG_ALBUM) ) {
+                attributeToLocalize = ((Song)item).mAlbumName;
+            }
+
+            return getLocalizedBucketLetter(attributeToLocalize, trimName);
+        } else if (item instanceof Artist) {
+            return getLocalizedBucketLetter(((Artist)item).mArtistName, true);
+        } else if (item instanceof Album) {
+            // we aren't 'trimming' certain attributes - a flag for such attributes
+            boolean trimName = true;
+            String attributeToLocalize = ((Album)item).mAlbumName;
+
+            if (sortOrder.equals(SortOrder.AlbumSortOrder.ALBUM_ARTIST) ) {
+                attributeToLocalize = ((Album)item).mArtistName;
+                trimName = false;
+            }
+
+            return getLocalizedBucketLetter(attributeToLocalize, trimName);
+        }
+
+        return null;
+    }
+
+    /**
+     *
+     * @param sortOrder values are mostly derived from SortOrder.class or could also be any sql
+     *                  order clause
+     * @return
+     */
+    public static boolean isSortOrderDesending(String sortOrder) {
+        return sortOrder.endsWith(" DESC");
     }
 }

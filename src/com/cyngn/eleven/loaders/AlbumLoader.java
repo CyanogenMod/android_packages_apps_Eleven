@@ -17,14 +17,12 @@ import android.provider.BaseColumns;
 import android.provider.MediaStore;
 import android.provider.MediaStore.Audio.AlbumColumns;
 
-import com.cyngn.eleven.R;
 import com.cyngn.eleven.model.Album;
 import com.cyngn.eleven.sectionadapter.SectionCreator;
 import com.cyngn.eleven.utils.Lists;
-import com.cyngn.eleven.utils.MusicUtils;
 import com.cyngn.eleven.utils.PreferenceUtils;
-import com.cyngn.eleven.utils.SectionCreatorUtils;
 import com.cyngn.eleven.utils.SortOrder;
+import com.cyngn.eleven.utils.SortUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -40,7 +38,7 @@ public class AlbumLoader extends SectionCreator.SimpleListLoader<Album> {
     /**
      * The result
      */
-    private final ArrayList<Album> mAlbumsList = Lists.newArrayList();
+    private ArrayList<Album> mAlbumsList = Lists.newArrayList();
 
     /**
      * The {@link Cursor} used to run the query.
@@ -99,7 +97,27 @@ public class AlbumLoader extends SectionCreator.SimpleListLoader<Album> {
             mCursor = null;
         }
 
+        // requested album ordering
+        String albumSortOrder = PreferenceUtils.getInstance(mContext).getAlbumSortOrder();
+
+        // run a custom localized sort to try to fit items in to header buckets more nicely
+        if (shouldEvokeCustomSortRoutine(albumSortOrder)) {
+            mAlbumsList = SortUtils.localizeSortList(mAlbumsList, albumSortOrder);
+        }
+
         return mAlbumsList;
+    }
+
+    /**
+     * Evoke custom sorting routine if the sorting attribute is a String. MediaProvider's sort
+     * can be trusted in other instances
+     * @param sortOrder
+     * @return
+     */
+    private boolean shouldEvokeCustomSortRoutine(String sortOrder) {
+        return sortOrder.equals(SortOrder.AlbumSortOrder.ALBUM_A_Z) ||
+               sortOrder.equals(SortOrder.AlbumSortOrder.ALBUM_Z_A) ||
+               sortOrder.equals(SortOrder.AlbumSortOrder.ALBUM_ARTIST);
     }
 
     /**

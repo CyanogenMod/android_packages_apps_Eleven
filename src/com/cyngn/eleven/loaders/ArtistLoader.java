@@ -17,11 +17,12 @@ import android.provider.BaseColumns;
 import android.provider.MediaStore;
 import android.provider.MediaStore.Audio.ArtistColumns;
 
-import com.cyngn.eleven.R;
 import com.cyngn.eleven.model.Artist;
 import com.cyngn.eleven.sectionadapter.SectionCreator;
 import com.cyngn.eleven.utils.Lists;
 import com.cyngn.eleven.utils.PreferenceUtils;
+import com.cyngn.eleven.utils.SortOrder;
+import com.cyngn.eleven.utils.SortUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -37,7 +38,7 @@ public class ArtistLoader extends SectionCreator.SimpleListLoader<Artist> {
     /**
      * The result
      */
-    private final ArrayList<Artist> mArtistsList = Lists.newArrayList();
+    private ArrayList<Artist> mArtistsList = Lists.newArrayList();
 
     /**
      * The {@link Cursor} used to run the query.
@@ -83,7 +84,6 @@ public class ArtistLoader extends SectionCreator.SimpleListLoader<Artist> {
                 // Create a new artist
                 final Artist artist = new Artist(id, artistName, songCount, albumCount);
 
-                // Add everything up
                 mArtistsList.add(artist);
             } while (mCursor.moveToNext());
         }
@@ -92,7 +92,26 @@ public class ArtistLoader extends SectionCreator.SimpleListLoader<Artist> {
             mCursor.close();
             mCursor = null;
         }
+
+        // requested artist ordering
+        String artistSortOrder = PreferenceUtils.getInstance(mContext).getArtistSortOrder();
+        // run a custom localized sort to try to fit items in to header buckets more nicely
+        if (shouldEvokeCustomSortRoutine(artistSortOrder)) {
+            mArtistsList = SortUtils.localizeSortList(mArtistsList, artistSortOrder);
+        }
+
         return mArtistsList;
+    }
+
+    /**
+     * Evoke custom sorting routine if the sorting attribute is a String. MediaProvider's sort
+     * can be trusted in other instances
+     * @param sortOrder
+     * @return
+     */
+    private boolean shouldEvokeCustomSortRoutine(String sortOrder) {
+        return sortOrder.equals(SortOrder.ArtistSortOrder.ARTIST_A_Z) ||
+               sortOrder.equals(SortOrder.ArtistSortOrder.ARTIST_Z_A);
     }
 
     /**

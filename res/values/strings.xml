@@ -183,6 +183,8 @@
 
     <string name="header_5_plus_albums">5+ albums</string>
 
+    <string name="header_other">"Other"</string>
+
     <string name="footer_search_artists">Show all artists</string>
     <string name="footer_search_albums">Show all albums</string>
     <string name="footer_search_songs">Show all songs</string>

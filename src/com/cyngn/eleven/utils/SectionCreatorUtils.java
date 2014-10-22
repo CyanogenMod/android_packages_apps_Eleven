@@ -4,6 +4,7 @@
 package com.cyngn.eleven.utils;
 
 import android.content.Context;
+import android.text.TextUtils;
 
 import com.cyngn.eleven.Config;
 import com.cyngn.eleven.R;
@@ -93,6 +94,12 @@ public class SectionCreatorUtils {
         public String createFooterLabel(T item) {
             return null;
         }
+
+        // partial sectioning helper functions
+
+        public boolean shouldStopSectionCreation() {
+            return false;
+        }
     }
 
     /**
@@ -100,11 +107,21 @@ public class SectionCreatorUtils {
      * @param <T> the type of item to compare
      */
     public static abstract class LocalizedCompare<T> extends IItemCompare<T> {
+        protected Context mContext;
+        private boolean mStopSectionCreation;
+
+        public LocalizedCompare(Context context) {
+            mContext = context;
+            mStopSectionCreation = false;
+        }
+
         @Override
         public String createSectionHeader(T first, T second) {
             String secondLabel = createHeaderLabel(second);
             // if we can't determine a good label then don't bother creating a section
             if (secondLabel == null) {
+                // stop section creation as the items further down the list
+                mStopSectionCreation = true;
                 return null;
             }
 
@@ -117,7 +134,11 @@ public class SectionCreatorUtils {
 
         @Override
         public String createHeaderLabel(T item) {
-            return MusicUtils.getLocalizedBucketLetter(getString(item), trimName());
+            final String label = MusicUtils.getLocalizedBucketLetter(getString(item), trimName());
+            if (TextUtils.isEmpty(label)) {
+                return mContext.getString(R.string.header_other);
+            }
+            return label;
         }
 
         /**
@@ -129,6 +150,11 @@ public class SectionCreatorUtils {
         }
 
         public abstract String getString(T item);
+
+        @Override
+        public boolean shouldStopSectionCreation() {
+            return mStopSectionCreation;
+        }
     }
 
     /**
@@ -301,7 +327,7 @@ public class SectionCreatorUtils {
     }
 
     /**
-     * This creates the sections give a list of items and the comparison algorithm
+     * This creates the sections given a list of items and the comparison algorithm
      * @param list The list of items to analyze
      * @param comparator The comparison function to use
      * @param <T> the type of item to compare
@@ -330,6 +356,10 @@ public class SectionCreatorUtils {
                     if (header != null) {
                         // add sectionHeaders.size() to store the indices of the combined list
                         sections.put(sections.size() + i, new Section(SectionType.Header, header));
+                        // stop section creation
+                        if (comparator.shouldStopSectionCreation()) {
+                            break;
+                        }
                     }
                 }
             }
@@ -351,7 +381,7 @@ public class SectionCreatorUtils {
         String sortOrder = PreferenceUtils.getInstance(context).getArtistSortOrder();
         if (sortOrder.equals(SortOrder.ArtistSortOrder.ARTIST_A_Z)
                 || sortOrder.equals(SortOrder.ArtistSortOrder.ARTIST_Z_A)) {
-            sectionCreator = new SectionCreatorUtils.LocalizedCompare<Artist>() {
+            sectionCreator = new SectionCreatorUtils.LocalizedCompare<Artist>(context) {
                 @Override
                 public String getString(Artist item) {
                     return item.mArtistName;
@@ -387,14 +417,14 @@ public class SectionCreatorUtils {
         String sortOrder = PreferenceUtils.getInstance(context).getAlbumSortOrder();
         if (sortOrder.equals(SortOrder.AlbumSortOrder.ALBUM_A_Z)
                 || sortOrder.equals(SortOrder.AlbumSortOrder.ALBUM_Z_A)) {
-            sectionCreator = new LocalizedCompare<Album>() {
+            sectionCreator = new LocalizedCompare<Album>(context) {
                 @Override
                 public String getString(Album item) {
                     return item.mAlbumName;
                 }
             };
         } else if (sortOrder.equals(SortOrder.AlbumSortOrder.ALBUM_ARTIST)) {
-            sectionCreator = new LocalizedCompare<Album>() {
+            sectionCreator = new LocalizedCompare<Album>(context) {
                 @Override
                 public String getString(Album item) {
                     return item.mArtistName;
@@ -461,21 +491,21 @@ public class SectionCreatorUtils {
         // so we will not return a sectionCreator for that one
         if (sortOrder.equals(SortOrder.SongSortOrder.SONG_A_Z)
                 || sortOrder.equals(SortOrder.SongSortOrder.SONG_Z_A)) {
-            sectionCreator = new LocalizedCompare<Song>() {
+            sectionCreator = new LocalizedCompare<Song>(context) {
                 @Override
                 public String getString(Song item) {
                     return item.mSongName;
                 }
             };
         } else if (sortOrder.equals(SortOrder.SongSortOrder.SONG_ALBUM)) {
-            sectionCreator = new LocalizedCompare<Song>() {
+            sectionCreator = new LocalizedCompare<Song>(context) {
                 @Override
                 public String getString(Song item) {
                     return item.mAlbumName;
                 }
             };
         } else if (sortOrder.equals(SortOrder.SongSortOrder.SONG_ARTIST)) {
-            sectionCreator = new LocalizedCompare<Song>() {
+            sectionCreator = new LocalizedCompare<Song>(context) {
                 @Override
                 public String getString(Song item) {
                     return item.mArtistName;
