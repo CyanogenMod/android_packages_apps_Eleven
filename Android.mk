@@ -15,8 +15,12 @@ LOCAL_STATIC_JAVA_LIBRARIES := \
 LOCAL_PACKAGE_NAME := Eleven
 LOCAL_OVERRIDES_PACKAGES := Music
 
-LOCAL_PROGUARD_ENABLED := obfuscation
 LOCAL_PROGUARD_FLAGS := -include $(LOCAL_PATH)/proguard.cfg
+ifeq ($(TARGET_BUILD_VARIANT),user)
+    LOCAL_PROGUARD_ENABLED := obfuscation
+else
+    LOCAL_PROGUARD_ENABLED := disabled
+endif
 
 include $(BUILD_PACKAGE)
 
