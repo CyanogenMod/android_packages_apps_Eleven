@@ -26,7 +26,6 @@
         <item name="android:actionBarStyle">@style/ActionBar</item>
         <item name="android:actionOverflowButtonStyle">@style/ActionOverFlowButton</item>
         <item name="android:actionBarWidgetTheme">@style/ActionBarWidgetTheme</item>
-        <item name="android:homeAsUpIndicator">@drawable/ic_action_back</item>
         <item name="vpiTabPageIndicatorStyle">@style/Eleven.TabPageIndicator</item>
     </style>
 
@@ -76,7 +75,7 @@
     </style>
 
     <!-- Sets the action bar title text style -->
-    <style name="ActionBar" parent="@android:style/Widget.Holo.Light.ActionBar">
+    <style name="ActionBar" parent="@android:style/Widget.Holo.ActionBar">
         <item name="android:titleTextStyle">@style/ActionBar.TitleText</item>
         <item name="android:subtitleTextStyle">@style/ActionBar.SubtitleText</item>
         <item name="android:background">@color/header_action_bar_color</item>
@@ -153,6 +152,11 @@
         <item name="android:windowNoTitle">true</item>
         <item name="android:windowIsFloating">true</item>
         <item name="android:backgroundDimEnabled">false</item>
+    </style>
+
+    <!-- Search Activity theme -->
+    <style name="Theme.ActionBarIcon"  parent="@style/Eleven.Theme">
+        <item name="android:homeAsUpIndicator">@drawable/ic_action_back</item>
     </style>
 
     <!-- Notification bar event text -->

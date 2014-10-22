@@ -86,7 +86,7 @@ public class HomeActivity extends SlidingPanelActivity {
                         getActionBar().setIcon(R.drawable.ic_launcher);
                         getActionBar().setHomeButtonEnabled(false);
                     } else {
-                        getActionBar().setIcon(R.drawable.ic_action_back);
+                        getActionBar().setIcon(R.drawable.ic_action_back_padded);
                         getActionBar().setHomeButtonEnabled(true);
                     }
                 }
@@ -159,7 +159,7 @@ public class HomeActivity extends SlidingPanelActivity {
                     // this happens when they launch search which is its own activity and then
                     // browse through that back to home activity
                     mLoadedBaseFragment = true;
-                    getActionBar().setIcon(R.drawable.ic_action_back);
+                    getActionBar().setIcon(R.drawable.ic_action_back_padded);
                     getActionBar().setHomeButtonEnabled(true);
                 }
                 // the current top fragment is about to be hidden by what we are replacing

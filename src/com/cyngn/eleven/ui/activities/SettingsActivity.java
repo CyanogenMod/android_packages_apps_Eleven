@@ -63,7 +63,7 @@ public class SettingsActivity extends PreferenceActivity {
         mImageCache = ImageCache.getInstance(this);
 
         // UP
-        getActionBar().setIcon(R.drawable.ic_action_back);
+        getActionBar().setIcon(R.drawable.ic_action_back_padded);
         getActionBar().setHomeButtonEnabled(true);
 
         // Add the preferences
