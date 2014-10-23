@@ -2249,6 +2249,10 @@ public class MusicPlaybackService extends Service {
                 index2 = mPlaylist.size() - 1;
             }
 
+            if (index1 == index2) {
+                return;
+            }
+
             final MusicPlaybackTrack track = mPlaylist.remove(index1);
             if (index1 < index2) {
                 mPlaylist.add(index2, track);
