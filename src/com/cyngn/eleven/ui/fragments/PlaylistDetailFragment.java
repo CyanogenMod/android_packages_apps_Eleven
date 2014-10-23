@@ -242,6 +242,8 @@ public class PlaylistDetailFragment extends FadingBarFragment implements
         getActivity().getContentResolver().delete(uri,
                 MediaStore.Audio.Playlists.Members.AUDIO_ID + "=" + song.mSongId,
                 null);
+
+        MusicUtils.refresh();
     }
 
     /**
