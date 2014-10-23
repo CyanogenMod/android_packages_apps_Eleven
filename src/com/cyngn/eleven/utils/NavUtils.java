@@ -152,11 +152,12 @@ public final class NavUtils {
      * 
      * @param activity The {@link Activity} to use.
      */
-    public static void goHome(final Activity activity) {
+    public static void goHome(final Activity activity, final int browseIndex) {
         final Intent intent = new Intent(activity, HomeActivity.class);
         intent.setAction(HomeActivity.ACTION_VIEW_BROWSE);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK
-                | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                | Intent.FLAG_ACTIVITY_NEW_TASK);
+        intent.putExtra(HomeActivity.EXTRA_BROWSE_PAGE_IDX, browseIndex);
         activity.startActivity(intent);
     }
 }

@@ -96,6 +96,8 @@ public abstract class DetailSongAdapter extends BaseAdapter
         // id is in this case the index in the underlying collection,
         // which is what we are interested in here -- so use as position
         int position = (int)id;
+        // ignore clicks on the header
+        if(id < 0) { return; }
         // play clicked song and enqueue the rest of the songs in the Adapter
         int songCount = getCount();
         long[] toPlay = new long[songCount];

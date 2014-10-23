@@ -24,11 +24,14 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.text.TextUtils;
+import android.view.MenuItem;
+
 import com.cyngn.eleven.Config;
 import com.cyngn.eleven.R;
 import com.cyngn.eleven.cache.ImageFetcher;
 import com.cyngn.eleven.ui.fragments.AlbumDetailFragment;
 import com.cyngn.eleven.ui.fragments.ArtistDetailFragment;
+import com.cyngn.eleven.ui.fragments.IChildFragment;
 import com.cyngn.eleven.ui.fragments.ISetupActionBar;
 import com.cyngn.eleven.ui.fragments.PlaylistDetailFragment;
 import com.cyngn.eleven.ui.fragments.RecentFragment;
@@ -37,6 +40,7 @@ import com.cyngn.eleven.ui.fragments.profile.LastAddedFragment;
 import com.cyngn.eleven.ui.fragments.profile.TopTracksFragment;
 import com.cyngn.eleven.utils.ApolloUtils;
 import com.cyngn.eleven.utils.MusicUtils;
+import com.cyngn.eleven.utils.NavUtils;
 
 public class HomeActivity extends SlidingPanelActivity {
     private static final String ACTION_PREFIX = HomeActivity.class.getName();
@@ -47,12 +51,19 @@ public class HomeActivity extends SlidingPanelActivity {
     public static final String ACTION_VIEW_ALBUM_DETAILS = ACTION_PREFIX + ".view.AlbumDetails";
     public static final String ACTION_VIEW_PLAYLIST_DETAILS = ACTION_PREFIX + ".view.PlaylistDetails";
     public static final String ACTION_VIEW_SMART_PLAYLIST = ACTION_PREFIX + ".view.SmartPlaylist";
+    public static final String EXTRA_BROWSE_PAGE_IDX = "BrowsePageIndex";
 
     private static final int NEW_PHOTO = 1;
 
     private String mKey;
     private boolean mLoadedBaseFragment = false;
     private Handler mHandler = new Handler();
+
+    /**
+     * Used by the up action to determine how to handle this
+     */
+    protected boolean mTopLevelActivity = false;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,10 +76,16 @@ public class HomeActivity extends SlidingPanelActivity {
 
         // if the intent didn't cause us to load a fragment, load the music browse one
         if (!mLoadedBaseFragment) {
+            final MusicBrowserPhoneFragment fragment = new MusicBrowserPhoneFragment();
+            if (launchIntent != null) {
+                fragment.setDefaultPageIdx(launchIntent.getIntExtra(EXTRA_BROWSE_PAGE_IDX,
+                        MusicBrowserPhoneFragment.INVALID_PAGE_INDEX));
+            }
             getSupportFragmentManager().beginTransaction()
-                    .replace(R.id.activity_base_content, new MusicBrowserPhoneFragment()).commit();
+                    .replace(R.id.activity_base_content, fragment).commit();
 
             mLoadedBaseFragment = true;
+            mTopLevelActivity = true;
         }
 
         getSupportFragmentManager().addOnBackStackChangedListener(new FragmentManager.OnBackStackChangedListener() {
@@ -206,4 +223,54 @@ public class HomeActivity extends SlidingPanelActivity {
         intent.setType("image/*");
         startActivityForResult(intent, NEW_PHOTO);
     }
+
+    @Override
+    public boolean onOptionsItemSelected(final MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                navigateToTop();
+                return true;
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+
+    /**
+     * Navigates to the top Activity and places the view to the correct page
+     */
+    protected void navigateToTop() {
+        final Fragment topFragment = getTopFragment();
+        int targetFragmentIndex = MusicBrowserPhoneFragment.INVALID_PAGE_INDEX;
+        if (topFragment instanceof IChildFragment) {
+            targetFragmentIndex = ((IChildFragment)topFragment).getMusicFragmentParent().ordinal();
+        }
+
+        // If we are the top activity in the stack (as determined by the activity that has loaded
+        // the MusicBrowserPhoneFragment) then clear the back stack and move the browse fragment
+        // to the appropriate page as per Android up standards
+        if (mTopLevelActivity) {
+            clearBackStack();
+            MusicBrowserPhoneFragment musicFragment = (MusicBrowserPhoneFragment) getTopFragment();
+            musicFragment.setDefaultPageIdx(targetFragmentIndex);
+            showPanel(Panel.Browse);
+        } else {
+            // I've tried all other combinations with parent activities, support.NavUtils and
+            // there is no easy way to achieve what we want that I'm aware of, so clear everything
+            // and jump to the right page
+            NavUtils.goHome(this, targetFragmentIndex);
+        }
+    }
+
+    /**
+     * Immediately clears the backstack
+     */
+    protected void clearBackStack() {
+        final FragmentManager fragmentManager = getSupportFragmentManager();
+        if (fragmentManager.getBackStackEntryCount() > 0) {
+            final int id = fragmentManager.getBackStackEntryAt(0).getId();
+            fragmentManager.popBackStackImmediate(id, FragmentManager.POP_BACK_STACK_INCLUSIVE);
+        }
+    }
+
+
 }

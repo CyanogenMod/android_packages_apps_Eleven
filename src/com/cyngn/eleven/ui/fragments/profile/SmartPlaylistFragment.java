@@ -12,15 +12,17 @@ import com.cyngn.eleven.Config.SmartPlaylistType;
 import com.cyngn.eleven.Config;
 import com.cyngn.eleven.R;
 import com.cyngn.eleven.adapters.SongAdapter;
+import com.cyngn.eleven.adapters.PagerAdapter;
 import com.cyngn.eleven.menu.ConfirmDialog;
 import com.cyngn.eleven.model.Playlist;
+import com.cyngn.eleven.ui.fragments.IChildFragment;
 import com.cyngn.eleven.utils.MusicUtils;
 import com.cyngn.eleven.utils.PlaylistPopupMenuHelper;
 import com.cyngn.eleven.utils.PopupMenuHelper;
 import com.cyngn.eleven.utils.PopupMenuHelper.PopupMenuType;
 
 public abstract class SmartPlaylistFragment extends BasicSongFragment
-implements ConfirmDialog.ConfirmCallback {
+        implements ConfirmDialog.ConfirmCallback, IChildFragment {
     /**
      * LoaderCallbacks identifier
      */
@@ -106,6 +108,10 @@ implements ConfirmDialog.ConfirmCallback {
             MusicUtils.playAll(getActivity(), songIds, position, getSmartPlaylistType().mId,
                     Config.IdType.Playlist, shuffle);
         }
+    }
+
+    public PagerAdapter.MusicFragments getMusicFragmentParent() {
+        return PagerAdapter.MusicFragments.PLAYLIST;
     }
 
     protected abstract SmartPlaylistType getSmartPlaylistType();

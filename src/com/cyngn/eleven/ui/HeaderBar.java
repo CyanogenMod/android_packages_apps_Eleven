@@ -150,7 +150,6 @@ public class HeaderBar extends LinearLayout {
                 return true;
             case R.id.menu_clear_queue:
                 MusicUtils.clearQueue();
-                NavUtils.goHome(mFragment.getActivity());
                 return true;
             default:
                 break;

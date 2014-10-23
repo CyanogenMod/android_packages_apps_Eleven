@@ -15,6 +15,7 @@ import com.cyngn.eleven.Config;
 import com.cyngn.eleven.R;
 import com.cyngn.eleven.adapters.ArtistDetailAlbumAdapter;
 import com.cyngn.eleven.adapters.ArtistDetailSongAdapter;
+import com.cyngn.eleven.adapters.PagerAdapter;
 import com.cyngn.eleven.cache.ImageFetcher;
 import com.cyngn.eleven.menu.FragmentMenuItems;
 import com.cyngn.eleven.model.Album;
@@ -30,7 +31,7 @@ import com.cyngn.eleven.widgets.LoadingEmptyContainer;
 
 import java.util.TreeSet;
 
-public class ArtistDetailFragment extends FadingBarFragment {
+public class ArtistDetailFragment extends FadingBarFragment implements IChildFragment {
     private final int ALBUM_LOADER_ID = 0;
     private final int SONG_LOADER_ID = 1;
 
@@ -227,5 +228,10 @@ public class ArtistDetailFragment extends FadingBarFragment {
         super.onMetaChanged();
 
         mSongAdapter.setCurrentlyPlayingTrack(MusicUtils.getCurrentTrack());
+    }
+
+    @Override
+    public PagerAdapter.MusicFragments getMusicFragmentParent() {
+        return PagerAdapter.MusicFragments.ARTIST;
     }
 }

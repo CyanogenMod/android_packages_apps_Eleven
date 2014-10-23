@@ -15,6 +15,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import com.cyngn.eleven.Config;
 import com.cyngn.eleven.R;
+import com.cyngn.eleven.adapters.PagerAdapter;
 import com.cyngn.eleven.adapters.ProfileSongAdapter;
 import com.cyngn.eleven.cache.ImageFetcher;
 import com.cyngn.eleven.dragdrop.DragSortListView;
@@ -40,7 +41,7 @@ import java.util.TreeSet;
 
 public class PlaylistDetailFragment extends FadingBarFragment implements
         LoaderCallbacks<List<Song>>, OnItemClickListener, DropListener,
-        RemoveListener, DragScrollProfile {
+        RemoveListener, DragScrollProfile, IChildFragment {
 
     /**
      * LoaderCallbacks identifier
@@ -385,5 +386,10 @@ public class PlaylistDetailFragment extends FadingBarFragment implements
         super.onPlaylistChanged();
 
         restartLoader();
+    }
+
+    @Override
+    public PagerAdapter.MusicFragments getMusicFragmentParent() {
+        return PagerAdapter.MusicFragments.PLAYLIST;
     }
 }

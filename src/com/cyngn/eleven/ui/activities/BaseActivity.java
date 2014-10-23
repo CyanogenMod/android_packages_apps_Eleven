@@ -184,10 +184,6 @@ public abstract class BaseActivity extends FragmentActivity implements ServiceCo
                 NavUtils.openSearch(BaseActivity.this, "");
                 return true;
 
-            case android.R.id.home:
-                getSupportFragmentManager().popBackStack();
-                return true;
-
             default:
                 break;
         }

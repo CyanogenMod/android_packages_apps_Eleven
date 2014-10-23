@@ -10,6 +10,7 @@ import com.cyngn.eleven.Config;
 import com.cyngn.eleven.R;
 import com.cyngn.eleven.adapters.AlbumDetailSongAdapter;
 import com.cyngn.eleven.adapters.DetailSongAdapter;
+import com.cyngn.eleven.adapters.PagerAdapter;
 import com.cyngn.eleven.cache.ImageFetcher;
 import com.cyngn.eleven.model.Album;
 import com.cyngn.eleven.model.Song;
@@ -24,7 +25,7 @@ import com.cyngn.eleven.widgets.LoadingEmptyContainer;
 
 import java.util.List;
 
-public class AlbumDetailFragment extends DetailFragment {
+public class AlbumDetailFragment extends DetailFragment implements IChildFragment {
     private static final int LOADER_ID = 1;
 
     private ListView mSongs;
@@ -186,5 +187,10 @@ public class AlbumDetailFragment extends DetailFragment {
         super.onMetaChanged();
 
         mSongAdapter.setCurrentlyPlayingTrack(MusicUtils.getCurrentTrack());
+    }
+
+    @Override
+    public PagerAdapter.MusicFragments getMusicFragmentParent() {
+        return PagerAdapter.MusicFragments.ALBUM;
     }
 }

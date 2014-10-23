@@ -194,23 +194,6 @@ public class AudioPlayerFragment extends Fragment implements ServiceConnection {
     public void onServiceDisconnected(ComponentName name) {
     }
 
-    public void onDelete(long[] ids) {
-        if (MusicUtils.getQueue().length == 0) {
-            NavUtils.goHome(getActivity());
-        }
-    }
-
-    public void onVisible() {
-        // Set the playback drawables
-        updatePlaybackControls();
-        // Current info
-        updateNowPlayingInfo();
-    }
-
-    public void onHidden() {
-
-    }
-
     @Override
     public void onStart() {
         super.onStart();
@@ -760,7 +743,6 @@ public class AudioPlayerFragment extends Fragment implements ServiceConnection {
                 return true;
             case R.id.menu_clear_queue:
                 MusicUtils.clearQueue();
-                NavUtils.goHome(getActivity());
                 return true;
             default:
                 break;

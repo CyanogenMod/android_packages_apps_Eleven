@@ -44,6 +44,7 @@ import com.viewpagerindicator.TabPageIndicator;
  * @author Andrew Neal (andrewdneal@gmail.com)
  */
 public class MusicBrowserPhoneFragment extends BaseFragment {
+    public static final int INVALID_PAGE_INDEX = -1;
 
     /**
      * Pager
@@ -56,6 +57,11 @@ public class MusicBrowserPhoneFragment extends BaseFragment {
     private PagerAdapter mPagerAdapter;
 
     private PreferenceUtils mPreferences;
+
+    /**
+     * A pre-defined page index to navigate to
+     */
+    private int mDefaultPageIdx = INVALID_PAGE_INDEX;
 
     /**
      * Empty constructor as per the {@link Fragment} documentation
@@ -102,14 +108,31 @@ public class MusicBrowserPhoneFragment extends BaseFragment {
         mViewPager.setAdapter(mPagerAdapter);
         // Offscreen pager loading limit
         mViewPager.setOffscreenPageLimit(mPagerAdapter.getCount() - 1);
-        // Start on the last page the user was on
-        mViewPager.setCurrentItem(mPreferences.getStartPage());
 
         // Initialze the TPI
         final TabPageIndicator pageIndicator = (TabPageIndicator)mRootView
                 .findViewById(R.id.fragment_home_phone_pager_titles);
         // Attach the ViewPager
         pageIndicator.setViewPager(mViewPager);
+
+        if (mDefaultPageIdx != INVALID_PAGE_INDEX)  {
+            navigateToPage(mDefaultPageIdx);
+        } else {
+            // Start on the last page the user was on
+            navigateToPage(mPreferences.getStartPage());
+        }
+    }
+
+    public void setDefaultPageIdx(final int pageIdx) {
+        mDefaultPageIdx = pageIdx;
+        navigateToPage(mDefaultPageIdx);
+    }
+
+    private void navigateToPage(final int idx) {
+        // this may be called before the view is created, so do a check for mViewPager
+        if (idx != INVALID_PAGE_INDEX && mViewPager != null) {
+            mViewPager.setCurrentItem(idx);
+        }
     }
 
     /**
