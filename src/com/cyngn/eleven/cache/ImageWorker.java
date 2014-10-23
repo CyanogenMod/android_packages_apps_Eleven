@@ -412,40 +412,8 @@ public abstract class ImageWorker {
      */
     protected void loadImage(final String key, final String artistName, final String albumName,
             final long albumId, final ImageView imageView, final ImageType imageType) {
-        if (key == null || mImageCache == null || imageView == null) {
-            return;
-        }
 
-        // First, check the memory for the image
-        final Bitmap lruBitmap = mImageCache.getBitmapFromMemCache(key);
-        if (lruBitmap != null && imageView != null) {
-            // Bitmap found in memory cache
-            imageView.setImageBitmap(lruBitmap);
-        } else {
-            // if a background drawable hasn't been set, create one so that even if
-            // the disk cache is paused we see something
-            if (imageView.getBackground() == null) {
-                imageView.setBackgroundDrawable(getNewDefaultBitmapDrawable(imageType));
-            }
-
-            if (executePotentialWork(key, imageView)
-                    && imageView != null && !mImageCache.isDiskCachePaused()) {
-                // cancel the old task if any
-                cancelWork(imageView);
-
-                // Otherwise run the worker task
-                final SimpleBitmapWorkerTask bitmapWorkerTask = new SimpleBitmapWorkerTask(key,
-                        imageView, imageType, mTransparentDrawable, mContext);
-                final AsyncTaskContainer asyncTaskContainer = new AsyncTaskContainer(bitmapWorkerTask);
-                imageView.setTag(asyncTaskContainer);
-                try {
-                    ApolloUtils.execute(false, bitmapWorkerTask,
-                            artistName, albumName, String.valueOf(albumId));
-                } catch (RejectedExecutionException e) {
-                    // Executor has exhausted queue space
-                }
-            }
-        }
+        loadImage(key, artistName, albumName, albumId, imageView, imageType, false);
     }
 
     /**
@@ -461,7 +429,9 @@ public abstract class ImageWorker {
      * @param scaleImgToView config option to scale the image to the image view's dimensions
      */
     protected void loadImage(final String key, final String artistName, final String albumName,
-                             final long albumId, final ImageView imageView, final ImageType imageType, boolean scaleImgToView) {
+                             final long albumId, final ImageView imageView,
+                             final ImageType imageType, final boolean scaleImgToView) {
+
         if (key == null || mImageCache == null || imageView == null) {
             return;
         }
@@ -470,10 +440,11 @@ public abstract class ImageWorker {
         final Bitmap lruBitmap = mImageCache.getBitmapFromMemCache(key);
         if (lruBitmap != null && imageView != null) {   // Bitmap found in memory cache
             // scale image if necessary
-            if (scaleImgToView)
-                imageView.setImageBitmap( ImageUtils.scaleBitmapForImageView(lruBitmap, imageView) );
-            else
+            if (scaleImgToView) {
+                imageView.setImageBitmap(ImageUtils.scaleBitmapForImageView(lruBitmap, imageView));
+            } else {
                 imageView.setImageBitmap(lruBitmap);
+            }
         } else {
             // if a background drawable hasn't been set, create one so that even if
             // the disk cache is paused we see something
@@ -488,7 +459,8 @@ public abstract class ImageWorker {
 
                 // Otherwise run the worker task
                 final SimpleBitmapWorkerTask bitmapWorkerTask = new SimpleBitmapWorkerTask(key,
-                        imageView, imageType, mTransparentDrawable, mContext, scaleImgToView);
+                            imageView, imageType, mTransparentDrawable, mContext, scaleImgToView);
+
                 final AsyncTaskContainer asyncTaskContainer = new AsyncTaskContainer(bitmapWorkerTask);
                 imageView.setTag(asyncTaskContainer);
                 try {

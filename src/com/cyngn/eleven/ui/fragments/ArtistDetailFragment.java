@@ -117,7 +117,6 @@ public class ArtistDetailFragment extends FadingBarFragment {
                 ImageFetcher.getInstance(getActivity()).loadArtistImage(mArtistName, mHero, true);
             }
         });
-
     }
 
     private void setupAlbumList() {
@@ -219,8 +218,8 @@ public class ArtistDetailFragment extends FadingBarFragment {
         LoaderManager lm = getLoaderManager();
         lm.restartLoader(ALBUM_LOADER_ID, arguments, mAlbumAdapter);
         lm.restartLoader(SONG_LOADER_ID, arguments, mSongAdapter);
-
-        ImageFetcher.getInstance(getActivity()).loadArtistImage(mArtistName, mHero);
+        
+        ImageFetcher.getInstance(getActivity()).loadArtistImage(mArtistName, mHero, true);
     }
 
     @Override
