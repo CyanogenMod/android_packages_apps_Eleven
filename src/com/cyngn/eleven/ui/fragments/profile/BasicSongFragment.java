@@ -235,6 +235,20 @@ public abstract class BasicSongFragment extends Fragment implements
     }
 
     /**
+     * @return Gets the list of song ids from the adapter, or null if none
+     */
+    protected long[] getSongIdsFromAdapter() {
+        if (mAdapter != null) {
+            final SongAdapter adapter = mAdapter.getUnderlyingAdapter();
+            if (adapter != null) {
+                return adapter.getSongIds();
+            }
+        }
+
+        return null;
+    }
+
+    /**
      * Restarts the loader.
      */
     public void refresh() {

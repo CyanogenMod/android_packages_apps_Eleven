@@ -40,11 +40,10 @@ public class SongFragment extends BasicSongFragment {
      */
     public void playAll(int position) {
         int internalPosition = mAdapter.getInternalPosition(position);
-        Cursor cursor = SongLoader.makeSongCursor(getActivity(), null);
-        final long[] list = MusicUtils.getSongListForCursor(cursor);
-        MusicUtils.playAll(getActivity(), list, internalPosition, -1, Config.IdType.NA, false);
-        cursor.close();
-        cursor = null;
+        final long[] list = mAdapter.getUnderlyingAdapter().getSongIds();
+        if (list != null) {
+            MusicUtils.playAll(getActivity(), list, internalPosition, -1, Config.IdType.NA, false);
+        }
     }
 
     /**

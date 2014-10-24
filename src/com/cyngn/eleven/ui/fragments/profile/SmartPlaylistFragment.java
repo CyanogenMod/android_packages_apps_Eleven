@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import com.cyngn.eleven.Config.SmartPlaylistType;
 import com.cyngn.eleven.Config;
 import com.cyngn.eleven.R;
+import com.cyngn.eleven.adapters.SongAdapter;
 import com.cyngn.eleven.menu.ConfirmDialog;
 import com.cyngn.eleven.model.Playlist;
 import com.cyngn.eleven.utils.MusicUtils;
@@ -93,8 +94,18 @@ implements ConfirmDialog.ConfirmCallback {
     }
 
     public void playAll(int position, boolean shuffle) {
-        MusicUtils.playSmartPlaylist(getActivity(), position,
-                getSmartPlaylistType(), shuffle);
+        // we grab the song ids from the adapter instead of querying the cursor because the user
+        // expects what they see to be what they play.  The counter argument of updating the list
+        // could be made, but refreshing the smart playlists so often will be annoying and
+        // confusing for the user so this is an intermediate compromise.  An example is the top
+        // tracks list is based on the # of times you play a song, but near the beginning each
+        // song being played will change the list and the compromise is to update only when you
+        // enter the page.
+        long[] songIds = getSongIdsFromAdapter();
+        if (songIds != null) {
+            MusicUtils.playAll(getActivity(), songIds, position, getSmartPlaylistType().mId,
+                    Config.IdType.Playlist, shuffle);
+        }
     }
 
     protected abstract SmartPlaylistType getSmartPlaylistType();

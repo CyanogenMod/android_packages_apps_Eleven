@@ -309,4 +309,16 @@ public class SongAdapter extends ArrayAdapter<Song>
 
         return false;
     }
+
+    /**
+     * @return Gets the list of song ids from the adapter
+     */
+    public long[] getSongIds() {
+        long[] ret = new long[getCount()];
+        for (int i = 0; i < getCount(); i++) {
+            ret[i] = getItem(i).mSongId;
+        }
+
+        return ret;
+    }
 }
