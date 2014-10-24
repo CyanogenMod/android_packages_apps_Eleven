@@ -945,6 +945,8 @@ public class MusicPlaybackService extends Service {
             final int numToRemove = last - first + 1;
 
             if (first == 0 && last == mPlaylist.size() - 1) {
+                mPlayPos = -1;
+                mNextPlayPos = -1;
                 mPlaylist.clear();
                 mHistory.clear();
             } else {
@@ -1152,6 +1154,10 @@ public class MusicPlaybackService extends Service {
      * @return The next position to play.
      */
     private int getNextPosition(final boolean force) {
+        // as a base case, if the playlist is empty just return -1
+        if (mPlaylist == null || mPlaylist.isEmpty()) {
+            return -1;
+        }
         // if we're not forced to go to the next track and we are only playing the current track
         if (!force && mRepeatMode == REPEAT_CURRENT) {
             if (mPlayPos < 0) {
@@ -1253,7 +1259,7 @@ public class MusicPlaybackService extends Service {
     private void setNextTrack(int position) {
         mNextPlayPos = position;
         if (D) Log.d(TAG, "setNextTrack: next play position = " + mNextPlayPos);
-        if (mNextPlayPos >= 0 && mPlaylist != null) {
+        if (mNextPlayPos >= 0 && mPlaylist != null && mNextPlayPos < mPlaylist.size()) {
             final long id = mPlaylist.get(mNextPlayPos).mId;
             mPlayer.setNextDataSource(MediaStore.Audio.Media.EXTERNAL_CONTENT_URI + "/" + id);
         } else {
