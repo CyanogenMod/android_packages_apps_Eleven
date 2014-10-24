@@ -13,7 +13,6 @@ package com.cyngn.eleven.menu;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
 import android.os.Bundle;
@@ -21,7 +20,7 @@ import android.support.v4.app.DialogFragment;
 import android.text.Editable;
 import android.text.InputType;
 import android.text.TextWatcher;
-import android.view.inputmethod.InputMethodManager;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 
@@ -81,7 +80,6 @@ public abstract class BasePlaylistDialog extends DialogFragment {
 
                     @Override
                     public void onClick(final DialogInterface dialog, final int which) {
-                        closeKeyboard();
                         MusicUtils.refresh();
                         dialog.dismiss();
                     }
@@ -91,8 +89,6 @@ public abstract class BasePlaylistDialog extends DialogFragment {
 
             @Override
             public void run() {
-                // Open up the soft keyboard
-                openKeyboard();
                 // Request focus to the edit text
                 mPlaylist.requestFocus();
                 // Select the playlist name
@@ -106,27 +102,10 @@ public abstract class BasePlaylistDialog extends DialogFragment {
         mPlaylist.setText(mDefaultname);
         mPlaylist.setSelection(mDefaultname.length());
         mPlaylist.addTextChangedListener(mTextWatcher);
+        mPlaylistDialog.getWindow().setSoftInputMode(
+                WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
         mPlaylistDialog.show();
         return mPlaylistDialog;
-    }
-
-    /**
-     * Opens the soft keyboard
-     */
-    protected void openKeyboard() {
-        final InputMethodManager mInputMethodManager = (InputMethodManager)getActivity()
-                .getSystemService(Context.INPUT_METHOD_SERVICE);
-        mInputMethodManager.toggleSoftInputFromWindow(mPlaylist.getApplicationWindowToken(),
-                InputMethodManager.SHOW_FORCED, 0);
-    }
-
-    /**
-     * Closes the soft keyboard
-     */
-    protected void closeKeyboard() {
-        final InputMethodManager mInputMethodManager = (InputMethodManager)getActivity()
-                .getSystemService(Context.INPUT_METHOD_SERVICE);
-        mInputMethodManager.hideSoftInputFromWindow(mPlaylist.getWindowToken(), 0);
     }
 
     /**

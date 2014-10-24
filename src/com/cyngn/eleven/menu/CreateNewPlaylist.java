@@ -82,7 +82,6 @@ public class CreateNewPlaylist extends BasePlaylistDialog {
                         Capitalize.capitalize(playlistName));
                 MusicUtils.addToPlaylist(getActivity(), mPlaylistList, newId);
             }
-            closeKeyboard();
             getDialog().dismiss();
         }
     }
