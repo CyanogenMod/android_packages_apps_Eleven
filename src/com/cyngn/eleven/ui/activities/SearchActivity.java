@@ -395,10 +395,6 @@ public class SearchActivity extends FragmentActivity implements
         // prep the loader in case the query takes a long time
         setLoading();
 
-        // set the no results string ahead of time in case the user changes the string whiel loading
-        NoResultsContainer noResults = mLoadingEmptyContainer.getNoResultsContainer();
-        noResults.setMainHighlightText("\"" + mFilterString + "\"");
-
         // if we are at the top level, create a comparator to separate the different types into
         // their own sections (artists, albums, etc)
         if (mTopLevelSearch) {

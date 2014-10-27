@@ -147,6 +147,9 @@ public class ImageFetcher extends ImageWorker {
         if (mImageCache != null) {
             mImageCache.clearCaches();
         }
+
+        // clear the keys of images we've already downloaded
+        sKeys.clear();
     }
 
     /**

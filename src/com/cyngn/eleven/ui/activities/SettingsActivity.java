@@ -25,27 +25,17 @@ import android.preference.Preference.OnPreferenceClickListener;
 import android.preference.PreferenceActivity;
 import android.view.MenuItem;
 
-import com.cyngn.eleven.MusicPlaybackService;
 import com.cyngn.eleven.R;
-import com.cyngn.eleven.cache.ImageCache;
-import com.cyngn.eleven.utils.ApolloUtils;
+import com.cyngn.eleven.cache.ImageFetcher;
 import com.cyngn.eleven.utils.MusicUtils;
-import com.cyngn.eleven.utils.PreferenceUtils;
 
 /**
  * Settings.
- * 
+ *
  * @author Andrew Neal (andrewdneal@gmail.com)
  */
 @SuppressWarnings("deprecation")
 public class SettingsActivity extends PreferenceActivity {
-
-    /**
-     * Image cache
-     */
-    private ImageCache mImageCache;
-
-    private PreferenceUtils mPreferences;
 
     /**
      * {@inheritDoc}
@@ -55,12 +45,6 @@ public class SettingsActivity extends PreferenceActivity {
         super.onCreate(savedInstanceState);
         // Fade it in
         overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
-
-        // Get the preferences
-        mPreferences = PreferenceUtils.getInstance(this);
-
-        // Initialze the image cache
-        mImageCache = ImageCache.getInstance(this);
 
         // UP
         getActionBar().setIcon(R.drawable.ic_action_back_padded);
@@ -116,19 +100,19 @@ public class SettingsActivity extends PreferenceActivity {
             @Override
             public boolean onPreferenceClick(final Preference preference) {
                 new AlertDialog.Builder(SettingsActivity.this).setMessage(R.string.delete_warning)
-                        .setPositiveButton(android.R.string.ok, new OnClickListener() {
-
-                            @Override
-                            public void onClick(final DialogInterface dialog, final int which) {
-                                mImageCache.clearCaches();
-                            }
-                        }).setNegativeButton(R.string.cancel, new OnClickListener() {
-
-                            @Override
-                            public void onClick(final DialogInterface dialog, final int which) {
-                                dialog.dismiss();
-                            }
-                        }).create().show();
+                    .setPositiveButton(android.R.string.ok, new OnClickListener() {
+                        @Override
+                        public void onClick(final DialogInterface dialog, final int which) {
+                            ImageFetcher.getInstance(SettingsActivity.this).clearCaches();
+                        }
+                    })
+                    .setNegativeButton(R.string.cancel, new OnClickListener() {
+                        @Override
+                        public void onClick(final DialogInterface dialog, final int which) {
+                            dialog.dismiss();
+                        }
+                    })
+                    .create().show();
                 return true;
             }
         });

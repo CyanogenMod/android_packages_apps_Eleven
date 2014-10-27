@@ -290,7 +290,7 @@ public final class ImageCache {
         addBitmapToMemCache(data, bitmap, replace);
 
         // Add to disk cache
-        if (mDiskCache != null) {
+        if (mDiskCache != null && !mDiskCache.isClosed()) {
             final String key = hashKeyForDisk(data);
             OutputStream out = null;
             try {
@@ -310,6 +310,11 @@ public final class ImageCache {
                     }
                 }
             } catch (final IOException e) {
+                Log.e(TAG, "addBitmapToCache - " + e);
+            } catch (final IllegalStateException e) {
+                // if the user clears the cache while we have an async task going we could try
+                // writing to the disk cache while it isn't ready. Catching here will silently
+                // fail instead
                 Log.e(TAG, "addBitmapToCache - " + e);
             } finally {
                 try {
@@ -565,7 +570,7 @@ public final class ImageCache {
                 }
                 return null;
             }
-        }, (Void[])null);
+        }, (Void[]) null);
     }
 
     /**

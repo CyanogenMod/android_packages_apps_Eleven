@@ -147,7 +147,7 @@
     <!-- Empty list / error messages -->
     <string name="no_effects_for_you">The equalizer could not be opened.</string>
     <string name="empty_music">To copy music from your computer to your device, use a USB cable.</string>
-    <string name="empty_search">No search results for</string>
+    <string name="empty_search">No search results found</string>
     <string name="empty_search_check">Please check that you have the correct spelling or try a different keyword.</string>
     <string name="empty_favorite">Songs you mark as favorites will be shown here.</string>
     <string name="empty_recent_main">No recent songs</string>
@@ -164,8 +164,8 @@
     <string name="empty_queue_secondary">To add songs to your Play Queue, tap the options menu on a song, album, or artist and select \"Add to queue\".</string>
 
     <!-- Section Headers -->
-    <string name="header_unknown_year">Unknown Year</string>
-    <string name="header_less_than_30s">Less than 30s</string>
+    <string name="header_unknown_year">Unknown year</string>
+    <string name="header_less_than_30s">Less than 30 seconds</string>
     <string name="header_30_to_60_seconds">30 - 60 seconds</string>
     <string name="header_1_to_2_minutes">1 - 2 minutes</string>
     <string name="header_2_to_3_minutes">2 - 3 minutes</string>
@@ -181,8 +181,6 @@
     <string name="header_5_to_9_songs">5 - 9 songs</string>
     <string name="header_10_plus_songs">10+ songs</string>
 
-    <string name="header_1_album">1 album</string>
-    <string name="header_n_albums"><xliff:g id="number">%d</xliff:g> albums</string>
     <string name="header_5_plus_albums">5+ albums</string>
 
     <string name="footer_search_artists">Show all artists</string>

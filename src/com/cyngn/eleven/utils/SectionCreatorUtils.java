@@ -259,10 +259,8 @@ public class SectionCreatorUtils {
 
         @Override
         protected int getStringId(int value) {
-            if (value <= 1) {
-                return R.string.header_1_album;
-            } else if (value <= 4) {
-                return R.string.header_n_albums;
+            if (value <= 4) {
+                return R.plurals.Nalbums;
             }
 
             return R.string.header_5_plus_albums;
@@ -293,8 +291,9 @@ public class SectionCreatorUtils {
 
         @Override
         protected String createLabel(int stringId, T item) {
-            if (stringId == R.string.header_n_albums) {
-                return mContext.getString(stringId, getInt(item));
+            if (stringId == R.plurals.Nalbums) {
+                final int numItems = getInt(item);
+                return mContext.getResources().getQuantityString(stringId, numItems, numItems);
             }
 
             return super.createLabel(stringId, item);
