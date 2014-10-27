@@ -69,7 +69,7 @@ public class AppWidgetSmall extends AppWidgetBase {
         final RemoteViews appWidgetViews = new RemoteViews(context.getPackageName(),
                 R.layout.app_widget_small);
         appWidgetViews.setViewVisibility(R.id.app_widget_small_info_container, View.INVISIBLE);
-        linkButtons(context, appWidgetViews, false);
+        linkButtons(context, appWidgetViews);
         pushUpdate(context, appWidgetIds, appWidgetViews);
     }
 
@@ -146,7 +146,7 @@ public class AppWidgetSmall extends AppWidgetBase {
         }
 
         // Link actions buttons to intents
-        linkButtons(service, appWidgetView, isPlaying);
+        linkButtons(service, appWidgetView);
 
         // Update the app-widget
         pushUpdate(service, appWidgetIds, appWidgetView);
@@ -155,33 +155,19 @@ public class AppWidgetSmall extends AppWidgetBase {
     /**
      * Link up various button actions using {@link PendingIntents}.
      *
-     * @param playerActive True if player is active in background, which means
-     *            widget click will launch {@link AudioPlayerFragment},
-     *            otherwise we launch {@link MusicBrowserActivity}.
      */
-    private void linkButtons(final Context context, final RemoteViews views,
-            final boolean playerActive) {
+    private void linkButtons(final Context context, final RemoteViews views) {
         Intent action;
         PendingIntent pendingIntent;
 
         final ComponentName serviceName = new ComponentName(context, MusicPlaybackService.class);
 
-        // Now playing
-        if (playerActive) {
-            action = new Intent(context, HomeActivity.class);
-            action.setAction(HomeActivity.ACTION_VIEW_MUSIC_PLAYER);
-            pendingIntent = PendingIntent.getActivity(context, 0, action, 0);
-            views.setOnClickPendingIntent(R.id.app_widget_small_info_container, pendingIntent);
-            views.setOnClickPendingIntent(R.id.app_widget_small_image, pendingIntent);
-        } else {
-            // Home
-            action = new Intent(context, HomeActivity.class);
-            action.setAction(HomeActivity.ACTION_VIEW_BROWSE);
-            action.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
-            pendingIntent = PendingIntent.getActivity(context, 0, action, 0);
-            views.setOnClickPendingIntent(R.id.app_widget_small_info_container, pendingIntent);
-            views.setOnClickPendingIntent(R.id.app_widget_small_image, pendingIntent);
-        }
+        // Home
+        action = new Intent(context, HomeActivity.class);
+        action.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        pendingIntent = PendingIntent.getActivity(context, 0, action, 0);
+        views.setOnClickPendingIntent(R.id.app_widget_small_info_container, pendingIntent);
+        views.setOnClickPendingIntent(R.id.app_widget_small_image, pendingIntent);
 
         // Previous track
         pendingIntent = buildPendingIntent(context, MusicPlaybackService.PREVIOUS_ACTION, serviceName);

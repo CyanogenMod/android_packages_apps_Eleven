@@ -44,9 +44,6 @@ import com.cyngn.eleven.utils.NavUtils;
 
 public class HomeActivity extends SlidingPanelActivity {
     private static final String ACTION_PREFIX = HomeActivity.class.getName();
-    public static final String ACTION_VIEW_BROWSE = ACTION_PREFIX + ".view.Browse";
-    public static final String ACTION_VIEW_MUSIC_PLAYER = ACTION_PREFIX + ".view.MusicPlayer";
-    public static final String ACTION_VIEW_QUEUE = ACTION_PREFIX + ".view.Queue";
     public static final String ACTION_VIEW_ARTIST_DETAILS = ACTION_PREFIX + ".view.ArtistDetails";
     public static final String ACTION_VIEW_ALBUM_DETAILS = ACTION_PREFIX + ".view.AlbumDetails";
     public static final String ACTION_VIEW_PLAYLIST_DETAILS = ACTION_PREFIX + ".view.PlaylistDetails";

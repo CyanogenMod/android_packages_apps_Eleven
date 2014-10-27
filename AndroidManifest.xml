@@ -132,19 +132,6 @@
             </intent-filter>
         </activity>
 
-        <!-- Shortcut launcher Activity -->
-        <activity
-            android:name=".ui.activities.ShortcutActivity"
-            android:excludeFromRecents="true"
-            android:exported="true"
-            android:theme="@style/Theme.Transparent"
-            android:screenOrientation="portrait">
-            <intent-filter>
-                <action android:name="android.media.action.MEDIA_PLAY_FROM_SEARCH" />
-
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
-        </activity>
         <!-- Search interface -->
         <activity
             android:name=".ui.activities.SearchActivity"

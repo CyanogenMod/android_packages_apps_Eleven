@@ -45,7 +45,6 @@ import com.cyngn.eleven.Config;
 import com.cyngn.eleven.R;
 import com.cyngn.eleven.cache.ImageCache;
 import com.cyngn.eleven.cache.ImageFetcher;
-import com.cyngn.eleven.ui.activities.ShortcutActivity;
 import com.cyngn.eleven.widgets.ColorPickerView;
 
 import java.util.concurrent.RejectedExecutionHandler;
