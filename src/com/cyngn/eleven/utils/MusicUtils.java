@@ -1393,6 +1393,26 @@ public final class MusicUtils {
     }
 
     /**
+     * Seeks the current track to a desired relative position.  This can be used
+     * to simulate fastforward and rewind
+     *
+     * @param deltaInMs The delta in ms to seek from the current position
+     */
+    public static void seekRelative(final long deltaInMs) {
+        if (mService != null) {
+            try {
+                mService.seekRelative(deltaInMs);
+            } catch (final RemoteException ignored) {
+            } catch (final IllegalStateException ignored) {
+                // Illegal State Exception message is empty so logging will actually throw an
+                // exception.  We should come back and figure out why we get an exception in the
+                // first place and make sure we understand it completely.  I will use
+                // https://cyanogen.atlassian.net/browse/MUSIC-125 to track investigating this more
+            }
+        }
+    }
+
+    /**
      * @return The current position time of the track
      */
     public static final long position() {

@@ -1967,6 +1967,33 @@ public class MusicPlaybackService extends Service {
     }
 
     /**
+     * Seeks the current track to a position relative to its current position
+     * If the relative position is after or before the track, it will also automatically
+     * jump to the previous or next track respectively
+     *
+     * @param deltaInMs The delta time to seek to in milliseconds
+     */
+    public void seekRelative(long deltaInMs) {
+        synchronized (this) {
+            if (mPlayer.isInitialized()) {
+                final long newPos = position() + deltaInMs;
+                final long duration = duration();
+                if (newPos < 0) {
+                    prev(true);
+                    // seek to the new duration + the leftover position
+                    seek(duration() + newPos);
+                } else if (newPos >= duration) {
+                    gotoNext(true);
+                    // seek to the leftover duration
+                    seek(newPos - duration);
+                } else {
+                    seek(newPos);
+                }
+            }
+        }
+    }
+
+    /**
      * Returns the current position in time of the currenttrack
      *
      * @return The current playback position in miliseconds
@@ -3033,6 +3060,14 @@ public class MusicPlaybackService extends Service {
         @Override
         public long seek(final long position) throws RemoteException {
             return mService.get().seek(position);
+        }
+
+        /**
+         * {@inheritDoc}
+         */
+        @Override
+        public void seekRelative(final long deltaInMs) throws RemoteException {
+            mService.get().seekRelative(deltaInMs);
         }
 
         /**

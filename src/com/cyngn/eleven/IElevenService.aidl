@@ -26,6 +26,7 @@ interface IElevenService
     long duration();
     long position();
     long seek(long pos);
+    void seekRelative(long deltaInMs);
     long getAudioId();
     MusicPlaybackTrack getCurrentTrack();
     MusicPlaybackTrack getTrack(int index);

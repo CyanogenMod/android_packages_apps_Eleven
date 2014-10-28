@@ -127,12 +127,6 @@ public class AudioPlayerFragment extends Fragment implements ServiceConnection {
     // popup menu for pressing the menu icon
     private PopupMenu mPopupMenu;
 
-    private long mPosOverride = -1;
-
-    private long mStartSeekPos = 0;
-
-    private long mLastSeekEventTime;
-
     private long mSelectedId = -1;
 
     private boolean mIsPaused = false;
@@ -527,85 +521,28 @@ public class AudioPlayerFragment extends Fragment implements ServiceConnection {
     }
 
     /**
-     * Used to scan backwards in time through the curren track
+     * Used to seek forwards or backwards in time through the current track
      *
      * @param repcnt The repeat count
      * @param delta The long press duration
+     * @param forwards Whether it was seeking forwards or backwards
      */
-    private void scanBackward(final int repcnt, long delta) {
+    private void seekRelative(final int repcnt, long delta, boolean forwards) {
         if (mService == null) {
             return;
         }
-        if (repcnt == 0) {
-            mStartSeekPos = MusicUtils.position();
-            mLastSeekEventTime = 0;
-        } else {
-            if (delta < 5000) {
+        if (repcnt > 0) {
+            final long EXTRA_FAST_CUTOFF = 10000;
+            if (delta < EXTRA_FAST_CUTOFF) {
                 // seek at 10x speed for the first 5 seconds
                 delta = delta * 10;
             } else {
                 // seek at 40x after that
-                delta = 50000 + (delta - 5000) * 40;
+                delta = EXTRA_FAST_CUTOFF * 10 + (delta - EXTRA_FAST_CUTOFF) * 40;
             }
-            long newpos = mStartSeekPos - delta;
-            if (newpos < 0) {
-                // move to previous track
-                MusicUtils.previous(getActivity(), true);
-                final long duration = MusicUtils.duration();
-                mStartSeekPos += duration;
-                newpos += duration;
-            }
-            if (delta - mLastSeekEventTime > 250 || repcnt < 0) {
-                MusicUtils.seek(newpos);
-                mLastSeekEventTime = delta;
-            }
-            if (repcnt >= 0) {
-                mPosOverride = newpos;
-            } else {
-                mPosOverride = -1;
-            }
-            refreshCurrentTime();
-        }
-    }
 
-    /**
-     * Used to scan forwards in time through the curren track
-     *
-     * @param repcnt The repeat count
-     * @param delta The long press duration
-     */
-    private void scanForward(final int repcnt, long delta) {
-        if (mService == null) {
-            return;
-        }
-        if (repcnt == 0) {
-            mStartSeekPos = MusicUtils.position();
-            mLastSeekEventTime = 0;
-        } else {
-            if (delta < 5000) {
-                // seek at 10x speed for the first 5 seconds
-                delta = delta * 10;
-            } else {
-                // seek at 40x after that
-                delta = 50000 + (delta - 5000) * 40;
-            }
-            long newpos = mStartSeekPos + delta;
-            final long duration = MusicUtils.duration();
-            if (newpos >= duration) {
-                // move to next track
-                MusicUtils.next();
-                mStartSeekPos -= duration; // is OK to go negative
-                newpos -= duration;
-            }
-            if (delta - mLastSeekEventTime > 250 || repcnt < 0) {
-                MusicUtils.seek(newpos);
-                mLastSeekEventTime = delta;
-            }
-            if (repcnt >= 0) {
-                mPosOverride = newpos;
-            } else {
-                mPosOverride = -1;
-            }
+            MusicUtils.seekRelative(forwards ? delta : -delta);
+
             refreshCurrentTime();
         }
     }
@@ -620,7 +557,7 @@ public class AudioPlayerFragment extends Fragment implements ServiceConnection {
             return 500;
         }
         try {
-            final long pos = mPosOverride < 0 ? MusicUtils.position() : mPosOverride;
+            final long pos = MusicUtils.position();
             if (pos >= 0 && MusicUtils.duration() > 0) {
                 refreshCurrentTimeText(pos);
 
@@ -665,7 +602,7 @@ public class AudioPlayerFragment extends Fragment implements ServiceConnection {
          */
         @Override
         public void onRepeat(final View v, final long howlong, final int repcnt) {
-            scanBackward(repcnt, howlong);
+            seekRelative(repcnt, howlong, false);
         }
     };
 
@@ -678,7 +615,7 @@ public class AudioPlayerFragment extends Fragment implements ServiceConnection {
          */
         @Override
         public void onRepeat(final View v, final long howlong, final int repcnt) {
-            scanForward(repcnt, howlong);
+            seekRelative(repcnt, howlong, true);
         }
     };
 
