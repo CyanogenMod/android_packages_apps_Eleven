@@ -165,6 +165,22 @@ public class SlidingPanelActivity extends BaseActivity {
     @Override
     protected void onResume() {
         super.onResume();
+
+        // This is extremely hard to repro but after leaving the app for a long time and coming
+        // back to the app, the action bar can be out of sync with the panel we are looking at -
+        // this will resync the panels
+        if (mTargetNavigatePanel == Panel.None) {
+            switch (getCurrentPanel()) {
+                case Queue:
+                case MusicPlayer:
+                    getActionBar().hide();
+                    break;
+                case Browse:
+                default:
+                    getActionBar().show();
+                    break;
+            }
+        }
     }
 
     /**
