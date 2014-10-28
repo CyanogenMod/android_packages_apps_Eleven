@@ -470,6 +470,10 @@ public class MusicPlaybackService extends Service {
 
     private BroadcastReceiver mUnmountReceiver = null;
 
+    // to improve perf, instead of hitting the disk cache or file cache, store the bitmaps in memory
+    private String mCachedKey;
+    private Bitmap[] mCachedBitmap = new Bitmap[2];
+
     /**
      * Image cache
      */
@@ -810,7 +814,7 @@ public class MusicPlaybackService extends Service {
     private void updateNotification() {
         if (!mAnyActivityInForeground && isPlaying()) {
             mNotificationHelper.buildNotification(getAlbumName(), getArtistName(),
-                    getTrackName(), getAlbumId(), getAlbumArt(), isPlaying());
+                    getTrackName(), getAlbumId(), getAlbumArt(true), isPlaying());
         } else if (mAnyActivityInForeground) {
             mNotificationHelper.killNotification();
         }
@@ -1414,7 +1418,7 @@ public class MusicPlaybackService extends Service {
         } else if (what.equals(PLAYSTATE_CHANGED)) {
             mRemoteControlClient.setPlaybackState(playState);
         } else if (what.equals(META_CHANGED) || what.equals(QUEUE_CHANGED)) {
-            Bitmap albumArt = getAlbumArt();
+            Bitmap albumArt = getAlbumArt(false);
             if (albumArt != null) {
                 // RemoteControlClient wants to recycle the bitmaps thrown at it, so we need
                 // to make sure not to hand out our cache copy
@@ -1571,7 +1575,13 @@ public class MusicPlaybackService extends Service {
                     if (D) Log.i(TAG, "Downloaded file's MP uri : " + mpUri);
                     if ( !TextUtils.isEmpty(mpUri) ) {
                         // if mpUri is valid, play that URI instead
-                        return openFile(mpUri);
+                        if (openFile(mpUri)) {
+                            // notify impending change in track
+                            notifyChange(META_CHANGED);
+                            return true;
+                        } else {
+                            return false;
+                        }
                     } else {
                         // create phantom cursor with download info, if a MP uri wasn't found
                         updateCursorForDownloadedFile(this, uri);
@@ -1603,7 +1613,6 @@ public class MusicPlaybackService extends Service {
             mPlayer.setDataSource(mFileToPlay);
             if (mPlayer.isInitialized()) {
                 mOpenFailedCounter = 0;
-                notifyChange(META_CHANGED);     // notify impending change in track
                 return true;
             }
             stop(true);
@@ -2453,12 +2462,34 @@ public class MusicPlaybackService extends Service {
     }
 
     /**
+     * @param smallBitmap true to return a smaller version of the default artwork image.
+     *                    Currently Has no impact on the artwork size if one exists
      * @return The album art for the current album.
      */
-    public Bitmap getAlbumArt() {
-        // Return the cached artwork
-        final Bitmap bitmap = mImageFetcher.getArtwork(getAlbumName(),
-                getAlbumId(), getArtistName());
+    public Bitmap getAlbumArt(boolean smallBitmap) {
+        final String albumName = getAlbumName();
+        final String artistName = getArtistName();
+        final long albumId = getAlbumId();
+        final String key = albumName + "_" + artistName + "_" + albumId;
+        final int targetIndex = smallBitmap ? 0 : 1;
+
+        // if the cached key matches and we have the bitmap, return it
+        if (key.equals(mCachedKey) && mCachedBitmap[targetIndex] != null) {
+            return mCachedBitmap[targetIndex];
+        }
+
+        // otherwise get the artwork (or defaultartwork if none found)
+        final Bitmap bitmap = mImageFetcher.getArtwork(albumName, albumId, artistName, smallBitmap);
+
+        // if the key is different, clear the bitmaps first
+        if (!key.equals(mCachedKey)) {
+            mCachedBitmap[0] = null;
+            mCachedBitmap[1] = null;
+        }
+
+        // store the new key and bitmap
+        mCachedKey = key;
+        mCachedBitmap[targetIndex] = bitmap;
         return bitmap;
     }
 

@@ -27,7 +27,7 @@
         android:id="@+id/app_widget_large_alternate_image"
         android:layout_width="@dimen/app_widget_large_alternate_artwork_size"
         android:layout_height="@dimen/app_widget_large_alternate_artwork_size"
-        android:background="@drawable/default_artwork"
+        android:background="@drawable/default_artwork_sm"
         android:scaleType="fitXY" />
 
     <LinearLayout

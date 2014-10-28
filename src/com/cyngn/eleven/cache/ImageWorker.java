@@ -81,9 +81,9 @@ public abstract class ImageWorker {
     private final Bitmap mDefault;
 
     /**
-     * Default album art blurred
+     * A small version of the default album art
      */
-    private final Bitmap mDefaultBlur;
+    private final Bitmap mDefaultSmall;
 
     /**
      * Default Artist art
@@ -120,12 +120,15 @@ public abstract class ImageWorker {
         mResources = mContext.getResources();
         // Create the default artwork
         mDefault = ((BitmapDrawable) mResources.getDrawable(R.drawable.default_artwork)).getBitmap();
-        // Create the default blurred artwork
-        mDefaultBlur = ((BitmapDrawable) mResources.getDrawable(R.drawable.default_artwork_blur)).getBitmap();
+        // Create the small version of the default artwork
+        mDefaultSmall = ((BitmapDrawable) mResources.getDrawable(R.drawable.default_artwork_sm))
+                .getBitmap();
         // Create the artist artwork
-        mDefaultArtist = ((BitmapDrawable) mResources.getDrawable(R.drawable.default_artist)).getBitmap();
+        mDefaultArtist = ((BitmapDrawable) mResources.getDrawable(R.drawable.default_artist))
+                .getBitmap();
         // Create the playlist artwork
-        mDefaultPlaylist = ((BitmapDrawable) mResources.getDrawable(R.drawable.default_playlist)).getBitmap();
+        mDefaultPlaylist = ((BitmapDrawable) mResources.getDrawable(R.drawable.default_playlist))
+                .getBitmap();
         // Create the transparent layer for the transition drawable
         mTransparentDrawable = new ColorDrawable(Color.TRANSPARENT);
     }
@@ -173,10 +176,18 @@ public abstract class ImageWorker {
     }
 
     /**
-     * @return The deafult artwork
+     * @return The default artwork
      */
     public Bitmap getDefaultArtwork() {
-        return mDefault;
+        return getDefaultArtwork(false);
+    }
+
+    /**
+     * @param small returns the smaller version of the default artwork if true
+     * @return The default artwork
+     */
+    public Bitmap getDefaultArtwork(boolean small) {
+        return small ? mDefaultSmall : mDefault;
     }
 
     /**

@@ -203,9 +203,11 @@ public class ImageFetcher extends ImageWorker {
      * @param albumId    The ID of the current album
      * @param artistName The album artist in case we should have to download
      *                   missing artwork
+     * @param smallArtwork Get the small version of the default artwork if no artwork exists
      * @return The album art as an {@link Bitmap}
      */
-    public Bitmap getArtwork(final String albumName, final long albumId, final String artistName) {
+    public Bitmap getArtwork(final String albumName, final long albumId, final String artistName,
+                             boolean smallArtwork) {
         // Check the disk cache
         Bitmap artwork = null;
 
@@ -220,7 +222,7 @@ public class ImageFetcher extends ImageWorker {
         if (artwork != null) {
             return artwork;
         }
-        return getDefaultArtwork();
+        return getDefaultArtwork(smallArtwork);
     }
 
     /**
