@@ -171,6 +171,10 @@ public final class MusicUtils {
         }
     }
 
+    public static final boolean isPlaybackServiceConnected() {
+        return mService != null;
+    }
+
     /**
      * Used to make number of labels for the number of artists, albums, songs,
      * genres, and playlists.

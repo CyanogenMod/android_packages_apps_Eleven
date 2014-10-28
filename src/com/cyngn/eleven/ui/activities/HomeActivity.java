@@ -20,10 +20,12 @@ import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
+import android.provider.MediaStore;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.MenuItem;
 
 import com.cyngn.eleven.Config;
@@ -43,6 +45,7 @@ import com.cyngn.eleven.utils.MusicUtils;
 import com.cyngn.eleven.utils.NavUtils;
 
 public class HomeActivity extends SlidingPanelActivity {
+    private static final String TAG = "HomeActivity";
     private static final String ACTION_PREFIX = HomeActivity.class.getName();
     public static final String ACTION_VIEW_ARTIST_DETAILS = ACTION_PREFIX + ".view.ArtistDetails";
     public static final String ACTION_VIEW_ALBUM_DETAILS = ACTION_PREFIX + ".view.AlbumDetails";
@@ -54,6 +57,7 @@ public class HomeActivity extends SlidingPanelActivity {
 
     private String mKey;
     private boolean mLoadedBaseFragment = false;
+    private boolean mHasPendingPlaybackRequest = false;
     private Handler mHandler = new Handler();
 
     /**
@@ -67,8 +71,9 @@ public class HomeActivity extends SlidingPanelActivity {
         super.onCreate(savedInstanceState);
         // if we've been launched by an intent, parse it
         Intent launchIntent = getIntent();
+        boolean intentHandled = false;
         if (launchIntent != null) {
-            parseIntent(launchIntent);
+            intentHandled = parseIntentForFragment(launchIntent);
         }
 
         // if the intent didn't cause us to load a fragment, load the music browse one
@@ -106,6 +111,12 @@ public class HomeActivity extends SlidingPanelActivity {
                 }
             }
         });
+
+        // if intent wasn't UI related, process it as a audio playback request
+        if ( !intentHandled ) {
+            handlePlaybackIntent(launchIntent);
+        }
+
     }
 
     public Fragment getTopFragment() {
@@ -125,10 +136,17 @@ public class HomeActivity extends SlidingPanelActivity {
     protected void onNewIntent(Intent intent) {
         super.onNewIntent(intent);
 
-        parseIntent(intent);
+        // parse intent to ascertain whether the intent is inter UI communication
+        boolean intentHandled = parseIntentForFragment(intent);
+        // since this activity is marked 'singleTop' (launch mode), an existing activity instance
+        // could be sent media play requests
+        if ( !intentHandled) {
+            handlePlaybackIntent(intent);
+        }
     }
 
-    private void parseIntent(Intent intent) {
+    private boolean parseIntentForFragment(Intent intent) {
+        boolean handled = false;
         if (intent.getAction() != null) {
             final String action = intent.getAction();
             Fragment targetFragment = null;
@@ -182,8 +200,10 @@ public class HomeActivity extends SlidingPanelActivity {
                 if(oldTop != null) { oldTop.setMenuVisibility(false); }
 
                 transaction.commit();
+                handled = true;
             }
         }
+        return handled;
     }
 
     @Override
@@ -269,5 +289,80 @@ public class HomeActivity extends SlidingPanelActivity {
         }
     }
 
+    @Override
+    public void handlePendingPlaybackRequests() {
+        if (mHasPendingPlaybackRequest) {
+            Intent unhandledIntent = getIntent();
+            handlePlaybackIntent(unhandledIntent);
+        }
+    }
+
+    /**
+     * Checks whether the passed intent contains a playback request,
+     * and starts playback if that's the case
+     * @return true if the intent was consumed
+     */
+    private boolean handlePlaybackIntent(Intent intent) {
+
+        if (intent == null) {
+            return false;
+        } else if ( !MusicUtils.isPlaybackServiceConnected() ) {
+            mHasPendingPlaybackRequest = true;
+            return false;
+        }
+
+        Uri uri = intent.getData();
+        String mimeType = intent.getType();
+        boolean handled = false;
+
+        if (uri != null && uri.toString().length() > 0) {
+            MusicUtils.playFile(this, uri);
+            handled = true;
+        } else if (MediaStore.Audio.Playlists.CONTENT_TYPE.equals(mimeType)) {
+            long id = parseIdFromIntent(intent, "playlistId", "playlist", -1);
+            if (id >= 0) {
+                MusicUtils.playPlaylist(this, id, false);
+                handled = true;
+            }
+        } else if (MediaStore.Audio.Albums.CONTENT_TYPE.equals(mimeType)) {
+            long id = parseIdFromIntent(intent, "albumId", "album", -1);
+            if (id >= 0) {
+                int position = intent.getIntExtra("position", 0);
+                MusicUtils.playAlbum(this, id, position, false);
+                handled = true;
+            }
+        } else if (MediaStore.Audio.Artists.CONTENT_TYPE.equals(mimeType)) {
+            long id = parseIdFromIntent(intent, "artistId", "artist", -1);
+            if (id >= 0) {
+                int position = intent.getIntExtra("position", 0);
+                MusicUtils.playArtist(this, id, position, false);
+                handled = true;
+            }
+        }
+
+        // reset intent as it was handled as a playback request
+        if (handled) {
+            setIntent(new Intent());
+        }
+
+        return handled;
+
+    }
+
+    private long parseIdFromIntent(Intent intent, String longKey,
+                                   String stringKey, long defaultId) {
+        long id = intent.getLongExtra(longKey, -1);
+        if (id < 0) {
+            String idString = intent.getStringExtra(stringKey);
+            if (idString != null) {
+                try {
+                    id = Long.parseLong(idString);
+                } catch (NumberFormatException e) {
+                    Log.e(TAG, e.getMessage());
+                }
+            }
+        }
+        return id;
+    }
 
 }

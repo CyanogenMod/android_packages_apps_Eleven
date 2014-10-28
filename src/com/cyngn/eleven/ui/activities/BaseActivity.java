@@ -146,6 +146,8 @@ public abstract class BaseActivity extends FragmentActivity implements ServiceCo
         updatePlaybackControls();
         // Current info
         onMetaChanged();
+        // if there were any pending intents while the service was started
+        handlePendingPlaybackRequests();
     }
 
     /**
@@ -443,4 +445,9 @@ public abstract class BaseActivity extends FragmentActivity implements ServiceCo
      * @return The resource ID to be inflated.
      */
     public abstract int setContentView();
+
+    /**
+     * handle pending playback requests
+     */
+    public abstract void handlePendingPlaybackRequests();
 }

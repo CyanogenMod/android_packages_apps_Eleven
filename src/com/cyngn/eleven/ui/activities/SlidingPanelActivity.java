@@ -34,7 +34,7 @@ import com.cyngn.eleven.widgets.BlurScrimImage;
  *
  * @author Andrew Neal (andrewdneal@gmail.com)
  */
-public class SlidingPanelActivity extends BaseActivity {
+public abstract class SlidingPanelActivity extends BaseActivity {
 
     public enum Panel {
         Browse,

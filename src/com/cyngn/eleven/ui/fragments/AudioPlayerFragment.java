@@ -174,8 +174,6 @@ public class AudioPlayerFragment extends Fragment implements ServiceConnection {
      */
     @Override
     public void onServiceConnected(final ComponentName name, final IBinder service) {
-        // Check whether we were asked to start any playback
-        startPlayback();
         // Set the playback drawables
         updatePlaybackControls();
         // Setup the adapter
@@ -429,72 +427,6 @@ public class AudioPlayerFragment extends Fragment implements ServiceConnection {
             mAlbumArtViewPager.setVisibility(View.VISIBLE);
             mQueueEmpty.hideAll();
         }
-    }
-
-    private long parseIdFromIntent(Intent intent, String longKey,
-                                   String stringKey, long defaultId) {
-        long id = intent.getLongExtra(longKey, -1);
-        if (id < 0) {
-            String idString = intent.getStringExtra(stringKey);
-            if (idString != null) {
-                try {
-                    id = Long.parseLong(idString);
-                } catch (NumberFormatException e) {
-                    Log.e(TAG, e.getMessage());
-                }
-            }
-        }
-        return id;
-    }
-
-    /**
-     * Checks whether the passed intent contains a playback request,
-     * and starts playback if that's the case
-     * @return true if the intent was consumed
-     */
-    public boolean startPlayback() {
-        Intent intent = getActivity().getIntent();
-
-        if (intent == null || mService == null || getActivity() == null) {
-            return false;
-        }
-
-        Uri uri = intent.getData();
-        String mimeType = intent.getType();
-        boolean handled = false;
-
-        if (uri != null && uri.toString().length() > 0) {
-            MusicUtils.playFile(getActivity(), uri);
-            handled = true;
-        } else if (Playlists.CONTENT_TYPE.equals(mimeType)) {
-            long id = parseIdFromIntent(intent, "playlistId", "playlist", -1);
-            if (id >= 0) {
-                MusicUtils.playPlaylist(getActivity(), id, false);
-                handled = true;
-            }
-        } else if (Albums.CONTENT_TYPE.equals(mimeType)) {
-            long id = parseIdFromIntent(intent, "albumId", "album", -1);
-            if (id >= 0) {
-                int position = intent.getIntExtra("position", 0);
-                MusicUtils.playAlbum(getActivity(), id, position, false);
-                handled = true;
-            }
-        } else if (Artists.CONTENT_TYPE.equals(mimeType)) {
-            long id = parseIdFromIntent(intent, "artistId", "artist", -1);
-            if (id >= 0) {
-                int position = intent.getIntExtra("position", 0);
-                MusicUtils.playArtist(getActivity(), id, position, false);
-                handled = true;
-            }
-        }
-
-        if (handled) {
-            // Make sure to process intent only once
-            getActivity().setIntent(new Intent());
-            return true;
-        }
-
-        return false;
     }
 
     /**

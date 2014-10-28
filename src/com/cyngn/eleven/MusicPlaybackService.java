@@ -1589,6 +1589,8 @@ public class MusicPlaybackService extends Service {
                         mPlaylist.clear();
                         mPlaylist.add(new MusicPlaybackTrack(
                                                 mCursor.getLong(IDCOLIDX), -1, IdType.NA, -1));
+                        // propagate the change in playlist state
+                        notifyChange(QUEUE_CHANGED);
                         mPlayPos = 0;
                         mHistory.clear();
                     }
