@@ -4,6 +4,7 @@
 package com.cyngn.eleven.utils;
 
 import android.app.Activity;
+import android.provider.MediaStore;
 import android.support.v4.app.FragmentManager;
 
 import android.view.MenuItem;
@@ -13,6 +14,8 @@ import com.cyngn.eleven.menu.DeleteDialog;
 import com.cyngn.eleven.menu.FragmentMenuItems;
 import com.cyngn.eleven.menu.PhotoSelectionDialog;
 import com.cyngn.eleven.model.Album;
+
+import java.util.TreeSet;
 
 public abstract class AlbumPopupMenuHelper extends PopupMenuHelper {
     protected Album mAlbum;
@@ -79,5 +82,15 @@ public abstract class AlbumPopupMenuHelper extends PopupMenuHelper {
         }
 
         return handled;
+    }
+
+    @Override
+    protected void updateMenuIds(PopupMenuType type, TreeSet<Integer> set) {
+        super.updateMenuIds(type, set);
+
+        // Don't show more by artist if it is an unknown artist
+        if (MediaStore.UNKNOWN_STRING.equals(mAlbum.mArtistName)) {
+            set.remove(FragmentMenuItems.MORE_BY_ARTIST);
+        }
     }
 }

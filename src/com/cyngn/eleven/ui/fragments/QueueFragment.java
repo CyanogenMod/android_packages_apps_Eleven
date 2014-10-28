@@ -21,6 +21,7 @@ import android.content.IntentFilter;
 import android.content.ServiceConnection;
 import android.os.Bundle;
 import android.os.IBinder;
+import android.provider.MediaStore;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.LoaderManager.LoaderCallbacks;
 import android.support.v4.content.Loader;
@@ -41,6 +42,7 @@ import com.cyngn.eleven.dragdrop.DragSortListView.RemoveListener;
 import com.cyngn.eleven.loaders.NowPlayingCursor;
 import com.cyngn.eleven.loaders.QueueLoader;
 import com.cyngn.eleven.menu.DeleteDialog;
+import com.cyngn.eleven.menu.FragmentMenuItems;
 import com.cyngn.eleven.model.Song;
 import com.cyngn.eleven.recycler.RecycleHolder;
 import com.cyngn.eleven.service.MusicPlaybackTrack;
@@ -54,6 +56,7 @@ import com.cyngn.eleven.widgets.PlayPauseProgressButton;
 
 import java.lang.ref.WeakReference;
 import java.util.List;
+import java.util.TreeSet;
 
 /**
  * This class is used to display all of the songs in the queue.
@@ -178,6 +181,16 @@ public class QueueFragment extends Fragment implements LoaderCallbacks<List<Song
             protected void removeFromQueue() {
                 MusicUtils.removeTrack(getId());
                 refreshQueue();
+            }
+
+            @Override
+            protected void updateMenuIds(PopupMenuType type, TreeSet<Integer> set) {
+                super.updateMenuIds(type, set);
+
+                // Don't show more by artist if it is an unknown artist
+                if (MediaStore.UNKNOWN_STRING.equals(mSong.mArtistName)) {
+                    set.remove(FragmentMenuItems.MORE_BY_ARTIST);
+                }
             }
         };
 

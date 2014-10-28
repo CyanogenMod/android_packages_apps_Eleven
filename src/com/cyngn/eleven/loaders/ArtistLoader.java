@@ -75,6 +75,11 @@ public class ArtistLoader extends SectionCreator.SimpleListLoader<Artist> {
                 // Copy the number of songs
                 final int songCount = mCursor.getInt(3);
 
+                // as per designer's request, don't show unknown artist
+                if (MediaStore.UNKNOWN_STRING.equals(artistName)) {
+                    continue;
+                }
+
                 // Create a new artist
                 final Artist artist = new Artist(id, artistName, songCount, albumCount);
 

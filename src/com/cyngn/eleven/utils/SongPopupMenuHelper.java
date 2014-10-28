@@ -5,10 +5,14 @@ package com.cyngn.eleven.utils;
 
 
 import android.app.Activity;
+import android.provider.MediaStore;
 import android.support.v4.app.FragmentManager;
 
 import com.cyngn.eleven.menu.DeleteDialog;
+import com.cyngn.eleven.menu.FragmentMenuItems;
 import com.cyngn.eleven.model.Song;
+
+import java.util.TreeSet;
 
 public abstract class SongPopupMenuHelper extends PopupMenuHelper {
     protected Song mSong;
@@ -44,5 +48,15 @@ public abstract class SongPopupMenuHelper extends PopupMenuHelper {
     protected void onDeleteClicked() {
         DeleteDialog.newInstance(mSong.mSongName, getIdList(), null)
                 .show(mFragmentManager, "DeleteDialog");
+    }
+
+    @Override
+    protected void updateMenuIds(PopupMenuType type, TreeSet<Integer> set) {
+        super.updateMenuIds(type, set);
+
+        // Don't show more by artist if it is an unknown artist
+        if (MediaStore.UNKNOWN_STRING.equals(mSong.mArtistName)) {
+            set.remove(FragmentMenuItems.MORE_BY_ARTIST);
+        }
     }
 }

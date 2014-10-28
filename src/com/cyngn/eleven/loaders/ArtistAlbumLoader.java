@@ -84,6 +84,11 @@ public class ArtistAlbumLoader extends WrappedAsyncTaskLoader<List<Album>> {
                 // Copy the release year
                 final String year = mCursor.getString(4);
 
+                // as per designer's request, don't show unknown albums
+                if (MediaStore.UNKNOWN_STRING.equals(albumName)) {
+                    continue;
+                }
+
                 // Create a new album
                 final Album album = new Album(id, albumName, artist, songCount, year);
 
