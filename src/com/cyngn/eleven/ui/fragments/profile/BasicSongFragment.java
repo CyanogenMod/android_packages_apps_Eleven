@@ -157,8 +157,7 @@ public abstract class BasicSongFragment extends Fragment implements
             @Override
             public void onScrollStateChanged(AbsListView view, int scrollState) {
                 // Pause disk cache access to ensure smoother scrolling
-                if (scrollState == AbsListView.OnScrollListener.SCROLL_STATE_FLING
-                        || scrollState == AbsListView.OnScrollListener.SCROLL_STATE_TOUCH_SCROLL) {
+                if (scrollState == AbsListView.OnScrollListener.SCROLL_STATE_FLING) {
                     mAdapter.getUnderlyingAdapter().setPauseDiskCache(true);
                 } else {
                     mAdapter.getUnderlyingAdapter().setPauseDiskCache(false);

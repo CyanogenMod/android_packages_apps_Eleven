@@ -289,8 +289,7 @@ public class PlaylistDetailFragment extends FadingBarFragment implements
     public void onScrollStateChanged(AbsListView view, int scrollState) {
         super.onScrollStateChanged(view, scrollState);
 
-        if (scrollState == AbsListView.OnScrollListener.SCROLL_STATE_FLING
-                || scrollState == AbsListView.OnScrollListener.SCROLL_STATE_TOUCH_SCROLL) {
+        if (scrollState == AbsListView.OnScrollListener.SCROLL_STATE_FLING) {
             mAdapter.setPauseDiskCache(true);
         } else {
             mAdapter.setPauseDiskCache(false);

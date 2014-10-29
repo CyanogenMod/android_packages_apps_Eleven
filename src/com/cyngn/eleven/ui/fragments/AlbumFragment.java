@@ -162,8 +162,7 @@ public class AlbumFragment extends MusicBrowserFragment implements
     @Override
     public void onScrollStateChanged(final AbsListView view, final int scrollState) {
         // Pause disk cache access to ensure smoother scrolling
-        if (scrollState == AbsListView.OnScrollListener.SCROLL_STATE_FLING
-                || scrollState == AbsListView.OnScrollListener.SCROLL_STATE_TOUCH_SCROLL) {
+        if (scrollState == AbsListView.OnScrollListener.SCROLL_STATE_FLING) {
             mAdapter.setPauseDiskCache(true);
         } else {
             mAdapter.setPauseDiskCache(false);
