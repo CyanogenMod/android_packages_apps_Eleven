@@ -4,6 +4,8 @@ import android.view.View;
 import android.widget.AbsListView;
 import android.widget.AbsListView.OnScrollListener;
 
+import com.cyngn.eleven.ui.activities.HomeActivity;
+
 public abstract class FadingBarFragment extends DetailFragment implements OnScrollListener {
     protected static final int ACTION_BAR_DEFAULT_OPACITY = 65;
 
@@ -42,8 +44,9 @@ public abstract class FadingBarFragment extends DetailFragment implements OnScro
             setHeaderPosition(-getHeaderHeight());
         }
 
-        if (getContainingActivity().getTopFragment() == this) {
-            getContainingActivity().setActionBarAlpha(alpha);
+        HomeActivity home = getContainingActivity();
+        if (home != null && home.getTopFragment() == this) {
+            home.setActionBarAlpha(alpha);
         }
     }
 
