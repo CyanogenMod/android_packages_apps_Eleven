@@ -3,6 +3,7 @@ package com.cyngn.eleven.ui.fragments;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -35,9 +36,14 @@ public abstract class BaseFragment extends Fragment implements MusicStateListene
         mRootView = (ViewGroup) inflater.inflate(getLayoutToInflate(), null);
         // set the background color
         mRootView.setBackgroundColor(getResources().getColor(R.color.background_color));
+        // eat any touches that fall through to the root so they aren't
+        // passed on to fragments "behind" the current one.
+        mRootView.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent me) { return true; }
+        });
 
         setupActionBar();
-
         onViewCreated();
 
         return mRootView;
