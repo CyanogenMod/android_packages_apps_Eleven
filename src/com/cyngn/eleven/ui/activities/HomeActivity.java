@@ -127,7 +127,14 @@ public class HomeActivity extends SlidingPanelActivity {
         mHandler.post(new Runnable() {
             @Override
             public void run() {
-                getSupportFragmentManager().beginTransaction().remove(frag).commit();
+                // removing the fragment doesn't cause the backstack event to be triggered even if
+                // it is the top fragment, so if it is the top fragment, we will just manually
+                // call pop back stack
+                if (frag == getTopFragment()) {
+                    getSupportFragmentManager().popBackStack();
+                } else {
+                    getSupportFragmentManager().beginTransaction().remove(frag).commit();
+                }
             }
         });
     }
