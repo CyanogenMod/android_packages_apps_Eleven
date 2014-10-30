@@ -610,6 +610,24 @@ public final class MusicUtils {
     }
 
     /**
+     * Remove song at a specified position in the list
+     *
+     * @param id The ID of the track to remove
+     * @param position The position of the song
+     *
+     * @return true if successful, false otherwise
+     */
+    public static final boolean removeTrackAtPosition(final long id, final int position) {
+        try {
+            if (mService != null) {
+                return mService.removeTrackAtPosition(id, position);
+            }
+        } catch (final RemoteException ingored) {
+        }
+        return false;
+    }
+
+    /**
      * @param cursor The {@link Cursor} used to perform our query.
      * @return The song list for a MIME type.
      */

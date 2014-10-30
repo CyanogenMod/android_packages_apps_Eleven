@@ -179,7 +179,7 @@ public class QueueFragment extends Fragment implements LoaderCallbacks<List<Song
 
             @Override
             protected void removeFromQueue() {
-                MusicUtils.removeTrack(getId());
+                MusicUtils.removeTrackAtPosition(getId(), mSelectedPosition);
                 refreshQueue();
             }
 
@@ -403,7 +403,7 @@ public class QueueFragment extends Fragment implements LoaderCallbacks<List<Song
         Song song = mAdapter.getItem(which);
         mAdapter.remove(song);
         mAdapter.notifyDataSetChanged();
-        MusicUtils.removeTrack(song.mSongId);
+        MusicUtils.removeTrackAtPosition(song.mSongId, which);
         // Build the cache
         mAdapter.buildCache();
     }

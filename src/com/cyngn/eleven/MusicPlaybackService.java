@@ -1735,6 +1735,25 @@ public class MusicPlaybackService extends Service {
     }
 
     /**
+     * Removes a song from the playlist at the specified position.
+     *
+     * @param id The song id to be removed
+     * @param position The position of the song in the playlist
+     * @return true if successful
+     */
+    public boolean removeTrackAtPosition(final long id, final int position) {
+        synchronized (this) {
+            if (    position >=0 &&
+                    position < mPlaylist.size() &&
+                    mPlaylist.get(position).mId == id  ) {
+
+                return removeTracks(position, position) > 0;
+            }
+        }
+        return false;
+    }
+
+    /**
      * Removes the range of tracks specified from the play list. If a file
      * within the range is the file currently being played, playback will move
      * to the next file after the range.
@@ -3196,6 +3215,15 @@ public class MusicPlaybackService extends Service {
         @Override
         public int removeTrack(final long id) throws RemoteException {
             return mService.get().removeTrack(id);
+        }
+
+        /**
+         * {@inheritDoc}
+         */
+        @Override
+        public boolean removeTrackAtPosition(final long id, final int position)
+                throws RemoteException {
+            return mService.get().removeTrackAtPosition(id, position);
         }
 
         /**

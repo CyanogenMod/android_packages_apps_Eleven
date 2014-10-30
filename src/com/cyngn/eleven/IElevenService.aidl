@@ -40,7 +40,8 @@ interface IElevenService
     String getPath();
     int getShuffleMode();
     int removeTracks(int first, int last);
-    int removeTrack(long id); 
+    int removeTrack(long id);
+    boolean removeTrackAtPosition(long id, int position);
     int getRepeatMode();
     int getMediaMountedCount();
     int getAudioSessionId();
