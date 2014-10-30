@@ -212,11 +212,6 @@ public class MusicPlaybackService extends Service {
     private static final int IDCOLIDX = 0;
 
     /**
-     * Moves a list to the front of the queue
-     */
-    public static final int NOW = 1;
-
-    /**
      * Moves a list to the next position in the queue
      */
     public static final int NEXT = 2;
@@ -306,6 +301,8 @@ public class MusicPlaybackService extends Service {
     /**
      * The max size allowed for the track history
      * TODO: Comeback and rewrite/fix all the whole queue code bugs after demo
+     * https://cyanogen.atlassian.net/browse/MUSIC-175
+     * https://cyanogen.atlassian.net/browse/MUSIC-44
      */
     public static final int MAX_HISTORY_SIZE = 1000;
 
@@ -1017,9 +1014,12 @@ public class MusicPlaybackService extends Service {
             position = mPlaylist.size();
         }
 
+        final ArrayList<MusicPlaybackTrack> arrayList = new ArrayList<MusicPlaybackTrack>(addlen);
         for (int i = 0; i < list.length; i++) {
-            mPlaylist.add(new MusicPlaybackTrack(list[i], sourceId, sourceType, i));
+            arrayList.add(new MusicPlaybackTrack(list[i], sourceId, sourceType, i));
         }
+
+        mPlaylist.addAll(position, arrayList);
 
         if (mPlaylist.size() == 0) {
             closeCursor();
@@ -1387,7 +1387,17 @@ public class MusicPlaybackService extends Service {
         } else if (what.equals(QUEUE_CHANGED)) {
             saveQueue(true);
             if (isPlaying()) {
-                setNextTrack();
+                // if we are in shuffle mode and our next track is still valid,
+                // try to re-use the track
+                // We need to reimplement the queue to prevent hacky solutions like this
+                // https://cyanogen.atlassian.net/browse/MUSIC-175
+                // https://cyanogen.atlassian.net/browse/MUSIC-44
+                if (mNextPlayPos >= 0 && mNextPlayPos < mPlaylist.size()
+                        && getShuffleMode() != SHUFFLE_NONE) {
+                    setNextTrack(mNextPlayPos);
+                } else {
+                    setNextTrack();
+                }
             }
         } else {
             saveQueue(false);
@@ -2411,18 +2421,13 @@ public class MusicPlaybackService extends Service {
         synchronized (this) {
             if (action == NEXT && mPlayPos + 1 < mPlaylist.size()) {
                 addToPlayList(list, mPlayPos + 1, sourceId, sourceType);
+                mNextPlayPos = mPlayPos + 1;
                 notifyChange(QUEUE_CHANGED);
             } else {
                 addToPlayList(list, Integer.MAX_VALUE, sourceId, sourceType);
                 notifyChange(QUEUE_CHANGED);
-                if (action == NOW) {
-                    mPlayPos = mPlaylist.size() - list.length;
-                    openCurrentAndNext();
-                    play();
-                    notifyChange(META_CHANGED);
-                    return;
-                }
             }
+
             if (mPlayPos < 0) {
                 mPlayPos = 0;
                 openCurrentAndNext();
