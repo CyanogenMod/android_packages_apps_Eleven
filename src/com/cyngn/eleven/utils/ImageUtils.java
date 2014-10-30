@@ -222,14 +222,24 @@ public class ImageUtils {
             if (urlConnection.getResponseCode() != HttpURLConnection.HTTP_OK) {
                 return null;
             }
+            int contentLength = urlConnection.getContentLength();
             final InputStream in = new BufferedInputStream(urlConnection.getInputStream(),
                     IO_BUFFER_SIZE_BYTES);
             out = new BufferedOutputStream(new FileOutputStream(tempFile), IO_BUFFER_SIZE_BYTES);
 
-            int oneByte;
-            while ((oneByte = in.read()) != -1) {
-                out.write(oneByte);
+            final byte[] buffer = new byte[IO_BUFFER_SIZE_BYTES];
+            int numBytes;
+            while ((numBytes = in.read(buffer)) != -1) {
+                out.write(buffer, 0, numBytes);
+                contentLength -= numBytes;
             }
+
+            // valid values for contentLength are either -ve (meaning it wasn't set) or 0
+            // if it is  > 0 that means we got a value but didn't fully download the content
+            if (contentLength > 0) {
+                return null;
+            }
+
             return tempFile;
         } catch (final IOException ignored) {
         } finally {
