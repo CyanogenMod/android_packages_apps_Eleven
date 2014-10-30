@@ -342,4 +342,36 @@ public final class ApolloUtils {
         // no selection/selection/sort args - they are ignored by fancy search anyways
         return context.getContentResolver().query(uri, projection, null, null, null);
     }
+
+    /** make a useful message from an exception without the stack track */
+    public static String formatException(String message, Exception e) {
+        StringBuilder builder = new StringBuilder();
+        if(message != null) {
+            builder.append(message);
+            if(e != null) { builder.append(" - "); }
+        }
+
+        if(e != null) {
+            builder.append(e.getClass().getSimpleName());
+
+            String exceptionMessage = e.getMessage();
+            if(exceptionMessage != null) {
+                builder.append(": ");
+                builder.append(exceptionMessage);
+            }
+
+            for(Throwable cause = e.getCause(); cause != null; cause = cause.getCause()) {
+                builder.append(" (cause ");
+                builder.append(cause.getClass().getSimpleName());
+                String causeMessage = e.getMessage();
+                if(causeMessage != null) {
+                    builder.append(": ");
+                    builder.append(exceptionMessage);
+                }
+                builder.append(")");
+            }
+        }
+
+        return builder.toString();
+    }
 }

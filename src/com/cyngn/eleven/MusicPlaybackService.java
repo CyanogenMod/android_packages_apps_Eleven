@@ -23,6 +23,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.SharedPreferences;
+import android.database.ContentObserver;
 import android.database.Cursor;
 import android.database.MatrixCursor;
 import android.graphics.Bitmap;
@@ -337,16 +338,6 @@ public class MusicPlaybackService extends Service {
     private static final Shuffler mShuffler = new Shuffler();
 
     /**
-     * Used to save the queue as reverse hexadecimal numbers, which we can
-     * generate faster than normal decimal or hexadecimal numbers, which in
-     * turn allows us to save the playlist more often without worrying too
-     * much about performance
-     */
-    private static final char HEX_DIGITS[] = new char[] {
-        '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'a', 'b', 'c', 'd', 'e', 'f'
-    };
-
-    /**
      * Service stub
      */
     private final IBinder mBinder = new ServiceStub(this);
@@ -616,6 +607,13 @@ public class MusicPlaybackService extends Service {
         // Attach the broadcast listener
         registerReceiver(mIntentReceiver, filter);
 
+        // Get events when MediaStore content changes
+        mMediaStoreObserver = new MediaStoreObserver(mPlayerHandler);
+        getContentResolver().registerContentObserver(
+                MediaStore.Audio.Media.INTERNAL_CONTENT_URI, true, mMediaStoreObserver);
+        getContentResolver().registerContentObserver(
+                MediaStore.Audio.Media.EXTERNAL_CONTENT_URI, true, mMediaStoreObserver);
+
         // Initialize the wake lock
         final PowerManager powerManager = (PowerManager)getSystemService(Context.POWER_SERVICE);
         mWakeLock = powerManager.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, getClass().getName());
@@ -702,6 +700,9 @@ public class MusicPlaybackService extends Service {
         // Remove the audio focus listener and lock screen controls
         mAudioManager.abandonAudioFocus(mAudioFocusListener);
         mAudioManager.unregisterRemoteControlClient(mRemoteControlClient);
+
+        // remove the media store observer
+        getContentResolver().unregisterContentObserver(mMediaStoreObserver);
 
         // Remove any callbacks from the handler
         mPlayerHandler.removeCallbacksAndMessages(null);
@@ -2528,6 +2529,35 @@ public class MusicPlaybackService extends Service {
             } else {
                 handleCommandIntent(intent);
             }
+        }
+    };
+
+    private ContentObserver mMediaStoreObserver;
+
+    private class MediaStoreObserver extends ContentObserver implements Runnable {
+        // milliseconds to delay before calling refresh to aggregate events
+        private static final long REFRESH_DELAY = 500;
+        private Handler mHandler;
+
+        public MediaStoreObserver(Handler handler) {
+            super(handler);
+            mHandler = handler;
+        }
+
+        @Override
+        public void onChange(boolean selfChange) {
+            // if a change is detected, remove any scheduled callback
+            // then post a new one. This is intended to prevent closely
+            // spaced events from generating multiple refresh calls
+            mHandler.removeCallbacks(this);
+            mHandler.postDelayed(this, REFRESH_DELAY);
+        }
+
+        @Override
+        public void run() {
+            // actually call refresh when the delayed callback fires
+            Log.e("ELEVEN", "calling refresh!");
+            refresh();
         }
     };
 

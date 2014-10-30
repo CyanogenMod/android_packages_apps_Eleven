@@ -197,8 +197,8 @@ public class AlbumFragment extends MusicBrowserFragment implements
     @Override
     public void onLoadFinished(final Loader<SectionListContainer<Album>> loader,
                                final SectionListContainer<Album> data) {
-        // Check for any errors
         if (data.mListResults.isEmpty()) {
+            mAdapter.unload();
             mLoadingEmptyContainer.showNoResults();
             return;
         }

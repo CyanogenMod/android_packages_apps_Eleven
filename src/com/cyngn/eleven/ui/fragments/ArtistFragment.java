@@ -205,13 +205,12 @@ public class ArtistFragment extends MusicBrowserFragment implements
     @Override
     public void onLoadFinished(final Loader<SectionListContainer<Artist>> loader,
                                final SectionListContainer<Artist> data) {
-        // Check for any errors
         if (data.mListResults.isEmpty()) {
+            mAdapter.unload();
             mLoadingEmptyContainer.showNoResults();
             return;
         }
 
-        // Set the data
         mAdapter.setData(data);
     }
 

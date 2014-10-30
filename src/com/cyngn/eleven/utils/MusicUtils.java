@@ -1135,25 +1135,18 @@ public final class MusicUtils {
         }
     }
 
-    public static final String getSongCountForAlbum(final Context context, final long id) {
-        Integer i = getSongCountForAlbumInt(context, id);
-        return i == null ? null : Integer.toString(i);
-    }
-
     /**
      * @param context The {@link Context} to use.
      * @param id The id of the album.
      * @return The song count for an album.
      */
-    public static final Integer getSongCountForAlbumInt(final Context context, final long id) {
-        if (id == -1) {
-            return null;
-        }
+    public static final int getSongCountForAlbumInt(final Context context, final long id) {
+        int songCount = 0;
+        if (id == -1) { return songCount; }
+
         Uri uri = ContentUris.withAppendedId(MediaStore.Audio.Albums.EXTERNAL_CONTENT_URI, id);
-        Cursor cursor = context.getContentResolver().query(uri, new String[] {
-                    AlbumColumns.NUMBER_OF_SONGS
-                }, null, null, null);
-        Integer songCount = null;
+        Cursor cursor = context.getContentResolver().query(uri,
+                new String[] { AlbumColumns.NUMBER_OF_SONGS }, null, null, null);
         if (cursor != null) {
             cursor.moveToFirst();
             if (!cursor.isAfterLast()) {
@@ -1164,6 +1157,7 @@ public final class MusicUtils {
             cursor.close();
             cursor = null;
         }
+
         return songCount;
     }
 

@@ -107,7 +107,8 @@ public class AlbumArtPagerAdapter extends FragmentStatePagerAdapter {
             // if we aren't shuffling, just return based on the queue position
             // add a check for empty queue
             long[] songQueue = MusicUtils.getQueue();
-            return (songQueue.length > 0) ? songQueue[position] : NO_TRACK_ID;
+            return (position >= 0 && position < songQueue.length)
+                    ? songQueue[position] : NO_TRACK_ID;
         } else {
             // if we are shuffling, there is no 'queue' going forward per say
             // because it is dynamically generated.  In that case we can only look

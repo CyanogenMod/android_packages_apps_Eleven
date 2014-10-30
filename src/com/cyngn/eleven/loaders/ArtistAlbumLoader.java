@@ -16,9 +16,12 @@ import android.database.Cursor;
 import android.provider.BaseColumns;
 import android.provider.MediaStore;
 import android.provider.MediaStore.Audio.AlbumColumns;
+import android.util.Log;
 
 import com.cyngn.eleven.R;
+import com.cyngn.eleven.adapters.AlbumArtPagerAdapter;
 import com.cyngn.eleven.model.Album;
+import com.cyngn.eleven.utils.ApolloUtils;
 import com.cyngn.eleven.utils.Lists;
 import com.cyngn.eleven.utils.PreferenceUtils;
 
@@ -32,6 +35,7 @@ import java.util.List;
  * @author Andrew Neal (andrewdneal@gmail.com)
  */
 public class ArtistAlbumLoader extends WrappedAsyncTaskLoader<List<Album>> {
+    private static final String TAG = ArtistAlbumLoader.class.getSimpleName();
 
     /**
      * The result
@@ -109,18 +113,23 @@ public class ArtistAlbumLoader extends WrappedAsyncTaskLoader<List<Album>> {
      * @param artistId The Id of the artist the albums belong to.
      */
     public static final Cursor makeArtistAlbumCursor(final Context context, final Long artistId) {
-        return context.getContentResolver().query(
-                MediaStore.Audio.Artists.Albums.getContentUri("external", artistId), new String[] {
-                        /* 0 */
-                        BaseColumns._ID,
-                        /* 1 */
-                        AlbumColumns.ALBUM,
-                        /* 2 */
-                        AlbumColumns.ARTIST,
-                        /* 3 */
-                        AlbumColumns.NUMBER_OF_SONGS,
-                        /* 4 */
-                        AlbumColumns.FIRST_YEAR
-                }, null, null, PreferenceUtils.getInstance(context).getArtistAlbumSortOrder());
+        try {
+            return context.getContentResolver().query(
+                    MediaStore.Audio.Artists.Albums.getContentUri("external", artistId), new String[] {
+                            /* 0 */
+                            BaseColumns._ID,
+                            /* 1 */
+                            AlbumColumns.ALBUM,
+                            /* 2 */
+                            AlbumColumns.ARTIST,
+                            /* 3 */
+                            AlbumColumns.NUMBER_OF_SONGS,
+                            /* 4 */
+                            AlbumColumns.FIRST_YEAR
+                    }, null, null, PreferenceUtils.getInstance(context).getArtistAlbumSortOrder());
+        } catch(Exception e) {
+            Log.e(TAG, ApolloUtils.formatException("unable to make ArtistAlbum cursor", e));
+            return null;
+        }
     }
 }

@@ -223,13 +223,12 @@ public abstract class BasicSongFragment extends Fragment implements
     @Override
     public void onLoadFinished(final Loader<SectionListContainer<Song>> loader,
                                final SectionListContainer<Song> data) {
-        // Check for any errors
         if (data.mListResults.isEmpty()) {
+            mAdapter.unload();
             mLoadingEmptyContainer.showNoResults();
             return;
         }
 
-        // Start fresh
         mAdapter.setData(data);
     }
 
