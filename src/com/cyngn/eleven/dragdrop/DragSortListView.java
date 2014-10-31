@@ -1448,6 +1448,7 @@ public class DragSortListView extends ListView {
             }
         }
         mWidthMeasureSpec = widthMeasureSpec;
+        mDragScroller.setListHeight(getHeight());
     }
 
     /**
@@ -1888,6 +1889,8 @@ public class DragSortListView extends ListView {
 
         private boolean mScrolling = false;
 
+        private int mMaxScrollSpeed;
+
         public boolean isScrolling() {
             return mScrolling;
         }
@@ -1919,6 +1922,11 @@ public class DragSortListView extends ListView {
                 mAbort = true;
             }
 
+        }
+
+        public void setListHeight(final int height) {
+            // cap the max scroll speed per frame to be 1/5 of the list height
+            mMaxScrollSpeed = height / 5;
         }
 
         /**
@@ -1975,6 +1983,9 @@ public class DragSortListView extends ListView {
             // y=0 is at top of View).
             dy = Math.round(mScrollSpeed * dt);
             mScrollY += dy;
+
+            // cap the scroll speed
+            mScrollY = Math.max(Math.min(mScrollY, mMaxScrollSpeed), -mMaxScrollSpeed);
 
             requestLayout();
 
