@@ -256,6 +256,26 @@ public abstract class ImageWorker {
     }
 
     /**
+     * Parses the drawable for instances of TransitionDrawable and breaks them open until it finds
+     * a drawable that isn't a transition drawable
+     * @param drawable to parse
+     * @return the target drawable that isn't a TransitionDrawable
+     */
+    public static Drawable getTopDrawable(final Drawable drawable) {
+        if (drawable == null) {
+            return null;
+        }
+
+        Drawable retDrawable = drawable;
+        while (retDrawable instanceof TransitionDrawable) {
+            TransitionDrawable transition = (TransitionDrawable) retDrawable;
+            retDrawable = transition.getDrawable(transition.getNumberOfLayers() - 1);
+        }
+
+        return retDrawable;
+    }
+
+    /**
      * Creates a transition drawable to Bitmap with params
      * @param resources Android Resources!
      * @param fromDrawable the drawable to transition from
@@ -270,7 +290,7 @@ public abstract class ImageWorker {
                final boolean dither, final boolean force) {
         if (bitmap != null || force) {
             final Drawable[] arrayDrawable = new Drawable[2];
-            arrayDrawable[0] = fromDrawable;
+            arrayDrawable[0] = getTopDrawable(fromDrawable);
 
             // Add the transition to drawable
             Drawable layerTwo;
@@ -303,7 +323,7 @@ public abstract class ImageWorker {
      */
     public static TransitionDrawable createPaletteTransition(BlurScrimImage scrimImage, int color) {
         final Drawable[] arrayDrawable = new Drawable[2];
-        arrayDrawable[0] = scrimImage.getBackground();
+        arrayDrawable[0] = getTopDrawable(scrimImage.getBackground());
 
         if (arrayDrawable[0] == null) {
             arrayDrawable[0] = new ColorDrawable(Color.TRANSPARENT);
@@ -320,9 +340,9 @@ public abstract class ImageWorker {
 
     /**
      * Cancels and clears out any pending bitmap worker tasks on this image view
-     * @param image ImageView to check
+     * @param image ImageView/BlurScrimImage to check
      */
-    public static final void cancelWork(final ImageView image) {
+    public static final void cancelWork(final View image) {
         Object tag = image.getTag();
         if (tag != null && tag instanceof AsyncTaskContainer) {
             AsyncTaskContainer asyncTaskContainer = (AsyncTaskContainer)tag;
@@ -337,31 +357,26 @@ public abstract class ImageWorker {
     }
 
     /**
-     * Returns true if the current work has been canceled or if there was no
-     * work in progress on this image view. Returns false if the work in
-     * progress deals with the same data. The work is not stopped in that case.
+     * Returns false if the existing async task is loading the same key value
+     * Returns true otherwise and also cancels the async task if one exists
      */
-    public static final boolean executePotentialWork(final Object data, final View view) {
+    public static final boolean executePotentialWork(final String key, final View view) {
         final BitmapWorkerTask bitmapWorkerTask = getBitmapWorkerTask(view);
-        return executePotentialWork(data, bitmapWorkerTask);
-    }
 
-    /**
-     * Returns true if the current work has been canceled or if there was no
-     * work in progress on this image view. Returns false if the work in
-     * progress deals with the same data. The work is not stopped in that case.
-     */
-    public static final boolean executePotentialWork(final Object data,
-                                                     final BitmapWorkerTask bitmapWorkerTask) {
-        if (bitmapWorkerTask != null) {
-            final Object bitmapData = bitmapWorkerTask.mKey;
-            if (bitmapData == null || !bitmapData.equals(data)) {
-                bitmapWorkerTask.cancel(true);
-            } else {
+        if (bitmapWorkerTask != null && !bitmapWorkerTask.isCancelled()) {
+            final String existingKey = bitmapWorkerTask.mKey;
+            if (existingKey != null && existingKey.equals(key)) {
                 // The same work is already in progress
                 return false;
+            } else {
+                // this cancel is needed here or else we need to go through each scenario and
+                // make sure that the code checks and ensures that the async task is relevant to
+                // the imageview before setting it, or cancels it - otherwise we can have
+                // multiple asnyc tasks per view
+                bitmapWorkerTask.cancel(true);
             }
         }
+
         return true;
     }
 
@@ -449,7 +464,7 @@ public abstract class ImageWorker {
 
         // First, check the memory for the image
         final Bitmap lruBitmap = mImageCache.getBitmapFromMemCache(key);
-        if (lruBitmap != null && imageView != null) {   // Bitmap found in memory cache
+        if (lruBitmap != null) {   // Bitmap found in memory cache
             // scale image if necessary
             if (scaleImgToView) {
                 imageView.setImageBitmap(ImageUtils.scaleBitmapForImageView(lruBitmap, imageView));
@@ -465,9 +480,6 @@ public abstract class ImageWorker {
 
             if (executePotentialWork(key, imageView)
                     && imageView != null && !mImageCache.isDiskCachePaused()) {
-                // cancel the old task if any
-                cancelWork(imageView);
-
                 // Otherwise run the worker task
                 final SimpleBitmapWorkerTask bitmapWorkerTask = new SimpleBitmapWorkerTask(key,
                             imageView, imageType, mTransparentDrawable, mContext, scaleImgToView);
@@ -528,9 +540,6 @@ public abstract class ImageWorker {
         // has been updated, or it's been too long since the last update and change the image
         // accordingly
         if (executePotentialWork(key, imageView) && !mImageCache.isDiskCachePaused()) {
-            // cancel the old task if any
-            cancelWork(imageView);
-
             // since a playlist's image can change based on changes to the playlist
             // set the from drawable to be the existing image (if it exists) instead of transparent
             // and fade from there
@@ -569,20 +578,7 @@ public abstract class ImageWorker {
             return;
         }
 
-        // Create the blur key
-        final String blurKey = key + "_blur";
-
-        if (executePotentialWork(blurKey, blurScrimImage)
-                && blurScrimImage != null && !mImageCache.isDiskCachePaused()) {
-            // cancel the old task if any
-            final AsyncTaskContainer previousDrawable = (AsyncTaskContainer)blurScrimImage.getTag();
-            if (previousDrawable != null) {
-                BitmapWorkerTask workerTask = previousDrawable.getBitmapWorkerTask();
-                if (workerTask != null) {
-                    workerTask.cancel(true);
-                }
-            }
-
+        if (executePotentialWork(key, blurScrimImage) && !mImageCache.isDiskCachePaused()) {
             // Otherwise run the worker task
             final BlurBitmapWorkerTask blurWorkerTask = new BlurBitmapWorkerTask(key, blurScrimImage,
                     imageType, mTransparentDrawable, mContext, sRenderScript);

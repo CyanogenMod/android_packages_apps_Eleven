@@ -17,6 +17,8 @@ import android.view.ViewGroup;
 
 import com.cyngn.eleven.MusicPlaybackService;
 import com.cyngn.eleven.R;
+import com.cyngn.eleven.cache.ICacheListener;
+import com.cyngn.eleven.cache.ImageCache;
 import com.cyngn.eleven.model.AlbumArtistDetails;
 import com.cyngn.eleven.utils.ApolloUtils;
 import com.cyngn.eleven.utils.MusicUtils;
@@ -144,7 +146,7 @@ public class AlbumArtPagerAdapter extends FragmentStatePagerAdapter {
      * The fragments to be displayed inside this adapter.  This wraps the album art
      * and handles loading the album art for a given audio id
      */
-    public static class AlbumArtFragment extends Fragment {
+    public static class AlbumArtFragment extends Fragment implements ICacheListener {
         private static final String ID = "com.cyngn.eleven.adapters.AlbumArtPagerAdapter.AlbumArtFragment.ID";
 
         private View mRootView;
@@ -165,12 +167,20 @@ public class AlbumArtPagerAdapter extends FragmentStatePagerAdapter {
             super.onCreate(savedInstanceState);
 
             mAudioId = getArguments().getLong(ID, NO_TRACK_ID);
+            ImageCache.getInstance(getActivity()).addCacheListener(this);
         }
 
         @Override
         public View onCreateView(final LayoutInflater inflater, final ViewGroup container, final Bundle savedInstanceState) {
             mRootView = inflater.inflate(R.layout.album_art_fragment, null);
             return mRootView;
+        }
+
+        @Override
+        public void onDestroy() {
+            super.onDestroy();
+
+            ImageCache.getInstance(getActivity()).removeCacheListener(this);
         }
 
         @Override
@@ -229,6 +239,11 @@ public class AlbumArtPagerAdapter extends FragmentStatePagerAdapter {
                     details.mAlbumId,
                     mImageView
             );
+        }
+
+        @Override
+        public void onCacheUnpaused() {
+            loadImageAsync();
         }
     }
 

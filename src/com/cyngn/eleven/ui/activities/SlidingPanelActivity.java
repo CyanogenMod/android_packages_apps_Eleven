@@ -268,6 +268,14 @@ public abstract class SlidingPanelActivity extends BaseActivity {
         mBlurScrimImage.loadBlurImage(ApolloUtils.getImageFetcher(this));
     }
 
+    @Override
+    public void onCacheUnpaused() {
+        super.onCacheUnpaused();
+
+        // load the blurred image
+        mBlurScrimImage.loadBlurImage(ApolloUtils.getImageFetcher(this));
+    }
+
     protected AudioPlayerFragment getAudioPlayerFragment() {
         return (AudioPlayerFragment)getSupportFragmentManager().findFragmentById(R.id.audioPlayerFragment);
     }

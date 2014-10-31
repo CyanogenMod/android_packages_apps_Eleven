@@ -37,6 +37,8 @@ import com.cyngn.eleven.IElevenService;
 import com.cyngn.eleven.MusicPlaybackService;
 import com.cyngn.eleven.MusicStateListener;
 import com.cyngn.eleven.R;
+import com.cyngn.eleven.cache.ICacheListener;
+import com.cyngn.eleven.cache.ImageFetcher;
 import com.cyngn.eleven.utils.ApolloUtils;
 import com.cyngn.eleven.utils.Lists;
 import com.cyngn.eleven.utils.MusicUtils;
@@ -56,7 +58,7 @@ import java.util.ArrayList;
  * @author Andrew Neal (andrewdneal@gmail.com)
  */
 public abstract class BaseActivity extends FragmentActivity implements ServiceConnection,
-        MusicStateListener {
+        MusicStateListener, ICacheListener {
 
     /**
      * Playstate and meta change listener
@@ -134,6 +136,9 @@ public abstract class BaseActivity extends FragmentActivity implements ServiceCo
                 getResources().getColor(R.color.background_color));
         // Initialze the bottom action bar
         initBottomActionBar();
+
+        // listen to changes to the cache status
+        ImageFetcher.getInstance(this).addCacheListener(this);
     }
 
     /**
@@ -259,6 +264,9 @@ public abstract class BaseActivity extends FragmentActivity implements ServiceCo
 
         // Remove any music status listeners
         mMusicStateListener.clear();
+
+        // remove cache listeners
+        ImageFetcher.getInstance(this).removeCacheListener(this);
     }
 
     public void setupActionBar(int resId) {
@@ -439,6 +447,12 @@ public abstract class BaseActivity extends FragmentActivity implements ServiceCo
         if (status != null) {
             mMusicStateListener.remove(status);
         }
+    }
+
+    @Override
+    public void onCacheUnpaused() {
+        // Set the album art
+        ApolloUtils.getImageFetcher(this).loadCurrentArtwork(mAlbumArt);
     }
 
     /**

@@ -43,6 +43,7 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.HashSet;
 
 /**
  * This class holds the memory and disk bitmap caches.
@@ -90,6 +91,11 @@ public final class ImageCache {
      * Disk LRU cache
      */
     private DiskLruCache mDiskCache;
+
+    /**
+     * listeners to the cache state
+     */
+    private HashSet<ICacheListener> mListeners = new HashSet<ICacheListener>();
 
     private static ImageCache sInstance;
 
@@ -619,6 +625,10 @@ public final class ImageCache {
                 mPauseDiskAccess = pause;
                 if (!pause) {
                     mPauseLock.notify();
+
+                    for (ICacheListener listener : mListeners) {
+                        listener.onCacheUnpaused();
+                    }
                 }
             }
         }
@@ -643,6 +653,14 @@ public final class ImageCache {
      */
     public boolean isDiskCachePaused() {
         return mPauseDiskAccess;
+    }
+
+    public void addCacheListener(ICacheListener listener) {
+        mListeners.add(listener);
+    }
+
+    public void removeCacheListener(ICacheListener listener) {
+        mListeners.remove(listener);
     }
 
     /**

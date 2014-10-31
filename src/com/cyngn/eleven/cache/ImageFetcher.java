@@ -152,6 +152,18 @@ public class ImageFetcher extends ImageWorker {
         sKeys.clear();
     }
 
+    public void addCacheListener(ICacheListener listener) {
+        if (mImageCache != null) {
+            mImageCache.addCacheListener(listener);
+        }
+    }
+
+    public void removeCacheListener(ICacheListener listener) {
+        if (mImageCache != null) {
+            mImageCache.removeCacheListener(listener);
+        }
+    }
+
     /**
      * @param key The key used to find the image to remove
      */

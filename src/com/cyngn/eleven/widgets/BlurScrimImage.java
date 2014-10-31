@@ -23,8 +23,6 @@ public class BlurScrimImage extends FrameLayout {
 
     private boolean mUsingDefaultBlur;
 
-    private String mLastLoadedKey;
-
     public BlurScrimImage(Context context, AttributeSet attrs) {
         super(context, attrs);
 
@@ -47,7 +45,14 @@ public class BlurScrimImage extends FrameLayout {
      * Transitions the image to the default state (default blur artwork)
      */
     public void transitionToDefaultState() {
-        Bitmap blurredBitmap = ((BitmapDrawable) getResources().getDrawable(R.drawable.default_artwork_blur)).getBitmap();
+        // if we are already showing the default blur and we are transitioning to the default blur
+        // then don't do the transition at all
+        if (mUsingDefaultBlur) {
+            return;
+        }
+
+        Bitmap blurredBitmap = ((BitmapDrawable) getResources()
+                .getDrawable(R.drawable.default_artwork_blur)).getBitmap();
 
         TransitionDrawable imageTransition = ImageWorker.createImageTransitionDrawable(getResources(),
                 mImageView.getDrawable(), blurredBitmap, ImageWorker.FADE_IN_TIME_SLOW, true, true);
@@ -56,27 +61,20 @@ public class BlurScrimImage extends FrameLayout {
                 Color.TRANSPARENT);
 
 
-        setTransitionDrawable(true, imageTransition, paletteTransition);
+        setTransitionDrawable(imageTransition, paletteTransition);
+        mUsingDefaultBlur = true;
     }
 
     /**
      * Sets the transition drawable
-     * @param defaultBlur flag whether this is transitioning to the default blur
      * @param imageTransition the transition for the imageview
      * @param paletteTransition the transition for the scrim overlay
      */
-    public void setTransitionDrawable(boolean defaultBlur, TransitionDrawable imageTransition,
+    public void setTransitionDrawable(TransitionDrawable imageTransition,
                                TransitionDrawable paletteTransition) {
-
-        // if we are already showing the default blur and we are transitioning to the default blur
-        // then don't do the transition at all
-        if (mUsingDefaultBlur && defaultBlur) {
-            return;
-        }
-
         mBlurScrim.setBackground(paletteTransition);
         mImageView.setImageDrawable(imageTransition);
-        mUsingDefaultBlur = defaultBlur;
+        mUsingDefaultBlur = false;
     }
 
     /**
@@ -84,10 +82,6 @@ public class BlurScrimImage extends FrameLayout {
      * @param imageFetcher an ImageFetcher instance
      */
     public void loadBlurImage(ImageFetcher imageFetcher) {
-        final String key = imageFetcher.getCurrentCacheKey();
-        if (mLastLoadedKey == null || !mLastLoadedKey.equals(key)) {
-            mLastLoadedKey = key;
-            imageFetcher.loadCurrentBlurredArtwork(this);
-        }
+        imageFetcher.loadCurrentBlurredArtwork(this);
     }
 }

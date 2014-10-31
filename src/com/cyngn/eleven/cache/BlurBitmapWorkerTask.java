@@ -149,8 +149,8 @@ public class BlurBitmapWorkerTask extends BitmapWorkerTask<String, Void, BlurBit
                         resultContainer.mPaletteColor);
 
                 // set the transition drawable
-                blurScrimImage.setTransitionDrawable(false,
-                        resultContainer.mImageViewBitmapDrawable, paletteTransition);
+                blurScrimImage.setTransitionDrawable(resultContainer.mImageViewBitmapDrawable,
+                        paletteTransition);
             }
         }
     }
