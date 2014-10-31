@@ -783,8 +783,6 @@ public final class MusicUtils {
         try {
             if (forceShuffle) {
                 mService.setShuffleMode(MusicPlaybackService.SHUFFLE_NORMAL);
-            } else {
-                mService.setShuffleMode(MusicPlaybackService.SHUFFLE_NONE);
             }
             final long currentId = mService.getAudioId();
             final int currentQueuePosition = getQueuePosition();
