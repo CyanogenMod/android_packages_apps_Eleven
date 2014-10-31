@@ -366,8 +366,15 @@ public class PlaylistDetailFragment extends FadingBarFragment implements
             getContainingActivity().postRemoveFragment(this);
             return;
         }
-        // update action bar title and popup menu handler
-        ((PlaylistPopupMenuHelper)mActionMenuHelper).updateName(mPlaylistName);
+
+        // since onCreateOptionsMenu can be called after onCreate it is possible for
+        // mActionMenuHelper to be null.  In this case, don't bother updating the Name since when
+        // it does create it, it will use the updated name anyways
+        if (mActionMenuHelper != null) {
+            // update action bar title and popup menu handler
+            ((PlaylistPopupMenuHelper) mActionMenuHelper).updateName(mPlaylistName);
+        }
+
         getContainingActivity().setActionBarTitle(mPlaylistName);
         // and reload the song list
         getLoaderManager().restartLoader(0, getArguments(), this);
