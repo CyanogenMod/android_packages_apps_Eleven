@@ -20,6 +20,7 @@ import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.TransitionDrawable;
 import android.support.v8.renderscript.RenderScript;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.ImageView;
 
@@ -361,20 +362,15 @@ public abstract class ImageWorker {
      * Returns true otherwise and also cancels the async task if one exists
      */
     public static final boolean executePotentialWork(final String key, final View view) {
-        final BitmapWorkerTask bitmapWorkerTask = getBitmapWorkerTask(view);
-
-        if (bitmapWorkerTask != null && !bitmapWorkerTask.isCancelled()) {
-            final String existingKey = bitmapWorkerTask.mKey;
-            if (existingKey != null && existingKey.equals(key)) {
-                // The same work is already in progress
+        final AsyncTaskContainer asyncTaskContainer = getAsyncTaskContainer(view);
+        if (asyncTaskContainer != null) {
+            // we are trying to reload the same image, return false to indicate no work is needed
+            if (asyncTaskContainer.getKey().equals(key)) {
                 return false;
-            } else {
-                // this cancel is needed here or else we need to go through each scenario and
-                // make sure that the code checks and ensures that the async task is relevant to
-                // the imageview before setting it, or cancels it - otherwise we can have
-                // multiple asnyc tasks per view
-                bitmapWorkerTask.cancel(true);
             }
+
+            // since we don't match, cancel the work and switch to the new worker task
+            cancelWork(view);
         }
 
         return true;
@@ -382,20 +378,37 @@ public abstract class ImageWorker {
 
     /**
      * Used to determine if the current image drawable has an instance of
-     * {@link BitmapWorkerTask}
+     * {@link AsyncTaskContainer}
+     *
+     * @param view Any {@link View} that either is or contains an ImageView.
+     * @return Retrieve the AsyncTaskContainer assigned to the {@link View}. null if there is no
+     * such task.
+     */
+    public static final AsyncTaskContainer getAsyncTaskContainer(final View view) {
+        if (view != null) {
+            if (view.getTag() instanceof AsyncTaskContainer) {
+                return (AsyncTaskContainer) view.getTag();
+            }
+        }
+
+        return null;
+    }
+
+    /**
+     * Used to determine if the current image drawable has an instance of
+     * {@link BitmapWorkerTask}.  A {@link BitmapWorkerTask} may not exist even if the {@link
+     * AsyncTaskContainer} does as it may have finished its work
      *
      * @param view Any {@link View} that either is or contains an ImageView.
      * @return Retrieve the currently active work task (if any) associated with
      *         this {@link View}. null if there is no such task.
      */
     public static final BitmapWorkerTask getBitmapWorkerTask(final View view) {
-        if (view != null) {
-            final Object tag = view.getTag();
-            if (tag instanceof AsyncTaskContainer) {
-                final AsyncTaskContainer asyncTaskContainer = (AsyncTaskContainer)tag;
-                return asyncTaskContainer.getBitmapWorkerTask();
-            }
+        AsyncTaskContainer asyncTask = getAsyncTaskContainer(view);
+        if (asyncTask != null) {
+            return asyncTask.getBitmapWorkerTask();
         }
+
         return null;
     }
 
@@ -409,12 +422,16 @@ public abstract class ImageWorker {
     public static final class AsyncTaskContainer {
 
         private final WeakReference<BitmapWorkerTask> mBitmapWorkerTaskReference;
+        // keep a copy of the key in case the worker task mBitmapWorkerTaskReference is released
+        // after completion
+        private String mKey;
 
         /**
          * Constructor of <code>AsyncDrawable</code>
          */
-        public AsyncTaskContainer(final BitmapWorkerTask mBitmapWorkerTask) {
-            mBitmapWorkerTaskReference = new WeakReference<BitmapWorkerTask>(mBitmapWorkerTask);
+        public AsyncTaskContainer(final BitmapWorkerTask bitmapWorkerTask) {
+            mBitmapWorkerTaskReference = new WeakReference<BitmapWorkerTask>(bitmapWorkerTask);
+            mKey = bitmapWorkerTask.mKey;
         }
 
         /**
@@ -422,6 +439,10 @@ public abstract class ImageWorker {
          */
         public BitmapWorkerTask getBitmapWorkerTask() {
             return mBitmapWorkerTaskReference.get();
+        }
+
+        public String getKey() {
+            return mKey;
         }
     }
 
