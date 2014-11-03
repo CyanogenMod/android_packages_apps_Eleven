@@ -287,9 +287,9 @@ public class MusicPlaybackService extends Service {
     private static final int FADEUP = 7;
 
     /**
-     * Idle time before stopping the foreground notfication (1 minute)
+     * Idle time before stopping the foreground notfication (5 minutes)
      */
-    private static final int IDLE_DELAY = 60000;
+    private static final int IDLE_DELAY = 5 * 60 * 1000;
 
     /**
      * Song play time used as threshold for rewinding to the beginning of the

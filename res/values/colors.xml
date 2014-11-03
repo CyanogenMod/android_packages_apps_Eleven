@@ -109,7 +109,7 @@
     <color name="now_playing_divider">#40ffffff</color>
 
     <!-- App widget colors -->
-    <color name="widget_divider">#569fd7</color>
+    <color name="widget_divider">#373737</color>
     <!-- 80% opacity white -->
     <color name="widget_text">#ccffffff</color>
 </resources>
