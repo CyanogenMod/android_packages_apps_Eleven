@@ -37,14 +37,6 @@ import java.util.List;
  * @author Andrew Neal (andrewdneal@gmail.com)
  */
 public class AlbumAdapter extends BaseAdapter implements IPopupMenuCallback {
-
-    /**
-     * Number of views (ImageView and TextView)
-     */
-    private static final int VIEW_TYPE_COUNT = 2;
-    private static final int VIEW_TYPE_HEADER = 0;
-    private static final int VIEW_TYPE_ITEM = 1;
-
     /**
      * The resource Id of the layout to inflate
      */
@@ -67,8 +59,9 @@ public class AlbumAdapter extends BaseAdapter implements IPopupMenuCallback {
     private IPopupMenuCallback.IListener mListener;
 
     /** number of columns of containing grid view,
-     *  used to determine how many headers to show */
+     *  used to determine which views to pad */
     private int mColumns;
+    private int mPadding;
 
     private Context mContext;
 
@@ -86,6 +79,7 @@ public class AlbumAdapter extends BaseAdapter implements IPopupMenuCallback {
         mLayoutId = layoutId;
         // Initialize the cache & image fetcher
         mImageFetcher = ApolloUtils.getImageFetcher(context);
+        mPadding = context.getResources().getDimensionPixelSize(R.dimen.list_item_general_margin);
     }
 
     /**
@@ -93,13 +87,6 @@ public class AlbumAdapter extends BaseAdapter implements IPopupMenuCallback {
      */
     @Override
     public View getView(final int position, View convertView, final ViewGroup parent) {
-        if(getItemViewType(position) == VIEW_TYPE_HEADER) {
-            if(convertView != null) {
-                return convertView;
-            }
-            return LayoutInflater.from(mContext).inflate(R.layout.grid_header, parent, false);
-        }
-
         // Recycle ViewHolder's items
         MusicHolder holder;
         if (convertView == null) {
@@ -112,8 +99,10 @@ public class AlbumAdapter extends BaseAdapter implements IPopupMenuCallback {
             holder = (MusicHolder)convertView.getTag();
         }
 
+        adjustPadding(position, convertView);
+
         // Retrieve the data holder
-        final DataHolder dataHolder = mData[position - mColumns];
+        final DataHolder dataHolder = mData[position];
 
         // Sets the position each time because of recycling
         holder.mPopupMenuButton.get().setPosition(position);
@@ -122,10 +111,29 @@ public class AlbumAdapter extends BaseAdapter implements IPopupMenuCallback {
         // Set the artist name (line two)
         holder.mLineTwo.get().setText(dataHolder.mLineTwo);
         // Asynchronously load the album images into the adapter
-        mImageFetcher.loadAlbumImage(dataHolder.mLineTwo, dataHolder.mLineOne, dataHolder.mItemId,
-                holder.mImage.get());
+        mImageFetcher.loadAlbumImage(
+                dataHolder.mLineTwo, dataHolder.mLineOne,
+                dataHolder.mItemId, holder.mImage.get());
 
         return convertView;
+    }
+
+    private void adjustPadding(final int position, View convertView) {
+        if (position < mColumns) {
+            // first row
+            convertView.setPadding(0, mPadding, 0, 0);
+            return;
+        }
+        int count = getCount();
+        int footers = count % mColumns;
+        if (footers == 0) { footers = mColumns; }
+        if (position >= (count-footers)) {
+            // last row
+            convertView.setPadding(0, 0, 0, mPadding);
+        } else {
+            // middle rows
+            convertView.setPadding(0, 0 ,0, 0);
+        }
     }
 
     /**
@@ -136,40 +144,14 @@ public class AlbumAdapter extends BaseAdapter implements IPopupMenuCallback {
         return true;
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public int getViewTypeCount() {
-        return VIEW_TYPE_COUNT;
-    }
-
-    @Override
-    public int getItemViewType(int position) {
-        if(position < mColumns) {
-            return VIEW_TYPE_HEADER;
-        } else {
-            return VIEW_TYPE_ITEM;
-        }
-    }
-
-    @Override
-    public boolean isEnabled(int position) {
-        return getItemViewType(position) == VIEW_TYPE_ITEM;
-    }
-
     @Override
     public int getCount() {
-        return mAlbums.size() + mColumns; // data items plus headers
+        return mAlbums.size();
     }
 
     @Override
     public Album getItem(int pos) {
-        if(pos < mColumns) {
-            return null; // header position
-        } else {
-            return mAlbums.get(pos - mColumns);
-        }
+        return mAlbums.get(pos);
     }
 
     @Override
@@ -241,7 +223,7 @@ public class AlbumAdapter extends BaseAdapter implements IPopupMenuCallback {
         int i = 0;
         for (Album album : mAlbums) {
             if (album.mAlbumId == id) {
-                return mColumns + i;
+                return i;
             }
             i++;
         }
