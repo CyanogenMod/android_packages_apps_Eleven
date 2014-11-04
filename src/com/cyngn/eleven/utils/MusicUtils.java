@@ -1172,8 +1172,11 @@ public final class MusicUtils {
                 MediaStore.Audio.Playlists.Members.getContentUri("external", playlistId),
                 new String[]{BaseColumns._ID}, MusicUtils.MUSIC_ONLY_SELECTION, null, null);
 
-        if (c != null && c.moveToFirst()) {
-            int count = c.getCount();
+        if (c != null) {
+            int count = 0;
+            if (c.moveToFirst()) {
+                count = c.getCount();
+            }
             c.close();
             c = null;
             return count;
