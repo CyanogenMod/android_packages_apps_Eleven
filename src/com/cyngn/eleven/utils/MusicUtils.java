@@ -1086,14 +1086,25 @@ public final class MusicUtils {
         final int size = ids.length;
         final ContentResolver resolver = context.getContentResolver();
         final String[] projection = new String[] {
-            "count(*)"
+            "max(" + Playlists.Members.PLAY_ORDER + ")",
         };
         final Uri uri = MediaStore.Audio.Playlists.Members.getContentUri("external", playlistid);
-        Cursor cursor = resolver.query(uri, projection, null, null, null);
-        cursor.moveToFirst();
-        final int base = cursor.getInt(0);
-        cursor.close();
-        cursor = null;
+        Cursor cursor = null;
+        int base = 0;
+
+        try {
+            cursor = resolver.query(uri, projection, null, null, null);
+
+            if (cursor != null && cursor.moveToFirst()) {
+                base = cursor.getInt(0) + 1;
+            }
+        } finally {
+            if (cursor != null) {
+                cursor.close();
+                cursor = null;
+            }
+        }
+
         int numinserted = 0;
         for (int offSet = 0; offSet < size; offSet += 1000) {
             makeInsertItems(ids, offSet, 1000, base);
@@ -1136,7 +1147,7 @@ public final class MusicUtils {
         try {
             mService.enqueue(list, MusicPlaybackService.LAST, sourceId, sourceType.mId);
             final String message = makeLabel(context, R.plurals.NNNtrackstoqueue, list.length);
-            CustomToast.makeText((Activity)context, message,CustomToast.LENGTH_SHORT).show();
+            CustomToast.makeText((Activity) context, message, CustomToast.LENGTH_SHORT).show();
         } catch (final RemoteException ignored) {
         }
     }
