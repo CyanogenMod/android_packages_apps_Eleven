@@ -358,6 +358,9 @@ public class QueueFragment extends Fragment implements LoaderCallbacks<List<Song
      */
     @Override
     public void onLoadFinished(final Loader<List<Song>> loader, final List<Song> data) {
+        // pause notifying the adapter and make changes before re-enabling it so that the list
+        // view doesn't reset to the top of the list
+        mAdapter.setNotifyOnChange(false);
         mAdapter.unload(); // Start fresh
 
         if (data.isEmpty()) {
@@ -372,6 +375,8 @@ public class QueueFragment extends Fragment implements LoaderCallbacks<List<Song
             // Set the currently playing audio
             mAdapter.setCurrentQueuePosition(MusicUtils.getQueuePosition());
         }
+        // re-enable the notify by calling notify dataset changes
+        mAdapter.notifyDataSetChanged();
     }
 
     /**

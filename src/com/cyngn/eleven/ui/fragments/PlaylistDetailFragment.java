@@ -150,6 +150,7 @@ public class PlaylistDetailFragment extends FadingBarFragment implements
             @Override
             protected void removeFromPlaylist() {
                 mAdapter.remove(mSong);
+                mAdapter.buildCache();
                 mAdapter.notifyDataSetChanged();
                 MusicUtils.removeFromPlaylist(getActivity(), mSong.mSongId, mPlaylistId);
                 getLoaderManager().restartLoader(LOADER, null, PlaylistDetailFragment.this);
@@ -326,12 +327,17 @@ public class PlaylistDetailFragment extends FadingBarFragment implements
             // show the header container
             mHeaderContainer.setVisibility(View.VISIBLE);
 
+            // pause notifying the adapter and make changes before re-enabling it so that the list
+            // view doesn't reset to the top of the list
+            mAdapter.setNotifyOnChange(false);
             // Start fresh
             mAdapter.unload();
             // Return the correct count
             mAdapter.addAll(data);
             // build the cache
             mAdapter.buildCache();
+            // re-enable the notify by calling notify dataset changes
+            mAdapter.notifyDataSetChanged();
             // set the number of songs
             String numberOfSongs = MusicUtils.makeLabel(getActivity(), R.plurals.Nsongs,
                     data.size());
@@ -358,8 +364,6 @@ public class PlaylistDetailFragment extends FadingBarFragment implements
 
     @Override
     public void restartLoader() {
-        // unload the adapter - this will also get the loading progress bar to show
-        mAdapter.unload();
         lookupName(); // playlist name may have changed
         if(mPlaylistName == null) {
             // if name is null, we've been deleted, so close the this fragment
