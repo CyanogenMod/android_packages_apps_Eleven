@@ -401,7 +401,7 @@ public class AudioPlayerFragment extends Fragment implements ServiceConnection {
         int repeatMode = MusicUtils.getRepeatMode();
         int targetSize = 0;
         int targetIndex = 0;
-        int queueSize = MusicUtils.getQueue().length;
+        int queueSize = MusicUtils.getQueueSize();
 
         if (repeatMode == MusicPlaybackService.REPEAT_CURRENT) {
             targetSize = 1;
@@ -423,9 +423,11 @@ public class AudioPlayerFragment extends Fragment implements ServiceConnection {
         if(queueSize == 0) {
             mAlbumArtViewPager.setVisibility(View.GONE);
             mQueueEmpty.showNoResults();
+            mAddToPlaylistButton.setVisibility(View.GONE);
         } else {
             mAlbumArtViewPager.setVisibility(View.VISIBLE);
             mQueueEmpty.hideAll();
+            mAddToPlaylistButton.setVisibility(View.VISIBLE);
         }
     }
 
@@ -561,19 +563,22 @@ public class AudioPlayerFragment extends Fragment implements ServiceConnection {
                     return onPopupMenuItemClick(item);
                 }
             });
+        }
 
-            final Menu menu = mPopupMenu.getMenu();
-            final MenuInflater inflater = mPopupMenu.getMenuInflater();
+        final Menu menu = mPopupMenu.getMenu();
+        final MenuInflater inflater = mPopupMenu.getMenuInflater();
+        menu.clear();
 
-            // Shuffle all
-            inflater.inflate(R.menu.shuffle_all, menu);
+        // Shuffle all
+        inflater.inflate(R.menu.shuffle_all, menu);
+        if (MusicUtils.getQueueSize() > 0) {
             // ringtone, and equalizer
             inflater.inflate(R.menu.audio_player, menu);
             // save queue/clear queue
             inflater.inflate(R.menu.queue, menu);
-            // Settings
-            inflater.inflate(R.menu.activity_base, menu);
         }
+        // Settings
+        inflater.inflate(R.menu.activity_base, menu);
 
         // show the popup
         mPopupMenu.show();
@@ -596,6 +601,9 @@ public class AudioPlayerFragment extends Fragment implements ServiceConnection {
             case R.id.menu_settings:
                 // Settings
                 NavUtils.openSettings(getActivity());
+                return true;
+            case R.id.menu_audio_player_more_by_artist:
+                NavUtils.openArtistProfile(getActivity(), MusicUtils.getArtistName());
                 return true;
             case R.id.menu_audio_player_delete:
                 // Delete current song

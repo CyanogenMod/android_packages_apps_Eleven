@@ -115,17 +115,21 @@ public class HeaderBar extends LinearLayout {
                     return onPopupMenuItemClick(item);
                 }
             });
+        }
 
-            final Menu menu = mPopupMenu.getMenu();
-            final MenuInflater inflater = mPopupMenu.getMenuInflater();
+        final Menu menu = mPopupMenu.getMenu();
+        final MenuInflater inflater = mPopupMenu.getMenuInflater();
 
-            // Shuffle all
-            inflater.inflate(R.menu.shuffle_all, menu);
+        menu.clear();
+
+        // Shuffle all
+        inflater.inflate(R.menu.shuffle_all, menu);
+        if (MusicUtils.getQueueSize() > 0) {
             // save queue/clear queue
             inflater.inflate(R.menu.queue, menu);
-            // Settings
-            inflater.inflate(R.menu.activity_base, menu);
         }
+        // Settings
+        inflater.inflate(R.menu.activity_base, menu);
 
         // show the popup
         mPopupMenu.show();

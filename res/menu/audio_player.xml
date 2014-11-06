@@ -27,9 +27,14 @@
         android:orderInCategory="42"
         android:title="@string/context_menu_use_as_ringtone"/>
     <item
-        android:id="@+id/menu_audio_player_delete"
+        android:id="@+id/menu_audio_player_more_by_artist"
         android:showAsAction="never"
         android:orderInCategory="43"
+        android:title="@string/context_menu_more_by_artist"/>
+    <item
+        android:id="@+id/menu_audio_player_delete"
+        android:showAsAction="never"
+        android:orderInCategory="44"
         android:title="@string/context_menu_delete"/>
 
 </menu>

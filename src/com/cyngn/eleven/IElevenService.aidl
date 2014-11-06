@@ -20,7 +20,10 @@ interface IElevenService
     void playlistChanged();
     boolean isPlaying();
     long [] getQueue();
+    long getQueueItemAtPosition(int position);
+    int getQueueSize();
     int getQueuePosition();
+    int getQueueHistoryPosition(int position);
     int getQueueHistorySize();
     int[] getQueueHistoryList();
     long duration();

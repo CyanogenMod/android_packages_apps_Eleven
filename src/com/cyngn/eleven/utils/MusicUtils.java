@@ -561,6 +561,35 @@ public final class MusicUtils {
     }
 
     /**
+     * @param position
+     * @return the id of the track in the queue at the given position
+     */
+    public static final long getQueueItemAtPosition(int position) {
+        try {
+            if (mService != null) {
+                return mService.getQueueItemAtPosition(position);
+            } else {
+            }
+        } catch (final RemoteException ignored) {
+        }
+        return -1;
+    }
+
+    /**
+     * @return the current queue size
+     */
+    public static final int getQueueSize() {
+        try {
+            if (mService != null) {
+                return mService.getQueueSize();
+            } else {
+            }
+        } catch (final RemoteException ignored) {
+        }
+        return 0;
+    }
+
+    /**
      * @return The position of the current track in the queue.
      */
     public static final int getQueuePosition() {
@@ -584,6 +613,19 @@ public final class MusicUtils {
             }
         }
         return 0;
+    }
+
+    /**
+     * @return The queue history position at the position
+     */
+    public static final int getQueueHistoryPosition(int position) {
+        if (mService != null) {
+            try {
+                return mService.getQueueHistoryPosition(position);
+            } catch (final RemoteException ignored) {
+            }
+        }
+        return -1;
     }
 
     /**

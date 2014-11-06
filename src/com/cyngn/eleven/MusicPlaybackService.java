@@ -1813,6 +1813,19 @@ public class MusicPlaybackService extends Service {
     }
 
     /**
+     * @return the position in the history
+     */
+    public int getQueueHistoryPosition(int position) {
+        synchronized (this) {
+            if (position >= 0 && position < mHistory.size()) {
+                return mHistory.get(position);
+            }
+        }
+
+        return -1;
+    }
+
+    /**
      * @return the queue of history positions
      */
     public int[] getQueueHistoryList() {
@@ -2071,6 +2084,30 @@ public class MusicPlaybackService extends Service {
                 list[i] = mPlaylist.get(i).mId;
             }
             return list;
+        }
+    }
+
+    /**
+     * Gets the track id at a given position in the queue
+     * @param position
+     * @return track id in the queue position
+     */
+    public long getQueueItemAtPosition(int position) {
+        synchronized (this) {
+            if (position >= 0 && position < mPlaylist.size()) {
+                return mPlaylist.get(position).mId;
+            }
+        }
+
+        return -1;
+    }
+
+    /**
+     * @return the size of the queue
+     */
+    public int getQueueSize() {
+        synchronized (this) {
+            return mPlaylist.size();
         }
     }
 
@@ -3107,6 +3144,30 @@ public class MusicPlaybackService extends Service {
         @Override
         public long[] getQueue() throws RemoteException {
             return mService.get().getQueue();
+        }
+
+        /**
+         * {@inheritDoc}
+         */
+        @Override
+        public long getQueueItemAtPosition(int position) throws RemoteException {
+            return mService.get().getQueueItemAtPosition(position);
+        }
+
+        /**
+         * {@inheritDoc}
+         */
+        @Override
+        public int getQueueSize() throws RemoteException {
+            return mService.get().getQueueSize();
+        }
+
+        /**
+         * {@inheritDoc}
+         */
+        @Override
+        public int getQueueHistoryPosition(int position) throws RemoteException {
+            return mService.get().getQueueHistoryPosition(position);
         }
 
         /**

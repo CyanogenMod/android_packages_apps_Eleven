@@ -108,9 +108,7 @@ public class AlbumArtPagerAdapter extends FragmentStatePagerAdapter {
         } else if (MusicUtils.getShuffleMode() == MusicPlaybackService.SHUFFLE_NONE) {
             // if we aren't shuffling, just return based on the queue position
             // add a check for empty queue
-            long[] songQueue = MusicUtils.getQueue();
-            return (position >= 0 && position < songQueue.length)
-                    ? songQueue[position] : NO_TRACK_ID;
+            return MusicUtils.getQueueItemAtPosition(position);
         } else {
             // if we are shuffling, there is no 'queue' going forward per say
             // because it is dynamically generated.  In that case we can only look
@@ -126,14 +124,9 @@ public class AlbumArtPagerAdapter extends FragmentStatePagerAdapter {
             } else if (position - positionOffset == 1) { // next track
                 return MusicUtils.getNextAudioId();
             } else if (position < positionOffset) {
-                // historical track - look up the historical position
-                long[] audioIds = MusicUtils.getQueue();
-                int[] historyPositions = MusicUtils.getQueueHistoryList();
-                if (position < historyPositions.length) {
-                    int queuePosition = historyPositions[position];
-                    if (queuePosition < audioIds.length) {
-                        return audioIds[queuePosition];
-                    }
+                int queuePosition = MusicUtils.getQueueHistoryPosition(position);
+                if (position >= 0) {
+                    return MusicUtils.getQueueItemAtPosition(queuePosition);
                 }
             }
         }
