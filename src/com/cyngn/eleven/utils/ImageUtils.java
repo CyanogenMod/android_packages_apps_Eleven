@@ -50,17 +50,21 @@ public class ImageUtils {
                                          final String albumName, final ImageWorker.ImageType imageType) {
         switch (imageType) {
             case ARTIST:
-                if (!TextUtils.isEmpty(artistName)) {
+                // Disable last.fm calls - TODO: Find an alternative artwork provider that has
+                // the proper license rights for artwork
+                /*if (!TextUtils.isEmpty(artistName)) {
                     if (PreferenceUtils.getInstance(context).downloadMissingArtistImages()) {
                         final Artist artist = Artist.getInfo(context, artistName);
                         if (artist != null) {
                             return getBestImage(artist);
                         }
                     }
-                }
+                }*/
                 break;
             case ALBUM:
-                if (!TextUtils.isEmpty(artistName) && !TextUtils.isEmpty(albumName)) {
+                // Disable last.fm calls - TODO: Find an alternative artwork provider that has
+                // the proper license rights for artwork
+                /*if (!TextUtils.isEmpty(artistName) && !TextUtils.isEmpty(albumName)) {
                     if (PreferenceUtils.getInstance(context).downloadMissingArtwork()) {
                         final Artist correction = Artist.getCorrection(context, artistName);
                         if (correction != null) {
@@ -71,7 +75,7 @@ public class ImageUtils {
                             }
                         }
                     }
-                }
+                }*/
                 break;
             default:
                 break;
