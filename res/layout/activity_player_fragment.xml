@@ -49,6 +49,21 @@
             android:clipChildren="false"
             android:clipToPadding="false"
             android:visibility="visible" />
+
+        <TextView
+            android:id="@+id/audio_player_lyrics"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:minHeight="66dp"
+            android:paddingLeft="15dp"
+            android:paddingRight="15dp"
+            android:paddingTop="6dp"
+            android:paddingBottom="6dp"
+            android:background="@color/lyrics_background_color"
+            android:textColor="@color/white"
+            android:textSize="@dimen/text_size_small"/>
     </com.cyngn.eleven.widgets.SquareFrame>
 
     <RelativeLayout

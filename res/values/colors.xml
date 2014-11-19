@@ -112,4 +112,7 @@
     <color name="widget_divider">#373737</color>
     <!-- 80% opacity white -->
     <color name="widget_text">#ccffffff</color>
+
+    <!-- Background Lyrics Color -->
+    <color name="lyrics_background_color">#b2000000</color>
 </resources>

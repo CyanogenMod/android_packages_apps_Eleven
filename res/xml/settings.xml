@@ -43,6 +43,13 @@
             android:defaultValue="true"
             android:key="music_visualization"
             android:title="@string/settings_show_music_visualization_title" />
+
+        <!-- Show Lyrics -->
+        <CheckBoxPreference
+            android:defaultValue="true"
+            android:key="show_lyrics"
+            android:title="@string/settings_show_lyrics_title"
+            android:summary="@string/settings_show_lyrics_summary"/>
     </PreferenceCategory>
     <!-- Storage catetory -->
     <PreferenceCategory android:title="@string/settings_storage_category" >

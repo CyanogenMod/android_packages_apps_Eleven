@@ -16,6 +16,9 @@ import android.os.IBinder;
 import android.os.Message;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
+import android.text.Html;
+import android.text.Spanned;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.ContextMenu;
 import android.view.LayoutInflater;
@@ -133,6 +136,9 @@ public class AudioPlayerFragment extends Fragment implements ServiceConnection,
     // popup menu for pressing the menu icon
     private PopupMenu mPopupMenu;
 
+    // Lyrics text view
+    private TextView mLyricsText;
+
     private long mSelectedId = -1;
 
     private boolean mIsPaused = false;
@@ -180,6 +186,8 @@ public class AudioPlayerFragment extends Fragment implements ServiceConnection,
         mEqualizerView.initialize(getActivity());
         mEqualizerGradient = mRootView.findViewById(R.id.equalizerGradient);
 
+        mLyricsText = (TextView) mRootView.findViewById(R.id.audio_player_lyrics);
+
         return mRootView;
     }
 
@@ -216,6 +224,8 @@ public class AudioPlayerFragment extends Fragment implements ServiceConnection,
         filter.addAction(MusicPlaybackService.REFRESH);
         // Listen to changes to the entire queue
         filter.addAction(MusicPlaybackService.QUEUE_CHANGED);
+        // Listen for lyrics text for the audio track
+        filter.addAction(MusicPlaybackService.NEW_LYRICS);
         // Register the intent filters
         getActivity().registerReceiver(mPlaybackStatus, filter);
         // Refresh the current time
@@ -685,6 +695,19 @@ public class AudioPlayerFragment extends Fragment implements ServiceConnection,
         return super.onContextItemSelected(item);
     }
 
+    public void onLyrics(String lyrics) {
+        if (TextUtils.isEmpty(lyrics)
+                || !PreferenceUtils.getInstance(getActivity()).getShowLyrics()) {
+            mLyricsText.animate().alpha(0).setDuration(200);
+        } else {
+            lyrics = lyrics.replace("\n", "<br/>");
+            Spanned span = Html.fromHtml(lyrics);
+            mLyricsText.setText(span);
+
+            mLyricsText.animate().alpha(1).setDuration(200);
+        }
+    }
+
     @Override
     public void onBeginSlide() {
         mEqualizerView.setPanelVisible(false);
@@ -743,25 +766,28 @@ public class AudioPlayerFragment extends Fragment implements ServiceConnection,
          */
         @Override
         public void onReceive(final Context context, final Intent intent) {
+            final AudioPlayerFragment audioPlayerFragment = mReference.get();
             final String action = intent.getAction();
             if (action.equals(MusicPlaybackService.META_CHANGED)) {
                 // Current info
-                mReference.get().updateNowPlayingInfo();
-                mReference.get().dismissPopupMenu();
+                audioPlayerFragment.updateNowPlayingInfo();
+                audioPlayerFragment.dismissPopupMenu();
             } else if (action.equals(MusicPlaybackService.PLAYSTATE_CHANGED)) {
                 // Set the play and pause image
-                mReference.get().mPlayPauseProgressButton.getPlayPauseButton().updateState();
+                audioPlayerFragment.mPlayPauseProgressButton.getPlayPauseButton().updateState();
             } else if (action.equals(MusicPlaybackService.REPEATMODE_CHANGED)
                     || action.equals(MusicPlaybackService.SHUFFLEMODE_CHANGED)) {
                 // Set the repeat image
-                mReference.get().mRepeatButton.updateRepeatState();
+                audioPlayerFragment.mRepeatButton.updateRepeatState();
                 // Set the shuffle image
-                mReference.get().mShuffleButton.updateShuffleState();
+                audioPlayerFragment.mShuffleButton.updateShuffleState();
 
                 // Update the queue
-                mReference.get().createAndSetAdapter();
+                audioPlayerFragment.createAndSetAdapter();
             } else if (action.equals(MusicPlaybackService.QUEUE_CHANGED)) {
-                mReference.get().createAndSetAdapter();
+                audioPlayerFragment.createAndSetAdapter();
+            } else if (action.equals(MusicPlaybackService.NEW_LYRICS)) {
+                audioPlayerFragment.onLyrics(intent.getStringExtra("lyrics"));
             }
         }
     }

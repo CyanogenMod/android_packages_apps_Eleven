@@ -61,7 +61,9 @@ import com.cyngn.eleven.provider.SongPlayCount;
 import com.cyngn.eleven.service.MusicPlaybackTrack;
 import com.cyngn.eleven.utils.ApolloUtils;
 import com.cyngn.eleven.utils.Lists;
+import com.cyngn.eleven.utils.SrtManager;
 
+import java.io.File;
 import java.io.IOException;
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
@@ -189,6 +191,11 @@ public class MusicPlaybackService extends Service {
     private static final String SHUTDOWN = "com.cyngn.eleven.shutdown";
 
     /**
+     * Called to notify of a timed text
+     */
+    public static final String NEW_LYRICS = "com.cyngn.eleven.lyrics";
+
+    /**
      * Called to update the remote control client
      */
     public static final String UPDATE_LOCKSCREEN = "com.cyngn.eleven.updatelockscreen";
@@ -285,6 +292,11 @@ public class MusicPlaybackService extends Service {
      * Indicates to fade the volume back up
      */
     private static final int FADEUP = 7;
+
+    /**
+     * Notifies that there is a new timed text string
+     */
+    private static final int LYRICS = 8;
 
     /**
      * Idle time before stopping the foreground notfication (5 minutes)
@@ -449,6 +461,8 @@ public class MusicPlaybackService extends Service {
     private int mRepeatMode = REPEAT_NONE;
 
     private int mServiceStartId = -1;
+
+    private String mLyrics;
 
     private ArrayList<MusicPlaybackTrack> mPlaylist = new ArrayList<MusicPlaybackTrack>(100);
 
@@ -1373,6 +1387,11 @@ public class MusicPlaybackService extends Service {
         intent.putExtra("album", getAlbumName());
         intent.putExtra("track", getTrackName());
         intent.putExtra("playing", isPlaying());
+
+        if (NEW_LYRICS.equals(what)) {
+            intent.putExtra("lyrics", mLyrics);
+        }
+
         sendStickyBroadcast(intent);
 
         final Intent musicIntent = new Intent(intent);
@@ -2682,6 +2701,10 @@ public class MusicPlaybackService extends Service {
                         service.gotoNext(false);
                     }
                     break;
+                case LYRICS:
+                    service.mLyrics = (String) msg.obj;
+                    service.notifyChange(NEW_LYRICS);
+                    break;
                 case RELEASE_WAKELOCK:
                     service.mWakeLock.release();
                     break;
@@ -2781,12 +2804,22 @@ public class MusicPlaybackService extends Service {
 
         private boolean mIsInitialized = false;
 
+        private SrtManager mSrtManager;
+
+        private String mNextMediaPath;
+
         /**
          * Constructor of <code>MultiPlayer</code>
          */
         public MultiPlayer(final MusicPlaybackService service) {
             mService = new WeakReference<MusicPlaybackService>(service);
             mCurrentMediaPlayer.setWakeMode(mService.get(), PowerManager.PARTIAL_WAKE_LOCK);
+            mSrtManager = new SrtManager() {
+                @Override
+                public void onTimedText(String text) {
+                    mHandler.obtainMessage(LYRICS, text).sendToTarget();
+                }
+            };
         }
 
         /**
@@ -2796,7 +2829,45 @@ public class MusicPlaybackService extends Service {
         public void setDataSource(final String path) {
             mIsInitialized = setDataSourceImpl(mCurrentMediaPlayer, path);
             if (mIsInitialized) {
+                loadSrt(path);
                 setNextDataSource(null);
+            }
+        }
+
+        private void loadSrt(final String path) {
+            mSrtManager.reset();
+
+            Uri uri = Uri.parse(path);
+            String filePath = null;
+
+            if (path.startsWith("content://")) {
+                // resolve the content resolver path to a file path
+                Cursor cursor = null;
+                try {
+                    final String[] proj = {MediaStore.Audio.Media.DATA};
+                    cursor = mService.get().getContentResolver().query(uri, proj,
+                            null, null, null);
+                    if (cursor != null && cursor.moveToFirst()) {
+                        filePath = cursor.getString(0);
+                    }
+                } finally {
+                    if (cursor != null) {
+                        cursor.close();
+                        cursor = null;
+                    }
+                }
+            } else {
+                filePath = uri.getPath();
+            }
+
+            if (!TextUtils.isEmpty(filePath)) {
+                final int lastIndex = filePath.lastIndexOf('.');
+                if (lastIndex != -1) {
+                    String newPath = filePath.substring(0, lastIndex) + ".srt";
+                    final File f = new File(newPath);
+
+                    mSrtManager.initialize(mCurrentMediaPlayer, f);
+                }
             }
         }
 
@@ -2817,6 +2888,7 @@ public class MusicPlaybackService extends Service {
                     player.setDataSource(path);
                 }
                 player.setAudioStreamType(AudioManager.STREAM_MUSIC);
+
                 player.prepare();
             } catch (final IOException todo) {
                 // TODO: notify the user why the file couldn't be opened
@@ -2841,6 +2913,7 @@ public class MusicPlaybackService extends Service {
          *            you want to play
          */
         public void setNextDataSource(final String path) {
+            mNextMediaPath = null;
             try {
                 mCurrentMediaPlayer.setNextMediaPlayer(null);
             } catch (IllegalArgumentException e) {
@@ -2860,6 +2933,7 @@ public class MusicPlaybackService extends Service {
             mNextMediaPlayer.setWakeMode(mService.get(), PowerManager.PARTIAL_WAKE_LOCK);
             mNextMediaPlayer.setAudioSessionId(getAudioSessionId());
             if (setDataSourceImpl(mNextMediaPlayer, path)) {
+                mNextMediaPath = path;
                 mCurrentMediaPlayer.setNextMediaPlayer(mNextMediaPlayer);
             } else {
                 if (mNextMediaPlayer != null) {
@@ -2890,6 +2964,7 @@ public class MusicPlaybackService extends Service {
          */
         public void start() {
             mCurrentMediaPlayer.start();
+            mSrtManager.play();
         }
 
         /**
@@ -2897,6 +2972,7 @@ public class MusicPlaybackService extends Service {
          */
         public void stop() {
             mCurrentMediaPlayer.reset();
+            mSrtManager.reset();
             mIsInitialized = false;
         }
 
@@ -2906,6 +2982,8 @@ public class MusicPlaybackService extends Service {
         public void release() {
             stop();
             mCurrentMediaPlayer.release();
+            mSrtManager.release();
+            mSrtManager = null;
         }
 
         /**
@@ -2913,6 +2991,7 @@ public class MusicPlaybackService extends Service {
          */
         public void pause() {
             mCurrentMediaPlayer.pause();
+            mSrtManager.pause();
         }
 
         /**
@@ -2941,6 +3020,7 @@ public class MusicPlaybackService extends Service {
          */
         public long seek(final long whereto) {
             mCurrentMediaPlayer.seekTo((int)whereto);
+            mSrtManager.seekTo(whereto);
             return whereto;
         }
 
@@ -2998,6 +3078,8 @@ public class MusicPlaybackService extends Service {
             if (mp == mCurrentMediaPlayer && mNextMediaPlayer != null) {
                 mCurrentMediaPlayer.release();
                 mCurrentMediaPlayer = mNextMediaPlayer;
+                loadSrt(mNextMediaPath);
+                mNextMediaPath = null;
                 mNextMediaPlayer = null;
                 mHandler.sendEmptyMessage(TRACK_WENT_TO_NEXT);
             } else {

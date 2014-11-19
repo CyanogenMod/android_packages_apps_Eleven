@@ -138,6 +138,8 @@
     <string name="settings_download_artist_images_title">Download missing artist images</string>
     <string name="settings_general_category">General</string>
     <string name="settings_show_music_visualization_title">Show music visualization</string>
+    <string name="settings_show_lyrics_title">Show song lyrics</string>
+    <string name="settings_show_lyrics_summary">For songs that have an srt file</string>
 
     <!-- App widget -->
     <string name="app_widget_small">Music: 4 \u00d7 1</string>

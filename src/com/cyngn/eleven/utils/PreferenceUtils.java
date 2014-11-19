@@ -69,6 +69,9 @@ public final class PreferenceUtils {
     // datetime cutoff for determining which songs go in last added playlist
     public static final String LAST_ADDED_CUTOFF = "last_added_cutoff";
 
+    // show lyrics option
+    public static final String SHOW_LYRICS = "show_lyrics";
+
     // show visualizer flag
     public static final String SHOW_VISUALIZER = "music_visualization";
 
@@ -305,6 +308,13 @@ public final class PreferenceUtils {
 
     public long getLastAddedCutoff() {
         return mPreferences.getLong(LAST_ADDED_CUTOFF, 0L);
+    }
+
+    /**
+     * @return Whether we want to show lyrics
+     */
+    public final boolean getShowLyrics() {
+        return mPreferences.getBoolean(SHOW_LYRICS, true);
     }
 
     public boolean getShowVisualizer() {
