@@ -120,7 +120,7 @@
   <string name="app_widget_recent">音楽: 最近聴いた曲</string>
   <string name="no_effects_for_you">イコライザーを開けませんでした。</string>
   <string name="empty_music">パソコンから端末に音楽をコピーするには、USBケーブルを使用してください。</string>
-  <string name="empty_search">検索結果がありません:</string>
+  <string name="empty_search">検索結果が見つかりませんでした</string>
   <string name="empty_search_check">検索語を正しく入力しているか確認してください。または別のキーワードを試してみてください。</string>
   <string name="empty_favorite">お気に入りに追加した曲がここに表示されます。</string>
   <string name="empty_recent_main">最近の曲はありません</string>
@@ -135,7 +135,7 @@
   <string name="empty_generic_secondary">パソコンから端末に音楽をコピーするには、USBケーブルを使用してください。</string>
   <string name="empty_queue_main">再生キューに曲がありません</string>
   <string name="empty_queue_secondary">再生キューに曲を追加するには、曲、アルバムまたはアーティストのオプションメニューをタップして「キューに追加」を選択してください。</string>
-  <string name="header_unknown_year">年不明</string>
+  <string name="header_unknown_year">不明な年</string>
   <string name="header_less_than_30s">30秒未満</string>
   <string name="header_30_to_60_seconds">30～60秒</string>
   <string name="header_1_to_2_minutes">1～2分</string>
@@ -150,8 +150,6 @@
   <string name="header_2_to_4_songs">2～4曲</string>
   <string name="header_5_to_9_songs">5～9曲</string>
   <string name="header_10_plus_songs">10曲以上</string>
-  <string name="header_1_album">1枚</string>
-  <string name="header_n_albums"><xliff:g id="number">%d</xliff:g>枚</string>
   <string name="header_5_plus_albums">5枚以上</string>
   <string name="footer_search_artists">すべてのアーティストを表示</string>
   <string name="footer_search_albums">すべてのアルバムを表示</string>

@@ -120,7 +120,7 @@
   <string name="app_widget_recent">Hudba: nedávno počúvané</string>
   <string name="no_effects_for_you">Nedá sa otvoriť ekvalizér.</string>
   <string name="empty_music">Na kopírovanie hudby z vášho počítača do vášho zariadenia použite USB kábel.</string>
-  <string name="empty_search">Žiadne výsledky vyhľadávania pre</string>
+  <string name="empty_search">Žiadne výsledky hľadania</string>
   <string name="empty_search_check">Skontrolujte, či máte správny pravopis alebo vyskúšajte iné kľúčové slovo.</string>
   <string name="empty_favorite">Tu budú zobrazené skladby, ktoré ste označili ako obľúbené.</string>
   <string name="empty_recent_main">Žiadne nedávne skladby</string>
@@ -150,8 +150,6 @@
   <string name="header_2_to_4_songs">2 - 4 skladby</string>
   <string name="header_5_to_9_songs">5 - 9 skladieb</string>
   <string name="header_10_plus_songs">Viac ako 10 skladieb</string>
-  <string name="header_1_album">1 album</string>
-  <string name="header_n_albums">Albumy: <xliff:g id="number">%d</xliff:g></string>
   <string name="header_5_plus_albums">Viac ako 5 albumov</string>
   <string name="footer_search_artists">Zobraziť všetkých interpretov</string>
   <string name="footer_search_albums">Zobraziť všetky albumy</string>

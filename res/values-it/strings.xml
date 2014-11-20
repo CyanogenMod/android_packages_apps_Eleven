@@ -120,7 +120,7 @@
   <string name="app_widget_recent">Musica: ascoltati recentemente</string>
   <string name="no_effects_for_you">L\'equalizzazione non può essere aperto.</string>
   <string name="empty_music">Per copiare musica dal tuo computer al tuo dispositivo, utilizza un cavo USB.</string>
-  <string name="empty_search">Nessun risultato dalla ricerca di</string>
+  <string name="empty_search">La ricerca non ha prodotto risultati</string>
   <string name="empty_search_check">Controlla l\'ortografia oppure prova una parola diversa.</string>
   <string name="empty_favorite">Le canzoni segnate come preferite saranno mostrate qui.</string>
   <string name="empty_recent_main">Nessuna canzone recente</string>
@@ -150,8 +150,6 @@
   <string name="header_2_to_4_songs">2 - 4 canzoni</string>
   <string name="header_5_to_9_songs">5 - 9 canzoni</string>
   <string name="header_10_plus_songs">10+ canzoni</string>
-  <string name="header_1_album">1 album</string>
-  <string name="header_n_albums"><xliff:g id="number">%d</xliff:g> album</string>
   <string name="header_5_plus_albums">5+ album</string>
   <string name="footer_search_artists">Visualizza tutti gli artisti</string>
   <string name="footer_search_albums">Visualizza tutti gli album</string>

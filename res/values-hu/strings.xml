@@ -120,7 +120,7 @@
   <string name="app_widget_recent">Zene: nemrégiben hallgatott</string>
   <string name="no_effects_for_you">A hangszínszabályzót nem lehet megnyitni.</string>
   <string name="empty_music">Számítógépről történő zene másoláshoz használjon USB kábelt.</string>
-  <string name="empty_search">Nincs keresési eredmény</string>
+  <string name="empty_search">Nincs találat</string>
   <string name="empty_search_check">Ellenőrizze, hogy helyesen írta-e be, vagy próbálkozzon más kulcsszóval.</string>
   <string name="empty_favorite">Itt a kedvencként megjelölt dalok fognak megjelenni.</string>
   <string name="empty_recent_main">Nincsenek előzmények</string>
@@ -150,8 +150,6 @@
   <string name="header_2_to_4_songs">2 - 4 dal</string>
   <string name="header_5_to_9_songs">5 - 9 dal</string>
   <string name="header_10_plus_songs">10+ dal</string>
-  <string name="header_1_album">1 album</string>
-  <string name="header_n_albums"><xliff:g id="number">%d</xliff:g> album</string>
   <string name="header_5_plus_albums">5+ album</string>
   <string name="footer_search_artists">Összes előadó megjelenítése</string>
   <string name="footer_search_albums">Összes album megjelenítése</string>

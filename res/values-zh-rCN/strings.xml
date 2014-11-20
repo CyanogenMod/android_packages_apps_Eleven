@@ -120,7 +120,7 @@
   <string name="app_widget_recent">最近听过的音乐</string>
   <string name="no_effects_for_you">无法打开均衡器。</string>
   <string name="empty_music">请使用 USB 数据线把音乐从您的计算机复制到您的设备中。</string>
-  <string name="empty_search">没有搜索结果</string>
+  <string name="empty_search">无搜索结果</string>
   <string name="empty_search_check">请检查您的拼写是否正确，或尝试另一个关键字。</string>
   <string name="empty_favorite">您标记为收藏的歌曲将在这里显示。</string>
   <string name="empty_recent_main">没有最近的歌曲</string>
@@ -150,8 +150,6 @@
   <string name="header_2_to_4_songs">2-4 首歌曲</string>
   <string name="header_5_to_9_songs">5-9 首歌曲</string>
   <string name="header_10_plus_songs">10+ 首歌曲</string>
-  <string name="header_1_album">1 张专辑</string>
-  <string name="header_n_albums"><xliff:g id="number">%d</xliff:g> 张专辑</string>
   <string name="header_5_plus_albums">5+ 张专辑</string>
   <string name="footer_search_artists">显示所有艺术家</string>
   <string name="footer_search_albums">显示所有专辑</string>

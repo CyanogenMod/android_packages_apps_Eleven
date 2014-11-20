@@ -38,8 +38,8 @@
   <plurals name="Ngenres">
     <item quantity="one"><xliff:g id="count">%d</xliff:g> жанр</item>
     <item quantity="few"><xliff:g id="count">%d</xliff:g> жанра</item>
-    <item quantity="many"><xliff:g id="count">%d</xliff:g> жанра</item>
-    <item quantity="other"><xliff:g id="count">%d</xliff:g> жанра</item>
+    <item quantity="many"><xliff:g id="count">%d</xliff:g> жанрова</item>
+    <item quantity="other"><xliff:g id="count">%d</xliff:g> жанрова</item>
   </plurals>
   <plurals name="Nhours">
     <item quantity="one"><xliff:g id="hours">%d</xliff:g>ч</item>

@@ -120,7 +120,7 @@
   <string name="app_widget_recent">เพลง: ฟังเมื่อเร็วๆนี้</string>
   <string name="no_effects_for_you">ไม่สามารถเปิด equalizer ได้</string>
   <string name="empty_music">คัดลอกเพลงจากคอมพิวเตอร์ของคุณสู่อุปกรณ์ผ่านสาย USB</string>
-  <string name="empty_search">ไม่มีผลลัพธ์สำหรับ %s</string>
+  <string name="empty_search">ไม่พบผลการค้นหา</string>
   <string name="empty_search_check">กรุณาตรวจสอบว่าการสะกดถูกต้องหรือลองคำอื่นๆ</string>
   <string name="empty_favorite">เพลงที่คุณทำเป็นรายการโปรดจะแสดงที่นี่</string>
   <string name="empty_recent_main">ไม่มีเพลงล่าสุด</string>
@@ -150,8 +150,6 @@
   <string name="header_2_to_4_songs">2 - 4 เพลง</string>
   <string name="header_5_to_9_songs">5 - 9 เพลง</string>
   <string name="header_10_plus_songs">10+ เพลง</string>
-  <string name="header_1_album">1 อัลบั้ม</string>
-  <string name="header_n_albums"><xliff:g id="number">%d</xliff:g> อัลบั้ม</string>
   <string name="header_5_plus_albums">5+ อัลบั้ม</string>
   <string name="footer_search_artists">แสดงศิลปินทั้งหมด</string>
   <string name="footer_search_albums">แสดงอัลบั้มทั้งหมด</string>

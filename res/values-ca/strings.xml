@@ -120,7 +120,7 @@
   <string name="app_widget_recent">Música: recentment escoltada</string>
   <string name="no_effects_for_you">L\'equalitzador no s\'ha pogut obrir.</string>
   <string name="empty_music">Per copiar música del teu ordenador al teu dispositiu, utilitza un cable USB.</string>
-  <string name="empty_search">No hi ha resultats de la cerca per</string>
+  <string name="empty_search">No s\'han trobat resultats</string>
   <string name="empty_search_check">Si us plau comprova que tingui l\'ortografia correcta o prova una altra paraula.</string>
   <string name="empty_favorite">Les cançons que marquis com a preferides es mostraran aquí.</string>
   <string name="empty_recent_main">Cap cançó recent</string>
@@ -136,7 +136,7 @@
   <string name="empty_queue_main">No hi ha cançons a la cua de reproducció</string>
   <string name="empty_queue_secondary">Per afegir cançons a la cua de reproducció, pica al menú opcions en una cançó, àlbum o artista i selecciona \"Afegeix a la cua\".</string>
   <string name="header_unknown_year">Any desconegut</string>
-  <string name="header_less_than_30s">Menys de 30s</string>
+  <string name="header_less_than_30s">Menys de 30 segons</string>
   <string name="header_30_to_60_seconds">30 - 60 segons</string>
   <string name="header_1_to_2_minutes">1 - 2 minuts</string>
   <string name="header_2_to_3_minutes">2 - 3 minuts</string>
@@ -150,8 +150,6 @@
   <string name="header_2_to_4_songs">2 - 4 cançons</string>
   <string name="header_5_to_9_songs">5 - 9 cançons</string>
   <string name="header_10_plus_songs">10+ cançons</string>
-  <string name="header_1_album">1 àlbum</string>
-  <string name="header_n_albums"><xliff:g id="number">%d</xliff:g> àlbums</string>
   <string name="header_5_plus_albums">5+ àlbums</string>
   <string name="footer_search_artists">Mostra tots els artistes</string>
   <string name="footer_search_albums">Mostra tots els àlbums</string>

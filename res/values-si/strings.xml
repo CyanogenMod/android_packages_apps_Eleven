@@ -120,7 +120,7 @@
   <string name="app_widget_recent">සංගීත: මෑතදී ඇසූ</string>
   <string name="no_effects_for_you">සමකරකය විවෘත කල නොහැක.</string>
   <string name="empty_music">ඔබගේ පරිගණකයේ සිට ඔබගේ උපාංගයට සිංදු පිටපත් කිරීමට USB කේබලයක් භාවිතාකරන්න.</string>
-  <string name="empty_search">සෙවීම් ප්‍රතිඵල නැත</string>
+  <string name="empty_search">සෙවීම් ප්‍රතිඵල කිසිවක් නැත</string>
   <string name="empty_search_check">කරුණාකර නිවැරදි අක්ෂර වින්‍යාසය ඇත්දැයි බලන්න නැතිනම් වෙනත් මූලපදයක් අත්හදා බලන්න.</string>
   <string name="empty_favorite">ප්‍රියතමයන් ලෙස ඔබ සලකුණු කල සිංදු මෙහි දිස්වනු ඇත.</string>
   <string name="empty_recent_main">මෑත සිංදු නැත</string>
@@ -136,7 +136,7 @@
   <string name="empty_queue_main">ධාවන පෙළේ සිංදු කිසිවක් නැත</string>
   <string name="empty_queue_secondary">ඔබගේ ධාවන පෙළට සිංදු එක් කිරීම සඳහා, සිංදුවක, ඇල්බමයක හෝ කලාකරුවෙකුගේ විකල්ප මෙනුව මත තට්ටුකර, \"පෙළට එක් කරන්න\" තෝරන්න.</string>
   <string name="header_unknown_year">නාඳුනන වර්ෂයක්</string>
-  <string name="header_less_than_30s">තත්පර 30 වඩා අඩු</string>
+  <string name="header_less_than_30s">තත්පර 30 වඩා අඩුය</string>
   <string name="header_30_to_60_seconds">තත්පර 30 - 60</string>
   <string name="header_1_to_2_minutes">මිනිත්තු 1 - 2</string>
   <string name="header_2_to_3_minutes">මිනිත්තු 2 - 3</string>
@@ -150,8 +150,6 @@
   <string name="header_2_to_4_songs">සිංදු 2 - 4</string>
   <string name="header_5_to_9_songs">සිංදු 5 - 9</string>
   <string name="header_10_plus_songs">සිංදු 10+</string>
-  <string name="header_1_album">1 ඇල්බමයක්</string>
-  <string name="header_n_albums">ඇල්බම <xliff:g id="number">%d</xliff:g></string>
   <string name="header_5_plus_albums">ඇල්බම 5+</string>
   <string name="footer_search_artists">සියලුම කලාකරුවන් පෙන්වන්න</string>
   <string name="footer_search_albums">සියලුම ඇල්බම පෙන්වන්න</string>

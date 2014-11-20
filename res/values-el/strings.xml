@@ -120,6 +120,7 @@
   <string name="app_widget_recent">Μουσική: ακούστηκαν πρόσφατα</string>
   <string name="no_effects_for_you">Δεν ήταν δυνατό το άνοιγμα του ισοσταθμιστή.</string>
   <string name="empty_music">Για να αντιγράψετε μουσική από τον υπολογιστή στη συσκευή σας, χρησιμοποιήστε ένα καλώδιο USB.</string>
+  <string name="empty_search">Δεν βρέθηκαν αποτελέσματα αναζήτησης</string>
   <string name="empty_search_check">Παρακαλώ ελέγξτε ότι έχετε τη σωστή ορθογραφία ή δοκιμάστε μια διαφορετική λέξη-κλειδί.</string>
   <string name="empty_favorite">Τραγούδια που έχετε επιλέξει ως αγαπημένα θα εμφανίζονται εδώ.</string>
   <string name="empty_recent_main">Δεν υπάρχουν πρόσφατα τραγούδια</string>
@@ -135,6 +136,7 @@
   <string name="empty_queue_main">Δεν υπάρχουν τραγούδια στην ουρά αναπαραγωγής</string>
   <string name="empty_queue_secondary">Για να προσθέσετε τραγούδια στην ουρά αναπαραγωγής, ανοίξτε το μενού επιλογών σε ένα τραγούδι, άλμπουμ ή καλλιτέχνη και επιλέξτε \"Προσθήκη στην ουρά\".</string>
   <string name="header_unknown_year">Άγνωστο έτος</string>
+  <string name="header_less_than_30s">Λιγότερο από 30 δευτερόλεπτα</string>
   <string name="header_30_to_60_seconds">30 - 60 δευτερόλεπτα</string>
   <string name="header_1_to_2_minutes">1 - 2 λεπτά</string>
   <string name="header_2_to_3_minutes">2 - 3 λεπτά</string>
@@ -148,8 +150,6 @@
   <string name="header_2_to_4_songs">2 - 4 τραγούδια</string>
   <string name="header_5_to_9_songs">5 - 9 τραγούδια</string>
   <string name="header_10_plus_songs">10+ τραγούδια</string>
-  <string name="header_1_album">1 άλμπουμ</string>
-  <string name="header_n_albums"><xliff:g id="number">%d</xliff:g> άλμπουμ</string>
   <string name="header_5_plus_albums">5+ άλμπουμ</string>
   <string name="footer_search_artists">Εμφάνιση όλων των καλλιτεχνών</string>
   <string name="footer_search_albums">Εμφάνιση όλων των άλμπουμ</string>

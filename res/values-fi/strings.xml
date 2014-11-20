@@ -136,7 +136,7 @@
   <string name="empty_queue_main">Ei kappaleita jonossa</string>
   <string name="empty_queue_secondary">Lisätäksesi kappaleita jonoon, avaa valikko kappaleen, albumin tai esittäjän kohdalla ja valitse \"Lisää jonoon\".</string>
   <string name="header_unknown_year">Tuntematon vuosi</string>
-  <string name="header_less_than_30s">Alle 30s</string>
+  <string name="header_less_than_30s">Alle 30 sekuntia</string>
   <string name="header_30_to_60_seconds">30 - 60 sekuntia</string>
   <string name="header_1_to_2_minutes">1 - 2 minuuttia</string>
   <string name="header_2_to_3_minutes">2 - 3 minuuttia</string>
@@ -150,8 +150,6 @@
   <string name="header_2_to_4_songs">2 - 4 kappaletta</string>
   <string name="header_5_to_9_songs">5 - 9 kappaletta</string>
   <string name="header_10_plus_songs">Yli 10 kappaletta</string>
-  <string name="header_1_album">1 albumi</string>
-  <string name="header_n_albums"><xliff:g id="number">%d</xliff:g> albumia</string>
   <string name="header_5_plus_albums">Yli 5 albumia</string>
   <string name="footer_search_artists">Näytä kaikki esittäjät</string>
   <string name="footer_search_albums">Näytä kaikki albumit</string>

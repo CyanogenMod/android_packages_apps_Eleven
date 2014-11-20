@@ -120,7 +120,7 @@
   <string name="app_widget_recent">Müzik: son zamanlarda dinlenen</string>
   <string name="no_effects_for_you">Equalizer açılamadı.</string>
   <string name="empty_music">Bilgisayarınızdan müzik kopyalamak için USB kablo kullanın.</string>
-  <string name="empty_search">Arama sonucu yok:</string>
+  <string name="empty_search">Arama sonucu bulunamadı</string>
   <string name="empty_search_check">Lütfen doğru kelime girdiğinizi kontrol edin ya da farklı bir kelime deneyin.</string>
   <string name="empty_favorite">Favori işaretlediğiniz şarkılar burada gözükecek.</string>
   <string name="empty_recent_main">Son çalınan şarkı yok</string>
@@ -150,8 +150,6 @@
   <string name="header_2_to_4_songs">2 - 4 şarkı</string>
   <string name="header_5_to_9_songs">5 - 9 şarkı</string>
   <string name="header_10_plus_songs">10 + şarkı</string>
-  <string name="header_1_album">1 albüm</string>
-  <string name="header_n_albums"><xliff:g id="number">%d</xliff:g> albüm</string>
   <string name="header_5_plus_albums">5 + albüm</string>
   <string name="footer_search_artists">Tüm sanatçıları göster</string>
   <string name="footer_search_albums">Tüm albümleri göster</string>

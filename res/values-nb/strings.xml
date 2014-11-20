@@ -120,7 +120,7 @@
   <string name="app_widget_recent">Musikk: nylig hørte</string>
   <string name="no_effects_for_you">Equalizeren kan ikke åpnes.</string>
   <string name="empty_music">For å kopiere musikk fra en datamaskin til enheten, bruk en USB kabel.</string>
-  <string name="empty_search">Ingen resultater for</string>
+  <string name="empty_search">Ingen resultater funnet</string>
   <string name="empty_search_check">Kontroller at du har riktig stavemåte eller prøv et annet nøkkelord.</string>
   <string name="empty_favorite">Sanger du markerer som favoritter vil bli vist her.</string>
   <string name="empty_recent_main">Ingen nye sanger</string>
@@ -136,7 +136,7 @@
   <string name="empty_queue_main">Ingen sanger i avspillingskøen</string>
   <string name="empty_queue_secondary">For å legge til sanger i spillekøen, trykk på Alternativer-menyen på en sang, et album eller en artist og velg \"Legg til i kø\".</string>
   <string name="header_unknown_year">Ukjent år</string>
-  <string name="header_less_than_30s">Mindre enn 30s</string>
+  <string name="header_less_than_30s">Mindre enn 30 sekunder</string>
   <string name="header_30_to_60_seconds">30 - 60 sekunder</string>
   <string name="header_1_to_2_minutes">1 - 2 minutter</string>
   <string name="header_2_to_3_minutes">2 - 3 minutter</string>
@@ -150,8 +150,6 @@
   <string name="header_2_to_4_songs">2 - 4 sanger</string>
   <string name="header_5_to_9_songs">5 - 9 sanger</string>
   <string name="header_10_plus_songs">10 + sanger</string>
-  <string name="header_1_album">1 album</string>
-  <string name="header_n_albums"><xliff:g id="number">%d</xliff:g> Albumer</string>
   <string name="header_5_plus_albums">5 + album</string>
   <string name="footer_search_artists">Vis alle artister</string>
   <string name="footer_search_albums">Vis alle album</string>

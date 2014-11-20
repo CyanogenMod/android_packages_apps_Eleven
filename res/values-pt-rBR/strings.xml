@@ -120,7 +120,7 @@
   <string name="app_widget_recent">Música: escutada recentemente</string>
   <string name="no_effects_for_you">O equalizador não pôde ser aberto.</string>
   <string name="empty_music">Para copiar a música de seu computador para seu dispositivo, use um cabo USB.</string>
-  <string name="empty_search">Não há resultados de pesquisa para</string>
+  <string name="empty_search">Nenhum resultado de busca</string>
   <string name="empty_search_check">Por favor, verifique se está escrito corretamente ou tente uma palavra diferente.</string>
   <string name="empty_favorite">Vão ser exibidas aqui as músicas que você marcou como favoritas.</string>
   <string name="empty_recent_main">Não há músicas recentes</string>
@@ -150,8 +150,6 @@
   <string name="header_2_to_4_songs">2 a 4 músicas</string>
   <string name="header_5_to_9_songs">5 a 9 músicas</string>
   <string name="header_10_plus_songs">10 ou mais músicas</string>
-  <string name="header_1_album">1 álbum</string>
-  <string name="header_n_albums"><xliff:g id="number"> %d </xliff:g> álbuns</string>
   <string name="header_5_plus_albums">5 + álbuns</string>
   <string name="footer_search_artists">Mostrar todos os artistas</string>
   <string name="footer_search_albums">Mostrar todos os álbuns</string>
