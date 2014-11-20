@@ -28,6 +28,8 @@ import com.cyngn.eleven.utils.ApolloUtils;
 import com.cyngn.eleven.utils.MusicUtils;
 import com.cyngn.eleven.widgets.BlurScrimImage;
 
+import java.util.HashSet;
+
 /**
  * This class is used to display the {@link ViewPager} used to swipe between the
  * main {@link Fragment}s used to browse the user's music.
@@ -43,9 +45,16 @@ public abstract class SlidingPanelActivity extends BaseActivity {
         None,
     }
 
+    public static interface ISlidingPanelListener {
+        public void onBeginSlide();
+        public void onFinishSlide(SlidingPanelActivity.Panel visiblePanel);
+    }
+
     private SlidingUpPanelLayout mFirstPanel;
     private SlidingUpPanelLayout mSecondPanel;
     protected Panel mTargetNavigatePanel;
+    private HashSet<ISlidingPanelListener> mSlidingPanelListeners
+            = new HashSet<ISlidingPanelListener>();
 
     private final ShowPanelClickListener mShowBrowse = new ShowPanelClickListener(Panel.Browse);
     private final ShowPanelClickListener mShowMusicPlayer = new ShowPanelClickListener(Panel.MusicPlayer);
@@ -107,6 +116,8 @@ public abstract class SlidingPanelActivity extends BaseActivity {
                 } else if (slideOffset < 0.75f) {
                     getActionBar().show();
                 }
+
+                onSlide();
             }
 
             @Override
@@ -131,6 +142,8 @@ public abstract class SlidingPanelActivity extends BaseActivity {
                 if (mTargetNavigatePanel == Panel.None) {
                     mFirstPanel.setSlidingEnabled(false);
                 }
+
+                onSlide();
             }
 
             @Override
@@ -213,6 +226,11 @@ public abstract class SlidingPanelActivity extends BaseActivity {
     }
 
     public void showPanel(Panel panel) {
+        // if we are already at our target panel, then don't do anything
+        if (panel == getCurrentPanel()) {
+            return;
+        }
+
         // TODO: Add ability to do this instantaneously as opposed to animate
         switch (panel) {
             case Browse:
@@ -236,12 +254,27 @@ public abstract class SlidingPanelActivity extends BaseActivity {
         }
     }
 
+    protected void onSlide() {
+        for (ISlidingPanelListener listener : mSlidingPanelListeners) {
+            listener.onBeginSlide();
+        }
+    }
+
     /**
      * This checks if we are at our target panel and resets our flag if we are there
      */
     protected void checkTargetNavigation() {
-        if (mTargetNavigatePanel == getCurrentPanel()) {
+        final Panel currentPanel = getCurrentPanel();
+        // This checks if we are at our target panel and resets our flag if we are there
+        if (mTargetNavigatePanel == currentPanel) {
             mTargetNavigatePanel = Panel.None;
+        }
+
+        // if we are at the target panel
+        if (mTargetNavigatePanel == Panel.None) {
+            for (ISlidingPanelListener listener : mSlidingPanelListeners) {
+                listener.onFinishSlide(currentPanel);
+            }
         }
     }
 
@@ -308,5 +341,13 @@ public abstract class SlidingPanelActivity extends BaseActivity {
         public void onClick(View v) {
             showPanel(mTargetPanel);
         }
+    }
+
+    public void addSlidingPanelListener(final ISlidingPanelListener listener) {
+        mSlidingPanelListeners.add(listener);
+    }
+
+    public void removeSlidingPanelListener(final ISlidingPanelListener listener) {
+        mSlidingPanelListeners.remove(listener);
     }
 }

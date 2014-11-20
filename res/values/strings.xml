@@ -136,6 +136,8 @@
     <string name="settings_download_only_on_wifi_summary">To reduce carrier charges, don\'t download over mobile networks</string>
     <string name="settings_download_missing_artwork_title">Download missing album art</string>
     <string name="settings_download_artist_images_title">Download missing artist images</string>
+    <string name="settings_general_category">General</string>
+    <string name="settings_show_music_visualization_title">Show music visualization</string>
 
     <!-- App widget -->
     <string name="app_widget_small">Music: 4 \u00d7 1</string>

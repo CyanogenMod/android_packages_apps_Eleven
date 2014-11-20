@@ -10,14 +10,10 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.ServiceConnection;
 import android.media.AudioManager;
-import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.IBinder;
 import android.os.Message;
-import android.provider.MediaStore.Audio.Albums;
-import android.provider.MediaStore.Audio.Artists;
-import android.provider.MediaStore.Audio.Playlists;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.util.Log;
@@ -41,10 +37,13 @@ import com.cyngn.eleven.loaders.QueueLoader;
 import com.cyngn.eleven.menu.CreateNewPlaylist;
 import com.cyngn.eleven.menu.DeleteDialog;
 import com.cyngn.eleven.menu.FragmentMenuItems;
+import com.cyngn.eleven.ui.activities.SlidingPanelActivity;
 import com.cyngn.eleven.utils.ApolloUtils;
 import com.cyngn.eleven.utils.MusicUtils;
 import com.cyngn.eleven.utils.NavUtils;
+import com.cyngn.eleven.utils.PreferenceUtils;
 import com.cyngn.eleven.widgets.BrowseButton;
+import com.cyngn.eleven.widgets.EqualizerView;
 import com.cyngn.eleven.widgets.LoadingEmptyContainer;
 import com.cyngn.eleven.widgets.NoResultsContainer;
 import com.cyngn.eleven.widgets.PlayPauseProgressButton;
@@ -58,7 +57,8 @@ import java.lang.ref.WeakReference;
 
 import static com.cyngn.eleven.utils.MusicUtils.mService;
 
-public class AudioPlayerFragment extends Fragment implements ServiceConnection {
+public class AudioPlayerFragment extends Fragment implements ServiceConnection,
+        SlidingPanelActivity.ISlidingPanelListener {
     private static final String TAG = AudioPlayerFragment.class.getSimpleName();
 
     /**
@@ -115,6 +115,12 @@ public class AudioPlayerFragment extends Fragment implements ServiceConnection {
     // Total time
     private TextView mTotalTime;
 
+    // Equalizer View
+    private EqualizerView mEqualizerView;
+
+    // Equalizer Gradient
+    private View mEqualizerGradient;
+
     // Broadcast receiver
     private PlaybackStatus mPlaybackStatus;
 
@@ -151,6 +157,9 @@ public class AudioPlayerFragment extends Fragment implements ServiceConnection {
 
         // Initialize the broadcast receiver
         mPlaybackStatus = new PlaybackStatus(this);
+
+        // add a listener for the sliding
+        ((SlidingPanelActivity)getActivity()).addSlidingPanelListener(this);
     }
 
     /**
@@ -166,6 +175,11 @@ public class AudioPlayerFragment extends Fragment implements ServiceConnection {
         initHeaderBar();
 
         initPlaybackControls();
+
+        mEqualizerView = (EqualizerView) mRootView.findViewById(R.id.equalizerView);
+        mEqualizerView.initialize(getActivity());
+        mEqualizerGradient = mRootView.findViewById(R.id.equalizerGradient);
+
         return mRootView;
     }
 
@@ -210,6 +224,8 @@ public class AudioPlayerFragment extends Fragment implements ServiceConnection {
 
         // resumes the update callback for the play pause progress button
         mPlayPauseProgressButton.resume();
+
+        mEqualizerView.onStart();
     }
 
     @Override
@@ -220,6 +236,8 @@ public class AudioPlayerFragment extends Fragment implements ServiceConnection {
         mPlayPauseProgressButton.pause();
 
         mImageFetcher.flush();
+
+        mEqualizerView.onStop();
     }
 
     @Override
@@ -233,6 +251,8 @@ public class AudioPlayerFragment extends Fragment implements ServiceConnection {
             MusicUtils.unbindFromService(mToken);
             mToken = null;
         }
+
+        ((SlidingPanelActivity)getActivity()).removeSlidingPanelListener(this);
 
         // Unregister the receiver
         try {
@@ -423,10 +443,18 @@ public class AudioPlayerFragment extends Fragment implements ServiceConnection {
         if(queueSize == 0) {
             mAlbumArtViewPager.setVisibility(View.GONE);
             mQueueEmpty.showNoResults();
+            mEqualizerGradient.setVisibility(View.GONE);
+            mEqualizerView.checkStateChanged();
             mAddToPlaylistButton.setVisibility(View.GONE);
         } else {
             mAlbumArtViewPager.setVisibility(View.VISIBLE);
             mQueueEmpty.hideAll();
+            if (PreferenceUtils.getInstance(getActivity()).getShowVisualizer()) {
+                mEqualizerGradient.setVisibility(View.VISIBLE);
+            } else {
+                mEqualizerGradient.setVisibility(View.GONE);
+            }
+            mEqualizerView.checkStateChanged();
             mAddToPlaylistButton.setVisibility(View.VISIBLE);
         }
     }
@@ -655,6 +683,18 @@ public class AudioPlayerFragment extends Fragment implements ServiceConnection {
         }
 
         return super.onContextItemSelected(item);
+    }
+
+    @Override
+    public void onBeginSlide() {
+        mEqualizerView.setPanelVisible(false);
+    }
+
+    @Override
+    public void onFinishSlide(SlidingPanelActivity.Panel visiblePanel) {
+        if (visiblePanel == SlidingPanelActivity.Panel.MusicPlayer) {
+            mEqualizerView.setPanelVisible(true);
+        }
     }
 
     /**

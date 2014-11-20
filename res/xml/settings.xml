@@ -36,6 +36,14 @@
             <!--android:key="download_missing_artist_images"-->
             <!--android:title="@string/settings_download_artist_images_title" />-->
     <!--</PreferenceCategory>-->
+    <PreferenceCategory android:title="@string/settings_general_category" >
+
+        <!-- Music visualizer -->
+        <CheckBoxPreference
+            android:defaultValue="true"
+            android:key="music_visualization"
+            android:title="@string/settings_show_music_visualization_title" />
+    </PreferenceCategory>
     <!-- Storage catetory -->
     <PreferenceCategory android:title="@string/settings_storage_category" >
 

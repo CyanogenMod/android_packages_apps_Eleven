@@ -32,6 +32,23 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
         <include layout="@layout/loading_empty_container" />
+
+        <View
+            android:id="@+id/equalizerGradient"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/equalizer_background"
+            android:layout_gravity="bottom"/>
+
+        <com.cyngn.eleven.widgets.EqualizerView
+            android:id="@+id/equalizerView"
+            android:gravity="bottom"
+            android:layout_gravity="bottom"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:clipChildren="false"
+            android:clipToPadding="false"
+            android:visibility="visible" />
     </com.cyngn.eleven.widgets.SquareFrame>
 
     <RelativeLayout

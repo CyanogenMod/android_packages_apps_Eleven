@@ -69,6 +69,9 @@ public final class PreferenceUtils {
     // datetime cutoff for determining which songs go in last added playlist
     public static final String LAST_ADDED_CUTOFF = "last_added_cutoff";
 
+    // show visualizer flag
+    public static final String SHOW_VISUALIZER = "music_visualization";
+
     private static PreferenceUtils sInstance;
 
     private final SharedPreferences mPreferences;
@@ -302,5 +305,9 @@ public final class PreferenceUtils {
 
     public long getLastAddedCutoff() {
         return mPreferences.getLong(LAST_ADDED_CUTOFF, 0L);
+    }
+
+    public boolean getShowVisualizer() {
+        return mPreferences.getBoolean(SHOW_VISUALIZER, true);
     }
 }
