@@ -36,7 +36,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewConfiguration;
 
-import com.cyngn.eleven.R;
+import com.cyanogenmod.eleven.R;
 
 import java.util.ArrayList;
 

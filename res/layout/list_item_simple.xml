@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
   Copyright (C) 2012 Andrew Neal
+  Copyright (C) 2014 The CyanogenMod Project
 
   Licensed under the Apache License, Version 2.0 (the "License");
   you may not use this file except in compliance with the License.
@@ -58,7 +59,7 @@
             android:layout_toLeftOf="@+id/popup_menu_button"
             android:layout_centerVertical="true" />
 
-        <com.cyngn.eleven.widgets.PopupMenuButton
+        <com.cyanogenmod.eleven.widgets.PopupMenuButton
             android:id="@id/popup_menu_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

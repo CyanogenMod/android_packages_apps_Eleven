@@ -52,7 +52,7 @@
             android:src="@drawable/now_playing_icon"
             android:visibility="gone" />
 
-        <com.cyngn.eleven.widgets.PopupMenuButton
+        <com.cyanogenmod.eleven.widgets.PopupMenuButton
             android:id="@+id/popup_menu_button"
             android:layout_width="@dimen/overflow_width"
             android:layout_height="@dimen/overflow_height"
