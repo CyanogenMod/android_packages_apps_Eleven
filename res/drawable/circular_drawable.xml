@@ -7,6 +7,7 @@
     android:layout_height="match_parent"
     android:innerRadiusRatio="@dimen/circular_progress_bar_inner_radius_ratio"
     android:thicknessRatio="@dimen/circular_progress_bar_thickness_ratio"
-    android:shape="ring">
+    android:shape="ring"
+    android:useLevel="true">
     <solid android:color="@color/circular_progress_bar" />
 </shape>
