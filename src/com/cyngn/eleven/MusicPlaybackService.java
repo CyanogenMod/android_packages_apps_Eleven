@@ -1223,13 +1223,12 @@ public class MusicPlaybackService extends Service {
                 }
             }
 
-            // if we've played each track at least once
-            if (minNumPlays > 0) {
-                // if we aren't repeating all and we're not forcing a track
-                // return no more tracks
-                if (mRepeatMode != REPEAT_ALL && !force) {
+            // if we've played each track at least once and all tracks have been played an equal
+            // # of times and we aren't repeating all and we're not forcing a track, then
+            // return no more tracks
+            if (minNumPlays > 0 && numTracksWithMinNumPlays == numTracks
+                    && mRepeatMode != REPEAT_ALL && !force) {
                     return -1;
-                }
             }
 
             // else pick a track from the least number of played tracks

@@ -769,6 +769,11 @@ public class AudioPlayerFragment extends Fragment implements ServiceConnection,
             final AudioPlayerFragment audioPlayerFragment = mReference.get();
             final String action = intent.getAction();
             if (action.equals(MusicPlaybackService.META_CHANGED)) {
+                // if we are repeating current and the track has changed, re-create the adapter
+                if (MusicUtils.getRepeatMode() == MusicPlaybackService.REPEAT_CURRENT) {
+                    mReference.get().createAndSetAdapter();
+                }
+
                 // Current info
                 audioPlayerFragment.updateNowPlayingInfo();
                 audioPlayerFragment.dismissPopupMenu();
