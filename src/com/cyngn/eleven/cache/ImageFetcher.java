@@ -22,6 +22,7 @@ import com.cyngn.eleven.MusicPlaybackService;
 import com.cyngn.eleven.cache.PlaylistWorkerTask.PlaylistWorkerType;
 import com.cyngn.eleven.utils.MusicUtils;
 import com.cyngn.eleven.widgets.BlurScrimImage;
+import com.cyngn.eleven.widgets.LetterTileDrawable;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -174,40 +175,6 @@ public class ImageFetcher extends ImageWorker {
     }
 
     /**
-     * @param key The key used to find the image to return
-     */
-    public Bitmap getCachedBitmap(final String key) {
-        if (mImageCache != null) {
-            return mImageCache.getCachedBitmap(key);
-        }
-        return getDefaultArtwork();
-    }
-
-    /**
-     * @param keyAlbum  The key (album name) used to find the album art to return
-     * @param keyArtist The key (artist name) used to find the album art to return
-     */
-    public Bitmap getCachedArtwork(final String keyAlbum, final String keyArtist) {
-        return getCachedArtwork(keyAlbum, keyArtist,
-                MusicUtils.getIdForAlbum(mContext, keyAlbum, keyArtist));
-    }
-
-    /**
-     * @param keyAlbum  The key (album name) used to find the album art to return
-     * @param keyArtist The key (artist name) used to find the album art to return
-     * @param keyId     The key (album id) used to find the album art to return
-     */
-    public Bitmap getCachedArtwork(final String keyAlbum, final String keyArtist,
-                                   final long keyId) {
-        if (mImageCache != null) {
-            return mImageCache.getCachedArtwork(mContext,
-                    generateAlbumCacheKey(keyAlbum, keyArtist),
-                    keyId);
-        }
-        return getDefaultArtwork();
-    }
-
-    /**
      * Finds cached or downloads album art. Used in {@link MusicPlaybackService}
      * to set the current album art in the notification and lock screen
      *
@@ -222,10 +189,11 @@ public class ImageFetcher extends ImageWorker {
                              boolean smallArtwork) {
         // Check the disk cache
         Bitmap artwork = null;
+        String key = albumName;
 
         if (artwork == null && albumName != null && mImageCache != null) {
-            artwork = mImageCache.getBitmapFromDiskCache(
-                    generateAlbumCacheKey(albumName, artistName));
+            key = generateAlbumCacheKey(albumName, artistName);
+            artwork = mImageCache.getBitmapFromDiskCache(key);
         }
         if (artwork == null && albumId >= 0 && mImageCache != null) {
             // Check for local artwork
@@ -234,7 +202,9 @@ public class ImageFetcher extends ImageWorker {
         if (artwork != null) {
             return artwork;
         }
-        return getDefaultArtwork(smallArtwork);
+
+        return LetterTileDrawable.createDefaultBitmap(mContext, key, ImageType.ALBUM, false,
+                smallArtwork);
     }
 
     /**

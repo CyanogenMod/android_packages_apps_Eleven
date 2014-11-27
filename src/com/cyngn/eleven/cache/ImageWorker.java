@@ -20,7 +20,7 @@ import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.TransitionDrawable;
 import android.support.v8.renderscript.RenderScript;
-import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 
@@ -30,6 +30,7 @@ import com.cyngn.eleven.utils.ApolloUtils;
 import com.cyngn.eleven.utils.ImageUtils;
 import com.cyngn.eleven.widgets.BlurScrimImage;
 import com.cyngn.eleven.cache.PlaylistWorkerTask.PlaylistWorkerType;
+import com.cyngn.eleven.widgets.LetterTileDrawable;
 
 import java.lang.ref.WeakReference;
 import java.util.Collections;
@@ -77,26 +78,6 @@ public abstract class ImageWorker {
     private final ColorDrawable mTransparentDrawable;
 
     /**
-     * Default album art
-     */
-    private final Bitmap mDefault;
-
-    /**
-     * A small version of the default album art
-     */
-    private final Bitmap mDefaultSmall;
-
-    /**
-     * Default Artist art
-     */
-    private final Bitmap mDefaultArtist;
-
-    /**
-     * Default Playlist art
-     */
-    private final Bitmap mDefaultPlaylist;
-
-    /**
      * The Context to use
      */
     protected Context mContext;
@@ -119,17 +100,6 @@ public abstract class ImageWorker {
         }
 
         mResources = mContext.getResources();
-        // Create the default artwork
-        mDefault = ((BitmapDrawable) mResources.getDrawable(R.drawable.default_artwork)).getBitmap();
-        // Create the small version of the default artwork
-        mDefaultSmall = ((BitmapDrawable) mResources.getDrawable(R.drawable.default_artwork_sm))
-                .getBitmap();
-        // Create the artist artwork
-        mDefaultArtist = ((BitmapDrawable) mResources.getDrawable(R.drawable.default_artist))
-                .getBitmap();
-        // Create the playlist artwork
-        mDefaultPlaylist = ((BitmapDrawable) mResources.getDrawable(R.drawable.default_playlist))
-                .getBitmap();
         // Create the transparent layer for the transition drawable
         mTransparentDrawable = new ColorDrawable(Color.TRANSPARENT);
     }
@@ -177,47 +147,14 @@ public abstract class ImageWorker {
     }
 
     /**
-     * @return The default artwork
+     * @return A new drawable of the default artwork
      */
-    public Bitmap getDefaultArtwork() {
-        return getDefaultArtwork(false);
-    }
-
-    /**
-     * @param small returns the smaller version of the default artwork if true
-     * @return The default artwork
-     */
-    public Bitmap getDefaultArtwork(boolean small) {
-        return small ? mDefaultSmall : mDefault;
-    }
-
-    /**
-     * @return A new bitmap drawable of the default artwork
-     */
-    public BitmapDrawable getNewDefaultBitmapDrawable(ImageType imageType) {
-        Bitmap targetBitmap = null;
-
-        switch (imageType) {
-            case ARTIST:
-                targetBitmap = mDefaultArtist;
-                break;
-
-            case PLAYLIST:
-                targetBitmap = mDefaultPlaylist;
-                break;
-
-            case ALBUM:
-            default:
-                targetBitmap = mDefault;
-                break;
-        }
-
-        BitmapDrawable bitmapDrawable = new BitmapDrawable(mResources, targetBitmap);
-        // No filter and no dither makes things much quicker
-        bitmapDrawable.setFilterBitmap(false);
-        bitmapDrawable.setDither(false);
-
-        return bitmapDrawable;
+    public Drawable getNewDrawable(ImageType imageType, String name,
+                                                String identifier) {
+        LetterTileDrawable letterTileDrawable = new LetterTileDrawable(mContext);
+        letterTileDrawable.setTileDetails(name, identifier, imageType);
+        letterTileDrawable.setIsCircular(false);
+        return letterTileDrawable;
     }
 
     public static Bitmap getBitmapInBackground(final Context context, final ImageCache imageCache,
@@ -447,6 +384,25 @@ public abstract class ImageWorker {
     }
 
     /**
+     * Loads the default image into the image view given the image type
+     * @param imageView The {@link ImageView}
+     * @param imageType The type of image
+     */
+    public void loadDefaultImage(final ImageView imageView, final ImageType imageType,
+                                    final String name, final String identifier) {
+        if (imageView != null) {
+            // if an existing letter drawable exists, re-use it
+            Drawable existingDrawable = imageView.getDrawable();
+            if (existingDrawable != null && existingDrawable instanceof LetterTileDrawable) {
+                ((LetterTileDrawable)existingDrawable).setTileDetails(name, identifier, imageType);
+            } else {
+                imageView.setImageDrawable(getNewDrawable(imageType, name,
+                        identifier));
+            }
+        }
+    }
+
+    /**
      * Called to fetch the artist or album art.
      *
      * @param key The unique identifier for the image.
@@ -493,17 +449,28 @@ public abstract class ImageWorker {
                 imageView.setImageBitmap(lruBitmap);
             }
         } else {
-            // if a background drawable hasn't been set, create one so that even if
-            // the disk cache is paused we see something
-            if (imageView.getBackground() == null) {
-                imageView.setBackgroundDrawable(getNewDefaultBitmapDrawable(imageType));
+            // load the default image
+            if (imageType == ImageType.ARTIST) {
+                loadDefaultImage(imageView, imageType, artistName, key);
+            } else if (imageType == ImageType.ALBUM) {
+                // don't show letters for albums so pass in null as the display string
+                // because an album could have multiple artists, use the album id as the key here
+                loadDefaultImage(imageView, imageType, null, String.valueOf(albumId));
+            } else {
+                // don't show letters for playlists so pass in null as the display string
+                loadDefaultImage(imageView, imageType, null, key);
             }
 
             if (executePotentialWork(key, imageView)
                     && imageView != null && !mImageCache.isDiskCachePaused()) {
+                Drawable fromDrawable = imageView.getDrawable();
+                if (fromDrawable == null) {
+                    fromDrawable = mTransparentDrawable;
+                }
+
                 // Otherwise run the worker task
                 final SimpleBitmapWorkerTask bitmapWorkerTask = new SimpleBitmapWorkerTask(key,
-                            imageView, imageType, mTransparentDrawable, mContext, scaleImgToView);
+                            imageView, imageType, fromDrawable, mContext, scaleImgToView);
 
                 final AsyncTaskContainer asyncTaskContainer = new AsyncTaskContainer(bitmapWorkerTask);
                 imageView.setTag(asyncTaskContainer);
@@ -546,15 +513,8 @@ public abstract class ImageWorker {
             // Bitmap found in memory cache
             imageView.setImageBitmap(lruBitmap);
         } else {
-            // if a background drawable hasn't been set, create one so that even if
-            // the disk cache is paused we see something
-            if (imageView.getBackground() == null) {
-                if (type == PlaylistWorkerType.Artist) {
-                    imageView.setBackground(getNewDefaultBitmapDrawable(ImageType.ARTIST));
-                } else if (type == PlaylistWorkerType.CoverArt) {
-                    imageView.setBackground(getNewDefaultBitmapDrawable(ImageType.PLAYLIST));
-                }
-            }
+            // load the default image
+            loadDefaultImage(imageView, ImageType.PLAYLIST, null, String.valueOf(playlistId));
         }
 
         // even though we may have found the image in the cache, we want to check if the playlist

@@ -4,18 +4,15 @@
 package com.cyngn.eleven.cache;
 
 import android.content.Context;
-import android.content.res.Resources;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Rect;
-import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.TransitionDrawable;
 import android.provider.MediaStore;
 import android.widget.ImageView;
 
-import com.cyngn.eleven.R;
 import com.cyngn.eleven.cache.ImageWorker.ImageType;
 import com.cyngn.eleven.loaders.PlaylistSongLoader;
 import com.cyngn.eleven.loaders.SortedCursor;
@@ -48,6 +45,9 @@ public class PlaylistWorkerTask extends BitmapWorkerTask<Void, Void, TransitionD
     // if the playlist has changed
     protected final boolean mFoundInCache;
 
+    // because a cached image can be loaded, we use this flag to signal to remove that default image
+    protected boolean mFallbackToDefaultImage;
+
     /**
      * Constructor of <code>PlaylistWorkerTask</code>
      * @param key the key of the image to store to
@@ -66,6 +66,7 @@ public class PlaylistWorkerTask extends BitmapWorkerTask<Void, Void, TransitionD
         mWorkerType = type;
         mPlaylistStore = PlaylistArtworkStore.getInstance(mContext);
         mFoundInCache = foundInCache;
+        mFallbackToDefaultImage = false;
     }
 
     /**
@@ -99,9 +100,15 @@ public class PlaylistWorkerTask extends BitmapWorkerTask<Void, Void, TransitionD
             bitmap = mImageCache.getCachedBitmap(mKey);
         }
 
-        // if we found a bitmap and we don't need an update, return it
-        if (bitmap != null && !needsUpdate) {
-            return createImageTransitionDrawable(bitmap);
+        // if we don't need an update, return something
+        if (!needsUpdate) {
+            if (bitmap != null) {
+                // if we found a bitmap, return it
+                return createImageTransitionDrawable(bitmap);
+            } else {
+                // otherwise return null since we don't need an update
+                return null;
+            }
         }
 
         // otherwise re-run the logic to get the bitmap
@@ -123,19 +130,15 @@ public class PlaylistWorkerTask extends BitmapWorkerTask<Void, Void, TransitionD
                     mPlaylistStore.updateArtistArt(mPlaylistId);
                     // remove the cached image
                     mImageCache.removeFromCache(PlaylistArtworkStore.getArtistCacheKey(mPlaylistId));
-                    // go back to the default image
-                    BitmapDrawable drawable =
-                            (BitmapDrawable) mResources.getDrawable(R.drawable.default_artist);
-                    bitmap = drawable.getBitmap();
+                    // revert back to default image
+                    mFallbackToDefaultImage = true;
                 } else if (mWorkerType == PlaylistWorkerType.CoverArt) {
                     // update the timestamp
                     mPlaylistStore.updateCoverArt(mPlaylistId);
                     // remove the cached image
                     mImageCache.removeFromCache(PlaylistArtworkStore.getCoverCacheKey(mPlaylistId));
-                    // go back to the default image
-                    BitmapDrawable drawable =
-                            (BitmapDrawable) mResources.getDrawable(R.drawable.default_playlist);
-                    bitmap = drawable.getBitmap();
+                    // revert back to default image
+                    mFallbackToDefaultImage = true;
                 }
             } else if (mWorkerType == PlaylistWorkerType.Artist) {
                 bitmap = loadTopArtist(sortedCursor);
@@ -230,15 +233,22 @@ public class PlaylistWorkerTask extends BitmapWorkerTask<Void, Void, TransitionD
                     null, artistName, -1, ImageType.ARTIST);
         } while (sortedCursor.moveToNext() && bitmap == null);
 
-        sortedCursor.close();
+        if (bitmap == null) {
+            // if we can't find any artist images, try loading the top songs image
+            bitmap = mImageCache.getCachedBitmap(
+                    PlaylistArtworkStore.getCoverCacheKey(mPlaylistId));
+        }
 
         if (bitmap != null) {
             // add the image to the cache
             mImageCache.addBitmapToCache(mKey, bitmap, true);
-
-            // store this artist name into the db
-            mPlaylistStore.updateArtistArt(mPlaylistId);
+        } else {
+            mImageCache.removeFromCache(mKey);
+            mFallbackToDefaultImage = true;
         }
+
+        // store the fact that we ran this code into the db to prevent multiple re-runs
+        mPlaylistStore.updateArtistArt(mPlaylistId);
 
         return bitmap;
     }
@@ -292,8 +302,6 @@ public class PlaylistWorkerTask extends BitmapWorkerTask<Void, Void, TransitionD
             }
         } while (sortedCursor.moveToNext() && loadedBitmaps.size() < MAX_NUM_BITMAPS_TO_LOAD);
 
-        sortedCursor.close();
-
         // if we found at least 1 bitmap
         if (loadedBitmaps.size() > 0) {
             // get the first bitmap
@@ -324,22 +332,24 @@ public class PlaylistWorkerTask extends BitmapWorkerTask<Void, Void, TransitionD
                 combinedCanvas.drawBitmap(loadedBitmaps.get(3), null,
                         new Rect(width / 2, height / 2, width, height), null);
 
+                combinedCanvas.release();
                 combinedCanvas = null;
                 bitmap = combinedBitmap;
             }
-
-            if (bitmap != null) {
-                // add the image to the cache
-                mImageCache.addBitmapToCache(mKey, bitmap, true);
-
-                // store this artist name into the db
-                mPlaylistStore.updateCoverArt(mPlaylistId);
-            }
-
-            return bitmap;
         }
 
-        return null;
+        // store the fact that we ran this code into the db to prevent multiple re-runs
+        mPlaylistStore.updateCoverArt(mPlaylistId);
+
+        if (bitmap != null) {
+            // add the image to the cache
+            mImageCache.addBitmapToCache(mKey, bitmap, true);
+        } else {
+            mImageCache.removeFromCache(mKey);
+            mFallbackToDefaultImage = true;
+        }
+
+        return bitmap;
     }
 
     /**
@@ -348,8 +358,13 @@ public class PlaylistWorkerTask extends BitmapWorkerTask<Void, Void, TransitionD
     @Override
     protected void onPostExecute(TransitionDrawable transitionDrawable) {
         final ImageView imageView = getAttachedImageView();
-        if (transitionDrawable != null && imageView != null) {
-            imageView.setImageDrawable(transitionDrawable);
+        if (imageView != null) {
+            if (transitionDrawable != null) {
+                imageView.setImageDrawable(transitionDrawable);
+            } else if (mFallbackToDefaultImage) {
+                ImageFetcher.getInstance(mContext).loadDefaultImage(imageView,
+                        ImageType.PLAYLIST, null, String.valueOf(mPlaylistId));
+            }
         }
     }
 }

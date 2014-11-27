@@ -7,7 +7,7 @@ import android.widget.AbsListView.OnScrollListener;
 import com.cyngn.eleven.ui.activities.HomeActivity;
 
 public abstract class FadingBarFragment extends DetailFragment implements OnScrollListener {
-    protected static final int ACTION_BAR_DEFAULT_OPACITY = 65;
+    protected static final int ACTION_BAR_DEFAULT_OPACITY = 100;
 
     @Override
     public void setupActionBar() {

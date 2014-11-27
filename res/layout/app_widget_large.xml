@@ -29,7 +29,6 @@
         android:layout_height="@dimen/notification_expanded_height"
         android:layout_rowSpan="3"
         android:layout_marginBottom="@dimen/app_widget_bottom_margin"
-        android:background="@drawable/default_artwork_sm"
         android:scaleType="fitXY" />
 
     <LinearLayout

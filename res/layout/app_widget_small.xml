@@ -29,7 +29,6 @@
         android:id="@+id/app_widget_small_image"
         android:layout_width="@dimen/app_widget_small_artwork_size"
         android:layout_height="@dimen/app_widget_small_artwork_size"
-        android:background="@drawable/default_artwork_sm"
         android:contentDescription="@null"
         android:scaleType="centerInside" />
 

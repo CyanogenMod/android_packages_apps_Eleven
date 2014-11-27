@@ -115,4 +115,18 @@
 
     <!-- Background Lyrics Color -->
     <color name="lyrics_background_color">#b2000000</color>
+
+    <!-- Letter tile colors -->
+    <color name="letter_tile_default_color">#cccccc</color>
+    <color name="letter_tile_font_color">#ffffff</color>
+    <array name="letter_tile_colors">
+        <item>#9237A2</item>
+        <item>#4B498C</item>
+        <item>#4E5BA7</item>
+        <item>#41A4F4</item>
+        <item>#10887C</item>
+        <item>#689144</item>
+        <item>#B9BF45</item>
+        <item>#757578</item>
+    </array>
 </resources>

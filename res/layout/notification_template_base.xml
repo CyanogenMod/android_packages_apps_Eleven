@@ -27,7 +27,6 @@
         android:id="@+id/notification_base_image"
         android:layout_width="@dimen/notification_big_icon_width"
         android:layout_height="@dimen/notification_big_icon_height"
-        android:background="@drawable/default_artwork"
         android:gravity="center" />
 
     <LinearLayout
