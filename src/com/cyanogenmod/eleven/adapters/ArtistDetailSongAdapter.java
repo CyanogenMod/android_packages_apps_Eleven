@@ -17,6 +17,7 @@ package com.cyanogenmod.eleven.adapters;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.support.v4.content.Loader;
 import android.view.View;
 import android.widget.ImageView;
@@ -25,7 +26,7 @@ import android.widget.TextView;
 import com.cyanogenmod.eleven.Config;
 import com.cyanogenmod.eleven.R;
 import com.cyanogenmod.eleven.cache.ImageFetcher;
-import com.cyanogenmod.eleven.loaders.ArtistSongLoader;
+import com.cyanogenmod.eleven.loaders.SongLoader;
 import com.cyanogenmod.eleven.model.Song;
 
 import java.util.List;
@@ -45,7 +46,8 @@ public abstract class ArtistDetailSongAdapter extends DetailSongAdapter {
     public Loader<List<Song>> onCreateLoader(int id, Bundle args) {
         onLoading();
         setSourceId(args.getLong(Config.ID));
-        return new ArtistSongLoader(mActivity, getSourceId());
+        final String selection = MediaStore.Audio.AudioColumns.ARTIST_ID + "=" + getSourceId();
+        return new SongLoader(mActivity, selection);
     }
 
     protected Holder newHolder(View root, ImageFetcher fetcher) {

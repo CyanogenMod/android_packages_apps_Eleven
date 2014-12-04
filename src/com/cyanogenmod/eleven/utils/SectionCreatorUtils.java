@@ -146,19 +146,15 @@ public class SectionCreatorUtils {
 
         @Override
         public String createHeaderLabel(T item) {
-            final String label = MusicUtils.getLocalizedBucketLetter(getString(item), trimName());
+            final String label = MusicUtils.getLocalizedBucketLetter(getString(item));
+            return createHeaderLabel(label);
+        }
+
+        protected String createHeaderLabel(final String label) {
             if (TextUtils.isEmpty(label)) {
                 return mContext.getString(R.string.header_other);
             }
             return label;
-        }
-
-        /**
-         * @return true if we want to trim the name first - apparently artists don't trim
-         * but albums/songs do
-         */
-        public boolean trimName() {
-            return true;
         }
 
         public abstract String getString(T item);
@@ -398,6 +394,15 @@ public class SectionCreatorUtils {
                 public String getString(Artist item) {
                     return item.mArtistName;
                 }
+
+                @Override
+                public String createHeaderLabel(Artist item) {
+                    if (item.mBucketLabel != null) {
+                        return super.createHeaderLabel(item.mBucketLabel);
+                    }
+
+                    return super.createHeaderLabel(item);
+                }
             };
         } else if (sortOrder.equals(SortOrder.ArtistSortOrder.ARTIST_NUMBER_OF_ALBUMS)) {
             sectionCreator = new SectionCreatorUtils.NumberOfAlbumsCompare<Artist>(context) {
@@ -434,6 +439,15 @@ public class SectionCreatorUtils {
                 public String getString(Album item) {
                     return item.mAlbumName;
                 }
+
+                @Override
+                public String createHeaderLabel(Album item) {
+                    if (item.mBucketLabel != null) {
+                        return super.createHeaderLabel(item.mBucketLabel);
+                    }
+
+                    return super.createHeaderLabel(item);
+                }
             };
         } else if (sortOrder.equals(SortOrder.AlbumSortOrder.ALBUM_ARTIST)) {
             sectionCreator = new LocalizedCompare<Album>(context) {
@@ -443,8 +457,12 @@ public class SectionCreatorUtils {
                 }
 
                 @Override
-                public boolean trimName() {
-                    return false;
+                public String createHeaderLabel(Album item) {
+                    if (item.mBucketLabel != null) {
+                        return super.createHeaderLabel(item.mBucketLabel);
+                    }
+
+                    return super.createHeaderLabel(item);
                 }
             };
         } else if (sortOrder.equals(SortOrder.AlbumSortOrder.ALBUM_NUMBER_OF_SONGS)) {
@@ -508,12 +526,30 @@ public class SectionCreatorUtils {
                 public String getString(Song item) {
                     return item.mSongName;
                 }
+
+                @Override
+                public String createHeaderLabel(Song item) {
+                    if (item.mBucketLabel != null) {
+                        return super.createHeaderLabel(item.mBucketLabel);
+                    }
+
+                    return super.createHeaderLabel(item);
+                }
             };
         } else if (sortOrder.equals(SortOrder.SongSortOrder.SONG_ALBUM)) {
             sectionCreator = new LocalizedCompare<Song>(context) {
                 @Override
                 public String getString(Song item) {
                     return item.mAlbumName;
+                }
+
+                @Override
+                public String createHeaderLabel(Song item) {
+                    if (item.mBucketLabel != null) {
+                        return super.createHeaderLabel(item.mBucketLabel);
+                    }
+
+                    return super.createHeaderLabel(item);
                 }
             };
         } else if (sortOrder.equals(SortOrder.SongSortOrder.SONG_ARTIST)) {
@@ -524,8 +560,12 @@ public class SectionCreatorUtils {
                 }
 
                 @Override
-                public boolean trimName() {
-                    return false;
+                public String createHeaderLabel(Song item) {
+                    if (item.mBucketLabel != null) {
+                        return super.createHeaderLabel(item.mBucketLabel);
+                    }
+
+                    return super.createHeaderLabel(item);
                 }
             };
         } else if (sortOrder.equals(SortOrder.SongSortOrder.SONG_DURATION)) {
