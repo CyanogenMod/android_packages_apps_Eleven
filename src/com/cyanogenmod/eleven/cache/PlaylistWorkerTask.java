@@ -205,7 +205,7 @@ public class PlaylistWorkerTask extends BitmapWorkerTask<Void, Void, TransitionD
 
             // create a new cursor that takes the playlist cursor and the sorted order
             sortedCursor = new SortedCursor(playlistCursor, order,
-                    MediaStore.Audio.Playlists.Members.AUDIO_ID);
+                    MediaStore.Audio.Playlists.Members.AUDIO_ID, null);
 
             // since this cursor is now wrapped by SortedTracksCursor, remove the reference here
             // so we don't accidentally close it in the finally loop

@@ -206,6 +206,12 @@
                 <action android:name="android.media.AUDIO_BECOMING_NOISY" />
             </intent-filter>
         </receiver>
+        <!-- Used to recalculate sorting of songs based on the user's locale -->
+        <receiver android:name=".locale.LocaleChangeReceiver">
+            <intent-filter>
+                <action android:name="android.intent.action.LOCALE_CHANGED"/>
+            </intent-filter>
+        </receiver>
         <!-- Music service -->
         <service
             android:name="com.cyanogenmod.eleven.MusicPlaybackService"
