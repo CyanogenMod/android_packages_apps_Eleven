@@ -24,6 +24,7 @@ import android.content.Intent;
 import android.content.ServiceConnection;
 import android.database.Cursor;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.IBinder;
 import android.os.RemoteException;
 import android.os.SystemClock;
@@ -50,6 +51,7 @@ import com.cyanogenmod.eleven.loaders.PlaylistLoader;
 import com.cyanogenmod.eleven.loaders.PlaylistSongLoader;
 import com.cyanogenmod.eleven.loaders.SongLoader;
 import com.cyanogenmod.eleven.loaders.TopTracksLoader;
+import com.cyanogenmod.eleven.locale.LocaleUtils;
 import com.cyanogenmod.eleven.menu.FragmentMenuItems;
 import com.cyanogenmod.eleven.model.Album;
 import com.cyanogenmod.eleven.model.AlbumArtistDetails;
@@ -61,6 +63,8 @@ import com.cyanogenmod.eleven.service.MusicPlaybackTrack;
 
 import java.io.File;
 import java.util.Arrays;
+import java.util.Collection;
+import java.util.Iterator;
 import java.util.WeakHashMap;
 
 /**
@@ -1684,34 +1688,17 @@ public final class MusicUtils {
      * This will take a name, removes things like "the", "an", etc
      * as well as special characters, then find the localized label
      * @param name Name to get the label of
-     * @param trimName boolean flag to run the trimmer on the name
      * @return the localized label of the bucket that the name falls into
      */
-    public static String getLocalizedBucketLetter(String name, boolean trimName) {
+    public static String getLocalizedBucketLetter(String name) {
         if (name == null || name.length() == 0) {
             return null;
         }
 
-        if (trimName) {
-            name = getTrimmedName(name);
-        }
+        name = getTrimmedName(name);
 
         if (name.length() > 0) {
-            String lbl = LocaleUtils.getInstance().getLabel(name);
-            // For now let's cap it to latin alphabet and the # sign
-            // since chinese characters are resulting in " " and other random
-            // characters but the sort doesn't match the sql sort so it is
-            // not quite sorted
-            if (lbl != null && lbl.length() > 0) {
-                char ch = lbl.charAt(0);
-                if ((ch < 'A' || ch > 'Z') && ch != '#') {
-                    return null;
-                }
-            }
-
-            if (lbl != null && lbl.length() > 0) {
-                return lbl;
-            }
+            return LocaleUtils.getInstance().getLabel(name);
         }
 
         return null;
@@ -1748,47 +1735,6 @@ public final class MusicUtils {
     }
 
     /**
-     * Determines the correct item attribute to use for a given sort request and generates the
-     * localized bucket for that attribute
-     * @param item
-     * @param sortOrder
-     * @param <T>
-     * @return
-     */
-    public static <T> String getLocalizedBucketLetterByAttribute(T item, String sortOrder) {
-        if (item instanceof Song) {
-            // we aren't 'trimming' certain attributes - a flag for such attributes
-            boolean trimName = true;
-            String attributeToLocalize = ((Song)item).mSongName;
-
-            // select Song attribute based on the sort order
-            if (sortOrder.equals(SortOrder.SongSortOrder.SONG_ARTIST) ) {
-                attributeToLocalize = ((Song)item).mArtistName;
-                trimName = false;
-            } else if (sortOrder.equals(SortOrder.SongSortOrder.SONG_ALBUM) ) {
-                attributeToLocalize = ((Song)item).mAlbumName;
-            }
-
-            return getLocalizedBucketLetter(attributeToLocalize, trimName);
-        } else if (item instanceof Artist) {
-            return getLocalizedBucketLetter(((Artist)item).mArtistName, true);
-        } else if (item instanceof Album) {
-            // we aren't 'trimming' certain attributes - a flag for such attributes
-            boolean trimName = true;
-            String attributeToLocalize = ((Album)item).mAlbumName;
-
-            if (sortOrder.equals(SortOrder.AlbumSortOrder.ALBUM_ARTIST) ) {
-                attributeToLocalize = ((Album)item).mArtistName;
-                trimName = false;
-            }
-
-            return getLocalizedBucketLetter(attributeToLocalize, trimName);
-        }
-
-        return null;
-    }
-
-    /**
      *
      * @param sortOrder values are mostly derived from SortOrder.class or could also be any sql
      *                  order clause
@@ -1796,5 +1742,24 @@ public final class MusicUtils {
      */
     public static boolean isSortOrderDesending(String sortOrder) {
         return sortOrder.endsWith(" DESC");
+    }
+
+    /**
+     * Takes a collection of items and builds a comma-separated list of them
+     * @param items collection of items
+     * @return comma-separted list of items
+     */
+    public static final <E> String buildCollectionAsString(Collection<E> items) {
+        Iterator<E> iterator = items.iterator();
+        StringBuilder str = new StringBuilder();
+        if (iterator.hasNext()) {
+            str.append(iterator.next());
+            while (iterator.hasNext()) {
+                str.append(",");
+                str.append(iterator.next());
+            }
+        }
+
+        return str.toString();
     }
 }

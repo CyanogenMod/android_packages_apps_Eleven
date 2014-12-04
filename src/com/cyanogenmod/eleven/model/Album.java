@@ -48,6 +48,12 @@ public class Album {
     public String mYear;
 
     /**
+     * Bucket label for the name - may not necessarily be the name - for example albums sorted by
+     * artists would be the artist bucket label and not the album name bucket label
+     */
+    public String mBucketLabel;
+
+    /**
      * Constructor of <code>Album</code>
      * 
      * @param albumId The Id of the album
