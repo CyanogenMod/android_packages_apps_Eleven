@@ -43,6 +43,11 @@ public class Artist {
     public int mSongNumber;
 
     /**
+     * Bucket label for the artist name if it exists
+     */
+    public String mBucketLabel;
+
+    /**
      * Constructor of <code>Artist</code>
      * 
      * @param artistId The Id of the artist

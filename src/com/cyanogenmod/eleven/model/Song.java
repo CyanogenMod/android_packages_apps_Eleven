@@ -58,6 +58,12 @@ public class Song {
     public int mYear;
 
     /**
+     * Bucket label for the name - may not necessarily be the name - for example songs sorted by
+     * artists would be the artist bucket label and not the song name bucket label
+     */
+    public String mBucketLabel;
+
+    /**
      * Constructor of <code>Song</code>
      * 
      * @param songId The Id of the song

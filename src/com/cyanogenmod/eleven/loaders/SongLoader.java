@@ -15,17 +15,18 @@ package com.cyanogenmod.eleven.loaders;
 
 import android.content.Context;
 import android.database.Cursor;
-import android.provider.BaseColumns;
 import android.provider.MediaStore;
-import android.provider.MediaStore.Audio.AudioColumns;
+import android.provider.MediaStore.Audio;
+import android.text.TextUtils;
 
 import com.cyanogenmod.eleven.model.Song;
+import com.cyanogenmod.eleven.provider.LocalizedStore;
+import com.cyanogenmod.eleven.provider.LocalizedStore.SortParameter;
 import com.cyanogenmod.eleven.sectionadapter.SectionCreator;
 import com.cyanogenmod.eleven.utils.Lists;
 import com.cyanogenmod.eleven.utils.MusicUtils;
 import com.cyanogenmod.eleven.utils.PreferenceUtils;
 import com.cyanogenmod.eleven.utils.SortOrder;
-import com.cyanogenmod.eleven.utils.SortUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -49,12 +50,25 @@ public class SongLoader extends SectionCreator.SimpleListLoader<Song> {
     protected Cursor mCursor;
 
     /**
-     * Constructor of <code>SongLoader</code>
-     * 
+     * Additional selection filter
+     */
+    protected String mSelection;
+
+    /**
      * @param context The {@link Context} to use
      */
     public SongLoader(final Context context) {
+        this(context, null);
+    }
+
+    /**
+     * @param context The {@link Context} to use
+     * @param selection Additional selection filter to apply to the loader
+     */
+    public SongLoader(final Context context, final String selection) {
         super(context);
+
+        mSelection = selection;
     }
 
     /**
@@ -96,6 +110,10 @@ public class SongLoader extends SectionCreator.SimpleListLoader<Song> {
                 final Song song = new Song(id, songName, artist, album, albumId,
                                             durationInSecs, year);
 
+                if (mCursor instanceof SortedCursor) {
+                    song.mBucketLabel = (String)((SortedCursor)mCursor).getExtraData();
+                }
+
                 mSongList.add(song);
             } while (mCursor.moveToNext());
         }
@@ -105,28 +123,7 @@ public class SongLoader extends SectionCreator.SimpleListLoader<Song> {
             mCursor = null;
         }
 
-        // requested ordering of songs
-        String songSortOrder = PreferenceUtils.getInstance(mContext).getSongSortOrder();
-
-        // run a custom localized sort to try to fit items in to header buckets more nicely
-        if (shouldEvokeCustomSortRoutine(songSortOrder)) {
-            mSongList = SortUtils.localizeSortList(mSongList, songSortOrder);
-        }
-
         return mSongList;
-    }
-
-    /**
-     * We are choosing to custom sort the song list for a cleaner look on the UI side for a few
-     * sort options
-     * @param sortOrder the song ordering preference selected by the user
-     * @return
-     */
-    private boolean shouldEvokeCustomSortRoutine(String sortOrder) {
-        return sortOrder.equals(SortOrder.SongSortOrder.SONG_A_Z) ||
-               sortOrder.equals(SortOrder.SongSortOrder.SONG_Z_A) ||
-               sortOrder.equals(SortOrder.SongSortOrder.SONG_ALBUM) ||
-               sortOrder.equals(SortOrder.SongSortOrder.SONG_ARTIST);
     }
 
     /**
@@ -134,7 +131,24 @@ public class SongLoader extends SectionCreator.SimpleListLoader<Song> {
      * @return cursor to load
      */
     protected Cursor getCursor() {
-        return makeSongCursor(mContext, null);
+        return makeSongCursor(mContext, mSelection);
+    }
+
+    /**
+     * For string-based sorts, return the localized store sort parameter, otherwise return null
+     * @param sortOrder the song ordering preference selected by the user
+     */
+    private static LocalizedStore.SortParameter getSortParameter(String sortOrder) {
+        if (sortOrder.equals(SortOrder.SongSortOrder.SONG_A_Z) ||
+                sortOrder.equals(SortOrder.SongSortOrder.SONG_Z_A)) {
+            return LocalizedStore.SortParameter.Song;
+        } else if (sortOrder.equals(SortOrder.SongSortOrder.SONG_ALBUM)) {
+            return LocalizedStore.SortParameter.Album;
+        } else if (sortOrder.equals(SortOrder.SongSortOrder.SONG_ARTIST)) {
+            return LocalizedStore.SortParameter.Artist;
+        }
+
+        return null;
     }
 
     /**
@@ -145,28 +159,54 @@ public class SongLoader extends SectionCreator.SimpleListLoader<Song> {
      * @return The {@link Cursor} used to run the song query.
      */
     public static final Cursor makeSongCursor(final Context context, final String selection) {
+        return makeSongCursor(context, selection, true);
+    }
+
+    /**
+     * Creates the {@link Cursor} used to run the query.
+     *
+     * @param context The {@link Context} to use.
+     * @param selection Additional selection statement to use
+     * @param runSort For localized sorts this can enable/disable the logic for running the
+     *                additional localization sort.  Queries that apply their own sorts can pass
+     *                in false for a boost in perf
+     * @return The {@link Cursor} used to run the song query.
+     */
+    public static final Cursor makeSongCursor(final Context context, final String selection,
+                                              final boolean runSort) {
         String selectionStatement = MusicUtils.MUSIC_ONLY_SELECTION;
-        if (selection != null && !selection.isEmpty()) {
+        if (!TextUtils.isEmpty(selection)) {
             selectionStatement += " AND " + selection;
         }
 
-        return context.getContentResolver().query(MediaStore.Audio.Media.EXTERNAL_CONTENT_URI,
+        final String songSortOrder = PreferenceUtils.getInstance(context).getSongSortOrder();
+
+        Cursor cursor = context.getContentResolver().query(Audio.Media.EXTERNAL_CONTENT_URI,
                 new String[] {
                         /* 0 */
-                        BaseColumns._ID,
+                        Audio.Media._ID,
                         /* 1 */
-                        AudioColumns.TITLE,
+                        Audio.Media.TITLE,
                         /* 2 */
-                        AudioColumns.ARTIST,
+                        Audio.Media.ARTIST,
                         /* 3 */
-                        AudioColumns.ALBUM_ID,
+                        Audio.Media.ALBUM_ID,
                         /* 4 */
-                        AudioColumns.ALBUM,
+                        Audio.Media.ALBUM,
                         /* 5 */
-                        AudioColumns.DURATION,
+                        Audio.Media.DURATION,
                         /* 6 */
-                        AudioColumns.YEAR,
-                }, selectionStatement, null,
-                PreferenceUtils.getInstance(context).getSongSortOrder());
+                        Audio.Media.YEAR,
+                }, selectionStatement, null, songSortOrder);
+
+        // if our sort is a localized-based sort, grab localized data from the store
+        final SortParameter sortParameter = getSortParameter(songSortOrder);
+        if (runSort && sortParameter != null && cursor != null) {
+            final boolean descending = MusicUtils.isSortOrderDesending(songSortOrder);
+            return LocalizedStore.getInstance(context).getLocalizedSort(cursor, Audio.Media._ID,
+                    SortParameter.Song, sortParameter, descending, TextUtils.isEmpty(selection));
+        }
+
+        return cursor;
     }
 }
