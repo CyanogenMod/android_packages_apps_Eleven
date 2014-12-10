@@ -34,6 +34,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toolbar;
 
 import com.cyanogenmod.eleven.IElevenService;
 import com.cyanogenmod.eleven.MusicPlaybackService;
@@ -120,8 +121,6 @@ public abstract class BaseActivity extends FragmentActivity implements ServiceCo
         // Initialize the broadcast receiver
         mPlaybackStatus = new PlaybackStatus(this);
 
-        getActionBar().setTitle(getString(R.string.app_name).toUpperCase());
-
         // Calculate ActionBar height
         TypedValue value = new TypedValue();
         if (getTheme().resolveAttribute(android.R.attr.actionBarSize, value, true))
@@ -132,6 +131,11 @@ public abstract class BaseActivity extends FragmentActivity implements ServiceCo
 
         // Set the layout
         setContentView(setContentView());
+
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setActionBar(toolbar);
+
+        getActionBar().setTitle(getString(R.string.app_name).toUpperCase());
 
         // set the background on the root view
         getWindow().getDecorView().getRootView().setBackgroundColor(
