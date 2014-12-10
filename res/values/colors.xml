@@ -6,15 +6,20 @@
      you may not use this file except in compliance with the License.
      You may obtain a copy of the License at
 
-          http://www.apache.org/licenses/LICENSE-2.0
+     http://www.apache.org/licenses/LICENSE-2.0
 
      Unless required by applicable law or agreed to in writing, software
      distributed under the License is distributed on an "AS IS" BASIS,
      WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
      See the License for the specific language governing permissions and
      limitations under the License.
- -->
+-->
 <resources>
+    <!-- Material -->
+    <color name="primary">#607D8B</color>
+    <color name="primary_dark">#455A64</color>
+    <color name="primary_light">#78909C</color>
+    <color name="accent">#3f51b5</color>
 
     <!-- light color -->
     <color name="background_color">#ffe4e9ed</color>
@@ -23,10 +28,10 @@
     <color name="transparent">#00000000</color>
 
     <!-- Black -->
-    <color name="black">#ff000000</color>
+    <color name="black">#212121</color>
 
     <!-- White -->
-    <color name="white">#ffffffff</color>
+    <color name="white">#fafafa</color>
 
     <!-- Standard Text Color -->
     <color name="default_text_color">#cc231f20</color>
@@ -37,9 +42,6 @@
 
     <!-- Transparent white -->
     <color name="transparent_white">#ffcccccc</color>
-
-    <!-- A darkish color used for the action bar -->
-    <color name="action_bar_color">#ff0d0d0d</color>
 
     <!-- A light, Holo shade of blue -->
     <color name="holo_blue_light">#ff33b5e5</color>
@@ -89,9 +91,9 @@
     <color name="grid_list_item_text_color">#b3231f20</color>
 
     <!-- Top title page colors -->
-    <color name="tpi_background_color">#fff4f4f4</color>
-    <color name="tpi_text_color">#bf3d4049</color>
-    <color name="tpi_selected_text_color">#bf3d4049</color>
+    <color name="tab_ripple_color">#ffffff</color>
+    <color name="tab_accent_color">#ffffff</color>
+    <color name="tab_selected_underline_color">#ffffff</color>
 
     <!-- Search Colors -->
     <color name="search_hint_color">#4cffffff</color>
@@ -121,24 +123,26 @@
     <color name="letter_tile_default_color">#cccccc</color>
     <color name="letter_tile_font_color">#ffffff</color>
     <array name="letter_tile_colors">
-        <item>#883397</item>
-        <item>#4B498C</item>
-        <item>#4E5BA7</item>
-        <item>#41A4F4</item>
-        <item>#10887C</item>
-        <item>#689144</item>
-        <item>#B9BF45</item>
-        <item>#757578</item>
+        <item>#9C27B0</item>
+        <item>#2196F3</item>
+        <item>#3F51B5</item>
+        <item>#009688</item>
+        <item>#8BC34A</item>
+        <item>#F44336</item>
+        <item>#9E9E9E</item>
+        <item>#FF5722</item>
+        <item>#795548</item>
     </array>
 
     <array name="letter_tile_vibrant_dark_colors">
-        <item>#b74bc9</item>
-        <item>#6967bf</item>
-        <item>#2a315a</item>
-        <item>#07497d</item>
-        <item>#0c6c64</item>
-        <item>#415a2a</item>
-        <item>#5f6322</item>
-        <item>#505052</item>
+        <item>#7B1FA2</item>
+        <item>#1976D2</item>
+        <item>#303F9F</item>
+        <item>#00796B</item>
+        <item>#689F38</item>
+        <item>#D32F2F</item>
+        <item>#616161</item>
+        <item>#E64A19</item>
+        <item>#5D4037</item>
     </array>
 </resources>

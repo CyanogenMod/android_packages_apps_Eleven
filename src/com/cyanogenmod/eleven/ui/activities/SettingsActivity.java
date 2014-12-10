@@ -43,8 +43,7 @@ public class SettingsActivity extends PreferenceActivity {
         overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
 
         // UP
-        getActionBar().setIcon(R.drawable.ic_action_back_padded);
-        getActionBar().setHomeButtonEnabled(true);
+        getActionBar().setDisplayHomeAsUpEnabled(true);
 
         // Add the preferences
         addPreferencesFromResource(R.xml.settings);
