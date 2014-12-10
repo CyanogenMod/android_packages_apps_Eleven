@@ -6,18 +6,17 @@
      you may not use this file except in compliance with the License.
      You may obtain a copy of the License at
 
-          http://www.apache.org/licenses/LICENSE-2.0
+     http://www.apache.org/licenses/LICENSE-2.0
 
      Unless required by applicable law or agreed to in writing, software
      distributed under the License is distributed on an "AS IS" BASIS,
      WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
      See the License for the specific language governing permissions and
      limitations under the License.
- -->
+-->
 <resources xmlns:android="http://schemas.android.com/apk/res/android">
-
-    <!-- Main Holo -->
-    <style name="Eleven.Theme" parent="@android:style/Theme.Holo.Light">
+    <!-- Main Material -->
+    <style name="Eleven.Theme" parent="@android:style/Theme.Material.Light.DarkActionBar">
         <item name="android:windowContentOverlay">@null</item>
         <item name="android:popupMenuStyle">@style/PopupMenu</item>
         <item name="android:dropDownListViewStyle">@style/DropDownListView</item>
@@ -27,36 +26,41 @@
         <item name="android:actionBarStyle">@style/ActionBar</item>
         <item name="android:actionOverflowButtonStyle">@style/ActionOverFlowButton</item>
         <item name="android:actionBarWidgetTheme">@style/ActionBarWidgetTheme</item>
-        <item name="vpiTabPageIndicatorStyle">@style/Eleven.TabPageIndicator</item>
+        <item name="android:colorPrimary">@color/primary</item>
+        <item name="android:colorPrimaryDark">@color/primary_dark</item>
+        <item name="android:colorAccent">@color/accent</item>
     </style>
 
-    <style name="ActionBarWidgetTheme" parent="@android:style/Theme.Holo">
+    <style name="ActionBarWidgetTheme" parent="@android:style/Theme.Material">
         <!-- This is the color of the search text hint in the action bar -->
         <item name="android:textColorHint">@color/search_hint_color</item>
         <item name="android:popupMenuStyle">@style/PopupMenu</item>
         <item name="android:dropDownListViewStyle">@style/DropDownListView</item>
         <item name="android:textAppearanceSmallPopupMenu">@style/SmallPopupMenu</item>
         <item name="android:textAppearanceLargePopupMenu">@style/LargePopupMenu</item>
+        <!-- Empty icon -->
+        <item name="android:icon">@android:color/transparent</item>
     </style>
 
     <!-- Make the action bar not take up space -->
     <style name="Eleven.Theme.ActionBar.Overlay" parent="@style/Eleven.Theme">
-        <item name="android:windowActionBarOverlay">true</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowActionBar">false</item>
     </style>
 
     <!-- Set the default list view divider color and size -->
-    <style name="ListView" parent="@android:style/Widget.Holo.ListView">
+    <style name="ListView" parent="@android:style/Widget.Material.ListView">
         <item name="android:divider">@color/list_item_divider_color</item>
         <item name="android:dividerHeight">@dimen/divider_height</item>
     </style>
-    
+
     <!-- Sets up the pop up menu backgroudn resource -->
-    <style name="PopupMenu" parent="@android:style/Widget.Holo.PopupMenu">
+    <style name="PopupMenu" parent="@android:style/Widget.Material.PopupMenu">
         <item name="android:popupBackground">@drawable/menu_background</item>
     </style>
 
     <!-- Sets up the pop up menu divider color and height -->
-    <style name="DropDownListView" parent="@android:style/Widget.Holo.ListView.DropDown">
+    <style name="DropDownListView" parent="@android:style/Widget.Material.ListView.DropDown">
         <item name="android:divider">@color/menu_divider_color</item>
         <item name="android:dividerHeight">@dimen/divider_height</item>
     </style>
@@ -76,25 +80,24 @@
     </style>
 
     <!-- Sets the action bar title text style -->
-    <style name="ActionBar" parent="@android:style/Widget.Holo.ActionBar">
+    <style name="ActionBar" parent="@android:style/Widget.Material.ActionBar">
         <item name="android:titleTextStyle">@style/ActionBar.TitleText</item>
         <item name="android:subtitleTextStyle">@style/ActionBar.SubtitleText</item>
         <item name="android:background">@color/header_action_bar_color</item>
     </style>
 
     <!-- Sets the action bar title text color -->
-    <style name="ActionBar.TitleText" parent="@android:style/TextAppearance.Holo.Widget.ActionBar.Title">
+    <style name="ActionBar.TitleText" parent="@android:style/TextAppearance.Material.Widget.ActionBar.Title">
         <item name="android:textColor">@color/header_action_bar_text_color</item>
         <item name="android:textSize">@dimen/text_size_medium</item>
-        <item name="android:textStyle">bold</item>
     </style>
 
-    <style name="ActionBar.SubtitleText" parent="@android:style/TextAppearance.Holo.Widget.ActionBar.Subtitle">
+    <style name="ActionBar.SubtitleText" parent="@android:style/TextAppearance.Material.Widget.ActionBar.Subtitle">
         <item name="android:textColor">@color/header_action_bar_text_color</item>
     </style>
 
     <!-- Sets the action bar menu icon -->
-    <style name="ActionOverFlowButton" parent="@android:style/Widget.Holo.ActionButton.Overflow">
+    <style name="ActionOverFlowButton" parent="@android:style/Widget.Material.ActionButton.Overflow">
         <item name="android:src">@drawable/menu_button_light</item>
         <item name="android:minWidth">0dip</item>
         <item name="android:paddingLeft">8dip</item>
@@ -146,18 +149,13 @@
     </style>
 
     <!-- Shortcut Activity theme -->
-    <style name="Theme.Transparent" parent="@android:style/Theme.Holo.NoActionBar">
+    <style name="Theme.Transparent" parent="@android:style/Theme.Material.NoActionBar">
         <item name="android:windowIsTranslucent">true</item>
         <item name="android:windowBackground">@color/transparent</item>
         <item name="android:windowContentOverlay">@null</item>
         <item name="android:windowNoTitle">true</item>
         <item name="android:windowIsFloating">true</item>
         <item name="android:backgroundDimEnabled">false</item>
-    </style>
-
-    <!-- Search Activity theme -->
-    <style name="Theme.ActionBarIcon"  parent="@style/Eleven.Theme">
-        <item name="android:homeAsUpIndicator">@drawable/ic_action_back</item>
     </style>
 
     <!-- Notification bar event text -->
@@ -167,36 +165,7 @@
         <item name="android:ellipsize">end</item>
         <item name="android:fadingEdge">horizontal</item>
         <item name="android:singleLine">true</item>
-    </style>
-
-    <!-- Notification bar actions -->
-    <style name="NotificationAction">
-        <item name="android:layout_width">@dimen/notification_action_width</item>
-        <item name="android:layout_height">@dimen/notification_action_height</item>
-        <item name="android:gravity">center|right</item>
-        <item name="android:scaleType">fitCenter</item>
-        <item name="android:padding">@dimen/notification_action_padding</item>
-        <item name="android:background">?android:selectableItemBackground</item>
-    </style>
-
-    <style name="NotificationAction.Previous" parent="@style/NotificationAction">
-        <item name="android:src">@drawable/btn_playback_previous</item>
-        <item name="android:visibility">gone</item>
-        <item name="android:contentDescription">@string/accessibility_prev</item>
-    </style>
-
-    <style name="NotificationAction.Play" parent="@style/NotificationAction">
-        <item name="android:src">@drawable/btn_playback_play</item>
-        <item name="android:contentDescription">@string/accessibility_play</item>
-    </style>
-
-    <style name="NotificationAction.Next" parent="@style/NotificationAction">
-        <item name="android:src">@drawable/btn_playback_next</item>
-        <item name="android:contentDescription">@string/accessibility_next</item>
-    </style>
-
-    <style name="NotificationAction.Collapse" parent="@style/NotificationAction">
-        <item name="android:src">@drawable/btn_notification_collapse</item>
+        <item name="android:textColor">#212121</item>
     </style>
 
     <!-- Bottom Action Bar TextViews -->
@@ -233,18 +202,9 @@
         <item name="android:scaleType">centerInside</item>
     </style>
 
-    <style name="Eleven.TabPageIndicator" parent="@style/Widget">
-        <item name="android:gravity">center</item>
-        <item name="android:background">@drawable/tabpageindicator</item>
-        <item name="android:paddingLeft">22dp</item>
-        <item name="android:paddingRight">22dp</item>
-        <item name="android:textAppearance">@style/Eleven.TextAppearance.TabPageIndicator</item>
-        <item name="android:textSize">@dimen/tpi_text_size</item>
-        <item name="android:maxLines">1</item>
-    </style>
-
-    <style name="Eleven.TextAppearance.TabPageIndicator" parent="Widget">
-        <item name="android:textStyle">bold</item>
-        <item name="android:textColor">@color/tpi_text_color</item>
+    <style name="HeaderTabTextStyle" parent="android:style/Widget.Material.ActionBar.TabText">
+        <item name="android:textColor">@color/tab_text_color</item>
+        <item name="android:textSize">@dimen/tab_text_size</item>
+        <item name="android:fontFamily">"sans-serif-medium"</item>
     </style>
 </resources>

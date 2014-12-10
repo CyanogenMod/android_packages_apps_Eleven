@@ -34,11 +34,16 @@ public abstract class BaseFragment extends Fragment implements MusicStateListene
     protected abstract String getTitle();
     protected abstract int getLayoutToInflate();
 
+    protected boolean needsElevatedActionBar() {
+        return true;
+    }
+
     @Override
     public void setupActionBar() {
         getContainingActivity().setupActionBar(getTitle());
         getContainingActivity().setActionBarAlpha(255);
         getContainingActivity().setFragmentPadding(true);
+        getContainingActivity().setActionBarElevation(needsElevatedActionBar());
     }
 
     protected HomeActivity getContainingActivity() {
