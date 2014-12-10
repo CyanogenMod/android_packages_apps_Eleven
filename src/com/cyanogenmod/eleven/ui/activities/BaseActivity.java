@@ -34,6 +34,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toolbar;
 
 import com.cyanogenmod.eleven.IElevenService;
 import com.cyanogenmod.eleven.MusicPlaybackService;
@@ -57,7 +58,7 @@ import java.util.ArrayList;
  * bind to Apollo's service.
  * <p>
  * {@link SlidingPanelActivity} extends from this skeleton.
- * 
+ *
  * @author Andrew Neal (andrewdneal@gmail.com)
  */
 public abstract class BaseActivity extends FragmentActivity implements ServiceConnection,
@@ -67,6 +68,8 @@ public abstract class BaseActivity extends FragmentActivity implements ServiceCo
      * Playstate and meta change listener
      */
     private final ArrayList<MusicStateListener> mMusicStateListener = Lists.newArrayList();
+
+    private Toolbar mToolBar;
 
     private int mActionBarHeight;
 
@@ -121,8 +124,6 @@ public abstract class BaseActivity extends FragmentActivity implements ServiceCo
         // Initialize the broadcast receiver
         mPlaybackStatus = new PlaybackStatus(this);
 
-        getActionBar().setTitle(getString(R.string.app_name).toUpperCase());
-
         // Calculate ActionBar height
         TypedValue value = new TypedValue();
         if (getTheme().resolveAttribute(android.R.attr.actionBarSize, value, true))
@@ -133,6 +134,11 @@ public abstract class BaseActivity extends FragmentActivity implements ServiceCo
 
         // Set the layout
         setContentView(setContentView());
+
+        mToolBar = (Toolbar) findViewById(R.id.toolbar);
+        setActionBar(mToolBar);
+
+        getActionBar().setTitle(getString(R.string.app_name).toUpperCase());
 
         // set the background on the root view
         getWindow().getDecorView().getRootView().setBackgroundColor(
@@ -280,7 +286,7 @@ public abstract class BaseActivity extends FragmentActivity implements ServiceCo
         if (mActionBarBackground == null) {
             final int actionBarColor = getResources().getColor(R.color.header_action_bar_color);
             mActionBarBackground = new ColorDrawable(actionBarColor);
-            getActionBar().setBackgroundDrawable(mActionBarBackground);
+            mToolBar.setBackgroundDrawable(mActionBarBackground);
         }
     }
 
@@ -291,6 +297,12 @@ public abstract class BaseActivity extends FragmentActivity implements ServiceCo
 
     public void setActionBarAlpha(int alpha) {
         mActionBarBackground.setAlpha(alpha);
+    }
+
+    public void setActionBarElevation(boolean isElevated) {
+        float targetElevation = isElevated
+                ? getResources().getDimension(R.dimen.action_bar_elevation) : 0;
+        mToolBar.setElevation(targetElevation);
     }
 
     public void setFragmentPadding(boolean enablePadding) {
