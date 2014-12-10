@@ -201,4 +201,9 @@
     <string name="search_title_playlists">All \"%s\" playlists</string>
 
     <string name="duration_format"><xliff:g id="hours">%1$s</xliff:g> <xliff:g id="minutes">%2$s</xliff:g></string>
+
+    <string name="settings_version_summary">Version 2.1.2. © 2014 CyanogenMod </string>
+    <string name="settings_version_title">Eleven</string>
+    <string name="settings_about_category">About</string>
+
 </resources>
