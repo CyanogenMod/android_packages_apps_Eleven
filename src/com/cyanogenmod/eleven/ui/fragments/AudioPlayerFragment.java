@@ -66,7 +66,6 @@ import com.cyanogenmod.eleven.widgets.QueueButton;
 import com.cyanogenmod.eleven.widgets.RepeatButton;
 import com.cyanogenmod.eleven.widgets.RepeatingImageButton;
 import com.cyanogenmod.eleven.widgets.ShuffleButton;
-import com.cyanogenmod.eleven.widgets.theme.HoloSelector;
 
 import java.lang.ref.WeakReference;
 
@@ -295,7 +294,6 @@ public class AudioPlayerFragment extends Fragment implements ServiceConnection,
         // Buttons
         // Search Button
         View v = mRootView.findViewById(R.id.header_bar_search_button);
-        v.setBackground(new HoloSelector(getActivity()));
         v.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -306,7 +304,6 @@ public class AudioPlayerFragment extends Fragment implements ServiceConnection,
         // Add to Playlist Button
         // Setup the playlist button - add a click listener to show the context
         mAddToPlaylistButton = (ImageView) mRootView.findViewById(R.id.header_bar_add_button);
-        mAddToPlaylistButton.setBackground(new HoloSelector(getActivity()));
 
         // Create the context menu when requested
         mAddToPlaylistButton.setOnCreateContextMenuListener(new View.OnCreateContextMenuListener() {
@@ -330,7 +327,6 @@ public class AudioPlayerFragment extends Fragment implements ServiceConnection,
         // Add the menu button
         // menu button
         mMenuButton = (ImageView) mRootView.findViewById(R.id.header_bar_menu_button);
-        mMenuButton.setBackground(new HoloSelector(getActivity()));
         mMenuButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

@@ -24,11 +24,12 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent" >
 
-        <com.viewpagerindicator.TabPageIndicator
+        <com.cyanogenmod.eleven.widgets.ViewPagerTabs
             android:id="@+id/fragment_home_phone_pager_titles"
-            android:background="@color/tpi_background_color"
             android:layout_width="wrap_content"
-            android:layout_height="@dimen/tpi_height" />
+            android:layout_height="@dimen/tpi_height"
+            android:elevation="@dimen/action_bar_elevation"
+            style="@style/HeaderTabTextStyle" />
 
         <android.support.v4.view.ViewPager
             android:id="@+id/fragment_home_phone_pager"

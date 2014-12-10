@@ -48,7 +48,6 @@ import com.cyanogenmod.eleven.utils.SectionCreatorUtils;
 import com.cyanogenmod.eleven.utils.SectionCreatorUtils.IItemCompare;
 import com.cyanogenmod.eleven.widgets.IPopupMenuCallback;
 import com.cyanogenmod.eleven.widgets.LoadingEmptyContainer;
-import com.viewpagerindicator.TitlePageIndicator;
 
 /**
  * This class is used to display all of the artists on a user's device.
