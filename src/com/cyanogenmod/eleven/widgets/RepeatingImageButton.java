@@ -23,7 +23,6 @@ import android.widget.ImageButton;
 import com.cyanogenmod.eleven.R;
 import com.cyanogenmod.eleven.utils.ApolloUtils;
 import com.cyanogenmod.eleven.utils.MusicUtils;
-import com.cyanogenmod.eleven.widgets.theme.HoloSelector;
 
 /**
  * A {@link ImageButton} that will repeatedly call a 'listener' method as long
@@ -47,9 +46,8 @@ public class RepeatingImageButton extends ImageButton implements OnClickListener
     @SuppressWarnings("deprecation")
     public RepeatingImageButton(final Context context, final AttributeSet attrs) {
         super(context, attrs);
-        // Theme the selector
         setPadding(0, 0, 0, 0);
-        setBackgroundDrawable(new HoloSelector(context));
+        setBackground(getResources().getDrawable(R.drawable.selectable_background));
         setFocusable(true);
         setLongClickable(true);
         setOnClickListener(this);

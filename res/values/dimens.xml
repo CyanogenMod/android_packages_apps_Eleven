@@ -19,29 +19,29 @@
     <!-- Text sizes -->
     <dimen name="text_size_extra_micro">10.0sp</dimen>
     <dimen name="text_size_micro">12.0sp</dimen>
-    <dimen name="text_size_small">14.0sp</dimen>
-    <dimen name="text_size_medium">16.0sp</dimen>
-    <dimen name="text_size_large">18.0sp</dimen>
-    <dimen name="text_size_x_large">24.0sp</dimen>
-    <dimen name="text_size_dayum">36.0sp</dimen>
+    <dimen name="text_size_small">12.0sp</dimen>
+    <dimen name="text_size_medium">14.0sp</dimen>
+    <dimen name="text_size_large">16.0sp</dimen>
+    <dimen name="text_size_x_large">22.0sp</dimen>
+    <dimen name="text_size_dayum">34.0sp</dimen>
 
     <!-- Frequently used spacing between elements in many layouts -->
-    <dimen name="standard_padding">10.0dip</dimen>
+    <dimen name="standard_padding">16.0dip</dimen>
 
     <!-- overflow menu used on page headers and in list items -->
     <dimen name="overflow_height">30.0dip</dimen>
     <dimen name="overflow_width">24.0dip</dimen>
 
     <!-- List and grid view padding -->
-    <dimen name="list_preferred_item_padding">10.0dip</dimen>
-    <dimen name="list_menu_item_padding_right">2.0dip</dimen>
+    <dimen name="list_preferred_item_padding">14.0dip</dimen>
+    <dimen name="list_menu_item_padding_right">4.0dip</dimen>
     <dimen name="list_item_general_margin">16.0dip</dimen>
     <dimen name="list_item_menu_button_width">24.0dip</dimen>
     <dimen name="list_item_menu_button_height">30.0dip</dimen>
-    <dimen name="list_item_padding_top">10.0dip</dimen>
-    <dimen name="list_item_padding_bottom">10.0dip</dimen>
+    <dimen name="list_item_padding_top">12.0dip</dimen>
+    <dimen name="list_item_padding_bottom">12.0dip</dimen>
     <dimen name="list_item_header_size">16.0sp</dimen>
-    <dimen name="list_item_footer_size">20.0sp</dimen>
+    <dimen name="list_item_footer_size">18.0sp</dimen>
     <dimen name="list_item_main_text_size">@dimen/text_size_small</dimen>
     <dimen name="list_item_secondary_text_size">@dimen/text_size_micro</dimen>
     <dimen name="list_item_queue_text_padding_left">15.0dip</dimen>
@@ -68,6 +68,8 @@
     <dimen name="list_item_image_height">50.0dip</dimen>
     <dimen name="list_item_image_width">50.0dip</dimen>
     <dimen name="list_item_top_track_image_size">26.0dip</dimen>
+
+    <dimen name="action_bar_elevation">4dp</dimen>
 
     <!-- Bottom Action Bar -->
     <dimen name="bottom_action_bar_height">50.0dip</dimen>
@@ -171,7 +173,7 @@
     <dimen name="sliding_panel_shadow_height">0.0dip</dimen>
 
     <!-- Header Bar -->
-    <dimen name="header_bar_height">50.0dip</dimen>
+    <dimen name="header_bar_height">56.0dip</dimen>
     <dimen name="header_bar_up_width">30.0dip</dimen>
     <dimen name="header_bar_up_height">30.0dip</dimen>
     <dimen name="header_bar_menu_button_width">24.0dip</dimen>
@@ -181,15 +183,14 @@
     <dimen name="header_bar_button_padding_small">5.0dip</dimen>
     <dimen name="header_bar_button_padding_large">10.0dip</dimen>
     <dimen name="header_bar_padding_left">16.0dp</dimen>
-    <dimen name="header_bar_padding_right">8.0dp</dimen>
+    <dimen name="header_bar_padding_right">16.0dp</dimen>
     <dimen name="header_bar_button_container_padding">8.0dp</dimen>
-    <dimen name="header_bar_button_padding">6.0dp</dimen>
+    <dimen name="header_bar_button_padding">16.0dp</dimen>
 
     <!-- Title Page Indicator Settings -->
-    <dimen name="tpi_height">50dp</dimen>
-    <dimen name="tpi_footer_line_height">0dp</dimen>
-    <dimen name="tpi_footer_indicator_height">6dp</dimen>
-    <dimen name="tpi_text_size">16sp</dimen>
+    <dimen name="tpi_height">48dp</dimen>
+    <dimen name="tab_text_size">14sp</dimen>
+    <dimen name="tab_selected_underline_height">2dp</dimen>
 
     <dimen name="list_item_progress_width">45.0dip</dimen>
     <dimen name="list_item_progress_height">45.0dip</dimen>
