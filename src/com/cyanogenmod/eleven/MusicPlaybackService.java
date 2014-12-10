@@ -1476,9 +1476,8 @@ public class MusicPlaybackService extends Service {
                 .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         PendingIntent clickIntent = PendingIntent.getActivity(this, 0, nowPlayingIntent, 0);
 
-        // TODO: Add back a beter small icon when we have time
         Notification notification = new Notification.Builder(this)
-                .setSmallIcon(R.drawable.ic_launcher)
+                .setSmallIcon(R.drawable.ic_notification)
                 .setLargeIcon(getAlbumArt(false))
                 .setContentIntent(clickIntent)
                 .setContentTitle(getTrackName())
