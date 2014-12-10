@@ -113,12 +113,6 @@ public abstract class SlidingPanelActivity extends BaseActivity {
         mFirstPanel.setPanelSlideListener(new SimplePanelSlideListener() {
             @Override
             public void onPanelSlide(View panel, float slideOffset) {
-                if (slideOffset > 0.8f) {
-                    getActionBar().hide();
-                } else if (slideOffset < 0.75f) {
-                    getActionBar().show();
-                }
-
                 onSlide();
             }
 

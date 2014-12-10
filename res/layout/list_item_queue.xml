@@ -19,7 +19,8 @@
     android:gravity="center_vertical"
     android:minHeight="@dimen/item_normal_height"
     android:paddingTop="@dimen/list_item_padding_top"
-    android:paddingBottom="@dimen/list_item_padding_bottom">
+    android:paddingBottom="@dimen/list_item_padding_bottom"
+    android:background="@android:color/transparent">
 
     <ImageView
         android:id="@+id/image"

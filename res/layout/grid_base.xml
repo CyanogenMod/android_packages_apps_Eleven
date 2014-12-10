@@ -32,6 +32,7 @@
         android:cacheColorHint="@color/transparent"
         android:drawSelectorOnTop="true"
         android:fadingEdge="vertical"
+        android:clipToPadding="false"
         android:fastScrollEnabled="true"
         android:horizontalSpacing="@dimen/grid_item_horizontal_spacing"
         android:scrollbarStyle="outsideOverlay"
