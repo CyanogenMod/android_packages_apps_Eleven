@@ -15,9 +15,13 @@
  */
 package com.cyanogenmod.eleven.ui.activities;
 
+import android.animation.ArgbEvaluator;
+import android.animation.ObjectAnimator;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.Color;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.provider.MediaStore;
@@ -27,6 +31,7 @@ import android.support.v4.app.FragmentTransaction;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.MenuItem;
+import android.view.Window;
 
 import com.cyanogenmod.eleven.Config;
 import com.cyanogenmod.eleven.R;
@@ -41,6 +46,7 @@ import com.cyanogenmod.eleven.ui.fragments.phone.MusicBrowserPhoneFragment;
 import com.cyanogenmod.eleven.ui.fragments.profile.LastAddedFragment;
 import com.cyanogenmod.eleven.ui.fragments.profile.TopTracksFragment;
 import com.cyanogenmod.eleven.utils.ApolloUtils;
+import com.cyanogenmod.eleven.utils.BitmapWithColors;
 import com.cyanogenmod.eleven.utils.MusicUtils;
 import com.cyanogenmod.eleven.utils.NavUtils;
 
@@ -60,6 +66,7 @@ public class HomeActivity extends SlidingPanelActivity {
     private boolean mLoadedBaseFragment = false;
     private boolean mHasPendingPlaybackRequest = false;
     private Handler mHandler = new Handler();
+    private boolean mBrowsePanelActive = true;
 
     /**
      * Used by the up action to determine how to handle this
@@ -103,7 +110,7 @@ public class HomeActivity extends SlidingPanelActivity {
                     setupActionBar.setupActionBar();
 
                     if (topFragment instanceof MusicBrowserPhoneFragment) {
-                        getActionBar().setIcon(R.drawable.ic_launcher);
+                        getActionBar().setIcon(null);
                         getActionBar().setHomeButtonEnabled(false);
                     } else {
                         getActionBar().setIcon(R.drawable.ic_action_back_padded);
@@ -151,6 +158,54 @@ public class HomeActivity extends SlidingPanelActivity {
         if ( !intentHandled) {
             handlePlaybackIntent(intent);
         }
+    }
+
+    @Override
+    public void onMetaChanged() {
+        super.onMetaChanged();
+        updateStatusBarColor();
+    }
+
+    @Override
+    protected void onSlide(float slideOffset) {
+        boolean isInBrowser = getCurrentPanel() == Panel.Browse && slideOffset < 0.7f;
+        if (isInBrowser != mBrowsePanelActive) {
+            mBrowsePanelActive = isInBrowser;
+            updateStatusBarColor();
+        }
+    }
+
+    private void updateStatusBarColor() {
+        if (mBrowsePanelActive || MusicUtils.getCurrentAlbumId() < 0) {
+            updateStatusBarColor(getResources().getColor(R.color.primary_dark));
+        } else {
+            new AsyncTask<Void, Void, Integer>() {
+                @Override
+                protected Integer doInBackground(Void... params) {
+                    ImageFetcher imageFetcher = ImageFetcher.getInstance(HomeActivity.this);
+                    final BitmapWithColors bitmap = imageFetcher.getArtwork(
+                            MusicUtils.getAlbumName(), MusicUtils.getCurrentAlbumId(),
+                            MusicUtils.getArtistName(), true);
+                    return bitmap != null ? bitmap.getVibrantDarkColor() : Color.TRANSPARENT;
+                }
+                @Override
+                protected void onPostExecute(Integer color) {
+                    if (color == Color.TRANSPARENT) {
+                        color = getResources().getColor(R.color.primary_dark);
+                    }
+                    updateStatusBarColor(color);
+                }
+            }.execute();
+        }
+    }
+
+    private void updateStatusBarColor(int color) {
+        final Window window = getWindow();
+        ObjectAnimator animator = ObjectAnimator.ofInt(window,
+                "statusBarColor", window.getStatusBarColor(), color);
+        animator.setEvaluator(new ArgbEvaluator());
+        animator.setDuration(300);
+        animator.start();
     }
 
     private boolean parseIntentForFragment(Intent intent) {

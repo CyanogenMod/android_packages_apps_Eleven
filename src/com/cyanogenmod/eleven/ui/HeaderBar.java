@@ -33,7 +33,6 @@ import com.cyanogenmod.eleven.loaders.QueueLoader;
 import com.cyanogenmod.eleven.menu.CreateNewPlaylist;
 import com.cyanogenmod.eleven.utils.MusicUtils;
 import com.cyanogenmod.eleven.utils.NavUtils;
-import com.cyanogenmod.eleven.widgets.theme.HoloSelector;
 
 /**
  * Simple Header bar wrapper class that also has its own menu bar button.
@@ -62,7 +61,6 @@ public class HeaderBar extends LinearLayout {
         super.onFinishInflate();
 
         mMenuButton = (ImageView)findViewById(R.id.header_bar_menu_button);
-        mMenuButton.setBackground(new HoloSelector(getContext()));
         mMenuButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -71,7 +69,6 @@ public class HeaderBar extends LinearLayout {
         });
 
         mSearchButton = (ImageView)findViewById(R.id.header_bar_search_button);
-        mSearchButton.setBackground(new HoloSelector(getContext()));
         mSearchButton.setOnClickListener(new View.OnClickListener() {
         @Override
             public void onClick(View v) {
@@ -81,7 +78,6 @@ public class HeaderBar extends LinearLayout {
 
 
         mBackButton = (ImageView)findViewById(R.id.header_bar_up);
-        mBackButton.setBackground(new HoloSelector(getContext()));
 
         mTitleText = (TextView)findViewById(R.id.header_bar_title);
     }
