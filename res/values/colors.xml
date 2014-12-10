@@ -6,15 +6,20 @@
      you may not use this file except in compliance with the License.
      You may obtain a copy of the License at
 
-          http://www.apache.org/licenses/LICENSE-2.0
+     http://www.apache.org/licenses/LICENSE-2.0
 
      Unless required by applicable law or agreed to in writing, software
      distributed under the License is distributed on an "AS IS" BASIS,
      WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
      See the License for the specific language governing permissions and
      limitations under the License.
- -->
+-->
 <resources>
+    <!-- Material -->
+    <color name="primary">#607D8B</color>
+    <color name="primary_dark">#455A64</color>
+    <color name="primary_light">#78909C</color>
+    <color name="accent">#3f51b5</color>
 
     <!-- light color -->
     <color name="background_color">#ffe4e9ed</color>
@@ -23,10 +28,10 @@
     <color name="transparent">#00000000</color>
 
     <!-- Black -->
-    <color name="black">#ff000000</color>
+    <color name="black">#212121</color>
 
     <!-- White -->
-    <color name="white">#ffffffff</color>
+    <color name="white">#fafafa</color>
 
     <!-- Standard Text Color -->
     <color name="default_text_color">#cc231f20</color>
@@ -66,6 +71,12 @@
     <color name="header_action_bar_color">#ff31353f</color>
     <color name="header_action_bar_text_color">#bfffffff</color>
     <color name="bottom_action_bar_text_color">@color/default_text_color_light</color>
+    <color name="actionbar_background_color">@color/primary</color>
+    <color name="action_bar_pressed">@color/primary_light</color>
+    <color name="action_bar_background">@color/primary</color>
+    <color name="action_bar_background_highlight">@color/primary_light</color>
+
+
 
     <!-- Background color used on some page headers -->
     <color name="page_header_background">#fff4f4f4</color>
@@ -89,9 +100,9 @@
     <color name="grid_list_item_text_color">#b3231f20</color>
 
     <!-- Top title page colors -->
-    <color name="tpi_background_color">#fff4f4f4</color>
-    <color name="tpi_text_color">#bf3d4049</color>
-    <color name="tpi_selected_text_color">#bf3d4049</color>
+    <color name="tab_ripple_color">#ffffff</color>
+    <color name="tab_accent_color">#ffffff</color>
+    <color name="tab_selected_underline_color">#ffffff</color>
 
     <!-- Search Colors -->
     <color name="search_hint_color">#4cffffff</color>
