@@ -49,7 +49,7 @@
         <item name="android:divider">@color/list_item_divider_color</item>
         <item name="android:dividerHeight">@dimen/divider_height</item>
     </style>
-    
+
     <!-- Sets up the pop up menu backgroudn resource -->
     <style name="PopupMenu" parent="@android:style/Widget.Holo.PopupMenu">
         <item name="android:popupBackground">@drawable/menu_background</item>

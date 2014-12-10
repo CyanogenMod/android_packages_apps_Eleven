@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright (C) 2012 Andrew Neal
+Copyright (C) 2014 The CyanogenMod Project
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+-->
+<resources>
+
+  <!-- Material -->
+  <color name="primary">#607D8B</color>
+  <color name="primary_dark">#455A64</color>
+  <color name="accent">#3f51b5</color>
+
+  <!-- light color -->
+  <color name="background_color">#ffe4e9ed</color>
+
+  <!-- See through -->
+  <color name="transparent">#00000000</color>
+
+  <!-- Black -->
+  <color name="black">#212121</color>
+
+  <!-- White -->
+  <color name="white">#fafafa</color>
+
+  <!-- Standard Text Color -->
+  <color name="default_text_color">#cc231f20</color>
+  <color name="default_text_color_light">#bfffffff</color>
+
+  <!-- Transparent black -->
+  <color name="transparent_black">#99000000</color>
+
+  <!-- Transparent white -->
+  <color name="transparent_white">#ffcccccc</color>
+
+  <!-- A darkish color used for the action bar -->
+  <color name="action_bar_color">#ff0d0d0d</color>
+
+  <!-- A light, Holo shade of blue -->
+  <color name="holo_blue_light">#ff33b5e5</color>
+
+  <!-- A light, transparent Holo shade of blue -->
+  <color name="holo_blue_light_transparent">#9933b5e5</color>
+
+  <!-- A light Holo shade of green -->
+  <color name="holo_green_light">#ff99cc00</color>
+
+  <!-- A light Holo shade of red -->
+  <color name="holo_red_light">#ffff4444</color>
+
+  <!-- A Holo shade of purple -->
+  <color name="holo_purple">#ffaa66cc</color>
+
+  <!-- A light Holo shade of orange -->
+  <color name="holo_orange_light">#ffffbb33</color>
+
+  <!-- A dark Holo shade of orange -->
+  <color name="holo_orange_dark">#ffff8800</color>
+
+  <!-- Color for the action bar -->
+  <color name="header_action_bar_color">#ff31353f</color>
+  <color name="header_action_bar_text_color">#bfffffff</color>
+  <color name="bottom_action_bar_text_color">@color/default_text_color_light</color>
+
+  <!-- Background color used on some page headers -->
+  <color name="page_header_background">#fff4f4f4</color>
+
+  <!-- Color for background for shadow on playlist page -->
+  <color name="header_shadow_color">#ea31353f</color>
+
+  <!-- Color for the pop up menu -->
+  <color name="menu_divider_color">#4ca19d9e</color>
+  <color name="menu_text_color">@color/black</color>
+
+  <!-- List view related colors -->
+  <color name="smart_playlist_item_background">#1931353f</color>
+  <color name="list_item_background">#4ce4e9ed</color>
+  <color name="list_item_header_text_color">#ff3d4049</color>
+  <color name="list_item_search_footer_text_color">#ff41a4f4</color>
+  <color name="list_item_text_color">@color/default_text_color</color>
+  <color name="list_item_text_color_light">@color/default_text_color_light</color>
+  <color name="list_item_divider_color">#4c231f20</color>
+  <color name="list_item_divider_color_light">#34ffffff</color>
+  <color name="grid_list_item_text_color">#b3231f20</color>
+
+  <!-- Top title page colors -->
+  <color name="tpi_background_color">#fff4f4f4</color>
+  <color name="tpi_text_color">#bf3d4049</color>
+  <color name="tpi_selected_text_color">#bf3d4049</color>
+
+  <!-- Search Colors -->
+  <color name="search_hint_color">#4cffffff</color>
+
+  <!-- Color for the text on the audio player -->
+  <color name="audio_player_text_color">@color/default_text_color_light</color>
+
+  <!-- Color for the Progress bar -->
+  <color name="circular_progress_bar_background">#66ffffff</color>
+  <color name="circular_progress_bar">@color/white</color>
+
+  <!-- search no results text color -->
+  <color name="no_results">#ff231f20</color>
+  <color name="no_results_light">@color/white</color>
+
+  <color name="now_playing_divider">#40ffffff</color>
+
+  <!-- App widget colors -->
+  <color name="widget_divider">#373737</color>
+  <!-- 80% opacity white -->
+  <color name="widget_text">#ccffffff</color>
+
+  <!-- Background Lyrics Color -->
+  <color name="lyrics_background_color">#b2000000</color>
+
+  <!-- Letter tile colors -->
+  <color name="letter_tile_default_color">#cccccc</color>
+  <color name="letter_tile_font_color">#ffffff</color>
+  <array name="letter_tile_colors">
+    <item>#9C27B0</item>
+    <item>#2196F3</item>
+    <item>#3F51B5</item>
+    <item>#2196F3</item>
+    <item>#009688</item>
+    <item>#8BC34A</item>
+    <item>#FFEB3B</item>
+    <item>#9E9E9E</item>
+  </array>
+</resources>
