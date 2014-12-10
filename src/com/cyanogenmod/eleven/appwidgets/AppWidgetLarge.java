@@ -126,14 +126,14 @@ public class AppWidgetLarge extends AppWidgetBase {
         final boolean isPlaying = service.isPlaying();
         if (isPlaying) {
             appWidgetView.setImageViewResource(R.id.app_widget_large_play,
-                    R.drawable.btn_playback_pause);
+                    R.drawable.btn_playback_pause_white);
             if (ApolloUtils.hasJellyBean()) {
                 appWidgetView.setContentDescription(R.id.app_widget_large_play,
                         service.getString(R.string.accessibility_pause));
             }
         } else {
             appWidgetView.setImageViewResource(R.id.app_widget_large_play,
-                    R.drawable.btn_playback_play);
+                    R.drawable.btn_playback_play_white);
             if (ApolloUtils.hasJellyBean()) {
                 appWidgetView.setContentDescription(R.id.app_widget_large_play,
                         service.getString(R.string.accessibility_play));
