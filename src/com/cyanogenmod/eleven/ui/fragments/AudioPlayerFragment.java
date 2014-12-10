@@ -21,6 +21,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.ServiceConnection;
+import android.graphics.Outline;
 import android.media.AudioManager;
 import android.os.Bundle;
 import android.os.Handler;
@@ -39,6 +40,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewOutlineProvider;
 import android.widget.ImageView;
 import android.widget.PopupMenu;
 import android.widget.TextView;
@@ -67,7 +69,6 @@ import com.cyanogenmod.eleven.widgets.QueueButton;
 import com.cyanogenmod.eleven.widgets.RepeatButton;
 import com.cyanogenmod.eleven.widgets.RepeatingImageButton;
 import com.cyanogenmod.eleven.widgets.ShuffleButton;
-import com.cyanogenmod.eleven.widgets.theme.HoloSelector;
 
 import java.lang.ref.WeakReference;
 
@@ -289,6 +290,17 @@ public class AudioPlayerFragment extends Fragment implements ServiceConnection,
      * Initializes the header bar
      */
     private void initHeaderBar() {
+        View headerBar = mRootView.findViewById(R.id.audio_player_header);
+        final int bottomActionBarHeight =
+                getResources().getDimensionPixelSize(R.dimen.bottom_action_bar_height);
+
+        headerBar.setOutlineProvider(new ViewOutlineProvider() {
+            @Override
+            public void getOutline(View view, Outline outline) {
+                outline.setRect(0, -bottomActionBarHeight, view.getWidth(), view.getHeight());
+            }
+        });
+
         // Title text
         mSongTitle = (TextView) mRootView.findViewById(R.id.header_bar_song_title);
         mArtistName = (TextView) mRootView.findViewById(R.id.header_bar_artist_title);
@@ -296,7 +308,6 @@ public class AudioPlayerFragment extends Fragment implements ServiceConnection,
         // Buttons
         // Search Button
         View v = mRootView.findViewById(R.id.header_bar_search_button);
-        v.setBackground(new HoloSelector(getActivity()));
         v.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -307,7 +318,6 @@ public class AudioPlayerFragment extends Fragment implements ServiceConnection,
         // Add to Playlist Button
         // Setup the playlist button - add a click listener to show the context
         mAddToPlaylistButton = (ImageView) mRootView.findViewById(R.id.header_bar_add_button);
-        mAddToPlaylistButton.setBackground(new HoloSelector(getActivity()));
 
         // Create the context menu when requested
         mAddToPlaylistButton.setOnCreateContextMenuListener(new View.OnCreateContextMenuListener() {
@@ -331,7 +341,6 @@ public class AudioPlayerFragment extends Fragment implements ServiceConnection,
         // Add the menu button
         // menu button
         mMenuButton = (ImageView) mRootView.findViewById(R.id.header_bar_menu_button);
-        mMenuButton.setBackground(new HoloSelector(getActivity()));
         mMenuButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

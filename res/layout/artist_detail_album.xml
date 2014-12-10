@@ -1,49 +1,59 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v7.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="104dp"
     android:layout_height="148dp"
     android:layout_marginRight="8dp"
-    android:background="@drawable/cardcontainer" >
+    android:foreground="@drawable/selectable_background"
+    android:elevation="3dp">
 
-    <ImageView
-        android:id="@+id/album_art"
-        android:layout_width="104dp"
-        android:layout_height="104dp"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentLeft="true"
-        android:scaleType="centerCrop" />
-
-    <com.cyanogenmod.eleven.widgets.PopupMenuButton
-        android:id="@+id/overflow"
-        android:layout_width="@dimen/overflow_width"
-        android:layout_height="match_parent"
-        android:layout_below="@id/album_art"
-        android:layout_alignParentRight="true"
-        android:layout_marginBottom="1dp"
-        android:gravity="center_vertical"
-        android:src="@drawable/menu_button" />
-
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:gravity="center_vertical"
-        android:layout_below="@id/album_art"
-        android:layout_toLeftOf="@id/overflow"
-        android:layout_alignParentLeft="true"
-        android:layout_marginLeft="8dp" >
+        android:layout_height="match_parent">
 
-        <TextView
-            android:id="@+id/title"
-            style="@style/ListItemMainText.Single"
-            android:textSize="@dimen/text_size_micro"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+        <ImageView
+            android:id="@+id/album_art"
+            android:layout_width="104dp"
+            android:layout_height="104dp"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentLeft="true"
+            android:scaleType="centerCrop" />
 
-        <TextView
-            android:id="@+id/year"
-            style="@style/ListItemSecondaryText.Single"
-            android:textSize="@dimen/text_size_extra_micro"
+        <com.cyanogenmod.eleven.widgets.PopupMenuButton
+            android:id="@+id/overflow"
+            android:layout_width="@dimen/overflow_width"
+            android:layout_height="match_parent"
+            android:layout_below="@id/album_art"
+            android:layout_alignParentRight="true"
+            android:layout_marginBottom="1dp"
+            android:gravity="center_vertical"
+            android:src="@drawable/menu_button" />
+
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-    </LinearLayout>
-</RelativeLayout>
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:gravity="center_vertical"
+            android:layout_below="@id/album_art"
+            android:layout_toLeftOf="@id/overflow"
+            android:layout_alignParentLeft="true"
+            android:layout_marginLeft="8dp" >
+
+            <TextView
+                android:id="@+id/title"
+                style="@style/ListItemMainText.Single"
+                android:textSize="@dimen/text_size_micro"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:id="@+id/year"
+                style="@style/ListItemSecondaryText.Single"
+                android:textSize="@dimen/text_size_extra_micro"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+        </LinearLayout>
+
+    </RelativeLayout>
+
+</android.support.v7.widget.CardView>

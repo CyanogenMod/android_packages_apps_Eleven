@@ -9,7 +9,8 @@
         android:layout_height="108dp"
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
-        android:background="@color/page_header_background" >
+        android:background="@color/page_header_background"
+        android:elevation="2dp" >
 
         <ImageView
             android:id="@+id/album_art"

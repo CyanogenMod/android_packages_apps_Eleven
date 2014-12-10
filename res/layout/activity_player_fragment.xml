@@ -70,9 +70,9 @@
 
     <RelativeLayout
         android:layout_width="fill_parent"
-        android:layout_height="fill_parent" >
+        android:layout_height="fill_parent"
+        android:background="@android:color/transparent" >
         <com.cyanogenmod.eleven.widgets.PlayPauseProgressButton
-            xmlns:android="http://schemas.android.com/apk/res/android"
             android:id="@+id/playPauseProgressButton"
             android:layout_width="@dimen/audio_player_controls_main_button_width"
             android:layout_height="@dimen/audio_player_controls_main_button_height"
