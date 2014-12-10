@@ -8,6 +8,7 @@ LOCAL_SRC_FILES += $(call all-java-files-under, src)
 
 LOCAL_STATIC_JAVA_LIBRARIES := \
     android-support-v8-renderscript \
+    android-support-v7-palette \
     android-common \
     android-visualizer \
     eleven_support_v4 \
