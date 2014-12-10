@@ -24,11 +24,10 @@ import android.widget.ImageButton;
 import com.cyanogenmod.eleven.R;
 import com.cyanogenmod.eleven.utils.ApolloUtils;
 import com.cyanogenmod.eleven.utils.MusicUtils;
-import com.cyanogenmod.eleven.widgets.theme.HoloSelector;
 
 /**
  * A custom {@link ImageButton} that represents the "play and pause" button.
- * 
+ *
  * @author Andrew Neal (andrewdneal@gmail.com)
  */
 public class PlayPauseButton extends ImageButton implements OnClickListener, OnLongClickListener {
@@ -50,8 +49,7 @@ public class PlayPauseButton extends ImageButton implements OnClickListener, OnL
     @SuppressWarnings("deprecation")
     public PlayPauseButton(final Context context, final AttributeSet attrs) {
         super(context, attrs);
-        // Theme the selector
-        setBackgroundDrawable(new HoloSelector(context));
+        setBackground(getResources().getDrawable(R.drawable.selectable_background));
         // Control playback (play/pause)
         setOnClickListener(this);
         // Show the cheat sheet
