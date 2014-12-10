@@ -44,7 +44,6 @@ import com.cyanogenmod.eleven.utils.NavUtils;
 import com.cyanogenmod.eleven.utils.PopupMenuHelper;
 import com.cyanogenmod.eleven.widgets.IPopupMenuCallback;
 import com.cyanogenmod.eleven.widgets.LoadingEmptyContainer;
-import com.viewpagerindicator.TitlePageIndicator;
 
 /**
  * This class is used to display all of the albums on a user's device.
