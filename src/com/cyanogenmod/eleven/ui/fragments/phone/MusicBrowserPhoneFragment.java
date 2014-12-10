@@ -31,7 +31,7 @@ import com.cyanogenmod.eleven.ui.fragments.SongFragment;
 import com.cyanogenmod.eleven.utils.MusicUtils;
 import com.cyanogenmod.eleven.utils.PreferenceUtils;
 import com.cyanogenmod.eleven.utils.SortOrder;
-import com.viewpagerindicator.TabPageIndicator;
+import com.cyanogenmod.eleven.widgets.ViewPagerTabs;
 
 /**
  * This class is used to hold the {@link ViewPager} used for swiping between the
@@ -111,11 +111,12 @@ public class MusicBrowserPhoneFragment extends BaseFragment {
         // Offscreen pager loading limit
         mViewPager.setOffscreenPageLimit(mPagerAdapter.getCount() - 1);
 
-        // Initialze the TPI
-        final TabPageIndicator pageIndicator = (TabPageIndicator)mRootView
-                .findViewById(R.id.fragment_home_phone_pager_titles);
+        // Initialize the tab strip
+        final ViewPagerTabs tabs = (ViewPagerTabs)
+                mRootView.findViewById(R.id.fragment_home_phone_pager_titles);
         // Attach the ViewPager
-        pageIndicator.setViewPager(mViewPager);
+        tabs.setViewPager(mViewPager);
+        mViewPager.setOnPageChangeListener(tabs);
 
         if (mDefaultPageIdx != INVALID_PAGE_INDEX)  {
             navigateToPage(mDefaultPageIdx);
@@ -280,6 +281,12 @@ public class MusicBrowserPhoneFragment extends BaseFragment {
                 break;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    protected boolean needsElevatedActionBar() {
+        // our view pager already has elevation
+        return false;
     }
 
     private boolean isArtistPage() {

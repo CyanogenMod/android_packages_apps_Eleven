@@ -301,8 +301,7 @@ public class SearchActivity extends FragmentActivity implements
 
         // Theme the action bar
         final ActionBar actionBar = getActionBar();
-        actionBar.setHomeButtonEnabled(true);
-        actionBar.setIcon(R.drawable.ic_action_search);
+        actionBar.setDisplayHomeAsUpEnabled(true);
 
         // Get the query String
         mFilterString = getIntent().getStringExtra(SearchManager.QUERY);

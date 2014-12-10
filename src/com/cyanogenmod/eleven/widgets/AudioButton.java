@@ -8,8 +8,8 @@ import android.view.View.OnClickListener;
 import android.view.View.OnLongClickListener;
 import android.widget.ImageButton;
 
+import com.cyanogenmod.eleven.R;
 import com.cyanogenmod.eleven.utils.ApolloUtils;
-import com.cyanogenmod.eleven.widgets.theme.HoloSelector;
 
 public abstract class AudioButton extends ImageButton implements OnClickListener, OnLongClickListener {
     public static float ACTIVE_ALPHA = 1.0f;
@@ -18,9 +18,8 @@ public abstract class AudioButton extends ImageButton implements OnClickListener
     @SuppressWarnings("deprecation")
     public AudioButton(final Context context, final AttributeSet attrs) {
         super(context, attrs);
-        // Theme the selector
         setPadding(0, 0, 0, 0);
-        setBackgroundDrawable(new HoloSelector(context));
+        setBackground(getResources().getDrawable(R.drawable.selectable_background));
         // Control playback (cycle shuffle)
         setOnClickListener(this);
         // Show the cheat sheet
