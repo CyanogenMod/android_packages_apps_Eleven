@@ -86,7 +86,7 @@
                 android:contentDescription="@string/accessibility_play"
                 android:focusable="true"
                 android:scaleType="centerCrop"
-                android:src="@drawable/btn_playback_play" />
+                android:src="@drawable/btn_playback_play_black" />
 
             <ProgressBar
                 android:id="@+id/progressBarBackground"
@@ -141,7 +141,7 @@
                 android:layout_toLeftOf="@id/audio_player_current_time"
                 android:layout_centerVertical="true"
                 android:scaleType="fitCenter"
-                android:src="@drawable/btn_playback_previous" />
+                android:src="@drawable/btn_playback_previous_black" />
 
             <!-- divider -->
             <View
@@ -215,7 +215,7 @@
                 android:layout_toRightOf="@id/audio_player_total_time"
                 android:layout_centerVertical="true"
                 android:scaleType="fitCenter"
-                android:src="@drawable/btn_playback_next" />
+                android:src="@drawable/btn_playback_next_black" />
 
             <!-- divider -->
             <View

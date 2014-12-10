@@ -132,12 +132,12 @@ public class NotificationHelper {
         }
         if (mNotificationTemplate != null) {
             mNotificationTemplate.setImageViewResource(R.id.notification_base_play,
-                    isPlaying ? R.drawable.btn_playback_pause : R.drawable.btn_playback_play);
+                    isPlaying ? R.drawable.btn_playback_pause_black : R.drawable.btn_playback_play_black);
         }
 
         if (ApolloUtils.hasJellyBean() && mExpandedView != null) {
             mExpandedView.setImageViewResource(R.id.notification_expanded_base_play,
-                    isPlaying ? R.drawable.btn_playback_pause : R.drawable.btn_playback_play);
+                    isPlaying ? R.drawable.btn_playback_pause_black : R.drawable.btn_playback_play_black);
         }
         mNotificationManager.notify(ELEVEN_MUSIC_SERVICE, mNotification);
     }
@@ -173,7 +173,7 @@ public class NotificationHelper {
 
         // Update the play button image
         mExpandedView.setImageViewResource(R.id.notification_expanded_base_play,
-                isPlaying ? R.drawable.btn_playback_pause : R.drawable.btn_playback_play);
+                isPlaying ? R.drawable.btn_playback_pause_black : R.drawable.btn_playback_play_black);
     }
 
     /**
@@ -198,7 +198,7 @@ public class NotificationHelper {
 
         // Update the play button image
         mNotificationTemplate.setImageViewResource(R.id.notification_base_play,
-                isPlaying ? R.drawable.btn_playback_pause : R.drawable.btn_playback_play);
+                isPlaying ? R.drawable.btn_playback_pause_black : R.drawable.btn_playback_play_black);
     }
 
     /**
