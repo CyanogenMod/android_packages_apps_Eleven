@@ -103,7 +103,7 @@ public class HomeActivity extends SlidingPanelActivity {
                     setupActionBar.setupActionBar();
 
                     if (topFragment instanceof MusicBrowserPhoneFragment) {
-                        getActionBar().setIcon(R.drawable.ic_launcher);
+                        getActionBar().setIcon(null);
                         getActionBar().setHomeButtonEnabled(false);
                     } else {
                         getActionBar().setIcon(R.drawable.ic_action_back_padded);
