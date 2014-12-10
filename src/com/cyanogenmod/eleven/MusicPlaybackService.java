@@ -16,6 +16,7 @@ package com.cyanogenmod.eleven;
 import android.annotation.SuppressLint;
 import android.app.AlarmManager;
 import android.app.Notification;
+import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.app.Service;
 import android.appwidget.AppWidgetManager;
@@ -32,7 +33,6 @@ import android.database.MatrixCursor;
 import android.graphics.Bitmap;
 import android.media.AudioManager;
 import android.media.AudioManager.OnAudioFocusChangeListener;
-import android.media.MediaMetadataRetriever;
 import android.media.MediaMetadata;
 import android.media.MediaPlayer;
 import android.media.audiofx.AudioEffect;
@@ -51,7 +51,6 @@ import android.os.SystemClock;
 import android.provider.MediaStore;
 import android.provider.MediaStore.Audio.AlbumColumns;
 import android.provider.MediaStore.Audio.AudioColumns;
-import android.support.v7.graphics.Palette;
 import android.text.TextUtils;
 import android.util.Log;
 
@@ -65,7 +64,7 @@ import com.cyanogenmod.eleven.provider.MusicPlaybackState;
 import com.cyanogenmod.eleven.provider.RecentStore;
 import com.cyanogenmod.eleven.provider.SongPlayCount;
 import com.cyanogenmod.eleven.service.MusicPlaybackTrack;
-import com.cyanogenmod.eleven.utils.ApolloUtils;
+import com.cyanogenmod.eleven.utils.BitmapWithColors;
 import com.cyanogenmod.eleven.utils.Lists;
 import com.cyanogenmod.eleven.utils.SrtManager;
 
@@ -114,14 +113,19 @@ public class MusicPlaybackService extends Service {
     public static final String PLAYLIST_CHANGED = "com.cyanogenmod.eleven.playlistchanged";
 
     /**
-     * Indicates the repeat mode chaned
+     * Indicates the repeat mode changed
      */
     public static final String REPEATMODE_CHANGED = "com.cyanogenmod.eleven.repeatmodechanged";
 
     /**
-     * Indicates the shuffle mode chaned
+     * Indicates the shuffle mode changed
      */
     public static final String SHUFFLEMODE_CHANGED = "com.cyanogenmod.eleven.shufflemodechanged";
+
+    /**
+     * Indicates the track fails to play
+     */
+    public static final String TRACK_ERROR = "com.cyanogenmod.eleven.trackerror";
 
     /**
      * For backwards compatibility reasons, also provide sticky
@@ -175,13 +179,6 @@ public class MusicPlaybackService extends Service {
      * Called to change the shuffle mode
      */
     public static final String SHUFFLE_ACTION = "com.cyanogenmod.eleven.shuffle";
-
-    /**
-     * Called to update the service about the foreground state of Apollo's activities
-     */
-    public static final String FOREGROUND_STATE_CHANGED = "com.cyanogenmod.eleven.fgstatechanged";
-
-    public static final String NOW_IN_FOREGROUND = "nowinforeground";
 
     public static final String FROM_MEDIA_BUTTON = "frommediabutton";
 
@@ -324,6 +321,13 @@ public class MusicPlaybackService extends Service {
      */
     public static final int MAX_HISTORY_SIZE = 1000;
 
+    public interface TrackErrorExtra {
+        /**
+         * Name of the track that was unable to play
+         */
+        public static final String TRACK_NAME = "trackname";
+    }
+
     /**
      * The columns used to retrieve any info from the current track
      */
@@ -396,6 +400,8 @@ public class MusicPlaybackService extends Service {
     private PendingIntent mShutdownIntent;
     private boolean mShutdownScheduled;
 
+    private NotificationManager mNotificationManager;
+
     /**
      * The cursor used to retrieve info on the current track and run the
      * necessary queries to play audio files
@@ -433,6 +439,13 @@ public class MusicPlaybackService extends Service {
      */
     private long mLastPlayedTime;
 
+    private int mNotifyMode = NOTIFY_MODE_NONE;
+    private long mNotificationPostTime = 0;
+
+    private static final int NOTIFY_MODE_NONE = 0;
+    private static final int NOTIFY_MODE_FOREGROUND = 1;
+    private static final int NOTIFY_MODE_BACKGROUND = 2;
+
     /**
      * Used to indicate if the queue can be saved
      */
@@ -442,11 +455,6 @@ public class MusicPlaybackService extends Service {
      * Used to track what type of audio focus loss caused the playback to pause
      */
     private boolean mPausedByTransientLossOfFocus = false;
-
-    /**
-     * Used to track whether any of Apollo's activities is in the foreground
-     */
-    private boolean mAnyActivityInForeground = false;
 
     /**
      * Lock screen controls
@@ -486,8 +494,7 @@ public class MusicPlaybackService extends Service {
 
     // to improve perf, instead of hitting the disk cache or file cache, store the bitmaps in memory
     private String mCachedKey;
-    private Bitmap[] mCachedBitmap = new Bitmap[2];
-    private int mCachedBitmapAccentColor = 0;
+    private BitmapWithColors[] mCachedBitmapWithColors = new BitmapWithColors[2];
 
     /**
      * Image cache
@@ -563,6 +570,8 @@ public class MusicPlaybackService extends Service {
     public void onCreate() {
         if (D) Log.d(TAG, "Creating service");
         super.onCreate();
+
+        mNotificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
 
         // Initialize the favorites and recents databases
         mRecentsCache = RecentStore.getInstance(this);
@@ -684,7 +693,6 @@ public class MusicPlaybackService extends Service {
             }
         });
         mSession.setFlags(MediaSession.FLAG_HANDLES_TRANSPORT_CONTROLS);
-        mSession.setActive(true);
     }
 
     /**
@@ -745,11 +753,6 @@ public class MusicPlaybackService extends Service {
         if (intent != null) {
             final String action = intent.getAction();
 
-            if (intent.hasExtra(NOW_IN_FOREGROUND)) {
-                mAnyActivityInForeground = intent.getBooleanExtra(NOW_IN_FOREGROUND, false);
-                updateNotification();
-            }
-
             if (SHUTDOWN.equals(action)) {
                 mShutdownScheduled = false;
                 releaseServiceUiAndStop();
@@ -778,8 +781,9 @@ public class MusicPlaybackService extends Service {
         }
 
         if (D) Log.d(TAG, "Nothing is playing anymore, releasing notification");
-        stopForeground(true);
+        cancelNotification();
         mAudioManager.abandonAudioFocus(mAudioFocusListener);
+        mSession.setActive(false);
 
         if (!mServiceInUse) {
             saveQueue(true);
@@ -826,11 +830,39 @@ public class MusicPlaybackService extends Service {
      * Updates the notification, considering the current play and activity state
      */
     private void updateNotification() {
-        if (!mAnyActivityInForeground && recentlyPlayed()) {
-            buildNotification();
-        } else if (mAnyActivityInForeground) {
-            stopForeground(true);
+        final int newNotifyMode;
+        if (isPlaying()) {
+            newNotifyMode = NOTIFY_MODE_FOREGROUND;
+        } else if (recentlyPlayed()) {
+            newNotifyMode = NOTIFY_MODE_BACKGROUND;
+        } else {
+            newNotifyMode = NOTIFY_MODE_NONE;
         }
+
+        int notificationId = hashCode();
+        if (mNotifyMode != newNotifyMode) {
+            if (mNotifyMode == NOTIFY_MODE_FOREGROUND) {
+                stopForeground(newNotifyMode == NOTIFY_MODE_NONE);
+            } else if (newNotifyMode == NOTIFY_MODE_NONE) {
+                mNotificationManager.cancel(notificationId);
+                mNotificationPostTime = 0;
+            }
+        }
+
+        if (newNotifyMode == NOTIFY_MODE_FOREGROUND) {
+            startForeground(notificationId, buildNotification());
+        } else if (newNotifyMode == NOTIFY_MODE_BACKGROUND) {
+            mNotificationManager.notify(notificationId, buildNotification());
+        }
+
+        mNotifyMode = newNotifyMode;
+    }
+
+    private void cancelNotification() {
+        stopForeground(true);
+        mNotificationManager.cancel(hashCode());
+        mNotificationPostTime = 0;
+        mNotifyMode = NOTIFY_MODE_NONE;
     }
 
     /**
@@ -1440,7 +1472,7 @@ public class MusicPlaybackService extends Service {
             mSession.setPlaybackState(new PlaybackState.Builder()
                     .setState(playState, position(), 1.0f).build());
         } else if (what.equals(META_CHANGED) || what.equals(QUEUE_CHANGED)) {
-            Bitmap albumArt = getAlbumArt(false);
+            Bitmap albumArt = getAlbumArt(false).getBitmap();
             if (albumArt != null) {
                 // RemoteControlClient wants to recycle the bitmaps thrown at it, so we need
                 // to make sure not to hand out our cache copy
@@ -1457,6 +1489,9 @@ public class MusicPlaybackService extends Service {
                     .putString(MediaMetadata.METADATA_KEY_ALBUM, getAlbumName())
                     .putString(MediaMetadata.METADATA_KEY_TITLE, getTrackName())
                     .putLong(MediaMetadata.METADATA_KEY_DURATION, duration())
+                    .putLong(MediaMetadata.METADATA_KEY_TRACK_NUMBER, getQueuePosition() + 1)
+                    .putLong(MediaMetadata.METADATA_KEY_NUM_TRACKS, getQueue().length)
+                    .putString(MediaMetadata.METADATA_KEY_GENRE, getGenreName())
                     .putBitmap(MediaMetadata.METADATA_KEY_ALBUM_ART, albumArt)
                     .build());
 
@@ -1465,7 +1500,7 @@ public class MusicPlaybackService extends Service {
         }
     }
 
-    private void buildNotification() {
+    private Notification buildNotification() {
         final String albumName = getAlbumName();
         final String artistName = getArtistName();
         final boolean isPlaying = isPlaying();
@@ -1484,18 +1519,21 @@ public class MusicPlaybackService extends Service {
         Intent nowPlayingIntent = new Intent("com.cyanogenmod.eleven.AUDIO_PLAYER")
                 .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         PendingIntent clickIntent = PendingIntent.getActivity(this, 0, nowPlayingIntent, 0);
-        Bitmap artwork = getAlbumArt(false);
+        BitmapWithColors artwork = getAlbumArt(false);
 
-        // TODO: Add back a beter small icon when we have time
+        if (mNotificationPostTime == 0) {
+            mNotificationPostTime = System.currentTimeMillis();
+        }
+
         Notification.Builder builder = new Notification.Builder(this)
-                .setSmallIcon(R.drawable.ic_launcher)
-                .setLargeIcon(artwork)
+                .setSmallIcon(R.drawable.ic_notification)
+                .setLargeIcon(artwork.getBitmap())
                 .setContentIntent(clickIntent)
                 .setContentTitle(getTrackName())
                 .setContentText(text)
+                .setWhen(mNotificationPostTime)
                 .setShowWhen(false)
                 .setStyle(style)
-                .setShowWhen(false)
                 .setVisibility(Notification.VISIBILITY_PUBLIC)
                 .addAction(R.drawable.btn_playback_previous,
                         getString(R.string.accessibility_prev),
@@ -1506,25 +1544,9 @@ public class MusicPlaybackService extends Service {
                         getString(R.string.accessibility_next),
                         retrievePlaybackAction(NEXT_ACTION));
 
-        if (mCachedBitmapAccentColor == 0 && artwork != null) {
-            // Generate a new Palette from the current artwork
-            final Palette p = Palette.generate(artwork);
-            if (p != null) {
-                // Check for dark vibrant colors, then vibrant
-                Palette.Swatch swatch = p.getDarkVibrantSwatch();
-                if (swatch == null) {
-                    swatch = p.getVibrantSwatch();
-                }
-                if (swatch != null) {
-                    mCachedBitmapAccentColor = swatch.getRgb();
-                }
-            }
-        }
-        if (mCachedBitmapAccentColor != 0) {
-            builder.setColor(mCachedBitmapAccentColor);
-        }
+        builder.setColor(artwork.getVibrantDarkColor());
 
-        startForeground(hashCode(), builder.build());
+        return builder.build();
     }
 
     private final PendingIntent retrievePlaybackAction(final String action) {
@@ -1961,6 +1983,35 @@ public class MusicPlaybackService extends Service {
     }
 
     /**
+     * Returns the genre name of song
+     *
+     * @return The current song genre name
+     */
+    public String getGenreName() {
+        synchronized (this) {
+            if (mCursor == null) {
+                return null;
+            }
+            String[] genreProjection = { MediaStore.Audio.Genres.NAME };
+            Uri genreUri = MediaStore.Audio.Genres.getContentUriForAudioId("external",
+                    (int) mPlaylist.get(mPlayPos).mId);
+            Cursor genreCursor = getContentResolver().query(genreUri, genreProjection,
+                    null, null, null);
+            if (genreCursor != null) {
+                try {
+                    if (genreCursor.moveToFirst()) {
+                        return genreCursor.getString(
+                            genreCursor.getColumnIndexOrThrow(MediaStore.Audio.Genres.NAME));
+                    }
+                } finally {
+                    genreCursor.close();
+                }
+            }
+            return null;
+        }
+    }
+
+    /**
      * Returns the artist name
      *
      * @return The current song artist name
@@ -2202,16 +2253,20 @@ public class MusicPlaybackService extends Service {
      * @param value to set mIsSupposedToBePlaying to
      * @param notify whether we want to fire PLAYSTATE_CHANGED event
      */
-    private void setIsSupposedToBePlaying(boolean value, boolean notify){
+    private void setIsSupposedToBePlaying(boolean value, boolean notify) {
         if (mIsSupposedToBePlaying != value) {
             mIsSupposedToBePlaying = value;
-            if (notify) {
-                notifyChange(PLAYSTATE_CHANGED);
-            }
 
+            // Update mLastPlayed time first and notify afterwards, as
+            // the notification listener method needs the up-to-date value
+            // for the recentlyPlayed() method to work
             if (!mIsSupposedToBePlaying) {
                 scheduleDelayedShutdown();
                 mLastPlayedTime = System.currentTimeMillis();
+            }
+
+            if (notify) {
+                notifyChange(PLAYSTATE_CHANGED);
             }
         }
     }
@@ -2294,6 +2349,7 @@ public class MusicPlaybackService extends Service {
 
         mAudioManager.registerMediaButtonEventReceiver(new ComponentName(getPackageName(),
                 MediaButtonIntentReceiver.class.getName()));
+        mSession.setActive(true);
 
         if (createNewNextTrack) {
             setNextTrack();
@@ -2605,7 +2661,7 @@ public class MusicPlaybackService extends Service {
      *                    Currently Has no impact on the artwork size if one exists
      * @return The album art for the current album.
      */
-    public Bitmap getAlbumArt(boolean smallBitmap) {
+    public BitmapWithColors getAlbumArt(boolean smallBitmap) {
         final String albumName = getAlbumName();
         final String artistName = getArtistName();
         final long albumId = getAlbumId();
@@ -2613,23 +2669,23 @@ public class MusicPlaybackService extends Service {
         final int targetIndex = smallBitmap ? 0 : 1;
 
         // if the cached key matches and we have the bitmap, return it
-        if (key.equals(mCachedKey) && mCachedBitmap[targetIndex] != null) {
-            return mCachedBitmap[targetIndex];
+        if (key.equals(mCachedKey) && mCachedBitmapWithColors[targetIndex] != null) {
+            return mCachedBitmapWithColors[targetIndex];
         }
 
         // otherwise get the artwork (or defaultartwork if none found)
-        final Bitmap bitmap = mImageFetcher.getArtwork(albumName, albumId, artistName, smallBitmap);
+        final BitmapWithColors bitmap = mImageFetcher.getArtwork(albumName,
+                albumId, artistName, smallBitmap);
 
         // if the key is different, clear the bitmaps first
         if (!key.equals(mCachedKey)) {
-            mCachedBitmap[0] = null;
-            mCachedBitmap[1] = null;
-            mCachedBitmapAccentColor = 0;
+            mCachedBitmapWithColors[0] = null;
+            mCachedBitmapWithColors[1] = null;
         }
 
         // store the new key and bitmap
         mCachedKey = key;
-        mCachedBitmap[targetIndex] = bitmap;
+        mCachedBitmapWithColors[targetIndex] = bitmap;
         return bitmap;
     }
 
@@ -2757,7 +2813,14 @@ public class MusicPlaybackService extends Service {
                         break;
                     case SERVER_DIED:
                         if (service.isPlaying()) {
-                            service.gotoNext(true);
+                            final Intent i = new Intent(TRACK_ERROR);
+                            final TrackErrorInfo info = (TrackErrorInfo)msg.obj;
+                            i.putExtra(TrackErrorExtra.TRACK_NAME, info.mTrackName);
+                            service.sendBroadcast(i);
+
+                            // since the service isPlaying(), we only need to remove the offending
+                            // audio track, and the code will automatically play the next track
+                            service.removeTrack(info.mId);
                         } else {
                             service.openCurrentAndNext();
                         }
@@ -2871,6 +2934,16 @@ public class MusicPlaybackService extends Service {
             }
         }
     };
+
+    private static final class TrackErrorInfo {
+        public long mId;
+        public String mTrackName;
+
+        public TrackErrorInfo(long id, String trackName) {
+            mId = id;
+            mTrackName = trackName;
+        }
+    }
 
     private static final class MultiPlayer implements MediaPlayer.OnErrorListener,
             MediaPlayer.OnCompletionListener {
@@ -3136,13 +3209,19 @@ public class MusicPlaybackService extends Service {
          */
         @Override
         public boolean onError(final MediaPlayer mp, final int what, final int extra) {
+            Log.w(TAG, "Music Server Error what: " + what + " extra: " + extra);
             switch (what) {
                 case MediaPlayer.MEDIA_ERROR_SERVER_DIED:
+                    final MusicPlaybackService service = mService.get();
+                    final TrackErrorInfo errorInfo = new TrackErrorInfo(service.getAudioId(),
+                            service.getTrackName());
+
                     mIsInitialized = false;
                     mCurrentMediaPlayer.release();
                     mCurrentMediaPlayer = new MediaPlayer();
-                    mCurrentMediaPlayer.setWakeMode(mService.get(), PowerManager.PARTIAL_WAKE_LOCK);
-                    mHandler.sendMessageDelayed(mHandler.obtainMessage(SERVER_DIED), 2000);
+                    mCurrentMediaPlayer.setWakeMode(service, PowerManager.PARTIAL_WAKE_LOCK);
+                    Message msg = mHandler.obtainMessage(SERVER_DIED, errorInfo);
+                    mHandler.sendMessageDelayed(msg, 2000);
                     return true;
                 default:
                     break;

@@ -34,6 +34,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toolbar;
 
 import com.cyanogenmod.eleven.IElevenService;
 import com.cyanogenmod.eleven.MusicPlaybackService;
@@ -56,7 +57,7 @@ import java.util.ArrayList;
  * bind to Apollo's service.
  * <p>
  * {@link SlidingPanelActivity} extends from this skeleton.
- * 
+ *
  * @author Andrew Neal (andrewdneal@gmail.com)
  */
 public abstract class BaseActivity extends FragmentActivity implements ServiceConnection,
@@ -120,8 +121,6 @@ public abstract class BaseActivity extends FragmentActivity implements ServiceCo
         // Initialize the broadcast receiver
         mPlaybackStatus = new PlaybackStatus(this);
 
-        getActionBar().setTitle(getString(R.string.app_name).toUpperCase());
-
         // Calculate ActionBar height
         TypedValue value = new TypedValue();
         if (getTheme().resolveAttribute(android.R.attr.actionBarSize, value, true))
@@ -132,6 +131,11 @@ public abstract class BaseActivity extends FragmentActivity implements ServiceCo
 
         // Set the layout
         setContentView(setContentView());
+
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setActionBar(toolbar);
+
+        getActionBar().setTitle(getString(R.string.app_name).toUpperCase());
 
         // set the background on the root view
         getWindow().getDecorView().getRootView().setBackgroundColor(
@@ -229,8 +233,6 @@ public abstract class BaseActivity extends FragmentActivity implements ServiceCo
         registerReceiver(mPlaybackStatus, filter);
 
         mPlayPauseProgressButton.resume();
-
-        MusicUtils.notifyForegroundStateChanged(this, true);
     }
 
     /**
@@ -242,7 +244,6 @@ public abstract class BaseActivity extends FragmentActivity implements ServiceCo
 
         mPlayPauseProgressButton.pause();
 
-        MusicUtils.notifyForegroundStateChanged(this, false);
     }
 
     /**
