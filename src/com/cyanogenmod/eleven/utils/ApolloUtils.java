@@ -79,27 +79,6 @@ public final class ApolloUtils {
     }
 
     /**
-     * Used to determine if the device is running Jelly Bean or greater
-     * 
-     * @return True if the device is running Jelly Bean or greater, false
-     *         otherwise
-     */
-    public static final boolean hasJellyBean() {
-        return Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN;
-    }
-
-    /**
-     * Used to determine if the device is running
-     * Jelly Bean MR2 (Android 4.3) or greater
-     *
-     * @return True if the device is running Jelly Bean MR2 or greater,
-     *         false otherwise
-     */
-    public static final boolean hasJellyBeanMR2() {
-        return Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR2;
-    }
-
-    /**
      * Used to determine if the device is a tablet or not
      * 
      * @param context The {@link Context} to use.
@@ -258,11 +237,7 @@ public final class ApolloUtils {
             @Override
             public void onGlobalLayout() {
                 /* Layout pass done, unregister for further events */
-                if (hasJellyBean()) {
-                    view.getViewTreeObserver().removeOnGlobalLayoutListener(this);
-                } else {
-                    view.getViewTreeObserver().removeGlobalOnLayoutListener(this);
-                }
+                view.getViewTreeObserver().removeOnGlobalLayoutListener(this);
                 runnable.run();
             }
         };

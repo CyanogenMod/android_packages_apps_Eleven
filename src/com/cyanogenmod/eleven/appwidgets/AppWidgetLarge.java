@@ -127,17 +127,13 @@ public class AppWidgetLarge extends AppWidgetBase {
         if (isPlaying) {
             appWidgetView.setImageViewResource(R.id.app_widget_large_play,
                     R.drawable.btn_playback_pause);
-            if (ApolloUtils.hasJellyBean()) {
-                appWidgetView.setContentDescription(R.id.app_widget_large_play,
-                        service.getString(R.string.accessibility_pause));
-            }
+            appWidgetView.setContentDescription(R.id.app_widget_large_play,
+                    service.getString(R.string.accessibility_pause));
         } else {
             appWidgetView.setImageViewResource(R.id.app_widget_large_play,
                     R.drawable.btn_playback_play);
-            if (ApolloUtils.hasJellyBean()) {
-                appWidgetView.setContentDescription(R.id.app_widget_large_play,
-                        service.getString(R.string.accessibility_play));
-            }
+            appWidgetView.setContentDescription(R.id.app_widget_large_play,
+                    service.getString(R.string.accessibility_play));
         }
 
         // Link actions buttons to intents
