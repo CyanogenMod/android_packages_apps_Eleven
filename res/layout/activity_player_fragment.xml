@@ -64,7 +64,8 @@
             android:paddingBottom="6dp"
             android:background="@color/lyrics_background_color"
             android:textColor="@color/white"
-            android:textSize="@dimen/text_size_small"/>
+            android:textSize="@dimen/text_size_small"
+            android:alpha="0.0"/>
     </com.cyanogenmod.eleven.widgets.SquareFrame>
 
     <RelativeLayout
