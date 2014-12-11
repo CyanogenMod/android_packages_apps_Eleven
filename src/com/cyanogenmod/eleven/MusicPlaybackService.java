@@ -2734,7 +2734,9 @@ public class MusicPlaybackService extends Service {
                     break;
                 case LYRICS:
                     service.mLyrics = (String) msg.obj;
-                    service.notifyChange(NEW_LYRICS);
+                    if (service.mFileToPlay != null) {
+                        service.notifyChange(NEW_LYRICS);
+                    }
                     break;
                 case RELEASE_WAKELOCK:
                     service.mWakeLock.release();
