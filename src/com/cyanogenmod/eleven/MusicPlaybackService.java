@@ -428,6 +428,11 @@ public class MusicPlaybackService extends Service {
     private boolean mIsSupposedToBePlaying = false;
 
     /**
+     * Gets the last played time to determine whether we still want notifications or not
+     */
+    private long mLastPlayedTime;
+
+    /**
      * Used to indicate if the queue can be saved
      */
     private boolean mQueueIsSaveable = true;
@@ -819,7 +824,7 @@ public class MusicPlaybackService extends Service {
      * Updates the notification, considering the current play and activity state
      */
     private void updateNotification() {
-        if (!mAnyActivityInForeground && isPlaying()) {
+        if (!mAnyActivityInForeground && recentlyPlayed()) {
             buildNotification();
         } else if (mAnyActivityInForeground) {
             stopForeground(true);
@@ -919,8 +924,7 @@ public class MusicPlaybackService extends Service {
         mFileToPlay = null;
         closeCursor();
         if (goToIdle) {
-            scheduleDelayedShutdown();
-            mIsSupposedToBePlaying = false;
+            setIsSupposedToBePlaying(false, false);
         } else {
             stopForeground(false);
         }
@@ -1416,7 +1420,7 @@ public class MusicPlaybackService extends Service {
         }
 
         if (what.equals(PLAYSTATE_CHANGED)) {
-            buildNotification();
+            updateNotification();
         }
 
         // Update the app-widgets
@@ -1486,6 +1490,7 @@ public class MusicPlaybackService extends Service {
                 .setContentIntent(clickIntent)
                 .setContentTitle(getTrackName())
                 .setContentText(text)
+                .setShowWhen(false)
                 .setStyle(style)
                 .setVisibility(Notification.VISIBILITY_PUBLIC)
                 .addAction(R.drawable.btn_playback_previous,
@@ -2172,6 +2177,32 @@ public class MusicPlaybackService extends Service {
     }
 
     /**
+     * Helper function to wrap the logic around mIsSupposedToBePlaying for consistentcy
+     * @param value to set mIsSupposedToBePlaying to
+     * @param notify whether we want to fire PLAYSTATE_CHANGED event
+     */
+    private void setIsSupposedToBePlaying(boolean value, boolean notify){
+        if (mIsSupposedToBePlaying != value) {
+            mIsSupposedToBePlaying = value;
+            if (notify) {
+                notifyChange(PLAYSTATE_CHANGED);
+            }
+
+            if (!mIsSupposedToBePlaying) {
+                scheduleDelayedShutdown();
+                mLastPlayedTime = System.currentTimeMillis();
+            }
+        }
+    }
+
+    /**
+     * @return true if is playing or has played within the last IDLE_DELAY time
+     */
+    private boolean recentlyPlayed() {
+        return isPlaying() || System.currentTimeMillis() - mLastPlayedTime < IDLE_DELAY;
+    }
+
+    /**
      * Opens a list for playback
      *
      * @param list The list of tracks to open
@@ -2260,10 +2291,7 @@ public class MusicPlaybackService extends Service {
             mPlayerHandler.removeMessages(FADEDOWN);
             mPlayerHandler.sendEmptyMessage(FADEUP);
 
-            if (!mIsSupposedToBePlaying) {
-                mIsSupposedToBePlaying = true;
-                notifyChange(PLAYSTATE_CHANGED);
-            }
+            setIsSupposedToBePlaying(true, true);
 
             cancelShutdown();
             updateNotification();
@@ -2281,9 +2309,7 @@ public class MusicPlaybackService extends Service {
             mPlayerHandler.removeMessages(FADEUP);
             if (mIsSupposedToBePlaying) {
                 mPlayer.pause();
-                scheduleDelayedShutdown();
-                mIsSupposedToBePlaying = false;
-                notifyChange(PLAYSTATE_CHANGED);
+                setIsSupposedToBePlaying(false, true);
             }
         }
     }
@@ -2305,11 +2331,7 @@ public class MusicPlaybackService extends Service {
             }
 
             if (pos < 0) {
-                scheduleDelayedShutdown();
-                if (mIsSupposedToBePlaying) {
-                    mIsSupposedToBePlaying = false;
-                    notifyChange(PLAYSTATE_CHANGED);
-                }
+                setIsSupposedToBePlaying(false, true);
                 return;
             }
 
