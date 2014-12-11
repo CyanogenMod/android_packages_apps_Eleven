@@ -17,15 +17,20 @@ import android.app.Activity;
 import android.app.SearchManager;
 import android.content.ActivityNotFoundException;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.content.pm.ResolveInfo;
 import android.media.audiofx.AudioEffect;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.util.Log;
 
 import com.cyanogenmod.eleven.Config;
 import com.cyanogenmod.eleven.R;
 import com.cyanogenmod.eleven.ui.activities.HomeActivity;
 import com.cyanogenmod.eleven.ui.activities.SearchActivity;
 import com.cyanogenmod.eleven.ui.activities.SettingsActivity;
+
+import java.util.List;
 
 /**
  * Various navigation helpers.
@@ -111,18 +116,37 @@ public final class NavUtils {
     }
 
     /**
+     * @return the intent to launch the effects panel/dsp manager
+     */
+    private static Intent createEffectsIntent() {
+        final Intent effects = new Intent(AudioEffect.ACTION_DISPLAY_AUDIO_EFFECT_CONTROL_PANEL);
+        effects.putExtra(AudioEffect.EXTRA_AUDIO_SESSION, MusicUtils.getAudioSessionId());
+        return effects;
+    }
+
+    /**
      * Opens the sound effects panel or DSP manager in CM
      * 
      * @param context The {@link Activity} to use.
+     * @param requestCode The request code passed into startActivityForResult
      */
-    public static void openEffectsPanel(final Activity context) {
+    public static void openEffectsPanel(final Activity context, final int requestCode) {
         try {
-            final Intent effects = new Intent(AudioEffect.ACTION_DISPLAY_AUDIO_EFFECT_CONTROL_PANEL);
-            effects.putExtra(AudioEffect.EXTRA_AUDIO_SESSION, MusicUtils.getAudioSessionId());
-            context.startActivity(effects);
+            // The google MusicFX apps need to be started using startActivityForResult
+            context.startActivityForResult(createEffectsIntent(), requestCode);
         } catch (final ActivityNotFoundException notFound) {
-            CustomToast.makeText(context, context.getString(R.string.no_effects_for_you), CustomToast.LENGTH_SHORT).show();
+            CustomToast.makeText(context, context.getString(R.string.no_effects_for_you),
+                    CustomToast.LENGTH_SHORT).show();
         }
+    }
+
+    /**
+     * @return true if there is an effects panel/DSK Manager
+     */
+    public static boolean hasEffectsPanel(final Activity activity) {
+        final PackageManager packageManager = activity.getPackageManager();
+        return packageManager.resolveActivity(createEffectsIntent(),
+                PackageManager.MATCH_DEFAULT_ONLY) != null;
     }
 
     /**
