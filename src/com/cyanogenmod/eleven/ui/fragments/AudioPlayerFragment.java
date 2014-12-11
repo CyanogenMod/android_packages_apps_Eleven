@@ -52,6 +52,7 @@ import com.cyanogenmod.eleven.loaders.QueueLoader;
 import com.cyanogenmod.eleven.menu.CreateNewPlaylist;
 import com.cyanogenmod.eleven.menu.DeleteDialog;
 import com.cyanogenmod.eleven.menu.FragmentMenuItems;
+import com.cyanogenmod.eleven.ui.activities.HomeActivity;
 import com.cyanogenmod.eleven.ui.activities.SlidingPanelActivity;
 import com.cyanogenmod.eleven.utils.ApolloUtils;
 import com.cyanogenmod.eleven.utils.MusicUtils;
@@ -624,6 +625,11 @@ public class AudioPlayerFragment extends Fragment implements ServiceConnection,
         if (MusicUtils.getQueueSize() > 0) {
             // ringtone, and equalizer
             inflater.inflate(R.menu.audio_player, menu);
+
+            if (!NavUtils.hasEffectsPanel(getActivity())) {
+                menu.removeItem(R.id.menu_audio_player_equalizer);
+            }
+
             // save queue/clear queue
             inflater.inflate(R.menu.queue, menu);
         }
@@ -646,7 +652,7 @@ public class AudioPlayerFragment extends Fragment implements ServiceConnection,
                 return true;
             case R.id.menu_audio_player_equalizer:
                 // Sound effects
-                NavUtils.openEffectsPanel(getActivity());
+                NavUtils.openEffectsPanel(getActivity(), HomeActivity.EQUALIZER);
                 return true;
             case R.id.menu_settings:
                 // Settings

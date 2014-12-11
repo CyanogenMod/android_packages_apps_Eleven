@@ -54,6 +54,7 @@ public class HomeActivity extends SlidingPanelActivity {
     public static final String EXTRA_BROWSE_PAGE_IDX = "BrowsePageIndex";
 
     private static final int NEW_PHOTO = 1;
+    public static final int EQUALIZER = 2;
 
     private String mKey;
     private boolean mLoadedBaseFragment = false;
