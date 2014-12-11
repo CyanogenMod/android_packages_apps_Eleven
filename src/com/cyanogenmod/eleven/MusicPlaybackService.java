@@ -474,6 +474,7 @@ public class MusicPlaybackService extends Service {
     private long[] mAutoShuffleList = null;
 
     private MusicPlayerHandler mPlayerHandler;
+    private HandlerThread mHandlerThread;
 
     private BroadcastReceiver mUnmountReceiver = null;
 
@@ -574,12 +575,12 @@ public class MusicPlaybackService extends Service {
         // separate thread because the service normally runs in the process's
         // main thread, which we don't want to block. We also make it
         // background priority so CPU-intensive work will not disrupt the UI.
-        final HandlerThread thread = new HandlerThread("MusicPlayerHandler",
+        mHandlerThread = new HandlerThread("MusicPlayerHandler",
                 android.os.Process.THREAD_PRIORITY_BACKGROUND);
-        thread.start();
+        mHandlerThread.start();
 
         // Initialize the handler
-        mPlayerHandler = new MusicPlayerHandler(this, thread.getLooper());
+        mPlayerHandler = new MusicPlayerHandler(this, mHandlerThread.getLooper());
 
         // Initialize the audio manager and register any headset controls for
         // playback
@@ -696,6 +697,11 @@ public class MusicPlaybackService extends Service {
         // remove any pending alarms
         mAlarmManager.cancel(mShutdownIntent);
 
+        // Remove any callbacks from the handler
+        mPlayerHandler.removeCallbacksAndMessages(null);
+        // quit the thread so that anything that gets posted won't run
+        mHandlerThread.quitSafely();
+
         // Release the player
         mPlayer.release();
         mPlayer = null;
@@ -706,9 +712,6 @@ public class MusicPlaybackService extends Service {
 
         // remove the media store observer
         getContentResolver().unregisterContentObserver(mMediaStoreObserver);
-
-        // Remove any callbacks from the handler
-        mPlayerHandler.removeCallbacksAndMessages(null);
 
         // Close the cursor
         closeCursor();
