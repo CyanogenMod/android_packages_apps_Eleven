@@ -24,7 +24,6 @@ import android.view.MenuItem;
 
 import com.cyanogenmod.eleven.R;
 import com.cyanogenmod.eleven.cache.ImageFetcher;
-import com.cyanogenmod.eleven.utils.MusicUtils;
 
 /**
  * Settings.
@@ -68,24 +67,6 @@ public class SettingsActivity extends PreferenceActivity {
                 break;
         }
         return super.onOptionsItemSelected(item);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    protected void onStart() {
-        super.onStart();
-        MusicUtils.notifyForegroundStateChanged(this, true);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    protected void onStop() {
-        super.onStop();
-        MusicUtils.notifyForegroundStateChanged(this, false);
     }
 
     /**

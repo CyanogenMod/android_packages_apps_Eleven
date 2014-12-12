@@ -229,8 +229,6 @@ public abstract class BaseActivity extends FragmentActivity implements ServiceCo
         registerReceiver(mPlaybackStatus, filter);
 
         mPlayPauseProgressButton.resume();
-
-        MusicUtils.notifyForegroundStateChanged(this, true);
     }
 
     /**
@@ -241,8 +239,6 @@ public abstract class BaseActivity extends FragmentActivity implements ServiceCo
         super.onStop();
 
         mPlayPauseProgressButton.pause();
-
-        MusicUtils.notifyForegroundStateChanged(this, false);
     }
 
     /**

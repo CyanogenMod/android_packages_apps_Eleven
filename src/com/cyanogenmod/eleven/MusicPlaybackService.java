@@ -16,6 +16,7 @@ package com.cyanogenmod.eleven;
 import android.annotation.SuppressLint;
 import android.app.AlarmManager;
 import android.app.Notification;
+import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.app.Service;
 import android.appwidget.AppWidgetManager;
@@ -175,13 +176,6 @@ public class MusicPlaybackService extends Service {
      * Called to change the shuffle mode
      */
     public static final String SHUFFLE_ACTION = "com.cyanogenmod.eleven.shuffle";
-
-    /**
-     * Called to update the service about the foreground state of Apollo's activities
-     */
-    public static final String FOREGROUND_STATE_CHANGED = "com.cyanogenmod.eleven.fgstatechanged";
-
-    public static final String NOW_IN_FOREGROUND = "nowinforeground";
 
     public static final String FROM_MEDIA_BUTTON = "frommediabutton";
 
@@ -396,6 +390,8 @@ public class MusicPlaybackService extends Service {
     private PendingIntent mShutdownIntent;
     private boolean mShutdownScheduled;
 
+    private NotificationManager mNotificationManager;
+
     /**
      * The cursor used to retrieve info on the current track and run the
      * necessary queries to play audio files
@@ -433,6 +429,13 @@ public class MusicPlaybackService extends Service {
      */
     private long mLastPlayedTime;
 
+    private int mNotifyMode = NOTIFY_MODE_NONE;
+    private long mNotificationPostTime = 0;
+
+    private static final int NOTIFY_MODE_NONE = 0;
+    private static final int NOTIFY_MODE_FOREGROUND = 1;
+    private static final int NOTIFY_MODE_BACKGROUND = 2;
+
     /**
      * Used to indicate if the queue can be saved
      */
@@ -442,11 +445,6 @@ public class MusicPlaybackService extends Service {
      * Used to track what type of audio focus loss caused the playback to pause
      */
     private boolean mPausedByTransientLossOfFocus = false;
-
-    /**
-     * Used to track whether any of Apollo's activities is in the foreground
-     */
-    private boolean mAnyActivityInForeground = false;
 
     /**
      * Lock screen controls
@@ -563,6 +561,8 @@ public class MusicPlaybackService extends Service {
     public void onCreate() {
         if (D) Log.d(TAG, "Creating service");
         super.onCreate();
+
+        mNotificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
 
         // Initialize the favorites and recents databases
         mRecentsCache = RecentStore.getInstance(this);
@@ -684,7 +684,6 @@ public class MusicPlaybackService extends Service {
             }
         });
         mSession.setFlags(MediaSession.FLAG_HANDLES_TRANSPORT_CONTROLS);
-        mSession.setActive(true);
     }
 
     /**
@@ -745,11 +744,6 @@ public class MusicPlaybackService extends Service {
         if (intent != null) {
             final String action = intent.getAction();
 
-            if (intent.hasExtra(NOW_IN_FOREGROUND)) {
-                mAnyActivityInForeground = intent.getBooleanExtra(NOW_IN_FOREGROUND, false);
-                updateNotification();
-            }
-
             if (SHUTDOWN.equals(action)) {
                 mShutdownScheduled = false;
                 releaseServiceUiAndStop();
@@ -778,8 +772,9 @@ public class MusicPlaybackService extends Service {
         }
 
         if (D) Log.d(TAG, "Nothing is playing anymore, releasing notification");
-        stopForeground(true);
+        cancelNotification();
         mAudioManager.abandonAudioFocus(mAudioFocusListener);
+        mSession.setActive(false);
 
         if (!mServiceInUse) {
             saveQueue(true);
@@ -826,12 +821,41 @@ public class MusicPlaybackService extends Service {
      * Updates the notification, considering the current play and activity state
      */
     private void updateNotification() {
-        if (!mAnyActivityInForeground && recentlyPlayed()) {
-            buildNotification();
-        } else if (mAnyActivityInForeground) {
-            stopForeground(true);
+        final int newNotifyMode;
+        if (isPlaying()) {
+            newNotifyMode = NOTIFY_MODE_FOREGROUND;
+        } else if (recentlyPlayed()) {
+            newNotifyMode = NOTIFY_MODE_BACKGROUND;
+        } else {
+            newNotifyMode = NOTIFY_MODE_NONE;
         }
+
+        int notificationId = hashCode();
+        if (mNotifyMode != newNotifyMode) {
+            if (mNotifyMode == NOTIFY_MODE_FOREGROUND) {
+                stopForeground(newNotifyMode == NOTIFY_MODE_NONE);
+            } else if (newNotifyMode == NOTIFY_MODE_NONE) {
+                mNotificationManager.cancel(notificationId);
+                mNotificationPostTime = 0;
+            }
+        }
+
+        if (newNotifyMode == NOTIFY_MODE_FOREGROUND) {
+            startForeground(notificationId, buildNotification());
+        } else if (newNotifyMode == NOTIFY_MODE_BACKGROUND) {
+            mNotificationManager.notify(notificationId, buildNotification());
+        }
+
+        mNotifyMode = newNotifyMode;
     }
+
+    private void cancelNotification() {
+        stopForeground(true);
+        mNotificationManager.cancel(hashCode());
+        mNotificationPostTime = 0;
+        mNotifyMode = NOTIFY_MODE_NONE;
+    }
+
 
     /**
      * @return A card ID used to save and restore playlists, i.e., the queue.
@@ -1465,7 +1489,7 @@ public class MusicPlaybackService extends Service {
         }
     }
 
-    private void buildNotification() {
+    private Notification buildNotification() {
         final String albumName = getAlbumName();
         final String artistName = getArtistName();
         final boolean isPlaying = isPlaying();
@@ -1486,16 +1510,20 @@ public class MusicPlaybackService extends Service {
         PendingIntent clickIntent = PendingIntent.getActivity(this, 0, nowPlayingIntent, 0);
         Bitmap artwork = getAlbumArt(false);
 
+        if (mNotificationPostTime == 0) {
+            mNotificationPostTime = System.currentTimeMillis();
+        }
+
         // TODO: Add back a beter small icon when we have time
         Notification.Builder builder = new Notification.Builder(this)
-                .setSmallIcon(R.drawable.ic_launcher)
+                .setSmallIcon(R.drawable.ic_notification)
                 .setLargeIcon(artwork)
                 .setContentIntent(clickIntent)
                 .setContentTitle(getTrackName())
                 .setContentText(text)
+                .setWhen(mNotificationPostTime)
                 .setShowWhen(false)
                 .setStyle(style)
-                .setShowWhen(false)
                 .setVisibility(Notification.VISIBILITY_PUBLIC)
                 .addAction(R.drawable.btn_playback_previous,
                         getString(R.string.accessibility_prev),
@@ -1524,7 +1552,7 @@ public class MusicPlaybackService extends Service {
             builder.setColor(mCachedBitmapAccentColor);
         }
 
-        startForeground(hashCode(), builder.build());
+        return builder.build();
     }
 
     private final PendingIntent retrievePlaybackAction(final String action) {
@@ -2202,16 +2230,20 @@ public class MusicPlaybackService extends Service {
      * @param value to set mIsSupposedToBePlaying to
      * @param notify whether we want to fire PLAYSTATE_CHANGED event
      */
-    private void setIsSupposedToBePlaying(boolean value, boolean notify){
+    private void setIsSupposedToBePlaying(boolean value, boolean notify) {
         if (mIsSupposedToBePlaying != value) {
             mIsSupposedToBePlaying = value;
-            if (notify) {
-                notifyChange(PLAYSTATE_CHANGED);
-            }
 
+            // Update mLastPlayed time first and notify afterwards, as
+            // the notification listener method needs the up-to-date value
+            // for the recentlyPlayed() method to work
             if (!mIsSupposedToBePlaying) {
                 scheduleDelayedShutdown();
                 mLastPlayedTime = System.currentTimeMillis();
+            }
+
+            if (notify) {
+                notifyChange(PLAYSTATE_CHANGED);
             }
         }
     }
@@ -2294,6 +2326,7 @@ public class MusicPlaybackService extends Service {
 
         mAudioManager.registerMediaButtonEventReceiver(new ComponentName(getPackageName(),
                 MediaButtonIntentReceiver.class.getName()));
+        mSession.setActive(true);
 
         if (createNewNextTrack) {
             setNextTrack();
