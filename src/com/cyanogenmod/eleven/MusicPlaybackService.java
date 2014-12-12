@@ -51,6 +51,7 @@ import android.os.SystemClock;
 import android.provider.MediaStore;
 import android.provider.MediaStore.Audio.AlbumColumns;
 import android.provider.MediaStore.Audio.AudioColumns;
+import android.support.v7.graphics.Palette;
 import android.text.TextUtils;
 import android.util.Log;
 
@@ -486,6 +487,7 @@ public class MusicPlaybackService extends Service {
     // to improve perf, instead of hitting the disk cache or file cache, store the bitmaps in memory
     private String mCachedKey;
     private Bitmap[] mCachedBitmap = new Bitmap[2];
+    private int mCachedBitmapAccentColor = 0;
 
     /**
      * Image cache
@@ -1482,16 +1484,18 @@ public class MusicPlaybackService extends Service {
         Intent nowPlayingIntent = new Intent("com.cyanogenmod.eleven.AUDIO_PLAYER")
                 .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         PendingIntent clickIntent = PendingIntent.getActivity(this, 0, nowPlayingIntent, 0);
+        Bitmap artwork = getAlbumArt(false);
 
         // TODO: Add back a beter small icon when we have time
-        Notification notification = new Notification.Builder(this)
+        Notification.Builder builder = new Notification.Builder(this)
                 .setSmallIcon(R.drawable.ic_launcher)
-                .setLargeIcon(getAlbumArt(false))
+                .setLargeIcon(artwork)
                 .setContentIntent(clickIntent)
                 .setContentTitle(getTrackName())
                 .setContentText(text)
                 .setShowWhen(false)
                 .setStyle(style)
+                .setShowWhen(false)
                 .setVisibility(Notification.VISIBILITY_PUBLIC)
                 .addAction(R.drawable.btn_playback_previous,
                         getString(R.string.accessibility_prev),
@@ -1500,10 +1504,27 @@ public class MusicPlaybackService extends Service {
                         retrievePlaybackAction(TOGGLEPAUSE_ACTION))
                 .addAction(R.drawable.btn_playback_next,
                         getString(R.string.accessibility_next),
-                        retrievePlaybackAction(NEXT_ACTION))
-                .build();
+                        retrievePlaybackAction(NEXT_ACTION));
 
-        startForeground(hashCode(), notification);
+        if (mCachedBitmapAccentColor == 0 && artwork != null) {
+            // Generate a new Palette from the current artwork
+            final Palette p = Palette.generate(artwork);
+            if (p != null) {
+                // Check for dark vibrant colors, then vibrant
+                Palette.Swatch swatch = p.getDarkVibrantSwatch();
+                if (swatch == null) {
+                    swatch = p.getVibrantSwatch();
+                }
+                if (swatch != null) {
+                    mCachedBitmapAccentColor = swatch.getRgb();
+                }
+            }
+        }
+        if (mCachedBitmapAccentColor != 0) {
+            builder.setColor(mCachedBitmapAccentColor);
+        }
+
+        startForeground(hashCode(), builder.build());
     }
 
     private final PendingIntent retrievePlaybackAction(final String action) {
@@ -2603,6 +2624,7 @@ public class MusicPlaybackService extends Service {
         if (!key.equals(mCachedKey)) {
             mCachedBitmap[0] = null;
             mCachedBitmap[1] = null;
+            mCachedBitmapAccentColor = 0;
         }
 
         // store the new key and bitmap
