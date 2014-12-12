@@ -29,7 +29,7 @@ import android.widget.TextView;
 import com.cyanogenmod.eleven.Config;
 import com.cyanogenmod.eleven.R;
 import com.cyanogenmod.eleven.cache.ImageFetcher;
-import com.cyanogenmod.eleven.loaders.ArtistAlbumLoader;
+import com.cyanogenmod.eleven.loaders.AlbumLoader;
 import com.cyanogenmod.eleven.model.Album;
 import com.cyanogenmod.eleven.utils.ApolloUtils;
 import com.cyanogenmod.eleven.utils.NavUtils;
@@ -130,7 +130,7 @@ implements LoaderCallbacks<List<Album>>, IPopupMenuCallback {
 
     @Override // LoaderCallbacks
     public Loader<List<Album>> onCreateLoader(int id, Bundle args) {
-        return new ArtistAlbumLoader(mActivity, args.getLong(Config.ID));
+        return new AlbumLoader(mActivity, args.getLong(Config.ID));
     }
 
     @Override // LoaderCallbacks

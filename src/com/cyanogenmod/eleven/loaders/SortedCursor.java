@@ -19,7 +19,9 @@ import android.database.AbstractCursor;
 import android.database.Cursor;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
+import java.util.List;
 
 /**
  * This cursor basically wraps a song cursor and is given a list of the order of the ids of the
@@ -33,50 +35,65 @@ public class SortedCursor extends AbstractCursor {
     private ArrayList<Integer> mOrderedPositions;
     // this contains the ids that weren't found in the underlying cursor
     private ArrayList<Long> mMissingIds;
+    // this contains the mapped cursor positions and afterwards the extra ids that weren't found
+    private HashMap<Long, Integer> mMapCursorPositions;
+    // extra we want to store with the cursor
+    private ArrayList<Object> mExtraData;
 
     /**
      * @param cursor to wrap
-     * @param order the list of ids in sorted order to display
+     * @param order the list of unique ids in sorted order to display
      * @param columnName the column name of the id to look up in the internal cursor
      */
-    public SortedCursor(final Cursor cursor, final long[] order, final String columnName) {
+    public SortedCursor(final Cursor cursor, final long[] order, final String columnName,
+            final List<? extends Object> extraData) {
         if (cursor == null) {
             throw new IllegalArgumentException("Non-null cursor is needed");
         }
 
         mCursor = cursor;
-        mMissingIds = buildCursorPositionMapping(order, columnName);
+        mMissingIds = buildCursorPositionMapping(order, columnName, extraData);
     }
 
     /**
      * This function populates mOrderedPositions with the cursor positions in the order based
      * on the order passed in
      * @param order the target order of the internal cursor
+     * @param extraData Extra data we want to add to the cursor
      * @return returns the ids that aren't found in the underlying cursor
      */
-    private ArrayList<Long> buildCursorPositionMapping(final long[] order, final String columnName) {
+    private ArrayList<Long> buildCursorPositionMapping(final long[] order,
+            final String columnName, final List<? extends Object> extraData) {
         ArrayList<Long> missingIds = new ArrayList<Long>();
 
         mOrderedPositions = new ArrayList<Integer>(mCursor.getCount());
+        mExtraData = new ArrayList<Object>();
 
-        HashMap<Long, Integer> mapCursorPositions = new HashMap<Long, Integer>(mCursor.getCount());
+        mMapCursorPositions = new HashMap<Long, Integer>(mCursor.getCount());
         final int idPosition = mCursor.getColumnIndex(columnName);
 
         if (mCursor.moveToFirst()) {
             // first figure out where each of the ids are in the cursor
             do {
-                mapCursorPositions.put(mCursor.getLong(idPosition), mCursor.getPosition());
+                mMapCursorPositions.put(mCursor.getLong(idPosition), mCursor.getPosition());
             } while (mCursor.moveToNext());
 
             // now create the ordered positions to map to the internal cursor given the
             // external sort order
-            for (long id : order) {
-                if (mapCursorPositions.containsKey(id)) {
-                    mOrderedPositions.add(mapCursorPositions.get(id));
+            for (int i = 0; order != null && i < order.length; i++) {
+                final long id = order[i];
+                if (mMapCursorPositions.containsKey(id)) {
+                    mOrderedPositions.add(mMapCursorPositions.get(id));
+                    mMapCursorPositions.remove(id);
+                    if (extraData != null) {
+                        mExtraData.add(extraData.get(i));
+                    }
                 } else {
                     missingIds.add(id);
                 }
             }
+
+            mCursor.moveToFirst();
         }
 
         return missingIds;
@@ -87,6 +104,20 @@ public class SortedCursor extends AbstractCursor {
      */
     public ArrayList<Long> getMissingIds() {
         return mMissingIds;
+    }
+
+    /**
+     * @return the list of ids that were in the underlying cursor but not part of the ordered list
+     */
+    public Collection<Long> getExtraIds() {
+        return mMapCursorPositions.keySet();
+    }
+
+    /**
+     * @return the extra object data that was passed in to be attached to the current row
+     */
+    public Object getExtraData() {
+        return mExtraData.get(getPosition());
     }
 
     @Override

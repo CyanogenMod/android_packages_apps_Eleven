@@ -11,7 +11,8 @@ LOCAL_STATIC_JAVA_LIBRARIES := \
     android-common \
     android-visualizer \
     eleven_support_v4 \
-    eleven_recyclerview
+    eleven_recyclerview \
+    guava
 
 LOCAL_PACKAGE_NAME := Eleven
 LOCAL_OVERRIDES_PACKAGES := Music
