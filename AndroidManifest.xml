@@ -19,10 +19,9 @@
     android:versionCode="2"
     android:versionName="1.1" >
 
-    <!-- ICS to Jelly Bean -->
     <uses-sdk
         android:minSdkVersion="17"
-        android:targetSdkVersion="20" />
+        android:targetSdkVersion="21" />
 
     <!-- Used for caching and creating new playlists -->
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
