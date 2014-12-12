@@ -94,7 +94,7 @@ public class EqualizerView extends VisualizerView {
                 byte rfk = data.bytes[mDivisions * i];
                 byte ifk = data.bytes[mDivisions * i + 1];
                 float magnitude = (rfk * rfk + ifk * ifk);
-                int dbValue = (int) (10 * Math.log10(magnitude));
+                int dbValue = magnitude > 0 ? (int) (10 * Math.log10(magnitude)) : 0;
 
                 mFFTPoints[i * 4 + 1] = rect.height();
                 mFFTPoints[i * 4 + 3] = rect.height() - (dbValue * mDbFuzzFactor + mDbFuzz);
