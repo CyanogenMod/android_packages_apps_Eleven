@@ -76,8 +76,6 @@ public final class MusicUtils {
 
     public static IElevenService mService = null;
 
-    private static int sForegroundActivities = 0;
-
     private static final WeakHashMap<Context, ServiceBinder> mConnectionMap;
 
     private static final long[] sEmptyList;
@@ -1546,28 +1544,6 @@ public final class MusicUtils {
         try {
             mService.removeTracks(0, Integer.MAX_VALUE);
         } catch (final RemoteException ignored) {
-        }
-    }
-
-    /**
-     * Used to build and show a notification when Apollo is sent into the
-     * background
-     *
-     * @param context The {@link Context} to use.
-     */
-    public static void notifyForegroundStateChanged(final Context context, boolean inForeground) {
-        int old = sForegroundActivities;
-        if (inForeground) {
-            sForegroundActivities++;
-        } else {
-            sForegroundActivities--;
-        }
-
-        if (old == 0 || sForegroundActivities == 0) {
-            final Intent intent = new Intent(context, MusicPlaybackService.class);
-            intent.setAction(MusicPlaybackService.FOREGROUND_STATE_CHANGED);
-            intent.putExtra(MusicPlaybackService.NOW_IN_FOREGROUND, sForegroundActivities != 0);
-            context.startService(intent);
         }
     }
 
