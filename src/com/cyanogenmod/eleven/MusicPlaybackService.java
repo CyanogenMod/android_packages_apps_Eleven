@@ -16,6 +16,7 @@ package com.cyanogenmod.eleven;
 import android.annotation.SuppressLint;
 import android.app.AlarmManager;
 import android.app.Notification;
+import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.app.Service;
 import android.appwidget.AppWidgetManager;
@@ -396,6 +397,8 @@ public class MusicPlaybackService extends Service {
     private PendingIntent mShutdownIntent;
     private boolean mShutdownScheduled;
 
+    private NotificationManager mNotificationManager;
+
     /**
      * The cursor used to retrieve info on the current track and run the
      * necessary queries to play audio files
@@ -432,6 +435,12 @@ public class MusicPlaybackService extends Service {
      * Gets the last played time to determine whether we still want notifications or not
      */
     private long mLastPlayedTime;
+
+    private int mNotifyMode = NOTIFY_MODE_NONE;
+
+    private static final int NOTIFY_MODE_NONE = 0;
+    private static final int NOTIFY_MODE_FOREGROUND = 1;
+    private static final int NOTIFY_MODE_BACKGROUND = 2;
 
     /**
      * Used to indicate if the queue can be saved
@@ -564,6 +573,8 @@ public class MusicPlaybackService extends Service {
         if (D) Log.d(TAG, "Creating service");
         super.onCreate();
 
+        mNotificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+
         // Initialize the favorites and recents databases
         mRecentsCache = RecentStore.getInstance(this);
 
@@ -684,7 +695,6 @@ public class MusicPlaybackService extends Service {
             }
         });
         mSession.setFlags(MediaSession.FLAG_HANDLES_TRANSPORT_CONTROLS);
-        mSession.setActive(true);
     }
 
     /**
@@ -778,8 +788,9 @@ public class MusicPlaybackService extends Service {
         }
 
         if (D) Log.d(TAG, "Nothing is playing anymore, releasing notification");
-        stopForeground(true);
+        cancelNotification();
         mAudioManager.abandonAudioFocus(mAudioFocusListener);
+        mSession.setActive(false);
 
         if (!mServiceInUse) {
             saveQueue(true);
@@ -826,12 +837,45 @@ public class MusicPlaybackService extends Service {
      * Updates the notification, considering the current play and activity state
      */
     private void updateNotification() {
-        if (!mAnyActivityInForeground && recentlyPlayed()) {
-            buildNotification();
-        } else if (mAnyActivityInForeground) {
-            stopForeground(true);
+        int newNotifyMode = NOTIFY_MODE_NONE;
+        if (!mAnyActivityInForeground) {
+            if (isPlaying()) {
+                newNotifyMode = NOTIFY_MODE_FOREGROUND;
+            } else if (recentlyPlayed()) {
+                newNotifyMode = NOTIFY_MODE_BACKGROUND;
+            }
         }
+
+        int notificationId = hashCode();
+        if (mNotifyMode == newNotifyMode) {
+            if (mNotifyMode != NOTIFY_MODE_NONE) {
+                mNotificationManager.notify(notificationId, buildNotification());
+            }
+
+            return;
+        }
+
+        if (mNotifyMode == NOTIFY_MODE_FOREGROUND) {
+            stopForeground(newNotifyMode == NOTIFY_MODE_NONE);
+        } else if (newNotifyMode == NOTIFY_MODE_NONE) {
+            mNotificationManager.cancel(notificationId);
+        }
+
+        if (newNotifyMode == NOTIFY_MODE_FOREGROUND) {
+            startForeground(notificationId, buildNotification());
+        } else if (newNotifyMode == NOTIFY_MODE_BACKGROUND) {
+            mNotificationManager.notify(notificationId, buildNotification());
+        }
+
+        mNotifyMode = newNotifyMode;
     }
+
+    private void cancelNotification() {
+        stopForeground(true);
+        mNotificationManager.cancel(hashCode());
+        mNotifyMode = NOTIFY_MODE_NONE;
+    }
+
 
     /**
      * @return A card ID used to save and restore playlists, i.e., the queue.
@@ -1465,7 +1509,7 @@ public class MusicPlaybackService extends Service {
         }
     }
 
-    private void buildNotification() {
+    private Notification buildNotification() {
         final String albumName = getAlbumName();
         final String artistName = getArtistName();
         final boolean isPlaying = isPlaying();
@@ -1495,7 +1539,6 @@ public class MusicPlaybackService extends Service {
                 .setContentText(text)
                 .setShowWhen(false)
                 .setStyle(style)
-                .setShowWhen(false)
                 .setVisibility(Notification.VISIBILITY_PUBLIC)
                 .addAction(R.drawable.btn_playback_previous,
                         getString(R.string.accessibility_prev),
@@ -1524,7 +1567,7 @@ public class MusicPlaybackService extends Service {
             builder.setColor(mCachedBitmapAccentColor);
         }
 
-        startForeground(hashCode(), builder.build());
+        return builder.build();
     }
 
     private final PendingIntent retrievePlaybackAction(final String action) {
@@ -2205,13 +2248,15 @@ public class MusicPlaybackService extends Service {
     private void setIsSupposedToBePlaying(boolean value, boolean notify){
         if (mIsSupposedToBePlaying != value) {
             mIsSupposedToBePlaying = value;
-            if (notify) {
-                notifyChange(PLAYSTATE_CHANGED);
-            }
 
+            // set the last played time before notifying change
             if (!mIsSupposedToBePlaying) {
                 scheduleDelayedShutdown();
                 mLastPlayedTime = System.currentTimeMillis();
+            }
+
+            if (notify) {
+                notifyChange(PLAYSTATE_CHANGED);
             }
         }
     }
@@ -2294,6 +2339,7 @@ public class MusicPlaybackService extends Service {
 
         mAudioManager.registerMediaButtonEventReceiver(new ComponentName(getPackageName(),
                 MediaButtonIntentReceiver.class.getName()));
+        mSession.setActive(true);
 
         if (createNewNextTrack) {
             setNextTrack();
