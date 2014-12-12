@@ -191,10 +191,9 @@ public class ImageFetcher extends ImageWorker {
                              boolean smallArtwork) {
         // Check the disk cache
         Bitmap artwork = null;
-        String key = albumName;
+        String key = String.valueOf(albumId);
 
         if (artwork == null && albumName != null && mImageCache != null) {
-            key = generateAlbumCacheKey(albumName, artistName);
             artwork = mImageCache.getBitmapFromDiskCache(key);
         }
         if (artwork == null && albumId >= 0 && mImageCache != null) {

@@ -258,6 +258,15 @@ public class LetterTileDrawable extends Drawable {
         mOffset = offset;
     }
 
+    /**
+     * Sets the tile data used to determine the display text and color
+     * @param displayName the name to display - Some logic will be applied to do some trimming
+     *                    and up to the first two letters will be displayed
+     * @param identifier the identifier used to determine the color of the background.  For
+     *                   album, use albumId, for artist use artistName and for playlist use
+     *                   playlistId
+     * @param type the type of item that this tile drawable corresponds to
+     */
     public void setTileDetails(final String displayName, final String identifier,
                                final ImageType type) {
         mDisplayName = MusicUtils.getTrimmedName(displayName);
@@ -292,6 +301,13 @@ public class LetterTileDrawable extends Drawable {
 
     /**
      * Draws the default letter tile drawable for the image type to a bitmap
+     * @param identifier the identifier used to determine the color of the background.  For
+     *                   album, use albumId, for artist use artistName and for playlist use
+     *                   playlistId
+     * @param type the type of item that this tile drawable corresponds to
+     * @param isCircle whether to draw a circle or a square
+     * @param smallArtwork true if you want to draw a smaller version of the default bitmap for
+     *                     perf/memory reasons
      */
     public static Bitmap createDefaultBitmap(Context context, String identifier, ImageType type, 
                                              boolean isCircle, boolean smallArtwork) {
