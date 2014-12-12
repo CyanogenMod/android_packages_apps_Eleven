@@ -27,7 +27,6 @@ public abstract class AppWidgetBase extends AppWidgetProvider {
             final ComponentName serviceName) {
         Intent intent = new Intent(action);
         intent.setComponent(serviceName);
-        intent.putExtra(MusicPlaybackService.NOW_IN_FOREGROUND, false);
         return PendingIntent.getService(context, 0, intent, 0);
     }
 
