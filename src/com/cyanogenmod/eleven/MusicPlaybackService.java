@@ -1492,6 +1492,9 @@ public class MusicPlaybackService extends Service {
                     .putString(MediaMetadata.METADATA_KEY_ALBUM, getAlbumName())
                     .putString(MediaMetadata.METADATA_KEY_TITLE, getTrackName())
                     .putLong(MediaMetadata.METADATA_KEY_DURATION, duration())
+                    .putLong(MediaMetadata.METADATA_KEY_TRACK_NUMBER, getQueuePosition() + 1)
+                    .putLong(MediaMetadata.METADATA_KEY_NUM_TRACKS, getQueue().length)
+                    .putString(MediaMetadata.METADATA_KEY_GENRE, getGenreName())
                     .putBitmap(MediaMetadata.METADATA_KEY_ALBUM_ART, albumArt)
                     .build());
 
@@ -1995,6 +1998,35 @@ public class MusicPlaybackService extends Service {
                 return null;
             }
             return mCursor.getString(mCursor.getColumnIndexOrThrow(AudioColumns.TITLE));
+        }
+    }
+
+    /**
+     * Returns the genre name of song
+     *
+     * @return The current song genre name
+     */
+    public String getGenreName() {
+        synchronized (this) {
+            if (mCursor == null) {
+                return null;
+            }
+            String[] genreProjection = { MediaStore.Audio.Genres.NAME };
+            Uri genreUri = MediaStore.Audio.Genres.getContentUriForAudioId("external",
+                    (int) mPlaylist.get(mPlayPos).mId);
+            Cursor genreCursor = getContentResolver().query(genreUri, genreProjection,
+                    null, null, null);
+            if (genreCursor != null) {
+                try {
+                    if (genreCursor.moveToFirst()) {
+                        return genreCursor.getString(
+                            genreCursor.getColumnIndexOrThrow(MediaStore.Audio.Genres.NAME));
+                    }
+                } finally {
+                    genreCursor.close();
+                }
+            }
+            return null;
         }
     }
 
