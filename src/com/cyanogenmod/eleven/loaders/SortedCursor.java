@@ -117,7 +117,8 @@ public class SortedCursor extends AbstractCursor {
      * @return the extra object data that was passed in to be attached to the current row
      */
     public Object getExtraData() {
-        return mExtraData.get(getPosition());
+        int position = getPosition();
+        return position < mExtraData.size() ? mExtraData.get(position) : null;
     }
 
     @Override
