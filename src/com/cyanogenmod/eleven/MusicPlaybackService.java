@@ -1089,7 +1089,7 @@ public class MusicPlaybackService extends Service {
         return c;
      }
 
-    private void closeCursor() {
+    private synchronized void closeCursor() {
         if (mCursor != null) {
             mCursor.close();
             mCursor = null;
@@ -2735,89 +2735,92 @@ public class MusicPlaybackService extends Service {
                 return;
             }
 
-            switch (msg.what) {
-                case FADEDOWN:
-                    mCurrentVolume -= .05f;
-                    if (mCurrentVolume > .2f) {
-                        sendEmptyMessageDelayed(FADEDOWN, 10);
-                    } else {
-                        mCurrentVolume = .2f;
-                    }
-                    service.mPlayer.setVolume(mCurrentVolume);
-                    break;
-                case FADEUP:
-                    mCurrentVolume += .01f;
-                    if (mCurrentVolume < 1.0f) {
-                        sendEmptyMessageDelayed(FADEUP, 10);
-                    } else {
-                        mCurrentVolume = 1.0f;
-                    }
-                    service.mPlayer.setVolume(mCurrentVolume);
-                    break;
-                case SERVER_DIED:
-                    if (service.isPlaying()) {
-                        service.gotoNext(true);
-                    } else {
-                        service.openCurrentAndNext();
-                    }
-                    break;
-                case TRACK_WENT_TO_NEXT:
-                    service.setAndRecordPlayPos(service.mNextPlayPos);
-                    service.setNextTrack();
-                    if (service.mCursor != null) {
-                        service.mCursor.close();
-                    }
-                    service.updateCursor(service.mPlaylist.get(service.mPlayPos).mId);
-                    service.notifyChange(META_CHANGED);
-                    service.updateNotification();
-                    break;
-                case TRACK_ENDED:
-                    if (service.mRepeatMode == REPEAT_CURRENT) {
-                        service.seek(0);
-                        service.play();
-                    } else {
-                        service.gotoNext(false);
-                    }
-                    break;
-                case LYRICS:
-                    service.mLyrics = (String) msg.obj;
-                    service.notifyChange(NEW_LYRICS);
-                    break;
-                case RELEASE_WAKELOCK:
-                    service.mWakeLock.release();
-                    break;
-                case FOCUSCHANGE:
-                    if (D) Log.d(TAG, "Received audio focus change event " + msg.arg1);
-                    switch (msg.arg1) {
-                        case AudioManager.AUDIOFOCUS_LOSS:
-                        case AudioManager.AUDIOFOCUS_LOSS_TRANSIENT:
-                            if (service.isPlaying()) {
-                                service.mPausedByTransientLossOfFocus =
-                                    msg.arg1 == AudioManager.AUDIOFOCUS_LOSS_TRANSIENT;
-                            }
-                            service.pause();
-                            break;
-                        case AudioManager.AUDIOFOCUS_LOSS_TRANSIENT_CAN_DUCK:
-                            removeMessages(FADEUP);
-                            sendEmptyMessage(FADEDOWN);
-                            break;
-                        case AudioManager.AUDIOFOCUS_GAIN:
-                            if (!service.isPlaying()
-                                    && service.mPausedByTransientLossOfFocus) {
-                                service.mPausedByTransientLossOfFocus = false;
-                                mCurrentVolume = 0f;
-                                service.mPlayer.setVolume(mCurrentVolume);
-                                service.play();
-                            } else {
-                                removeMessages(FADEDOWN);
-                                sendEmptyMessage(FADEUP);
-                            }
-                            break;
-                        default:
-                    }
-                    break;
-                default:
-                    break;
+            synchronized (service) {
+                switch (msg.what) {
+                    case FADEDOWN:
+                        mCurrentVolume -= .05f;
+                        if (mCurrentVolume > .2f) {
+                            sendEmptyMessageDelayed(FADEDOWN, 10);
+                        } else {
+                            mCurrentVolume = .2f;
+                        }
+                        service.mPlayer.setVolume(mCurrentVolume);
+                        break;
+                    case FADEUP:
+                        mCurrentVolume += .01f;
+                        if (mCurrentVolume < 1.0f) {
+                            sendEmptyMessageDelayed(FADEUP, 10);
+                        } else {
+                            mCurrentVolume = 1.0f;
+                        }
+                        service.mPlayer.setVolume(mCurrentVolume);
+                        break;
+                    case SERVER_DIED:
+                        if (service.isPlaying()) {
+                            service.gotoNext(true);
+                        } else {
+                            service.openCurrentAndNext();
+                        }
+                        break;
+                    case TRACK_WENT_TO_NEXT:
+                        service.setAndRecordPlayPos(service.mNextPlayPos);
+                        service.setNextTrack();
+                        if (service.mCursor != null) {
+                            service.mCursor.close();
+                            service.mCursor = null;
+                        }
+                        service.updateCursor(service.mPlaylist.get(service.mPlayPos).mId);
+                        service.notifyChange(META_CHANGED);
+                        service.updateNotification();
+                        break;
+                    case TRACK_ENDED:
+                        if (service.mRepeatMode == REPEAT_CURRENT) {
+                            service.seek(0);
+                            service.play();
+                        } else {
+                            service.gotoNext(false);
+                        }
+                        break;
+                    case LYRICS:
+                        service.mLyrics = (String) msg.obj;
+                        service.notifyChange(NEW_LYRICS);
+                        break;
+                    case RELEASE_WAKELOCK:
+                        service.mWakeLock.release();
+                        break;
+                    case FOCUSCHANGE:
+                        if (D) Log.d(TAG, "Received audio focus change event " + msg.arg1);
+                        switch (msg.arg1) {
+                            case AudioManager.AUDIOFOCUS_LOSS:
+                            case AudioManager.AUDIOFOCUS_LOSS_TRANSIENT:
+                                if (service.isPlaying()) {
+                                    service.mPausedByTransientLossOfFocus =
+                                            msg.arg1 == AudioManager.AUDIOFOCUS_LOSS_TRANSIENT;
+                                }
+                                service.pause();
+                                break;
+                            case AudioManager.AUDIOFOCUS_LOSS_TRANSIENT_CAN_DUCK:
+                                removeMessages(FADEUP);
+                                sendEmptyMessage(FADEDOWN);
+                                break;
+                            case AudioManager.AUDIOFOCUS_GAIN:
+                                if (!service.isPlaying()
+                                        && service.mPausedByTransientLossOfFocus) {
+                                    service.mPausedByTransientLossOfFocus = false;
+                                    mCurrentVolume = 0f;
+                                    service.mPlayer.setVolume(mCurrentVolume);
+                                    service.play();
+                                } else {
+                                    removeMessages(FADEDOWN);
+                                    sendEmptyMessage(FADEUP);
+                                }
+                                break;
+                            default:
+                        }
+                        break;
+                    default:
+                        break;
+                }
             }
         }
     }
@@ -3058,7 +3061,6 @@ public class MusicPlaybackService extends Service {
          * Releases resources associated with this MediaPlayer object.
          */
         public void release() {
-            stop();
             mCurrentMediaPlayer.release();
             mSrtManager.release();
             mSrtManager = null;

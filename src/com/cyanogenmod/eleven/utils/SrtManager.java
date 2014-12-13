@@ -61,16 +61,13 @@ public abstract class SrtManager implements Handler.Callback {
     }
 
     public synchronized void release() {
-        reset();
-        mHandlerThread.quit();
-        mHandlerThread = null;
-    }
-
-    @Override
-    protected void finalize() throws Throwable {
-        super.finalize();
-        mHandlerThread.quit();
-        mHandlerThread = null;
+        if (mHandlerThread != null) {
+            mHandler.removeMessages(POST_TEXT_MSG);
+            mHandler.removeCallbacks(mLoader);
+            mHandler = null;
+            mHandlerThread.quit();
+            mHandlerThread = null;
+        }
     }
 
     public synchronized void initialize(final MediaPlayer player, final File f) {
