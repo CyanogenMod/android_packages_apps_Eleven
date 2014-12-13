@@ -27,7 +27,6 @@ import com.cyanogenmod.eleven.sectionadapter.SectionListContainer;
 import com.cyanogenmod.eleven.ui.fragments.profile.BasicSongFragment;
 import com.cyanogenmod.eleven.utils.MusicUtils;
 import com.cyanogenmod.eleven.utils.SectionCreatorUtils;
-import com.viewpagerindicator.TitlePageIndicator;
 
 /**
  * This class is used to display all of the songs on a user's device.

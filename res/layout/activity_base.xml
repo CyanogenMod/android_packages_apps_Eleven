@@ -32,6 +32,14 @@
         sothree:dragViewClickable="false"
         sothree:shadowHeight="@dimen/sliding_panel_shadow_height">
 
+        <Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?android:attr/actionBarSize"
+            android:theme="@android:style/ThemeOverlay.Material.Dark.ActionBar"
+            android:popupTheme="@android:style/Theme.Material.Light"
+            android:elevation="@dimen/action_bar_elevation" />
+
         <FrameLayout
             android:id="@+id/activity_base_content"
             android:layout_width="match_parent"

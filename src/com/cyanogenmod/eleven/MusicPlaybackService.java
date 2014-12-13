@@ -1486,10 +1486,9 @@ public class MusicPlaybackService extends Service {
         PendingIntent clickIntent = PendingIntent.getActivity(this, 0, nowPlayingIntent, 0);
         Bitmap artwork = getAlbumArt(false);
 
-        // TODO: Add back a beter small icon when we have time
-        Notification.Builder builder = new Notification.Builder(this)
-                .setSmallIcon(R.drawable.ic_launcher)
-                .setLargeIcon(artwork)
+        Notification notification = new Notification.Builder(this)
+                .setSmallIcon(R.drawable.ic_notification)
+                .setLargeIcon(getAlbumArt(false))
                 .setContentIntent(clickIntent)
                 .setContentTitle(getTrackName())
                 .setContentText(text)
