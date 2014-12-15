@@ -42,6 +42,7 @@ import com.cyanogenmod.eleven.R;
 import com.cyanogenmod.eleven.cache.ICacheListener;
 import com.cyanogenmod.eleven.cache.ImageFetcher;
 import com.cyanogenmod.eleven.utils.ApolloUtils;
+import com.cyanogenmod.eleven.utils.CustomToast;
 import com.cyanogenmod.eleven.utils.Lists;
 import com.cyanogenmod.eleven.utils.MusicUtils;
 import com.cyanogenmod.eleven.utils.MusicUtils.ServiceToken;
@@ -226,6 +227,8 @@ public abstract class BaseActivity extends FragmentActivity implements ServiceCo
         filter.addAction(MusicPlaybackService.REFRESH);
         // If a playlist has changed, notify us
         filter.addAction(MusicPlaybackService.PLAYLIST_CHANGED);
+        // If there is an error playing a track
+        filter.addAction(MusicPlaybackService.TRACK_ERROR);
         registerReceiver(mPlaybackStatus, filter);
 
         mPlayPauseProgressButton.resume();
@@ -391,6 +394,10 @@ public abstract class BaseActivity extends FragmentActivity implements ServiceCo
                     baseActivity.restartLoader();
                 } else if (action.equals(MusicPlaybackService.PLAYLIST_CHANGED)) {
                     baseActivity.onPlaylistChanged();
+                } else if (action.equals(MusicPlaybackService.TRACK_ERROR)) {
+                    final String errorMsg = context.getString(R.string.error_playing_track,
+                            intent.getStringExtra(MusicPlaybackService.TrackErrorExtra.TRACK_NAME));
+                    CustomToast.makeText(baseActivity, errorMsg, CustomToast.LENGTH_SHORT).show();
                 }
             }
         }
