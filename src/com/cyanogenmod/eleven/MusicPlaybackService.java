@@ -114,14 +114,19 @@ public class MusicPlaybackService extends Service {
     public static final String PLAYLIST_CHANGED = "com.cyanogenmod.eleven.playlistchanged";
 
     /**
-     * Indicates the repeat mode chaned
+     * Indicates the repeat mode changed
      */
     public static final String REPEATMODE_CHANGED = "com.cyanogenmod.eleven.repeatmodechanged";
 
     /**
-     * Indicates the shuffle mode chaned
+     * Indicates the shuffle mode changed
      */
     public static final String SHUFFLEMODE_CHANGED = "com.cyanogenmod.eleven.shufflemodechanged";
+
+    /**
+     * Indicates the track fails to play
+     */
+    public static final String TRACK_ERROR = "com.cyanogenmod.eleven.trackerror";
 
     /**
      * For backwards compatibility reasons, also provide sticky
@@ -323,6 +328,13 @@ public class MusicPlaybackService extends Service {
      * https://cyanogen.atlassian.net/browse/MUSIC-44
      */
     public static final int MAX_HISTORY_SIZE = 1000;
+
+    public interface TrackErrorExtra {
+        /**
+         * Name of the track that was unable to play
+         */
+        public static final String TRACK_NAME = "trackname";
+    }
 
     /**
      * The columns used to retrieve any info from the current track
@@ -2757,7 +2769,14 @@ public class MusicPlaybackService extends Service {
                         break;
                     case SERVER_DIED:
                         if (service.isPlaying()) {
-                            service.gotoNext(true);
+                            final Intent i = new Intent(TRACK_ERROR);
+                            final TrackErrorInfo info = (TrackErrorInfo)msg.obj;
+                            i.putExtra(TrackErrorExtra.TRACK_NAME, info.mTrackName);
+                            service.sendBroadcast(i);
+
+                            // since the service isPlaying(), we only need to remove the offending
+                            // audio track, and the code will automatically play the next track
+                            service.removeTrack(info.mId);
                         } else {
                             service.openCurrentAndNext();
                         }
@@ -2871,6 +2890,16 @@ public class MusicPlaybackService extends Service {
             }
         }
     };
+
+    private static final class TrackErrorInfo {
+        public long mId;
+        public String mTrackName;
+
+        public TrackErrorInfo(long id, String trackName) {
+            mId = id;
+            mTrackName = trackName;
+        }
+    }
 
     private static final class MultiPlayer implements MediaPlayer.OnErrorListener,
             MediaPlayer.OnCompletionListener {
@@ -3136,13 +3165,19 @@ public class MusicPlaybackService extends Service {
          */
         @Override
         public boolean onError(final MediaPlayer mp, final int what, final int extra) {
+            Log.w(TAG, "Music Server Error what: " + what + " extra: " + extra);
             switch (what) {
                 case MediaPlayer.MEDIA_ERROR_SERVER_DIED:
+                    final MusicPlaybackService service = mService.get();
+                    final TrackErrorInfo errorInfo = new TrackErrorInfo(service.getAudioId(),
+                            service.getTrackName());
+
                     mIsInitialized = false;
                     mCurrentMediaPlayer.release();
                     mCurrentMediaPlayer = new MediaPlayer();
-                    mCurrentMediaPlayer.setWakeMode(mService.get(), PowerManager.PARTIAL_WAKE_LOCK);
-                    mHandler.sendMessageDelayed(mHandler.obtainMessage(SERVER_DIED), 2000);
+                    mCurrentMediaPlayer.setWakeMode(service, PowerManager.PARTIAL_WAKE_LOCK);
+                    Message msg = mHandler.obtainMessage(SERVER_DIED, errorInfo);
+                    mHandler.sendMessageDelayed(msg, 2000);
                     return true;
                 default:
                     break;
