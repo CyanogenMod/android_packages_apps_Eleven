@@ -22,6 +22,9 @@ import android.provider.MediaStore;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.app.LoaderManager.LoaderCallbacks;
 import android.support.v4.content.Loader;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AbsListView;
 import android.widget.AdapterView;
@@ -416,5 +419,22 @@ public class PlaylistDetailFragment extends FadingBarFragment implements
     @Override
     public PagerAdapter.MusicFragments getMusicFragmentParent() {
         return PagerAdapter.MusicFragments.PLAYLIST;
+    }
+
+    @Override
+    public void onCreateOptionsMenu(final Menu menu, final MenuInflater inflater) {
+        inflater.inflate(R.menu.clear_list, menu);
+
+        super.onCreateOptionsMenu(menu, inflater);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(final MenuItem item) {
+        if(item.getItemId() == R.id.clear_list) {
+            MusicUtils.removeFromPlaylist(getContainingActivity(), mPlaylistId);
+            return true;
+        }
+
+        return super.onOptionsItemSelected(item);
     }
 }

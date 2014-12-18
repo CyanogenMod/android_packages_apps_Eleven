@@ -1130,13 +1130,36 @@ public final class MusicUtils {
      */
     public static void removeFromPlaylist(final Context context, final long id,
             final long playlistId) {
+        removeFromPlaylist(context, playlistId, Playlists.Members.AUDIO_ID + " = ? ",
+                new String[] {
+                    Long.toString(id)
+                }
+        );
+    }
+
+    /**
+     * Removes a single track from a given playlist
+     * @param context The {@link Context} to use.
+     * @param playlistId The id of the playlist being removed from.
+     */
+    public static void removeFromPlaylist(final Context context, final long playlistId) {
+        removeFromPlaylist(context, playlistId, null, null);
+    }
+
+    /**
+     * Removes a single track from a given playlist
+     * @param context The {@link Context} to use.
+     * @param playlistId The id of the playlist being removed from.
+     * @param where where clause to delete
+     * @param selectionArgs selection args to supply to where clause
+     */
+    private static void removeFromPlaylist(final Context context, final long playlistId,
+            final String where, final String[] selectionArgs) {
         final Uri uri = MediaStore.Audio.Playlists.Members.getContentUri("external", playlistId);
         final ContentResolver resolver = context.getContentResolver();
-        resolver.delete(uri, Playlists.Members.AUDIO_ID + " = ? ", new String[] {
-            Long.toString(id)
-        });
+        final int rowsDeleted = resolver.delete(uri, where, selectionArgs);
         final String message = context.getResources().getQuantityString(
-                R.plurals.NNNtracksfromplaylist, 1, 1);
+                R.plurals.NNNtracksfromplaylist, rowsDeleted, rowsDeleted);
         CustomToast.makeText((Activity)context, message, CustomToast.LENGTH_SHORT).show();
         playlistChanged();
     }
