@@ -29,8 +29,8 @@
     <dimen name="standard_padding">16.0dip</dimen>
 
     <!-- overflow menu used on page headers and in list items -->
-    <dimen name="overflow_height">30.0dip</dimen>
-    <dimen name="overflow_width">24.0dip</dimen>
+    <dimen name="overflow_height">48.0dip</dimen>
+    <dimen name="overflow_width">38.0dip</dimen>
 
     <!-- List and grid view padding -->
     <dimen name="list_preferred_item_padding">14.0dip</dimen>
@@ -112,16 +112,16 @@
     <dimen name="playlist_detail_header_bottom_height">40.0dip</dimen>
 
     <!-- Audio player Buttons (play/pause/shuffle/repeat/next/previous)-->
-    <dimen name="audio_player_controls_end_button_width">34.0dip</dimen>
-    <dimen name="audio_player_controls_end_button_height">34.0dip</dimen>
-    <dimen name="audio_player_controls_end_button_half_width">17.0dip</dimen>
+    <dimen name="audio_player_controls_end_button_width">50.0dip</dimen>
+    <dimen name="audio_player_controls_end_button_height">50.0dip</dimen>
+    <dimen name="audio_player_controls_end_button_half_width">25.0dip</dimen>
+    <dimen name="audio_player_controls_end_button_padding">8.0dip</dimen>
     <dimen name="audio_player_controls_main_button_width">100.0dip</dimen>
     <dimen name="audio_player_controls_main_button_height">100.0dip</dimen>
     <dimen name="audio_player_controls_top_button_width">26.0dip</dimen>
     <dimen name="audio_player_controls_top_button_height">30.0dip</dimen>
     <dimen name="audio_player_controls_side_width">83.0dip</dimen>
     <dimen name="audio_player_control_padding_top">26.0dip</dimen>
-    <dimen name="audio_player_secondary_control_offset">16dp</dimen>
 
     <!-- Audio player track text settings-->
     <dimen name="audio_player_track_name_padding_side">36.0dip</dimen>
@@ -134,7 +134,6 @@
 
     <dimen name="audio_player_divider_length">86.0dip</dimen>
     <dimen name="audio_player_divider_height">1.0dip</dimen>
-    <dimen name="audio_player_divider_vertical_offset">8.0dip</dimen>
     <dimen name="audio_player_divider_horizontal_offset">8.0dip</dimen>
 
     <!-- App Widgets -->
@@ -175,17 +174,13 @@
     <!-- Header Bar -->
     <dimen name="header_bar_height">56.0dip</dimen>
     <dimen name="header_bar_up_width">30.0dip</dimen>
-    <dimen name="header_bar_up_height">30.0dip</dimen>
-    <dimen name="header_bar_menu_button_width">24.0dip</dimen>
-    <dimen name="header_bar_menu_button_height">30.0dip</dimen>
-    <dimen name="header_bar_custom_button_width">30.0dip</dimen>
-    <dimen name="header_bar_custom_button_height">30.0dip</dimen>
+    <dimen name="header_bar_menu_button_width">38.0dip</dimen>
+    <dimen name="header_bar_custom_button_width">48.0dip</dimen>
+    <dimen name="header_bar_button_height">48.0dip</dimen>
     <dimen name="header_bar_button_padding_small">5.0dip</dimen>
     <dimen name="header_bar_button_padding_large">10.0dip</dimen>
     <dimen name="header_bar_padding_left">16.0dp</dimen>
-    <dimen name="header_bar_padding_right">16.0dp</dimen>
     <dimen name="header_bar_button_container_padding">8.0dp</dimen>
-    <dimen name="header_bar_button_padding">16.0dp</dimen>
 
     <!-- Title Page Indicator Settings -->
     <dimen name="tpi_height">48dp</dimen>
