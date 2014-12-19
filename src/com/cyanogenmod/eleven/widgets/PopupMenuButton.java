@@ -31,6 +31,7 @@ public class PopupMenuButton extends ImageView implements IPopupMenuCallback,
     public PopupMenuButton(Context context, AttributeSet attrs) {
         super(context, attrs);
 
+        setScaleType(ScaleType.CENTER_INSIDE);
         setBackground(getResources().getDrawable(R.drawable.selectable_background_light));
         setOnClickListener(this);
     }

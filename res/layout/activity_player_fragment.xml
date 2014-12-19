@@ -146,20 +146,20 @@
 
             <!-- divider -->
             <View
+                android:id="@+id/action_button_left_top_divider"
                 android:layout_height="@dimen/audio_player_divider_height"
                 android:layout_width="@dimen/audio_player_divider_length"
                 android:layout_marginRight="@dimen/audio_player_divider_horizontal_offset"
-                android:layout_marginBottom="@dimen/audio_player_divider_vertical_offset"
                 android:layout_alignParentRight="true"
                 android:layout_above="@id/audio_player_current_time"
                 android:background="@color/now_playing_divider" />
 
             <!-- divider -->
             <View
+                android:id="@+id/action_button_left_bottom_divider"
                 android:layout_height="@dimen/audio_player_divider_height"
                 android:layout_width="@dimen/audio_player_divider_length"
                 android:layout_marginRight="@dimen/audio_player_divider_horizontal_offset"
-                android:layout_marginTop="@dimen/audio_player_divider_vertical_offset"
                 android:layout_alignParentRight="true"
                 android:layout_below="@id/audio_player_current_time"
                 android:background="@color/now_playing_divider" />
@@ -168,10 +168,9 @@
                 android:id="@+id/action_button_browse"
                 android:layout_width="@dimen/audio_player_controls_end_button_width"
                 android:layout_height="@dimen/audio_player_controls_end_button_height"
-                android:layout_above="@id/action_button_previous"
+                android:layout_above="@id/action_button_left_top_divider"
                 android:layout_alignLeft="@id/action_button_previous"
                 android:layout_marginLeft="@dimen/audio_player_controls_end_button_half_width"
-                android:layout_marginBottom="@dimen/audio_player_secondary_control_offset"
                 android:contentDescription="@string/accessibility_browse"
                 android:focusable="true"
                 android:scaleType="fitCenter"
@@ -181,10 +180,9 @@
                 android:id="@+id/action_button_shuffle"
                 android:layout_width="@dimen/audio_player_controls_end_button_width"
                 android:layout_height="@dimen/audio_player_controls_end_button_height"
-                android:layout_below="@id/action_button_previous"
+                android:layout_below="@id/action_button_left_bottom_divider"
                 android:layout_alignLeft="@id/action_button_previous"
                 android:layout_marginLeft="@dimen/audio_player_controls_end_button_half_width"
-                android:layout_marginTop="@dimen/audio_player_secondary_control_offset"
                 android:contentDescription="@string/accessibility_shuffle"
                 android:scaleType="fitCenter"
                 android:src="@drawable/btn_playback_shuffle_all" />
@@ -220,20 +218,20 @@
 
             <!-- divider -->
             <View
+                android:id="@+id/action_button_right_top_divider"
                 android:layout_height="@dimen/audio_player_divider_height"
                 android:layout_width="@dimen/audio_player_divider_length"
                 android:layout_marginLeft="@dimen/audio_player_divider_horizontal_offset"
-                android:layout_marginBottom="@dimen/audio_player_divider_vertical_offset"
                 android:layout_alignParentLeft="true"
                 android:layout_above="@id/audio_player_total_time"
                 android:background="@color/now_playing_divider" />
 
             <!-- divider -->
             <View
+                android:id="@+id/action_button_right_bottom_divider"
                 android:layout_height="@dimen/audio_player_divider_height"
                 android:layout_width="@dimen/audio_player_divider_length"
                 android:layout_marginLeft="@dimen/audio_player_divider_horizontal_offset"
-                android:layout_marginTop="@dimen/audio_player_divider_vertical_offset"
                 android:layout_alignParentLeft="true"
                 android:layout_below="@id/audio_player_total_time"
                 android:background="@color/now_playing_divider" />
@@ -242,10 +240,9 @@
                 android:id="@+id/action_button_queue"
                 android:layout_width="@dimen/audio_player_controls_end_button_width"
                 android:layout_height="@dimen/audio_player_controls_end_button_height"
-                android:layout_above="@id/action_button_next"
+                android:layout_above="@id/action_button_right_top_divider"
                 android:layout_alignRight="@id/action_button_next"
                 android:layout_marginRight="@dimen/audio_player_controls_end_button_half_width"
-                android:layout_marginBottom="@dimen/audio_player_secondary_control_offset"
                 android:contentDescription="@string/accessibility_queue"
                 android:focusable="true"
                 android:scaleType="fitCenter"
@@ -255,10 +252,9 @@
                 android:id="@+id/action_button_repeat"
                 android:layout_width="@dimen/audio_player_controls_end_button_width"
                 android:layout_height="@dimen/audio_player_controls_end_button_height"
-                android:layout_below="@id/action_button_next"
+                android:layout_below="@id/action_button_right_bottom_divider"
                 android:layout_alignRight="@id/action_button_next"
                 android:layout_marginRight="@dimen/audio_player_controls_end_button_half_width"
-                android:layout_marginTop="@dimen/audio_player_secondary_control_offset"
                 android:contentDescription="@string/accessibility_repeat"
                 android:focusable="true"
                 android:scaleType="fitCenter"
