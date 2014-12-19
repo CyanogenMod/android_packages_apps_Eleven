@@ -59,8 +59,7 @@
             <com.cyanogenmod.eleven.widgets.PopupMenuButton
                 android:id="@+id/popup_menu_button"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
+                android:layout_height="match_parent"
                 android:paddingRight="@dimen/grid_item_padding_right"
                 android:src="@drawable/menu_button" />
 

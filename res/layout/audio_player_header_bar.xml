@@ -20,7 +20,6 @@
     android:layout_height="@dimen/header_bar_height"
     android:orientation="horizontal"
     android:paddingStart="@dimen/header_bar_padding_left"
-    android:paddingEnd="@dimen/header_bar_padding_right"
     android:elevation="@dimen/action_bar_elevation"
     android:background="@android:color/transparent">
 
@@ -35,11 +34,9 @@
         <ImageView
             android:id="@+id/header_bar_add_button"
             android:layout_width="@dimen/header_bar_custom_button_width"
-            android:layout_height="@dimen/header_bar_custom_button_height"
+            android:layout_height="@dimen/header_bar_button_height"
             android:layout_gravity="center_vertical"
             android:layout_weight="0"
-            android:layout_marginStart="@dimen/header_bar_button_padding"
-            android:layout_marginEnd="@dimen/header_bar_button_padding"
             android:background="@drawable/selectable_background"
             android:src="@drawable/btn_add_to_playlist"
             android:scaleType="centerInside" />
@@ -47,11 +44,9 @@
         <ImageView
             android:id="@+id/header_bar_search_button"
             android:layout_width="@dimen/header_bar_custom_button_width"
-            android:layout_height="@dimen/header_bar_custom_button_height"
+            android:layout_height="@dimen/header_bar_button_height"
             android:layout_gravity="center_vertical"
             android:layout_weight="0"
-            android:layout_marginStart="@dimen/header_bar_button_padding"
-            android:layout_marginEnd="@dimen/header_bar_button_padding"
             android:background="@drawable/selectable_background"
             android:src="@drawable/ic_action_search"
             android:scaleType="centerInside" />
@@ -59,11 +54,10 @@
         <ImageView
             android:id="@+id/header_bar_menu_button"
             android:layout_width="@dimen/header_bar_menu_button_width"
-            android:layout_height="@dimen/header_bar_menu_button_height"
+            android:layout_height="@dimen/header_bar_button_height"
             android:layout_gravity="center_vertical"
             android:layout_weight="0"
             android:scaleType="centerInside"
-            android:layout_marginStart="@dimen/header_bar_button_padding"
             android:background="@drawable/selectable_background"
             android:src="@drawable/menu_button_light"/>
     </LinearLayout>
