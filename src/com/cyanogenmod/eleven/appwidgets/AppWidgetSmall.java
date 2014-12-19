@@ -116,7 +116,7 @@ public class AppWidgetSmall extends AppWidgetBase {
 
         final CharSequence trackName = service.getTrackName();
         final CharSequence artistName = service.getArtistName();
-        final Bitmap bitmap = service.getAlbumArt(true);
+        final Bitmap bitmap = service.getAlbumArt(true).getBitmap();
 
         // Set the titles and artwork
         if (TextUtils.isEmpty(trackName) && TextUtils.isEmpty(artistName)) {
