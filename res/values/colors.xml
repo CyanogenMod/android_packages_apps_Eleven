@@ -121,7 +121,7 @@
     <color name="letter_tile_default_color">#cccccc</color>
     <color name="letter_tile_font_color">#ffffff</color>
     <array name="letter_tile_colors">
-        <item>#9237A2</item>
+        <item>#883397</item>
         <item>#4B498C</item>
         <item>#4E5BA7</item>
         <item>#41A4F4</item>
@@ -129,5 +129,16 @@
         <item>#689144</item>
         <item>#B9BF45</item>
         <item>#757578</item>
+    </array>
+
+    <array name="letter_tile_vibrant_dark_colors">
+        <item>#b74bc9</item>
+        <item>#6967bf</item>
+        <item>#2a315a</item>
+        <item>#07497d</item>
+        <item>#0c6c64</item>
+        <item>#415a2a</item>
+        <item>#5f6322</item>
+        <item>#505052</item>
     </array>
 </resources>

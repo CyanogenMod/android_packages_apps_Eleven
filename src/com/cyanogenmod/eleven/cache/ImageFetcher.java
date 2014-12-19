@@ -22,6 +22,7 @@ import android.widget.ImageView;
 import com.cyanogenmod.eleven.Config;
 import com.cyanogenmod.eleven.MusicPlaybackService;
 import com.cyanogenmod.eleven.cache.PlaylistWorkerTask.PlaylistWorkerType;
+import com.cyanogenmod.eleven.utils.BitmapWithColors;
 import com.cyanogenmod.eleven.utils.MusicUtils;
 import com.cyanogenmod.eleven.widgets.BlurScrimImage;
 import com.cyanogenmod.eleven.widgets.LetterTileDrawable;
@@ -187,8 +188,8 @@ public class ImageFetcher extends ImageWorker {
      * @param smallArtwork Get the small version of the default artwork if no artwork exists
      * @return The album art as an {@link Bitmap}
      */
-    public Bitmap getArtwork(final String albumName, final long albumId, final String artistName,
-                             boolean smallArtwork) {
+    public BitmapWithColors getArtwork(final String albumName, final long albumId,
+            final String artistName, boolean smallArtwork) {
         // Check the disk cache
         Bitmap artwork = null;
         String key = String.valueOf(albumId);
@@ -201,7 +202,7 @@ public class ImageFetcher extends ImageWorker {
             artwork = mImageCache.getArtworkFromFile(mContext, albumId);
         }
         if (artwork != null) {
-            return artwork;
+            return new BitmapWithColors(artwork);
         }
 
         return LetterTileDrawable.createDefaultBitmap(mContext, key, ImageType.ALBUM, false,

@@ -114,7 +114,7 @@ public class AppWidgetLarge extends AppWidgetBase {
         final CharSequence trackName = service.getTrackName();
         final CharSequence artistName = service.getArtistName();
         final CharSequence albumName = service.getAlbumName();
-        final Bitmap bitmap = service.getAlbumArt(true);
+        final Bitmap bitmap = service.getAlbumArt(true).getBitmap();
 
         // Set the titles and artwork
         appWidgetView.setTextViewText(R.id.app_widget_large_line_one, trackName);

@@ -34,6 +34,7 @@ import junit.framework.Assert;
 
 import com.cyanogenmod.eleven.R;
 import com.cyanogenmod.eleven.cache.ImageWorker.ImageType;
+import com.cyanogenmod.eleven.utils.BitmapWithColors;
 import com.cyanogenmod.eleven.utils.MusicUtils;
 
 /**
@@ -48,6 +49,7 @@ public class LetterTileDrawable extends Drawable {
 
     /** Letter tile */
     private static TypedArray sColors;
+    private static TypedArray sVibrantDarkColors;
     private static int sDefaultColor;
     private static int sTileFontColor;
     private static float sLetterToTileRatio;
@@ -75,6 +77,7 @@ public class LetterTileDrawable extends Drawable {
     private static synchronized void initializeStaticVariables(final Resources res) {
         if (sColors == null) {
             sColors = res.obtainTypedArray(R.array.letter_tile_colors);
+            sVibrantDarkColors = res.obtainTypedArray(R.array.letter_tile_vibrant_dark_colors);
             sDefaultColor = res.getColor(R.color.letter_tile_default_color);
             sTileFontColor = res.getColor(R.color.letter_tile_font_color);
             sLetterToTileRatio = res.getFraction(R.dimen.letter_to_tile_ratio, 1, 1);
@@ -173,17 +176,38 @@ public class LetterTileDrawable extends Drawable {
     }
 
     /**
+     * @return the corresponding index in the color palette based on the identifier
+     */
+    private static int getColorIndex(final String identifier) {
+        if (TextUtils.isEmpty(identifier)) {
+            return -1;
+        }
+
+        return Math.abs(identifier.hashCode()) % sColors.length();
+    }
+
+    /**
      * Returns a deterministic color based on the provided contact identifier string.
      */
     private static int pickColor(final String identifier) {
-        if (TextUtils.isEmpty(identifier)) {
+        final int idx = getColorIndex(identifier);
+        if (idx == -1) {
             return sDefaultColor;
         }
-        // String.hashCode() implementation is not supposed to change across java versions, so
-        // this should guarantee the same email address always maps to the same color.
-        // The email should already have been normalized by the ContactRequest.
-        final int color = Math.abs(identifier.hashCode()) % sColors.length();
-        return sColors.getColor(color, sDefaultColor);
+
+        return sColors.getColor(idx, sDefaultColor);
+    }
+
+    /**
+     * Returns the vibrant matching color based on the provided contact identifier string.
+     */
+    private static int pickVibrantDarkColor(final String identifier) {
+        final int idx = getColorIndex(identifier);
+        if (idx == -1) {
+            return sDefaultColor;
+        }
+
+        return sVibrantDarkColors.getColor(idx, sDefaultColor);
     }
 
     /**
@@ -309,8 +333,8 @@ public class LetterTileDrawable extends Drawable {
      * @param smallArtwork true if you want to draw a smaller version of the default bitmap for
      *                     perf/memory reasons
      */
-    public static Bitmap createDefaultBitmap(Context context, String identifier, ImageType type, 
-                                             boolean isCircle, boolean smallArtwork) {
+    public static BitmapWithColors createDefaultBitmap(Context context, String identifier,
+            ImageType type, boolean isCircle, boolean smallArtwork) {
         initializeStaticVariables(context.getResources());
         
         identifier = MusicUtils.getTrimmedName(identifier);
@@ -324,8 +348,11 @@ public class LetterTileDrawable extends Drawable {
                 defaultBitmap.getHeight(), defaultBitmap.getConfig());
         Canvas canvas = new Canvas(createdBitmap);
 
+        int color = pickColor(identifier);
+        int vibrantDarkColor = pickVibrantDarkColor(identifier);
+
         Paint paint = new Paint();
-        paint.setColor(pickColor(identifier));
+        paint.setColor(color);
 
         final int minDimension = Math.min(bounds.width(), bounds.height());
 
@@ -339,6 +366,6 @@ public class LetterTileDrawable extends Drawable {
         drawBitmap(defaultBitmap, defaultBitmap.getWidth(), defaultBitmap.getHeight(), canvas,
                 bounds, 1, 0, paint);
 
-        return createdBitmap;
+        return new BitmapWithColors(createdBitmap, color, vibrantDarkColor);
     }
 }
