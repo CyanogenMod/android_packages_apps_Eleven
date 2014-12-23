@@ -1156,6 +1156,8 @@ public class MusicPlaybackService extends Service {
             }
             stop(false);
 
+            boolean shutdown = false;
+
             updateCursor(mPlaylist.get(mPlayPos).mId);
             while (true) {
                 if (mCursor != null
@@ -1163,6 +1165,7 @@ public class MusicPlaybackService extends Service {
                                 + mCursor.getLong(IDCOLIDX))) {
                     break;
                 }
+
                 // if we get here then opening the file failed. We can close the
                 // cursor now, because
                 // we're either going to create a new one next, or stop trying
@@ -1170,12 +1173,8 @@ public class MusicPlaybackService extends Service {
                 if (mOpenFailedCounter++ < 10 && mPlaylist.size() > 1) {
                     final int pos = getNextPosition(false);
                     if (pos < 0) {
-                        scheduleDelayedShutdown();
-                        if (mIsSupposedToBePlaying) {
-                            mIsSupposedToBePlaying = false;
-                            notifyChange(PLAYSTATE_CHANGED);
-                        }
-                        return;
+                        shutdown = true;
+                        break;
                     }
                     mPlayPos = pos;
                     stop(false);
@@ -1184,18 +1183,27 @@ public class MusicPlaybackService extends Service {
                 } else {
                     mOpenFailedCounter = 0;
                     Log.w(TAG, "Failed to open file for playback");
-                    scheduleDelayedShutdown();
-                    if (mIsSupposedToBePlaying) {
-                        mIsSupposedToBePlaying = false;
-                        notifyChange(PLAYSTATE_CHANGED);
-                    }
-                    return;
+                    shutdown = true;
+                    break;
                 }
             }
-            if (openNext) {
+
+            if (shutdown) {
+                scheduleDelayedShutdown();
+                if (mIsSupposedToBePlaying) {
+                    mIsSupposedToBePlaying = false;
+                    notifyChange(PLAYSTATE_CHANGED);
+                }
+            } else if (openNext) {
                 setNextTrack();
             }
         }
+    }
+
+    private void sendErrorMessage(final String trackName) {
+        final Intent i = new Intent(TRACK_ERROR);
+        i.putExtra(TrackErrorExtra.TRACK_NAME, trackName);
+        sendBroadcast(i);
     }
 
     /**
@@ -1727,6 +1735,13 @@ public class MusicPlaybackService extends Service {
                 mOpenFailedCounter = 0;
                 return true;
             }
+
+            String trackName = getTrackName();
+            if (TextUtils.isEmpty(trackName)) {
+                trackName = path;
+            }
+            sendErrorMessage(trackName);
+
             stop(true);
             return false;
         }
@@ -1989,7 +2004,7 @@ public class MusicPlaybackService extends Service {
      */
     public String getGenreName() {
         synchronized (this) {
-            if (mCursor == null) {
+            if (mCursor == null || mPlayPos < 0 || mPlayPos >= mPlaylist.size()) {
                 return null;
             }
             String[] genreProjection = { MediaStore.Audio.Genres.NAME };
@@ -2813,10 +2828,8 @@ public class MusicPlaybackService extends Service {
                         break;
                     case SERVER_DIED:
                         if (service.isPlaying()) {
-                            final Intent i = new Intent(TRACK_ERROR);
                             final TrackErrorInfo info = (TrackErrorInfo)msg.obj;
-                            i.putExtra(TrackErrorExtra.TRACK_NAME, info.mTrackName);
-                            service.sendBroadcast(i);
+                            service.sendErrorMessage(info.mTrackName);
 
                             // since the service isPlaying(), we only need to remove the offending
                             // audio track, and the code will automatically play the next track
