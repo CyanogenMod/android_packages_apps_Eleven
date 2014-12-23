@@ -18,25 +18,36 @@ package com.cyanogenmod.eleven.utils;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.support.v7.graphics.Palette;
+import android.util.LruCache;
 
 public class BitmapWithColors {
-    private Bitmap mBitmap;
-    private int mVibrantColor;
-    private int mVibrantDarkColor;
-    private boolean mColorsLoaded = false;
+    private static final class BitmapColors {
+        public int mVibrantColor;
+        public int mVibrantDarkColor;
 
-    public BitmapWithColors(Bitmap bitmap) {
-        mBitmap = bitmap;
-        mVibrantColor = Color.TRANSPARENT;
-        mVibrantDarkColor = Color.TRANSPARENT;
-        mColorsLoaded = false;
+        public BitmapColors(int vibrantColor, int vibrantDarkColor) {
+            mVibrantColor = vibrantColor;
+            mVibrantDarkColor = vibrantDarkColor;
+        }
     }
 
-    public BitmapWithColors(Bitmap bitmap, int vibrantColor, int vibrantDarkColor) {
+    private static final int CACHE_SIZE_MAX = 20;
+    private static final LruCache<Integer, BitmapColors> sCachedColors =
+            new LruCache<Integer, BitmapColors>(CACHE_SIZE_MAX);
+
+    private Bitmap mBitmap;
+    private int mBitmapKey;
+    private BitmapColors mColors;
+
+    public BitmapWithColors(Bitmap bitmap, int bitmapKey) {
         mBitmap = bitmap;
-        mVibrantColor = vibrantColor;
-        mVibrantDarkColor = vibrantDarkColor;
-        mColorsLoaded = true;
+        mBitmapKey = bitmapKey;
+    }
+
+    public BitmapWithColors(Bitmap bitmap, int bitmapKey, int vibrantColor, int vibrantDarkColor) {
+        mBitmap = bitmap;
+        mBitmapKey = bitmapKey;
+        mColors = new BitmapColors(vibrantColor, vibrantDarkColor);
     }
 
     public Bitmap getBitmap() {
@@ -45,47 +56,52 @@ public class BitmapWithColors {
 
     public int getVibrantColor() {
         loadColorsIfNeeded();
-        return mVibrantColor;
+        if (mColors.mVibrantColor == Color.TRANSPARENT) {
+            return mColors.mVibrantDarkColor;
+        }
+        return mColors.mVibrantColor;
     }
 
     public int getVibrantDarkColor() {
         loadColorsIfNeeded();
-        return mVibrantDarkColor;
+        if (mColors.mVibrantDarkColor == Color.TRANSPARENT) {
+            return mColors.mVibrantColor;
+        }
+        return mColors.mVibrantDarkColor;
     }
 
-    private void loadColorsIfNeeded() {
-        synchronized (this) {
-            if (mColorsLoaded) {
-                return;
-            }
+    private synchronized void loadColorsIfNeeded() {
+        if (mColors != null) {
+            return;
+        }
+
+        synchronized (sCachedColors) {
+            mColors = sCachedColors.get(mBitmapKey);
+        }
+        if (mColors != null) {
+            return;
         }
 
         final Palette p = Palette.generate(mBitmap);
+        if (p == null) {
+            return;
+        }
+
         int vibrantColor = Color.TRANSPARENT;
         int vibrantDarkColor = Color.TRANSPARENT;
 
-        if (p != null) {
-            Palette.Swatch swatch = p.getDarkVibrantSwatch();
-            if (swatch != null) {
-                vibrantDarkColor = swatch.getRgb();
-            }
-            swatch = p.getVibrantSwatch();
-            if (swatch != null) {
-                vibrantColor = swatch.getRgb();
-            }
+        Palette.Swatch swatch = p.getDarkVibrantSwatch();
+        if (swatch != null) {
+            vibrantDarkColor = swatch.getRgb();
+        }
+        swatch = p.getVibrantSwatch();
+        if (swatch != null) {
+            vibrantColor = swatch.getRgb();
         }
 
-        if (vibrantColor == Color.TRANSPARENT && vibrantDarkColor != Color.TRANSPARENT) {
-            vibrantColor = vibrantDarkColor;
-        }
-        if (vibrantColor != Color.TRANSPARENT && vibrantDarkColor == Color.TRANSPARENT) {
-            vibrantDarkColor = vibrantColor;
-        }
-
-        synchronized (this) {
-            mColorsLoaded = true;
-            mVibrantColor = vibrantColor;
-            mVibrantDarkColor = vibrantDarkColor;
+        mColors = new BitmapColors(vibrantColor, vibrantDarkColor);
+        synchronized (sCachedColors) {
+            sCachedColors.put(mBitmapKey, mColors);
         }
     }
 }
