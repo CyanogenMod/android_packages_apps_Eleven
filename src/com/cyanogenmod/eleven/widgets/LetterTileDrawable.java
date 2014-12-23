@@ -366,6 +366,6 @@ public class LetterTileDrawable extends Drawable {
         drawBitmap(defaultBitmap, defaultBitmap.getWidth(), defaultBitmap.getHeight(), canvas,
                 bounds, 1, 0, paint);
 
-        return new BitmapWithColors(createdBitmap, color, vibrantDarkColor);
+        return new BitmapWithColors(createdBitmap, identifier.hashCode(), color, vibrantDarkColor);
     }
 }

@@ -202,7 +202,7 @@ public class ImageFetcher extends ImageWorker {
             artwork = mImageCache.getArtworkFromFile(mContext, albumId);
         }
         if (artwork != null) {
-            return new BitmapWithColors(artwork);
+            return new BitmapWithColors(artwork, key.hashCode());
         }
 
         return LetterTileDrawable.createDefaultBitmap(mContext, key, ImageType.ALBUM, false,
