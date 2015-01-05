@@ -164,6 +164,8 @@ public class HomeActivity extends SlidingPanelActivity {
 
     @Override
     protected void onSlide(float slideOffset) {
+        super.onSlide(slideOffset);
+
         boolean isInBrowser = getCurrentPanel() == Panel.Browse && slideOffset < 0.7f;
         if (isInBrowser != mBrowsePanelActive) {
             mBrowsePanelActive = isInBrowser;
