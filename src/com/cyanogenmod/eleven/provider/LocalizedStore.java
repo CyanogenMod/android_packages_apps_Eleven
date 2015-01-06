@@ -110,7 +110,7 @@ public class LocalizedStore {
                     SongSortColumns.ID + " INTEGER PRIMARY KEY," +
                     SongSortColumns.ARTIST_ID + " INTEGER NOT NULL," +
                     SongSortColumns.ALBUM_ID + " INTEGER NOT NULL," +
-                    SongSortColumns.NAME + " TEXT," +
+                    SongSortColumns.NAME + " TEXT COLLATE LOCALIZED," +
                     SongSortColumns.NAME_LABEL + " TEXT," +
                     SongSortColumns.NAME_BUCKET + " INTEGER);",
 
@@ -137,8 +137,11 @@ public class LocalizedStore {
     }
 
     public void onUpgrade(final SQLiteDatabase db, final int oldVersion, final int newVersion) {
-        // this table was created in version 3 so call the onCreate method if we hit that scenario
-        if (oldVersion < 3 && newVersion >= 3) {
+        // this table was created in version 3 so call the onCreate method if oldVersion <= 2
+        // in version 4 we need to recreate the SongSortcolumns table so drop the table and call
+        // onCreate if oldVersion <= 3
+        if (oldVersion <= 3) {
+            db.execSQL("DROP TABLE IF EXISTS " + SongSortColumns.TABLE_NAME);
             onCreate(db);
         }
     }
