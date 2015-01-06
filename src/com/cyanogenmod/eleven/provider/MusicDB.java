@@ -30,11 +30,12 @@ public class MusicDB extends SQLiteOpenHelper {
      *                  maintain data
      * v3 Dec 4 2014    Add Sorting tables similar to Contacts to enable other languages like
      *                  Chinese to properly sort as they would expect
+     * v4 Jan 6 2015    Missed Collate keyword on the LocalizedSongSortTable
      */
 
 
     /* Version constant to increment when the database should be rebuilt */
-    private static final int VERSION = 3;
+    private static final int VERSION = 4;
 
     /* Name of database file */
     public static final String DATABASENAME = "musicdb.db";
