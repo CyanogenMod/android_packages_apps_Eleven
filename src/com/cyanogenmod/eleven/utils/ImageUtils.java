@@ -46,6 +46,8 @@ public class ImageUtils {
 
     private static AtomicInteger sInteger = new AtomicInteger(0);
 
+    boolean noncommercial = getResources().getBoolean(R.bool.is_noncommercial);
+
     /**
      * Gets the image url based on the imageType
      * @param artistName The artist name param used in the Last.fm API.
@@ -57,21 +59,17 @@ public class ImageUtils {
                                          final String albumName, final ImageWorker.ImageType imageType) {
         switch (imageType) {
             case ARTIST:
-                // Disable last.fm calls - TODO: Find an alternative artwork provider that has
-                // the proper license rights for artwork
-                /*if (!TextUtils.isEmpty(artistName)) {
+                if ((!TextUtils.isEmpty(artistName)) && noncommercial) {
                     if (PreferenceUtils.getInstance(context).downloadMissingArtistImages()) {
                         final Artist artist = Artist.getInfo(context, artistName);
                         if (artist != null) {
                             return getBestImage(artist);
                         }
                     }
-                }*/
+                }
                 break;
             case ALBUM:
-                // Disable last.fm calls - TODO: Find an alternative artwork provider that has
-                // the proper license rights for artwork
-                /*if (!TextUtils.isEmpty(artistName) && !TextUtils.isEmpty(albumName)) {
+                if ((!TextUtils.isEmpty(artistName) && !TextUtils.isEmpty(albumName)) && noncommercial) {
                     if (PreferenceUtils.getInstance(context).downloadMissingArtwork()) {
                         final Artist correction = Artist.getCorrection(context, artistName);
                         if (correction != null) {
@@ -82,7 +80,7 @@ public class ImageUtils {
                             }
                         }
                     }
-                }*/
+                }
                 break;
             default:
                 break;
