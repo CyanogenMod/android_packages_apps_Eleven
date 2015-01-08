@@ -18,10 +18,14 @@ package com.cyanogenmod.eleven.utils;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.text.TextUtils;
 import android.widget.ImageView;
 
 import com.cyanogenmod.eleven.cache.ImageCache;
 import com.cyanogenmod.eleven.cache.ImageWorker;
+import com.cyanogenmod.eleven.Config;
+import com.cyanogenmod.eleven.lastfm.Album;
+import com.cyanogenmod.eleven.lastfm.Artist;
 import com.cyanogenmod.eleven.lastfm.ImageSize;
 import com.cyanogenmod.eleven.lastfm.MusicEntry;
 
@@ -46,6 +50,12 @@ public class ImageUtils {
 
     private static AtomicInteger sInteger = new AtomicInteger(0);
 
+    private Context mContext;
+
+    public boolean noncommercial() {
+       return mContext.getResources().getBoolean(R.bool.is_noncommercial);
+    }
+
     /**
      * Gets the image url based on the imageType
      * @param artistName The artist name param used in the Last.fm API.
@@ -57,21 +67,17 @@ public class ImageUtils {
                                          final String albumName, final ImageWorker.ImageType imageType) {
         switch (imageType) {
             case ARTIST:
-                // Disable last.fm calls - TODO: Find an alternative artwork provider that has
-                // the proper license rights for artwork
-                /*if (!TextUtils.isEmpty(artistName)) {
+                if ((!TextUtils.isEmpty(artistName)) && noncommercial) {
                     if (PreferenceUtils.getInstance(context).downloadMissingArtistImages()) {
                         final Artist artist = Artist.getInfo(context, artistName);
                         if (artist != null) {
                             return getBestImage(artist);
                         }
                     }
-                }*/
+                }
                 break;
             case ALBUM:
-                // Disable last.fm calls - TODO: Find an alternative artwork provider that has
-                // the proper license rights for artwork
-                /*if (!TextUtils.isEmpty(artistName) && !TextUtils.isEmpty(albumName)) {
+                if ((!TextUtils.isEmpty(artistName) && !TextUtils.isEmpty(albumName)) && noncommercial) {
                     if (PreferenceUtils.getInstance(context).downloadMissingArtwork()) {
                         final Artist correction = Artist.getCorrection(context, artistName);
                         if (correction != null) {
@@ -82,7 +88,7 @@ public class ImageUtils {
                             }
                         }
                     }
-                }*/
+                }
                 break;
             default:
                 break;
