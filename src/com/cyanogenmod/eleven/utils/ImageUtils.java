@@ -18,10 +18,13 @@ package com.cyanogenmod.eleven.utils;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.text.TextUtils;
 import android.widget.ImageView;
 
 import com.cyanogenmod.eleven.cache.ImageCache;
 import com.cyanogenmod.eleven.cache.ImageWorker;
+import com.cyanogenmod.eleven.lastfm.Album;
+import com.cyanogenmod.eleven.lastfm.Artist;
 import com.cyanogenmod.eleven.lastfm.ImageSize;
 import com.cyanogenmod.eleven.lastfm.MusicEntry;
 
@@ -57,21 +60,18 @@ public class ImageUtils {
                                          final String albumName, final ImageWorker.ImageType imageType) {
         switch (imageType) {
             case ARTIST:
-                // Disable last.fm calls - TODO: Find an alternative artwork provider that has
-                // the proper license rights for artwork
-                /*if (!TextUtils.isEmpty(artistName)) {
+                if (!TextUtils.isEmpty(artistName) && ArtworkProvider.usingLastFm(context)) {
                     if (PreferenceUtils.getInstance(context).downloadMissingArtistImages()) {
                         final Artist artist = Artist.getInfo(context, artistName);
                         if (artist != null) {
                             return getBestImage(artist);
                         }
                     }
-                }*/
+                }
                 break;
             case ALBUM:
-                // Disable last.fm calls - TODO: Find an alternative artwork provider that has
-                // the proper license rights for artwork
-                /*if (!TextUtils.isEmpty(artistName) && !TextUtils.isEmpty(albumName)) {
+                if (!TextUtils.isEmpty(artistName) && !TextUtils.isEmpty(albumName)
+                        && ArtworkProvider.usingLastFm(context)) {
                     if (PreferenceUtils.getInstance(context).downloadMissingArtwork()) {
                         final Artist correction = Artist.getCorrection(context, artistName);
                         if (correction != null) {
@@ -82,7 +82,7 @@ public class ImageUtils {
                             }
                         }
                     }
-                }*/
+                }
                 break;
             default:
                 break;
@@ -191,8 +191,8 @@ public class ImageUtils {
     }
 
     private static String getBestImage(MusicEntry e) {
-        final ImageSize[] QUALITY = {ImageSize.EXTRALARGE, ImageSize.LARGE, ImageSize.MEDIUM,
-                ImageSize.SMALL, ImageSize.UNKNOWN};
+        final ImageSize[] QUALITY = {ImageSize.MEGA, ImageSize.EXTRALARGE, ImageSize.LARGE,
+                ImageSize.MEDIUM, ImageSize.SMALL, ImageSize.UNKNOWN};
         for(ImageSize q : QUALITY) {
             String url = e.getImageURL(q);
             if (url != null) {

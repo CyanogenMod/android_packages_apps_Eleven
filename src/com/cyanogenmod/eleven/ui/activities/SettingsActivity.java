@@ -20,10 +20,13 @@ import android.os.Bundle;
 import android.preference.Preference;
 import android.preference.Preference.OnPreferenceClickListener;
 import android.preference.PreferenceActivity;
+import android.preference.PreferenceManager;
+import android.preference.PreferenceScreen;
 import android.view.MenuItem;
 
 import com.cyanogenmod.eleven.R;
 import com.cyanogenmod.eleven.cache.ImageFetcher;
+import com.cyanogenmod.eleven.utils.ArtworkProvider;
 
 /**
  * Settings.
@@ -47,6 +50,14 @@ public class SettingsActivity extends PreferenceActivity {
 
         // Add the preferences
         addPreferencesFromResource(R.xml.settings);
+
+        PreferenceScreen screen = getPreferenceScreen();
+
+        if (!ArtworkProvider.hasProvider(this)) {
+            screen.removePreference(screen.findPreference(getString(R.string.settings_key_data)));
+        }
+
+        setPreferenceScreen(screen);
 
         // Removes the cache entries
         deleteCache();

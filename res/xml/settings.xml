@@ -18,25 +18,26 @@
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" >
 
     <!-- Data catetory -->
-    <!--<PreferenceCategory android:title="@string/settings_data_category" >-->
+    <PreferenceCategory android:title="@string/settings_data_category"
+        android:key="@string/settings_key_data">
 
-        <!--&lt;!&ndash; Only on Wi-Fi &ndash;&gt;-->
-        <!--<CheckBoxPreference-->
-            <!--android:defaultValue="true"-->
-            <!--android:key="only_on_wifi"-->
-            <!--android:summary="@string/settings_download_only_on_wifi_summary"-->
-            <!--android:title="@string/settings_download_only_on_wifi_title" />-->
-        <!--&lt;!&ndash; Missing artwork &ndash;&gt;-->
-        <!--<CheckBoxPreference-->
-            <!--android:defaultValue="true"-->
-            <!--android:key="download_missing_artwork"-->
-            <!--android:title="@string/settings_download_missing_artwork_title" />-->
-        <!--&lt;!&ndash; Missing artist images &ndash;&gt;-->
-        <!--<CheckBoxPreference-->
-            <!--android:defaultValue="true"-->
-            <!--android:key="download_missing_artist_images"-->
-            <!--android:title="@string/settings_download_artist_images_title" />-->
-    <!--</PreferenceCategory>-->
+        <!-- Only on Wi-Fi -->
+        <CheckBoxPreference
+            android:defaultValue="true"
+            android:key="only_on_wifi"
+            android:summary="@string/settings_download_only_on_wifi_summary"
+            android:title="@string/settings_download_only_on_wifi_title" />
+        <!-- Missing artwork -->
+        <CheckBoxPreference
+            android:defaultValue="true"
+            android:key="download_missing_artwork"
+            android:title="@string/settings_download_missing_artwork_title" />
+        <!-- Missing artist images -->
+        <CheckBoxPreference
+            android:defaultValue="true"
+            android:key="download_missing_artist_images"
+            android:title="@string/settings_download_artist_images_title" />
+    </PreferenceCategory>
     <PreferenceCategory android:title="@string/settings_general_category" >
 
         <!-- Music visualizer -->

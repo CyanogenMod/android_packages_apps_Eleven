@@ -25,4 +25,7 @@
 
     <!-- Font family used when drawing letters for letter tile avatars. -->
     <string name="letter_tile_letter_font_family" translatable="false">sans-serif-light</string>
+
+    <!-- Key for the Data category -->
+    <string name="settings_key_data" translatable="false">settings_key_data</string>
 </resources>

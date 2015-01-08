@@ -21,4 +21,8 @@
     <!-- Configures a larger heap size -->
     <bool name="config_largeHeap">true</bool>
 
+    <string name="artwork_provider_none" translatable="false"></string>
+    <string name="artwork_provider_lastfm" translatable="false">last.fm</string>
+    <string name="artwork_provider" translatable="false">@string/artwork_provider_lastfm</string>
+
 </resources>

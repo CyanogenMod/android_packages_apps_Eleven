@@ -25,6 +25,7 @@ import com.cyanogenmod.eleven.Config;
 import com.cyanogenmod.eleven.R;
 import com.cyanogenmod.eleven.ui.activities.HomeActivity;
 import com.cyanogenmod.eleven.utils.ApolloUtils;
+import com.cyanogenmod.eleven.utils.ArtworkProvider;
 import com.cyanogenmod.eleven.utils.Lists;
 import com.cyanogenmod.eleven.utils.MusicUtils;
 
@@ -120,11 +121,10 @@ public class PhotoSelectionDialog extends DialogFragment {
     private void setArtistChoices() {
         // Select a photo from the gallery
         mChoices.add(NEW_PHOTO, getString(R.string.new_photo));
-        /* Disable fetching image until we find a last.fm replacement
-        if (ApolloUtils.isOnline(getActivity())) {
+        if (ApolloUtils.isOnline(getActivity()) && ArtworkProvider.hasProvider(getActivity())) {
             // Option to fetch the old artist image
             mChoices.add(OLD_PHOTO, getString(R.string.context_menu_fetch_artist_image));
-        }*/
+        }
     }
 
     /**
@@ -133,12 +133,11 @@ public class PhotoSelectionDialog extends DialogFragment {
     private void setAlbumChoices() {
         // Select a photo from the gallery
         mChoices.add(NEW_PHOTO, getString(R.string.new_photo));
-        /* Disable fetching image until we find a last.fm replacement
         // Option to fetch the old album image
-        if (ApolloUtils.isOnline(getActivity())) {
+        if (ApolloUtils.isOnline(getActivity()) && ArtworkProvider.hasProvider(getActivity())) {
             // Option to fetch the old artist image
             mChoices.add(OLD_PHOTO, getString(R.string.context_menu_fetch_album_art));
-        }*/
+        }
     }
 
     /**
@@ -147,9 +146,10 @@ public class PhotoSelectionDialog extends DialogFragment {
     private void setOtherChoices() {
         // Select a photo from the gallery
         mChoices.add(NEW_PHOTO, getString(R.string.new_photo));
-        // Disable fetching image until we find a last.fm replacement
-        // Option to use the default image
-        // mChoices.add(OLD_PHOTO, getString(R.string.use_default));
+        if (ArtworkProvider.hasProvider(getActivity())) {
+            // Option to use the default image
+            mChoices.add(OLD_PHOTO, getString(R.string.use_default));
+        }
     }
 
     /**
