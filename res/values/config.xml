@@ -21,4 +21,7 @@
     <!-- Configures a larger heap size -->
     <bool name="config_largeHeap">true</bool>
 
+    <!-- Last.fm support (only non commercial) -->
+    <bool name="is_noncommercial">true</bool>
+
 </resources>
