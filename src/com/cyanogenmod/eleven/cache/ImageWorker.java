@@ -182,12 +182,8 @@ public abstract class ImageWorker {
             String url = ImageUtils.processImageUrl(context, artistName, albumName, imageType);
             if (url != null) {
                 bitmap = ImageUtils.processBitmap(context, url);
+                imageCache.addBitmapToCache(key, bitmap);
             }
-        }
-
-        // Fourth, add the new image to the cache
-        if (bitmap != null && key != null && imageCache != null) {
-            imageCache.addBitmapToCache(key, bitmap);
         }
 
         sKeys.add(key);
