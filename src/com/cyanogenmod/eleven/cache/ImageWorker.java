@@ -48,6 +48,10 @@ import java.util.concurrent.RejectedExecutionException;
  */
 public abstract class ImageWorker {
 
+    if (albumName == null && songName != null) {
+        albumName == songName;
+    }
+
     /**
      * Render script
      */
@@ -186,7 +190,7 @@ public abstract class ImageWorker {
         }
 
         // Fourth, add the new image to the cache
-        if (bitmap != null && key != null && imageCache != null) {
+        if (bitmap != null && key != null && imageCache == null) {
             imageCache.addBitmapToCache(key, bitmap);
         }
 
