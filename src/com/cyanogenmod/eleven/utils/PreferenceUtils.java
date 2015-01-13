@@ -15,6 +15,7 @@ package com.cyanogenmod.eleven.utils;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.content.SharedPreferences.OnSharedPreferenceChangeListener;
 import android.os.AsyncTask;
 import android.preference.PreferenceManager;
 
@@ -25,8 +26,7 @@ import com.cyanogenmod.eleven.ui.fragments.SongFragment;
 import com.cyanogenmod.eleven.ui.fragments.phone.MusicBrowserPhoneFragment;
 
 /**
- * A collection of helpers designed to get and set various preferences across
- * Apollo.
+ * A collection of helpers designed to get and set various preferences across Apollo.
  * 
  * @author Andrew Neal (andrewdneal@gmail.com)
  */
@@ -77,6 +77,9 @@ public final class PreferenceUtils {
     // show visualizer flag
     public static final String SHOW_VISUALIZER = "music_visualization";
 
+    // shake to play flag
+    public static final String SHAKE_TO_PLAY = "shake_to_play";
+
     private static PreferenceUtils sInstance;
 
     private final SharedPreferences mPreferences;
@@ -104,8 +107,8 @@ public final class PreferenceUtils {
     /**
      * Saves the current page the user is on when they close the app.
      * 
-     * @param value The last page the pager was on when the onDestroy is called
-     *            in {@link MusicBrowserPhoneFragment}.
+     * @param value The last page the pager was on when the onDestroy is called in
+     *            {@link MusicBrowserPhoneFragment}.
      */
     public void setStartPage(final int value) {
         ApolloUtils.execute(false, new AsyncTask<Void, Void, Void>() {
@@ -117,7 +120,16 @@ public final class PreferenceUtils {
 
                 return null;
             }
-        }, (Void[])null);
+        }, (Void[]) null);
+    }
+
+    /**
+     * Set the listener for preference change
+     * 
+     * @param listener
+     */
+    public void setOnSharedPreferenceChangeListener(OnSharedPreferenceChangeListener listener) {
+        mPreferences.registerOnSharedPreferenceChangeListener(listener);
     }
 
     /**
@@ -144,7 +156,7 @@ public final class PreferenceUtils {
 
                 return null;
             }
-        }, (Void[])null);
+        }, (Void[]) null);
     }
 
     /**
@@ -159,24 +171,21 @@ public final class PreferenceUtils {
     }
 
     /**
-     * @return True if the user has checked to only download images on Wi-Fi,
-     *         false otherwise
+     * @return True if the user has checked to only download images on Wi-Fi, false otherwise
      */
     public final boolean onlyOnWifi() {
         return mPreferences.getBoolean(ONLY_ON_WIFI, true);
     }
 
     /**
-     * @return True if the user has checked to download missing album covers,
-     *         false otherwise.
+     * @return True if the user has checked to download missing album covers, false otherwise.
      */
     public final boolean downloadMissingArtwork() {
         return mPreferences.getBoolean(DOWNLOAD_MISSING_ARTWORK, true);
     }
 
     /**
-     * @return True if the user has checked to download missing artist images,
-     *         false otherwise.
+     * @return True if the user has checked to download missing artist images, false otherwise.
      */
     public final boolean downloadMissingArtistImages() {
         return mPreferences.getBoolean(DOWNLOAD_MISSING_ARTIST_IMAGES, true);
@@ -198,7 +207,7 @@ public final class PreferenceUtils {
 
                 return null;
             }
-        }, (Void[])null);
+        }, (Void[]) null);
     }
 
     /**
@@ -227,8 +236,7 @@ public final class PreferenceUtils {
     }
 
     /**
-     * @return The sort order used for the artist song list in
-     *         {@link ArtistDetailSongAdapter}
+     * @return The sort order used for the artist song list in {@link ArtistDetailSongAdapter}
      */
     public final String getArtistSongSortOrder() {
         return mPreferences.getString(ARTIST_SONG_SORT_ORDER,
@@ -279,8 +287,7 @@ public final class PreferenceUtils {
     }
 
     /**
-     * @return The sort order used for the album song in
-     *         {@link AlbumSongFragment}
+     * @return The sort order used for the album song in {@link AlbumSongFragment}
      */
     public final String getAlbumSongSortOrder() {
         return mPreferences.getString(ALBUM_SONG_SORT_ORDER,
@@ -321,5 +328,9 @@ public final class PreferenceUtils {
 
     public boolean getShowVisualizer() {
         return mPreferences.getBoolean(SHOW_VISUALIZER, true);
+    }
+
+    public boolean getShakeToPlay() {
+        return mPreferences.getBoolean(SHAKE_TO_PLAY, false);
     }
 }
