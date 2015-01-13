@@ -16,6 +16,7 @@ package com.cyanogenmod.eleven.utils;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
+import android.content.SharedPreferences.OnSharedPreferenceChangeListener;
 import android.preference.PreferenceManager;
 
 import com.cyanogenmod.eleven.R;
@@ -77,6 +78,9 @@ public final class PreferenceUtils {
     // show visualizer flag
     public static final String SHOW_VISUALIZER = "music_visualization";
 
+    // shake to play flag
+    public static final String SHAKE_TO_PLAY = "shake_to_play";
+
     private static PreferenceUtils sInstance;
 
     private final SharedPreferences mPreferences;
@@ -118,6 +122,14 @@ public final class PreferenceUtils {
                 return null;
             }
         }, (Void[])null);
+    }
+    
+    /**
+     * Set the listener for preference change
+     * @param listener
+     */
+    public void setOnSharedPreferenceChangeListener(OnSharedPreferenceChangeListener listener){
+        mPreferences.registerOnSharedPreferenceChangeListener(listener);
     }
 
     /**
@@ -321,5 +333,9 @@ public final class PreferenceUtils {
 
     public boolean getShowVisualizer() {
         return mPreferences.getBoolean(SHOW_VISUALIZER, true);
+    }
+    
+    public boolean getShakeToPlay() {
+        return mPreferences.getBoolean(SHAKE_TO_PLAY, false);
     }
 }
