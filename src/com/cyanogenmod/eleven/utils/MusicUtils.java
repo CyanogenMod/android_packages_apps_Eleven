@@ -271,6 +271,18 @@ public final class MusicUtils {
     }
 
     /**
+     * Set shake to play status
+     */
+    public static void setShakeToPlayEnabled(boolean enabled) {
+        try {
+            if (mService != null) {
+                mService.setShakeToPlayEnabled(enabled);
+            }
+        } catch (final RemoteException ignored) {
+        }
+    }
+
+    /**
      * Changes to the next track asynchronously
      */
     public static void asyncNext(final Context context) {
