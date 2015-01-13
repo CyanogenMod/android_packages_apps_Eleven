@@ -87,6 +87,8 @@ public final class MusicUtils {
     public static final String MUSIC_ONLY_SELECTION = MediaStore.Audio.AudioColumns.IS_MUSIC + "=1"
                     + " AND " + MediaStore.Audio.AudioColumns.TITLE + " != ''"; //$NON-NLS-2$
 
+    private static boolean sShakeToPlayEnabled;
+
     static {
         mConnectionMap = new WeakHashMap<Context, ServiceBinder>();
         sEmptyList = new long[0];
@@ -107,6 +109,7 @@ public final class MusicUtils {
         if (realActivity == null) {
             realActivity = (Activity)context;
         }
+        sShakeToPlayEnabled = PreferenceUtils.getInstance(context).getShakeToPlay();
         final ContextWrapper contextWrapper = new ContextWrapper(realActivity);
         contextWrapper.startService(new Intent(contextWrapper, MusicPlaybackService.class));
         final ServiceBinder binder = new ServiceBinder(callback);
@@ -154,6 +157,7 @@ public final class MusicUtils {
             if (mCallback != null) {
                 mCallback.onServiceConnected(className, service);
             }
+            MusicUtils.setShakeToPlayEnabled(sShakeToPlayEnabled);
         }
 
         @Override
@@ -265,6 +269,18 @@ public final class MusicUtils {
         try {
             if (mService != null) {
                 mService.next();
+            }
+        } catch (final RemoteException ignored) {
+        }
+    }
+
+    /**
+     * Set shake to play status
+     */
+    public static void setShakeToPlayEnabled(boolean enabled) {
+        try {
+            if (mService != null) {
+                mService.setShakeToPlayEnabled(enabled);
             }
         } catch (final RemoteException ignored) {
         }
