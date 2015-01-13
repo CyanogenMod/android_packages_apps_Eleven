@@ -48,6 +48,9 @@
     <uses-permission android:name="android.permission.RECORD_AUDIO" />
     <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS" />
 
+    <!-- Accelerometer feature for shake to play -->
+    <uses-feature android:name="android.hardware.sensor.accelerometer" />
+
     <application
         android:name="com.cyanogenmod.eleven.ElevenApplication"
         android:allowBackup="true"
