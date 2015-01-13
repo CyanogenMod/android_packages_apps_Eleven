@@ -31,6 +31,7 @@ import android.database.ContentObserver;
 import android.database.Cursor;
 import android.database.MatrixCursor;
 import android.graphics.Bitmap;
+import android.hardware.SensorManager;
 import android.media.AudioManager;
 import android.media.AudioManager.OnAudioFocusChangeListener;
 import android.media.MediaMetadata;
@@ -66,6 +67,8 @@ import com.cyanogenmod.eleven.provider.SongPlayCount;
 import com.cyanogenmod.eleven.service.MusicPlaybackTrack;
 import com.cyanogenmod.eleven.utils.BitmapWithColors;
 import com.cyanogenmod.eleven.utils.Lists;
+import com.cyanogenmod.eleven.utils.PreferenceUtils;
+import com.cyanogenmod.eleven.utils.ShakeDetector;
 import com.cyanogenmod.eleven.utils.SrtManager;
 
 import java.io.File;
@@ -517,6 +520,23 @@ public class MusicPlaybackService extends Service {
     private MusicPlaybackState mPlaybackStateStore;
 
     /**
+     * Shake detector class used for shake to switch song feature
+     */
+    private ShakeDetector mShakeDetector;
+
+    private ShakeDetector.Listener mShakeDetectorListener=new ShakeDetector.Listener() {
+
+        @Override
+        public void hearShake() {
+            /*
+             * on shake detect, play next song
+             */
+            if(D) Log.d(TAG,"Shake detected!!!");
+            gotoNext(true);
+        }
+    };
+
+    /**
      * {@inheritDoc}
      */
     @Override
@@ -551,6 +571,7 @@ public class MusicPlaybackService extends Service {
             return true;
         }
         stopSelf(mServiceStartId);
+
         return true;
     }
 
@@ -736,6 +757,14 @@ public class MusicPlaybackService extends Service {
         if (mUnmountReceiver != null) {
             unregisterReceiver(mUnmountReceiver);
             mUnmountReceiver = null;
+        }
+
+        // deinitialize shake detector
+        if (mShakeDetector != null) {
+            mShakeDetector.stop();
+            mShakeDetector = null;
+            if (D)
+                Log.d(TAG, "ShakeToPlay destroyed!!!");
         }
 
         // Release the wake lock
@@ -2337,6 +2366,9 @@ public class MusicPlaybackService extends Service {
      * Stops playback.
      */
     public void stop() {
+        if(mShakeDetector!=null){
+            mShakeDetector.stop();
+        }
         stop(true);
     }
 
@@ -2344,6 +2376,9 @@ public class MusicPlaybackService extends Service {
      * Resumes or starts playback.
      */
     public void play() {
+        if(mShakeDetector!=null){
+            mShakeDetector.start((SensorManager)getSystemService(SENSOR_SERVICE));
+        }
         play(true);
     }
 
@@ -2402,6 +2437,9 @@ public class MusicPlaybackService extends Service {
             if (mIsSupposedToBePlaying) {
                 mPlayer.pause();
                 setIsSupposedToBePlaying(false, true);
+                if(mShakeDetector!=null){
+                    mShakeDetector.stop();
+                }
             }
         }
     }
@@ -2716,6 +2754,29 @@ public class MusicPlaybackService extends Service {
      */
     public void playlistChanged() {
         notifyChange(PLAYLIST_CHANGED);
+    }
+
+    /**
+     * Called to set the status of shake to play feature
+     */
+    public void setShakeToPlayEnabled(boolean enabled){
+        if (D) Log.d(TAG, "ShakeToPlay status: "+enabled);
+        if (enabled) {
+            if(mShakeDetector==null){
+                mShakeDetector = new ShakeDetector(mShakeDetectorListener);
+            }
+            // if song is already playing, start listening immediately
+            if(isPlaying()){
+                // does nothing if accelerometer is already activated
+                mShakeDetector.start((SensorManager) getSystemService(SENSOR_SERVICE));
+            }
+        }
+        else {
+            if (mShakeDetector != null) {
+                mShakeDetector.stop();
+            }
+            mShakeDetector = null;
+        }
     }
 
     private final BroadcastReceiver mIntentReceiver = new BroadcastReceiver() {
@@ -3623,6 +3684,14 @@ public class MusicPlaybackService extends Service {
         @Override
         public int getAudioSessionId() throws RemoteException {
             return mService.get().getAudioSessionId();
+        }
+
+        /**
+         * {@inheritDoc}
+         */
+        @Override
+        public void setShakeToPlayEnabled(boolean enabled) {
+            mService.get().setShakeToPlayEnabled(enabled);
         }
 
     }
