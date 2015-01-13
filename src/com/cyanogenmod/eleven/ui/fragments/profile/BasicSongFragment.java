@@ -26,6 +26,7 @@ import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.cyanogenmod.eleven.Config;
 import com.cyanogenmod.eleven.MusicStateListener;
@@ -39,6 +40,7 @@ import com.cyanogenmod.eleven.service.MusicPlaybackTrack;
 import com.cyanogenmod.eleven.ui.activities.BaseActivity;
 import com.cyanogenmod.eleven.utils.MusicUtils;
 import com.cyanogenmod.eleven.utils.PopupMenuHelper;
+import com.cyanogenmod.eleven.utils.PreferenceUtils;
 import com.cyanogenmod.eleven.utils.SongPopupMenuHelper;
 import com.cyanogenmod.eleven.widgets.IPopupMenuCallback;
 import com.cyanogenmod.eleven.widgets.LoadingEmptyContainer;
@@ -181,7 +183,7 @@ public abstract class BasicSongFragment extends Fragment implements
 
         // Register the music status listener
         ((BaseActivity)getActivity()).setMusicStateListenerListener(this);
-
+        
         return mRootView;
     }
 
