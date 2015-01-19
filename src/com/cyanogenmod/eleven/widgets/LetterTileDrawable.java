@@ -135,7 +135,7 @@ public class LetterTileDrawable extends Drawable {
         }
 
         // Draw letter/digit only if the first character is an english letter
-        if (mDisplayName != null
+        if (mDisplayName != null && !mDisplayName.isEmpty()
                 && isEnglishLetter(mDisplayName.charAt(0))) {
             int numChars = 1;
 
