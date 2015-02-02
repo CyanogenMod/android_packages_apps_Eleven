@@ -53,7 +53,7 @@
         android:allowBackup="true"
         android:allowTaskReparenting="true"
         android:hardwareAccelerated="@bool/config_hardwareAccelerated"
-        android:icon="@drawable/ic_launcher"
+        android:icon="@mipmap/ic_launcher_eleven"
         android:label="@string/app_name"
         android:largeHeap="@bool/config_largeHeap"
         android:taskAffinity="com.cyanogenmod.eleven.task"
