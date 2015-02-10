@@ -111,9 +111,13 @@
   <string name="settings_delete_cache_title">Избриши кеш</string>
   <string name="settings_delete_cache_summary">Уклони све кеширане слике</string>
   <string name="settings_download_only_on_wifi_title">Преузимање само преко Wi-Fi</string>
-  <string name="settings_download_only_on_wifi_summary">Да би смањио трошкове оператера, не преузимај преко мобилних мрежа</string>
+  <string name="settings_download_only_on_wifi_summary">Да би смањио трошкове од оператера, не преузимај преко мобилних мрежа</string>
   <string name="settings_download_missing_artwork_title">Преузми омот албума који недостаје</string>
   <string name="settings_download_artist_images_title">Преузми слике аутора које недостају</string>
+  <string name="settings_general_category">Опште</string>
+  <string name="settings_show_music_visualization_title">Прикажи визуализацију музике</string>
+  <string name="settings_show_lyrics_title">Прикажи текст песме</string>
+  <string name="settings_show_lyrics_summary">За песме које имају srt фајл</string>
   <string name="app_widget_small">Музика: 4 \u00d7 1</string>
   <string name="app_widget_large">Музика: 4 \u00d7 2</string>
   <string name="app_widget_large_alt">Музика: 4 \u00d7 2 (алтернативно)</string>
@@ -135,6 +139,7 @@
   <string name="empty_generic_secondary">Да копираш музику са рачунара на твој уређај, користи USB кабал.</string>
   <string name="empty_queue_main">Нема песама у редоследу за пуштање</string>
   <string name="empty_queue_secondary">Да додаш песме у редослед за пуштање, додирни опциони мени на песми, албуму или уметнику и изабери \"Додај у редослед\".</string>
+  <string name="error_playing_track">Немогу да пустим нумеру %1$s</string>
   <string name="header_unknown_year">Непозната година</string>
   <string name="header_less_than_30s">Мање од 30 секунди</string>
   <string name="header_30_to_60_seconds">30 - 60 секунди</string>
@@ -151,6 +156,7 @@
   <string name="header_5_to_9_songs">5 - 9 песама</string>
   <string name="header_10_plus_songs">10+ песама</string>
   <string name="header_5_plus_albums">5+ албума</string>
+  <string name="header_other">"Друго"</string>
   <string name="footer_search_artists">Прикажи све уметнике</string>
   <string name="footer_search_albums">Прикажи све албуме</string>
   <string name="footer_search_songs">Прикажи све песме</string>

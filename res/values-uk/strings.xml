@@ -103,7 +103,7 @@
   <string name="accessibility_repeat_one">Повторити одну</string>
   <string name="accessibility_queue">Відкрити чергу</string>
   <string name="accessibility_browse">Огляд музики</string>
-  <string name="set_as_ringtone">\"<xliff:g id="name" example="Alarm Bell">%s</xliff:g>\" встановити як мелодію дзвінка</string>
+  <string name="set_as_ringtone">«<xliff:g id="name" example="Alarm Bell">%s</xliff:g>» встановити як мелодію дзвінка</string>
   <string name="playlist_renamed">Список відтворення перейменовано</string>
   <string name="settings_ui_category">Інтерфейс</string>
   <string name="settings_storage_category">Сховище</string>
@@ -114,6 +114,10 @@
   <string name="settings_download_only_on_wifi_summary">Щоб знизити витрати мобільного оператора, не завантажуйте через мобільні мережі</string>
   <string name="settings_download_missing_artwork_title">Завантажити відсутні обкладинки альбомів</string>
   <string name="settings_download_artist_images_title">Завантажити відсутні зображення виконавців</string>
+  <string name="settings_general_category">Загальні</string>
+  <string name="settings_show_music_visualization_title">Показати візуалізацію музики</string>
+  <string name="settings_show_lyrics_title">Показати тексти пісень</string>
+  <string name="settings_show_lyrics_summary">Для композицій що мають srt файл</string>
   <string name="app_widget_small">Музика: 4 \u00d7 1</string>
   <string name="app_widget_large">Музика: 4 \u00d7 2</string>
   <string name="app_widget_large_alt">Музика: 4 \u00d7 2 (альтернативний)</string>
@@ -134,7 +138,8 @@
   <string name="empty_generic_main">Композицій не знайдено</string>
   <string name="empty_generic_secondary">Використовуйте USB-кабель для копіювання музики з комп’ютера.</string>
   <string name="empty_queue_main">Немає пісень в черзі відтворення</string>
-  <string name="empty_queue_secondary">Щоб додати пісню у список відтворення, торкніться меню параметрів на композиції, альбому або виконавця та виберіть \"Додати до списку відтворення\".</string>
+  <string name="empty_queue_secondary">Щоб додати пісню у список відтворення, торкніться меню параметрів на композиції, альбому або виконавця та виберіть «Додати до списку відтворення».</string>
+  <string name="error_playing_track">Неможливо грати трек %1$s</string>
   <string name="header_unknown_year">Невідомий рік</string>
   <string name="header_less_than_30s">Менш ніж за 30 секунд</string>
   <string name="header_30_to_60_seconds">30 - 60 секунд</string>
@@ -151,6 +156,7 @@
   <string name="header_5_to_9_songs">5 - 9 пісень</string>
   <string name="header_10_plus_songs">10 + пісні</string>
   <string name="header_5_plus_albums">5 + альбоми</string>
+  <string name="header_other">"Інші"</string>
   <string name="footer_search_artists">Показати всіх виконавців</string>
   <string name="footer_search_albums">Показати всі альбоми</string>
   <string name="footer_search_songs">Показати всі композиції</string>

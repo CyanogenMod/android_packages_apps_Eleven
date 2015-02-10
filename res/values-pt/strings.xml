@@ -114,6 +114,10 @@
   <string name="settings_download_only_on_wifi_summary">Para reduzir custos adicionais por parte da operadora, não fazer download em redes móveis</string>
   <string name="settings_download_missing_artwork_title">Baixar arte de álbuns em falta</string>
   <string name="settings_download_artist_images_title">Baixar imagens do artista em falta</string>
+  <string name="settings_general_category">Geral</string>
+  <string name="settings_show_music_visualization_title">Mostrar visualização da música</string>
+  <string name="settings_show_lyrics_title">Mostrar letras das músicas</string>
+  <string name="settings_show_lyrics_summary">Para músicas que têm um ficheiro srt</string>
   <string name="app_widget_small">Música: 4 \u00d7 1</string>
   <string name="app_widget_large">Música: 4 \u00d7 2</string>
   <string name="app_widget_large_alt">Música: 4 \u00d7 2 (alternativo)</string>
@@ -135,6 +139,7 @@
   <string name="empty_generic_secondary">Para copiar a música do seu computador para o seu dispositivo, utilize um cabo USB.</string>
   <string name="empty_queue_main">Não há músicas na fila de reprodução</string>
   <string name="empty_queue_secondary">Para adicionar músicas à sua fila de reprodução, toque no menu de opções numa música, álbum ou artista e selecione \"Adicionar à fila\".</string>
+  <string name="error_playing_track">Incapaz de tocar a música %1$s</string>
   <string name="header_unknown_year">Ano desconhecido</string>
   <string name="header_less_than_30s">Menos de 30 segundos</string>
   <string name="header_30_to_60_seconds">30 - 60 segundos</string>
@@ -151,6 +156,7 @@
   <string name="header_5_to_9_songs">5 - 9 músicas</string>
   <string name="header_10_plus_songs">Mais de 10 músicas</string>
   <string name="header_5_plus_albums">Mais de 5 álbuns</string>
+  <string name="header_other">"Outro"</string>
   <string name="footer_search_artists">Mostrar todos os artistas</string>
   <string name="footer_search_albums">Mostrar todos os álbuns</string>
   <string name="footer_search_songs">Mostrar todas as músicas</string>

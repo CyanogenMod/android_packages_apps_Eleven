@@ -62,7 +62,7 @@
   <string name="sort_order_entry_number_of_albums">Albüm sayısı</string>
   <string name="sort_order_entry_filename">Dosya adı</string>
   <string name="playlist_last_added">Son eklenenler</string>
-  <string name="playlist_recently_played">Son çalınan</string>
+  <string name="playlist_recently_played">Son çalınanlar</string>
   <string name="playlist_top_tracks">Üst parçalarım</string>
   <string name="new_playlist">Yeni çalma listesi</string>
   <string name="save">Kaydet</string>
@@ -75,8 +75,8 @@
   <string name="clear_top_tracks_title">Üst parçalar temizlensin mi?</string>
   <string name="clear_recent_title">Son çalınanlar temizlensin mi?</string>
   <string name="clear_last_added">Son eklenenler temizlensin mi?</string>
-  <string name="cannot_be_undone">Bu işlem geriye alınamaz</string>
-  <string name="delete_warning">Bu önbelleğe alınmış resimleri kalıcı olarak silecek</string>
+  <string name="cannot_be_undone">Bu işlem geri alınamaz</string>
+  <string name="delete_warning">Bu, önbelleğe alınmış resimleri kalıcı olarak silecek</string>
   <string name="new_photo">Galeriden fotoğraf seç</string>
   <string name="google_search">Google arama</string>
   <string name="use_default">Varsayılan fotoğrafı kullan</string>
@@ -97,9 +97,9 @@
   <string name="accessibility_next">Sonraki</string>
   <string name="accessibility_prev">Önceki</string>
   <string name="accessibility_shuffle">Karıştır</string>
-  <string name="accessibility_shuffle_all">Hepsini karıştır</string>
+  <string name="accessibility_shuffle_all">Tümünü karıştır</string>
   <string name="accessibility_repeat">Tekrarla</string>
-  <string name="accessibility_repeat_all">Hepsini tekrarla</string>
+  <string name="accessibility_repeat_all">Tümünü tekrarla</string>
   <string name="accessibility_repeat_one">Birini tekrarla</string>
   <string name="accessibility_queue">Kuyruğu aç</string>
   <string name="accessibility_browse">Müziğe gözat</string>
@@ -110,10 +110,14 @@
   <string name="settings_data_category">Veri</string>
   <string name="settings_delete_cache_title">Önbelleği sil</string>
   <string name="settings_delete_cache_summary">Ön belleğe alınmış tüm resimleri sil</string>
-  <string name="settings_download_only_on_wifi_title">Sadece Wi-Fi\'de indir</string>
+  <string name="settings_download_only_on_wifi_title">Sadece Wi-Fi ile indir</string>
   <string name="settings_download_only_on_wifi_summary">Operatör veri ücretlerini azaltmak için mobil şebeke üzerinden indirme yapmayın</string>
   <string name="settings_download_missing_artwork_title">Eksik albüm kapaklarını indir</string>
   <string name="settings_download_artist_images_title">Eksik sanatçı resimlerini indir</string>
+  <string name="settings_general_category">Genel</string>
+  <string name="settings_show_music_visualization_title">Müzik görselleştirmelerini göster</string>
+  <string name="settings_show_lyrics_title">Şarkı sözlerini göster</string>
+  <string name="settings_show_lyrics_summary">srt dosyası olan şarkılar için</string>
   <string name="app_widget_small">Müzik: 4 \u00d7 1</string>
   <string name="app_widget_large">Müzik: 4 \u00d7 2</string>
   <string name="app_widget_large_alt">Müzik: 4 \u00d7 2 (alternatif)</string>
@@ -135,6 +139,7 @@
   <string name="empty_generic_secondary">Bilgisayarınızdan müzik kopyalamak için USB kablo kullanın.</string>
   <string name="empty_queue_main">Çalma kuyruğunda şarkı yok</string>
   <string name="empty_queue_secondary">Çalma Kuyruğuna şarkı eklemek için, seçeneklerden \"Kuyruğa ekle\"yi tıklayın.</string>
+  <string name="error_playing_track">%1$s parçası oynatılamıyor</string>
   <string name="header_unknown_year">Bilinmeyen yıl</string>
   <string name="header_less_than_30s">30 saniyeden daha az</string>
   <string name="header_30_to_60_seconds">30 - 60 saniye</string>
@@ -149,8 +154,9 @@
   <string name="header_1_song">1 şarkı</string>
   <string name="header_2_to_4_songs">2 - 4 şarkı</string>
   <string name="header_5_to_9_songs">5 - 9 şarkı</string>
-  <string name="header_10_plus_songs">10 + şarkı</string>
-  <string name="header_5_plus_albums">5 + albüm</string>
+  <string name="header_10_plus_songs">10+ şarkı</string>
+  <string name="header_5_plus_albums">5+ albüm</string>
+  <string name="header_other">"Diğer"</string>
   <string name="footer_search_artists">Tüm sanatçıları göster</string>
   <string name="footer_search_albums">Tüm albümleri göster</string>
   <string name="footer_search_songs">Tüm şarkıları göster</string>

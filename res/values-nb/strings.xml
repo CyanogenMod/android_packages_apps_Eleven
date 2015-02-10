@@ -114,6 +114,10 @@
   <string name="settings_download_only_on_wifi_summary">For å redusere operatøravgifter, ikke last ned over mobilnett</string>
   <string name="settings_download_missing_artwork_title">Last ned manglende albumcover</string>
   <string name="settings_download_artist_images_title">Last ned manglende artistbilder</string>
+  <string name="settings_general_category">Generelt</string>
+  <string name="settings_show_music_visualization_title">Vis musikk visualisering</string>
+  <string name="settings_show_lyrics_title">Vis sangtekst</string>
+  <string name="settings_show_lyrics_summary">For sanger som har en srt fil</string>
   <string name="app_widget_small">Musikk: 4 \u00d7 1</string>
   <string name="app_widget_large">Musikk: 4 \u00d7 2</string>
   <string name="app_widget_large_alt">Musikk: 4 \u00d7 2 (alternativ)</string>
@@ -135,6 +139,7 @@
   <string name="empty_generic_secondary">For å kopiere musikk fra en datamaskin til enheten, bruk en USB kabel.</string>
   <string name="empty_queue_main">Ingen sanger i avspillingskøen</string>
   <string name="empty_queue_secondary">For å legge til sanger i spillekøen, trykk på Alternativer-menyen på en sang, et album eller en artist og velg \"Legg til i kø\".</string>
+  <string name="error_playing_track">Kan ikke spille spor %1$s</string>
   <string name="header_unknown_year">Ukjent år</string>
   <string name="header_less_than_30s">Mindre enn 30 sekunder</string>
   <string name="header_30_to_60_seconds">30 - 60 sekunder</string>
@@ -151,6 +156,7 @@
   <string name="header_5_to_9_songs">5 - 9 sanger</string>
   <string name="header_10_plus_songs">10 + sanger</string>
   <string name="header_5_plus_albums">5 + album</string>
+  <string name="header_other">"Andre"</string>
   <string name="footer_search_artists">Vis alle artister</string>
   <string name="footer_search_albums">Vis alle album</string>
   <string name="footer_search_songs">Vis alle sanger</string>

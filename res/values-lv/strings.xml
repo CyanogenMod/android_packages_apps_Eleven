@@ -114,6 +114,10 @@
   <string name="settings_download_only_on_wifi_summary">Lai mazinātu izmaksas, neveikt lejuplādi, izmantojot mobilo tīklu</string>
   <string name="settings_download_missing_artwork_title">Lejuplādēt trūkstošo albuma noformējumu</string>
   <string name="settings_download_artist_images_title">Lejuplādēt trūkstošos izpildītāju attēlus</string>
+  <string name="settings_general_category">Vispārīgi</string>
+  <string name="settings_show_music_visualization_title">Rādīt mūzikas vizualizāciju</string>
+  <string name="settings_show_lyrics_title">Rādīt dziesmu vārdus</string>
+  <string name="settings_show_lyrics_summary">Dziesmām kam ir srt fails</string>
   <string name="app_widget_small">Mūzika: 4 \u00d7 1</string>
   <string name="app_widget_large">Mūzika: 4 \u00d7 2</string>
   <string name="app_widget_large_alt">Mūzika: 4 \u00d7 2 (alternatīvā)</string>
@@ -135,6 +139,7 @@
   <string name="empty_generic_secondary">Lai kopētu mūziku no datora uz šo iekārtu, izmantojiet USB kabeli.</string>
   <string name="empty_queue_main">Atskaņošanas rindā nav dziesmu</string>
   <string name="empty_queue_secondary">Lai pievienotu dziesmas atskaņošanas rindai, piesitiet dziesmas, albuma vai izpildītāja izvēlnei un izvēlieties \"Pievienot rindai\".</string>
+  <string name="error_playing_track">Nevar atskaņot dziesmu %1$s</string>
   <string name="header_unknown_year">Nezināms gads</string>
   <string name="header_less_than_30s">Mazāk kā 30 sekundes</string>
   <string name="header_30_to_60_seconds">30 - 60 sekundes</string>
@@ -151,6 +156,7 @@
   <string name="header_5_to_9_songs">5 - 9 dziesmas</string>
   <string name="header_10_plus_songs">10 + dziesmas</string>
   <string name="header_5_plus_albums">5 + albumi</string>
+  <string name="header_other">"Cits"</string>
   <string name="footer_search_artists">Parādīt visus māksliniekus</string>
   <string name="footer_search_albums">Parādīt visus albumus</string>
   <string name="footer_search_songs">Rādīt visas dziesmas</string>

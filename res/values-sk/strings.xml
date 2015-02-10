@@ -114,6 +114,10 @@
   <string name="settings_download_only_on_wifi_summary">Na zníženie poplatkov poskytovateľovi sa nebude preberať cez mobilné siete</string>
   <string name="settings_download_missing_artwork_title">Prevziať chýbajúce obrázky albumov</string>
   <string name="settings_download_artist_images_title">Prevziať chýbajúce obrázky interpretov</string>
+  <string name="settings_general_category">Všeobecné</string>
+  <string name="settings_show_music_visualization_title">Zobraziť vizualizáciu hudby</string>
+  <string name="settings_show_lyrics_title">Zobraziť texty skladieb</string>
+  <string name="settings_show_lyrics_summary">Pre skladby, ktoré majú súbor srt</string>
   <string name="app_widget_small">Hudba: 4 \u00d7 1</string>
   <string name="app_widget_large">Hudba: 4 \u00d7 2</string>
   <string name="app_widget_large_alt">Hudba: 4 \u00d7 2 (alternatívna)</string>
@@ -135,6 +139,7 @@
   <string name="empty_generic_secondary">Na kopírovanie hudby z vášho počítača do vášho zariadenia použite USB kábel.</string>
   <string name="empty_queue_main">Žiadne skladby v poradí na prehrávanie</string>
   <string name="empty_queue_secondary">Pre pridanie skladieb do poradia na prehrávanie kliknite na ponuku s možnosťami na skladbe, albume alebo interpretovi a vyberte \"Pridať do poradia\".</string>
+  <string name="error_playing_track">Nepodarilo sa prehrať skladbu %1$s</string>
   <string name="header_unknown_year">Neznámy rok</string>
   <string name="header_less_than_30s">Menej ako 30 sekúnd</string>
   <string name="header_30_to_60_seconds">30 - 60 sekúnd</string>
@@ -151,6 +156,7 @@
   <string name="header_5_to_9_songs">5 - 9 skladieb</string>
   <string name="header_10_plus_songs">Viac ako 10 skladieb</string>
   <string name="header_5_plus_albums">Viac ako 5 albumov</string>
+  <string name="header_other">"Iné"</string>
   <string name="footer_search_artists">Zobraziť všetkých interpretov</string>
   <string name="footer_search_albums">Zobraziť všetky albumy</string>
   <string name="footer_search_songs">Zobraziť všetky skladby</string>
