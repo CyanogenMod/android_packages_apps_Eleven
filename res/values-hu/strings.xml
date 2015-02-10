@@ -71,7 +71,7 @@
   <string name="clear">Kiürít</string>
   <string name="new_playlist_name_template">Lejátszási lista: <xliff:g id="number">%d</xliff:g></string>
   <string name="create_playlist_prompt">Lejátszási lista neve</string>
-  <string name="delete_dialog_title">Törli a következő albumot: <xliff:g id="item" example="album">%s</xliff:g>?</string>
+  <string name="delete_dialog_title">Törli a következőt: <xliff:g id="item" example="album">%s</xliff:g>?</string>
   <string name="clear_top_tracks_title">Törli a kedvenc számokat?</string>
   <string name="clear_recent_title">Törli a nemrég játszottakat?</string>
   <string name="clear_last_added">Törli az utoljára hozzáadottakat?</string>
@@ -103,7 +103,7 @@
   <string name="accessibility_repeat_one">Egy dal ismétlése</string>
   <string name="accessibility_queue">Lejátszási sor megnyitása</string>
   <string name="accessibility_browse">Zene böngészése</string>
-  <string name="set_as_ringtone"><xliff:g id="name" example="Alarm Bell">%s</xliff:g> beállítva csengőhangként</string>
+  <string name="set_as_ringtone">\"<xliff:g id="name" example="Alarm Bell">%s</xliff:g>\" beállítva csengőhangként</string>
   <string name="playlist_renamed">Lejátszási lista átnevezve</string>
   <string name="settings_ui_category">Felhasználói felület</string>
   <string name="settings_storage_category">Tárhely</string>
@@ -114,6 +114,10 @@
   <string name="settings_download_only_on_wifi_summary">A szolgáltató által felszámolt díj csökkentése érdekében ne használja a mobilinternetet letöltésre</string>
   <string name="settings_download_missing_artwork_title">Hiányzó albumborítók letöltése</string>
   <string name="settings_download_artist_images_title">Hiányzó előadóképek letöltése</string>
+  <string name="settings_general_category">Általános</string>
+  <string name="settings_show_music_visualization_title">Zenei vizualizáció megjelenítése</string>
+  <string name="settings_show_lyrics_title">Dalszöveg megjelenítése</string>
+  <string name="settings_show_lyrics_summary">Dalok, melyek rendelkeznek srt fájllal</string>
   <string name="app_widget_small">Zene: 4 \u00d7 1</string>
   <string name="app_widget_large">Zene: 4 \u00d7 2</string>
   <string name="app_widget_large_alt">Zene: 4 \u00d7 2 (alternatív)</string>
@@ -135,6 +139,7 @@
   <string name="empty_generic_secondary">Számítógépről történő zene másoláshoz használjon USB kábelt.</string>
   <string name="empty_queue_main">Nincsenek számok a lejátszási sorban</string>
   <string name="empty_queue_secondary">Zeneszámok hozzáadása a lejátszási sorhoz, koppintson a beállítások menü, dal, album vagy előadó lehetőségre, és válassza a \"Hozzáadás a lejátszólistához\" opciót.</string>
+  <string name="error_playing_track">Nem lehet lejátszani a következőt: %1$s</string>
   <string name="header_unknown_year">Ismeretlen év</string>
   <string name="header_less_than_30s">Kevesebb, mint 30 másodperc</string>
   <string name="header_30_to_60_seconds">30 - 60 másodperc</string>
@@ -151,6 +156,7 @@
   <string name="header_5_to_9_songs">5 - 9 dal</string>
   <string name="header_10_plus_songs">10+ dal</string>
   <string name="header_5_plus_albums">5+ album</string>
+  <string name="header_other">"Egyéb"</string>
   <string name="footer_search_artists">Összes előadó megjelenítése</string>
   <string name="footer_search_albums">Összes album megjelenítése</string>
   <string name="footer_search_songs">Összes dal megjelenítése</string>

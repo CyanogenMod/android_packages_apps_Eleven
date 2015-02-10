@@ -43,15 +43,15 @@
   </plurals>
   <plurals name="NNNtrackstoplaylist">
     <item quantity="one"><xliff:g id="number" example="1">%d</xliff:g> canzone aggiunta alla playlist.</item>
-    <item quantity="other"><xliff:g id="number" example="1">%d</xliff:g> canzoni aggiunte alla playlist.</item>
+    <item quantity="other"><xliff:g id="number" example="27">%d</xliff:g> canzoni aggiunte alla playlist.</item>
   </plurals>
   <plurals name="NNNtracksfromplaylist">
-    <item quantity="one"><xliff:g id="number" example="27">%d</xliff:g> canzone rimossa dalla playlist.</item>
+    <item quantity="one"><xliff:g id="number" example="1">%d</xliff:g> canzone rimossa dalla playlist.</item>
     <item quantity="other"><xliff:g id="number" example="27">%d</xliff:g> canzoni rimosse dalla playlist.</item>
   </plurals>
   <plurals name="NNNtrackstoqueue">
     <item quantity="one"><xliff:g id="number" example="1">%d</xliff:g> canzone aggiunta alla coda.</item>
-    <item quantity="other"><xliff:g id="number" example="1">%d</xliff:g> canzoni aggiunte alla coda.</item>
+    <item quantity="other"><xliff:g id="number" example="27">%d</xliff:g> canzoni aggiunte alla coda.</item>
   </plurals>
   <plurals name="NNNtrackstofavorites">
     <item quantity="one"><xliff:g id="number" example="1">%d</xliff:g> canzone aggiunta ai preferiti.</item>
@@ -59,6 +59,6 @@
   </plurals>
   <plurals name="NNNtracksdeleted">
     <item quantity="one"><xliff:g id="songs_to_delete" example="1">%d</xliff:g> canzone eliminata.</item>
-    <item quantity="other"><xliff:g id="songs_to_delete" example="1">%d</xliff:g> canzoni eliminate.</item>
+    <item quantity="other"><xliff:g id="songs_to_delete">%d</xliff:g> canzoni eliminate.</item>
   </plurals>
 </resources>

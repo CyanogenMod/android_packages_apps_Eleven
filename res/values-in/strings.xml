@@ -114,6 +114,10 @@
   <string name="settings_download_only_on_wifi_summary">Untuk mengurangi biaya operator, jangan unduh melalui jaringan seluler</string>
   <string name="settings_download_missing_artwork_title">Unduh seni album yang hilang</string>
   <string name="settings_download_artist_images_title">Unduh gambar artis yang hilang</string>
+  <string name="settings_general_category">Umum</string>
+  <string name="settings_show_music_visualization_title">Tampilkan visualisasi musik</string>
+  <string name="settings_show_lyrics_title">Tampilkan lirik lagu</string>
+  <string name="settings_show_lyrics_summary">Untuk lagu-lagu yang memiliki file srt</string>
   <string name="app_widget_small">Musik: 4 \u00d7 1</string>
   <string name="app_widget_large">Musik: 4 \u00d7 2</string>
   <string name="app_widget_large_alt">Musik: 4 \u00d7 2 (alternatif)</string>
@@ -135,6 +139,7 @@
   <string name="empty_generic_secondary">Untuk menyalin musik dari komputer ke perangkat Anda, gunakan kabel USB.</string>
   <string name="empty_queue_main">Tidak ada lagu dalam antrian putar</string>
   <string name="empty_queue_secondary">Untuk menambahkan lagu ke Antrian Putar Anda, tekan menu pilihan pada lagu, album, atau artis dan pilih \"Tambahkan ke antrian\".</string>
+  <string name="error_playing_track">Tidak dapat memutar trek %1$s</string>
   <string name="header_unknown_year">Tahun tidak diketahui</string>
   <string name="header_less_than_30s">Kurang dari 30 detik</string>
   <string name="header_30_to_60_seconds">30 - 60 detik</string>
@@ -151,6 +156,7 @@
   <string name="header_5_to_9_songs">5 - 9 lagu</string>
   <string name="header_10_plus_songs">10+ lagu</string>
   <string name="header_5_plus_albums">5+ album</string>
+  <string name="header_other">"Lain-lain"</string>
   <string name="footer_search_artists">Tampilkan semua artis</string>
   <string name="footer_search_albums">Tampilkan semua album</string>
   <string name="footer_search_songs">Tampilkan semua lagu</string>

@@ -33,18 +33,6 @@
     <item quantity="one"><xliff:g id="count">%d</xliff:g> Genre</item>
     <item quantity="other"><xliff:g id="count">%d</xliff:g> Genres</item>
   </plurals>
-  <plurals name="Nhours">
-    <item quantity="one"><xliff:g id="hours">%d</xliff:g> h</item>
-    <item quantity="other"><xliff:g id="hours">%d</xliff:g> h</item>
-  </plurals>
-  <plurals name="Nminutes">
-    <item quantity="one"><xliff:g id="minutes">%d</xliff:g> m</item>
-    <item quantity="other"><xliff:g id="minutes">%d</xliff:g> m</item>
-  </plurals>
-  <plurals name="NNNtrackstoplaylist">
-    <item quantity="one"><xliff:g id="number" example="1">%d</xliff:g> Titel wurde zur Wiedergabeliste hinzugefügt.</item>
-    <item quantity="other"><xliff:g id="number" example="27">%d</xliff:g> Titel wurden zur Wiedergabeliste hinzugefügt.</item>
-  </plurals>
   <plurals name="NNNtracksfromplaylist">
     <item quantity="one"><xliff:g id="number" example="1">%d</xliff:g> Titel wurde aus der Wiedergabeliste entfernt.</item>
     <item quantity="other"><xliff:g id="number" example="27">%d</xliff:g> Titel wurden aus der Wiedergabeliste entfernt.</item>
@@ -55,10 +43,10 @@
   </plurals>
   <plurals name="NNNtrackstofavorites">
     <item quantity="one"><xliff:g id="number" example="1">%d</xliff:g> Titel wurde zu den Favoriten hinzugefügt.</item>
-    <item quantity="other"><xliff:g id="number" example="1">%d</xliff:g> Titel wurden zu den Favoriten hinzugefügt.</item>
+    <item quantity="other"><xliff:g id="number" example="27">%d</xliff:g> Titel wurden zu den Favoriten hinzugefügt.</item>
   </plurals>
   <plurals name="NNNtracksdeleted">
     <item quantity="one"><xliff:g id="songs_to_delete" example="1">%d</xliff:g> Titel wurde gelöscht.</item>
-    <item quantity="other"><xliff:g id="songs_to_delete">%d</xliff:g>  Titel wurden gelöscht.</item>
+    <item quantity="other"><xliff:g id="songs_to_delete">%d</xliff:g> Titel wurden gelöscht.</item>
   </plurals>
 </resources>

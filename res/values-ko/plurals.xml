@@ -24,7 +24,7 @@
     <item quantity="other"><xliff:g id="count">%d</xliff:g>개의 앨범</item>
   </plurals>
   <plurals name="Nsongs">
-    <item quantity="other"><xliff:g id="count">%d</xliff:g>개의 노래</item>
+    <item quantity="other"><xliff:g id="count">%d</xliff:g>곡의 음악</item>
   </plurals>
   <plurals name="Ngenres">
     <item quantity="other"><xliff:g id="count">%d</xliff:g>개의 장르</item>
@@ -36,18 +36,18 @@
     <item quantity="other"><xliff:g id="minutes">%d</xliff:g>분</item>
   </plurals>
   <plurals name="NNNtrackstoplaylist">
-    <item quantity="other"><xliff:g id="number" example="27">%d</xliff:g>개의 노래가 재생목록에 추가되었습니다.</item>
+    <item quantity="other"><xliff:g id="number" example="27">%d</xliff:g>곡의 음악이 재생목록에 추가되었습니다.</item>
   </plurals>
   <plurals name="NNNtracksfromplaylist">
-    <item quantity="other"><xliff:g id="number" example="27">%d</xliff:g>개의 노래가 재생목록에서 제거되었습니다.</item>
+    <item quantity="other"><xliff:g id="number" example="27">%d</xliff:g>곡의 음악이 재생목록에서 제거되었습니다.</item>
   </plurals>
   <plurals name="NNNtrackstoqueue">
-    <item quantity="other"><xliff:g id="number" example="27">%d</xliff:g>개의 노래가 대기열에 추가되었습니다.</item>
+    <item quantity="other"><xliff:g id="number" example="27">%d</xliff:g>곡의 음악이 대기열에 추가되었습니다.</item>
   </plurals>
   <plurals name="NNNtrackstofavorites">
-    <item quantity="other"><xliff:g id="number" example="27">%d</xliff:g>개의 노래가 즐겨찾기에 추가되었습니다.</item>
+    <item quantity="other"><xliff:g id="number" example="27">%d</xliff:g>곡의 음악이 즐겨찾기에 추가되었습니다.</item>
   </plurals>
   <plurals name="NNNtracksdeleted">
-    <item quantity="other"><xliff:g id="songs_to_delete">%d</xliff:g>개의 노래가 삭제되었습니다.</item>
+    <item quantity="other"><xliff:g id="songs_to_delete">%d</xliff:g>곡의 음악이 삭제되었습니다.</item>
   </plurals>
 </resources>

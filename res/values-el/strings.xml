@@ -114,6 +114,10 @@
   <string name="settings_download_only_on_wifi_summary">Για μείωση των χρεώσεων, να μην γίνεται λήψη μέσω του δίκτυου κινητής τηλεφωνίας</string>
   <string name="settings_download_missing_artwork_title">Λήψη εξωφύλλων άλμπουμ που λείπουν</string>
   <string name="settings_download_artist_images_title">Λήψη εικόνων καλλιτέχνη που λείπουν</string>
+  <string name="settings_general_category">Γενικά</string>
+  <string name="settings_show_music_visualization_title">Εμφάνιση οπτικοποίησης μουσικής</string>
+  <string name="settings_show_lyrics_title">Εμφάνιση στίχων τραγουδιών</string>
+  <string name="settings_show_lyrics_summary">Για τραγούδια που έχουν αρχείο srt</string>
   <string name="app_widget_small">Μουσική: 4 \u00d7 1</string>
   <string name="app_widget_large">Μουσική: 4 \u00d7 2</string>
   <string name="app_widget_large_alt">Μουσική: 4 \u00d7 2 (εναλλακτικό)</string>
@@ -135,6 +139,7 @@
   <string name="empty_generic_secondary">Για να αντιγράψετε μουσική από τον υπολογιστή στη συσκευή σας, χρησιμοποιήστε ένα καλώδιο USB.</string>
   <string name="empty_queue_main">Δεν υπάρχουν τραγούδια στην ουρά αναπαραγωγής</string>
   <string name="empty_queue_secondary">Για να προσθέσετε τραγούδια στην ουρά αναπαραγωγής, ανοίξτε το μενού επιλογών σε ένα τραγούδι, άλμπουμ ή καλλιτέχνη και επιλέξτε \"Προσθήκη στην ουρά\".</string>
+  <string name="error_playing_track">Δεν είναι δυνατή η αναπαραγωγή του κομματιού %1$s</string>
   <string name="header_unknown_year">Άγνωστο έτος</string>
   <string name="header_less_than_30s">Λιγότερο από 30 δευτερόλεπτα</string>
   <string name="header_30_to_60_seconds">30 - 60 δευτερόλεπτα</string>
@@ -151,6 +156,7 @@
   <string name="header_5_to_9_songs">5 - 9 τραγούδια</string>
   <string name="header_10_plus_songs">10+ τραγούδια</string>
   <string name="header_5_plus_albums">5+ άλμπουμ</string>
+  <string name="header_other">"Άλλα"</string>
   <string name="footer_search_artists">Εμφάνιση όλων των καλλιτεχνών</string>
   <string name="footer_search_albums">Εμφάνιση όλων των άλμπουμ</string>
   <string name="footer_search_songs">Εμφάνιση όλων των τραγουδιών</string>

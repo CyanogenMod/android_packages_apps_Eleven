@@ -18,7 +18,7 @@
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
   <string name="app_name">音乐</string>
-  <string name="page_recent">最近使用</string>
+  <string name="page_recent">最近播放</string>
   <string name="page_artists">艺术家</string>
   <string name="page_albums">专辑</string>
   <string name="page_songs">歌曲</string>
@@ -114,6 +114,10 @@
   <string name="settings_download_only_on_wifi_summary">为了减少运营商费用，不使用移动网络下载。</string>
   <string name="settings_download_missing_artwork_title">下载缺失的专辑封面</string>
   <string name="settings_download_artist_images_title">下载缺失的艺术家的图像</string>
+  <string name="settings_general_category">常规</string>
+  <string name="settings_show_music_visualization_title">显示音乐可视化效果</string>
+  <string name="settings_show_lyrics_title">显示歌词</string>
+  <string name="settings_show_lyrics_summary">有一个 srt 文件与歌曲匹配</string>
   <string name="app_widget_small">音乐：4 \u00d7 1</string>
   <string name="app_widget_large">音乐：4 \u00d7 1</string>
   <string name="app_widget_large_alt">音乐： 4 \u00d7 2 (交替)</string>
@@ -135,6 +139,7 @@
   <string name="empty_generic_secondary">请使用 USB 数据线把音乐从您的计算机复制到您的设备中。</string>
   <string name="empty_queue_main">播放队列中没有音乐</string>
   <string name="empty_queue_secondary">要向您的播放队列中添加歌曲，请点击歌曲、 唱片集或艺术家在选项菜单并选择“添加到队列”。</string>
+  <string name="error_playing_track">无法播放音轨 %1$s</string>
   <string name="header_unknown_year">未知年份</string>
   <string name="header_less_than_30s">少于 30 秒</string>
   <string name="header_30_to_60_seconds">30-60 秒</string>
@@ -151,6 +156,7 @@
   <string name="header_5_to_9_songs">5-9 首歌曲</string>
   <string name="header_10_plus_songs">10+ 首歌曲</string>
   <string name="header_5_plus_albums">5+ 张专辑</string>
+  <string name="header_other">"其他"</string>
   <string name="footer_search_artists">显示所有艺术家</string>
   <string name="footer_search_albums">显示所有专辑</string>
   <string name="footer_search_songs">显示所有歌曲</string>

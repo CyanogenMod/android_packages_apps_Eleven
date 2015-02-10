@@ -114,6 +114,10 @@
   <string name="settings_download_only_on_wifi_summary">Per reduir les despeses amb l\'operadora, no descarreguis en xarxes mòbils</string>
   <string name="settings_download_missing_artwork_title">Descarrega les cobertes que faltin</string>
   <string name="settings_download_artist_images_title">Descarrega les imatges dels artistes que faltin</string>
+  <string name="settings_general_category">General</string>
+  <string name="settings_show_music_visualization_title">Mostra la visualització de la música</string>
+  <string name="settings_show_lyrics_title">Mostra la lletra de les cançons</string>
+  <string name="settings_show_lyrics_summary">Per cançons que tenen un fitxer srt</string>
   <string name="app_widget_small">Música: 4 \u00d7 1</string>
   <string name="app_widget_large">Música: 4 \u00d7 2</string>
   <string name="app_widget_large_alt">Música: 4 \u00d7 2 (alternatiu)</string>
@@ -135,6 +139,7 @@
   <string name="empty_generic_secondary">Per copiar música del teu ordenador al teu dispositiu, utilitza un cable USB.</string>
   <string name="empty_queue_main">No hi ha cançons a la cua de reproducció</string>
   <string name="empty_queue_secondary">Per afegir cançons a la cua de reproducció, pica al menú opcions en una cançó, àlbum o artista i selecciona \"Afegeix a la cua\".</string>
+  <string name="error_playing_track">No s\'ha pogut reproduir la pista %1$s</string>
   <string name="header_unknown_year">Any desconegut</string>
   <string name="header_less_than_30s">Menys de 30 segons</string>
   <string name="header_30_to_60_seconds">30 - 60 segons</string>
@@ -151,6 +156,7 @@
   <string name="header_5_to_9_songs">5 - 9 cançons</string>
   <string name="header_10_plus_songs">10+ cançons</string>
   <string name="header_5_plus_albums">5+ àlbums</string>
+  <string name="header_other">"Altres"</string>
   <string name="footer_search_artists">Mostra tots els artistes</string>
   <string name="footer_search_albums">Mostra tots els àlbums</string>
   <string name="footer_search_songs">Mostra totes les cançons</string>

@@ -42,7 +42,7 @@
   <string name="menu_play_all">すべて再生</string>
   <string name="menu_sort_by">並べ替え</string>
   <string name="menu_clear_list">リストを消去</string>
-  <string name="menu_clear_recents">最近の曲をクリア</string>
+  <string name="menu_clear_recents">最近の曲を消去</string>
   <string name="menu_clear_queue">キューを消去</string>
   <string name="menu_save_queue">キューを保存</string>
   <string name="menu_equalizer">イコライザー</string>
@@ -58,8 +58,8 @@
   <string name="sort_order_entry_duration">長さ</string>
   <string name="sort_order_entry_date_added">追加日</string>
   <string name="sort_order_entry_track_list">トラックリスト</string>
-  <string name="sort_order_entry_number_of_songs">曲番号</string>
-  <string name="sort_order_entry_number_of_albums">アルバム番号</string>
+  <string name="sort_order_entry_number_of_songs">曲数</string>
+  <string name="sort_order_entry_number_of_albums">アルバム数</string>
   <string name="sort_order_entry_filename">ファイル名</string>
   <string name="playlist_last_added">最近追加した曲</string>
   <string name="playlist_recently_played">最近再生した曲</string>
@@ -87,7 +87,7 @@
   <string name="context_menu_rename_playlist">名前の変更</string>
   <string name="context_menu_delete">削除</string>
   <string name="context_menu_fetch_album_art">アルバムアートを取得</string>
-  <string name="context_menu_fetch_artist_image">アーティスト画像を取得</string>
+  <string name="context_menu_fetch_artist_image">アーティストの画像を取得</string>
   <string name="context_menu_remove_from_recent">最近の曲から削除</string>
   <string name="context_menu_use_as_ringtone">着信音として使用</string>
   <string name="context_menu_remove_from_playlist">プレイリストから削除</string>
@@ -113,7 +113,11 @@
   <string name="settings_download_only_on_wifi_title">Wi-Fi経由でのみダウンロード</string>
   <string name="settings_download_only_on_wifi_summary">パケット通信料を減らすために、モバイルネットワーク経由でダウンロードしない</string>
   <string name="settings_download_missing_artwork_title">持っていないアルバムアートをダウンロード</string>
-  <string name="settings_download_artist_images_title">持っていないアーティスト画像をダウンロード</string>
+  <string name="settings_download_artist_images_title">持っていないアーティストの画像をダウンロード</string>
+  <string name="settings_general_category">全般</string>
+  <string name="settings_show_music_visualization_title">音楽の視覚エフェクトを表示</string>
+  <string name="settings_show_lyrics_title">歌詞を表示</string>
+  <string name="settings_show_lyrics_summary">srtファイルがある曲向け</string>
   <string name="app_widget_small">音楽: 4 \u00d7 1</string>
   <string name="app_widget_large">音楽: 4 \u00d7 2</string>
   <string name="app_widget_large_alt">音楽: 4 \u00d7 2（別バージョン）</string>
@@ -135,6 +139,7 @@
   <string name="empty_generic_secondary">パソコンから端末に音楽をコピーするには、USBケーブルを使用してください。</string>
   <string name="empty_queue_main">再生キューに曲がありません</string>
   <string name="empty_queue_secondary">再生キューに曲を追加するには、曲、アルバムまたはアーティストのオプションメニューをタップして「キューに追加」を選択してください。</string>
+  <string name="error_playing_track">トラック%1$sを再生できません</string>
   <string name="header_unknown_year">不明な年</string>
   <string name="header_less_than_30s">30秒未満</string>
   <string name="header_30_to_60_seconds">30～60秒</string>
@@ -151,6 +156,7 @@
   <string name="header_5_to_9_songs">5～9曲</string>
   <string name="header_10_plus_songs">10曲以上</string>
   <string name="header_5_plus_albums">5枚以上</string>
+  <string name="header_other">"その他"</string>
   <string name="footer_search_artists">すべてのアーティストを表示</string>
   <string name="footer_search_albums">すべてのアルバムを表示</string>
   <string name="footer_search_songs">すべての曲を表示</string>
