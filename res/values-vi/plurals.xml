@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <plurals name="Nartists">
+        <item quantity="other">%d nghệ sĩ</item>
+        <item quantity="one">%d nghệ sĩ</item>
+    </plurals>
+    <plurals name="Nalbums">
+        <item quantity="other">%d album</item>
+        <item quantity="one">%d album</item>
+    </plurals>
+    <plurals name="Nsongs">
+        <item quantity="other">%d bài hát</item>
+        <item quantity="zero">%d bài hát</item>
+        <item quantity="one">%d bài hát</item>
+    </plurals>
+    <plurals name="Ngenres">
+        <item quantity="other">%d thể loại</item>
+        <item quantity="one">%d thể loại</item>
+    </plurals>
+    <plurals name="Nhours">
+        <item quantity="other">%d giờ</item>
+    </plurals>
+    <plurals name="Nminutes">
+        <item quantity="other">%d phút</item>
+    </plurals>
+    <plurals name="NNNtrackstoplaylist">
+        <item quantity="other">Đã thêm %d bài hát vào danh sách.</item>
+        <item quantity="one">Đã thêm %d bài hát vào danh sách.</item>
+    </plurals>
+    <plurals name="NNNtracksfromplaylist">
+        <item quantity="other">Đã xoá %d bài hát khỏi danh sách.</item>
+        <item quantity="one">Đã xoá %d bài hát khỏi danh sách.</item>
+    </plurals>
+    <plurals name="NNNtrackstoqueue">
+        <item quantity="other">Đã thêm %d bài hát vào danh sách chờ phát.</item>
+        <item quantity="one">Đã thêm %d bài hát vào danh sách chờ phát.</item>
+    </plurals>
+    <plurals name="NNNtrackstofavorites">
+        <item quantity="other">Đã thêm %d bài hát vào danh sách yêu thích.</item>
+        <item quantity="one">Đã thêm %d bài hát vào danh sách yêu thích.</item>
+    </plurals>
+    <plurals name="NNNtracksdeleted">
+        <item quantity="other">Đã xoá %d bài hát.</item>
+        <item quantity="one">Đã xoá %d bài hát.</item>
+    </plurals>
+</resources>
