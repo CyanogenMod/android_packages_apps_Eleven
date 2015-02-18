@@ -18,6 +18,7 @@
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
   <string name="app_name">Muzică</string>
+  <string name="page_recent">Recent</string>
   <string name="page_artists">Artiști</string>
   <string name="page_albums">Albume</string>
   <string name="page_songs">Melodii</string>
@@ -46,6 +47,7 @@
   <string name="new_playlist_name_template">Listă de redare <xliff:g id="number">%d</xliff:g></string>
   <string name="cannot_be_undone">Această acțiune nu poate fi anulată</string>
   <string name="google_search">Căutare pe Google</string>
+  <string name="context_menu_play_selection">Redare</string>
   <string name="context_menu_rename_playlist">Redenumire</string>
   <string name="set_as_ringtone">\'<xliff:g id="name" example="Alarm Bell">%s</xliff:g>\' este ton de apel</string>
   <string name="empty_search">Nu am găsit rezultate la căutare</string>
