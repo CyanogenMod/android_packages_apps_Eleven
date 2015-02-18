@@ -115,6 +115,7 @@
   <string name="settings_download_missing_artwork_title">Fehlende Albencover laden</string>
   <string name="settings_download_artist_images_title">Fehlende Interpretenbilder laden</string>
   <string name="settings_general_category">Allgemein</string>
+  <string name="settings_show_music_visualization_title">Zeige Musik-Visualisierung</string>
   <string name="settings_show_lyrics_title">Zeige Songtexte</string>
   <string name="settings_show_lyrics_summary">Für Titel, die eine srt-Datei haben</string>
   <string name="app_widget_small">Musik: 4 \u00d7 1</string>
