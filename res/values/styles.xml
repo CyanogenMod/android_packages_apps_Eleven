@@ -29,6 +29,7 @@
         <item name="android:colorPrimary">@color/primary</item>
         <item name="android:colorPrimaryDark">@color/primary_dark</item>
         <item name="android:colorAccent">@color/accent</item>
+        <item name="android:navigationBarColor">@color/primary</item>
     </style>
 
     <style name="ActionBarWidgetTheme" parent="@android:style/Theme.Material">
