@@ -24,8 +24,8 @@
   <string name="page_songs">Dainos</string>
   <string name="page_playlists">Grojaraščiai</string>
   <string name="page_genres">Žanrai</string>
-  <string name="page_now_playing">Dabar grojama</string>
-  <string name="page_play_queue">Groti eilėje</string>
+  <string name="page_now_playing">Dabar leidžiama</string>
+  <string name="page_play_queue">Paleisti eilėje</string>
   <string name="header_albums">Albumai</string>
   <string name="header_top_songs">Top dainos</string>
   <string name="header_all_songs">Visos dainos</string>
@@ -36,10 +36,10 @@
   <string name="menu_shuffle_playlist">Maišyti grojaraštį</string>
   <string name="menu_shuffle_album">Maišyti albumą</string>
   <string name="menu_shuffle_artist">Maišyti atlikėją</string>
-  <string name="menu_shuffle_top_tracks">Maišyti top dainas</string>
-  <string name="menu_shuffle_recent">Maišyti naujausiai grotus</string>
+  <string name="menu_shuffle_top_tracks">Maišyti top takelius</string>
+  <string name="menu_shuffle_recent">Maišyti naujausiai leistus</string>
   <string name="menu_shuffle_last_added">Maišyti neseniai įkeltas</string>
-  <string name="menu_play_all">Groti viską</string>
+  <string name="menu_play_all">Paleisti viską</string>
   <string name="menu_sort_by">Rūšiuoti pagal</string>
   <string name="menu_clear_list">Išvalyti sąrašą</string>
   <string name="menu_clear_recents">Išvalyti naujausius</string>
@@ -57,13 +57,13 @@
   <string name="sort_order_entry_year">Metus</string>
   <string name="sort_order_entry_duration">Trukmę</string>
   <string name="sort_order_entry_date_added">Įkėlimo datą</string>
-  <string name="sort_order_entry_track_list">Dainų sąrašą</string>
+  <string name="sort_order_entry_track_list">Takelių sąrašą</string>
   <string name="sort_order_entry_number_of_songs">Dainų skaičių</string>
   <string name="sort_order_entry_number_of_albums">Albumų skaičių</string>
   <string name="sort_order_entry_filename">Failo pavadinimą</string>
   <string name="playlist_last_added">Neseniai įkelti</string>
-  <string name="playlist_recently_played">Naujausiai grotos</string>
-  <string name="playlist_top_tracks">Mano top dainos</string>
+  <string name="playlist_recently_played">Naujausiai leista</string>
+  <string name="playlist_top_tracks">Mano top takeliai</string>
   <string name="new_playlist">Naujas grojaraštis</string>
   <string name="save">Išsaugoti</string>
   <string name="cancel">Atšaukti</string>
@@ -72,7 +72,7 @@
   <string name="new_playlist_name_template">Grojaraštis <xliff:g id="number">%d</xliff:g></string>
   <string name="create_playlist_prompt">Grojaraščio pavadinimas</string>
   <string name="delete_dialog_title">Ištrinti <xliff:g id="item" example="album">%s</xliff:g>?</string>
-  <string name="clear_top_tracks_title">Išvalyti top dainas?</string>
+  <string name="clear_top_tracks_title">Išvalyti top takelius?</string>
   <string name="clear_recent_title">Išvalyti naujausiai grotas?</string>
   <string name="clear_last_added">Išvalyti neseniai įkeltas?</string>
   <string name="cannot_be_undone">Tai negali būti atšaukta</string>
@@ -81,8 +81,8 @@
   <string name="google_search">„Google“ paieška</string>
   <string name="use_default">Naudoti numatytąją nuotrauką</string>
   <string name="old_photo">Naudoti seną nuotrauką</string>
-  <string name="context_menu_play_selection">Groti</string>
-  <string name="context_menu_play_next">Groti kitą</string>
+  <string name="context_menu_play_selection">Paleisti</string>
+  <string name="context_menu_play_next">Paleisti kitą</string>
   <string name="context_menu_more_by_artist">Daugiau pagal atlikėją</string>
   <string name="context_menu_rename_playlist">Pervadinti</string>
   <string name="context_menu_delete">Ištrinti</string>
@@ -92,7 +92,7 @@
   <string name="context_menu_use_as_ringtone">Naudoti kaip skambėjimo toną</string>
   <string name="context_menu_remove_from_playlist">Pašalinti iš grojaraščio</string>
   <string name="context_menu_change_image">Pakeisti paveikslėlį</string>
-  <string name="accessibility_play">Groti</string>
+  <string name="accessibility_play">Paleisti</string>
   <string name="accessibility_pause">Sustabdyti</string>
   <string name="accessibility_next">Kitas</string>
   <string name="accessibility_prev">Ankstesnis</string>
@@ -131,7 +131,7 @@
   <string name="empty_recent">Naujausiai klausytos dainos bus rodomos čia.</string>
   <string name="empty_playlist_main">Nėra dainų grojaraštyje</string>
   <string name="empty_playlist_secondary">Kad pridėtumėte dainas į šį grojaraštį, bakstelėkite meniu parinktį ant dainos, albumo arba atlikėjo ir pasirinkite „Pridėti į grojaraštį“.</string>
-  <string name="empty_top_tracks_main">Nėra top dainų</string>
+  <string name="empty_top_tracks_main">Nėra top takelių</string>
   <string name="empty_top_tracks_secondary">Dainas, kurias klausėte daugiausiai bus pridėtos į šį sąrašą.</string>
   <string name="empty_last_added_main">Nėra naujausiai įkeltų dainų</string>
   <string name="empty_last_added">Dainas, kurias pridėjote per pastarąjį mėnesį bus rodomos čia.</string>
@@ -139,7 +139,7 @@
   <string name="empty_generic_secondary">Kad kopijuotumėte muziką iš kompiuterio į savo įrenginį, naudokite USB kabelį.</string>
   <string name="empty_queue_main">Nėra dainų eilėje</string>
   <string name="empty_queue_secondary">Kad pridėtumėte dainas į eilę, bakstelėkite meniu parinktį ant dainos, albumo arba atlikėjo ir pasirinkite „Pridėti į eilę“.</string>
-  <string name="error_playing_track">Nepavyko groti dainos %1$s</string>
+  <string name="error_playing_track">Nepavyko paleisti takelio %1$s</string>
   <string name="header_unknown_year">Nežinomi metai</string>
   <string name="header_less_than_30s">Mažiau nei 30 sek.</string>
   <string name="header_30_to_60_seconds">30 - 60 sek.</string>

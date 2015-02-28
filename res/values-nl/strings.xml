@@ -27,7 +27,7 @@
   <string name="page_now_playing">Nu afspelen</string>
   <string name="page_play_queue">Wachtrij</string>
   <string name="header_albums">Albums</string>
-  <string name="header_top_songs">Topnummers</string>
+  <string name="header_top_songs">Beste nummers</string>
   <string name="header_all_songs">Alle nummers</string>
   <string name="menu_settings">Instellingen</string>
   <string name="menu_search">Zoeken</string>
@@ -36,7 +36,7 @@
   <string name="menu_shuffle_playlist">Shuffle afspeellijst</string>
   <string name="menu_shuffle_album">Shuffle album</string>
   <string name="menu_shuffle_artist">Shuffle artiest</string>
-  <string name="menu_shuffle_top_tracks">Shuffle topnummers</string>
+  <string name="menu_shuffle_top_tracks">Shuffle beste nummers</string>
   <string name="menu_shuffle_recent">Shuffle recente nrs.</string>
   <string name="menu_shuffle_last_added">Shuffle laatst toegevoegd</string>
   <string name="menu_play_all">Alles afspelen</string>
@@ -57,13 +57,13 @@
   <string name="sort_order_entry_year">Jaar</string>
   <string name="sort_order_entry_duration">Duur</string>
   <string name="sort_order_entry_date_added">Datum toegevoegd</string>
-  <string name="sort_order_entry_track_list">Nummerlijst</string>
+  <string name="sort_order_entry_track_list">Tracklist</string>
   <string name="sort_order_entry_number_of_songs">Aantal nummers</string>
   <string name="sort_order_entry_number_of_albums">Aantal albums</string>
   <string name="sort_order_entry_filename">Bestandsnaam</string>
   <string name="playlist_last_added">Laatst toegevoegd</string>
   <string name="playlist_recently_played">Recent afgespeeld</string>
-  <string name="playlist_top_tracks">Mijn topnummers</string>
+  <string name="playlist_top_tracks">Mijn beste nummers</string>
   <string name="new_playlist">Nieuwe afspeellijst</string>
   <string name="save">Opslaan</string>
   <string name="cancel">Annuleren</string>
@@ -72,7 +72,7 @@
   <string name="new_playlist_name_template">Afspeellijst <xliff:g id="number">%d</xliff:g></string>
   <string name="create_playlist_prompt">Naam afspeellijst</string>
   <string name="delete_dialog_title">\'<xliff:g id="item" example="album">%s</xliff:g>\' verwijderen?</string>
-  <string name="clear_top_tracks_title">Topnummers wissen?</string>
+  <string name="clear_top_tracks_title">Beste nummers wissen?</string>
   <string name="clear_recent_title">Recent afgespeelde nummers wissen?</string>
   <string name="clear_last_added">Laatst toegevoegde wissen?</string>
   <string name="cannot_be_undone">Dit kan niet ongedaan worden gemaakt</string>
@@ -131,5 +131,40 @@
   <string name="empty_recent">Nummers waar u recent naar heeft geluisterd worden hier getoond.</string>
   <string name="empty_playlist_main">Geen nummers in afspeellijst</string>
   <string name="empty_playlist_secondary">Om nummers toe te voegen aan deze afspeellijst, tik op het menu van een nummer, album of artiest en selecteer \'Toevoegen aan afspeellijst\'.</string>
-  <string name="empty_top_tracks_main">Geen topnummers</string>
+  <string name="empty_top_tracks_main">Geen beste nummers</string>
+  <string name="empty_top_tracks_secondary">Nummers waar u het meest naar luistert worden toegevoegd aan deze lijst.</string>
+  <string name="empty_last_added_main">Geen nummers recent toegevoegd</string>
+  <string name="empty_last_added">Nummers die u in de afgelopen maand heeft toegevoegd worden hier getoond.</string>
+  <string name="empty_generic_main">Geen muziek gevonden</string>
+  <string name="empty_generic_secondary">Om muziek van uw computer te kopiëren naar uw apparaat, kunt u een USB-kabel gebruiken.</string>
+  <string name="empty_queue_main">Geen nummers in wachtrij</string>
+  <string name="empty_queue_secondary">Om nummers toe te voegen aan de wachtrij, tik op het menu van een nummer, album of artiest en selecteer \'Toevoegen aan wachtrij\'.</string>
+  <string name="error_playing_track">Kan nummer %1$s niet afspelen</string>
+  <string name="header_unknown_year">Onbekend jaar</string>
+  <string name="header_less_than_30s">Minder dan 30 seconden</string>
+  <string name="header_30_to_60_seconds">30 - 60 seconden</string>
+  <string name="header_1_to_2_minutes">1 - 2 minuten</string>
+  <string name="header_2_to_3_minutes">2 - 3 minuten</string>
+  <string name="header_3_to_4_minutes">3 - 4 minuten</string>
+  <string name="header_4_to_5_minutes">4 - 5 minuten</string>
+  <string name="header_5_to_10_minutes">5 - 10 minuten</string>
+  <string name="header_10_to_30_minutes">10 - 30 minuten</string>
+  <string name="header_30_to_60_minutes">30 - 60 minuten</string>
+  <string name="header_greater_than_60_minutes">Meer dan 60 minuten</string>
+  <string name="header_1_song">1 nummer</string>
+  <string name="header_2_to_4_songs">2 - 4 nummers</string>
+  <string name="header_5_to_9_songs">5 - 9 nummers</string>
+  <string name="header_10_plus_songs">10+ nummers</string>
+  <string name="header_5_plus_albums">5+ albums</string>
+  <string name="header_other">"Overig"</string>
+  <string name="footer_search_artists">Alle artiesten tonen</string>
+  <string name="footer_search_albums">Alle albums tonen</string>
+  <string name="footer_search_songs">Alle nummers tonen</string>
+  <string name="footer_search_playlists">Alle afspeellijsten tonen</string>
+  <string name="searchHint">Muziek zoeken</string>
+  <string name="search_title_artists">Alle \"%s\" artiesten</string>
+  <string name="search_title_albums">Alle \"%s\" albums</string>
+  <string name="search_title_songs">Alle \"%s\" nummers</string>
+  <string name="search_title_playlists">Alle \"%s\" afspeellijsten</string>
+  <string name="duration_format"><xliff:g id="hours">%1$s</xliff:g> <xliff:g id="minutes">%2$s</xliff:g></string>
 </resources>
