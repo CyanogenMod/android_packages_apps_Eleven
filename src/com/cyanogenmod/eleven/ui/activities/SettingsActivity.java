@@ -105,8 +105,11 @@ public class SettingsActivity extends PreferenceActivity implements OnSharedPref
     @Override
     public void onSharedPreferenceChanged(SharedPreferences sharedPreferences,
              String key) {
-        if(key.equals(PreferenceUtils.SHAKE_TO_PLAY)){
-            MusicUtils.setShakeToPlayEnabled(sharedPreferences.getBoolean(key, false));
+        if(key.equals(PreferenceUtils.SHAKE_TO_PLAY)) {
+            MusicUtils.setShakeToPlayEnabled(SettingsActivity.this,sharedPreferences.getBoolean(key, false));
+        }
+        else if(key.equals(PreferenceUtils.SHOW_ALBUM_ART_ON_LOCKSCREEN)) {
+            MusicUtils.setShowAlbumArtOnLockscreen(SettingsActivity.this,sharedPreferences.getBoolean(key, true));
         }
     }
 }

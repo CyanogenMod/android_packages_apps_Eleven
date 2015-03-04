@@ -87,8 +87,6 @@ public final class MusicUtils {
     public static final String MUSIC_ONLY_SELECTION = MediaStore.Audio.AudioColumns.IS_MUSIC + "=1"
                     + " AND " + MediaStore.Audio.AudioColumns.TITLE + " != ''"; //$NON-NLS-2$
 
-    private static boolean sShakeToPlayEnabled;
-
     static {
         mConnectionMap = new WeakHashMap<Context, ServiceBinder>();
         sEmptyList = new long[0];
@@ -109,7 +107,6 @@ public final class MusicUtils {
         if (realActivity == null) {
             realActivity = (Activity)context;
         }
-        sShakeToPlayEnabled = PreferenceUtils.getInstance(context).getShakeToPlay();
         final ContextWrapper contextWrapper = new ContextWrapper(realActivity);
         contextWrapper.startService(new Intent(contextWrapper, MusicPlaybackService.class));
         final ServiceBinder binder = new ServiceBinder(callback);
@@ -157,7 +154,7 @@ public final class MusicUtils {
             if (mCallback != null) {
                 mCallback.onServiceConnected(className, service);
             }
-            MusicUtils.setShakeToPlayEnabled(sShakeToPlayEnabled);
+            MusicUtils.initPlaybackServiceWithSettings();
         }
 
         @Override
@@ -275,15 +272,34 @@ public final class MusicUtils {
     }
 
     /**
+     * Initialize playback service with values from Settings    
+     */
+    public static void initPlaybackServiceWithSettings(){
+        if(!mConnectionMap.isEmpty()) {
+            Context context=mConnectionMap.keySet().iterator().next();
+            MusicUtils.setShakeToPlayEnabled(context,PreferenceUtils.getInstance(context).getShakeToPlay());
+            MusicUtils.setShowAlbumArtOnLockscreen(context,PreferenceUtils.getInstance(context).getShowAlbumArtOnLockscreen());
+        }
+    }
+
+    /**
      * Set shake to play status
      */
-    public static void setShakeToPlayEnabled(boolean enabled) {
-        try {
-            if (mService != null) {
-                mService.setShakeToPlayEnabled(enabled);
-            }
-        } catch (final RemoteException ignored) {
-        }
+    public static void setShakeToPlayEnabled(final Context context, final boolean enabled) {
+        final Intent shakeToPlayState = new Intent(context, MusicPlaybackService.class);
+        shakeToPlayState.setAction(MusicPlaybackService.SHAKE_TO_PLAY_CHANGED_ACTION);
+        shakeToPlayState.putExtra(PreferenceUtils.SHAKE_TO_PLAY, enabled);
+        context.startService(shakeToPlayState);
+    }
+    
+    /**
+     * Set show album art on lockscreen
+     */
+    public static void setShowAlbumArtOnLockscreen(final Context context, final boolean enabled) {
+        final Intent showAlbumArtOnLockscreenState = new Intent(context, MusicPlaybackService.class);
+        showAlbumArtOnLockscreenState.setAction(MusicPlaybackService.LOCKSCREEN_ALBUMART_CHANGED_ACTION);
+        showAlbumArtOnLockscreenState.putExtra(PreferenceUtils.SHOW_ALBUM_ART_ON_LOCKSCREEN, enabled);
+        context.startService(showAlbumArtOnLockscreenState);
     }
 
     /**

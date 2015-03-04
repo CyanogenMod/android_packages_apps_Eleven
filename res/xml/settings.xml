@@ -58,6 +58,13 @@
             android:key="shake_to_play"
             android:title="@string/settings_shake_to_play"
             android:summary="@string/settings_shake_to_play_summary"/>
+
+        <!-- Show album art on lockscreen -->
+        <CheckBoxPreference
+            android:defaultValue="true"
+            android:key="lockscreen_album_art"
+            android:title="@string/settings_lockscreen_album_art"
+            android:summary="@string/settings_lockscreen_album_art_summary"/>
     </PreferenceCategory>
     <!-- Storage catetory -->
     <PreferenceCategory android:title="@string/settings_storage_category" >

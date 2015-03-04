@@ -186,6 +186,16 @@ public class MusicPlaybackService extends Service {
     public static final String FROM_MEDIA_BUTTON = "frommediabutton";
 
     /**
+     * Called to update shake to play feature state
+     */
+    public static final String SHAKE_TO_PLAY_CHANGED_ACTION = "com.cyanogenmod.eleven.shaketoplay";
+
+    /**
+     * Called to update album art on lockscreen state
+     */
+    public static final String LOCKSCREEN_ALBUMART_CHANGED_ACTION = "com.cyanogenmod.eleven.lockscreen.albumart";
+
+    /**
      * Used to easily notify a list that it should refresh. i.e. A playlist
      * changes
      */
@@ -524,6 +534,11 @@ public class MusicPlaybackService extends Service {
      */
     private ShakeDetector mShakeDetector;
 
+    /**
+     * Switch for displaying album art on lockscreen
+     */
+    private boolean mShowAlbumArtOnLockscreen;
+
     private ShakeDetector.Listener mShakeDetectorListener=new ShakeDetector.Listener() {
 
         @Override
@@ -652,6 +667,9 @@ public class MusicPlaybackService extends Service {
         filter.addAction(PREVIOUS_FORCE_ACTION);
         filter.addAction(REPEAT_ACTION);
         filter.addAction(SHUFFLE_ACTION);
+        // Actions regarding preferences settings
+        filter.addAction(SHAKE_TO_PLAY_CHANGED_ACTION);
+        filter.addAction(LOCKSCREEN_ALBUMART_CHANGED_ACTION);
         // Attach the broadcast listener
         registerReceiver(mIntentReceiver, filter);
 
@@ -849,6 +867,10 @@ public class MusicPlaybackService extends Service {
             cycleRepeat();
         } else if (SHUFFLE_ACTION.equals(action)) {
             cycleShuffle();
+        } else if (SHAKE_TO_PLAY_CHANGED_ACTION.equals(action)) {
+            setShakeToPlayEnabled(intent.getBooleanExtra(PreferenceUtils.SHAKE_TO_PLAY, false));
+        } else if (LOCKSCREEN_ALBUMART_CHANGED_ACTION.equals(action)) {
+            setShowAlbumArtOnLockscreen(intent.getBooleanExtra(PreferenceUtils.SHOW_ALBUM_ART_ON_LOCKSCREEN, true));
         }
     }
 
@@ -1526,7 +1548,7 @@ public class MusicPlaybackService extends Service {
                     .putLong(MediaMetadata.METADATA_KEY_TRACK_NUMBER, getQueuePosition() + 1)
                     .putLong(MediaMetadata.METADATA_KEY_NUM_TRACKS, getQueue().length)
                     .putString(MediaMetadata.METADATA_KEY_GENRE, getGenreName())
-                    .putBitmap(MediaMetadata.METADATA_KEY_ALBUM_ART, albumArt)
+                    .putBitmap(MediaMetadata.METADATA_KEY_ALBUM_ART, mShowAlbumArtOnLockscreen ? albumArt : null)
                     .build());
 
             mSession.setPlaybackState(new PlaybackState.Builder()
@@ -2767,6 +2789,14 @@ public class MusicPlaybackService extends Service {
             stopShakeDetector(true);
         }
     }
+    
+    /**
+     * Called to set visibility of album art on lockscreen
+     */
+    public void setShowAlbumArtOnLockscreen(boolean enabled) {
+        mShowAlbumArtOnLockscreen=enabled;
+        notifyChange(META_CHANGED);
+    }
 
     /**
      * Called to start listening to shakes
@@ -3697,14 +3727,6 @@ public class MusicPlaybackService extends Service {
         @Override
         public int getAudioSessionId() throws RemoteException {
             return mService.get().getAudioSessionId();
-        }
-
-        /**
-         * {@inheritDoc}
-         */
-        @Override
-        public void setShakeToPlayEnabled(boolean enabled) {
-            mService.get().setShakeToPlayEnabled(enabled);
         }
 
     }
