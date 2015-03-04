@@ -81,6 +81,9 @@ public final class PreferenceUtils {
     // shake to play flag
     public static final String SHAKE_TO_PLAY = "shake_to_play";
 
+    // show/hide album art on lockscreen
+    public static final String SHOW_ALBUM_ART_ON_LOCKSCREEN = "lockscreen_album_art";
+
     private static PreferenceUtils sInstance;
 
     private final SharedPreferences mPreferences;
@@ -337,5 +340,9 @@ public final class PreferenceUtils {
     
     public boolean getShakeToPlay() {
         return mPreferences.getBoolean(SHAKE_TO_PLAY, false);
+    }
+
+    public boolean getShowAlbumArtOnLockscreen() {
+        return mPreferences.getBoolean(SHOW_ALBUM_ART_ON_LOCKSCREEN, true);
     }
 }
