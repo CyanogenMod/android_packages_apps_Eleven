@@ -524,6 +524,11 @@ public class MusicPlaybackService extends Service {
      */
     private ShakeDetector mShakeDetector;
 
+    /**
+     * Switch for displaying album art on lockscreen
+     */
+    private boolean mShowAlbumArtOnLockscreen;
+
     private ShakeDetector.Listener mShakeDetectorListener=new ShakeDetector.Listener() {
 
         @Override
@@ -1526,7 +1531,8 @@ public class MusicPlaybackService extends Service {
                     .putLong(MediaMetadata.METADATA_KEY_TRACK_NUMBER, getQueuePosition() + 1)
                     .putLong(MediaMetadata.METADATA_KEY_NUM_TRACKS, getQueue().length)
                     .putString(MediaMetadata.METADATA_KEY_GENRE, getGenreName())
-                    .putBitmap(MediaMetadata.METADATA_KEY_ALBUM_ART, albumArt)
+                    .putBitmap(MediaMetadata.METADATA_KEY_ALBUM_ART,
+                            mShowAlbumArtOnLockscreen ? albumArt : null)
                     .build());
 
             mSession.setPlaybackState(new PlaybackState.Builder()
@@ -2769,6 +2775,14 @@ public class MusicPlaybackService extends Service {
     }
 
     /**
+     * Called to set visibility of album art on lockscreen
+     */
+    public void setLockscreenAlbumArt(boolean enabled) {
+        mShowAlbumArtOnLockscreen = enabled;
+        notifyChange(META_CHANGED);
+    }
+
+    /**
      * Called to start listening to shakes
      */
     private void startShakeDetector() {
@@ -3700,11 +3714,19 @@ public class MusicPlaybackService extends Service {
         }
 
         /**
-         * {@inheritDoc}
-         */
+        * {@inheritDoc}
+        */
         @Override
         public void setShakeToPlayEnabled(boolean enabled) {
             mService.get().setShakeToPlayEnabled(enabled);
+        }
+
+        /**
+        * {@inheritDoc}
+        */
+        @Override
+        public void setLockscreenAlbumArt(boolean enabled) {
+            mService.get().setLockscreenAlbumArt(enabled);
         }
 
     }
