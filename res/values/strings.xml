@@ -140,7 +140,7 @@
     <string name="settings_show_music_visualization_title">Show music visualization</string>
     <string name="settings_show_lyrics_title">Show song lyrics</string>
     <string name="settings_show_lyrics_summary">For songs that have an srt file</string>
-    <string name="settings_shake_to_play">Shake To Play</string>
+    <string name="settings_shake_to_play">Shake to Play</string>
     <string name="settings_shake_to_play_summary">Shake your device to play next song</string>
 
     <!-- App widget -->
