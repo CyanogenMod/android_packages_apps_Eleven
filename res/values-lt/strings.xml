@@ -118,6 +118,7 @@
   <string name="settings_show_music_visualization_title">Rodyti muzikos vizualizacija</string>
   <string name="settings_show_lyrics_title">Rodyti dainos žodžius</string>
   <string name="settings_show_lyrics_summary">Dėl dainų, kurios turi srt failą</string>
+  <string name="settings_shake_to_play_summary">Purtyti įrenginį, kad paleisti kitą takelį</string>
   <string name="app_widget_small">Muzika: 4 \u00d7 1</string>
   <string name="app_widget_large">Muzika: 4 \u00d7 2</string>
   <string name="app_widget_large_alt">Muzika: 4 \u00d7 2 (alternatyva)</string>

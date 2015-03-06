@@ -118,6 +118,8 @@
   <string name="settings_show_music_visualization_title">Zobrazit vizualizaci hudby</string>
   <string name="settings_show_lyrics_title">Zobrazit text skladby</string>
   <string name="settings_show_lyrics_summary">U skladeb, které mají soubor srt</string>
+  <string name="settings_shake_to_play">Zatřesením přehrát</string>
+  <string name="settings_shake_to_play_summary">Zatřeste se zařízením pro přehrání další skladby</string>
   <string name="app_widget_small">Hudba: 4 \u00d7 1</string>
   <string name="app_widget_large">Hudba: 4 \u00d7 2</string>
   <string name="app_widget_large_alt">Hudba: 4 \u00d7 2 (alternativní)</string>

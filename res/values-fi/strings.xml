@@ -118,6 +118,7 @@
   <string name="settings_show_music_visualization_title">Näytä visualisointi</string>
   <string name="settings_show_lyrics_title">Näytä sanoitukset</string>
   <string name="settings_show_lyrics_summary">Jos kappaleella on srt-tiedosto</string>
+  <string name="settings_shake_to_play_summary">Ravista laitettasi toistaaksesi seuraavan kappaleen</string>
   <string name="app_widget_small">Musiikki: 4 \u00d7 1</string>
   <string name="app_widget_large">Musiikki: 4 \u00d7 2</string>
   <string name="app_widget_large_alt">Musiikki: 4 \u00d7 2 (vaihtoehtoinen)</string>

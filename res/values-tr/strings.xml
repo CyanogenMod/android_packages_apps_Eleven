@@ -118,6 +118,8 @@
   <string name="settings_show_music_visualization_title">Müzik görselleştirmelerini göster</string>
   <string name="settings_show_lyrics_title">Şarkı sözlerini göster</string>
   <string name="settings_show_lyrics_summary">srt dosyası olan şarkılar için</string>
+  <string name="settings_shake_to_play">Oynatmak için sallayın</string>
+  <string name="settings_shake_to_play_summary">Sıradaki şarkıyı oynatmak için cihazınızı sallayın</string>
   <string name="app_widget_small">Müzik: 4 \u00d7 1</string>
   <string name="app_widget_large">Müzik: 4 \u00d7 2</string>
   <string name="app_widget_large_alt">Müzik: 4 \u00d7 2 (alternatif)</string>

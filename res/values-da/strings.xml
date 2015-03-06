@@ -118,6 +118,7 @@
   <string name="settings_show_music_visualization_title">Vis visualisering af musik</string>
   <string name="settings_show_lyrics_title">Vis sangtekster</string>
   <string name="settings_show_lyrics_summary">For sange der har en srt-fil</string>
+  <string name="settings_shake_to_play_summary">Ryst din enhed for at afspille næste sang</string>
   <string name="app_widget_small">Musik: 4 \u00d7 1</string>
   <string name="app_widget_large">Musik: 4 \u00d7 2</string>
   <string name="app_widget_large_alt">Musik: 4 \u00d7 2 (alternativ)</string>

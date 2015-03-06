@@ -33,7 +33,7 @@
   <string name="menu_search">Suche</string>
   <string name="menu_shuffle_item">Zufällige Wiedergabe</string>
   <string name="menu_shuffle_all">Alles zufällig wiedergeben</string>
-  <string name="menu_shuffle_playlist">Wiedergabeliste zufällig wiedergeben</string>
+  <string name="menu_shuffle_playlist">Wiedergabeliste zufällig abspielen</string>
   <string name="menu_shuffle_album">Album zufällig wiedergeben</string>
   <string name="menu_shuffle_artist">Titel dieses Interpreten zufällig wiedergeben</string>
   <string name="menu_shuffle_top_tracks">Toptitel zufällig wiedergeben</string>
@@ -118,6 +118,8 @@
   <string name="settings_show_music_visualization_title">Zeige Musik-Visualisierung</string>
   <string name="settings_show_lyrics_title">Zeige Songtexte</string>
   <string name="settings_show_lyrics_summary">Für Titel, die eine srt-Datei haben</string>
+  <string name="settings_shake_to_play">Schütteln, um abzuspielen</string>
+  <string name="settings_shake_to_play_summary">Schütteln Sie Ihr Gerät, um den nächsten Titel abzuspielen</string>
   <string name="app_widget_small">Musik: 4 \u00d7 1</string>
   <string name="app_widget_large">Musik: 4 \u00d7 2</string>
   <string name="app_widget_large_alt">Musik: 4 \u00d7 2 (alternativ)</string>

@@ -118,6 +118,7 @@
   <string name="settings_show_music_visualization_title">Muziekvisualisaties weergeven</string>
   <string name="settings_show_lyrics_title">Songteksten weergeven</string>
   <string name="settings_show_lyrics_summary">Voor nummers met een srt-bestand</string>
+  <string name="settings_shake_to_play_summary">Uw apparaat schudden om het volgende nummer af te spelen</string>
   <string name="app_widget_small">Muziek: 4 \u00d7 1</string>
   <string name="app_widget_large">Muziek: 4 \u00d7 2</string>
   <string name="app_widget_large_alt">Muziek: 4 \u00d7 2 (alternatief)</string>

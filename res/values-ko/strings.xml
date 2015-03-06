@@ -118,6 +118,7 @@
   <string name="settings_show_music_visualization_title">음악 시각화 표시</string>
   <string name="settings_show_lyrics_title">노래 가사 표시</string>
   <string name="settings_show_lyrics_summary">SRT 파일이 있는 곡만</string>
+  <string name="settings_shake_to_play_summary">기기를 흔들어 다음 곡을 재생</string>
   <string name="app_widget_small">음악: 4 \u00d7 1</string>
   <string name="app_widget_large">음악: 4 \u00d7 2</string>
   <string name="app_widget_large_alt">음악: 4 \u00d7 2 (다른 배치)</string>

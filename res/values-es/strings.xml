@@ -118,6 +118,7 @@
   <string name="settings_show_music_visualization_title">Mostrar visualización musical</string>
   <string name="settings_show_lyrics_title">Mostrar las letras de las canciones</string>
   <string name="settings_show_lyrics_summary">Para canciones que tienen un archivo srt</string>
+  <string name="settings_shake_to_play_summary">Agitar el dispositivo para reproducir la siguiente canción</string>
   <string name="app_widget_small">Música: 4 \u00d7 1</string>
   <string name="app_widget_large">Música: 4 \u00d7 2</string>
   <string name="app_widget_large_alt">Música: 4 \u00d7 2 (alternativo)</string>

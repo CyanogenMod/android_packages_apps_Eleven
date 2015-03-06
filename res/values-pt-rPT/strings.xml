@@ -39,7 +39,7 @@
   <string name="menu_shuffle_top_tracks">Misturar músicas Top</string>
   <string name="menu_shuffle_recent">Misturar tocadas recentemente</string>
   <string name="menu_shuffle_last_added">Misturar última adicionada</string>
-  <string name="menu_play_all">Tocar todas</string>
+  <string name="menu_play_all">Reproduzir todas</string>
   <string name="menu_sort_by">Ordenar por</string>
   <string name="menu_clear_list">Limpar lista</string>
   <string name="menu_clear_recents">Limpar recentes</string>
@@ -118,6 +118,7 @@
   <string name="settings_show_music_visualization_title">Mostrar visualização da música</string>
   <string name="settings_show_lyrics_title">Mostrar letras das músicas</string>
   <string name="settings_show_lyrics_summary">Para músicas que têm um ficheiro srt</string>
+  <string name="settings_shake_to_play_summary">Agite o seu dispositivo para reproduzir a próxima música</string>
   <string name="app_widget_small">Música: 4 \u00d7 1</string>
   <string name="app_widget_large">Música: 4 \u00d7 2</string>
   <string name="app_widget_large_alt">Música: 4 \u00d7 2 (alternativo)</string>

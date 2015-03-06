@@ -76,6 +76,8 @@
   <string name="clear_recent_title">לנקות רשימת \"שהושמעו לאחרונה\"?</string>
   <string name="clear_last_added">לנקות רשימת \"הוספו לאחרונה\"?</string>
   <string name="cannot_be_undone">פעולה זו אינה ניתנת לביטול</string>
+  <string name="delete_warning">פעולה זו תמחק לתמיד את התמונות שבמטמון</string>
+  <string name="new_photo">בחר תמונה מהגלריה</string>
   <string name="google_search">חיפוש Google</string>
   <string name="use_default">השתמש בתמונת ברירת מחדל</string>
   <string name="old_photo">השתמש בתמונה ישנה</string>
@@ -100,12 +102,15 @@
   <string name="accessibility_repeat_one">חזור על נוכחי</string>
   <string name="accessibility_queue">פתח את התור</string>
   <string name="accessibility_browse">הצג מוסיקה</string>
+  <string name="set_as_ringtone">\"<xliff:g id="name" example="Alarm Bell">%s</xliff:g>\" נקבע כצלצול</string>
   <string name="playlist_renamed">שם רשימת ההשמעה שונה</string>
   <string name="settings_ui_category">ממשק</string>
   <string name="settings_storage_category">אחסון</string>
   <string name="settings_delete_cache_title">מחק מטמון</string>
+  <string name="settings_delete_cache_summary">מחק את כל התמונות שבמטמון</string>
   <string name="settings_download_only_on_wifi_title">הורד דרך Wi-Fi בלבד</string>
   <string name="settings_download_only_on_wifi_summary">כדי להוריד עלויות מפעיל, אל תוריד מאינטרנט סלולרי</string>
+  <string name="settings_download_artist_images_title">הורד תמונות אמנים חסרות</string>
   <string name="settings_general_category">כללי</string>
   <string name="settings_show_music_visualization_title">הצג אפקטים ויזואלים</string>
   <string name="settings_show_lyrics_title">הצג את מילות השיר</string>
@@ -120,6 +125,7 @@
   <string name="empty_search_check">אנא בדוק כי האיות נכון או נסה מילת מפתח שונה.</string>
   <string name="empty_recent_main">אין שירים אחרונים</string>
   <string name="empty_playlist_main">אין שירים ברשימת ההשמעה</string>
+  <string name="empty_playlist_secondary">כדי להוסיף שירים לרשימת ההשמעה הזו, הקש על תפריט אפשרויות של שיר, אלבום או אמן ובחר \"הוסף לרשימת השמעה\".</string>
   <string name="empty_top_tracks_main">אין רצועות מובילות</string>
   <string name="empty_last_added_main">לא נוספו שירים לאחרונה</string>
   <string name="empty_generic_main">לא נמצאה מוזיקה</string>
