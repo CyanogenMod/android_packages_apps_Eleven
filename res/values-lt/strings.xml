@@ -115,9 +115,10 @@
   <string name="settings_download_missing_artwork_title">Parsisiųsti trūkstamus albumo viršelius</string>
   <string name="settings_download_artist_images_title">Parsisiųsti trūkstamus artistų atvaizdus</string>
   <string name="settings_general_category">Bendra</string>
-  <string name="settings_show_music_visualization_title">Rodyti muzikos vizualizacija</string>
+  <string name="settings_show_music_visualization_title">Rodyti muzikos vizualizaciją</string>
   <string name="settings_show_lyrics_title">Rodyti dainos žodžius</string>
   <string name="settings_show_lyrics_summary">Dėl dainų, kurios turi srt failą</string>
+  <string name="settings_shake_to_play">Purtyti, kad paleisti</string>
   <string name="settings_shake_to_play_summary">Purtyti įrenginį, kad paleisti kitą takelį</string>
   <string name="app_widget_small">Muzika: 4 \u00d7 1</string>
   <string name="app_widget_large">Muzika: 4 \u00d7 2</string>
