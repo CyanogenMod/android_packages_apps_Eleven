@@ -118,6 +118,7 @@
   <string name="settings_show_music_visualization_title">Zenei vizualizáció megjelenítése</string>
   <string name="settings_show_lyrics_title">Dalszöveg megjelenítése</string>
   <string name="settings_show_lyrics_summary">Dalok, melyek rendelkeznek srt fájllal</string>
+  <string name="settings_shake_to_play">Lejátszás indítása rázásra</string>
   <string name="settings_shake_to_play_summary">Rázza meg a készülékét a következő szám lejátszásához</string>
   <string name="app_widget_small">Zene: 4 \u00d7 1</string>
   <string name="app_widget_large">Zene: 4 \u00d7 2</string>

@@ -41,9 +41,9 @@
   <string name="menu_shuffle_last_added">Lecture aléatoire des derniers titres ajoutés</string>
   <string name="menu_play_all">Tout lire</string>
   <string name="menu_sort_by">Trier par</string>
-  <string name="menu_clear_list">Vider la liste</string>
-  <string name="menu_clear_recents">Vider les récents</string>
-  <string name="menu_clear_queue">Vider la file d\'attente</string>
+  <string name="menu_clear_list">Effacer la liste</string>
+  <string name="menu_clear_recents">Effacer les récents</string>
+  <string name="menu_clear_queue">Effacer la liste d\'attente</string>
   <string name="menu_save_queue">Enregistrer la file d\'attente</string>
   <string name="menu_equalizer">Égaliseur</string>
   <string name="add_to_playlist">Ajouter à liste de lecture</string>
@@ -118,6 +118,8 @@
   <string name="settings_show_music_visualization_title">Voir les animations musicales</string>
   <string name="settings_show_lyrics_title">Voir les paroles</string>
   <string name="settings_show_lyrics_summary">Pour les titres ayant un fichier srt</string>
+  <string name="settings_shake_to_play">Secouer pour lire</string>
+  <string name="settings_shake_to_play_summary">Secouer votre appareil pour lire la chanson suivante</string>
   <string name="app_widget_small">Musique : 4 \u00d7 1</string>
   <string name="app_widget_large">Musique : 4 \u00d7 2</string>
   <string name="app_widget_large_alt">Musique : 4 \u00d7 2 (alterné)</string>
