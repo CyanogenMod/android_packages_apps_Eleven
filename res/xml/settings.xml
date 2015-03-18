@@ -40,27 +40,27 @@
     <PreferenceCategory android:title="@string/settings_general_category" >
 
         <!-- Music visualizer -->
-        <CheckBoxPreference
+        <SwitchPreference
             android:defaultValue="true"
             android:key="music_visualization"
             android:title="@string/settings_show_music_visualization_title" />
 
         <!-- Show Lyrics -->
-        <CheckBoxPreference
+        <SwitchPreference
             android:defaultValue="true"
             android:key="show_lyrics"
             android:title="@string/settings_show_lyrics_title"
             android:summary="@string/settings_show_lyrics_summary"/>
 
         <!-- Shake to switch songs -->
-        <CheckBoxPreference
+        <SwitchPreference
             android:defaultValue="false"
             android:key="shake_to_play"
             android:title="@string/settings_shake_to_play"
             android:summary="@string/settings_shake_to_play_summary"/>
 
         <!-- Show album art on lockscreen -->
-        <CheckBoxPreference
+        <SwitchPreference
             android:defaultValue="true"
             android:key="lockscreen_album_art"
             android:title="@string/settings_lockscreen_album_art"
