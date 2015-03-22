@@ -120,6 +120,8 @@
   <string name="settings_show_lyrics_summary">有一个 srt 文件与歌曲匹配</string>
   <string name="settings_shake_to_play">摇动播放</string>
   <string name="settings_shake_to_play_summary">摇动您的设备以播放下一首歌</string>
+  <string name="settings_lockscreen_album_art">锁屏唱片封面</string>
+  <string name="settings_lockscreen_album_art_summary">将锁屏背景换为唱片集封面</string>
   <string name="app_widget_small">音乐：4 \u00d7 1</string>
   <string name="app_widget_large">音乐：4 \u00d7 1</string>
   <string name="app_widget_large_alt">音乐： 4 \u00d7 2 (交替)</string>

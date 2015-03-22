@@ -120,6 +120,8 @@
   <string name="settings_show_lyrics_summary">srt dosyası olan şarkılar için</string>
   <string name="settings_shake_to_play">Oynatmak için sallayın</string>
   <string name="settings_shake_to_play_summary">Sıradaki şarkıyı oynatmak için cihazınızı sallayın</string>
+  <string name="settings_lockscreen_album_art">Kilit ekranı albüm görseli</string>
+  <string name="settings_lockscreen_album_art_summary">Kilit ekranı arkaplanını albüm görseli ile değiştirir</string>
   <string name="app_widget_small">Müzik: 4 \u00d7 1</string>
   <string name="app_widget_large">Müzik: 4 \u00d7 2</string>
   <string name="app_widget_large_alt">Müzik: 4 \u00d7 2 (alternatif)</string>

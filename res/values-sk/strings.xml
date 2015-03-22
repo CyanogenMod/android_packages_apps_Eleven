@@ -120,6 +120,8 @@
   <string name="settings_show_lyrics_summary">Pre skladby, ktoré majú súbor srt</string>
   <string name="settings_shake_to_play">Prehrať zatrasením</string>
   <string name="settings_shake_to_play_summary">Prehrať ďalšiu skladbu zatrasením vášho zariadenia</string>
+  <string name="settings_lockscreen_album_art">Obal albumu na obrazovke uzamknutia</string>
+  <string name="settings_lockscreen_album_art_summary">Nahradiť pozadie na obrazovke uzamknutia s obalom albumu</string>
   <string name="app_widget_small">Hudba: 4 \u00d7 1</string>
   <string name="app_widget_large">Hudba: 4 \u00d7 2</string>
   <string name="app_widget_large_alt">Hudba: 4 \u00d7 2 (alternatívna)</string>

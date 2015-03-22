@@ -120,6 +120,8 @@
   <string name="settings_show_lyrics_summary">Für Titel, die eine srt-Datei haben</string>
   <string name="settings_shake_to_play">Schütteln, um abzuspielen</string>
   <string name="settings_shake_to_play_summary">Schütteln Sie Ihr Gerät, um den nächsten Titel abzuspielen</string>
+  <string name="settings_lockscreen_album_art">Albumcover auf Sperrbildschirm</string>
+  <string name="settings_lockscreen_album_art_summary">Ersetzt den Hintergrund des Sperrbildschirms mit dem Albumcover</string>
   <string name="app_widget_small">Musik: 4 \u00d7 1</string>
   <string name="app_widget_large">Musik: 4 \u00d7 2</string>
   <string name="app_widget_large_alt">Musik: 4 \u00d7 2 (alternativ)</string>
