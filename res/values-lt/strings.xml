@@ -120,6 +120,8 @@
   <string name="settings_show_lyrics_summary">Dėl dainų, kurios turi srt failą</string>
   <string name="settings_shake_to_play">Purtyti, kad paleisti</string>
   <string name="settings_shake_to_play_summary">Purtyti įrenginį, kad paleisti kitą takelį</string>
+  <string name="settings_lockscreen_album_art">Ekrano užrakto albumo viršelis</string>
+  <string name="settings_lockscreen_album_art_summary">Pakeisti ekrano užrakto foną į albumo viršelį</string>
   <string name="app_widget_small">Muzika: 4 \u00d7 1</string>
   <string name="app_widget_large">Muzika: 4 \u00d7 2</string>
   <string name="app_widget_large_alt">Muzika: 4 \u00d7 2 (alternatyva)</string>

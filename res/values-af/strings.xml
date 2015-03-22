@@ -120,6 +120,8 @@
   <string name="settings_show_lyrics_summary">Vir liedjies wat \'n srt lêer het</string>
   <string name="settings_shake_to_play">Skud</string>
   <string name="settings_shake_to_play_summary">Skud jou toestel om volgende liedjie te speel</string>
+  <string name="settings_lockscreen_album_art">Slotskerm foto album kuns</string>
+  <string name="settings_lockscreen_album_art_summary">Vervang slotskerm agtergrond foto album kuns</string>
   <string name="app_widget_small">Musiek: 4 \u00d7 1</string>
   <string name="app_widget_large">Musiek: 4 \u00d7 2</string>
   <string name="app_widget_large_alt">Musiek: 4 \u00d7 2 (alternatief)</string>
