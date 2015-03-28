@@ -131,12 +131,6 @@
 
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
-            <intent-filter>
-                <action android:name="android.intent.action.PICK" />
-                <category android:name="android.intent.category.DEFAULT" />
-                <category android:name="android.intent.category.OPENABLE" />
-                <data android:mimeType="vnd.android.cursor.dir/audio"/>
-            </intent-filter>
         </activity>
 
         <!-- Search interface -->
