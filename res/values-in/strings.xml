@@ -118,6 +118,10 @@
   <string name="settings_show_music_visualization_title">Tampilkan visualisasi musik</string>
   <string name="settings_show_lyrics_title">Tampilkan lirik lagu</string>
   <string name="settings_show_lyrics_summary">Untuk lagu-lagu yang memiliki file srt</string>
+  <string name="settings_shake_to_play">Kocok untuk memutar</string>
+  <string name="settings_shake_to_play_summary">Kocok perangkat anda untuk memutar lagu berikutnya</string>
+  <string name="settings_lockscreen_album_art">Album art pada Layar kunci</string>
+  <string name="settings_lockscreen_album_art_summary">Ganti latar belakang Layar Kunci dengan album art</string>
   <string name="app_widget_small">Musik: 4 \u00d7 1</string>
   <string name="app_widget_large">Musik: 4 \u00d7 2</string>
   <string name="app_widget_large_alt">Musik: 4 \u00d7 2 (alternatif)</string>

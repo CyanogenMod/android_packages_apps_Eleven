@@ -30,7 +30,7 @@
   <string name="header_top_songs">Titres populaires</string>
   <string name="header_all_songs">Tous les titres</string>
   <string name="menu_settings">Paramètres</string>
-  <string name="menu_search">Recherche</string>
+  <string name="menu_search">Rechercher</string>
   <string name="menu_shuffle_item">Lecture aléatoire</string>
   <string name="menu_shuffle_all">Lecture aléatoire de tous les titres</string>
   <string name="menu_shuffle_playlist">Lecture aléatoire des titres de la liste de lecture</string>
@@ -120,6 +120,8 @@
   <string name="settings_show_lyrics_summary">Pour les titres ayant un fichier srt</string>
   <string name="settings_shake_to_play">Secouer pour lire</string>
   <string name="settings_shake_to_play_summary">Secouer votre appareil pour lire la chanson suivante</string>
+  <string name="settings_lockscreen_album_art">Pochettes d\'album sur l\'écran de verrouillage</string>
+  <string name="settings_lockscreen_album_art_summary">Remplacer le fond d\'écran de verrouillage avec les pochettes d\'album</string>
   <string name="app_widget_small">Musique : 4 \u00d7 1</string>
   <string name="app_widget_large">Musique : 4 \u00d7 2</string>
   <string name="app_widget_large_alt">Musique : 4 \u00d7 2 (alterné)</string>

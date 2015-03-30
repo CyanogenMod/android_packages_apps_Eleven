@@ -120,6 +120,8 @@
   <string name="settings_show_lyrics_summary">Utwory, które mają plik srt</string>
   <string name="settings_shake_to_play">Potrząśnij, aby rozpocząć odtwarzanie</string>
   <string name="settings_shake_to_play_summary">Wstrząśnij urządzenie, aby odtworzyć następny utwór</string>
+  <string name="settings_lockscreen_album_art">Okładka albumu na ekranie blokady</string>
+  <string name="settings_lockscreen_album_art_summary">Zastąp tło ekranu blokady okładką albumu</string>
   <string name="app_widget_small">Muzyka: 4 \u00d7 1</string>
   <string name="app_widget_large">Muzyka: 4 \u00d7 2</string>
   <string name="app_widget_large_alt">Muzyka: 4×2 (alternatywny)</string>
