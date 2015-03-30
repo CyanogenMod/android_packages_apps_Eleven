@@ -120,6 +120,8 @@
   <string name="settings_show_lyrics_summary">Para canciones que tienen un archivo srt</string>
   <string name="settings_shake_to_play">Agitar para reproducir</string>
   <string name="settings_shake_to_play_summary">Agitar el dispositivo para reproducir la siguiente canción</string>
+  <string name="settings_lockscreen_album_art">Portada en pantalla de bloqueo</string>
+  <string name="settings_lockscreen_album_art_summary">Reemplazar la pantalla de bloqueo con la imagen del álbum</string>
   <string name="app_widget_small">Música: 4 \u00d7 1</string>
   <string name="app_widget_large">Música: 4 \u00d7 2</string>
   <string name="app_widget_large_alt">Música: 4 \u00d7 2 (alternativo)</string>

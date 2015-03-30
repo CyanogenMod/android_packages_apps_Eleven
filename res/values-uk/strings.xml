@@ -118,6 +118,10 @@
   <string name="settings_show_music_visualization_title">Показати візуалізацію музики</string>
   <string name="settings_show_lyrics_title">Показати тексти пісень</string>
   <string name="settings_show_lyrics_summary">Для композицій що мають srt файл</string>
+  <string name="settings_shake_to_play">Струсити для програвання</string>
+  <string name="settings_shake_to_play_summary">Струсити пристрій для програвання наступної пісні</string>
+  <string name="settings_lockscreen_album_art">Обкладинка альбому на екрані блокування</string>
+  <string name="settings_lockscreen_album_art_summary">Замінити фон екрану блокування на обкладинку альбому</string>
   <string name="app_widget_small">Музика: 4 \u00d7 1</string>
   <string name="app_widget_large">Музика: 4 \u00d7 2</string>
   <string name="app_widget_large_alt">Музика: 4 \u00d7 2 (альтернативний)</string>
