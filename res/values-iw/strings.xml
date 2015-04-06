@@ -55,7 +55,7 @@
   <string name="sort_order_entry_artist">אמן</string>
   <string name="sort_order_entry_album">אלבום</string>
   <string name="sort_order_entry_year">שנה</string>
-  <string name="sort_order_entry_duration">אורך</string>
+  <string name="sort_order_entry_duration">משך</string>
   <string name="sort_order_entry_date_added">תאריך הוספה</string>
   <string name="sort_order_entry_track_list">רשימת שירים</string>
   <string name="sort_order_entry_number_of_songs">מספר שירים</string>

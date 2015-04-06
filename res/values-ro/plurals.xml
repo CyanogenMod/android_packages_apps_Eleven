@@ -27,6 +27,11 @@
     <item quantity="few"><xliff:g id="count">%d</xliff:g> albume</item>
     <item quantity="other"><xliff:g id="count">%d</xliff:g> albume</item>
   </plurals>
+  <plurals name="Nsongs">
+    <item quantity="one"><xliff:g id="count">%d</xliff:g> melodie</item>
+    <item quantity="few"><xliff:g id="count">%d</xliff:g> melodii</item>
+    <item quantity="other"><xliff:g id="count">%d</xliff:g> melodii</item>
+  </plurals>
   <plurals name="Nminutes">
     <item quantity="one"><xliff:g id="minutes">%d</xliff:g>m</item>
     <item quantity="few"><xliff:g id="minutes">%d</xliff:g>m</item>
