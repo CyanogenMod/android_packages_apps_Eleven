@@ -158,8 +158,8 @@
   <string name="header_1_song">שיר אחד</string>
   <string name="header_2_to_4_songs">בין 2 ל-4 שירים</string>
   <string name="header_5_to_9_songs">בין 5 ל-9 שירים</string>
-  <string name="header_10_plus_songs">10 שירים ויותר</string>
-  <string name="header_5_plus_albums">5 אלבומים ויותר</string>
+  <string name="header_10_plus_songs">10+ שירים</string>
+  <string name="header_5_plus_albums">5+ אלבומים</string>
   <string name="header_other">"אחר"</string>
   <string name="footer_search_artists">הצג את כל האמנים</string>
   <string name="footer_search_albums">הצג את כל האלבומים</string>

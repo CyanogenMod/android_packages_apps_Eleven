@@ -120,6 +120,8 @@
   <string name="settings_show_lyrics_summary">SRT 파일이 있는 곡만</string>
   <string name="settings_shake_to_play">흔들어 재생</string>
   <string name="settings_shake_to_play_summary">기기를 흔들어 다음 곡을 재생</string>
+  <string name="settings_lockscreen_album_art">잠금화면 앨범 아트</string>
+  <string name="settings_lockscreen_album_art_summary">잠금화면 배경을 앨범 아트로 바꿈</string>
   <string name="app_widget_small">음악: 4 \u00d7 1</string>
   <string name="app_widget_large">음악: 4 \u00d7 2</string>
   <string name="app_widget_large_alt">음악: 4 \u00d7 2 (다른 배치)</string>

@@ -52,6 +52,7 @@
   <string name="context_menu_use_as_ringtone">Folosește ca ton de apel</string>
   <string name="accessibility_pause">Pauză</string>
   <string name="set_as_ringtone">\'<xliff:g id="name" example="Alarm Bell">%s</xliff:g>\' este ton de apel</string>
+  <string name="settings_data_category">Date</string>
   <string name="empty_search">Nu am găsit rezultate la căutare</string>
   <string name="header_unknown_year">An necunoscut</string>
   <string name="header_less_than_30s">Mai puţin de 30 de secunde</string>
