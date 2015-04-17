@@ -118,6 +118,10 @@
   <string name="settings_show_music_visualization_title">Amosar visualización musical</string>
   <string name="settings_show_lyrics_title">Amosar les lletres de les canciones</string>
   <string name="settings_show_lyrics_summary">Pa canciones que tienen un ficheru srt</string>
+  <string name="settings_shake_to_play">Xiringar pa reproducir</string>
+  <string name="settings_shake_to_play_summary">Xiringa\'l preséu pa reproducir la siguiente canción</string>
+  <string name="settings_lockscreen_album_art">Portada en pantalla de bloquéu</string>
+  <string name="settings_lockscreen_album_art_summary">Trocar la pantalla de bloquéu cola imaxe del álbum</string>
   <string name="app_widget_small">Música: 4 \u00d7 1</string>
   <string name="app_widget_large">Música: 4 \u00d7 2</string>
   <string name="app_widget_large_alt">Música: 4 \u00d7 2 (alternativu)</string>

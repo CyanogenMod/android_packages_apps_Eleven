@@ -18,9 +18,9 @@
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
   <plurals name="Nartists">
-    <item quantity="one"><xliff:g id="count">%d</xliff:g> artistas</item>
-    <item quantity="few"><xliff:g id="count">%d</xliff:g> artistai</item>
-    <item quantity="other"><xliff:g id="count">%d</xliff:g> artistų</item>
+    <item quantity="one"><xliff:g id="count">%d</xliff:g> atlikėjas</item>
+    <item quantity="few"><xliff:g id="count">%d</xliff:g> atlikėjai</item>
+    <item quantity="other"><xliff:g id="count">%d</xliff:g> atlikėjų</item>
   </plurals>
   <plurals name="Nalbums">
     <item quantity="one"><xliff:g id="count">%d</xliff:g> albumas</item>

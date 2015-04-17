@@ -120,6 +120,8 @@
   <string name="settings_show_lyrics_summary">За песме које имају srt фајл</string>
   <string name="settings_shake_to_play">Протреси да пустиш</string>
   <string name="settings_shake_to_play_summary">Протреси уређај да пустиш следећу песму</string>
+  <string name="settings_lockscreen_album_art">Албум за закључани екран</string>
+  <string name="settings_lockscreen_album_art_summary">Замени позадину закључаног екрана са овим албумом</string>
   <string name="app_widget_small">Музика: 4 \u00d7 1</string>
   <string name="app_widget_large">Музика: 4 \u00d7 2</string>
   <string name="app_widget_large_alt">Музика: 4 \u00d7 2 (алтернативно)</string>

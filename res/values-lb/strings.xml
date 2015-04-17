@@ -118,6 +118,8 @@
   <string name="settings_show_music_visualization_title">Musekvisualiséierung uweisen</string>
   <string name="settings_show_lyrics_title">Liddertexter uweisen</string>
   <string name="settings_show_lyrics_summary">Fir Lidder déi en \"srt\"-Fichier hunn</string>
+  <string name="settings_shake_to_play">Rësele fir opzespillen</string>
+  <string name="settings_shake_to_play_summary">Apparat rësele fir dat nächst Lidd ofzespillen</string>
   <string name="app_widget_small">Musek: 4 \u00d7 1</string>
   <string name="app_widget_large">Musek: 4 \u00d7 2</string>
   <string name="app_widget_large_alt">Musek: 4 \u00d7 2 (alternativ)</string>
