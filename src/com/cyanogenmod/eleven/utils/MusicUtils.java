@@ -873,13 +873,6 @@ public final class MusicUtils {
             }
             final long currentId = mService.getAudioId();
             final int currentQueuePosition = getQueuePosition();
-            if (position != -1 && currentQueuePosition == position && currentId == list[position]) {
-                final long[] playlist = getQueue();
-                if (Arrays.equals(list, playlist)) {
-                    mService.play();
-                    return;
-                }
-            }
             if (position < 0) {
                 position = 0;
             }
