@@ -95,13 +95,12 @@ public class MusicBrowserPhoneFragment extends BaseFragment {
     protected void onViewCreated() {
         super.onViewCreated();
 
-        if (mPagerAdapter == null) {
-            // Initialize the adapter
-            mPagerAdapter = new PagerAdapter(getActivity(), getChildFragmentManager());
-            final MusicFragments[] mFragments = MusicFragments.values();
-            for (final MusicFragments mFragment : mFragments) {
-                mPagerAdapter.add(mFragment.getFragmentClass(), null);
-            }
+        // create the adapter - on rotation the view gets created again and we need to recreate
+        // the child fragments (fragments of fragments cannot be retained)
+        mPagerAdapter = new PagerAdapter(getActivity(), getChildFragmentManager());
+        final MusicFragments[] mFragments = MusicFragments.values();
+        for (final MusicFragments mFragment : mFragments) {
+            mPagerAdapter.add(mFragment.getFragmentClass(), null);
         }
 
         // Initialize the ViewPager

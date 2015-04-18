@@ -180,6 +180,9 @@ public class AudioPlayerFragment extends Fragment implements ServiceConnection,
 
         // add a listener for the sliding
         ((SlidingPanelActivity)getActivity()).addSlidingPanelListener(this);
+
+        // check equalizer view
+        checkEqualizerView();
     }
 
     /**
@@ -297,7 +300,11 @@ public class AudioPlayerFragment extends Fragment implements ServiceConnection,
         headerBar.setOutlineProvider(new ViewOutlineProvider() {
             @Override
             public void getOutline(View view, Outline outline) {
-                outline.setRect(0, -bottomActionBarHeight, view.getWidth(), view.getHeight());
+                // since we only want the top and bottom shadows, pad the horizontal width
+                // to hide the shadows. Can't seem to find a better way to do this
+                int padWidth = (int)(0.2f * view.getWidth());
+                outline.setRect(-padWidth, -bottomActionBarHeight, view.getWidth() + padWidth,
+                        view.getHeight());
             }
         });
 
@@ -742,6 +749,14 @@ public class AudioPlayerFragment extends Fragment implements ServiceConnection,
 
     @Override
     public void onFinishSlide(SlidingPanelActivity.Panel visiblePanel) {
+        checkEqualizerView(visiblePanel);
+    }
+
+    private void checkEqualizerView() {
+        checkEqualizerView(((HomeActivity)getActivity()).getCurrentPanel());
+    }
+
+    private void checkEqualizerView(SlidingPanelActivity.Panel visiblePanel) {
         if (visiblePanel == SlidingPanelActivity.Panel.MusicPlayer) {
             mEqualizerView.setPanelVisible(true);
         }

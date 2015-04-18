@@ -39,6 +39,12 @@ public abstract class BaseFragment extends Fragment implements MusicStateListene
     }
 
     @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setRetainInstance(true);
+    }
+
+    @Override
     public void setupActionBar() {
         getContainingActivity().setupActionBar(getTitle());
         getContainingActivity().setActionBarAlpha(255);
