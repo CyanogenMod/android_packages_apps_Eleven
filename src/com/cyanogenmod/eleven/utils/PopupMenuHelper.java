@@ -152,6 +152,13 @@ public abstract class PopupMenuHelper implements PopupMenu.OnMenuItemClickListen
     }
 
     /**
+     * Called when the user clicks "play album".
+     */
+    protected void playAlbum() {
+        throw new UnsupportedOperationException("Method Not Implemented!");
+    }
+
+    /**
      * Creates the pop up menu by inflating the menu items
      * @param menu Menu to use for adding to
      */
@@ -201,6 +208,7 @@ public abstract class PopupMenuHelper implements PopupMenu.OnMenuItemClickListen
                 return new int[] {
                         FragmentMenuItems.PLAY_SELECTION,
                         FragmentMenuItems.PLAY_NEXT,
+                        FragmentMenuItems.PLAY_ALBUM,
                         FragmentMenuItems.ADD_TO_QUEUE,
                         FragmentMenuItems.ADD_TO_PLAYLIST,
                         FragmentMenuItems.MORE_BY_ARTIST,
@@ -295,6 +303,8 @@ public abstract class PopupMenuHelper implements PopupMenu.OnMenuItemClickListen
                 return R.string.remove_from_queue;
             case FragmentMenuItems.PLAY_NEXT:
                 return R.string.context_menu_play_next;
+            case FragmentMenuItems.PLAY_ALBUM:
+                return R.string.context_menu_play_album;
             case FragmentMenuItems.CHANGE_IMAGE:
                 return R.string.context_menu_change_image;
         }
@@ -370,6 +380,9 @@ public abstract class PopupMenuHelper implements PopupMenu.OnMenuItemClickListen
                     return true;
                 case FragmentMenuItems.PLAY_NEXT:
                     playNext();
+                    return true;
+                case FragmentMenuItems.PLAY_ALBUM:
+                    playAlbum();
                     return true;
                 default:
                     break;

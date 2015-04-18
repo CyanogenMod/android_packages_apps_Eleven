@@ -21,6 +21,7 @@ package com.cyanogenmod.eleven.menu;
 public interface FragmentMenuItems {
     int PLAY_SELECTION      =  10; // play the selected song, album, etc.
     int PLAY_NEXT           =  20; // queue a track to be played next
+    int PLAY_ALBUM          =  25; // play the album that this track belongs to
     //  SHUFFLE             =  30  // defined in res/menu
     int ADD_TO_QUEUE        =  40; // add to end of current queue
     int ADD_TO_PLAYLIST     =  50; // append to a playlist

@@ -47,6 +47,11 @@ public abstract class SongPopupMenuHelper extends PopupMenuHelper {
     }
 
     @Override
+    protected void playAlbum() {
+        MusicUtils.playAlbum(mActivity, mSong.mAlbumId, 0, false);
+    }
+
+    @Override
     protected long[] getIdList() {
         return new long[] { mSong.mSongId };
     }
