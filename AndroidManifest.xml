@@ -72,7 +72,6 @@
             android:windowSoftInputMode="adjustPan"
             android:launchMode="singleTop"
             android:exported="true"
-            android:screenOrientation="portrait"
             android:theme="@style/Eleven.Theme.ActionBar.Overlay">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -138,8 +137,7 @@
             android:name="com.cyanogenmod.eleven.ui.activities.SearchActivity"
             android:windowSoftInputMode="adjustResize"
             android:exported="true"
-            android:theme="@style/Eleven.Theme"
-            android:screenOrientation="portrait">
+            android:theme="@style/Eleven.Theme">
             <intent-filter>
                 <action android:name="android.intent.action.SEARCH" />
                 <action android:name="android.intent.action.MEDIA_SEARCH" />
@@ -154,8 +152,7 @@
         <!-- Used to set options -->
         <activity
             android:name="com.cyanogenmod.eleven.ui.activities.SettingsActivity"
-            android:label="@string/menu_settings"
-            android:screenOrientation="portrait"/>
+            android:label="@string/menu_settings"/>
         <!-- 4x1 App Widget -->
         <receiver
             android:name="com.cyanogenmod.eleven.appwidgets.AppWidgetSmall"

@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Copyright (C) 2012 Andrew Neal
+  Copyright (C) 2014 The CyanogenMod Project
+
+  Licensed under the Apache License, Version 2.0 (the "License");
+  you may not use this file except in compliance with the License.
+  You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@android:color/transparent" >
+    <com.cyanogenmod.eleven.widgets.PlayPauseProgressButton
+        android:id="@+id/playPauseProgressButton"
+        android:layout_width="@dimen/audio_player_controls_main_button_width"
+        android:layout_height="@dimen/audio_player_controls_main_button_height"
+        android:layout_centerInParent="true" >
+
+        <!-- TODO: Figure out why scaleType: centerInside isn't properly scaling up -->
+        <com.cyanogenmod.eleven.widgets.PlayPauseButton
+            android:id="@+id/action_button_play"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:contentDescription="@string/accessibility_play"
+            android:focusable="true"
+            android:scaleType="centerCrop"
+            android:src="@drawable/btn_playback_play" />
+
+        <ProgressBar
+            android:id="@+id/progressBarBackground"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:clickable="false"
+            android:indeterminate="false"
+            android:max="100"
+            android:progress="100"
+            android:progressDrawable="@drawable/now_playing_progress_background" />
+
+        <ProgressBar
+            android:id="@+id/circularProgressBar"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:clickable="false"
+            android:indeterminate="false"
+            android:max="100"
+            android:progressDrawable="@drawable/now_playing_progress" />
+    </com.cyanogenmod.eleven.widgets.PlayPauseProgressButton>
+
+    <!-- TODO: Figure out why scaleType: centerInside isn't properly scaling up -->
+    <!-- ANSWER: two issues (a) centerInside doesn't scale up, only down, use
+         fitCenter instead. Also, ImageButtons come with built-in padding, but
+         that only makes a visible difference when you are scaling the image.
+         so you have to set the padding to zero in order to get the result you expect -->
+    <!-- This is the left side of the progress bar - it has the previous
+    and shuffle button and the current time text -->
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="fill_parent"
+        android:layout_toLeftOf="@id/playPauseProgressButton">
+
+        <TextView
+            android:id="@+id/audio_player_current_time"
+            android:layout_width="52dp"
+            android:layout_height="@dimen/audio_player_controls_end_button_height"
+            android:gravity="left|center_vertical"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:paddingLeft="@dimen/audio_player_time_text_padding"
+            android:textColor="@color/audio_player_text_color"
+            android:textSize="@dimen/audio_player_time_text_size"
+            android:textStyle="bold"/>
+
+        <com.cyanogenmod.eleven.widgets.RepeatingImageButton
+            android:id="@+id/action_button_previous"
+            android:layout_width="@dimen/audio_player_controls_end_button_width"
+            android:layout_height="@dimen/audio_player_controls_end_button_height"
+            android:layout_toLeftOf="@id/audio_player_current_time"
+            android:layout_centerVertical="true"
+            android:scaleType="fitCenter"
+            android:src="@drawable/btn_playback_previous" />
+
+        <!-- divider -->
+        <View
+            android:id="@+id/action_button_left_top_divider"
+            android:layout_height="@dimen/audio_player_divider_height"
+            android:layout_width="@dimen/audio_player_divider_length"
+            android:layout_marginRight="@dimen/audio_player_divider_horizontal_offset"
+            android:layout_alignParentRight="true"
+            android:layout_above="@id/audio_player_current_time"
+            android:background="@color/now_playing_divider" />
+
+        <!-- divider -->
+        <View
+            android:id="@+id/action_button_left_bottom_divider"
+            android:layout_height="@dimen/audio_player_divider_height"
+            android:layout_width="@dimen/audio_player_divider_length"
+            android:layout_marginRight="@dimen/audio_player_divider_horizontal_offset"
+            android:layout_alignParentRight="true"
+            android:layout_below="@id/audio_player_current_time"
+            android:background="@color/now_playing_divider" />
+
+        <com.cyanogenmod.eleven.widgets.BrowseButton
+            android:id="@+id/action_button_browse"
+            android:layout_width="@dimen/audio_player_controls_end_button_width"
+            android:layout_height="@dimen/audio_player_controls_end_button_height"
+            android:layout_above="@id/action_button_left_top_divider"
+            android:layout_alignLeft="@id/action_button_previous"
+            android:layout_marginLeft="@dimen/audio_player_controls_end_button_half_width"
+            android:contentDescription="@string/accessibility_browse"
+            android:focusable="true"
+            android:scaleType="fitCenter"
+            android:src="@drawable/btn_playback_browse" />
+
+        <com.cyanogenmod.eleven.widgets.ShuffleButton
+            android:id="@+id/action_button_shuffle"
+            android:layout_width="@dimen/audio_player_controls_end_button_width"
+            android:layout_height="@dimen/audio_player_controls_end_button_height"
+            android:layout_below="@id/action_button_left_bottom_divider"
+            android:layout_alignLeft="@id/action_button_previous"
+            android:layout_marginLeft="@dimen/audio_player_controls_end_button_half_width"
+            android:contentDescription="@string/accessibility_shuffle"
+            android:scaleType="fitCenter"
+            android:src="@drawable/btn_playback_shuffle_all" />
+    </RelativeLayout>
+
+    <!-- This is the right side of the progress bar - it has the next
+    and repeat button and the total time text -->
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="fill_parent"
+        android:layout_toRightOf="@id/playPauseProgressButton">
+
+        <TextView
+            android:id="@+id/audio_player_total_time"
+            android:layout_width="52dp"
+            android:layout_height="@dimen/audio_player_controls_end_button_height"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:paddingRight="@dimen/audio_player_time_text_padding"
+            android:gravity="right|center_vertical"
+            android:textColor="@color/audio_player_text_color"
+            android:textSize="@dimen/audio_player_time_text_size"
+            android:textStyle="bold"/>
+
+        <com.cyanogenmod.eleven.widgets.RepeatingImageButton
+            android:id="@+id/action_button_next"
+            android:layout_width="@dimen/audio_player_controls_end_button_width"
+            android:layout_height="@dimen/audio_player_controls_end_button_height"
+            android:layout_toRightOf="@id/audio_player_total_time"
+            android:layout_centerVertical="true"
+            android:scaleType="fitCenter"
+            android:src="@drawable/btn_playback_next" />
+
+        <!-- divider -->
+        <View
+            android:id="@+id/action_button_right_top_divider"
+            android:layout_height="@dimen/audio_player_divider_height"
+            android:layout_width="@dimen/audio_player_divider_length"
+            android:layout_marginLeft="@dimen/audio_player_divider_horizontal_offset"
+            android:layout_alignParentLeft="true"
+            android:layout_above="@id/audio_player_total_time"
+            android:background="@color/now_playing_divider" />
+
+        <!-- divider -->
+        <View
+            android:id="@+id/action_button_right_bottom_divider"
+            android:layout_height="@dimen/audio_player_divider_height"
+            android:layout_width="@dimen/audio_player_divider_length"
+            android:layout_marginLeft="@dimen/audio_player_divider_horizontal_offset"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@id/audio_player_total_time"
+            android:background="@color/now_playing_divider" />
+
+        <com.cyanogenmod.eleven.widgets.QueueButton
+            android:id="@+id/action_button_queue"
+            android:layout_width="@dimen/audio_player_controls_end_button_width"
+            android:layout_height="@dimen/audio_player_controls_end_button_height"
+            android:layout_above="@id/action_button_right_top_divider"
+            android:layout_alignRight="@id/action_button_next"
+            android:layout_marginRight="@dimen/audio_player_controls_end_button_half_width"
+            android:contentDescription="@string/accessibility_queue"
+            android:focusable="true"
+            android:scaleType="fitCenter"
+            android:src="@drawable/btn_queue_icon" />
+
+        <com.cyanogenmod.eleven.widgets.RepeatButton
+            android:id="@+id/action_button_repeat"
+            android:layout_width="@dimen/audio_player_controls_end_button_width"
+            android:layout_height="@dimen/audio_player_controls_end_button_height"
+            android:layout_below="@id/action_button_right_bottom_divider"
+            android:layout_alignRight="@id/action_button_next"
+            android:layout_marginRight="@dimen/audio_player_controls_end_button_half_width"
+            android:contentDescription="@string/accessibility_repeat"
+            android:focusable="true"
+            android:scaleType="fitCenter"
+            android:src="@drawable/btn_playback_repeat_all" />
+
+    </RelativeLayout>
+
+</RelativeLayout>

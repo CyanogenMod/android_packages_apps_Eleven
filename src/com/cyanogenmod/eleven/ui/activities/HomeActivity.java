@@ -24,9 +24,11 @@ import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.PersistableBundle;
 import android.provider.MediaStore;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentManager.OnBackStackChangedListener;
 import android.support.v4.app.FragmentTransaction;
 import android.text.TextUtils;
 import android.util.Log;
@@ -50,7 +52,7 @@ import com.cyanogenmod.eleven.utils.BitmapWithColors;
 import com.cyanogenmod.eleven.utils.MusicUtils;
 import com.cyanogenmod.eleven.utils.NavUtils;
 
-public class HomeActivity extends SlidingPanelActivity {
+public class HomeActivity extends SlidingPanelActivity implements OnBackStackChangedListener {
     private static final String TAG = "HomeActivity";
     private static final String ACTION_PREFIX = HomeActivity.class.getName();
     public static final String ACTION_VIEW_ARTIST_DETAILS = ACTION_PREFIX + ".view.ArtistDetails";
@@ -77,6 +79,7 @@ public class HomeActivity extends SlidingPanelActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         // if we've been launched by an intent, parse it
         Intent launchIntent = getIntent();
         boolean intentHandled = false;
@@ -84,43 +87,48 @@ public class HomeActivity extends SlidingPanelActivity {
             intentHandled = parseIntentForFragment(launchIntent);
         }
 
-        // if the intent didn't cause us to load a fragment, load the music browse one
-        if (!mLoadedBaseFragment) {
-            final MusicBrowserPhoneFragment fragment = new MusicBrowserPhoneFragment();
-            if (launchIntent != null) {
-                fragment.setDefaultPageIdx(launchIntent.getIntExtra(EXTRA_BROWSE_PAGE_IDX,
-                        MusicBrowserPhoneFragment.INVALID_PAGE_INDEX));
-            }
-            getSupportFragmentManager().beginTransaction()
-                    .replace(R.id.activity_base_content, fragment).commit();
-
+        if (savedInstanceState != null) {
+            Log.d("Linus", "base fragment is: " + savedInstanceState.getBoolean("TEST_BASE_FRAGMENT"));
+            mTopLevelActivity = savedInstanceState.getBoolean("TEST_BASE_FRAGMENT");
             mLoadedBaseFragment = true;
-            mTopLevelActivity = true;
         }
 
-        getSupportFragmentManager().addOnBackStackChangedListener(
-                new FragmentManager.OnBackStackChangedListener() {
-            @Override
-            public void onBackStackChanged() {
-                Fragment topFragment = getTopFragment();
-                if (topFragment != null) {
-                    // the fragment that has come back to the top should now have its menu items
-                    // added to the action bar -- so tell it to make it menu items visible
-                    topFragment.setMenuVisibility(true);
-                    ISetupActionBar setupActionBar = (ISetupActionBar) topFragment;
-                    setupActionBar.setupActionBar();
-
-                    getActionBar().setDisplayHomeAsUpEnabled(
-                            !(topFragment instanceof MusicBrowserPhoneFragment));
+        if (savedInstanceState == null) {
+            // if the intent didn't cause us to load a fragment, load the music browse one
+            if (!mLoadedBaseFragment) {
+                final MusicBrowserPhoneFragment fragment = new MusicBrowserPhoneFragment();
+                if (launchIntent != null) {
+                    fragment.setDefaultPageIdx(launchIntent.getIntExtra(EXTRA_BROWSE_PAGE_IDX,
+                            MusicBrowserPhoneFragment.INVALID_PAGE_INDEX));
                 }
+                Log.d("Linus", "Replacing base content fragment");
+                getSupportFragmentManager().beginTransaction()
+                        .replace(R.id.activity_base_content, fragment).commit();
+
+                mLoadedBaseFragment = true;
+                mTopLevelActivity = true;
             }
-        });
+
+        }
+
+        getSupportFragmentManager().addOnBackStackChangedListener(this);
+
+        if (savedInstanceState != null) {
+            onBackStackChanged();
+        }
 
         // if intent wasn't UI related, process it as a audio playback request
         if (!intentHandled) {
             handlePlaybackIntent(launchIntent);
         }
+    }
 
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+
+        Log.d("Linus", "setting base fragment to: " + mTopLevelActivity);
+        outState.putBoolean("TEST_BASE_FRAGMENT", mTopLevelActivity);
     }
 
     public Fragment getTopFragment() {
@@ -260,6 +268,8 @@ public class HomeActivity extends SlidingPanelActivity {
                 if (oldTop != null) {
                     oldTop.setMenuVisibility(false);
                 }
+
+                Log.d("Linus", "Committing transaction");
 
                 transaction.commit();
                 handled = true;
@@ -427,4 +437,20 @@ public class HomeActivity extends SlidingPanelActivity {
         return id;
     }
 
+    @Override
+    public void onBackStackChanged() {
+        Log.d("Linus", "back stack size is: " + getSupportFragmentManager()
+                .getBackStackEntryCount());
+        Fragment topFragment = getTopFragment();
+        if (topFragment != null) {
+            // the fragment that has come back to the top should now have its menu items
+            // added to the action bar -- so tell it to make it menu items visible
+            topFragment.setMenuVisibility(true);
+            ISetupActionBar setupActionBar = (ISetupActionBar) topFragment;
+            setupActionBar.setupActionBar();
+
+            getActionBar().setDisplayHomeAsUpEnabled(
+                    !(topFragment instanceof MusicBrowserPhoneFragment));
+        }
+    }
 }

@@ -15,8 +15,10 @@ package com.cyanogenmod.eleven.ui.activities;
 
 import android.graphics.Color;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
+import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
 
@@ -60,6 +62,7 @@ public abstract class SlidingPanelActivity extends BaseActivity {
 
     private final ShowPanelClickListener mShowBrowse = new ShowPanelClickListener(Panel.Browse);
     private final ShowPanelClickListener mShowMusicPlayer = new ShowPanelClickListener(Panel.MusicPlayer);
+    private Handler mHandler = new Handler();
 
     // this is the blurred image that goes behind the now playing and queue fragments
     private BlurScrimImage mBlurScrimImage;
@@ -106,6 +109,32 @@ public abstract class SlidingPanelActivity extends BaseActivity {
 
         // get the blur scrim image
         mBlurScrimImage = (BlurScrimImage)findViewById(R.id.blurScrimImage);
+
+        if (savedInstanceState != null) {
+            Panel targetPanel = Panel.values()[savedInstanceState.getInt("Panel",
+                    Panel.Browse.ordinal())];
+            showPanel(targetPanel);
+
+            if (targetPanel == Panel.Queue) {
+                mFirstPanel.setSlidingEnabled(false);
+            }
+        }
+    }
+
+    @Override
+    protected void onRestoreInstanceState(Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+
+
+        mFirstPanel.forceLayout();
+        mSecondPanel.forceLayout();
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+
+        outState.putInt("Panel", getCurrentPanel().ordinal());
     }
 
     private void setupFirstPanel() {
