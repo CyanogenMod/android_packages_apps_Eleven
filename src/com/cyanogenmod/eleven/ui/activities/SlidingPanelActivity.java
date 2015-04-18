@@ -52,6 +52,8 @@ public abstract class SlidingPanelActivity extends BaseActivity {
         public void onFinishSlide(SlidingPanelActivity.Panel visiblePanel);
     }
 
+    private static final String STATE_KEY_CURRENT_PANEL = "CurrentPanel";
+
     private SlidingUpPanelLayout mFirstPanel;
     private SlidingUpPanelLayout mSecondPanel;
     protected Panel mTargetNavigatePanel;
@@ -106,6 +108,33 @@ public abstract class SlidingPanelActivity extends BaseActivity {
 
         // get the blur scrim image
         mBlurScrimImage = (BlurScrimImage)findViewById(R.id.blurScrimImage);
+
+        if (savedInstanceState != null) {
+            int panelIndex = savedInstanceState.getInt(STATE_KEY_CURRENT_PANEL,
+                    Panel.Browse.ordinal());
+            Panel targetPanel = Panel.values()[panelIndex];
+
+            showPanel(targetPanel);
+
+            if (targetPanel == Panel.Queue) {
+                mFirstPanel.setSlidingEnabled(false);
+            }
+        }
+    }
+
+    @Override
+    protected void onRestoreInstanceState(Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+
+        mFirstPanel.forceLayout();
+        mSecondPanel.forceLayout();
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+
+        outState.putInt(STATE_KEY_CURRENT_PANEL, getCurrentPanel().ordinal());
     }
 
     private void setupFirstPanel() {
