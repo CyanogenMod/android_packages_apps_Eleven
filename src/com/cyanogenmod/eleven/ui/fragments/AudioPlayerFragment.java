@@ -180,6 +180,9 @@ public class AudioPlayerFragment extends Fragment implements ServiceConnection,
 
         // add a listener for the sliding
         ((SlidingPanelActivity)getActivity()).addSlidingPanelListener(this);
+
+        // check equalizer view
+        checkEqualizerView();
     }
 
     /**
@@ -742,6 +745,14 @@ public class AudioPlayerFragment extends Fragment implements ServiceConnection,
 
     @Override
     public void onFinishSlide(SlidingPanelActivity.Panel visiblePanel) {
+        checkEqualizerView(visiblePanel);
+    }
+
+    private void checkEqualizerView() {
+        checkEqualizerView(((HomeActivity)getActivity()).getCurrentPanel());
+    }
+
+    private void checkEqualizerView(SlidingPanelActivity.Panel visiblePanel) {
         if (visiblePanel == SlidingPanelActivity.Panel.MusicPlayer) {
             mEqualizerView.setPanelVisible(true);
         }

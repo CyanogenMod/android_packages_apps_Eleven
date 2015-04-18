@@ -50,7 +50,8 @@ import com.cyanogenmod.eleven.utils.BitmapWithColors;
 import com.cyanogenmod.eleven.utils.MusicUtils;
 import com.cyanogenmod.eleven.utils.NavUtils;
 
-public class HomeActivity extends SlidingPanelActivity {
+public class HomeActivity extends SlidingPanelActivity implements
+        FragmentManager.OnBackStackChangedListener {
     private static final String TAG = "HomeActivity";
     private static final String ACTION_PREFIX = HomeActivity.class.getName();
     public static final String ACTION_VIEW_ARTIST_DETAILS = ACTION_PREFIX + ".view.ArtistDetails";
@@ -58,6 +59,8 @@ public class HomeActivity extends SlidingPanelActivity {
     public static final String ACTION_VIEW_PLAYLIST_DETAILS = ACTION_PREFIX + ".view.PlaylistDetails";
     public static final String ACTION_VIEW_SMART_PLAYLIST = ACTION_PREFIX + ".view.SmartPlaylist";
     public static final String EXTRA_BROWSE_PAGE_IDX = "BrowsePageIndex";
+
+    private static final String STATE_KEY_BASE_FRAGMENT = "BaseFragment";
 
     private static final int NEW_PHOTO = 1;
     public static final int EQUALIZER = 2;
@@ -73,10 +76,10 @@ public class HomeActivity extends SlidingPanelActivity {
      */
     protected boolean mTopLevelActivity = false;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         // if we've been launched by an intent, parse it
         Intent launchIntent = getIntent();
         boolean intentHandled = false;
@@ -85,42 +88,46 @@ public class HomeActivity extends SlidingPanelActivity {
         }
 
         // if the intent didn't cause us to load a fragment, load the music browse one
-        if (!mLoadedBaseFragment) {
+        if (savedInstanceState == null && !mLoadedBaseFragment) {
             final MusicBrowserPhoneFragment fragment = new MusicBrowserPhoneFragment();
             if (launchIntent != null) {
                 fragment.setDefaultPageIdx(launchIntent.getIntExtra(EXTRA_BROWSE_PAGE_IDX,
                         MusicBrowserPhoneFragment.INVALID_PAGE_INDEX));
             }
             getSupportFragmentManager().beginTransaction()
-                    .replace(R.id.activity_base_content, fragment).commit();
+                    .replace(R.id.activity_base_content, fragment)
+                    .commit();
 
             mLoadedBaseFragment = true;
             mTopLevelActivity = true;
         }
 
-        getSupportFragmentManager().addOnBackStackChangedListener(
-                new FragmentManager.OnBackStackChangedListener() {
-            @Override
-            public void onBackStackChanged() {
-                Fragment topFragment = getTopFragment();
-                if (topFragment != null) {
-                    // the fragment that has come back to the top should now have its menu items
-                    // added to the action bar -- so tell it to make it menu items visible
-                    topFragment.setMenuVisibility(true);
-                    ISetupActionBar setupActionBar = (ISetupActionBar) topFragment;
-                    setupActionBar.setupActionBar();
+        getSupportFragmentManager().addOnBackStackChangedListener(this);
 
-                    getActionBar().setDisplayHomeAsUpEnabled(
-                            !(topFragment instanceof MusicBrowserPhoneFragment));
-                }
-            }
-        });
+        // if we are resuming from a saved instance state
+        if (savedInstanceState != null) {
+            // track which fragments are loaded and if this is the top level activity
+            mTopLevelActivity = savedInstanceState.getBoolean(STATE_KEY_BASE_FRAGMENT);
+            mLoadedBaseFragment = mTopLevelActivity;
+
+            // update the action bar based on the top most fragment
+            onBackStackChanged();
+
+            // figure which panel we are on and update the status bar
+            mBrowsePanelActive = (getCurrentPanel() == Panel.Browse);
+            updateStatusBarColor();
+        }
 
         // if intent wasn't UI related, process it as a audio playback request
         if (!intentHandled) {
             handlePlaybackIntent(launchIntent);
         }
+    }
 
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putBoolean(STATE_KEY_BASE_FRAGMENT, mTopLevelActivity);
     }
 
     public Fragment getTopFragment() {
@@ -427,4 +434,18 @@ public class HomeActivity extends SlidingPanelActivity {
         return id;
     }
 
+    @Override
+    public void onBackStackChanged() {
+        Fragment topFragment = getTopFragment();
+        if (topFragment != null) {
+            // the fragment that has come back to the top should now have its menu items
+            // added to the action bar -- so tell it to make it menu items visible
+            topFragment.setMenuVisibility(true);
+            ISetupActionBar setupActionBar = (ISetupActionBar) topFragment;
+            setupActionBar.setupActionBar();
+
+            getActionBar().setDisplayHomeAsUpEnabled(
+                    !(topFragment instanceof MusicBrowserPhoneFragment));
+        }
+    }
 }
