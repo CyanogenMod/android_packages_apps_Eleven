@@ -24,6 +24,7 @@ import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.PersistableBundle;
 import android.provider.MediaStore;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -77,6 +78,7 @@ public class HomeActivity extends SlidingPanelActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         // if we've been launched by an intent, parse it
         Intent launchIntent = getIntent();
         boolean intentHandled = false;
@@ -84,43 +86,53 @@ public class HomeActivity extends SlidingPanelActivity {
             intentHandled = parseIntentForFragment(launchIntent);
         }
 
-        // if the intent didn't cause us to load a fragment, load the music browse one
-        if (!mLoadedBaseFragment) {
-            final MusicBrowserPhoneFragment fragment = new MusicBrowserPhoneFragment();
-            if (launchIntent != null) {
-                fragment.setDefaultPageIdx(launchIntent.getIntExtra(EXTRA_BROWSE_PAGE_IDX,
-                        MusicBrowserPhoneFragment.INVALID_PAGE_INDEX));
-            }
-            getSupportFragmentManager().beginTransaction()
-                    .replace(R.id.activity_base_content, fragment).commit();
+        if (savedInstanceState == null ||
+                savedInstanceState.getBoolean("TEST_BASE_FRAGMENT")) {
+            // if the intent didn't cause us to load a fragment, load the music browse one
+            if (!mLoadedBaseFragment) {
+                final MusicBrowserPhoneFragment fragment = new MusicBrowserPhoneFragment();
+                if (launchIntent != null) {
+                    fragment.setDefaultPageIdx(launchIntent.getIntExtra(EXTRA_BROWSE_PAGE_IDX,
+                            MusicBrowserPhoneFragment.INVALID_PAGE_INDEX));
+                }
+                getSupportFragmentManager().beginTransaction()
+                        .replace(R.id.activity_base_content, fragment).commit();
 
-            mLoadedBaseFragment = true;
-            mTopLevelActivity = true;
+                mLoadedBaseFragment = true;
+                mTopLevelActivity = true;
+            }
+
         }
 
         getSupportFragmentManager().addOnBackStackChangedListener(
-                new FragmentManager.OnBackStackChangedListener() {
-            @Override
-            public void onBackStackChanged() {
-                Fragment topFragment = getTopFragment();
-                if (topFragment != null) {
-                    // the fragment that has come back to the top should now have its menu items
-                    // added to the action bar -- so tell it to make it menu items visible
-                    topFragment.setMenuVisibility(true);
-                    ISetupActionBar setupActionBar = (ISetupActionBar) topFragment;
-                    setupActionBar.setupActionBar();
+            new FragmentManager.OnBackStackChangedListener() {
+                @Override
+                public void onBackStackChanged() {
+                    Fragment topFragment = getTopFragment();
+                    if (topFragment != null) {
+                        // the fragment that has come back to the top should now have its menu items
+                        // added to the action bar -- so tell it to make it menu items visible
+                        topFragment.setMenuVisibility(true);
+                        ISetupActionBar setupActionBar = (ISetupActionBar) topFragment;
+                        setupActionBar.setupActionBar();
 
-                    getActionBar().setDisplayHomeAsUpEnabled(
-                            !(topFragment instanceof MusicBrowserPhoneFragment));
+                        getActionBar().setDisplayHomeAsUpEnabled(
+                                !(topFragment instanceof MusicBrowserPhoneFragment));
+                    }
                 }
-            }
-        });
+            });
 
         // if intent wasn't UI related, process it as a audio playback request
         if (!intentHandled) {
             handlePlaybackIntent(launchIntent);
         }
+    }
 
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+
+        outState.putBoolean("TEST_BASE_FRAGMENT", mLoadedBaseFragment);
     }
 
     public Fragment getTopFragment() {
