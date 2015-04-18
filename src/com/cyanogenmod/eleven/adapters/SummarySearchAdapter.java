@@ -42,11 +42,6 @@ public final class SummarySearchAdapter extends ArrayAdapter<SearchResult>
         implements SectionAdapter.BasicAdapter, IPopupMenuCallback {
 
     /**
-     * no-image list item type and with image type
-     */
-    private static final int VIEW_TYPE_COUNT = 2;
-
-    /**
      * Image cache and image fetcher
      */
     private final ImageFetcher mImageFetcher;
@@ -89,7 +84,7 @@ public final class SummarySearchAdapter extends ArrayAdapter<SearchResult>
 
         if (convertView == null) {
             convertView = LayoutInflater.from(getContext()).inflate(
-                    getViewResourceId(position), parent, false);
+                    R.layout.list_item_normal, parent, false);
             holder = new MusicHolder(convertView);
             convertView.setTag(holder);
             // set the pop up menu listener
@@ -133,6 +128,10 @@ public final class SummarySearchAdapter extends ArrayAdapter<SearchResult>
                         MusicUtils.makeCombinedString(getContext(), item.mArtist, item.mAlbum));
                 break;
             case Playlist:
+                // Asynchronously load the playlist images into the adapter
+                ImageFetcher.getInstance(getContext()).loadPlaylistCoverArtImage(
+                        item.mId, holder.mImage.get());
+
                 setText(holder.mLineOne.get(), item.mTitle);
                 String songs = MusicUtils.makeLabel(getContext(), R.plurals.Nsongs, item.mSongCount);
                 holder.mLineTwo.get().setText(songs);
@@ -161,46 +160,6 @@ public final class SummarySearchAdapter extends ArrayAdapter<SearchResult>
     @Override
     public boolean hasStableIds() {
         return true;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public int getViewTypeCount() {
-        return VIEW_TYPE_COUNT;
-    }
-
-    /**
-     * This categorizes the view types we want for each item type
-     * @param position of the item
-     * @return categorization
-     */
-    @Override
-    public int getItemViewType(int position) {
-        switch (getItem(position).mType) {
-            case Artist:
-            case Album:
-            case Song:
-                return 0;
-            default:
-            case Playlist:
-                return 1;
-        }
-    }
-
-    /**
-     * this returns the layout needed for the item
-     * @param position of the item
-     * @return layout id
-     */
-    public int getViewResourceId(int position) {
-        switch (getItemViewType(position)) {
-            case 0:
-                return R.layout.list_item_normal;
-            default:
-                return R.layout.list_item_simple;
-        }
     }
 
     /**
