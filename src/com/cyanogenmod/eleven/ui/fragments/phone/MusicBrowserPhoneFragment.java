@@ -95,14 +95,14 @@ public class MusicBrowserPhoneFragment extends BaseFragment {
     protected void onViewCreated() {
         super.onViewCreated();
 
-        if (mPagerAdapter == null) {
+        //if (mPagerAdapter == null) {
             // Initialize the adapter
             mPagerAdapter = new PagerAdapter(getActivity(), getChildFragmentManager());
             final MusicFragments[] mFragments = MusicFragments.values();
             for (final MusicFragments mFragment : mFragments) {
                 mPagerAdapter.add(mFragment.getFragmentClass(), null);
             }
-        }
+        //}
 
         // Initialize the ViewPager
         mViewPager = (ViewPager)mRootView.findViewById(R.id.fragment_home_phone_pager);

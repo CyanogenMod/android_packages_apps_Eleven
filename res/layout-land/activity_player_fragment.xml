@@ -25,7 +25,13 @@
         android:id="@+id/audio_player_header"
         layout="@layout/audio_player_header_bar" />
 
-    <include layout="@layout/main_album_flow" />
+    <LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
 
-    <include layout="@layout/main_playback_controls" />
+        <include layout="@layout/main_album_flow" />
+        <include layout="@layout/main_playback_controls" />
+    </LinearLayout>
 </LinearLayout>
