@@ -50,7 +50,7 @@
     <string name="menu_clear_list">Clear list</string>
     <string name="menu_clear_recents">Clear recent</string>
     <string name="menu_clear_queue">Clear queue</string>
-    <string name="menu_save_queue">Save queue</string>
+    <string name="menu_save_queue">Save queue to playlist</string>
     <string name="menu_equalizer">Equalizer</string>
 
     <!-- Playlist items -->
