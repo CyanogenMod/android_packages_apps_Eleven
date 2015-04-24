@@ -43,13 +43,13 @@
   <string name="menu_sort_by">מיין לפי</string>
   <string name="menu_clear_list">נקה רשימה</string>
   <string name="menu_clear_recents">נקה רשימת אחרונים</string>
-  <string name="menu_clear_queue">נקה תור השמעה</string>
-  <string name="menu_save_queue">שמור תור השמעה</string>
+  <string name="menu_clear_queue">נקה את התור</string>
+  <string name="menu_save_queue">שמור את התור לרשימת השמעה</string>
   <string name="menu_equalizer">אקולייזר</string>
   <string name="add_to_playlist">הוסף לרשימת השמעה</string>
-  <string name="add_to_queue">הוסף לתור השמעה</string>
+  <string name="add_to_queue">הוסף לתור</string>
   <string name="remove_from_recent">הסר מרשימת האחרונים</string>
-  <string name="remove_from_queue">הסר מתור השמעה</string>
+  <string name="remove_from_queue">הסר מהתור</string>
   <string name="sort_order_entry_az">א-ת / A-Z</string>
   <string name="sort_order_entry_za">ת-א / Z-A</string>
   <string name="sort_order_entry_artist">אמן</string>
@@ -101,7 +101,7 @@
   <string name="accessibility_repeat">חזור</string>
   <string name="accessibility_repeat_all">חזור על הכל</string>
   <string name="accessibility_repeat_one">חזור על נוכחי</string>
-  <string name="accessibility_queue">פתח את התור</string>
+  <string name="accessibility_queue">פתח את תור ההשמעה</string>
   <string name="accessibility_browse">הצג מוסיקה</string>
   <string name="set_as_ringtone">\"<xliff:g id="name" example="Alarm Bell">%s</xliff:g>\" נקבע כצלצול</string>
   <string name="playlist_renamed">שם רשימת ההשמעה שונה</string>

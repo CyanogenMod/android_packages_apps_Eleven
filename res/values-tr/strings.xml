@@ -44,7 +44,7 @@
   <string name="menu_clear_list">Listeyi temizle</string>
   <string name="menu_clear_recents">Son çalınanları temizle</string>
   <string name="menu_clear_queue">Kuyruğu sil</string>
-  <string name="menu_save_queue">Kuyruğu kaydet</string>
+  <string name="menu_save_queue">Kuyruğu çalma listesine kaydet</string>
   <string name="menu_equalizer">Equalizer / Dengeleyici</string>
   <string name="add_to_playlist">Çalma listesine ekle</string>
   <string name="add_to_queue">Kuyruğa ekle</string>

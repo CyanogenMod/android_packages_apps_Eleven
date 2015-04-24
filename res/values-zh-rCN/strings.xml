@@ -44,7 +44,7 @@
   <string name="menu_clear_list">清除列表</string>
   <string name="menu_clear_recents">清除最近播放列表</string>
   <string name="menu_clear_queue">清除队列</string>
-  <string name="menu_save_queue">保存队列</string>
+  <string name="menu_save_queue">保存队列到播放列表</string>
   <string name="menu_equalizer">均衡器</string>
   <string name="add_to_playlist">添加到播放列表</string>
   <string name="add_to_queue">添加到队列</string>

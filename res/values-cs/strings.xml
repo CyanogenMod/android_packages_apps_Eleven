@@ -44,7 +44,7 @@
   <string name="menu_clear_list">Vyčistit seznam</string>
   <string name="menu_clear_recents">Vyčistit nedávné</string>
   <string name="menu_clear_queue">Vyčistit frontu</string>
-  <string name="menu_save_queue">Uložit frontu</string>
+  <string name="menu_save_queue">Uložit frontu do seznamu skladeb</string>
   <string name="menu_equalizer">Ekvalizér</string>
   <string name="add_to_playlist">Přidat do seznamu skladeb</string>
   <string name="add_to_queue">Přidat do fronty</string>

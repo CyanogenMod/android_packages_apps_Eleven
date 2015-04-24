@@ -44,7 +44,7 @@
   <string name="menu_clear_list">Lista törlése</string>
   <string name="menu_clear_recents">Előzmények törlése</string>
   <string name="menu_clear_queue">Lejátszási sor törlése</string>
-  <string name="menu_save_queue">Lejátszási sor elmentése</string>
+  <string name="menu_save_queue">Várólista lista mentése</string>
   <string name="menu_equalizer">Hangszínszabályzó</string>
   <string name="add_to_playlist">Hozzáadás a lejátszási lista</string>
   <string name="add_to_queue">Hozzáadás a lejátszási sorhoz</string>

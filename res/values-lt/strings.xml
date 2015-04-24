@@ -44,7 +44,7 @@
   <string name="menu_clear_list">Išvalyti sąrašą</string>
   <string name="menu_clear_recents">Išvalyti naujausias</string>
   <string name="menu_clear_queue">Išvalyti eilę</string>
-  <string name="menu_save_queue">Išsaugti eilę</string>
+  <string name="menu_save_queue">Išsaugoti eilę į grojaraštį</string>
   <string name="menu_equalizer">Ekvalaizeris</string>
   <string name="add_to_playlist">Pridėti į grojaraštį</string>
   <string name="add_to_queue">Pridėti į eilę</string>
@@ -87,11 +87,11 @@
   <string name="context_menu_rename_playlist">Pervardyti</string>
   <string name="context_menu_delete">Ištrinti</string>
   <string name="context_menu_fetch_album_art">Atsisiųsti albumo viršelį</string>
-  <string name="context_menu_fetch_artist_image">Atsisiųsti atlikėjo atvaizdą</string>
+  <string name="context_menu_fetch_artist_image">Atsisiųsti atlikėjo vaizdą</string>
   <string name="context_menu_remove_from_recent">Pašalinti iš naujausių</string>
   <string name="context_menu_use_as_ringtone">Naudoti kaip skambėjimo toną</string>
   <string name="context_menu_remove_from_playlist">Pašalinti iš grojaraščio</string>
-  <string name="context_menu_change_image">Pakeisti atvaizdą</string>
+  <string name="context_menu_change_image">Pakeisti vaizdą</string>
   <string name="accessibility_play">Paleisti</string>
   <string name="accessibility_pause">Sustabdyti</string>
   <string name="accessibility_next">Kitas</string>
@@ -109,11 +109,11 @@
   <string name="settings_storage_category">Saugykla</string>
   <string name="settings_data_category">Duomenys</string>
   <string name="settings_delete_cache_title">Ištrinti talpyklą</string>
-  <string name="settings_delete_cache_summary">Pašalinti visus talpyklos atvaizdus</string>
+  <string name="settings_delete_cache_summary">Pašalinti visus talpyklos vaizdus</string>
   <string name="settings_download_only_on_wifi_title">Atsisiųsti tik per „Wi-Fi“</string>
   <string name="settings_download_only_on_wifi_summary">Siekiant sumažinti operatoriaus mokesčius nesisiųsti per mobiliojio ryšio tinklus</string>
   <string name="settings_download_missing_artwork_title">Atsisiųsti trūkstamus albumo viršelius</string>
-  <string name="settings_download_artist_images_title">Atsisiųsti trūkstamus atlikėjų atvaizdus</string>
+  <string name="settings_download_artist_images_title">Atsisiųsti trūkstamus atlikėjų vaizdus</string>
   <string name="settings_general_category">Bendra</string>
   <string name="settings_show_music_visualization_title">Rodyti muzikos vizualizaciją</string>
   <string name="settings_show_lyrics_title">Rodyti dainos žodžius</string>

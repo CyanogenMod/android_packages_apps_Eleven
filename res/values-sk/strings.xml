@@ -44,7 +44,7 @@
   <string name="menu_clear_list">Vyčistiť zoznam</string>
   <string name="menu_clear_recents">Vyčistiť nedávne</string>
   <string name="menu_clear_queue">Vyčistiť poradie</string>
-  <string name="menu_save_queue">Uložiť poradie</string>
+  <string name="menu_save_queue">Uložiť poradie do zoznamu skladieb</string>
   <string name="menu_equalizer">Ekvalizér</string>
   <string name="add_to_playlist">Pridať do zoznamu skladieb</string>
   <string name="add_to_queue">Pridať do poradia</string>

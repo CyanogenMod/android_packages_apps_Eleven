@@ -44,7 +44,6 @@
   <string name="menu_clear_list">Xoá danh sách</string>
   <string name="menu_clear_recents">Xoá danh sách vừa nghe</string>
   <string name="menu_clear_queue">Xoá danh sách chờ</string>
-  <string name="menu_save_queue">Lưu danh sách chờ</string>
   <string name="menu_equalizer">Bộ chỉnh âm</string>
   <string name="add_to_playlist">Thêm vào danh sách</string>
   <string name="add_to_queue">Thêm vào danh sách chờ</string>
@@ -69,9 +68,7 @@
   <string name="cancel">Huỷ</string>
   <string name="overwrite">Ghi đè</string>
   <string name="clear">Xoá</string>
-  <string name="new_playlist_name_template">Danh sách %d</string>
   <string name="create_playlist_prompt">Tên danh sách</string>
-  <string name="delete_dialog_title">Xoá %s?</string>
   <string name="clear_top_tracks_title">Xoá những bài hát thường nghe?</string>
   <string name="clear_recent_title">Xoá danh sách vừa nghe?</string>
   <string name="clear_last_added">Xoá danh sách vừa thêm?</string>
@@ -103,7 +100,6 @@
   <string name="accessibility_repeat_one">Lặp lại một bài hát</string>
   <string name="accessibility_queue">Mở danh sách chờ</string>
   <string name="accessibility_browse">Chọn nhạc</string>
-  <string name="set_as_ringtone">\'%s\' được đặt làm nhạc chuông</string>
   <string name="playlist_renamed">Đã đổi tên danh sách</string>
   <string name="settings_ui_category">Giao diện</string>
   <string name="settings_storage_category">Lưu trữ</string>
@@ -170,5 +166,4 @@
   <string name="search_title_albums">Tất cả về album \"%s\"</string>
   <string name="search_title_songs">Tất cả về bài hát \"%s\"</string>
   <string name="search_title_playlists">Tất cả về danh sách \"%s\"</string>
-  <string name="duration_format">%1$s %2$s</string>
 </resources>

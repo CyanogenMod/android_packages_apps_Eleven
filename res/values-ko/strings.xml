@@ -44,7 +44,6 @@
   <string name="menu_clear_list">목록 비우기</string>
   <string name="menu_clear_recents">최근 목록 비우기</string>
   <string name="menu_clear_queue">대기열 비우기</string>
-  <string name="menu_save_queue">대기열 저장</string>
   <string name="menu_equalizer">이퀄라이저</string>
   <string name="add_to_playlist">재생목록에 추가</string>
   <string name="add_to_queue">대기열에 추가</string>
