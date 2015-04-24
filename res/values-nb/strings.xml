@@ -44,7 +44,6 @@
   <string name="menu_clear_list">Tøm liste</string>
   <string name="menu_clear_recents">Slett siste</string>
   <string name="menu_clear_queue">Slett kø</string>
-  <string name="menu_save_queue">Lagre køen</string>
   <string name="menu_equalizer">Equalizer</string>
   <string name="add_to_playlist">Legg til i spilleliste</string>
   <string name="add_to_queue">Legg til i køen</string>

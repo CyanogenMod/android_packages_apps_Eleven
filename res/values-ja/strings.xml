@@ -44,7 +44,7 @@
   <string name="menu_clear_list">リストを消去</string>
   <string name="menu_clear_recents">最近の曲を消去</string>
   <string name="menu_clear_queue">キューを消去</string>
-  <string name="menu_save_queue">キューを保存</string>
+  <string name="menu_save_queue">プレイリストにキューを保存</string>
   <string name="menu_equalizer">イコライザー</string>
   <string name="add_to_playlist">プレイリストに追加</string>
   <string name="add_to_queue">キューに追加</string>

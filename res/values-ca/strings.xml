@@ -44,7 +44,7 @@
   <string name="menu_clear_list">Neteja la llista</string>
   <string name="menu_clear_recents">Neteja els recents</string>
   <string name="menu_clear_queue">Neteja la cua</string>
-  <string name="menu_save_queue">Desa la cua</string>
+  <string name="menu_save_queue">Desa-ho en cua a la llista de reproducció</string>
   <string name="menu_equalizer">Equalitzador</string>
   <string name="add_to_playlist">Afegeix a la llista de reproducció</string>
   <string name="add_to_queue">Afegeix a la cua</string>

@@ -44,7 +44,7 @@
   <string name="menu_clear_list">Liste leeren</string>
   <string name="menu_clear_recents">\"Kürzlich gehört\" leeren</string>
   <string name="menu_clear_queue">Warteschlange leeren</string>
-  <string name="menu_save_queue">Warteschlange speichern</string>
+  <string name="menu_save_queue">Warteschlange als Wiedergabeliste speichern</string>
   <string name="menu_equalizer">Equalizer</string>
   <string name="add_to_playlist">Zur Wiedergabeliste hinzufügen</string>
   <string name="add_to_queue">Zur Warteschlange hinzufügen</string>

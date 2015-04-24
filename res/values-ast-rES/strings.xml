@@ -44,7 +44,6 @@
   <string name="menu_clear_list">Llimpiar llista</string>
   <string name="menu_clear_recents">Llimpiar reciente</string>
   <string name="menu_clear_queue">Llimpiar cola</string>
-  <string name="menu_save_queue">Guardar cola</string>
   <string name="menu_equalizer">Ecualizador</string>
   <string name="add_to_playlist">Amestar a la llista reproducción</string>
   <string name="add_to_queue">Amestar a la cola</string>

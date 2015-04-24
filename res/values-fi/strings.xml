@@ -44,7 +44,7 @@
   <string name="menu_clear_list">Tyhjennä lista</string>
   <string name="menu_clear_recents">Tyhjennä äskettäin kuunnellut</string>
   <string name="menu_clear_queue">Tyhjennä jono</string>
-  <string name="menu_save_queue">Tallenna jono</string>
+  <string name="menu_save_queue">Tallenna jono soittolistalle</string>
   <string name="menu_equalizer">Taajuuskorjain</string>
   <string name="add_to_playlist">Lisää soittolistalle</string>
   <string name="add_to_queue">Lisää jonoon</string>

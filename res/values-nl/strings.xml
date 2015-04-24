@@ -44,7 +44,7 @@
   <string name="menu_clear_list">Lijst wissen</string>
   <string name="menu_clear_recents">Recente items wissen</string>
   <string name="menu_clear_queue">Wachtrij wissen</string>
-  <string name="menu_save_queue">Wachtrij opslaan</string>
+  <string name="menu_save_queue">Wachtrij opslaan als afspeellijst</string>
   <string name="menu_equalizer">Equalizer</string>
   <string name="add_to_playlist">Toevoegen aan afspeellijst</string>
   <string name="add_to_queue">Toevoegen aan wachtrij</string>

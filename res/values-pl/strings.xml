@@ -44,7 +44,7 @@
   <string name="menu_clear_list">Wyczyść listę</string>
   <string name="menu_clear_recents">Wyczyść ostatnio słuchane</string>
   <string name="menu_clear_queue">Wyczyść kolejkę</string>
-  <string name="menu_save_queue">Zapisz kolejkę</string>
+  <string name="menu_save_queue">Zapisz kolejkę odtwarzania jako listę odtwarzania</string>
   <string name="menu_equalizer">Equalizer</string>
   <string name="add_to_playlist">Dodaj do playlisty</string>
   <string name="add_to_queue">Dodaj do kolejki</string>
