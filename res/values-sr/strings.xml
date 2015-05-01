@@ -44,6 +44,7 @@
   <string name="menu_clear_list">Избриши листу</string>
   <string name="menu_clear_recents">Избриши недавне</string>
   <string name="menu_clear_queue">Избриши редослед</string>
+  <string name="menu_save_queue">Сачувај редослед као плејлисту</string>
   <string name="menu_equalizer">Еквилајзер</string>
   <string name="add_to_playlist">Додај на плејлисту</string>
   <string name="add_to_queue">Додај у редослед</string>
