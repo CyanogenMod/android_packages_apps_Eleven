@@ -18,4 +18,5 @@
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
   <string name="google_search">Google bilaketa</string>
+  <string name="header_30_to_60_seconds">30 - 60 segundo</string>
 </resources>

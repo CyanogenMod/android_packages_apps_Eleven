@@ -44,6 +44,7 @@
   <string name="menu_clear_list">Відчистити список</string>
   <string name="menu_clear_recents">Відчистити нещодавні</string>
   <string name="menu_clear_queue">Відчистити чергу</string>
+  <string name="menu_save_queue">Зберегти чергу до списку відтворення</string>
   <string name="menu_equalizer">Еквалайзер</string>
   <string name="add_to_playlist">Додати до списку відтворення</string>
   <string name="add_to_queue">Додати до черги</string>
