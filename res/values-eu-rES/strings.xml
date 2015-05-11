@@ -17,6 +17,19 @@
      limitations under the License.
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string name="page_artists">Artistak</string>
+  <string name="remove_from_recent">Kendu berrikietatik</string>
+  <string name="remove_from_queue">Kendu Ilaratik</string>
+  <string name="sort_order_entry_za">Z-A</string>
+  <string name="delete_dialog_title">Ezabatu <xliff:g id="item" example="album">%s</xliff:g>?</string>
+  <string name="delete_warning">Honek katxean gordetako irudi guztiak behin betiko ezabatuko ditu</string>
   <string name="google_search">Google bilaketa</string>
+  <string name="context_menu_delete">Ezabatu</string>
+  <string name="context_menu_remove_from_recent">Kendu berrikietatik</string>
+  <string name="context_menu_remove_from_playlist">Kendu erreprodukzio-zerrendatik</string>
+  <string name="settings_delete_cache_title">Ezabatu katxea</string>
+  <string name="settings_delete_cache_summary">Ezabatu katxean gordetako irudi guztiak</string>
+  <string name="settings_download_only_on_wifi_title">Deskargatu Wi-Fi bidez soilik</string>
+  <string name="settings_download_only_on_wifi_summary">Ez deskargatu datu mugikorren bidez operadorearen zordunketa murrizteko</string>
   <string name="header_30_to_60_seconds">30 - 60 segundo</string>
 </resources>
