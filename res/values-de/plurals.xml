@@ -33,6 +33,18 @@
     <item quantity="one"><xliff:g id="count">%d</xliff:g> Genre</item>
     <item quantity="other"><xliff:g id="count">%d</xliff:g> Genres</item>
   </plurals>
+  <plurals name="Nhours">
+    <item quantity="one"><xliff:g id="hours">%d</xliff:g> h</item>
+    <item quantity="other"><xliff:g id="hours">%d</xliff:g> h</item>
+  </plurals>
+  <plurals name="Nminutes">
+    <item quantity="one"><xliff:g id="minutes">%d</xliff:g> m</item>
+    <item quantity="other"><xliff:g id="minutes">%d</xliff:g> m</item>
+  </plurals>
+  <plurals name="NNNtrackstoplaylist">
+    <item quantity="one"><xliff:g id="number" example="1">%d</xliff:g> Titel wurde zur Wiedergabeliste hinzugefügt.</item>
+    <item quantity="other"><xliff:g id="number" example="27">%d</xliff:g> Titel wurden zur Wiedergabeliste hinzugefügt.</item>
+  </plurals>
   <plurals name="NNNtracksfromplaylist">
     <item quantity="one"><xliff:g id="number" example="1">%d</xliff:g> Titel wurde aus der Wiedergabeliste entfernt.</item>
     <item quantity="other"><xliff:g id="number" example="27">%d</xliff:g> Titel wurden aus der Wiedergabeliste entfernt.</item>

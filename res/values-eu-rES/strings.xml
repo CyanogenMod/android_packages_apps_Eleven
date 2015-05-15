@@ -17,6 +17,58 @@
      limitations under the License.
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string name="app_name">Musika</string>
+  <string name="page_recent">Oraintsukoa</string>
+  <string name="page_artists">Artistak</string>
+  <string name="page_songs">Abestiak</string>
+  <string name="page_genres">Generoak</string>
+  <string name="page_play_queue">Erreproduzitu ilara</string>
+  <string name="header_top_songs">Gehien entzundako abestiak</string>
+  <string name="header_all_songs">Abesti guztiak</string>
+  <string name="menu_shuffle_last_added">Nahastu berriki gehitutakoak</string>
+  <string name="menu_play_all">Erreproduzitu guztiak</string>
+  <string name="menu_equalizer">Ekualizadorea</string>
+  <string name="add_to_playlist">Gehitu erreprodukzio zerrendara</string>
+  <string name="add_to_queue">Gehitu ilarara</string>
+  <string name="remove_from_recent">Kendu berrikietatik</string>
+  <string name="remove_from_queue">Kendu Ilaratik</string>
+  <string name="sort_order_entry_az">A-Z</string>
+  <string name="sort_order_entry_za">Z-A</string>
+  <string name="sort_order_entry_year">Urtea</string>
+  <string name="sort_order_entry_duration">Iraupena</string>
+  <string name="sort_order_entry_date_added">Gehitze data</string>
+  <string name="sort_order_entry_number_of_songs">Abesti kopurua</string>
+  <string name="sort_order_entry_filename">Fitxategi izena</string>
+  <string name="playlist_last_added">Berriki gehituak</string>
+  <string name="save">Gorde</string>
+  <string name="cancel">Utzi</string>
+  <string name="overwrite">Gainidatzi</string>
+  <string name="clear">Garbitu</string>
+  <string name="new_playlist_name_template"><xliff:g id="number">%d</xliff:g> zerrenda</string>
+  <string name="create_playlist_prompt">Zerrendaren izena</string>
+  <string name="delete_dialog_title">Ezabatu <xliff:g id="item" example="album">%s</xliff:g>?</string>
+  <string name="clear_last_added">Garbitu gehitutako azkenak?</string>
+  <string name="delete_warning">Honek katxean gordetako irudi guztiak behin betiko ezabatuko ditu</string>
   <string name="google_search">Google bilaketa</string>
+  <string name="context_menu_play_selection">Erreproduzitu</string>
+  <string name="context_menu_delete">Ezabatu</string>
+  <string name="context_menu_remove_from_recent">Kendu berrikietatik</string>
+  <string name="context_menu_remove_from_playlist">Kendu erreprodukzio-zerrendatik</string>
+  <string name="settings_storage_category">Biltegiratzea</string>
+  <string name="settings_delete_cache_title">Ezabatu katxea</string>
+  <string name="settings_delete_cache_summary">Ezabatu katxean gordetako irudi guztiak</string>
+  <string name="settings_download_only_on_wifi_title">Deskargatu Wi-Fi bidez soilik</string>
+  <string name="settings_download_only_on_wifi_summary">Ez deskargatu datu mugikorren bidez operadorearen zordunketa murrizteko</string>
+  <string name="settings_show_lyrics_summary">str fitxategia duten abestientzat</string>
+  <string name="app_widget_small">Musika: 4 \u00d7 1</string>
+  <string name="app_widget_large">Musika: 4 \u00d7 2</string>
+  <string name="app_widget_large_alt">Musika: 4 \u00d7 2 (txandakatu)</string>
+  <string name="empty_playlist_secondary">Abestiak erreprodukzio-zerrendara gehitzeko, sakatu abesti, album edo artista baten aukeren menuan eta hautatu \"Gehitu erreprodukzio-zerrendara\".</string>
+  <string name="empty_top_tracks_secondary">Sarri entzuten dituzun abestiak zerrenda honetara gehituko dira.</string>
+  <string name="empty_last_added_main">Ez da abestirik gehitu berriki</string>
+  <string name="empty_last_added">Azken hilabetean gehituriko abestiak hemen agertuko dira.</string>
+  <string name="empty_queue_secondary">Abestiak erreprodukzio-zerrendara gehitzeko, sakatu abesti, album edo artista bat eta hautatu \"Gehitu ilarara\".</string>
   <string name="header_30_to_60_seconds">30 - 60 segundo</string>
+  <string name="footer_search_playlists">Erakutsi erreprodukzio-zerrenda guztiak</string>
+  <string name="search_title_playlists">\"%s\" erreprodukzio-zerrenda guztiak</string>
 </resources>
