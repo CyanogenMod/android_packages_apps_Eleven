@@ -99,7 +99,7 @@
   <string name="set_as_ringtone">\'<xliff:g id="name" example="Alarm Bell">%s</xliff:g>\' خستنه‌ سه‌ر زه‌نگ</string>
   <string name="playlist_renamed">ناوی لیستی لێدان گۆڕا</string>
   <string name="settings_ui_category">ڕووکار</string>
-  <string name="settings_storage_category">بیرگەی</string>
+  <string name="settings_storage_category">یادگەی</string>
   <string name="settings_data_category">داتا</string>
   <string name="settings_delete_cache_title">سڕینه‌وه‌ی حه‌شارگه‌</string>
   <string name="settings_delete_cache_summary">سڕینه‌وه‌ی هه‌موو وێنه‌ حه‌شارگه‌کان</string>
@@ -107,7 +107,7 @@
   <string name="settings_download_only_on_wifi_summary">بۆ باڵانس نه‌بردنی سیمکارته‌که‌ت ، دابه‌زاندن مه‌که‌ له‌ڕێگه‌ی سیمکارته‌وه‌</string>
   <string name="settings_download_missing_artwork_title">دابه‌زاندنی ئه‌لبومه‌ هونه‌رییه‌ ونبوه‌کان</string>
   <string name="settings_download_artist_images_title">دابه‌زاندنی وێنه‌ هونه‌رمه‌نده‌ ونبوه‌کان</string>
-  <string name="app_widget_large_alt">Apollo: 4×2 (alternate)</string>
+  <string name="app_widget_large_alt">Apollo: ٤×٢ (alternate)</string>
   <string name="app_widget_recent">ئه‌پۆڵۆ:تازه‌ترین که‌ گوێلێگیراون</string>
   <string name="no_effects_for_you">یه‌کسانکه‌ری ده‌نگ ناکرێته‌وه‌.</string>
   <string name="empty_music">بۆ له‌به‌رگرتنه‌وه‌ی گۆرانی له‌ کۆمپیوته‌ر بۆ ئامێره‌که‌ت ، کێبڵی USB به‌کاربهێنه‌.</string>
