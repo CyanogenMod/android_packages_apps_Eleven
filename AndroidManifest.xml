@@ -153,6 +153,10 @@
         <activity
             android:name="com.cyanogenmod.eleven.ui.activities.SettingsActivity"
             android:label="@string/menu_settings"/>
+        <!-- Audio Preview -->
+        <activity
+            android:name=".ui.activities.preview.AudioPreviewActivity"
+            android:theme="@style/Theme.Transparent"/>
         <!-- 4x1 App Widget -->
         <receiver
             android:name="com.cyanogenmod.eleven.appwidgets.AppWidgetSmall"

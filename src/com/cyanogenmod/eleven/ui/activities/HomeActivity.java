@@ -36,6 +36,7 @@ import android.view.Window;
 import com.cyanogenmod.eleven.Config;
 import com.cyanogenmod.eleven.R;
 import com.cyanogenmod.eleven.cache.ImageFetcher;
+import com.cyanogenmod.eleven.ui.activities.preview.AudioPreviewActivity;
 import com.cyanogenmod.eleven.ui.fragments.AlbumDetailFragment;
 import com.cyanogenmod.eleven.ui.fragments.ArtistDetailFragment;
 import com.cyanogenmod.eleven.ui.fragments.IChildFragment;
@@ -385,7 +386,10 @@ public class HomeActivity extends SlidingPanelActivity implements
         boolean handled = false;
 
         if (uri != null && uri.toString().length() > 0) {
-            MusicUtils.playFile(this, uri);
+            Intent previewIntent = new Intent(this, AudioPreviewActivity.class);
+            previewIntent.setData(uri);
+            startActivity(previewIntent);
+            finish();
             handled = true;
         } else if (MediaStore.Audio.Playlists.CONTENT_TYPE.equals(mimeType)) {
             long id = parseIdFromIntent(intent, "playlistId", "playlist", -1);
