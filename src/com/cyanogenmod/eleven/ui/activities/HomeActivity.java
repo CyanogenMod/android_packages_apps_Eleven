@@ -380,14 +380,10 @@ public class HomeActivity extends SlidingPanelActivity implements
             return false;
         }
 
-        Uri uri = intent.getData();
         String mimeType = intent.getType();
         boolean handled = false;
 
-        if (uri != null && uri.toString().length() > 0) {
-            MusicUtils.playFile(this, uri);
-            handled = true;
-        } else if (MediaStore.Audio.Playlists.CONTENT_TYPE.equals(mimeType)) {
+        if (MediaStore.Audio.Playlists.CONTENT_TYPE.equals(mimeType)) {
             long id = parseIdFromIntent(intent, "playlistId", "playlist", -1);
             if (id >= 0) {
                 MusicUtils.playPlaylist(this, id, false);
