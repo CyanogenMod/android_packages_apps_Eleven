@@ -206,4 +206,13 @@
     <dimen name="divider_height">1px</dimen>
 
     <item name="letter_to_tile_ratio" type="dimen">53%</item>
+
+    <!-- Audio preview -->
+    <dimen name="preview_layout_height">125dp</dimen>
+    <dimen name="preview_layout_seekbar_height">30dp</dimen>
+    <dimen name="preview_layout_padding">20dp</dimen>
+    <dimen name="preview_layout_margin">20dp</dimen>
+    <dimen name="preview_title_textSize">12sp</dimen>
+    <dimen name="preview_artist_textSize">10sp</dimen>
+
 </resources>
