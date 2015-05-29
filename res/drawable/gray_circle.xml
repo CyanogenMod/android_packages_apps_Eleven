@@ -14,14 +14,6 @@
      See the License for the specific language governing permissions and
      limitations under the License.
 -->
-<inset xmlns:android="http://schemas.android.com/apk/res/android"
-    android:insetLeft="1dp"
-    android:insetRight="1dp"
-    android:insetTop="1dp"
-    android:insetBottom="1dp">
-
-    <shape android:shape="oval">
-        <solid android:color="#90a4ae" />
-    </shape>
-
-</inset>
+<shape xmlns:android="http://schemas.android.com/apk/res/android" android:shape="oval">
+    <solid android:color="#90a4ae" />
+</shape>
