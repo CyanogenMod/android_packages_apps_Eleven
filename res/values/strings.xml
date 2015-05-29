@@ -99,6 +99,7 @@
     <!-- Context menu items -->
     <string name="context_menu_play_selection">Play</string>
     <string name="context_menu_play_next">Play next</string>
+    <string name="context_menu_play_album">Play album</string>
     <string name="context_menu_more_by_artist">More by artist</string>
     <string name="context_menu_rename_playlist">Rename</string>
     <string name="context_menu_delete">Delete</string>
