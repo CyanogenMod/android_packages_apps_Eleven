@@ -83,6 +83,7 @@
   <string name="old_photo">Erabili aurreko irudia</string>
   <string name="context_menu_play_selection">Erreproduzitu</string>
   <string name="context_menu_play_next">Erreproduzitu hurrengoa</string>
+  <string name="context_menu_play_album">Erreproduzitu albuma</string>
   <string name="context_menu_more_by_artist">Artistaren abestiak</string>
   <string name="context_menu_rename_playlist">Berrizendatu</string>
   <string name="context_menu_delete">Ezabatu</string>

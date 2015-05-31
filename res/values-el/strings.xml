@@ -83,6 +83,7 @@
   <string name="old_photo">Χρήση παλιάς φωτογραφίας</string>
   <string name="context_menu_play_selection">Αναπαραγωγή</string>
   <string name="context_menu_play_next">Αναπαραγωγή επόμενου</string>
+  <string name="context_menu_play_album">Αναπαραγωγή άλμπουμ</string>
   <string name="context_menu_more_by_artist">Περισσότερα από τον καλλιτέχνη</string>
   <string name="context_menu_rename_playlist">Μετονομασία</string>
   <string name="context_menu_delete">Διαγραφή</string>

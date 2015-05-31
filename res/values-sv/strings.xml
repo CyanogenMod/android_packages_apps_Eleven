@@ -23,6 +23,7 @@
   <string name="page_songs">Låtar</string>
   <string name="page_playlists">Spellistor</string>
   <string name="page_genres">Genrer</string>
+  <string name="page_now_playing">Nu spelas</string>
   <string name="header_albums">Album</string>
   <string name="header_all_songs">Alla låtar</string>
   <string name="menu_settings">Inställningar</string>
@@ -53,6 +54,8 @@
   <string name="accessibility_prev">Föregående</string>
   <string name="accessibility_shuffle">Blanda</string>
   <string name="settings_delete_cache_title">Ta bort cache</string>
+  <string name="header_less_than_30s">Mindre än 30 sekunder</string>
+  <string name="header_30_to_60_seconds">30 - 60 sekunder</string>
   <string name="footer_search_artists">Visa alla artister</string>
   <string name="footer_search_albums">Visa alla album</string>
   <string name="footer_search_songs">Visa alla låtar</string>

@@ -83,6 +83,7 @@
   <string name="old_photo">Usar imagen previa</string>
   <string name="context_menu_play_selection">Reproducir</string>
   <string name="context_menu_play_next">Siguiente</string>
+  <string name="context_menu_play_album">Reproducir álbum</string>
   <string name="context_menu_more_by_artist">Más del artista</string>
   <string name="context_menu_rename_playlist">Renombrar</string>
   <string name="context_menu_delete">Eliminar</string>
