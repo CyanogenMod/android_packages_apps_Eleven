@@ -83,6 +83,7 @@
   <string name="old_photo">Použít starý obrázek</string>
   <string name="context_menu_play_selection">Přehrát</string>
   <string name="context_menu_play_next">Přehrát další</string>
+  <string name="context_menu_play_album">Přehrát album</string>
   <string name="context_menu_more_by_artist">Více od umělce</string>
   <string name="context_menu_rename_playlist">Přejmenovat</string>
   <string name="context_menu_delete">Odstranit</string>

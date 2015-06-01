@@ -44,6 +44,7 @@
   <string name="menu_clear_list">ล้างรายการ</string>
   <string name="menu_clear_recents">ล้างรายการล่าสุด</string>
   <string name="menu_clear_queue">ล้างคิว</string>
+  <string name="menu_save_queue">บันทึกคิวไปยังรายการที่จะเล่น</string>
   <string name="menu_equalizer">Equalizer</string>
   <string name="add_to_playlist">เพิ่มไปยังรายการเพลง</string>
   <string name="add_to_queue">เพิ่มไปยังคิว</string>
@@ -117,6 +118,10 @@
   <string name="settings_show_music_visualization_title">แสดงภาพเคลื่อนไหวประกอบเพลง</string>
   <string name="settings_show_lyrics_title">แสดงเนื้อเพลง</string>
   <string name="settings_show_lyrics_summary">สำหรับเพลงที่มีไฟล์ srt</string>
+  <string name="settings_shake_to_play">เขย่าเพื่อเล่น</string>
+  <string name="settings_shake_to_play_summary">เขย่าอุปกรณ์ของคุณเพื่อเล่นเพลงถัดไป</string>
+  <string name="settings_lockscreen_album_art">ปกอัลบั้มบนหน้าล็อคจอ</string>
+  <string name="settings_lockscreen_album_art_summary">แทนที่ภาพพื้นหลังของหน้าล็อคจอด้วยปกอัลบั้มของเพลงที่กำลังเล่น</string>
   <string name="app_widget_small">เพลง: 4 \u00d7 1</string>
   <string name="app_widget_large">เพลง: 4 \u00d7 1</string>
   <string name="app_widget_large_alt">เพลง: 4 \u00d7 2 (สำรอง)</string>

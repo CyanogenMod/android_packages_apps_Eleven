@@ -83,6 +83,7 @@
   <string name="old_photo">Brug gammelt foto</string>
   <string name="context_menu_play_selection">Afspil</string>
   <string name="context_menu_play_next">Afspil næste</string>
+  <string name="context_menu_play_album">Afspil album</string>
   <string name="context_menu_more_by_artist">Mere fra kunstner</string>
   <string name="context_menu_rename_playlist">Omdøb</string>
   <string name="context_menu_delete">Slet</string>

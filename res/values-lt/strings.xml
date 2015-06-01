@@ -83,6 +83,7 @@
   <string name="old_photo">Naudoti seną nuotrauką</string>
   <string name="context_menu_play_selection">Paleisti</string>
   <string name="context_menu_play_next">Paleisti kitą</string>
+  <string name="context_menu_play_album">Paleisti albumą</string>
   <string name="context_menu_more_by_artist">Daugiau pagal atlikėją</string>
   <string name="context_menu_rename_playlist">Pervardyti</string>
   <string name="context_menu_delete">Ištrinti</string>

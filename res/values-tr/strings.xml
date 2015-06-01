@@ -83,6 +83,7 @@
   <string name="old_photo">Eski fotoğrafı kullan</string>
   <string name="context_menu_play_selection">Çal</string>
   <string name="context_menu_play_next">Sonrakini çal</string>
+  <string name="context_menu_play_album">Albümü oynat</string>
   <string name="context_menu_more_by_artist">Sanatçıdan başka şarkılar</string>
   <string name="context_menu_rename_playlist">Yeniden adlandır</string>
   <string name="context_menu_delete">Sil</string>

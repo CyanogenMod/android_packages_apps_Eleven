@@ -83,6 +83,7 @@
   <string name="old_photo">Käytä vanhaa valokuvaa</string>
   <string name="context_menu_play_selection">Toista</string>
   <string name="context_menu_play_next">Toista seuraava</string>
+  <string name="context_menu_play_album">Toista albumi</string>
   <string name="context_menu_more_by_artist">Lisää esittäjältä</string>
   <string name="context_menu_rename_playlist">Nimeä uudelleen</string>
   <string name="context_menu_delete">Poista</string>

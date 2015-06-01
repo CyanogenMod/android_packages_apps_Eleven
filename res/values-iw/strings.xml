@@ -83,6 +83,7 @@
   <string name="old_photo">השתמש בתמונה ישנה</string>
   <string name="context_menu_play_selection">נגן</string>
   <string name="context_menu_play_next">נגן את הבא</string>
+  <string name="context_menu_play_album">נגן אלבום</string>
   <string name="context_menu_more_by_artist">עוד מהאמן</string>
   <string name="context_menu_rename_playlist">שנה שם</string>
   <string name="context_menu_delete">מחק</string>

@@ -83,6 +83,7 @@
   <string name="old_photo">Utiliser l\'ancienne photo</string>
   <string name="context_menu_play_selection">Lire</string>
   <string name="context_menu_play_next">Lire le suivant</string>
+  <string name="context_menu_play_album">Lire l\'album</string>
   <string name="context_menu_more_by_artist">Plus du même artiste</string>
   <string name="context_menu_rename_playlist">Renommer</string>
   <string name="context_menu_delete">Supprimer</string>
