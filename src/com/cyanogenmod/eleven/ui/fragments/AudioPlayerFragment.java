@@ -15,6 +15,7 @@
 */
 package com.cyanogenmod.eleven.ui.fragments;
 
+import android.app.Activity;
 import android.content.BroadcastReceiver;
 import android.content.ComponentName;
 import android.content.Context;
@@ -28,6 +29,7 @@ import android.os.Handler;
 import android.os.IBinder;
 import android.os.Message;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewPager;
 import android.text.Html;
 import android.text.Spanned;
@@ -153,6 +155,9 @@ public class AudioPlayerFragment extends Fragment implements ServiceConnection,
     // Lyrics text view
     private TextView mLyricsText;
 
+    // Activity reference
+    private FragmentActivity mActivity;
+
     private long mSelectedId = -1;
 
     private boolean mIsPaused = false;
@@ -164,13 +169,13 @@ public class AudioPlayerFragment extends Fragment implements ServiceConnection,
         super.onActivityCreated(savedInstanceState);
 
         // Control the media volume
-        getActivity().setVolumeControlStream(AudioManager.STREAM_MUSIC);
+        mActivity.setVolumeControlStream(AudioManager.STREAM_MUSIC);
 
         // Bind Apollo's service
-        mToken = MusicUtils.bindToService(getActivity(), this);
+        mToken = MusicUtils.bindToService(mActivity, this);
 
         // Initialize the image fetcher/cache
-        mImageFetcher = ApolloUtils.getImageFetcher(getActivity());
+        mImageFetcher = ApolloUtils.getImageFetcher(mActivity);
 
         // Initialize the handler used to update the current time
         mTimeHandler = new TimeHandler(this);
@@ -179,7 +184,7 @@ public class AudioPlayerFragment extends Fragment implements ServiceConnection,
         mPlaybackStatus = new PlaybackStatus(this);
 
         // add a listener for the sliding
-        ((SlidingPanelActivity)getActivity()).addSlidingPanelListener(this);
+        ((SlidingPanelActivity)mActivity).addSlidingPanelListener(this);
 
         // check equalizer view
         checkEqualizerView();
@@ -200,7 +205,7 @@ public class AudioPlayerFragment extends Fragment implements ServiceConnection,
         initPlaybackControls();
 
         mEqualizerView = (EqualizerView) mRootView.findViewById(R.id.equalizerView);
-        mEqualizerView.initialize(getActivity());
+        mEqualizerView.initialize(mActivity);
         mEqualizerGradient = mRootView.findViewById(R.id.equalizerGradient);
 
         mLyricsText = (TextView) mRootView.findViewById(R.id.audio_player_lyrics);
@@ -226,6 +231,12 @@ public class AudioPlayerFragment extends Fragment implements ServiceConnection,
     }
 
     @Override
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+        mActivity = (FragmentActivity) activity;
+    }
+
+    @Override
     public void onStart() {
         super.onStart();
 
@@ -244,7 +255,7 @@ public class AudioPlayerFragment extends Fragment implements ServiceConnection,
         // Listen for lyrics text for the audio track
         filter.addAction(MusicPlaybackService.NEW_LYRICS);
         // Register the intent filters
-        getActivity().registerReceiver(mPlaybackStatus, filter);
+        mActivity.registerReceiver(mPlaybackStatus, filter);
         // Refresh the current time
         final long next = refreshCurrentTime();
         queueNextRefresh(next);
@@ -271,6 +282,7 @@ public class AudioPlayerFragment extends Fragment implements ServiceConnection,
     public void onDestroy() {
         super.onDestroy();
 
+        mActivity = null;
         mIsPaused = false;
         mTimeHandler.removeMessages(REFRESH_TIME);
         // Unbind from the service
@@ -279,11 +291,11 @@ public class AudioPlayerFragment extends Fragment implements ServiceConnection,
             mToken = null;
         }
 
-        ((SlidingPanelActivity)getActivity()).removeSlidingPanelListener(this);
+        ((SlidingPanelActivity)mActivity).removeSlidingPanelListener(this);
 
         // Unregister the receiver
         try {
-            getActivity().unregisterReceiver(mPlaybackStatus);
+            mActivity.unregisterReceiver(mPlaybackStatus);
         } catch (final Throwable e) {
             //$FALL-THROUGH$
         }
@@ -318,7 +330,7 @@ public class AudioPlayerFragment extends Fragment implements ServiceConnection,
         v.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                NavUtils.openSearch(getActivity(), "");
+                NavUtils.openSearch(mActivity, "");
             }
         });
 
@@ -330,7 +342,7 @@ public class AudioPlayerFragment extends Fragment implements ServiceConnection,
         mAddToPlaylistButton.setOnCreateContextMenuListener(new View.OnCreateContextMenuListener() {
             @Override
             public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
-                MusicUtils.makePlaylistMenu(getActivity(), GROUP_ID, menu);
+                MusicUtils.makePlaylistMenu(mActivity, GROUP_ID, menu);
                 menu.setHeaderTitle(R.string.add_to_playlist);
             }
         });
@@ -366,9 +378,9 @@ public class AudioPlayerFragment extends Fragment implements ServiceConnection,
         mPreviousButton = (RepeatingImageButton)mRootView.findViewById(R.id.action_button_previous);
         mNextButton = (RepeatingImageButton)mRootView.findViewById(R.id.action_button_next);
         mBrowseButton = (BrowseButton)mRootView.findViewById(R.id.action_button_browse);
-        mBrowseButton.setActivity(getActivity());
+        mBrowseButton.setActivity(mActivity);
         mQueueButton = (QueueButton)mRootView.findViewById(R.id.action_button_queue);
-        mQueueButton.setActivity(getActivity());
+        mQueueButton.setActivity(mActivity);
 
         // Album art view pager
         mAlbumArtViewPager = (ViewPager)mRootView.findViewById(R.id.audio_player_album_art_viewpager);
@@ -388,9 +400,9 @@ public class AudioPlayerFragment extends Fragment implements ServiceConnection,
 
                 // check if we are going to next or previous track
                 if (position - currentPosition == 1) {
-                    MusicUtils.asyncNext(getActivity());
+                    MusicUtils.asyncNext(mActivity);
                 } else if (position - currentPosition == -1) {
-                    MusicUtils.previous(getActivity(), true);
+                    MusicUtils.previous(mActivity, true);
                 } else if (currentPosition != position) {
                     Log.w(TAG, "Unexpected page position of " + position
                             + " when current is: " + currentPosition);
@@ -430,7 +442,7 @@ public class AudioPlayerFragment extends Fragment implements ServiceConnection,
         mArtistName.setText(MusicUtils.getArtistName());
 
         // Set the total time
-        String totalTime = MusicUtils.makeShortTimeString(getActivity(), MusicUtils.duration() / 1000);
+        String totalTime = MusicUtils.makeShortTimeString(mActivity, MusicUtils.duration() / 1000);
         if (!mTotalTime.getText().equals(totalTime)) {
             mTotalTime.setText(totalTime);
         }
@@ -488,7 +500,7 @@ public class AudioPlayerFragment extends Fragment implements ServiceConnection,
         } else {
             mAlbumArtViewPager.setVisibility(View.VISIBLE);
             mQueueEmpty.hideAll();
-            if (PreferenceUtils.getInstance(getActivity()).getShowVisualizer()) {
+            if (PreferenceUtils.getInstance(mActivity).getShowVisualizer()) {
                 mEqualizerGradient.setVisibility(View.VISIBLE);
             } else {
                 mEqualizerGradient.setVisibility(View.GONE);
@@ -549,7 +561,7 @@ public class AudioPlayerFragment extends Fragment implements ServiceConnection,
     }
 
     private void refreshCurrentTimeText(final long pos) {
-        mCurrentTime.setText(MusicUtils.makeShortTimeString(getActivity(), pos / 1000));
+        mCurrentTime.setText(MusicUtils.makeShortTimeString(mActivity, pos / 1000));
     }
 
     /* Used to update the current time string */
@@ -623,7 +635,7 @@ public class AudioPlayerFragment extends Fragment implements ServiceConnection,
     public void showPopupMenu() {
         // create the popup menu
         if (mPopupMenu == null) {
-            mPopupMenu = new PopupMenu(getActivity(), mMenuButton);
+            mPopupMenu = new PopupMenu(mActivity, mMenuButton);
             mPopupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
                 @Override
                 public boolean onMenuItemClick(MenuItem item) {
@@ -642,7 +654,7 @@ public class AudioPlayerFragment extends Fragment implements ServiceConnection,
             // ringtone, and equalizer
             inflater.inflate(R.menu.audio_player, menu);
 
-            if (!NavUtils.hasEffectsPanel(getActivity())) {
+            if (!NavUtils.hasEffectsPanel(mActivity)) {
                 menu.removeItem(R.id.menu_audio_player_equalizer);
             }
 
@@ -660,32 +672,32 @@ public class AudioPlayerFragment extends Fragment implements ServiceConnection,
         switch (item.getItemId()) {
             case R.id.menu_shuffle_all:
                 // Shuffle all the songs
-                MusicUtils.shuffleAll(getActivity());
+                MusicUtils.shuffleAll(mActivity);
                 return true;
             case R.id.menu_audio_player_ringtone:
                 // Set the current track as a ringtone
-                MusicUtils.setRingtone(getActivity(), MusicUtils.getCurrentAudioId());
+                MusicUtils.setRingtone(mActivity, MusicUtils.getCurrentAudioId());
                 return true;
             case R.id.menu_audio_player_equalizer:
                 // Sound effects
-                NavUtils.openEffectsPanel(getActivity(), HomeActivity.EQUALIZER);
+                NavUtils.openEffectsPanel(mActivity, HomeActivity.EQUALIZER);
                 return true;
             case R.id.menu_settings:
                 // Settings
-                NavUtils.openSettings(getActivity());
+                NavUtils.openSettings(mActivity);
                 return true;
             case R.id.menu_audio_player_more_by_artist:
-                NavUtils.openArtistProfile(getActivity(), MusicUtils.getArtistName());
+                NavUtils.openArtistProfile(mActivity, MusicUtils.getArtistName());
                 return true;
             case R.id.menu_audio_player_delete:
                 // Delete current song
                 DeleteDialog.newInstance(MusicUtils.getTrackName(), new long[]{
                         MusicUtils.getCurrentAudioId()
-                }, null).show(getActivity().getSupportFragmentManager(), "DeleteDialog");
+                }, null).show(mActivity.getSupportFragmentManager(), "DeleteDialog");
                 return true;
             case R.id.menu_save_queue:
                 NowPlayingCursor queue = (NowPlayingCursor) QueueLoader
-                        .makeQueueCursor(getActivity());
+                        .makeQueueCursor(mActivity);
                 CreateNewPlaylist.getInstance(MusicUtils.getSongListForCursor(queue)).show(
                         getFragmentManager(), "CreatePlaylist");
                 queue.close();
@@ -717,7 +729,7 @@ public class AudioPlayerFragment extends Fragment implements ServiceConnection,
                     return true;
                 case FragmentMenuItems.PLAYLIST_SELECTED:
                     final long mPlaylistId = item.getIntent().getLongExtra("playlist", 0);
-                    MusicUtils.addToPlaylist(getActivity(), new long[]{
+                    MusicUtils.addToPlaylist(mActivity, new long[]{
                             mSelectedId
                     }, mPlaylistId);
                     return true;
@@ -731,7 +743,7 @@ public class AudioPlayerFragment extends Fragment implements ServiceConnection,
 
     public void onLyrics(String lyrics) {
         if (TextUtils.isEmpty(lyrics)
-                || !PreferenceUtils.getInstance(getActivity()).getShowLyrics()) {
+                || !PreferenceUtils.getInstance(mActivity).getShowLyrics()) {
             mLyricsText.animate().alpha(0).setDuration(200);
         } else {
             lyrics = lyrics.replace("\n", "<br/>");
@@ -753,7 +765,7 @@ public class AudioPlayerFragment extends Fragment implements ServiceConnection,
     }
 
     private void checkEqualizerView() {
-        checkEqualizerView(((HomeActivity)getActivity()).getCurrentPanel());
+        checkEqualizerView(((HomeActivity)mActivity).getCurrentPanel());
     }
 
     private void checkEqualizerView(SlidingPanelActivity.Panel visiblePanel) {
