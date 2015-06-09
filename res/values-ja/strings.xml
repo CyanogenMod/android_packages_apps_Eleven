@@ -83,6 +83,7 @@
   <string name="old_photo">以前の写真を使用</string>
   <string name="context_menu_play_selection">再生</string>
   <string name="context_menu_play_next">次を再生</string>
+  <string name="context_menu_play_album">アルバムを再生</string>
   <string name="context_menu_more_by_artist">アーティストの他の曲</string>
   <string name="context_menu_rename_playlist">名前の変更</string>
   <string name="context_menu_delete">削除</string>

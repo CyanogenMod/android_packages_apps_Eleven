@@ -45,7 +45,7 @@
   <string name="menu_clear_recents">Išvalyti naujausias</string>
   <string name="menu_clear_queue">Išvalyti eilę</string>
   <string name="menu_save_queue">Išsaugoti eilę į grojaraštį</string>
-  <string name="menu_equalizer">Ekvalaizeris</string>
+  <string name="menu_equalizer">Vienodintuvas</string>
   <string name="add_to_playlist">Pridėti į grojaraštį</string>
   <string name="add_to_queue">Pridėti į eilę</string>
   <string name="remove_from_recent">Pašalinti iš naujausių</string>
@@ -83,6 +83,7 @@
   <string name="old_photo">Naudoti seną nuotrauką</string>
   <string name="context_menu_play_selection">Paleisti</string>
   <string name="context_menu_play_next">Paleisti kitą</string>
+  <string name="context_menu_play_album">Paleisti albumą</string>
   <string name="context_menu_more_by_artist">Daugiau pagal atlikėją</string>
   <string name="context_menu_rename_playlist">Pervardyti</string>
   <string name="context_menu_delete">Ištrinti</string>
@@ -126,7 +127,7 @@
   <string name="app_widget_large">Muzika: 4 \u00d7 2</string>
   <string name="app_widget_large_alt">Muzika: 4 \u00d7 2 (pakaitinis)</string>
   <string name="app_widget_recent">Muzika: naujausiai klausyta</string>
-  <string name="no_effects_for_you">Nepavyko atidaryti ekvalaizerio.</string>
+  <string name="no_effects_for_you">Nepavyko atidaryti vienodintuvo.</string>
   <string name="empty_music">Kad kopijuotumėte muziką iš kompiuterio į savo įrenginį, naudokite USB kabelį.</string>
   <string name="empty_search">Nerasta jokių paieškos rezultatų</string>
   <string name="empty_search_check">Patikrinkite, kad turite teisingą rašybą arba bandykite kitą raktažodį.</string>

@@ -83,6 +83,7 @@
   <string name="old_photo">Régi kép használata</string>
   <string name="context_menu_play_selection">Lejátszás</string>
   <string name="context_menu_play_next">Következő lejátszása</string>
+  <string name="context_menu_play_album">Album lejátszása</string>
   <string name="context_menu_more_by_artist">Több az előadótól</string>
   <string name="context_menu_rename_playlist">Átnevezés</string>
   <string name="context_menu_delete">Törlés</string>

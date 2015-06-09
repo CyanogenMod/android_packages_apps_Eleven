@@ -48,12 +48,31 @@
   <string name="cannot_be_undone">Această acțiune nu poate fi anulată</string>
   <string name="google_search">Căutare pe Google</string>
   <string name="context_menu_play_selection">Redare</string>
+  <string name="context_menu_play_album">Redă album</string>
   <string name="context_menu_rename_playlist">Redenumire</string>
   <string name="context_menu_use_as_ringtone">Folosește ca ton de apel</string>
   <string name="accessibility_pause">Pauză</string>
+  <string name="accessibility_queue">Deschide coada</string>
+  <string name="accessibility_browse">Răsfoire muzică</string>
   <string name="set_as_ringtone">\'<xliff:g id="name" example="Alarm Bell">%s</xliff:g>\' este ton de apel</string>
+  <string name="playlist_renamed">Listă de redare redenumită</string>
+  <string name="settings_ui_category">Interfața</string>
   <string name="settings_data_category">Date</string>
+  <string name="settings_delete_cache_title">Șterge cache-ul</string>
+  <string name="settings_delete_cache_summary">Elimină toate imaginile din cache</string>
+  <string name="settings_download_only_on_wifi_title">Descărcați doar via Wi-Fi</string>
+  <string name="app_widget_small">Muzică: 4 \u00d7 1</string>
+  <string name="app_widget_large">Muzică: 4 \u00d7 2</string>
+  <string name="app_widget_large_alt">Muzică: 4 \u00d7 2 (alternativ)</string>
+  <string name="app_widget_recent">Muzică: recent ascultate</string>
+  <string name="no_effects_for_you">Egalizatorul nu a putut fi deschis.</string>
+  <string name="empty_music">Pentru a copia muzică de pe computer în dispozitivul dvs, folosiți un cablu USB.</string>
   <string name="empty_search">Nu am găsit rezultate la căutare</string>
+  <string name="empty_search_check">Vă rugăm să verificați că aveți ortografia corectă sau încercați un cuvânt cheie diferit.</string>
+  <string name="empty_favorite">Melodiile marcate de dvs ca favorite vor fi afișate aici.</string>
+  <string name="empty_recent_main">Nicio melodie recentă</string>
+  <string name="empty_recent">Melodiile redate recent vor fi afișate aici.</string>
+  <string name="empty_playlist_main">Nicio melodie în lista de redare</string>
   <string name="header_unknown_year">An necunoscut</string>
   <string name="header_less_than_30s">Mai puţin de 30 de secunde</string>
   <string name="header_30_to_60_seconds">30 - 60 de secunde</string>
@@ -70,4 +89,9 @@
   <string name="header_5_to_9_songs">5 - 9 melodii</string>
   <string name="header_10_plus_songs">10+ melodii</string>
   <string name="header_5_plus_albums">5+ albume</string>
+  <string name="header_other">"Altele"</string>
+  <string name="footer_search_albums">Arată toate albumele</string>
+  <string name="footer_search_songs">Arată toate melodiile</string>
+  <string name="footer_search_playlists">Arată toate listele de redare</string>
+  <string name="searchHint">Căutare muzică</string>
 </resources>

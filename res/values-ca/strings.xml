@@ -83,6 +83,7 @@
   <string name="old_photo">Utilitza la foto antiga</string>
   <string name="context_menu_play_selection">Reprodueix</string>
   <string name="context_menu_play_next">Reprodueix el següent</string>
+  <string name="context_menu_play_album">Reprodueix àlbum</string>
   <string name="context_menu_more_by_artist">Més de l\'artista</string>
   <string name="context_menu_rename_playlist">Reanomena</string>
   <string name="context_menu_delete">Esborra</string>
