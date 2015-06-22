@@ -83,6 +83,7 @@
   <string name="old_photo">Користи стару слику</string>
   <string name="context_menu_play_selection">Пусти</string>
   <string name="context_menu_play_next">Пусти следећу</string>
+  <string name="context_menu_play_album">Пусти албум</string>
   <string name="context_menu_more_by_artist">Више о извођачу</string>
   <string name="context_menu_rename_playlist">Преименуј</string>
   <string name="context_menu_delete">Избриши</string>

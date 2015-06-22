@@ -83,6 +83,7 @@
   <string name="old_photo">이전 사진 사용</string>
   <string name="context_menu_play_selection">재생</string>
   <string name="context_menu_play_next">다음 곡 재생</string>
+  <string name="context_menu_play_album">앨범 재생</string>
   <string name="context_menu_more_by_artist">이 아티스트의 다른 곡들</string>
   <string name="context_menu_rename_playlist">이름 바꾸기</string>
   <string name="context_menu_delete">삭제</string>

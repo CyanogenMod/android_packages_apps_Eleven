@@ -83,6 +83,7 @@
   <string name="old_photo">Исходное изображение</string>
   <string name="context_menu_play_selection">Воспроизвести</string>
   <string name="context_menu_play_next">Включить следующим</string>
+  <string name="context_menu_play_album">Воспр. альбом</string>
   <string name="context_menu_more_by_artist">Все треки исполнителя</string>
   <string name="context_menu_rename_playlist">Переименовать</string>
   <string name="context_menu_delete">Удалить</string>
