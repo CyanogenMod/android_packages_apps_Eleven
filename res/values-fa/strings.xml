@@ -21,5 +21,7 @@
   <string name="save">ذخیره</string>
   <string name="cancel">لغو</string>
   <string name="context_menu_delete">حذف</string>
+  <string name="settings_ui_category">رابط کاربری</string>
   <string name="settings_download_only_on_wifi_title">دریافت فقط از طریق وای‌فای</string>
+  <string name="settings_lockscreen_album_art">عکس آلبوم در صفحه قفل</string>
 </resources>

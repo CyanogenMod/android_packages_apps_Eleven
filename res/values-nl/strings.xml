@@ -83,6 +83,7 @@
   <string name="old_photo">Oude afbeelding</string>
   <string name="context_menu_play_selection">Afspelen</string>
   <string name="context_menu_play_next">Volgende afspelen</string>
+  <string name="context_menu_play_album">Album afspelen</string>
   <string name="context_menu_more_by_artist">Meer van deze artiest</string>
   <string name="context_menu_rename_playlist">Naam wijzigen</string>
   <string name="context_menu_delete">Verwijderen</string>

@@ -83,6 +83,7 @@
   <string name="old_photo">ใช้รูปเก่า</string>
   <string name="context_menu_play_selection">เล่น</string>
   <string name="context_menu_play_next">เล่นเพลงถัดไป</string>
+  <string name="context_menu_play_album">เล่นอัลบั้ม</string>
   <string name="context_menu_more_by_artist">เพิ่มเติมโดยศิลปิน</string>
   <string name="context_menu_rename_playlist">เปลี่ยนชื่อ</string>
   <string name="context_menu_delete">ลบ</string>
