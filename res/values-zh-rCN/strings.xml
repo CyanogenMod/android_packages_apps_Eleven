@@ -83,6 +83,7 @@
   <string name="old_photo">使用旧照片</string>
   <string name="context_menu_play_selection">播放</string>
   <string name="context_menu_play_next">播放下一首</string>
+  <string name="context_menu_play_album">播放专辑</string>
   <string name="context_menu_more_by_artist">来自此艺术家的更多作品</string>
   <string name="context_menu_rename_playlist">重命名</string>
   <string name="context_menu_delete">删除</string>

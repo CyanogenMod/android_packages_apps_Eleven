@@ -83,6 +83,7 @@
   <string name="old_photo">Gebruik ou foto</string>
   <string name="context_menu_play_selection">Speel</string>
   <string name="context_menu_play_next">Speel volgende</string>
+  <string name="context_menu_play_album">Speel album</string>
   <string name="context_menu_more_by_artist">Meer van kunstenaar</string>
   <string name="context_menu_rename_playlist">Hernoem</string>
   <string name="context_menu_delete">Verwyder</string>

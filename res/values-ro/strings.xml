@@ -48,6 +48,7 @@
   <string name="cannot_be_undone">Această acțiune nu poate fi anulată</string>
   <string name="google_search">Căutare pe Google</string>
   <string name="context_menu_play_selection">Redare</string>
+  <string name="context_menu_play_album">Redă album</string>
   <string name="context_menu_rename_playlist">Redenumire</string>
   <string name="context_menu_use_as_ringtone">Folosește ca ton de apel</string>
   <string name="accessibility_pause">Pauză</string>

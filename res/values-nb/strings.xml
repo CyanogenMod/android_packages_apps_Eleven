@@ -83,6 +83,7 @@
   <string name="old_photo">Bruk gammelt bilde</string>
   <string name="context_menu_play_selection">Spill av</string>
   <string name="context_menu_play_next">Spill neste</string>
+  <string name="context_menu_play_album">Spill album</string>
   <string name="context_menu_more_by_artist">Mer fra denne artisten</string>
   <string name="context_menu_rename_playlist">Gi nytt navn</string>
   <string name="context_menu_delete">Slett</string>
