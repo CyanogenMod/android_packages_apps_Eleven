@@ -182,29 +182,47 @@ public class HomeActivity extends SlidingPanelActivity implements
 
     private void updateStatusBarColor() {
         if (mBrowsePanelActive || MusicUtils.getCurrentAlbumId() < 0) {
-            updateStatusBarColor(getResources().getColor(R.color.primary_dark));
+            updateStatusBarColor(-1);
         } else {
-            new AsyncTask<Void, Void, Integer>() {
+            new AsyncTask<Void, Void, BitmapWithColors>() {
                 @Override
-                protected Integer doInBackground(Void... params) {
+                protected BitmapWithColors doInBackground(Void... params) {
                     ImageFetcher imageFetcher = ImageFetcher.getInstance(HomeActivity.this);
                     final BitmapWithColors bitmap = imageFetcher.getArtwork(
                             MusicUtils.getAlbumName(), MusicUtils.getCurrentAlbumId(),
                             MusicUtils.getArtistName(), true);
-                    return bitmap != null ? bitmap.getVibrantDarkColor() : Color.TRANSPARENT;
+                    return bitmap;
                 }
                 @Override
-                protected void onPostExecute(Integer color) {
-                    if (color == Color.TRANSPARENT) {
-                        color = getResources().getColor(R.color.primary_dark);
+                protected void onPostExecute(BitmapWithColors bmc) {
+                    int eqColor = -1;
+                    int sbColor = -1;
+                    if (bmc != null) {
+                        eqColor = bmc.getVibrantColor();
+                        if (eqColor == Color.TRANSPARENT) {
+                            eqColor = -1;
+                        } else {
+                            sbColor = bmc.getVibrantDarkColor();
+                        }
                     }
-                    updateStatusBarColor(color);
+                    updateEqualizerColor(eqColor);
+                    updateStatusBarColor(sbColor);
                 }
             }.execute();
         }
     }
 
+    private void updateEqualizerColor(int color) {
+        if (color == -1) {
+            color = getResources().getColor(R.color.equalizer_fill_color);
+        }
+        MusicUtils.updateVisualizerColor(color);
+    }
+
     private void updateStatusBarColor(int color) {
+        if (color == -1) {
+            color = getResources().getColor(R.color.primary_dark);
+        }
         final Window window = getWindow();
         ObjectAnimator animator = ObjectAnimator.ofInt(window,
                 "statusBarColor", window.getStatusBarColor(), color);

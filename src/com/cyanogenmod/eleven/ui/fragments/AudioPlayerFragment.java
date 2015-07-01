@@ -201,6 +201,7 @@ public class AudioPlayerFragment extends Fragment implements ServiceConnection,
 
         mEqualizerView = (EqualizerView) mRootView.findViewById(R.id.equalizerView);
         mEqualizerView.initialize(getActivity());
+        MusicUtils.setEqualizerView(mEqualizerView);
         mEqualizerGradient = mRootView.findViewById(R.id.equalizerGradient);
 
         mLyricsText = (TextView) mRootView.findViewById(R.id.audio_player_lyrics);

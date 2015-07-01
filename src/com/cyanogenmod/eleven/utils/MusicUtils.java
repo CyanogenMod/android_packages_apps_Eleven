@@ -60,6 +60,7 @@ import com.cyanogenmod.eleven.model.Song;
 import com.cyanogenmod.eleven.provider.RecentStore;
 import com.cyanogenmod.eleven.provider.SongPlayCount;
 import com.cyanogenmod.eleven.service.MusicPlaybackTrack;
+import com.cyanogenmod.eleven.widgets.EqualizerView;
 
 import java.io.File;
 import java.util.Arrays;
@@ -81,6 +82,8 @@ public final class MusicUtils {
     private static final long[] sEmptyList;
 
     private static ContentValues[] mContentValuesCache = null;
+
+    private static EqualizerView mEqualizerView = null;
 
     private static final int MIN_VALID_YEAR = 1900; // used to remove invalid years from metadata
 
@@ -1766,5 +1769,15 @@ public final class MusicUtils {
         }
 
         return str.toString();
+    }
+
+    public static void setEqualizerView(EqualizerView equalizerView) {
+        mEqualizerView = equalizerView;
+    }
+
+    public static void updateVisualizerColor(int color) {
+        if (mEqualizerView != null) {
+            mEqualizerView.setColor(color);
+        }
     }
 }
