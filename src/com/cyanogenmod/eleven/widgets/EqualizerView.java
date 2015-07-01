@@ -15,6 +15,8 @@
 */
 package com.cyanogenmod.eleven.widgets;
 
+import android.animation.ArgbEvaluator;
+import android.animation.ObjectAnimator;
 import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.Canvas;
@@ -33,9 +35,13 @@ import com.pheelicks.visualizer.VisualizerView;
 import com.pheelicks.visualizer.renderer.Renderer;
 
 public class EqualizerView extends VisualizerView {
+
     private boolean mLinked = false;
     private boolean mStarted = false;
     private boolean mPanelVisible = false;
+    private int mColor;
+    private TileBarGraphRenderer mBarRenderer = null;
+    private ObjectAnimator mVisualizerColorAnimator = null;
 
     private final Runnable mLinkVisualizer = new Runnable() {
         @Override
@@ -120,19 +126,21 @@ public class EqualizerView extends VisualizerView {
         setEnabled(false);
 
         Resources res = mContext.getResources();
+        mColor = res.getColor(R.color.equalizer_fill_color);
         Paint paint = new Paint();
         paint.setStrokeWidth(res.getDimensionPixelSize(R.dimen.eqalizer_path_stroke_width));
         paint.setAntiAlias(true);
-        paint.setColor(res.getColor(R.color.equalizer_fill_color));
+        paint.setColor(mColor);
         paint.setPathEffect(new DashPathEffect(new float[]{
                 res.getDimensionPixelSize(R.dimen.eqalizer_path_effect_1),
                 res.getDimensionPixelSize(R.dimen.eqalizer_path_effect_2)
         }, 0));
 
         int bars = res.getInteger(R.integer.equalizer_divisions);
-        addRenderer(new TileBarGraphRenderer(bars, paint,
+        mBarRenderer = new TileBarGraphRenderer(bars, paint,
                 res.getInteger(R.integer.equalizer_db_fuzz),
-                res.getInteger(R.integer.equalizer_db_fuzz_factor)));
+                res.getInteger(R.integer.equalizer_db_fuzz_factor));
+        addRenderer(mBarRenderer);
     }
 
     /**
@@ -162,6 +170,17 @@ public class EqualizerView extends VisualizerView {
         }
     }
 
+    public void setColor(int color) {
+        if (mColor != color) {
+            mColor = color;
+            if (mLinked) {
+                updateVisualizerColor();
+            } else {
+                mBarRenderer.mPaint.setColor(mColor);
+            }
+        }
+    }
+
     /**
      * Checks the state of the EqualizerView to determine whether we want to link up the equalizer
      */
@@ -173,5 +192,17 @@ public class EqualizerView extends VisualizerView {
         } else {
             mUnlinkVisualizer.run();
         }
+    }
+
+    private void updateVisualizerColor() {
+        if (mVisualizerColorAnimator != null) {
+            mVisualizerColorAnimator.cancel();
+        }
+        mVisualizerColorAnimator = ObjectAnimator.ofInt(mBarRenderer.mPaint,
+                "color", mBarRenderer.mPaint.getColor(), mColor);
+        mVisualizerColorAnimator.setEvaluator(new ArgbEvaluator());
+        mVisualizerColorAnimator.setStartDelay(900);
+        mVisualizerColorAnimator.setDuration(1200);
+        mVisualizerColorAnimator.start();
     }
 }

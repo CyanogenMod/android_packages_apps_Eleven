@@ -289,6 +289,12 @@ public class AudioPlayerFragment extends Fragment implements ServiceConnection,
         }
     }
 
+    public void updateVisualizerColor(int color) {
+        if (mEqualizerView != null) {
+            mEqualizerView.setColor(color);
+        }
+    }
+
     /**
      * Initializes the header bar
      */
