@@ -762,6 +762,12 @@ public class AudioPlayerFragment extends Fragment implements ServiceConnection,
         }
     }
 
+    public void updateVisualizerColor(int color) {
+        if (mEqualizerView != null) {
+            mEqualizerView.setColor(color);
+        }
+    }
+
     /**
      * Used to update the current time string
      */
