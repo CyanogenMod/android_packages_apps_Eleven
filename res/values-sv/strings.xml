@@ -32,6 +32,7 @@
   <string name="menu_shuffle_all">Blanda alla</string>
   <string name="menu_shuffle_playlist">Blanda spellista</string>
   <string name="menu_play_all">Spela alla</string>
+  <string name="menu_sort_by">Sortera efter</string>
   <string name="menu_clear_list">Töm lista</string>
   <string name="menu_clear_queue">Rensa kö</string>
   <string name="menu_equalizer">Equalizer</string>

@@ -114,7 +114,7 @@
   <string name="settings_download_only_on_wifi_title">הורד דרך Wi-Fi בלבד</string>
   <string name="settings_download_only_on_wifi_summary">כדי להוריד עלויות מפעיל, אל תוריד מאינטרנט סלולרי</string>
   <string name="settings_download_missing_artwork_title">הורד תמונת אלבום חסרה</string>
-  <string name="settings_download_artist_images_title">הורד תמונות אמנים חסרות</string>
+  <string name="settings_download_artist_images_title">הורד תמונות אמן חסרות</string>
   <string name="settings_general_category">כללי</string>
   <string name="settings_show_music_visualization_title">הצג אפקטים ויזואלים</string>
   <string name="settings_show_lyrics_title">הצג את מילות השיר</string>
