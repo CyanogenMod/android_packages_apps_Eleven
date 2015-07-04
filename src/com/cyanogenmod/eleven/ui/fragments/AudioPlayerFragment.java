@@ -483,19 +483,21 @@ public class AudioPlayerFragment extends Fragment implements ServiceConnection,
             mAlbumArtViewPager.setVisibility(View.GONE);
             mQueueEmpty.showNoResults();
             mEqualizerGradient.setVisibility(View.GONE);
-            mEqualizerView.checkStateChanged();
             mAddToPlaylistButton.setVisibility(View.GONE);
         } else {
             mAlbumArtViewPager.setVisibility(View.VISIBLE);
             mQueueEmpty.hideAll();
             if (PreferenceUtils.getInstance(getActivity()).getShowVisualizer()) {
                 mEqualizerGradient.setVisibility(View.VISIBLE);
+                mEqualizerView.setEnabled(true);
             } else {
                 mEqualizerGradient.setVisibility(View.GONE);
+                mEqualizerView.setEnabled(false);
             }
-            mEqualizerView.checkStateChanged();
             mAddToPlaylistButton.setVisibility(View.VISIBLE);
         }
+        mEqualizerView.setPlaying(queueSize > 0);
+        mEqualizerView.checkStateChanged();
     }
 
     /**
@@ -759,6 +761,12 @@ public class AudioPlayerFragment extends Fragment implements ServiceConnection,
     private void checkEqualizerView(SlidingPanelActivity.Panel visiblePanel) {
         if (visiblePanel == SlidingPanelActivity.Panel.MusicPlayer) {
             mEqualizerView.setPanelVisible(true);
+        }
+    }
+
+    public void updateVisualizerColor(int color) {
+        if (mEqualizerView != null) {
+            mEqualizerView.setColor(color);
         }
     }
 
