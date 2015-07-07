@@ -180,31 +180,49 @@ public class HomeActivity extends SlidingPanelActivity implements
         }
     }
 
+    @Override
+    public void onWindowFocusChanged(boolean hasFocus) {
+        getAudioPlayerFragment().onWindowFocusChanged(hasFocus
+                && (getCurrentPanel() == Panel.MusicPlayer));
+
+        super.onWindowFocusChanged(hasFocus);
+    }
+
     private void updateStatusBarColor() {
         if (mBrowsePanelActive || MusicUtils.getCurrentAlbumId() < 0) {
-            updateStatusBarColor(getResources().getColor(R.color.primary_dark));
+            updateStatusBarColor(Color.TRANSPARENT);
         } else {
-            new AsyncTask<Void, Void, Integer>() {
+            new AsyncTask<Void, Void, BitmapWithColors>() {
                 @Override
-                protected Integer doInBackground(Void... params) {
+                protected BitmapWithColors doInBackground(Void... params) {
                     ImageFetcher imageFetcher = ImageFetcher.getInstance(HomeActivity.this);
                     final BitmapWithColors bitmap = imageFetcher.getArtwork(
                             MusicUtils.getAlbumName(), MusicUtils.getCurrentAlbumId(),
                             MusicUtils.getArtistName(), true);
-                    return bitmap != null ? bitmap.getVibrantDarkColor() : Color.TRANSPARENT;
+                    return bitmap;
                 }
                 @Override
-                protected void onPostExecute(Integer color) {
-                    if (color == Color.TRANSPARENT) {
-                        color = getResources().getColor(R.color.primary_dark);
-                    }
-                    updateStatusBarColor(color);
+                protected void onPostExecute(BitmapWithColors bmc) {
+                    updateEqualizerColor(bmc != null
+                            ? bmc.getVibrantColor() : Color.TRANSPARENT);
+                    updateStatusBarColor(bmc != null
+                            ? bmc.getVibrantDarkColor() : Color.TRANSPARENT);
                 }
             }.execute();
         }
     }
 
+    private void updateEqualizerColor(int color) {
+        if (color == Color.TRANSPARENT) {
+            color = getResources().getColor(R.color.equalizer_fill_color);
+        }
+        getAudioPlayerFragment().updateVisualizerColor(color);
+    }
+
     private void updateStatusBarColor(int color) {
+        if (color == Color.TRANSPARENT) {
+            color = getResources().getColor(R.color.primary_dark);
+        }
         final Window window = getWindow();
         ObjectAnimator animator = ObjectAnimator.ofInt(window,
                 "statusBarColor", window.getStatusBarColor(), color);

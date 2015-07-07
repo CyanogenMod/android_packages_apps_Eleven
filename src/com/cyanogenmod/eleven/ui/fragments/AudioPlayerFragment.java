@@ -180,9 +180,6 @@ public class AudioPlayerFragment extends Fragment implements ServiceConnection,
 
         // add a listener for the sliding
         ((SlidingPanelActivity)getActivity()).addSlidingPanelListener(this);
-
-        // check equalizer view
-        checkEqualizerView();
     }
 
     /**
@@ -251,8 +248,6 @@ public class AudioPlayerFragment extends Fragment implements ServiceConnection,
 
         // resumes the update callback for the play pause progress button
         mPlayPauseProgressButton.resume();
-
-        mEqualizerView.onStart();
     }
 
     @Override
@@ -263,8 +258,6 @@ public class AudioPlayerFragment extends Fragment implements ServiceConnection,
         mPlayPauseProgressButton.pause();
 
         mImageFetcher.flush();
-
-        mEqualizerView.onStop();
     }
 
     @Override
@@ -483,17 +476,17 @@ public class AudioPlayerFragment extends Fragment implements ServiceConnection,
             mAlbumArtViewPager.setVisibility(View.GONE);
             mQueueEmpty.showNoResults();
             mEqualizerGradient.setVisibility(View.GONE);
-            mEqualizerView.checkStateChanged();
             mAddToPlaylistButton.setVisibility(View.GONE);
         } else {
             mAlbumArtViewPager.setVisibility(View.VISIBLE);
             mQueueEmpty.hideAll();
             if (PreferenceUtils.getInstance(getActivity()).getShowVisualizer()) {
                 mEqualizerGradient.setVisibility(View.VISIBLE);
+                mEqualizerView.setEnabled(true);
             } else {
                 mEqualizerGradient.setVisibility(View.GONE);
+                mEqualizerView.setEnabled(false);
             }
-            mEqualizerView.checkStateChanged();
             mAddToPlaylistButton.setVisibility(View.VISIBLE);
         }
     }
@@ -744,22 +737,20 @@ public class AudioPlayerFragment extends Fragment implements ServiceConnection,
 
     @Override
     public void onBeginSlide() {
-        mEqualizerView.setPanelVisible(false);
+        mEqualizerView.setVisible(false);
     }
 
     @Override
     public void onFinishSlide(SlidingPanelActivity.Panel visiblePanel) {
-        checkEqualizerView(visiblePanel);
+        mEqualizerView.setVisible(visiblePanel == SlidingPanelActivity.Panel.MusicPlayer);
     }
 
-    private void checkEqualizerView() {
-        checkEqualizerView(((HomeActivity)getActivity()).getCurrentPanel());
+    public void onWindowFocusChanged(boolean hasFocus) {
+        mEqualizerView.setVisible(hasFocus);
     }
 
-    private void checkEqualizerView(SlidingPanelActivity.Panel visiblePanel) {
-        if (visiblePanel == SlidingPanelActivity.Panel.MusicPlayer) {
-            mEqualizerView.setPanelVisible(true);
-        }
+    public void updateVisualizerColor(int color) {
+        mEqualizerView.setColor(color);
     }
 
     /**
@@ -820,6 +811,7 @@ public class AudioPlayerFragment extends Fragment implements ServiceConnection,
                 audioPlayerFragment.updateNowPlayingInfo();
                 audioPlayerFragment.dismissPopupMenu();
             } else if (action.equals(MusicPlaybackService.PLAYSTATE_CHANGED)) {
+                audioPlayerFragment.mEqualizerView.setPlaying(MusicUtils.isPlaying());
                 // Set the play and pause image
                 audioPlayerFragment.mPlayPauseProgressButton.getPlayPauseButton().updateState();
             } else if (action.equals(MusicPlaybackService.REPEATMODE_CHANGED)

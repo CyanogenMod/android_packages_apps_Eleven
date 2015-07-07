@@ -15,6 +15,7 @@
 */
 package com.cyanogenmod.eleven.widgets;
 
+import android.animation.ObjectAnimator;
 import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.Canvas;
@@ -22,11 +23,8 @@ import android.graphics.DashPathEffect;
 import android.graphics.Paint;
 import android.graphics.Rect;
 import android.util.AttributeSet;
-import android.util.Log;
 
 import com.cyanogenmod.eleven.R;
-import com.cyanogenmod.eleven.utils.MusicUtils;
-import com.cyanogenmod.eleven.utils.PreferenceUtils;
 import com.pheelicks.visualizer.AudioData;
 import com.pheelicks.visualizer.FFTData;
 import com.pheelicks.visualizer.VisualizerView;
@@ -34,15 +32,20 @@ import com.pheelicks.visualizer.renderer.Renderer;
 
 public class EqualizerView extends VisualizerView {
     private boolean mLinked = false;
-    private boolean mStarted = false;
-    private boolean mPanelVisible = false;
+    private boolean mVisible = false;
+    private boolean mPlaying = false;
+    private boolean mEnabled = false;
+    private int mColor;
+
+    private TileBarGraphRenderer mBarRenderer;
+    private ObjectAnimator mVisualizerColorAnimator;
 
     private final Runnable mLinkVisualizer = new Runnable() {
         @Override
         public void run() {
             if (!mLinked) {
-                animate().alpha(1).setDuration(300);
                 link(0);
+                animate().alpha(1f).setDuration(300);
                 mLinked = true;
             }
         }
@@ -52,7 +55,7 @@ public class EqualizerView extends VisualizerView {
         @Override
         public void run() {
             if (mLinked) {
-                animate().alpha(0).setDuration(300);
+                animate().alpha(0f).setDuration(300);
                 unlink();
                 mLinked = false;
             }
@@ -120,55 +123,64 @@ public class EqualizerView extends VisualizerView {
         setEnabled(false);
 
         Resources res = mContext.getResources();
+        mColor = res.getColor(R.color.equalizer_fill_color);
         Paint paint = new Paint();
         paint.setStrokeWidth(res.getDimensionPixelSize(R.dimen.eqalizer_path_stroke_width));
         paint.setAntiAlias(true);
-        paint.setColor(res.getColor(R.color.equalizer_fill_color));
+        paint.setColor(mColor);
         paint.setPathEffect(new DashPathEffect(new float[]{
                 res.getDimensionPixelSize(R.dimen.eqalizer_path_effect_1),
                 res.getDimensionPixelSize(R.dimen.eqalizer_path_effect_2)
         }, 0));
 
         int bars = res.getInteger(R.integer.equalizer_divisions);
-        addRenderer(new TileBarGraphRenderer(bars, paint,
+        mBarRenderer = new TileBarGraphRenderer(bars, paint,
                 res.getInteger(R.integer.equalizer_db_fuzz),
-                res.getInteger(R.integer.equalizer_db_fuzz_factor)));
+                res.getInteger(R.integer.equalizer_db_fuzz_factor));
+        addRenderer(mBarRenderer);
     }
 
-    /**
-     * Follows Fragment onStart to determine if the containing fragment/activity is started
-     */
-    public void onStart() {
-        mStarted = true;
-        checkStateChanged();
-    }
-
-    /**
-     * Follows Fragment onStop to determine if the containing fragment/activity is stopped
-     */
-    public void onStop() {
-        mStarted = false;
-        checkStateChanged();
-    }
-
-    /**
-     * Separate method to toggle panel visibility - currently used when the user slides to
-     * improve performance of the sliding panel
-     */
-    public void setPanelVisible(boolean panelVisible) {
-        if (mPanelVisible != panelVisible) {
-            mPanelVisible = panelVisible;
+    public void setVisible(boolean visible) {
+        if (mVisible != visible) {
+            mVisible = visible;
             checkStateChanged();
         }
     }
 
-    /**
-     * Checks the state of the EqualizerView to determine whether we want to link up the equalizer
-     */
-    public void checkStateChanged() {
-        if (mPanelVisible && mStarted
-                && PreferenceUtils.getInstance(mContext).getShowVisualizer()
-                && MusicUtils.getQueueSize() > 0) {
+    public void setPlaying(boolean playing) {
+        if (mPlaying != playing) {
+            mPlaying = playing;
+            checkStateChanged();
+        }
+    }
+
+    public void setEnabled(boolean enabled) {
+        if (mEnabled != enabled) {
+            mEnabled = enabled;
+            checkStateChanged();
+        }
+    }
+
+    public void setColor(int color) {
+        if (mColor != color) {
+            mColor = color;
+            if (mLinked) {
+                if (mVisualizerColorAnimator != null) {
+                    mVisualizerColorAnimator.cancel();
+                }
+                mVisualizerColorAnimator = ObjectAnimator.ofArgb(mBarRenderer.mPaint, "color",
+                        mBarRenderer.mPaint.getColor(), mColor);
+                mVisualizerColorAnimator.setStartDelay(900);
+                mVisualizerColorAnimator.setDuration(1200);
+                mVisualizerColorAnimator.start();
+            } else {
+                mBarRenderer.mPaint.setColor(mColor);
+            }
+        }
+    }
+
+    private void checkStateChanged() {
+        if (mVisible && mPlaying && mEnabled) {
             mLinkVisualizer.run();
         } else {
             mUnlinkVisualizer.run();
