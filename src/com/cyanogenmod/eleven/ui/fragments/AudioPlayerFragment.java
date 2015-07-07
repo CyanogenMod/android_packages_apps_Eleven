@@ -252,19 +252,19 @@ public class AudioPlayerFragment extends Fragment implements ServiceConnection,
         // resumes the update callback for the play pause progress button
         mPlayPauseProgressButton.resume();
 
-        mEqualizerView.onStart();
+        mEqualizerView.setStarted(true);
     }
 
     @Override
     public void onStop() {
+        mEqualizerView.setStarted(false);
+
         super.onStop();
 
         // pause the update callback for the play pause progress button
         mPlayPauseProgressButton.pause();
 
         mImageFetcher.flush();
-
-        mEqualizerView.onStop();
     }
 
     @Override
@@ -483,17 +483,17 @@ public class AudioPlayerFragment extends Fragment implements ServiceConnection,
             mAlbumArtViewPager.setVisibility(View.GONE);
             mQueueEmpty.showNoResults();
             mEqualizerGradient.setVisibility(View.GONE);
-            mEqualizerView.checkStateChanged();
             mAddToPlaylistButton.setVisibility(View.GONE);
         } else {
             mAlbumArtViewPager.setVisibility(View.VISIBLE);
             mQueueEmpty.hideAll();
             if (PreferenceUtils.getInstance(getActivity()).getShowVisualizer()) {
                 mEqualizerGradient.setVisibility(View.VISIBLE);
+                mEqualizerView.setEnabled(true);
             } else {
                 mEqualizerGradient.setVisibility(View.GONE);
+                mEqualizerView.setEnabled(false);
             }
-            mEqualizerView.checkStateChanged();
             mAddToPlaylistButton.setVisibility(View.VISIBLE);
         }
     }
@@ -762,6 +762,10 @@ public class AudioPlayerFragment extends Fragment implements ServiceConnection,
         }
     }
 
+    public void updateVisualizerColor(int color) {
+        mEqualizerView.setColor(color);
+    }
+
     /**
      * Used to update the current time string
      */
@@ -820,6 +824,7 @@ public class AudioPlayerFragment extends Fragment implements ServiceConnection,
                 audioPlayerFragment.updateNowPlayingInfo();
                 audioPlayerFragment.dismissPopupMenu();
             } else if (action.equals(MusicPlaybackService.PLAYSTATE_CHANGED)) {
+                audioPlayerFragment.mEqualizerView.setPlaying(MusicUtils.isPlaying());
                 // Set the play and pause image
                 audioPlayerFragment.mPlayPauseProgressButton.getPlayPauseButton().updateState();
             } else if (action.equals(MusicPlaybackService.REPEATMODE_CHANGED)
