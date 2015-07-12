@@ -83,6 +83,7 @@
   <string name="old_photo">Al Foto benotzen</string>
   <string name="context_menu_play_selection">Ofspillen</string>
   <string name="context_menu_play_next">Als nächst ofspillen</string>
+  <string name="context_menu_play_album">Album ofspillen</string>
   <string name="context_menu_more_by_artist">Méi vun dësem Interpret</string>
   <string name="context_menu_rename_playlist">Ëmbenennen</string>
   <string name="context_menu_delete">Läschen</string>
