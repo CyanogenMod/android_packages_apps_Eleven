@@ -57,6 +57,7 @@
   <string name="set_as_ringtone">\'<xliff:g id="name" example="Alarm Bell">%s</xliff:g>\' este ton de apel</string>
   <string name="playlist_renamed">Listă de redare redenumită</string>
   <string name="settings_ui_category">Interfața</string>
+  <string name="settings_storage_category">Stocare</string>
   <string name="settings_data_category">Date</string>
   <string name="settings_delete_cache_title">Șterge cache-ul</string>
   <string name="settings_delete_cache_summary">Elimină toate imaginile din cache</string>
@@ -73,6 +74,7 @@
   <string name="empty_recent_main">Nicio melodie recentă</string>
   <string name="empty_recent">Melodiile redate recent vor fi afișate aici.</string>
   <string name="empty_playlist_main">Nicio melodie în lista de redare</string>
+  <string name="empty_generic_main">Nicio melodie nu a fost găsită</string>
   <string name="header_unknown_year">An necunoscut</string>
   <string name="header_less_than_30s">Mai puţin de 30 de secunde</string>
   <string name="header_30_to_60_seconds">30 - 60 de secunde</string>

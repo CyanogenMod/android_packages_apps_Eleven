@@ -33,6 +33,10 @@
     <item quantity="one">1 genre</item>
     <item quantity="other"><xliff:g id="count">%d</xliff:g> genrer</item>
   </plurals>
+  <plurals name="Nhours">
+    <item quantity="one"><xliff:g id="hours">%d</xliff:g>t</item>
+    <item quantity="other"><xliff:g id="hours">%d</xliff:g>t</item>
+  </plurals>
   <plurals name="Nminutes">
     <item quantity="one"><xliff:g id="minutes">%d</xliff:g>m</item>
     <item quantity="other"><xliff:g id="minutes">%d</xliff:g>m</item>
