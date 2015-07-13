@@ -89,12 +89,18 @@ public class SrtParser {
 
                 ret.add(entry);
             }
+        } catch (NumberFormatException nfe) {
+            // The file isn't a valid srt format
+            Log.e(TAG, nfe.getMessage(), nfe);
+            ret = null;
         } catch (IOException ioe) {
             // shouldn't happen
             Log.e(TAG, ioe.getMessage(), ioe);
+            ret = null;
         } catch (ArrayIndexOutOfBoundsException e) {
             // if the time is malformed
             Log.e(TAG, e.getMessage());
+            ret = null;
         } finally {
             if (br != null) {
                 try {
