@@ -83,6 +83,7 @@
   <string name="old_photo">Gunakan foto lama</string>
   <string name="context_menu_play_selection">Putar</string>
   <string name="context_menu_play_next">Putar selanjutnya</string>
+  <string name="context_menu_play_album">Putar album</string>
   <string name="context_menu_more_by_artist">Lebih banyak oleh artis</string>
   <string name="context_menu_rename_playlist">Ubah Nama</string>
   <string name="context_menu_delete">Hapus</string>
