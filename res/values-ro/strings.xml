@@ -50,6 +50,8 @@
   <string name="context_menu_play_selection">Redare</string>
   <string name="context_menu_play_album">Redă album</string>
   <string name="context_menu_rename_playlist">Redenumire</string>
+  <string name="context_menu_delete">Ștergere</string>
+  <string name="context_menu_remove_from_recent">Elimină din recente</string>
   <string name="context_menu_use_as_ringtone">Folosește ca ton de apel</string>
   <string name="accessibility_pause">Pauză</string>
   <string name="accessibility_queue">Deschide coada</string>
