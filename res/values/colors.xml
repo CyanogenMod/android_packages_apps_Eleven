@@ -145,4 +145,7 @@
         <item>@color/letter_tile_deep_orange_color_dark</item>
         <item>@color/letter_tile_brown_color_dark</item>
     </array>
+
+    <!-- Color for the visualizer bars -->
+    <color name="visualizer_fill_color">#bfffffff</color>
 </resources>

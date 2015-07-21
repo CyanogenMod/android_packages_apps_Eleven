@@ -14,7 +14,6 @@ LOCAL_STATIC_JAVA_LIBRARIES := \
     android-support-v7-palette \
     android-support-v7-cardview \
     android-common \
-    android-visualizer \
     eleven_support_v4 \
     eleven_recyclerview \
     guava
