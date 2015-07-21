@@ -182,10 +182,10 @@ public class HomeActivity extends SlidingPanelActivity implements
 
     @Override
     public void onWindowFocusChanged(boolean hasFocus) {
-        getAudioPlayerFragment().onWindowFocusChanged(hasFocus
-                && (getCurrentPanel() == Panel.MusicPlayer));
-
         super.onWindowFocusChanged(hasFocus);
+
+        getAudioPlayerFragment().setVisualizerVisible(hasFocus
+                && getCurrentPanel() == Panel.MusicPlayer);
     }
 
     private void updateStatusBarColor() {
@@ -203,7 +203,7 @@ public class HomeActivity extends SlidingPanelActivity implements
                 }
                 @Override
                 protected void onPostExecute(BitmapWithColors bmc) {
-                    updateEqualizerColor(bmc != null
+                    updateVisualizerColor(bmc != null
                             ? bmc.getVibrantColor() : Color.TRANSPARENT);
                     updateStatusBarColor(bmc != null
                             ? bmc.getVibrantDarkColor() : Color.TRANSPARENT);
@@ -212,11 +212,12 @@ public class HomeActivity extends SlidingPanelActivity implements
         }
     }
 
-    private void updateEqualizerColor(int color) {
+    private void updateVisualizerColor(int color) {
         if (color == Color.TRANSPARENT) {
-            color = getResources().getColor(R.color.equalizer_fill_color);
+            color = getResources().getColor(R.color.visualizer_fill_color);
         }
-        getAudioPlayerFragment().updateVisualizerColor(color);
+
+        getAudioPlayerFragment().setVisualizerColor(color);
     }
 
     private void updateStatusBarColor(int color) {

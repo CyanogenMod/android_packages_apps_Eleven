@@ -32,8 +32,8 @@
         android:background="@drawable/equalizer_background"
         android:layout_gravity="bottom"/>
 
-    <com.cyanogenmod.eleven.widgets.EqualizerView
-        android:id="@+id/equalizerView"
+    <com.cyanogenmod.eleven.widgets.VisualizerView
+        android:id="@+id/visualizerView"
         android:gravity="bottom"
         android:layout_gravity="bottom"
         android:layout_width="match_parent"
