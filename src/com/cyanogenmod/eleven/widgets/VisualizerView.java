@@ -38,6 +38,7 @@ public class VisualizerView extends View {
 
     private boolean mVisible = false;
     private boolean mPlaying = false;
+    private boolean mPowerSaveMode = false;
     private int mColor;
 
     private Visualizer.OnDataCaptureListener mVisualizerListener =
@@ -55,13 +56,13 @@ public class VisualizerView extends View {
             for (int i = 0; i < 32; i++) {
                 mValueAnimators[i].cancel();
 
-                rfk = fft[i * 2];
-                ifk = fft[i * 2 + 1];
+                rfk = fft[i * 2 + 2];
+                ifk = fft[i * 2 + 3];
                 magnitude = rfk * rfk + ifk * ifk;
                 dbValue = magnitude > 0 ? (int) (10 * Math.log10(magnitude)) : 0;
 
                 mValueAnimators[i].setFloatValues(mFFTPoints[i * 4 + 1],
-                        mFFTPoints[i * 4 + 3] - (dbValue * 16f));
+                        mFFTPoints[3] - (dbValue * 16f));
                 mValueAnimators[i].start();
             }
         }
@@ -77,7 +78,7 @@ public class VisualizerView extends View {
             }
 
             mVisualizer.setEnabled(false);
-            mVisualizer.setCaptureSize(64);
+            mVisualizer.setCaptureSize(66);
             mVisualizer.setDataCaptureListener(mVisualizerListener, Visualizer.getMaxCaptureRate(),
                     false, true);
             mVisualizer.setEnabled(true);
@@ -109,14 +110,18 @@ public class VisualizerView extends View {
     protected void onSizeChanged(int w, int h, int oldw, int oldh) {
         super.onSizeChanged(w, h, oldw, oldh);
 
-        float barUnit = w / 32f;
-        float barWidth = barUnit * 8f / 9f;
-        barUnit = barWidth + (barUnit - barWidth) * 32f / 31f;
-        mPaint.setStrokeWidth(barWidth);
+        if (h > w) {
+            float barUnit = w / 32f;
+            float barWidth = barUnit * 8f / 9f;
+            barUnit = barWidth + (barUnit - barWidth) * 32f / 31f;
+            mPaint.setStrokeWidth(barWidth);
 
-        for (int i = 0; i < 32; i++) {
-            mFFTPoints[i * 4] = mFFTPoints[i * 4 + 2] = i * barUnit + (barWidth / 2);
-            mFFTPoints[i * 4 + 3] = h;
+            for (int i = 0; i < 32; i++) {
+                mFFTPoints[i * 4] = mFFTPoints[i * 4 + 2] = i * barUnit + (barWidth / 2);
+                mFFTPoints[i * 4 + 3] = h;
+            }
+        } else {
+            setVisible(false);
         }
     }
 
@@ -170,6 +175,13 @@ public class VisualizerView extends View {
         }
     }
 
+    public void setPowerSaveMode(boolean powerSaveMode) {
+        if (mPowerSaveMode != powerSaveMode) {
+            mPowerSaveMode = powerSaveMode;
+            checkStateChanged();
+        }
+    }
+
     public void setColor(int color) {
         color = Color.argb(191, Color.red(color), Color.green(color), Color.blue(color));
 
@@ -183,7 +195,7 @@ public class VisualizerView extends View {
 
                 mVisualizerColorAnimator = ObjectAnimator.ofArgb(mPaint, "color",
                         mPaint.getColor(), mColor);
-                mVisualizerColorAnimator.setStartDelay(900);
+                mVisualizerColorAnimator.setStartDelay(600);
                 mVisualizerColorAnimator.setDuration(1200);
                 mVisualizerColorAnimator.start();
             } else {
@@ -193,7 +205,7 @@ public class VisualizerView extends View {
     }
 
     private void checkStateChanged() {
-        if (mVisible && mPlaying) {
+        if (mVisible && mPlaying && !mPowerSaveMode) {
             if (mVisualizer == null) {
                 AsyncTask.execute(mLinkVisualizer);
                 animate().alpha(1f).setDuration(300);
