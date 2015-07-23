@@ -27,6 +27,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.IBinder;
 import android.os.Message;
+import android.os.PowerManager;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.text.Html;
@@ -55,7 +56,6 @@ import com.cyanogenmod.eleven.menu.CreateNewPlaylist;
 import com.cyanogenmod.eleven.menu.DeleteDialog;
 import com.cyanogenmod.eleven.menu.FragmentMenuItems;
 import com.cyanogenmod.eleven.ui.activities.HomeActivity;
-import com.cyanogenmod.eleven.ui.activities.SlidingPanelActivity;
 import com.cyanogenmod.eleven.utils.ApolloUtils;
 import com.cyanogenmod.eleven.utils.MusicUtils;
 import com.cyanogenmod.eleven.utils.NavUtils;
@@ -74,8 +74,7 @@ import java.lang.ref.WeakReference;
 
 import static com.cyanogenmod.eleven.utils.MusicUtils.mService;
 
-public class AudioPlayerFragment extends Fragment implements ServiceConnection,
-        SlidingPanelActivity.ISlidingPanelListener {
+public class AudioPlayerFragment extends Fragment implements ServiceConnection {
     private static final String TAG = AudioPlayerFragment.class.getSimpleName();
 
     /**
@@ -177,9 +176,6 @@ public class AudioPlayerFragment extends Fragment implements ServiceConnection,
 
         // Initialize the broadcast receiver
         mPlaybackStatus = new PlaybackStatus(this);
-
-        // add a listener for the sliding
-        ((SlidingPanelActivity)getActivity()).addSlidingPanelListener(this);
     }
 
     /**
@@ -198,6 +194,8 @@ public class AudioPlayerFragment extends Fragment implements ServiceConnection,
 
         mVisualizerView = (VisualizerView) mRootView.findViewById(R.id.visualizerView);
         mVisualizerView.initialize(getActivity());
+        updateVisualizerPowerSaveMode();
+
         mEqualizerGradient = mRootView.findViewById(R.id.equalizerGradient);
 
         mLyricsText = (TextView) mRootView.findViewById(R.id.audio_player_lyrics);
@@ -240,6 +238,8 @@ public class AudioPlayerFragment extends Fragment implements ServiceConnection,
         filter.addAction(MusicPlaybackService.QUEUE_CHANGED);
         // Listen for lyrics text for the audio track
         filter.addAction(MusicPlaybackService.NEW_LYRICS);
+        // Listen for power save mode changed
+        filter.addAction(PowerManager.ACTION_POWER_SAVE_MODE_CHANGED);
         // Register the intent filters
         getActivity().registerReceiver(mPlaybackStatus, filter);
         // Refresh the current time
@@ -271,8 +271,6 @@ public class AudioPlayerFragment extends Fragment implements ServiceConnection,
             MusicUtils.unbindFromService(mToken);
             mToken = null;
         }
-
-        ((SlidingPanelActivity)getActivity()).removeSlidingPanelListener(this);
 
         // Unregister the receiver
         try {
@@ -733,22 +731,17 @@ public class AudioPlayerFragment extends Fragment implements ServiceConnection,
         }
     }
 
-    @Override
-    public void onBeginSlide() {
-        mVisualizerView.setVisible(false);
-    }
-
-    @Override
-    public void onFinishSlide(SlidingPanelActivity.Panel visiblePanel) {
-        setVisualizerVisible(visiblePanel == SlidingPanelActivity.Panel.MusicPlayer);
-    }
-
     public void setVisualizerVisible(boolean visible) {
         if (visible && PreferenceUtils.getInstance(getActivity()).getShowVisualizer()) {
             mVisualizerView.setVisible(true);
         } else {
             mVisualizerView.setVisible(false);
         }
+    }
+
+    public void updateVisualizerPowerSaveMode() {
+        PowerManager pm = (PowerManager) getActivity().getSystemService(Context.POWER_SERVICE);
+        mVisualizerView.setPowerSaveMode(pm.isPowerSaveMode());
     }
 
     public void setVisualizerColor(int color) {
@@ -813,9 +806,9 @@ public class AudioPlayerFragment extends Fragment implements ServiceConnection,
                 audioPlayerFragment.updateNowPlayingInfo();
                 audioPlayerFragment.dismissPopupMenu();
             } else if (action.equals(MusicPlaybackService.PLAYSTATE_CHANGED)) {
-                audioPlayerFragment.mVisualizerView.setPlaying(MusicUtils.isPlaying());
                 // Set the play and pause image
                 audioPlayerFragment.mPlayPauseProgressButton.getPlayPauseButton().updateState();
+                audioPlayerFragment.mVisualizerView.setPlaying(MusicUtils.isPlaying());
             } else if (action.equals(MusicPlaybackService.REPEATMODE_CHANGED)
                     || action.equals(MusicPlaybackService.SHUFFLEMODE_CHANGED)) {
                 // Set the repeat image
@@ -829,6 +822,8 @@ public class AudioPlayerFragment extends Fragment implements ServiceConnection,
                 audioPlayerFragment.createAndSetAdapter();
             } else if (action.equals(MusicPlaybackService.NEW_LYRICS)) {
                 audioPlayerFragment.onLyrics(intent.getStringExtra("lyrics"));
+            } else if (action.equals(PowerManager.ACTION_POWER_SAVE_MODE_CHANGED)) {
+                audioPlayerFragment.updateVisualizerPowerSaveMode();
             }
         }
     }
