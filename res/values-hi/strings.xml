@@ -83,6 +83,7 @@
   <string name="old_photo">पुरानी फ़ोटो का उपयोग करें</string>
   <string name="context_menu_play_selection">बजाएँ</string>
   <string name="context_menu_play_next">अगला बजाएँ</string>
+  <string name="context_menu_play_album">एल्बम को चलाएँ</string>
   <string name="context_menu_more_by_artist">इस कलाकार की और रचनाएँ</string>
   <string name="context_menu_rename_playlist">नाम बदलें</string>
   <string name="context_menu_delete">हटाएँ</string>
