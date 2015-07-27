@@ -20,4 +20,34 @@
   <plurals name="Nartists">
     <item quantity="other"><xliff:g id="count">%d</xliff:g> هنرمند</item>
   </plurals>
+  <plurals name="Nalbums">
+    <item quantity="other"><xliff:g id="count">%d</xliff:g> آلبوم</item>
+  </plurals>
+  <plurals name="Nsongs">
+    <item quantity="other"><xliff:g id="count">%d</xliff:g> آهنگ</item>
+  </plurals>
+  <plurals name="Ngenres">
+    <item quantity="other"><xliff:g id="count">%d</xliff:g> سبک</item>
+  </plurals>
+  <plurals name="Nhours">
+    <item quantity="other"><xliff:g id="hours">%d</xliff:g>س</item>
+  </plurals>
+  <plurals name="Nminutes">
+    <item quantity="other"><xliff:g id="minutes">%d </xliff:g> د</item>
+  </plurals>
+  <plurals name="NNNtrackstoplaylist">
+    <item quantity="other"><xliff:g id="number" example="27">%d</xliff:g> آهنگ به لیست پخش اضافه شد.</item>
+  </plurals>
+  <plurals name="NNNtracksfromplaylist">
+    <item quantity="other"><xliff:g id="number" example="27">%d</xliff:g> آهنگ از لیست پخش حذف شد.</item>
+  </plurals>
+  <plurals name="NNNtrackstoqueue">
+    <item quantity="other"><xliff:g id="number" example="27">%d</xliff:g> آهنگ به صف اضافه شد.</item>
+  </plurals>
+  <plurals name="NNNtrackstofavorites">
+    <item quantity="other"><xliff:g id="number" example="27">%d</xliff:g> آهنگ به علاقه‌مندی‌ها اضافه شد.</item>
+  </plurals>
+  <plurals name="NNNtracksdeleted">
+    <item quantity="other"><xliff:g id="songs_to_delete">%d</xliff:g> آهنگ حذف شد.</item>
+  </plurals>
 </resources>
