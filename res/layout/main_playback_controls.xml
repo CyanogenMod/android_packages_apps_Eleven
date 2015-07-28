@@ -44,8 +44,8 @@
             android:layout_height="match_parent"
             android:clickable="false"
             android:indeterminate="false"
-            android:max="100"
-            android:progress="100"
+            android:max="1000"
+            android:progress="1000"
             android:progressDrawable="@drawable/now_playing_progress_background" />
 
         <ProgressBar
@@ -55,7 +55,7 @@
             android:layout_height="match_parent"
             android:clickable="false"
             android:indeterminate="false"
-            android:max="100"
+            android:max="1000"
             android:progressDrawable="@drawable/now_playing_progress" />
     </com.cyanogenmod.eleven.widgets.PlayPauseProgressButton>
 

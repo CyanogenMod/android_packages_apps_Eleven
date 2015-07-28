@@ -38,6 +38,7 @@ import com.cyanogenmod.eleven.R;
 import com.cyanogenmod.eleven.cache.ImageFetcher;
 import com.cyanogenmod.eleven.ui.fragments.AlbumDetailFragment;
 import com.cyanogenmod.eleven.ui.fragments.ArtistDetailFragment;
+import com.cyanogenmod.eleven.ui.fragments.AudioPlayerFragment;
 import com.cyanogenmod.eleven.ui.fragments.IChildFragment;
 import com.cyanogenmod.eleven.ui.fragments.ISetupActionBar;
 import com.cyanogenmod.eleven.ui.fragments.PlaylistDetailFragment;
@@ -215,7 +216,11 @@ public class HomeActivity extends SlidingPanelActivity implements
             color = getResources().getColor(R.color.visualizer_fill_color);
         }
 
-        getAudioPlayerFragment().setVisualizerColor(color);
+        // check for null since updatestatusBarColor is a async task
+        AudioPlayerFragment fragment = getAudioPlayerFragment();
+        if (fragment != null) {
+            fragment.setVisualizerColor(color);
+        }
     }
 
     private void updateStatusBarColor(int color) {

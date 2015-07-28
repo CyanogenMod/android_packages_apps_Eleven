@@ -156,8 +156,6 @@ public class AudioPlayerFragment extends Fragment implements ServiceConnection {
 
     private boolean mIsPaused = false;
 
-    private boolean mFromTouch = false;
-
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
@@ -352,6 +350,7 @@ public class AudioPlayerFragment extends Fragment implements ServiceConnection {
      */
     private void initPlaybackControls() {
         mPlayPauseProgressButton = (PlayPauseProgressButton)mRootView.findViewById(R.id.playPauseProgressButton);
+        mPlayPauseProgressButton.setDragEnabled(true);
         mShuffleButton = (ShuffleButton)mRootView.findViewById(R.id.action_button_shuffle);
         mRepeatButton = (RepeatButton)mRootView.findViewById(R.id.action_button_repeat);
         mPreviousButton = (RepeatingImageButton)mRootView.findViewById(R.id.action_button_previous);
@@ -538,49 +537,48 @@ public class AudioPlayerFragment extends Fragment implements ServiceConnection {
     }
 
     private void refreshCurrentTimeText(final long pos) {
-        mCurrentTime.setText(MusicUtils.makeShortTimeString(getActivity(), pos / 1000));
+        if (mPlayPauseProgressButton.isDragging()) {
+            mCurrentTime.setText(MusicUtils.makeShortTimeString(getActivity(),
+                    mPlayPauseProgressButton.getDragProgressInMs() / 1000));
+        } else {
+            mCurrentTime.setText(MusicUtils.makeShortTimeString(getActivity(), pos / 1000));
+        }
     }
 
     /* Used to update the current time string */
     private long refreshCurrentTime() {
         if (mService == null) {
-            return 500;
+            return MusicUtils.UPDATE_FREQUENCY_MS;
         }
         try {
             final long pos = MusicUtils.position();
             if (pos >= 0 && MusicUtils.duration() > 0) {
                 refreshCurrentTimeText(pos);
 
-                if (mFromTouch) {
-                    return 500;
+                if (mPlayPauseProgressButton.isDragging()) {
+                    mCurrentTime.setVisibility(View.VISIBLE);
+                    return MusicUtils.UPDATE_FREQUENCY_FAST_MS;
                 } else if (MusicUtils.isPlaying()) {
                     mCurrentTime.setVisibility(View.VISIBLE);
+
+                    // calculate the number of milliseconds until the next full second,
+                    // so the counter can be updated at just the right time
+                    return Math.max(20, 1000 - pos % 1000);
                 } else {
                     // blink the counter
                     final int vis = mCurrentTime.getVisibility();
                     mCurrentTime.setVisibility(vis == View.INVISIBLE ? View.VISIBLE
                             : View.INVISIBLE);
-                    return 500;
                 }
             } else {
                 mCurrentTime.setText("--:--");
             }
-
-            // calculate the number of milliseconds until the next full second,
-            // so
-            // the counter can be updated at just the right time
-            final long remaining = 1000 - pos % 1000;
-            if (remaining < 20) {
-                return 20;
-            }
-
-            return remaining;
         } catch (final Exception ignored) {
             if (ignored.getMessage() != null) {
                 Log.e(TAG, ignored.getMessage());
             }
         }
-        return 500;
+        return MusicUtils.UPDATE_FREQUENCY_MS;
     }
 
     /**
