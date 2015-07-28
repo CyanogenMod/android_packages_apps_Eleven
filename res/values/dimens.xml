@@ -215,4 +215,6 @@
     <dimen name="preview_title_textSize">12sp</dimen>
     <dimen name="preview_artist_textSize">10sp</dimen>
 
+    <dimen name="small_move_distance">2dp</dimen>
+
 </resources>
