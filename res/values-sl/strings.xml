@@ -161,7 +161,7 @@
   <string name="header_5_to_9_songs">5 - 9 skladb</string>
   <string name="header_10_plus_songs">10 in več skladb</string>
   <string name="header_5_plus_albums">5 in več albumov</string>
-  <string name="header_other">"Drugo"</string>
+  <string name="header_other">"Ostalo"</string>
   <string name="footer_search_artists">Prikaži vse izvajalce</string>
   <string name="footer_search_albums">Prikaži vse albume</string>
   <string name="footer_search_songs">Prikaži vse skladbe</string>
