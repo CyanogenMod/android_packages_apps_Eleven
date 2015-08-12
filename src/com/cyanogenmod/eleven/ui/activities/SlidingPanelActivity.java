@@ -132,13 +132,11 @@ public abstract class SlidingPanelActivity extends BaseActivity {
             @Override
             public void onPanelExpanded(View panel) {
                 checkTargetNavigation();
-                getAudioPlayerFragment().setVisualizerVisible(true);
             }
 
             @Override
             public void onPanelCollapsed(View panel) {
                 checkTargetNavigation();
-                getAudioPlayerFragment().setVisualizerVisible(false);
             }
         });
     }
@@ -251,6 +249,8 @@ public abstract class SlidingPanelActivity extends BaseActivity {
      * This checks if we are at our target panel and resets our flag if we are there
      */
     protected void checkTargetNavigation() {
+        getAudioPlayerFragment().setVisualizerVisible(mTargetNavigatePanel == Panel.MusicPlayer);
+
         if (mTargetNavigatePanel == getCurrentPanel()) {
             mTargetNavigatePanel = Panel.None;
         }

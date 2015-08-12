@@ -107,21 +107,25 @@ public class VisualizerView extends View {
     }
 
     @Override
+    protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
+        super.onMeasure(widthMeasureSpec, heightMeasureSpec);
+
+        final int size = Math.min(getMeasuredWidth(), getMeasuredHeight());
+        setMeasuredDimension(size, size);
+    }
+
+    @Override
     protected void onSizeChanged(int w, int h, int oldw, int oldh) {
         super.onSizeChanged(w, h, oldw, oldh);
 
-        if (h > w) {
-            float barUnit = w / 32f;
-            float barWidth = barUnit * 8f / 9f;
-            barUnit = barWidth + (barUnit - barWidth) * 32f / 31f;
-            mPaint.setStrokeWidth(barWidth);
+        float barUnit = w / 32f;
+        float barWidth = barUnit * 8f / 9f;
+        barUnit = barWidth + (barUnit - barWidth) * 32f / 31f;
+        mPaint.setStrokeWidth(barWidth);
 
-            for (int i = 0; i < 32; i++) {
-                mFFTPoints[i * 4] = mFFTPoints[i * 4 + 2] = i * barUnit + (barWidth / 2);
-                mFFTPoints[i * 4 + 3] = h;
-            }
-        } else {
-            setVisible(false);
+        for (int i = 0; i < 32; i++) {
+            mFFTPoints[i * 4] = mFFTPoints[i * 4 + 2] = i * barUnit + (barWidth / 2);
+            mFFTPoints[i * 4 + 3] = h;
         }
     }
 
