@@ -132,13 +132,11 @@ public abstract class SlidingPanelActivity extends BaseActivity {
             @Override
             public void onPanelExpanded(View panel) {
                 checkTargetNavigation();
-                getAudioPlayerFragment().setVisualizerVisible(true);
             }
 
             @Override
             public void onPanelCollapsed(View panel) {
                 checkTargetNavigation();
-                getAudioPlayerFragment().setVisualizerVisible(false);
             }
         });
     }
@@ -254,6 +252,8 @@ public abstract class SlidingPanelActivity extends BaseActivity {
         if (mTargetNavigatePanel == getCurrentPanel()) {
             mTargetNavigatePanel = Panel.None;
         }
+
+        getAudioPlayerFragment().setVisualizerVisible(getCurrentPanel() == Panel.MusicPlayer);
     }
 
     public Panel getCurrentPanel() {
