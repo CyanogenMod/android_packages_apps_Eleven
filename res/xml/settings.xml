@@ -38,13 +38,6 @@
             <!--android:title="@string/settings_download_artist_images_title" />-->
     <!--</PreferenceCategory>-->
     <PreferenceCategory android:title="@string/settings_general_category" >
-
-        <!-- Music visualizer -->
-        <SwitchPreference
-            android:defaultValue="true"
-            android:key="music_visualization"
-            android:title="@string/settings_show_music_visualization_title" />
-
         <!-- Show Lyrics -->
         <SwitchPreference
             android:defaultValue="true"
@@ -65,6 +58,13 @@
             android:key="lockscreen_album_art"
             android:title="@string/settings_lockscreen_album_art"
             android:summary="@string/settings_lockscreen_album_art_summary"/>
+
+        <!-- Music visualizer -->
+        <SwitchPreference
+            android:defaultValue="true"
+            android:dependency="lockscreen_album_art"
+            android:key="music_visualization"
+            android:title="@string/settings_show_music_visualization_title" />
     </PreferenceCategory>
     <!-- Storage catetory -->
     <PreferenceCategory android:title="@string/settings_storage_category" >
