@@ -68,10 +68,12 @@
   <string name="save">Salvare</string>
   <string name="cancel">Anulare</string>
   <string name="overwrite">Suprascrie</string>
-  <string name="clear">Golește</string>
+  <string name="clear">Curăță</string>
   <string name="new_playlist_name_template">Listă de redare <xliff:g id="number">%d</xliff:g></string>
   <string name="create_playlist_prompt">Numele listei de redare</string>
+  <string name="delete_dialog_title">Șterge <xliff:g id="item" example="album">%s</xliff:g>?</string>
   <string name="clear_top_tracks_title">Golește melodiile de top?</string>
+  <string name="clear_recent_title">Golește lista de redare recentă?</string>
   <string name="clear_last_added">Golește ultimele adăugate?</string>
   <string name="cannot_be_undone">Această acțiune nu poate fi anulată</string>
   <string name="delete_warning">Aceasta va șterge permanent imaginile păstrate în cache</string>
@@ -108,6 +110,7 @@
   <string name="settings_delete_cache_title">Șterge cache-ul</string>
   <string name="settings_delete_cache_summary">Elimină toate imaginile din cache</string>
   <string name="settings_download_only_on_wifi_title">Descărcați doar via Wi-Fi</string>
+  <string name="settings_download_only_on_wifi_summary">Pentru a micșora taxele operatorului, nu descărcați folosind rețelele mobile</string>
   <string name="settings_download_artist_images_title">Descărcare imagine artist absentă</string>
   <string name="settings_general_category">General</string>
   <string name="settings_show_music_visualization_title">Arată vizualizarea muzicală</string>
@@ -134,7 +137,7 @@
   <string name="empty_generic_secondary">Pentru a copia muzică de pe computer în dispozitivul dvs, folosiți un cablu USB.</string>
   <string name="error_playing_track">Melodia %1$s nu poate fi redată</string>
   <string name="header_unknown_year">An necunoscut</string>
-  <string name="header_less_than_30s">Mai puţin de 30 de secunde</string>
+  <string name="header_less_than_30s">Mai puțin de 30 de secunde</string>
   <string name="header_30_to_60_seconds">30 - 60 de secunde</string>
   <string name="header_1_to_2_minutes">1 - 2 minute</string>
   <string name="header_2_to_3_minutes">2 - 3 minute</string>
