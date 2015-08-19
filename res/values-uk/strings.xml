@@ -83,6 +83,7 @@
   <string name="old_photo">Використовувати старе фото</string>
   <string name="context_menu_play_selection">Грати</string>
   <string name="context_menu_play_next">Грати наступну</string>
+  <string name="context_menu_play_album">Відтворити альбом</string>
   <string name="context_menu_more_by_artist">Більше за виконавцем</string>
   <string name="context_menu_rename_playlist">Перейменувати</string>
   <string name="context_menu_delete">Видалити</string>
