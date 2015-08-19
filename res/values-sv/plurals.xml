@@ -33,6 +33,14 @@
     <item quantity="one">1 genre</item>
     <item quantity="other"><xliff:g id="count">%d</xliff:g> genrer</item>
   </plurals>
+  <plurals name="Nhours">
+    <item quantity="one"><xliff:g id="hours">%d</xliff:g>tim</item>
+    <item quantity="other"><xliff:g id="hours">%d</xliff:g>tim</item>
+  </plurals>
+  <plurals name="Nminutes">
+    <item quantity="one"><xliff:g id="minutes">%d</xliff:g>min</item>
+    <item quantity="other"><xliff:g id="minutes">%d</xliff:g>min</item>
+  </plurals>
   <plurals name="NNNtrackstoplaylist">
     <item quantity="one">1 låt lades till spellistan.</item>
     <item quantity="other"><xliff:g id="number" example="27">%d</xliff:g> låtar lades till spellistan.</item>

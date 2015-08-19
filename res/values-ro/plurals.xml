@@ -32,9 +32,19 @@
     <item quantity="few"><xliff:g id="count">%d</xliff:g> melodii</item>
     <item quantity="other"><xliff:g id="count">%d</xliff:g> melodii</item>
   </plurals>
+  <plurals name="Nhours">
+    <item quantity="one"><xliff:g id="hours">%d</xliff:g>o</item>
+    <item quantity="few"><xliff:g id="hours">%d</xliff:g>o</item>
+    <item quantity="other"><xliff:g id="hours">%d</xliff:g>o</item>
+  </plurals>
   <plurals name="Nminutes">
     <item quantity="one"><xliff:g id="minutes">%d</xliff:g>m</item>
     <item quantity="few"><xliff:g id="minutes">%d</xliff:g>m</item>
     <item quantity="other"><xliff:g id="minutes">%d</xliff:g>m</item>
+  </plurals>
+  <plurals name="NNNtrackstoplaylist">
+    <item quantity="one"><xliff:g id="number" example="1">%d</xliff:g> melodie adăugată la lista de redare.</item>
+    <item quantity="few"><xliff:g id="number" example="1">%d</xliff:g> melodii adăugate la lista de redare.</item>
+    <item quantity="other"><xliff:g id="number" example="1">%d</xliff:g> melodii adăugate la lista de redare.</item>
   </plurals>
 </resources>
