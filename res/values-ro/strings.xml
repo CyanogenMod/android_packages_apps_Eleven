@@ -95,6 +95,7 @@
   <string name="context_menu_change_image">Modificare imagine</string>
   <string name="accessibility_play">Redare</string>
   <string name="accessibility_pause">Pauză</string>
+  <string name="accessibility_next">Înainte</string>
   <string name="accessibility_shuffle">Amestecă</string>
   <string name="accessibility_shuffle_all">Amestecă toate</string>
   <string name="accessibility_repeat">Repetă</string>
@@ -129,6 +130,7 @@
   <string name="empty_recent_main">Nicio melodie recentă</string>
   <string name="empty_recent">Melodiile redate recent vor fi afișate aici.</string>
   <string name="empty_playlist_main">Nicio melodie în lista de redare</string>
+  <string name="empty_playlist_secondary">Pentru a adăuga melodii la această listă de redare, atingeți meniul de opțiuni pe un cântec, album sau artist și selectați \"Adăugați la lista de redare\".</string>
   <string name="empty_top_tracks_main">Nicio melodie de top</string>
   <string name="empty_top_tracks_secondary">Melodiile ascultate cel mai des vor fi adăugate la această listă.</string>
   <string name="empty_last_added_main">Nicio melodie adăugată recent</string>
