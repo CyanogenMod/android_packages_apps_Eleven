@@ -30,10 +30,10 @@
     <item quantity="other"><xliff:g id="count">%d</xliff:g> سبک</item>
   </plurals>
   <plurals name="Nhours">
-    <item quantity="other"><xliff:g id="hours">%d</xliff:g>س</item>
+    <item quantity="other"><xliff:g id="hours">%d</xliff:g>ساعت</item>
   </plurals>
   <plurals name="Nminutes">
-    <item quantity="other"><xliff:g id="minutes">%d </xliff:g> د</item>
+    <item quantity="other"><xliff:g id="minutes">%d</xliff:g>دقیقه</item>
   </plurals>
   <plurals name="NNNtrackstoplaylist">
     <item quantity="other"><xliff:g id="number" example="27">%d</xliff:g> آهنگ به لیست پخش اضافه شد.</item>
@@ -42,7 +42,7 @@
     <item quantity="other"><xliff:g id="number" example="27">%d</xliff:g> آهنگ از لیست پخش حذف شد.</item>
   </plurals>
   <plurals name="NNNtrackstoqueue">
-    <item quantity="other"><xliff:g id="number" example="27">%d</xliff:g> آهنگ به صف اضافه شد.</item>
+    <item quantity="other"><xliff:g id="number" example="27">%d</xliff:g> آهنگ به صف پخش اضافه شد.</item>
   </plurals>
   <plurals name="NNNtrackstofavorites">
     <item quantity="other"><xliff:g id="number" example="27">%d</xliff:g> آهنگ به علاقه‌مندی‌ها اضافه شد.</item>

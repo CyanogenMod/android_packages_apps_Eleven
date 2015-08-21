@@ -90,7 +90,7 @@
   <string name="context_menu_fetch_album_art">دریافت تصویر جلد آلبوم</string>
   <string name="context_menu_fetch_artist_image">دریافت تصویر هنرمند</string>
   <string name="context_menu_remove_from_recent">حذف از لیست اخیر</string>
-  <string name="context_menu_use_as_ringtone">استفاده به عنوان آهنگ زنگ</string>
+  <string name="context_menu_use_as_ringtone">استفاده به عنوان صدای زنگ</string>
   <string name="context_menu_remove_from_playlist">حذف از لیست پخش</string>
   <string name="context_menu_change_image">تغییر تصویر</string>
   <string name="accessibility_play">پخش</string>
@@ -104,7 +104,7 @@
   <string name="accessibility_repeat_one">تکرار یکی</string>
   <string name="accessibility_queue">باز کردن صف</string>
   <string name="accessibility_browse">مرور موسیقی</string>
-  <string name="set_as_ringtone">«<xliff:g id="name" example="Alarm Bell">%s</xliff:g>» به عنوان آهنگ زنگ تنظیم شد</string>
+  <string name="set_as_ringtone">\'<xliff:g id="name" example="Alarm Bell">%s</xliff:g>\' به‌عنوان صدای زنگ تنظیم شد</string>
   <string name="playlist_renamed">نام لیست پخش تغییر کرد</string>
   <string name="settings_ui_category">رابط کاربری</string>
   <string name="settings_storage_category">ذخیره‌سازی</string>
