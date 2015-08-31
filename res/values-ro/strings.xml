@@ -96,6 +96,7 @@
   <string name="accessibility_play">Redare</string>
   <string name="accessibility_pause">Pauză</string>
   <string name="accessibility_next">Înainte</string>
+  <string name="accessibility_prev">Înapoi</string>
   <string name="accessibility_shuffle">Amestecă</string>
   <string name="accessibility_shuffle_all">Amestecă toate</string>
   <string name="accessibility_repeat">Repetă</string>
@@ -112,12 +113,14 @@
   <string name="settings_delete_cache_summary">Elimină toate imaginile din cache</string>
   <string name="settings_download_only_on_wifi_title">Descărcați doar via Wi-Fi</string>
   <string name="settings_download_only_on_wifi_summary">Pentru a micșora taxele operatorului, nu descărcați folosind rețelele mobile</string>
+  <string name="settings_download_missing_artwork_title">Descărcare copertă album absentă</string>
   <string name="settings_download_artist_images_title">Descărcare imagine artist absentă</string>
   <string name="settings_general_category">General</string>
   <string name="settings_show_music_visualization_title">Arată vizualizarea muzicală</string>
   <string name="settings_show_lyrics_title">Arată versurile</string>
   <string name="settings_show_lyrics_summary">Pentru melodii care au un fișier srt</string>
   <string name="settings_shake_to_play">Scuturați pentru a reda</string>
+  <string name="settings_shake_to_play_summary">Se agită dispozitivul pentru a reda melodia următoare</string>
   <string name="app_widget_small">Muzică: 4 \u00d7 1</string>
   <string name="app_widget_large">Muzică: 4 \u00d7 2</string>
   <string name="app_widget_large_alt">Muzică: 4 \u00d7 2 (alternativ)</string>
