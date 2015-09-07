@@ -33,6 +33,7 @@ import com.cyanogenmod.eleven.loaders.QueueLoader;
 import com.cyanogenmod.eleven.menu.CreateNewPlaylist;
 import com.cyanogenmod.eleven.utils.MusicUtils;
 import com.cyanogenmod.eleven.utils.NavUtils;
+import com.cyanogenmod.eleven.widgets.SleepModeDialog;
 
 /**
  * Simple Header bar wrapper class that also has its own menu bar button.
@@ -162,6 +163,9 @@ public class HeaderBar extends LinearLayout {
                 return true;
             case R.id.menu_clear_queue:
                 MusicUtils.clearQueue();
+                return true;
+            case R.id.menu_sleep_mode:
+                SleepModeDialog.show(mFragment.getFragmentManager());
                 return true;
             default:
                 break;
