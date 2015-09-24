@@ -58,8 +58,8 @@
   <string name="sort_order_entry_duration">Trajanje</string>
   <string name="sort_order_entry_date_added">Datum dodajanja</string>
   <string name="sort_order_entry_track_list">Seznam skladb</string>
-  <string name="sort_order_entry_number_of_songs">Število skladb</string>
-  <string name="sort_order_entry_number_of_albums">Število albumov</string>
+  <string name="sort_order_entry_number_of_songs">številu skladb</string>
+  <string name="sort_order_entry_number_of_albums">številu albumov</string>
   <string name="sort_order_entry_filename">Ime datoteke</string>
   <string name="playlist_last_added">Nazadnje dodano</string>
   <string name="playlist_recently_played">Nazadnje predvajano</string>
@@ -121,7 +121,7 @@
   <string name="settings_show_lyrics_summary">Za pesmi, ki imajo datoteko srt</string>
   <string name="settings_shake_to_play">Stresi za predvajanje</string>
   <string name="settings_shake_to_play_summary">Stresite svojo napravo za predvajanje naslednje skladbe</string>
-  <string name="settings_lockscreen_album_art">Naslovnica zaslona za zaklepanje</string>
+  <string name="settings_lockscreen_album_art">Naslovnica zaslona za zakl.</string>
   <string name="settings_lockscreen_album_art_summary">Nadomesti ozadje zaslona za zaklepanje z naslovnico</string>
   <string name="app_widget_small">Glasba: 4 \u00d7 1</string>
   <string name="app_widget_large">Glasba: 4 \u00d7 2</string>

@@ -44,6 +44,7 @@
   <string name="menu_clear_list">清除清單</string>
   <string name="menu_clear_recents">清除最近播放</string>
   <string name="menu_clear_queue">清除佇列</string>
+  <string name="menu_save_queue">將佇列保存到播放清單</string>
   <string name="menu_equalizer">等化器</string>
   <string name="add_to_playlist">加入播放清單</string>
   <string name="add_to_queue">加入佇列</string>
@@ -82,6 +83,7 @@
   <string name="old_photo">使用舊的相片</string>
   <string name="context_menu_play_selection">播放</string>
   <string name="context_menu_play_next">播放下一個</string>
+  <string name="context_menu_play_album">播放專輯</string>
   <string name="context_menu_more_by_artist">更多此演出者的作品</string>
   <string name="context_menu_rename_playlist">重新命名</string>
   <string name="context_menu_delete">刪除</string>
@@ -119,6 +121,8 @@
   <string name="settings_show_lyrics_summary">有 srt 檔的歌曲</string>
   <string name="settings_shake_to_play">搖動播放</string>
   <string name="settings_shake_to_play_summary">搖動您的裝置即可播放下一首歌曲</string>
+  <string name="settings_lockscreen_album_art">鎖屏專輯圖片</string>
+  <string name="settings_lockscreen_album_art_summary">將鎖屏的背景圖換成專輯圖片</string>
   <string name="app_widget_small">音樂：4 \u00d7 1</string>
   <string name="app_widget_large">音樂：4 \u00d7 2</string>
   <string name="app_widget_large_alt">音樂：4 \u00d7 2 (備用)</string>
