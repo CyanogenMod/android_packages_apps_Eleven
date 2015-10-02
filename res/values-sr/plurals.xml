@@ -20,67 +20,56 @@
   <plurals name="Nartists">
     <item quantity="one"><xliff:g id="count">%d</xliff:g> уметник</item>
     <item quantity="few"><xliff:g id="count">%d</xliff:g> уметника</item>
-    <item quantity="many"><xliff:g id="count">%d</xliff:g> уметника</item>
     <item quantity="other"><xliff:g id="count">%d</xliff:g> уметника</item>
   </plurals>
   <plurals name="Nalbums">
     <item quantity="one"><xliff:g id="count">%d</xliff:g> албум</item>
     <item quantity="few"><xliff:g id="count">%d</xliff:g> албума</item>
-    <item quantity="many"><xliff:g id="count">%d</xliff:g> албума</item>
     <item quantity="other"><xliff:g id="count">%d</xliff:g> албума</item>
   </plurals>
   <plurals name="Nsongs">
     <item quantity="one"><xliff:g id="count">%d</xliff:g> песма</item>
     <item quantity="few"><xliff:g id="count">%d</xliff:g> песме</item>
-    <item quantity="many"><xliff:g id="count">%d</xliff:g> песама</item>
     <item quantity="other"><xliff:g id="count">%d</xliff:g> песама</item>
   </plurals>
   <plurals name="Ngenres">
     <item quantity="one"><xliff:g id="count">%d</xliff:g> жанр</item>
     <item quantity="few"><xliff:g id="count">%d</xliff:g> жанра</item>
-    <item quantity="many"><xliff:g id="count">%d</xliff:g> жанрова</item>
     <item quantity="other"><xliff:g id="count">%d</xliff:g> жанрова</item>
   </plurals>
   <plurals name="Nhours">
     <item quantity="one"><xliff:g id="hours">%d</xliff:g>ч</item>
     <item quantity="few"><xliff:g id="hours">%d</xliff:g>ч</item>
-    <item quantity="many"><xliff:g id="hours">%d</xliff:g>ч</item>
     <item quantity="other"><xliff:g id="hours">%d</xliff:g>ч</item>
   </plurals>
   <plurals name="Nminutes">
     <item quantity="one"><xliff:g id="minutes">%d</xliff:g>м</item>
     <item quantity="few"><xliff:g id="minutes">%d</xliff:g>м</item>
-    <item quantity="many"><xliff:g id="minutes">%d</xliff:g>м</item>
     <item quantity="other"><xliff:g id="minutes">%d</xliff:g>м</item>
   </plurals>
   <plurals name="NNNtrackstoplaylist">
     <item quantity="one"><xliff:g id="number" example="1">%d</xliff:g> песма додата на плејлисту.</item>
     <item quantity="few"><xliff:g id="number" example="27">%d</xliff:g> песме додате на плејлисту.</item>
-    <item quantity="many"><xliff:g id="number" example="27">%d</xliff:g> песама додато на плејлисту.</item>
     <item quantity="other"><xliff:g id="number" example="27">%d</xliff:g> песама додато на плејлисту.</item>
   </plurals>
   <plurals name="NNNtracksfromplaylist">
     <item quantity="one"><xliff:g id="number" example="1">%d</xliff:g> песма уклоњена са плејлисте.</item>
     <item quantity="few"><xliff:g id="number" example="27">%d</xliff:g> песме уклоњене са плејлисте.</item>
-    <item quantity="many"><xliff:g id="number" example="27">%d</xliff:g> песама уклоњено са плејлисте.</item>
     <item quantity="other"><xliff:g id="number" example="27">%d</xliff:g> песама уклоњено са плејлисте.</item>
   </plurals>
   <plurals name="NNNtrackstoqueue">
     <item quantity="one"><xliff:g id="number" example="1">%d</xliff:g> песма додата у ред.</item>
     <item quantity="few"><xliff:g id="number" example="27">%d</xliff:g> песме додате у ред.</item>
-    <item quantity="many"><xliff:g id="number" example="27">%d</xliff:g> песама додато у ред.</item>
     <item quantity="other"><xliff:g id="number" example="27">%d</xliff:g> песама додато у ред.</item>
   </plurals>
   <plurals name="NNNtrackstofavorites">
     <item quantity="one"><xliff:g id="number" example="1">%d</xliff:g> песма додата у омиљене.</item>
     <item quantity="few"><xliff:g id="number" example="27">%d</xliff:g> песме додате у омиљене.</item>
-    <item quantity="many"><xliff:g id="number" example="27">%d</xliff:g> песама додато у омиљене.</item>
     <item quantity="other"><xliff:g id="number" example="27">%d</xliff:g> песама додато у омиљене.</item>
   </plurals>
   <plurals name="NNNtracksdeleted">
     <item quantity="one"><xliff:g id="songs_to_delete" example="1">%d</xliff:g> песма је избрисана.</item>
     <item quantity="few"><xliff:g id="songs_to_delete">%d</xliff:g> песме су избрисане.</item>
-    <item quantity="many"><xliff:g id="songs_to_delete">%d</xliff:g> песама је избрисано.</item>
     <item quantity="other"><xliff:g id="songs_to_delete">%d</xliff:g> песама је избрисано.</item>
   </plurals>
 </resources>
