@@ -29,7 +29,6 @@ import android.util.Log;
 
 import com.cyanogenmod.eleven.lastfm.Result.Status;
 
-import org.apache.http.HttpStatus;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.xml.sax.InputSource;
@@ -142,7 +141,7 @@ public class Caller {
             } catch (final IOException ioEx) {
                 // We will assume that the server is not ready
                 Log.e(TAG, "Failed to download data", ioEx);
-                lastResult = Result.createHttpErrorResult(HttpStatus.SC_SERVICE_UNAVAILABLE,
+                lastResult = Result.createHttpErrorResult(HttpURLConnection.HTTP_UNAVAILABLE,
                         ioEx.getLocalizedMessage());
                 return lastResult;
             }
