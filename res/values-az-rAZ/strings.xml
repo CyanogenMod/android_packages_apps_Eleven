@@ -65,10 +65,51 @@
   <string name="playlist_recently_played">Son çalınan</string>
   <string name="playlist_top_tracks">Top musiqilərim</string>
   <string name="new_playlist">Yeni çalma siyahısı</string>
+  <string name="save">Saxla</string>
+  <string name="cancel">İmtina</string>
+  <string name="overwrite">Üzərinə yaz</string>
+  <string name="clear">Təmizlə</string>
+  <string name="new_playlist_name_template">Çalma siyahısı <xliff:g id="number">%d</xliff:g></string>
+  <string name="create_playlist_prompt">Çalma siyahısı adı</string>
+  <string name="delete_dialog_title"><xliff:g id="item" example="album">%s</xliff:g> silinsin?</string>
+  <string name="clear_recent_title">Son çalınanlar təmizlənsin?</string>
+  <string name="clear_last_added">Son əlavə edilənlər təmizlənsin?</string>
+  <string name="cannot_be_undone">Bu əməliyyat geri alına bilməz</string>
   <string name="new_photo">Qalereyadan foto seçin</string>
+  <string name="google_search">Google axtarışı</string>
   <string name="use_default">İlkin fotodan istifadə et</string>
   <string name="old_photo">Köhnə fotodan istifadə et</string>
+  <string name="context_menu_play_selection">Çal</string>
+  <string name="context_menu_play_next">Sonrakını çal</string>
+  <string name="context_menu_play_album">Albomu oynat</string>
+  <string name="context_menu_more_by_artist">Sənətçidən daha çox</string>
+  <string name="context_menu_rename_playlist">Yenidən adlandır</string>
+  <string name="context_menu_delete">Sil</string>
+  <string name="context_menu_fetch_album_art">Albomun üz qabığını endir</string>
+  <string name="context_menu_fetch_artist_image">Sənətçinin şəklini endir</string>
+  <string name="context_menu_remove_from_recent">Son çalınanlardan çıxart</string>
+  <string name="context_menu_use_as_ringtone">Zəng səsi kimi istifadə et</string>
+  <string name="context_menu_remove_from_playlist">Çalma siyahısından çıxart</string>
+  <string name="context_menu_change_image">Şəkli dəyişdir</string>
+  <string name="accessibility_play">Çal</string>
+  <string name="accessibility_pause">Fasilə</string>
+  <string name="accessibility_next">Sonrakı</string>
+  <string name="accessibility_prev">Əvvəlki</string>
+  <string name="accessibility_shuffle">Qarışdır</string>
+  <string name="accessibility_shuffle_all">Hamısını qarışdır</string>
+  <string name="accessibility_repeat">Təkrarla</string>
+  <string name="accessibility_repeat_all">Hamısını təkrarla</string>
+  <string name="accessibility_repeat_one">Birini təkrarla</string>
+  <string name="accessibility_queue">Növbəni aç</string>
+  <string name="accessibility_browse">Musiqini gözdən keçir</string>
+  <string name="set_as_ringtone">\'<xliff:g id="name" example="Alarm Bell">%s</xliff:g>\' zəng səsi kimi tənzimləndi</string>
+  <string name="playlist_renamed">Çalma siyahısını yenidən adlandır</string>
+  <string name="settings_ui_category">İnterfeys</string>
+  <string name="settings_storage_category">Saxlama</string>
   <string name="settings_data_category">Verilənlər</string>
+  <string name="settings_download_only_on_wifi_title">Yalnız Wi-Fi ilə endir</string>
+  <string name="settings_download_only_on_wifi_summary">Operator xərclərini azaltmaq üçün mobil şəbəkələr üzərindən endirmə etməyin</string>
+  <string name="settings_download_missing_artwork_title">Əskik albom üz qabıqlarını endir</string>
   <string name="settings_download_artist_images_title">Əskik sənətkar şəkillərini endir</string>
   <string name="settings_general_category">Ümumi</string>
   <string name="settings_show_music_visualization_title">Musiqi əyaniləşdiricini göstər</string>
@@ -118,4 +159,8 @@
   <string name="header_other">"Digər"</string>
   <string name="footer_search_artists">Bütün sənətkarları göstər</string>
   <string name="footer_search_albums">Bütün albomları göstər</string>
+  <string name="footer_search_songs">Bütün mahnıları göstər</string>
+  <string name="footer_search_playlists">Bütün siyahıları göstər</string>
+  <string name="searchHint">Musiqi axtar</string>
+  <string name="duration_format"><xliff:g id="hours">%1$s</xliff:g> <xliff:g id="minutes">%2$s</xliff:g></string>
 </resources>

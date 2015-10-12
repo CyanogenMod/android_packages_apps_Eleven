@@ -44,6 +44,7 @@
   <string name="menu_clear_list">Llimpiar llista</string>
   <string name="menu_clear_recents">Llimpiar reciente</string>
   <string name="menu_clear_queue">Llimpiar cola</string>
+  <string name="menu_save_queue">Guardar cola a la llista de reproducción</string>
   <string name="menu_equalizer">Ecualizador</string>
   <string name="add_to_playlist">Amestar a la llista reproducción</string>
   <string name="add_to_queue">Amestar a la cola</string>
@@ -82,6 +83,7 @@
   <string name="old_photo">Usar imaxe previa</string>
   <string name="context_menu_play_selection">Reproducir</string>
   <string name="context_menu_play_next">Siguiente</string>
+  <string name="context_menu_play_album">Reproducir álbum</string>
   <string name="context_menu_more_by_artist">Más del artista</string>
   <string name="context_menu_rename_playlist">Renomar</string>
   <string name="context_menu_delete">Desaniciar</string>
