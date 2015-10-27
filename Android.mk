@@ -14,13 +14,14 @@ LOCAL_STATIC_JAVA_LIBRARIES := \
     android-support-v7-palette \
     android-support-v7-cardview \
     android-common \
-    eleven_support_v4 \
-    eleven_recyclerview \
+    android-support-v4 \
+    android-support-v7-recyclerview \
     guava
 
 LOCAL_AAPT_FLAGS := \
     --auto-add-overlay \
-    --extra-packages android.support.v7.cardview
+    --extra-packages android.support.v7.cardview \
+    --extra-packages android.support.v7.recyclerview
 
 LOCAL_PACKAGE_NAME := Eleven
 LOCAL_OVERRIDES_PACKAGES := Music
@@ -36,7 +37,4 @@ include $(BUILD_PACKAGE)
 
 include $(CLEAR_VARS)
 
-LOCAL_PREBUILT_STATIC_JAVA_LIBRARIES := \
-    eleven_recyclerview:libs/android-support-v7-recyclerview.jar \
-    eleven_support_v4:libs/android-support-v4-21.jar
 include $(BUILD_MULTI_PREBUILT)
