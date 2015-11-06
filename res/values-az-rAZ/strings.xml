@@ -162,5 +162,9 @@
   <string name="footer_search_songs">Bütün mahnıları göstər</string>
   <string name="footer_search_playlists">Bütün siyahıları göstər</string>
   <string name="searchHint">Musiqi axtar</string>
+  <string name="search_title_artists">Bütün \"%s\" sənətkarları</string>
+  <string name="search_title_albums">Bütün \"%s\" albomları</string>
+  <string name="search_title_songs">Bütün \"%s\" mahnıları</string>
+  <string name="search_title_playlists">Bütün \"%s\" çalma siyahıları</string>
   <string name="duration_format"><xliff:g id="hours">%1$s</xliff:g> <xliff:g id="minutes">%2$s</xliff:g></string>
 </resources>
