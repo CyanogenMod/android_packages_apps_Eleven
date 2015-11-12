@@ -82,7 +82,7 @@ import static com.cyanogenmod.eleven.utils.MusicUtils.mService;
 
 /**
  * Provides the search interface for Apollo.
- * 
+ *
  * @author Andrew Neal (andrewdneal@gmail.com)
  */
 public class SearchActivity extends FragmentActivity implements
@@ -346,10 +346,6 @@ public class SearchActivity extends FragmentActivity implements
             // Start the loader for the search history
             getSupportLoaderManager().initLoader(HISTORY_LOADER, null, mSearchHistoryCallback);
         }
-
-        // set the background on the root view
-        getWindow().getDecorView().getRootView().setBackgroundColor(
-                getResources().getColor(R.color.background_color));
     }
 
     /**
