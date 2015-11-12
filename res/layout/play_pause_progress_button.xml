@@ -30,7 +30,8 @@
         android:contentDescription="@string/accessibility_play"
         android:focusable="true"
         android:scaleType="centerCrop"
-        android:src="@drawable/btn_playback_play" />
+        android:src="@drawable/btn_playback_play"
+        android:background="@color/accent" />
 
     <ProgressBar
         android:id="@+id/progressBarBackground"
