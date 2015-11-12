@@ -20,8 +20,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:columnCount="2"
-    android:rowCount="3"
-    android:background="@drawable/appwidget_bg"
+    android:rowCount="4"
+    android:background="@color/black"
     android:gravity="top"
     android:padding="@dimen/app_widget_padding"
     tools:ignore="NestedWeights" >
@@ -78,12 +78,6 @@
     </LinearLayout>
 
     <LinearLayout
-        android:layout_gravity="fill_horizontal"
-        android:layout_height="1dp"
-        android:layout_columnSpan="2"
-        android:background="@color/widget_divider" />
-
-    <LinearLayout
         android:id="@+id/app_widget_small_info_container"
         android:layout_gravity="fill"
         android:layout_columnSpan="2"
@@ -113,7 +107,6 @@
             android:paddingRight="5dp"
             android:singleLine="true"
             android:text="@string/app_widget_text_separator"
-            android:fontFamily="sans-serif-light"
             android:textColor="@color/widget_text"
             android:textSize="@dimen/text_size_small" />
 
@@ -124,7 +117,6 @@
             android:ellipsize="marquee"
             android:singleLine="true"
             android:textColor="@color/widget_text"
-            android:fontFamily="sans-serif-light"
             android:textSize="@dimen/text_size_small" />
     </LinearLayout>
 
