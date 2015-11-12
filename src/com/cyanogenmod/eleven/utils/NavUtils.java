@@ -23,6 +23,7 @@ import android.media.audiofx.AudioEffect;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.cyanogenmod.eleven.Config;
 import com.cyanogenmod.eleven.R;
@@ -34,14 +35,14 @@ import java.util.List;
 
 /**
  * Various navigation helpers.
- * 
+ *
  * @author Andrew Neal (andrewdneal@gmail.com)
  */
 public final class NavUtils {
 
     /**
      * Opens the profile of an artist.
-     * 
+     *
      * @param context The {@link Activity} to use.
      * @param artistName The name of the artist
      */
@@ -61,7 +62,7 @@ public final class NavUtils {
 
     /**
      * Opens the profile of an album.
-     * 
+     *
      * @param context The {@link Activity} to use.
      * @param albumName The name of the album
      * @param artistName The name of the album artist
@@ -126,7 +127,7 @@ public final class NavUtils {
 
     /**
      * Opens the sound effects panel or DSP manager in CM
-     * 
+     *
      * @param context The {@link Activity} to use.
      * @param requestCode The request code passed into startActivityForResult
      */
@@ -135,8 +136,8 @@ public final class NavUtils {
             // The google MusicFX apps need to be started using startActivityForResult
             context.startActivityForResult(createEffectsIntent(), requestCode);
         } catch (final ActivityNotFoundException notFound) {
-            CustomToast.makeText(context, context.getString(R.string.no_effects_for_you),
-                    CustomToast.LENGTH_SHORT).show();
+            Toast.makeText(context, context.getString(R.string.no_effects_for_you),
+                    Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -151,7 +152,7 @@ public final class NavUtils {
 
     /**
      * Opens to {@link SettingsActivity}.
-     * 
+     *
      * @param activity The {@link Activity} to use.
      */
     public static void openSettings(final Activity activity) {
@@ -161,7 +162,7 @@ public final class NavUtils {
 
     /**
      * Opens to {@link com.cyanogenmod.eleven.ui.activities.SearchActivity}.
-     * 
+     *
      * @param activity The {@link Activity} to use.
      * @param query The search query.
      */
@@ -175,7 +176,7 @@ public final class NavUtils {
 
     /**
      * Opens to {@link com.cyanogenmod.eleven.ui.activities.HomeActivity}.
-     * 
+     *
      * @param activity The {@link Activity} to use.
      */
     public static void goHome(final Activity activity, final int browseIndex) {

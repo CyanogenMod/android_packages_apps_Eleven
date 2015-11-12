@@ -90,7 +90,6 @@
                 android:ellipsize="end"
                 android:maxLines="1"
                 android:textAllCaps="true"
-                android:fontFamily="sans-serif-light"
                 android:textColor="@color/header_action_bar_text_color"
                 android:textSize="@dimen/text_size_micro" />
     </LinearLayout>
