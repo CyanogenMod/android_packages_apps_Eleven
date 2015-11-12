@@ -17,20 +17,20 @@
 <resources>
 
     <!-- Text sizes -->
-    <dimen name="text_size_extra_micro">10.0sp</dimen>
-    <dimen name="text_size_micro">12.0sp</dimen>
-    <dimen name="text_size_small">12.0sp</dimen>
-    <dimen name="text_size_medium">14.0sp</dimen>
-    <dimen name="text_size_large">16.0sp</dimen>
-    <dimen name="text_size_x_large">22.0sp</dimen>
-    <dimen name="text_size_dayum">34.0sp</dimen>
+    <dimen name="text_size_extra_micro">12sp</dimen>
+    <dimen name="text_size_micro">13sp</dimen>
+    <dimen name="text_size_small">14sp</dimen>
+    <dimen name="text_size_medium">16sp</dimen>
+    <dimen name="text_size_large">22sp</dimen>
+    <dimen name="text_size_x_large">24sp</dimen>
+    <dimen name="text_size_dayum">34sp</dimen>
 
     <!-- Frequently used spacing between elements in many layouts -->
-    <dimen name="standard_padding">16.0dip</dimen>
+    <dimen name="standard_padding">16.0dp</dimen>
 
     <!-- overflow menu used on page headers and in list items -->
-    <dimen name="overflow_height">48.0dip</dimen>
-    <dimen name="overflow_width">38.0dip</dimen>
+    <dimen name="overflow_height">56dp</dimen>
+    <dimen name="overflow_width">48dp</dimen>
 
     <!-- List and grid view padding -->
     <dimen name="list_preferred_item_padding">14.0dip</dimen>
@@ -47,19 +47,19 @@
     <dimen name="list_item_queue_text_padding_left">15.0dip</dimen>
 
     <!-- List view fast scroll padding left -->
-    <dimen name="fast_scroll_padding_left">8.0dip</dimen>
+    <dimen name="fast_scroll_padding_left">8dp</dimen>
     <!-- List view fast scroll padding right -->
-    <dimen name="fast_scroll_padding_right">8.0dip</dimen>
+    <dimen name="fast_scroll_padding_right">8dp</dimen>
     <!-- grid view vertical and horizontal spacing -->
-    <dimen name="grid_item_horizontal_spacing">8.0dip</dimen>
-    <dimen name="grid_item_vertical_spacing">8.0dip</dimen>
+    <dimen name="grid_item_horizontal_spacing">2dp</dimen>
+    <dimen name="grid_item_vertical_spacing">2dp</dimen>
     <!-- List item detailed height -->
-    <dimen name="list_item_detailed_height">120.0dip</dimen>
+    <dimen name="list_item_detailed_height">128dp</dimen>
     <!-- Top margin of "line_two" -->
-    <dimen name="list_item_line_two_margin_top">8.0dip</dimen>
+    <dimen name="list_item_line_two_margin_top">8dp</dimen>
     <!-- Left padding in the grid text -->
-    <dimen name="grid_item_padding_left">8.0dip</dimen>
-    <dimen name="grid_item_padding_right">5.0dip</dimen>
+    <dimen name="grid_item_padding_left">16dp</dimen>
+    <dimen name="grid_item_padding_right">16dp</dimen>
     <!-- Left padding in the grid text -->
     <dimen name="grid_bottom_height">44dip</dimen>
     <!-- Grid and list item normal height -->

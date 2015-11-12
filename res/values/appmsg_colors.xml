@@ -15,8 +15,8 @@
  -->
 <resources>
 
-    <color name="alert">#CC0000</color>
-    <color name="confirm">#FF8800</color>
-    <color name="info">#669900</color>
+    <color name="alert">@color/red</color>
+    <color name="confirm">@color/orange</color>
+    <color name="info">@color/green</color>
 
 </resources>
