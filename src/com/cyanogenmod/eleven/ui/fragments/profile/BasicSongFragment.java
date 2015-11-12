@@ -145,7 +145,7 @@ public abstract class BasicSongFragment extends Fragment implements
         // The View for the fragment's UI
         mRootView = (ViewGroup) inflater.inflate(R.layout.list_base, null);
         // set the background on the root view
-        mRootView.setBackgroundColor(getResources().getColor(R.color.background_color));
+        mRootView.setBackgroundColor(getResources().getColor(R.color.white));
         // Initialize the list
         mListView = (ListView) mRootView.findViewById(R.id.list_base);
         // Set the data behind the list

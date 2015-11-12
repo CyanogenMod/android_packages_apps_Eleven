@@ -10,7 +10,8 @@
         android:layout_centerVertical="true"
         android:gravity="center_vertical"
         android:orientation="horizontal"
-        android:layout_marginRight="@dimen/list_item_general_margin" >
+        android:layout_marginRight="@dimen/list_item_general_margin"
+        android:color="@color/white" >
         <ImageView
             android:id="@+id/now_playing"
             android:layout_width="wrap_content"

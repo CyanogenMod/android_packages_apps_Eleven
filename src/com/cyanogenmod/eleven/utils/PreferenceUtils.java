@@ -28,7 +28,7 @@ import com.cyanogenmod.eleven.ui.fragments.phone.MusicBrowserPhoneFragment;
 /**
  * A collection of helpers designed to get and set various preferences across
  * Apollo.
- * 
+ *
  * @author Andrew Neal (andrewdneal@gmail.com)
  */
 public final class PreferenceUtils {
@@ -90,7 +90,7 @@ public final class PreferenceUtils {
 
     /**
      * Constructor for <code>PreferenceUtils</code>
-     * 
+     *
      * @param context The {@link Context} to use.
      */
     public PreferenceUtils(final Context context) {
@@ -110,7 +110,7 @@ public final class PreferenceUtils {
 
     /**
      * Saves the current page the user is on when they close the app.
-     * 
+     *
      * @param value The last page the pager was on when the onDestroy is called
      *            in {@link MusicBrowserPhoneFragment}.
      */
@@ -126,7 +126,7 @@ public final class PreferenceUtils {
             }
         }, (Void[])null);
     }
-    
+
     /**
      * Set the listener for preference change
      * @param listener
@@ -137,7 +137,7 @@ public final class PreferenceUtils {
 
     /**
      * Returns the last page the user was on when the app was exited.
-     * 
+     *
      * @return The page to start on when the app is opened.
      */
     public final int getStartPage() {
@@ -146,7 +146,7 @@ public final class PreferenceUtils {
 
     /**
      * Sets the new theme color.
-     * 
+     *
      * @param value The new theme color to use.
      */
     public void setDefaultThemeColor(final int value) {
@@ -164,13 +164,13 @@ public final class PreferenceUtils {
 
     /**
      * Returns the current theme color.
-     * 
+     *
      * @param context The {@link Context} to use.
      * @return The default theme color.
      */
     public final int getDefaultThemeColor(final Context context) {
         return mPreferences.getInt(DEFAULT_THEME_COLOR,
-                context.getResources().getColor(R.color.holo_blue_light));
+                context.getResources().getColor(R.color.blue));
     }
 
     /**
@@ -199,7 +199,7 @@ public final class PreferenceUtils {
 
     /**
      * Saves the sort order for a list.
-     * 
+     *
      * @param key Which sort order to change
      * @param value The new sort order
      */
@@ -218,7 +218,7 @@ public final class PreferenceUtils {
 
     /**
      * Sets the sort order for the artist list.
-     * 
+     *
      * @param value The new sort order
      */
     public void setArtistSortOrder(final String value) {
@@ -234,7 +234,7 @@ public final class PreferenceUtils {
 
     /**
      * Sets the sort order for the artist song list.
-     * 
+     *
      * @param value The new sort order
      */
     public void setArtistSongSortOrder(final String value) {
@@ -252,7 +252,7 @@ public final class PreferenceUtils {
 
     /**
      * Sets the sort order for the artist album list.
-     * 
+     *
      * @param value The new sort order
      */
     public void setArtistAlbumSortOrder(final String value) {
@@ -270,7 +270,7 @@ public final class PreferenceUtils {
 
     /**
      * Sets the sort order for the album list.
-     * 
+     *
      * @param value The new sort order
      */
     public void setAlbumSortOrder(final String value) {
@@ -286,7 +286,7 @@ public final class PreferenceUtils {
 
     /**
      * Sets the sort order for the album song list.
-     * 
+     *
      * @param value The new sort order
      */
     public void setAlbumSongSortOrder(final String value) {
@@ -304,7 +304,7 @@ public final class PreferenceUtils {
 
     /**
      * Sets the sort order for the song list.
-     * 
+     *
      * @param value The new sort order
      */
     public void setSongSortOrder(final String value) {
@@ -337,7 +337,7 @@ public final class PreferenceUtils {
     public boolean getShowVisualizer() {
         return mPreferences.getBoolean(SHOW_VISUALIZER, true);
     }
-    
+
     public boolean getShakeToPlay() {
         return mPreferences.getBoolean(SHAKE_TO_PLAY, false);
     }

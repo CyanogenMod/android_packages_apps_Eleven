@@ -88,8 +88,6 @@ public class LetterTileDrawable extends Drawable {
             DEFAULT_PLAYLIST = BitmapFactory.decodeResource(res, R.drawable.ic_playlist);
             DEFAULT_PLAYLIST_LARGE = BitmapFactory.decodeResource(res, R.drawable.ic_playlist_lg);
 
-            sPaint.setTypeface(Typeface.create(
-                    res.getString(R.string.letter_tile_letter_font_family), Typeface.NORMAL));
             sPaint.setTextAlign(Align.CENTER);
             sPaint.setAntiAlias(true);
         }
@@ -336,7 +334,7 @@ public class LetterTileDrawable extends Drawable {
     public static BitmapWithColors createDefaultBitmap(Context context, String identifier,
             ImageType type, boolean isCircle, boolean smallArtwork) {
         initializeStaticVariables(context.getResources());
-        
+
         identifier = MusicUtils.getTrimmedName(identifier);
 
         // get the default bitmap to determine what to draw to

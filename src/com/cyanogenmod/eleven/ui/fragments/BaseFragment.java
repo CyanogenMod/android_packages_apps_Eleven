@@ -60,8 +60,6 @@ public abstract class BaseFragment extends Fragment implements MusicStateListene
     public final View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // The View for the fragment's UI
         mRootView = (ViewGroup) inflater.inflate(getLayoutToInflate(), null);
-        // set the background color
-        mRootView.setBackgroundColor(getResources().getColor(R.color.background_color));
         // eat any touches that fall through to the root so they aren't
         // passed on to fragments "behind" the current one.
         mRootView.setOnTouchListener(new View.OnTouchListener() {

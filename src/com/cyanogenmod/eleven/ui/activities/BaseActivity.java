@@ -140,9 +140,6 @@ public abstract class BaseActivity extends FragmentActivity implements ServiceCo
 
         getActionBar().setTitle(getString(R.string.app_name).toUpperCase());
 
-        // set the background on the root view
-        getWindow().getDecorView().getRootView().setBackgroundColor(
-                getResources().getColor(R.color.background_color));
         // Initialze the bottom action bar
         initBottomActionBar();
 
