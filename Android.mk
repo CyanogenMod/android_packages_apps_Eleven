@@ -7,7 +7,8 @@ LOCAL_SRC_FILES := src/com/cyanogenmod/eleven/IElevenService.aidl
 LOCAL_SRC_FILES += $(call all-java-files-under, src)
 
 LOCAL_RESOURCE_DIR := $(addprefix $(LOCAL_PATH)/, res) \
-frameworks/support/v7/cardview/res
+    $(TOP)/frameworks/support/v7/cardview/res \
+    $(TOP)/frameworks/support/v7/recyclerview/res
 
 LOCAL_STATIC_JAVA_LIBRARIES := \
     android-support-v8-renderscript \
@@ -21,7 +22,7 @@ LOCAL_STATIC_JAVA_LIBRARIES := \
 LOCAL_AAPT_FLAGS := \
     --auto-add-overlay \
     --extra-packages android.support.v7.cardview \
-    --extra-packages android.support.v7.recyclerview
+    --extra-packages android.support.v7.recyclerview \
 
 LOCAL_PACKAGE_NAME := Eleven
 LOCAL_OVERRIDES_PACKAGES := Music
