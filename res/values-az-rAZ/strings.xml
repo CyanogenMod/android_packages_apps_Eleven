@@ -75,6 +75,7 @@
   <string name="clear_recent_title">Son çalınanlar təmizlənsin?</string>
   <string name="clear_last_added">Son əlavə edilənlər təmizlənsin?</string>
   <string name="cannot_be_undone">Bu əməliyyat geri alına bilməz</string>
+  <string name="delete_warning">Bu, gizli yaddaşda olan təsvirləri birdəfəlik siləcək</string>
   <string name="new_photo">Qalereyadan foto seçin</string>
   <string name="google_search">Google axtarışı</string>
   <string name="use_default">İlkin fotodan istifadə et</string>
@@ -107,6 +108,8 @@
   <string name="settings_ui_category">İnterfeys</string>
   <string name="settings_storage_category">Saxlama</string>
   <string name="settings_data_category">Verilənlər</string>
+  <string name="settings_delete_cache_title">Gizli yaddaşı sil</string>
+  <string name="settings_delete_cache_summary">Gizli yaddaşdakı bütün təsvirləri sil</string>
   <string name="settings_download_only_on_wifi_title">Yalnız Wi-Fi ilə endir</string>
   <string name="settings_download_only_on_wifi_summary">Operator xərclərini azaltmaq üçün mobil şəbəkələr üzərindən endirmə etməyin</string>
   <string name="settings_download_missing_artwork_title">Əskik albom üz qabıqlarını endir</string>
