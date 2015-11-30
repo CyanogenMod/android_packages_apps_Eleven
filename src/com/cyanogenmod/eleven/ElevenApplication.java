@@ -14,6 +14,8 @@
 package com.cyanogenmod.eleven;
 
 import android.app.Application;
+import android.content.SharedPreferences;
+import android.content.Intent;
 import android.os.StrictMode;
 
 import com.cyanogenmod.eleven.cache.ImageCache;
@@ -25,7 +27,7 @@ import java.util.logging.Logger;
  * Used to turn off logging for jaudiotagger and free up memory when
  * {@code #onLowMemory()} is called on pre-ICS devices. On post-ICS memory is
  * released within {@link ImageCache}.
- * 
+ *
  * @author Andrew Neal (andrewdneal@gmail.com)
  */
 public class ElevenApplication extends Application {
@@ -40,6 +42,18 @@ public class ElevenApplication extends Application {
         enableStrictMode();
         // Turn off logging for jaudiotagger.
         Logger.getLogger("org.jaudiotagger").setLevel(Level.OFF);
+    }
+
+    @Override
+    public void onResume() {
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
+        boolean previouslyStarted = prefs.getBoolean(getString(R.string.pref_previously_started), false);
+        if(!previouslyStarted) {
+            SharedPreferences.Editor edit = prefs.edit();
+            edit.putBoolean(getString(R.string.pref_previously_started), Boolean.TRUE);
+            edit.commit();
+            WarmWelcome();
+        }
     }
 
     /**
@@ -62,5 +76,10 @@ public class ElevenApplication extends Application {
             StrictMode.setThreadPolicy(threadPolicyBuilder.build());
             StrictMode.setVmPolicy(vmPolicyBuilder.build());
         }
+    }
+
+    private void WarmWelcome() {
+        Intent mSetup = new Intent(this, ElevenIntro.class);
+        startActivity(mSetup);
     }
 }
