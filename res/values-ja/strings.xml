@@ -55,7 +55,7 @@
   <string name="sort_order_entry_artist">アーティスト</string>
   <string name="sort_order_entry_album">アルバム</string>
   <string name="sort_order_entry_year">年</string>
-  <string name="sort_order_entry_duration">長さ</string>
+  <string name="sort_order_entry_duration">時間</string>
   <string name="sort_order_entry_date_added">追加日</string>
   <string name="sort_order_entry_track_list">トラックリスト</string>
   <string name="sort_order_entry_number_of_songs">曲数</string>

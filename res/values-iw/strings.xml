@@ -103,7 +103,7 @@
   <string name="accessibility_repeat_all">חזור על הכל</string>
   <string name="accessibility_repeat_one">חזור על נוכחי</string>
   <string name="accessibility_queue">פתח את תור ההשמעה</string>
-  <string name="accessibility_browse">הצג מוסיקה</string>
+  <string name="accessibility_browse">הצג מוזיקה</string>
   <string name="set_as_ringtone">\"<xliff:g id="name" example="Alarm Bell">%s</xliff:g>\" נקבע כצלצול</string>
   <string name="playlist_renamed">שם רשימת ההשמעה שונה</string>
   <string name="settings_ui_category">ממשק</string>
@@ -123,10 +123,10 @@
   <string name="settings_shake_to_play_summary">נער את המכשיר כדי לנגן את השיר הבא</string>
   <string name="settings_lockscreen_album_art">תמונת אלבום במסך הנעילה</string>
   <string name="settings_lockscreen_album_art_summary">החלף את רקע מסך הנעילה בתמונת האלבום המתנגן</string>
-  <string name="app_widget_small">מוסיקה: 4 \u00d7 1</string>
-  <string name="app_widget_large">מוסיקה: 4 \u00d7 2</string>
-  <string name="app_widget_large_alt">מוסיקה: 4 \u00d7 2 (חלופי)</string>
-  <string name="app_widget_recent">מוסיקה: הושמעו לאחרונה</string>
+  <string name="app_widget_small">מוזיקה: 4 \u00d7 1</string>
+  <string name="app_widget_large">מוזיקה: 4 \u00d7 2</string>
+  <string name="app_widget_large_alt">מוזיקה: 4 \u00d7 2 (חלופי)</string>
+  <string name="app_widget_recent">מוזיקה: הושמעו לאחרונה</string>
   <string name="no_effects_for_you">האקולייזר לא הצליח להיפתח.</string>
   <string name="empty_music">כדי להעתיק מוזיקה מהמחשב למכשיר השתמש בכבל USB.</string>
   <string name="empty_search">לא נמצאו תוצאות חיפוש</string>
