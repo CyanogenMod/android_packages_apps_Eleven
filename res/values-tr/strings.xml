@@ -25,7 +25,7 @@
   <string name="page_playlists">Çalma listeleri</string>
   <string name="page_genres">Türler</string>
   <string name="page_now_playing">Şimdi Çalınıyor</string>
-  <string name="page_play_queue">Kuyruğu çal</string>
+  <string name="page_play_queue">Kuyruğu Çal</string>
   <string name="header_albums">Albümler</string>
   <string name="header_top_songs">Üst Şarkılar</string>
   <string name="header_all_songs">Tüm Şarkılar</string>
@@ -42,13 +42,13 @@
   <string name="menu_play_all">Tümünü çal</string>
   <string name="menu_sort_by">Sıralama ölçütü:</string>
   <string name="menu_clear_list">Listeyi temizle</string>
-  <string name="menu_clear_recents">Son çalınanları temizle</string>
+  <string name="menu_clear_recents">Sonkileri temizle</string>
   <string name="menu_clear_queue">Kuyruğu sil</string>
   <string name="menu_save_queue">Kuyruğu çalma listesine kaydet</string>
   <string name="menu_equalizer">Equalizer / Dengeleyici</string>
   <string name="add_to_playlist">Çalma listesine ekle</string>
   <string name="add_to_queue">Kuyruğa ekle</string>
-  <string name="remove_from_recent">Son çalınanlardan kaldır</string>
+  <string name="remove_from_recent">Sonkilerden kaldır</string>
   <string name="remove_from_queue">Kuyruktan çıkar</string>
   <string name="sort_order_entry_az">A-Z</string>
   <string name="sort_order_entry_za">Z-A</string>
@@ -68,8 +68,6 @@
   <string name="save">Kaydet</string>
   <string name="cancel">İptal</string>
   <string name="overwrite">Üzerine yaz</string>
-  <string name="clear">Temizle</string>
-  <string name="new_playlist_name_template">Çalma listesi <xliff:g id="number">%d</xliff:g></string>
   <string name="create_playlist_prompt">Çalma listesi adı</string>
   <string name="delete_dialog_title"><xliff:g id="item" example="album">%s</xliff:g> silinsin mi?</string>
   <string name="clear_top_tracks_title">Üst parçalar temizlensin mi?</string>
@@ -85,8 +83,6 @@
   <string name="context_menu_play_next">Sonrakini çal</string>
   <string name="context_menu_play_album">Albümü oynat</string>
   <string name="context_menu_more_by_artist">Sanatçıdan başka şarkılar</string>
-  <string name="context_menu_rename_playlist">Yeniden adlandır</string>
-  <string name="context_menu_delete">Sil</string>
   <string name="context_menu_fetch_album_art">Albüm kapağını indir</string>
   <string name="context_menu_fetch_artist_image">Sanatçı resmini indir</string>
   <string name="context_menu_remove_from_recent">Son çalınanlardan çıkar</string>
@@ -104,9 +100,6 @@
   <string name="accessibility_repeat_one">Birini tekrarla</string>
   <string name="accessibility_queue">Kuyruğu aç</string>
   <string name="accessibility_browse">Müziğe gözat</string>
-  <string name="set_as_ringtone">\'<xliff:g id="name" example="Alarm Bell">%s</xliff:g>\' zil sesi olarak ayarlandı</string>
-  <string name="playlist_renamed">Çalma listesi yeniden adlandırıldı</string>
-  <string name="settings_ui_category">Arayüz</string>
   <string name="settings_storage_category">Depolama</string>
   <string name="settings_data_category">Veri</string>
   <string name="settings_delete_cache_title">Önbelleği sil</string>
@@ -115,61 +108,14 @@
   <string name="settings_download_only_on_wifi_summary">Operatör veri ücretlerini azaltmak için mobil şebeke üzerinden indirme yapmayın</string>
   <string name="settings_download_missing_artwork_title">Eksik albüm kapaklarını indir</string>
   <string name="settings_download_artist_images_title">Eksik sanatçı resimlerini indir</string>
-  <string name="settings_general_category">Genel</string>
-  <string name="settings_show_music_visualization_title">Müzik görselleştirmelerini göster</string>
   <string name="settings_show_lyrics_title">Şarkı sözlerini göster</string>
   <string name="settings_show_lyrics_summary">srt dosyası olan şarkılar için</string>
   <string name="settings_shake_to_play">Oynatmak için sallayın</string>
-  <string name="settings_shake_to_play_summary">Sıradaki şarkıyı oynatmak için cihazınızı sallayın</string>
-  <string name="settings_lockscreen_album_art">Kilit ekranı albüm görseli</string>
   <string name="settings_lockscreen_album_art_summary">Kilit ekranı arkaplanını albüm görseli ile değiştirir</string>
   <string name="app_widget_small">Müzik: 4 \u00d7 1</string>
   <string name="app_widget_large">Müzik: 4 \u00d7 2</string>
-  <string name="app_widget_large_alt">Müzik: 4 \u00d7 2 (alternatif)</string>
-  <string name="app_widget_recent">Müzik: son zamanlarda dinlenen</string>
   <string name="no_effects_for_you">Equalizer açılamadı.</string>
-  <string name="empty_music">Bilgisayarınızdan müzik kopyalamak için USB kablo kullanın.</string>
-  <string name="empty_search">Arama sonucu bulunamadı</string>
-  <string name="empty_search_check">Lütfen doğru kelime girdiğinizi kontrol edin ya da farklı bir kelime deneyin.</string>
-  <string name="empty_favorite">Favori işaretlediğiniz şarkılar burada gözükecek.</string>
+  <string name="empty_music">Bilgisayarınızdan cihazınıza müzik kopyalamak için USB kablo kullanın.</string>
   <string name="empty_recent_main">Son çalınan şarkı yok</string>
   <string name="empty_recent">Son zamanlarda dinlediğiniz şarkılar burada gösterilecek.</string>
-  <string name="empty_playlist_main">Çalma listesinde şarkı yok</string>
-  <string name="empty_playlist_secondary">Bu çalma listesine şarkı eklemek için, seçeneklerden \"Çalma listesine ekle\"yi tıklayın.</string>
-  <string name="empty_top_tracks_main">Üst şarkı yok</string>
-  <string name="empty_top_tracks_secondary">Çoğu zaman dinlediğiniz şarkılar bu listeye eklenecek.</string>
-  <string name="empty_last_added_main">Son zamanlarda şarkı eklenmedi</string>
-  <string name="empty_last_added">Geçen ay boyunca eklediğiniz şarkılar burada gösterilecek.</string>
-  <string name="empty_generic_main">Müzik bulunamadı</string>
-  <string name="empty_generic_secondary">Bilgisayarınızdan müzik kopyalamak için USB kablo kullanın.</string>
-  <string name="empty_queue_main">Çalma kuyruğunda şarkı yok</string>
-  <string name="empty_queue_secondary">Çalma Kuyruğuna şarkı eklemek için, seçeneklerden \"Kuyruğa ekle\"yi tıklayın.</string>
-  <string name="error_playing_track">%1$s parçası oynatılamıyor</string>
-  <string name="header_unknown_year">Bilinmeyen yıl</string>
-  <string name="header_less_than_30s">30 saniyeden daha az</string>
-  <string name="header_30_to_60_seconds">30 - 60 saniye</string>
-  <string name="header_1_to_2_minutes">1 - 2 dakika</string>
-  <string name="header_2_to_3_minutes">2 - 3 dakika</string>
-  <string name="header_3_to_4_minutes">3 - 4 dakika</string>
-  <string name="header_4_to_5_minutes">4 - 5 dakika</string>
-  <string name="header_5_to_10_minutes">5 - 10 dakika</string>
-  <string name="header_10_to_30_minutes">10 - 30 dakika</string>
-  <string name="header_30_to_60_minutes">30 - 60 dakika</string>
-  <string name="header_greater_than_60_minutes">60 dakikadan daha fazla</string>
-  <string name="header_1_song">1 şarkı</string>
-  <string name="header_2_to_4_songs">2 - 4 şarkı</string>
-  <string name="header_5_to_9_songs">5 - 9 şarkı</string>
-  <string name="header_10_plus_songs">10+ şarkı</string>
-  <string name="header_5_plus_albums">5+ albüm</string>
-  <string name="header_other">"Diğer"</string>
-  <string name="footer_search_artists">Tüm sanatçıları göster</string>
-  <string name="footer_search_albums">Tüm albümleri göster</string>
-  <string name="footer_search_songs">Tüm şarkıları göster</string>
-  <string name="footer_search_playlists">Tüm listeleri göster</string>
-  <string name="searchHint">Müzik ara</string>
-  <string name="search_title_artists">Tüm \"%s\" sanatçıları</string>
-  <string name="search_title_albums">Tüm \"%s\" albümleri</string>
-  <string name="search_title_songs">Tüm \"%s\" şarkıları</string>
-  <string name="search_title_playlists">Tüm \"%s\" çalma listeleri</string>
-  <string name="duration_format"><xliff:g id="hours">%1$s</xliff:g> <xliff:g id="minutes">%2$s</xliff:g></string>
 </resources>

@@ -33,6 +33,10 @@
     <item quantity="one"><xliff:g id="count">%d</xliff:g> género</item>
     <item quantity="other"><xliff:g id="count">%d</xliff:g> géneros</item>
   </plurals>
+  <plurals name="Nhours">
+    <item quantity="one"><xliff:g id="hours">%d</xliff:g>h</item>
+    <item quantity="other"><xliff:g id="hours">%d</xliff:g>h</item>
+  </plurals>
   <plurals name="Nminutes">
     <item quantity="one"><xliff:g id="minutes">%d</xliff:g>min</item>
     <item quantity="other"><xliff:g id="minutes">%d</xliff:g>mins</item>
@@ -52,5 +56,9 @@
   <plurals name="NNNtrackstofavorites">
     <item quantity="one"><xliff:g id="number" example="1">%d</xliff:g> canción añadida a favoritos.</item>
     <item quantity="other"><xliff:g id="number" example="27">%d</xliff:g> canciones añadidas a favoritos.</item>
+  </plurals>
+  <plurals name="NNNtracksdeleted">
+    <item quantity="one"><xliff:g id="songs_to_delete" example="1">%d</xliff:g> canción fue eliminada.</item>
+    <item quantity="other"><xliff:g id="songs_to_delete">%d</xliff:g> canciones fueron eliminadas.</item>
   </plurals>
 </resources>
