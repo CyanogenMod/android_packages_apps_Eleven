@@ -25,7 +25,7 @@
   <string name="page_playlists">Playlist</string>
   <string name="page_genres">Generi</string>
   <string name="page_now_playing">In riproduzione</string>
-  <string name="page_play_queue">Riproduci coda</string>
+  <string name="page_play_queue">Coda di riproduzione</string>
   <string name="header_albums">Album</string>
   <string name="header_top_songs">Canzoni più ascoltate</string>
   <string name="header_all_songs">Tutte le canzoni</string>
