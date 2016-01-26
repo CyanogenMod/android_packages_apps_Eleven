@@ -22,7 +22,7 @@ LOCAL_STATIC_JAVA_LIBRARIES := \
 LOCAL_AAPT_FLAGS := \
     --auto-add-overlay \
     --extra-packages android.support.v7.cardview \
-    --extra-packages android.support.v7.recyclerview
+    --extra-packages android.support.v7.recyclerview \
 
 LOCAL_PACKAGE_NAME := Eleven
 LOCAL_OVERRIDES_PACKAGES := Music

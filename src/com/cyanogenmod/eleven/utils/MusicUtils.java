@@ -39,6 +39,7 @@ import android.provider.MediaStore.MediaColumns;
 import android.provider.Settings;
 import android.util.Log;
 import android.view.Menu;
+import android.widget.Toast;
 
 import com.cyanogenmod.eleven.Config.IdType;
 import com.cyanogenmod.eleven.Config.SmartPlaylistType;
@@ -1148,7 +1149,7 @@ public final class MusicUtils {
         }
         final String message = context.getResources().getQuantityString(
                 R.plurals.NNNtrackstoplaylist, numinserted, numinserted);
-        CustomToast.makeText((Activity)context, message, CustomToast.LENGTH_SHORT).show();
+        Toast.makeText((Activity)context, message, Toast.LENGTH_SHORT).show();
         playlistChanged();
     }
 
@@ -1167,7 +1168,7 @@ public final class MusicUtils {
         });
         final String message = context.getResources().getQuantityString(
                 R.plurals.NNNtracksfromplaylist, 1, 1);
-        CustomToast.makeText((Activity)context, message, CustomToast.LENGTH_SHORT).show();
+        Toast.makeText((Activity)context, message, Toast.LENGTH_SHORT).show();
         playlistChanged();
     }
 
@@ -1183,7 +1184,7 @@ public final class MusicUtils {
         try {
             mService.enqueue(list, MusicPlaybackService.LAST, sourceId, sourceType.mId);
             final String message = makeLabel(context, R.plurals.NNNtrackstoqueue, list.length);
-            CustomToast.makeText((Activity) context, message, CustomToast.LENGTH_SHORT).show();
+            Toast.makeText((Activity) context, message, Toast.LENGTH_SHORT).show();
         } catch (final RemoteException ignored) {
         }
     }
@@ -1217,7 +1218,7 @@ public final class MusicUtils {
                 Settings.System.putString(resolver, Settings.System.RINGTONE, uri.toString());
                 final String message = context.getString(R.string.set_as_ringtone,
                         cursor.getString(2));
-                CustomToast.makeText((Activity)context, message, CustomToast.LENGTH_SHORT).show();
+                Toast.makeText((Activity)context, message, Toast.LENGTH_SHORT).show();
             }
         } finally {
             if (cursor != null) {
@@ -1641,7 +1642,7 @@ public final class MusicUtils {
 
         final String message = makeLabel(context, R.plurals.NNNtracksdeleted, list.length);
 
-        CustomToast.makeText((Activity)context, message, CustomToast.LENGTH_SHORT).show();
+        Toast.makeText((Activity)context, message, Toast.LENGTH_SHORT).show();
         // We deleted a number of tracks, which could affect any number of
         // things
         // in the media content domain, so update everything.
