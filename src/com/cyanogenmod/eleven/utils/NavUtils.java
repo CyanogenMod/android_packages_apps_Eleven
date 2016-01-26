@@ -23,6 +23,7 @@ import android.media.audiofx.AudioEffect;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.cyanogenmod.eleven.Config;
 import com.cyanogenmod.eleven.R;
@@ -135,8 +136,8 @@ public final class NavUtils {
             // The google MusicFX apps need to be started using startActivityForResult
             context.startActivityForResult(createEffectsIntent(), requestCode);
         } catch (final ActivityNotFoundException notFound) {
-            CustomToast.makeText(context, context.getString(R.string.no_effects_for_you),
-                    CustomToast.LENGTH_SHORT).show();
+            Toast.makeText(context, context.getString(R.string.no_effects_for_you),
+                    Toast.LENGTH_SHORT).show();
         }
     }
 

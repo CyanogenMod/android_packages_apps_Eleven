@@ -30,6 +30,5 @@
         android:gravity="center_vertical"
         android:textAllCaps="true"
         android:textColor="@color/list_item_header_text_color"
-        android:textSize="@dimen/list_item_header_size"
-        android:fontFamily="sans-serif-light" />
+        android:textSize="@dimen/list_item_header_size" />
 </RelativeLayout>
