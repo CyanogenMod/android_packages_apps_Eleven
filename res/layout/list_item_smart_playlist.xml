@@ -19,8 +19,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="@dimen/item_normal_height"
-    android:background="@color/smart_playlist_item_background"
     android:minHeight="@dimen/item_normal_height"
+    android:elevation="2dp"
     tools:ignore="ContentDescription">
     <RelativeLayout
         android:layout_width="match_parent"

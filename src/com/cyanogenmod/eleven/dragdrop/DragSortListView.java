@@ -393,9 +393,8 @@ public class DragSortListView extends ListView {
                 DragSortController.ON_DOWN, DragSortController.FLING_RIGHT_REMOVE);
         mController.setRemoveEnabled(true);
         mController.setSortEnabled(true);
-        /* Transparent holo light blue */
         mController
-                .setBackgroundColor(getResources().getColor(R.color.holo_blue_light_transparent));
+                .setBackgroundColor(getResources().getColor(R.color.accent));
 
         mFloatViewManager = mController;
         setOnTouchListener(mController);
