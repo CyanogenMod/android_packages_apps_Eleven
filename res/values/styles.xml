@@ -24,11 +24,13 @@
         <item name="android:textAppearanceLargePopupMenu">@style/LargePopupMenu</item>
         <item name="android:listViewStyle">@style/ListView</item>
         <item name="android:actionBarStyle">@style/ActionBar</item>
-        <item name="android:actionOverflowButtonStyle">@style/ActionOverFlowButton</item>
         <item name="android:actionBarWidgetTheme">@style/ActionBarWidgetTheme</item>
         <item name="android:colorPrimary">@color/primary</item>
         <item name="android:colorPrimaryDark">@color/primary_dark</item>
         <item name="android:colorAccent">@color/accent</item>
+        <item name="android:windowContentTransitions">true</item>
+        <item name="android:windowAllowEnterTransitionOverlap">false</item>
+        <item name="android:windowAllowReturnTransitionOverlap">false</item>
     </style>
 
     <style name="ActionBarWidgetTheme" parent="@android:style/Theme.Material">
@@ -54,46 +56,25 @@
         <item name="android:dividerHeight">@dimen/divider_height</item>
     </style>
 
-    <!-- Sets up the pop up menu backgroudn resource -->
-    <style name="PopupMenu" parent="@android:style/Widget.Material.PopupMenu">
-        <item name="android:popupBackground">@drawable/menu_background</item>
-    </style>
+    <style name="PopupMenu" parent="@android:style/Widget.Material.PopupMenu"/>
 
-    <!-- Sets up the pop up menu divider color and height -->
-    <style name="DropDownListView" parent="@android:style/Widget.Material.ListView.DropDown">
-        <item name="android:divider">@color/menu_divider_color</item>
-        <item name="android:dividerHeight">@dimen/divider_height</item>
-    </style>
+    <style name="DropDownListView" parent="@android:style/Widget.Material.ListView.DropDown"/>
 
     <!-- Sets up the pop up menu text color and size -->
     <style name="SmallPopupMenu" parent="@android:style/TextAppearance.Widget.PopupMenu.Small">
-        <item name="android:fontFamily">sans-serif-light</item>
         <item name="android:textColor">@color/menu_text_color</item>
         <item name="android:textSize">@dimen/text_size_medium</item>
     </style>
 
     <!-- Sets up the pop up menu text color and size -->
     <style name="LargePopupMenu" parent="@android:style/TextAppearance.Widget.PopupMenu.Large">
-        <item name="android:fontFamily">sans-serif-light</item>
         <item name="android:textColor">@color/menu_text_color</item>
         <item name="android:textSize">@dimen/text_size_medium</item>
     </style>
 
     <!-- Sets the action bar title text style -->
     <style name="ActionBar" parent="@android:style/Widget.Material.ActionBar">
-        <item name="android:titleTextStyle">@style/ActionBar.TitleText</item>
-        <item name="android:subtitleTextStyle">@style/ActionBar.SubtitleText</item>
         <item name="android:background">@color/header_action_bar_color</item>
-    </style>
-
-    <!-- Sets the action bar title text color -->
-    <style name="ActionBar.TitleText" parent="@android:style/TextAppearance.Material.Widget.ActionBar.Title">
-        <item name="android:textColor">@color/header_action_bar_text_color</item>
-        <item name="android:textSize">@dimen/text_size_medium</item>
-    </style>
-
-    <style name="ActionBar.SubtitleText" parent="@android:style/TextAppearance.Material.Widget.ActionBar.Subtitle">
-        <item name="android:textColor">@color/header_action_bar_text_color</item>
     </style>
 
     <!-- Sets the action bar menu icon -->
@@ -108,7 +89,6 @@
     <style name="ListItemMainText">
         <item name="android:textColor">@color/list_item_text_color</item>
         <item name="android:textSize">@dimen/list_item_main_text_size</item>
-        <item name="android:fontFamily">sans-serif</item>
         <item name="android:textStyle">bold</item>
         <item name="android:ellipsize">end</item>
     </style>
@@ -126,7 +106,6 @@
     <style name="ListItemSecondaryText">
         <item name="android:textColor">@color/list_item_text_color</item>
         <item name="android:textSize">@dimen/list_item_secondary_text_size</item>
-        <item name="android:fontFamily">sans-serif-light</item>
         <item name="android:textStyle">normal</item>
         <item name="android:ellipsize">end</item>
     </style>
@@ -189,13 +168,11 @@
     </style>
 
     <style name="BottomActionBarLineOne" parent="@style/BottomActionBarText">
-        <item name="android:fontFamily">sans-serif</item>
         <item name="android:textStyle">bold</item>
         <item name="android:textSize">@dimen/text_size_small</item>
     </style>
 
     <style name="BottomActionBarLineTwo" parent="@style/BottomActionBarText">
-        <item name="android:fontFamily">sans-serif-light</item>
         <item name="android:textSize">@dimen/text_size_extra_micro</item>
     </style>
 
@@ -213,6 +190,5 @@
     <style name="HeaderTabTextStyle" parent="android:style/Widget.Material.ActionBar.TabText">
         <item name="android:textColor">@color/tab_text_color</item>
         <item name="android:textSize">@dimen/tab_text_size</item>
-        <item name="android:fontFamily">"sans-serif-medium"</item>
     </style>
 </resources>

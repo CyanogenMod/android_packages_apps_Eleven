@@ -336,7 +336,7 @@ public class LetterTileDrawable extends Drawable {
     public static BitmapWithColors createDefaultBitmap(Context context, String identifier,
             ImageType type, boolean isCircle, boolean smallArtwork) {
         initializeStaticVariables(context.getResources());
-        
+
         identifier = MusicUtils.getTrimmedName(identifier);
 
         // get the default bitmap to determine what to draw to

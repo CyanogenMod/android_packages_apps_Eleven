@@ -116,9 +116,6 @@ public class AudioPlayerFragment extends Fragment implements ServiceConnection {
     // Next button
     private RepeatingImageButton mNextButton;
 
-    private BrowseButton mBrowseButton;
-    private QueueButton mQueueButton;
-
     // Album art ListView
     private ViewPager mAlbumArtViewPager;
     private LoadingEmptyContainer mQueueEmpty;
@@ -355,10 +352,6 @@ public class AudioPlayerFragment extends Fragment implements ServiceConnection {
         mRepeatButton = (RepeatButton)mRootView.findViewById(R.id.action_button_repeat);
         mPreviousButton = (RepeatingImageButton)mRootView.findViewById(R.id.action_button_previous);
         mNextButton = (RepeatingImageButton)mRootView.findViewById(R.id.action_button_next);
-        mBrowseButton = (BrowseButton)mRootView.findViewById(R.id.action_button_browse);
-        mBrowseButton.setActivity(getActivity());
-        mQueueButton = (QueueButton)mRootView.findViewById(R.id.action_button_queue);
-        mQueueButton.setActivity(getActivity());
 
         // Album art view pager
         mAlbumArtViewPager = (ViewPager)mRootView.findViewById(R.id.audio_player_album_art_viewpager);
