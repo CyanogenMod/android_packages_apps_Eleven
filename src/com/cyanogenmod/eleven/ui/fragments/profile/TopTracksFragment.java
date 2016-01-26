@@ -16,6 +16,7 @@ package com.cyanogenmod.eleven.ui.fragments.profile;
 import android.app.Activity;
 import android.os.Bundle;
 import android.support.v4.content.Loader;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
@@ -69,8 +70,15 @@ implements ISetupActionBar {
     }
 
     @Override
+    public final View onCreateView(LayoutInflater inflater, ViewGroup container,
+            Bundle savedInstanceState) {
+        setupActionBar();
+        return super.onCreateView(inflater, container, savedInstanceState);
+    }
+
     public void setupActionBar() {
         ((BaseActivity)getActivity()).setupActionBar(R.string.playlist_top_tracks);
+        ((BaseActivity)getActivity()).setActionBarElevation(true);
     }
 
     public class TopTracksAdapter extends SongAdapter {

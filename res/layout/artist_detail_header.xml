@@ -16,7 +16,6 @@
         android:layout_marginLeft="@dimen/list_item_general_margin"
         android:layout_below="@id/hero"
         android:gravity="center_vertical"
-        android:fontFamily="sans-serif-light"
         android:textAllCaps="true"
         android:textColor="@color/list_item_header_text_color"
         android:textSize="@dimen/text_size_medium"
@@ -26,7 +25,7 @@
         android:id="@+id/albums"
         android:scrollbars="none"
         android:layout_width="match_parent"
-        android:layout_height="148dp"
+        android:layout_height="230dp"
         android:layout_below="@id/albums_label" />
 
     <TextView
@@ -36,7 +35,6 @@
         android:layout_marginLeft="@dimen/list_item_general_margin"
         android:layout_below="@id/albums"
         android:gravity="bottom"
-        android:fontFamily="sans-serif-light"
         android:textAllCaps="true"
         android:textColor="@color/list_item_header_text_color"
         android:textSize="@dimen/text_size_medium"

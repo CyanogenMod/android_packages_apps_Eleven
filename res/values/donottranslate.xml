@@ -22,7 +22,5 @@
     <string name="durationformatlong" translatable="false"><xliff:g id="format">%1$d:%2$02d:%3$02d</xliff:g></string>
     <!-- Do not translate. This provides a separator for two strings -->
     <string name="combine_two_strings" translatable="false">%1$s | %2$s</string>
-
-    <!-- Font family used when drawing letters for letter tile avatars. -->
-    <string name="letter_tile_letter_font_family" translatable="false">sans-serif-light</string>
+    <string name="letter_tile_letter_font_family" translatable="false">roboto</string>
 </resources>

@@ -16,6 +16,9 @@ package com.cyanogenmod.eleven.ui.fragments;
 import android.app.Activity;
 import android.os.Bundle;
 import android.support.v4.content.Loader;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 
 import com.cyanogenmod.eleven.Config;
 import com.cyanogenmod.eleven.Config.SmartPlaylistType;
@@ -84,8 +87,16 @@ public class RecentFragment extends SmartPlaylistFragment implements ISetupActio
     }
 
     @Override
+    public final View onCreateView(LayoutInflater inflater, ViewGroup container,
+            Bundle savedInstanceState) {
+        setupActionBar();
+        return super.onCreateView(inflater, container, savedInstanceState);
+    }
+
+    @Override
     public void setupActionBar() {
         ((BaseActivity)getActivity()).setupActionBar(R.string.playlist_recently_played);
+        ((BaseActivity)getActivity()).setActionBarElevation(true);
     }
 
     @Override
