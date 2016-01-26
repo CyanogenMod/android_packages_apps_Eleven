@@ -393,9 +393,8 @@ public class DragSortListView extends ListView {
                 DragSortController.ON_DOWN, DragSortController.FLING_RIGHT_REMOVE);
         mController.setRemoveEnabled(true);
         mController.setSortEnabled(true);
-        /* Transparent holo light blue */
         mController
-                .setBackgroundColor(getResources().getColor(R.color.holo_blue_light_transparent));
+                .setBackgroundColor(getResources().getColor(R.color.accent));
 
         mFloatViewManager = mController;
         setOnTouchListener(mController);
@@ -1101,7 +1100,7 @@ public class DragSortListView extends ListView {
     /**
      * Set the width of each drag scroll region by specifying a fraction of the
      * ListView height.
-     * 
+     *
      * @param heightFraction Fraction of ListView height. Capped at 0.5f.
      */
     public void setDragScrollStart(final float heightFraction) {
@@ -1503,7 +1502,7 @@ public class DragSortListView extends ListView {
      * 
      * @param position Item to drag.
      * @param dragFlags Flags that restrict some movements of the floating View.
-     *            For example, set <code>dragFlags |= 
+     *            For example, set <code>dragFlags |=
      * ~{@link #DRAG_NEG_X}</code> to allow dragging the floating View in all
      *            directions except off the screen to the left.
      * @param deltaX Offset in x of the touch coordinate from the left edge of
@@ -1538,7 +1537,7 @@ public class DragSortListView extends ListView {
      * @param position Item to drag.
      * @param floatView Floating View.
      * @param dragFlags Flags that restrict some movements of the floating View.
-     *            For example, set <code>dragFlags |= 
+     *            For example, set <code>dragFlags |=
      * ~{@link #DRAG_NEG_X}</code> to allow dragging the floating View in all
      *            directions except off the screen to the left.
      * @param deltaX Offset in x of the touch coordinate from the left edge of
@@ -1723,7 +1722,7 @@ public class DragSortListView extends ListView {
          * can be changed here. Also, the upcoming location of the float View
          * can be altered by setting <code>location.x</code> and
          * <code>location.y</code>.
-         * 
+         *
          * @param floatView The floating View.
          * @param location The location (top-left; relative to DSLV top-left) at
          *            which the float View would like to appear, given the
