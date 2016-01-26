@@ -16,112 +16,107 @@
 -->
 <resources>
     <!-- Material -->
-    <color name="primary">#607D8B</color>
-    <color name="primary_dark">#455A64</color>
-    <color name="primary_light">#78909C</color>
-    <color name="accent">#3f51b5</color>
+    <color name="primary">#333333</color>
+    <color name="primary_dark">#282828</color>
+    <color name="primary_light">#444444</color>
+    <color name="accent">#009688</color>
 
-    <!-- light color -->
-    <color name="background_color">#ffe4e9ed</color>
-
-    <!-- See through -->
-    <color name="transparent">#00000000</color>
-
-    <!-- Black -->
-    <color name="black">#212121</color>
-
-    <!-- White -->
+    <!-- Main colors -->
+    <color name="black">#333333</color>
+    <color name="semitransparent_black">#a0333333</color>
     <color name="white">#fafafa</color>
+    <color name="grey">#9e9e9e</color>
+    <color name="grey_dark">#616161</color>
+    <color name="purple">#9C27B0</color>
+    <color name="indigo">#673AB7</color>
+    <color name="green">#4CAF50</color>
+    <color name="red">#F44336</color>
+    <color name="orange">#FF5722</color>
+    <color name="brown">#795548</color>
+    <color name="teal">#009688</color>
+    <color name="blue">#3F51B5</color>
+    <color name="purple_dark">#7B1FA2</color>
+    <color name="indigo_dark">#512DA8</color>
+    <color name="green_dark">#388E3C</color>
+    <color name="red_dark">#D32F2F</color>
+    <color name="orange_dark">#F57C00</color>
+    <color name="brown_dark">#5D4037</color>
+    <color name="teal_dark">#00796B</color>
+    <color name="blue_dark">#303F9F</color>
 
     <!-- Standard Text Color -->
-    <color name="default_text_color">#cc231f20</color>
-    <color name="default_text_color_light">#bfffffff</color>
+    <color name="default_text_color">@color/black</color>
+    <color name="default_text_color_light">@color/white</color>
 
-    <!-- Transparent black -->
-    <color name="transparent_black">#99000000</color>
+    <!-- Cards -->
+    <color name="cards_bg_color">#273139</color>
+    <color name="cardOne">@color/white</color>
+    <color name="cardTwo">#e0e0e0</color>
 
-    <!-- Transparent white -->
-    <color name="transparent_white">#ffcccccc</color>
+    <!-- Transparent colors -->
+    <color name="transparent">#00000000</color>
+    <color name="transparent_black">#99212121</color>
+    <color name="transparent_white">#99fafafa</color>
+    <color name="transparent_blue">#993F51B5</color>
 
-    <!-- A light, Holo shade of blue -->
-    <color name="holo_blue_light">#ff33b5e5</color>
-
-    <!-- A light, transparent Holo shade of blue -->
-    <color name="holo_blue_light_transparent">#9933b5e5</color>
-
-    <!-- A light Holo shade of green -->
-    <color name="holo_green_light">#ff99cc00</color>
-
-    <!-- A light Holo shade of red -->
-    <color name="holo_red_light">#ffff4444</color>
-
-    <!-- A Holo shade of purple -->
-    <color name="holo_purple">#ffaa66cc</color>
-
-    <!-- A light Holo shade of orange -->
-    <color name="holo_orange_light">#ffffbb33</color>
-
-    <!-- A dark Holo shade of orange -->
-    <color name="holo_orange_dark">#ffff8800</color>
+    <color name="background_color">@color/white</color>
 
     <!-- Color for the action bar -->
-    <color name="header_action_bar_color">#ff31353f</color>
-    <color name="header_action_bar_text_color">#bfffffff</color>
+    <color name="header_action_bar_color">@color/primary</color>
+    <color name="header_action_bar_text_color">#f5f5f5</color>
+    <color name="header_action_bar_text_color_active">#ffffff</color>
     <color name="bottom_action_bar_text_color">@color/default_text_color_light</color>
 
     <!-- Background color used on some page headers -->
-    <color name="page_header_background">#fff4f4f4</color>
+    <color name="page_header_background">@color/white</color>
 
     <!-- Color for background for shadow on playlist page -->
-    <color name="header_shadow_color">#ea31353f</color>
+    <color name="header_shadow_color">#ea212121</color>
 
     <!-- Color for the pop up menu -->
-    <color name="menu_divider_color">#4ca19d9e</color>
+    <color name="menu_divider_color">@color/transparent</color>
     <color name="menu_text_color">@color/black</color>
 
     <!-- List view related colors -->
-    <color name="smart_playlist_item_background">#1931353f</color>
-    <color name="list_item_background">#4ce4e9ed</color>
-    <color name="list_item_header_text_color">#ff3d4049</color>
-    <color name="list_item_search_footer_text_color">#ff41a4f4</color>
+    <color name="list_item_background">#4cfafafa</color>
+    <color name="list_item_header_text_color">@color/black</color>
+    <color name="list_item_search_footer_text_color">@color/accent</color>
     <color name="list_item_text_color">@color/default_text_color</color>
     <color name="list_item_text_color_light">@color/default_text_color_light</color>
-    <color name="list_item_divider_color">#4c231f20</color>
-    <color name="list_item_divider_color_light">#34ffffff</color>
-    <color name="grid_list_item_text_color">#b3231f20</color>
+    <color name="list_item_divider_color">#4c212121</color>
+    <color name="list_item_divider_color_light">#34fafafa</color>
+    <color name="grid_list_item_text_color">#b3212121</color>
 
     <!-- Top title page colors -->
-    <color name="tab_ripple_color">#ffffff</color>
-    <color name="tab_accent_color">#ffffff</color>
-    <color name="tab_selected_underline_color">#ffffff</color>
+    <color name="tab_ripple_color">@color/white</color>
+    <color name="tab_accent_color">@color/white</color>
+    <color name="tab_selected_underline_color">@color/white</color>
 
     <!-- Search Colors -->
-    <color name="search_hint_color">#4cffffff</color>
+    <color name="search_hint_color">@color/white</color>
 
     <!-- Color for the text on the audio player -->
     <color name="audio_player_text_color">@color/default_text_color_light</color>
 
     <!-- Color for the Progress bar -->
-    <color name="circular_progress_bar_background">#66ffffff</color>
+    <color name="circular_progress_bar_background">#40ffffff</color>
     <color name="circular_progress_bar">@color/white</color>
 
     <!-- search no results text color -->
-    <color name="no_results">#ff231f20</color>
+    <color name="no_results">@color/black</color>
     <color name="no_results_light">@color/white</color>
 
-    <color name="now_playing_divider">#40ffffff</color>
+    <color name="now_playing_divider">@color/transparent</color>
 
     <!-- App widget colors -->
-    <color name="widget_divider">#373737</color>
-    <!-- 80% opacity white -->
-    <color name="widget_text">#ccffffff</color>
+    <color name="widget_text">@color/white</color>
 
     <!-- Background Lyrics Color -->
-    <color name="lyrics_background_color">#b2000000</color>
+    <color name="lyrics_background_color">#b2212121</color>
 
     <!-- Letter tile colors -->
-    <color name="letter_tile_default_color">#cccccc</color>
-    <color name="letter_tile_font_color">#ffffff</color>
+    <color name="letter_tile_default_color">@color/grey</color>
+    <color name="letter_tile_font_color">@color/white</color>
     <array name="letter_tile_colors">
         <item>@color/letter_tile_purple_color</item>
         <item>@color/letter_tile_blue_color</item>
@@ -147,5 +142,5 @@
     </array>
 
     <!-- Color for the visualizer bars -->
-    <color name="visualizer_fill_color">#bfffffff</color>
+    <color name="visualizer_fill_color">#bffafafa</color>
 </resources>

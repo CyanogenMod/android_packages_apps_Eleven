@@ -19,9 +19,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="@dimen/app_widget_large_min_height"
-    android:background="@drawable/appwidget_bg"
+    android:background="@color/black"
     android:columnCount="2"
-    android:rowCount="3"
+    android:rowCount="4"
     tools:ignore="ContentDescription" >
 
     <ImageView
@@ -48,23 +48,15 @@
             android:id="@+id/app_widget_large_alternate_line_two"
             style="@style/NotificationText"
             android:textColor="@color/widget_text"
-            android:fontFamily="sans-serif-light"
             android:textSize="@dimen/text_size_small" />
 
         <TextView
             android:id="@+id/app_widget_large_alternate_line_three"
             style="@style/NotificationText"
             android:textColor="@color/widget_text"
-            android:fontFamily="sans-serif-light"
             android:textSize="@dimen/text_size_small" />
 
     </LinearLayout>
-
-    <LinearLayout
-        android:layout_gravity="fill_horizontal"
-        android:layout_height="1dp"
-        android:layout_columnSpan="2"
-        android:background="@color/widget_divider" />
 
     <LinearLayout
         android:id="@+id/app_widget_large_alternate_buttons"

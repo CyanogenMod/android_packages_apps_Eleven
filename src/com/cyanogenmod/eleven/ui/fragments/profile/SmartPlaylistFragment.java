@@ -48,7 +48,8 @@ public abstract class SmartPlaylistFragment extends BasicSongFragment
     public int getLoaderId() { return LOADER; }
 
     @Override
-    public final View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+            Bundle savedInstanceState) {
         setHasOptionsMenu(true);
         return super.onCreateView(inflater, container, savedInstanceState);
     }
