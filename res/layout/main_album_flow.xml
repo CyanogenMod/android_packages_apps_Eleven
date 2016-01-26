@@ -25,13 +25,6 @@
         android:layout_height="match_parent" />
     <include layout="@layout/loading_empty_container" />
 
-    <View
-        android:id="@+id/equalizerGradient"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@drawable/equalizer_background"
-        android:layout_gravity="bottom"/>
-
     <com.cyanogenmod.eleven.widgets.VisualizerView
         android:id="@+id/visualizerView"
         android:gravity="bottom"

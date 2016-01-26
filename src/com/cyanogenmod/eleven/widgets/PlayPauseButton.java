@@ -13,12 +13,16 @@
 
 package com.cyanogenmod.eleven.widgets;
 
+import android.animation.Animator;
 import android.content.Context;
 import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.view.View;
+import android.view.ViewAnimationUtils;
 import android.view.View.OnClickListener;
 import android.view.View.OnLongClickListener;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.ImageButton;
 
 import com.cyanogenmod.eleven.R;
@@ -62,6 +66,17 @@ public class PlayPauseButton extends ImageButton implements OnClickListener, OnL
     @Override
     public void onClick(final View v) {
         MusicUtils.playOrPause();
+        int centerX = (v.getLeft() + v.getRight())  / 2;
+        int centerY = (v.getTop()  + v.getBottom()) / 2;
+        int startRadius = 0;
+        int endRadius = (int) Math.hypot(v.getWidth(), v.getHeight());
+
+        Animator anim = ViewAnimationUtils.createCircularReveal(
+                v, centerX, centerY, startRadius, endRadius);
+
+        anim.setDuration(800);
+        anim.start();
+
         updateState();
     }
 
