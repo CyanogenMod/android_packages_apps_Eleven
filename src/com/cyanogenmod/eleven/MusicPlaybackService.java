@@ -46,6 +46,7 @@ import android.os.IBinder;
 import android.os.Looper;
 import android.os.Message;
 import android.os.PowerManager;
+import android.os.PowerManager.WakeLock;
 import android.os.RemoteException;
 import android.os.SystemClock;
 import android.provider.MediaStore;
@@ -274,29 +275,34 @@ public class MusicPlaybackService extends Service {
     private static final int TRACK_WENT_TO_NEXT = 2;
 
     /**
+     * Indicates when the release the wake lock
+     */
+    private static final int RELEASE_WAKELOCK = 3;
+
+    /**
      * Indicates the player died
      */
-    private static final int SERVER_DIED = 3;
+    private static final int SERVER_DIED = 4;
 
     /**
      * Indicates some sort of focus change, maybe a phone call
      */
-    private static final int FOCUSCHANGE = 4;
+    private static final int FOCUSCHANGE = 5;
 
     /**
      * Indicates to fade the volume down
      */
-    private static final int FADEDOWN = 5;
+    private static final int FADEDOWN = 6;
 
     /**
      * Indicates to fade the volume back up
      */
-    private static final int FADEUP = 6;
+    private static final int FADEUP = 7;
 
     /**
      * Notifies that there is a new timed text string
      */
-    private static final int LYRICS = 7;
+    private static final int LYRICS = 8;
 
     /**
      * Idle time before stopping the foreground notfication (5 minutes)
@@ -383,6 +389,11 @@ public class MusicPlaybackService extends Service {
      * The path of the current file to play
      */
     private String mFileToPlay;
+
+    /**
+     * Keeps the service running when the screen is off
+     */
+    private WakeLock mWakeLock;
 
     /**
      * Alarm intent for removing the notification when nothing is playing
@@ -656,6 +667,11 @@ public class MusicPlaybackService extends Service {
         getContentResolver().registerContentObserver(
                 MediaStore.Audio.Media.EXTERNAL_CONTENT_URI, true, mMediaStoreObserver);
 
+        // Initialize the wake lock
+        final PowerManager powerManager = (PowerManager)getSystemService(Context.POWER_SERVICE);
+        mWakeLock = powerManager.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, getClass().getName());
+        mWakeLock.setReferenceCounted(false);
+
         // Initialize the delayed shutdown intent
         final Intent shutdownIntent = new Intent(this, MusicPlaybackService.class);
         shutdownIntent.setAction(SHUTDOWN);
@@ -752,6 +768,9 @@ public class MusicPlaybackService extends Service {
 
         // deinitialize shake detector
         stopShakeDetector(true);
+
+        // Release the wake lock
+        mWakeLock.release();
     }
 
     /**
@@ -2941,6 +2960,9 @@ public class MusicPlaybackService extends Service {
                         service.mLyrics = (String) msg.obj;
                         service.notifyChange(NEW_LYRICS);
                         break;
+                    case RELEASE_WAKELOCK:
+                        service.mWakeLock.release();
+                        break;
                     case FOCUSCHANGE:
                         if (D) Log.d(TAG, "Received audio focus change event " + msg.arg1);
                         switch (msg.arg1) {
@@ -3057,6 +3079,7 @@ public class MusicPlaybackService extends Service {
          */
         public MultiPlayer(final MusicPlaybackService service) {
             mService = new WeakReference<MusicPlaybackService>(service);
+            mCurrentMediaPlayer.setWakeMode(mService.get(), PowerManager.PARTIAL_WAKE_LOCK);
             mSrtManager = new SrtManager() {
                 @Override
                 public void onTimedText(String text) {
@@ -3169,6 +3192,7 @@ public class MusicPlaybackService extends Service {
                 return;
             }
             mNextMediaPlayer = new MediaPlayer();
+            mNextMediaPlayer.setWakeMode(mService.get(), PowerManager.PARTIAL_WAKE_LOCK);
             mNextMediaPlayer.setAudioSessionId(getAudioSessionId());
             if (setDataSourceImpl(mNextMediaPlayer, path)) {
                 mNextMediaPath = path;
@@ -3303,6 +3327,7 @@ public class MusicPlaybackService extends Service {
                     mIsInitialized = false;
                     mCurrentMediaPlayer.release();
                     mCurrentMediaPlayer = new MediaPlayer();
+                    mCurrentMediaPlayer.setWakeMode(service, PowerManager.PARTIAL_WAKE_LOCK);
                     Message msg = mHandler.obtainMessage(SERVER_DIED, errorInfo);
                     mHandler.sendMessageDelayed(msg, 2000);
                     return true;
@@ -3325,7 +3350,9 @@ public class MusicPlaybackService extends Service {
                 mNextMediaPlayer = null;
                 mHandler.sendEmptyMessage(TRACK_WENT_TO_NEXT);
             } else {
+                mService.get().mWakeLock.acquire(30000);
                 mHandler.sendEmptyMessage(TRACK_ENDED);
+                mHandler.sendEmptyMessage(RELEASE_WAKELOCK);
             }
         }
     }
