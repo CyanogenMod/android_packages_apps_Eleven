@@ -28,6 +28,8 @@ import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
 
+import java.util.Objects;
+
 /**
  * Displays a color picker to the user and allow them to select a color. A
  * slider for the alpha channel is also available. Enable it by setting
@@ -337,7 +339,7 @@ public class ColorPickerView extends View {
 
         canvas.drawRect(rect, mAlphaPaint);
 
-        if (mAlphaSliderText != null && mAlphaSliderText != "") {
+        if (mAlphaSliderText != null && !Objects.equals(mAlphaSliderText, "")) {
             canvas.drawText(mAlphaSliderText, rect.centerX(), rect.centerY() + 4 * mDensity,
                     mAlphaTextPaint);
         }
@@ -945,3 +947,4 @@ public class ColorPickerView extends View {
         return mAlphaSliderText;
     }
 }
+
