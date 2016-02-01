@@ -757,10 +757,9 @@ public class SlidingUpPanelLayout extends ViewGroup {
                 }
             }
             final int childBottom = childTop + childHeight;
-            final int childLeft = paddingLeft;
-            final int childRight = childLeft + child.getMeasuredWidth();
+            final int childRight = paddingLeft + child.getMeasuredWidth();
 
-            child.layout(childLeft, childTop, childRight, childBottom);
+            child.layout(paddingLeft, childTop, childRight, childBottom);
         }
 
         if (mFirstLayout) {
@@ -1373,3 +1372,4 @@ public class SlidingUpPanelLayout extends ViewGroup {
         };
     }
 }
+
