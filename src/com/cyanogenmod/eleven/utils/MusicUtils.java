@@ -1280,7 +1280,7 @@ public final class MusicUtils {
     public static final AlbumArtistDetails getAlbumArtDetails(final Context context, final long trackId) {
         final StringBuilder selection = new StringBuilder();
         selection.append(MediaStore.Audio.AudioColumns.IS_MUSIC + "=1");
-        selection.append(" AND " + BaseColumns._ID + " = '" + trackId + "'");
+        selection.append(" AND " + BaseColumns._ID + " = '").append(trackId).append("'");
 
         Cursor cursor = context.getContentResolver().query(
             MediaStore.Audio.Media.EXTERNAL_CONTENT_URI,

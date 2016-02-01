@@ -77,7 +77,7 @@ public class SrtParser {
                     subtitleBuilder.append(s);
 
                     while (!((s = br.readLine()) == null || s.trim().equals(""))) {
-                        subtitleBuilder.append("\n" + s);
+                        subtitleBuilder.append("\n").append(s);
                     }
                 }
 
@@ -135,3 +135,4 @@ public class SrtParser {
         return hours * 60 * 60 * 1000 + minutes * 60 * 1000 + seconds * 1000 + millies;
     }
 }
+
