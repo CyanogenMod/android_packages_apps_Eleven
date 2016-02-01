@@ -102,10 +102,7 @@ public class Artist {
         if (!TextUtils.equals(mArtistName, other.mArtistName)) {
             return false;
         }
-        if (mSongNumber != other.mSongNumber) {
-            return false;
-        }
-        return true;
+        return mSongNumber == other.mSongNumber;
     }
 
     /**
@@ -117,3 +114,4 @@ public class Artist {
     }
 
 }
+

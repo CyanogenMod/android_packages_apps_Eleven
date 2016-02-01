@@ -181,7 +181,7 @@ public abstract class SrtManager implements Handler.Callback {
                 long delay = targetTime - timeMs;
                 mHandler.sendEmptyMessageDelayed(POST_TEXT_MSG, delay);
 
-                if (DEBUG && mNextIndex < mEntries.size()) {
+                if (false) {
                     Log.d(TAG, "Preparing next message: " + delay + "ms from now with msg: " +
                             mEntries.get(mNextIndex).mLine);
                 }
@@ -206,3 +206,4 @@ public abstract class SrtManager implements Handler.Callback {
 
     public abstract void onTimedText(String txt);
 }
+
