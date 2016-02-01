@@ -151,7 +151,7 @@ public class ArtistDetailFragment extends FadingBarFragment implements IChildFra
 
     private void setupSongList() {
         mSongs = (ListView)mRootView.findViewById(R.id.songs);
-        mHeader = (ViewGroup)LayoutInflater.from(getActivity()).
+        mHeader = LayoutInflater.from(getActivity()).
                 inflate(R.layout.artist_detail_header, mSongs, false);
         mSongs.addHeaderView(mHeader);
         mSongs.setOnScrollListener(this);
