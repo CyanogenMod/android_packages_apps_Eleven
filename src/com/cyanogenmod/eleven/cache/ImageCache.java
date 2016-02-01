@@ -103,7 +103,7 @@ public final class ImageCache {
      * Used to temporarily pause the disk cache while scrolling
      */
     public boolean mPauseDiskAccess = false;
-    private Object mPauseLock = new Object();
+    private final Object mPauseLock = new Object();
 
     static {
         mArtworkUri = Uri.parse("content://media/external/audio/albumart");
