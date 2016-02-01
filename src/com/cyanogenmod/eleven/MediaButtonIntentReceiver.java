@@ -99,7 +99,7 @@ public class MediaButtonIntentReceiver extends WakefulBroadcastReceiver {
         if (AudioManager.ACTION_AUDIO_BECOMING_NOISY.equals(intentAction)) {
             startService(context, MusicPlaybackService.CMDPAUSE);
         } else if (Intent.ACTION_MEDIA_BUTTON.equals(intentAction)) {
-            final KeyEvent event = (KeyEvent)intent.getParcelableExtra(Intent.EXTRA_KEY_EVENT);
+            final KeyEvent event = intent.getParcelableExtra(Intent.EXTRA_KEY_EVENT);
             if (event == null) {
                 return;
             }
@@ -221,3 +221,4 @@ public class MediaButtonIntentReceiver extends WakefulBroadcastReceiver {
         }
     }
 }
+
