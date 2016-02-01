@@ -148,8 +148,7 @@ public class Caller {
         }
 
         try {
-            final Result result = createResultFromInputStream(inputStream);
-            lastResult = result;
+            lastResult = createResultFromInputStream(inputStream);
         } catch (final IOException ioEx) {
             Log.e(TAG, "Failed to read document", ioEx);
             lastResult = new Result(ioEx.getLocalizedMessage());

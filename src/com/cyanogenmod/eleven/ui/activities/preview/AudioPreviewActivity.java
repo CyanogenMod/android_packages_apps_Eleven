@@ -458,8 +458,7 @@ public class AudioPreviewActivity extends Activity implements MediaPlayer.OnComp
             mLastOrientationWhileBuffering = getRequestedOrientation();
             setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_NOSENSOR);
         }
-        String path = getNameFromPath();
-        mPreviewSong.TITLE = path;
+        mPreviewSong.TITLE = getNameFromPath();
         setNames();
     }
 
