@@ -296,9 +296,8 @@ public class ImageUtils {
         int dstHeight = (int) Math.ceil(srcHeight * scale);
         int dstWidth = (int) Math.ceil(srcWidth * scale);
         Bitmap scaledBitmap =  Bitmap.createScaledBitmap(src, dstWidth, dstHeight, false);
-        Bitmap croppedBitmap = Bitmap.createBitmap(scaledBitmap, 0, 0, viewWidth, viewHeight);
 
-        return croppedBitmap;
+        return Bitmap.createBitmap(scaledBitmap, 0, 0, viewWidth, viewHeight);
 
     }
 }

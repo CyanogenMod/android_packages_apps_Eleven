@@ -1,3 +1,4 @@
+
 /*
  * DragSortListView. A subclass of the Android ListView component that enables
  * drag and drop re-ordering of list items. Copyright 2012 Carl Bauer Licensed
@@ -889,7 +890,6 @@ public class DragSortListView extends ListView {
             // Log.d("mobeta", "edgeTop="+edgeTop+" edgeBot="+edgeBottom);
 
             final int slideRgnHeight = (int)(0.5f * mSlideRegionFrac * edgeToEdge);
-            final float slideRgnHeightF = slideRgnHeight;
             final int slideEdgeTop = edgeTop + slideRgnHeight;
             final int slideEdgeBottom = edgeBottom - slideRgnHeight;
 
@@ -897,7 +897,7 @@ public class DragSortListView extends ListView {
             if (mFloatViewMid < slideEdgeTop) {
                 mFirstExpPos = itemPos - 1;
                 mSecondExpPos = itemPos;
-                mSlideFrac = 0.5f * (slideEdgeTop - mFloatViewMid) / slideRgnHeightF;
+                mSlideFrac = 0.5f * (slideEdgeTop - mFloatViewMid) / (float) slideRgnHeight;
                 // Log.d("mobeta",
                 // "firstExp="+mFirstExpPos+" secExp="+mSecondExpPos+" slideFrac="+mSlideFrac);
             } else if (mFloatViewMid < slideEdgeBottom) {
@@ -906,7 +906,7 @@ public class DragSortListView extends ListView {
             } else {
                 mFirstExpPos = itemPos;
                 mSecondExpPos = itemPos + 1;
-                mSlideFrac = 0.5f * (1.0f + (edgeBottom - mFloatViewMid) / slideRgnHeightF);
+                mSlideFrac = 0.5f * (1.0f + (edgeBottom - mFloatViewMid) / (float) slideRgnHeight);
                 // Log.d("mobeta",
                 // "firstExp="+mFirstExpPos+" secExp="+mSecondExpPos+" slideFrac="+mSlideFrac);
             }
@@ -1186,10 +1186,9 @@ public class DragSortListView extends ListView {
     private void updateScrollStarts() {
         final int padTop = getPaddingTop();
         final int listHeight = getHeight() - padTop - getPaddingBottom();
-        final float heightF = listHeight;
 
-        mUpScrollStartYF = padTop + mDragUpScrollStartFrac * heightF;
-        mDownScrollStartYF = padTop + (1.0f - mDragDownScrollStartFrac) * heightF;
+        mUpScrollStartYF = padTop + mDragUpScrollStartFrac * (float) listHeight;
+        mDownScrollStartYF = padTop + (1.0f - mDragDownScrollStartFrac) * (float) listHeight;
 
         mUpScrollStartY = (int)mUpScrollStartYF;
         mDownScrollStartY = (int)mDownScrollStartYF;

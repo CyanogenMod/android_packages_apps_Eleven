@@ -195,10 +195,9 @@ public class HomeActivity extends SlidingPanelActivity implements
                 @Override
                 protected BitmapWithColors doInBackground(Void... params) {
                     ImageFetcher imageFetcher = ImageFetcher.getInstance(HomeActivity.this);
-                    final BitmapWithColors bitmap = imageFetcher.getArtwork(
+                    return imageFetcher.getArtwork(
                             MusicUtils.getAlbumName(), MusicUtils.getCurrentAlbumId(),
                             MusicUtils.getArtistName(), true);
-                    return bitmap;
                 }
                 @Override
                 protected void onPostExecute(BitmapWithColors bmc) {
