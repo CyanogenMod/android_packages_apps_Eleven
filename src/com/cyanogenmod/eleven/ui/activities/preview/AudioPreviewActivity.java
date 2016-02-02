@@ -474,7 +474,7 @@ public class AudioPreviewActivity extends Activity implements MediaPlayer.OnComp
     public void onCompletion(MediaPlayer mp) {
         mHandler.removeMessages(UiHandler.MSG_UPDATE_PROGRESS);
         if (mSeekBar != null && mPreviewPlayer != null) {
-            mSeekBar.setProgress(mPreviewPlayer.getCurrentPosition());
+            mSeekBar.setProgress(mPreviewPlayer.getDuration());
         }
         sendStateChange(State.PREPARED);
     }
