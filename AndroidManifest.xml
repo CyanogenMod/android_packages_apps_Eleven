@@ -123,6 +123,7 @@
             android:name=".ui.activities.preview.AudioPreviewActivity"
             android:launchMode="singleTask"
             android:excludeFromRecents="true"
+            android:taskAffinity=""
             android:theme="@style/Theme.AudioPreview">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
