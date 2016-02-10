@@ -42,20 +42,20 @@
     <item quantity="other"><xliff:g id="minutes">%d </xliff:g> м</item>
   </plurals>
   <plurals name="NNNtrackstoplaylist">
-    <item quantity="one"><xliff:g id="number" example="1">%d </xliff:g> песента е добавена към списъка за изпълнение.</item>
-    <item quantity="other"><xliff:g id="number" example="1">%d </xliff:g> песните са добавени към списъка за изпълнение.</item>
+    <item quantity="one"><xliff:g id="number" example="1">%d </xliff:g> песен е добавена към списъка за изпълнение.</item>
+    <item quantity="other"><xliff:g id="number" example="1">%d </xliff:g> песни са добавени към списъка за изпълнение.</item>
   </plurals>
   <plurals name="NNNtracksfromplaylist">
-    <item quantity="one"><xliff:g id="number" example="1">%d </xliff:g> песента е премахната от списъка за изпълнение.</item>
-    <item quantity="other"><xliff:g id="number" example="1">%d </xliff:g> песените са премахнати от списъка за изпълнение.</item>
+    <item quantity="one"><xliff:g id="number" example="1">%d </xliff:g> песен е премахната от списъка за изпълнение.</item>
+    <item quantity="other"><xliff:g id="number" example="1">%d </xliff:g> песени са премахнати от списъка за изпълнение.</item>
   </plurals>
   <plurals name="NNNtrackstoqueue">
     <item quantity="one"><xliff:g id="number" example="1">%d</xliff:g> песен е добавена към опашката.</item>
     <item quantity="other"><xliff:g id="number" example="27">%d</xliff:g> песни са добавени към опашката.</item>
   </plurals>
   <plurals name="NNNtrackstofavorites">
-    <item quantity="one"><xliff:g id="number" example="1">%d </xliff:g> песента е добавена към \"Предпочитани\".</item>
-    <item quantity="other"><xliff:g id="number" example="1">%d </xliff:g> песните са добавени към \"Предпочитани\".</item>
+    <item quantity="one"><xliff:g id="number" example="1">%d </xliff:g> песен е добавена към \"Предпочитани\".</item>
+    <item quantity="other"><xliff:g id="number" example="1">%d </xliff:g> песни са добавени към \"Предпочитани\".</item>
   </plurals>
   <plurals name="NNNtracksdeleted">
     <item quantity="one"><xliff:g id="songs_to_delete" example="1">%d </xliff:g> песента е изтрита.</item>
