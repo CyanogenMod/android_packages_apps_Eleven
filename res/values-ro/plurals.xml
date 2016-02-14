@@ -32,6 +32,11 @@
     <item quantity="few"><xliff:g id="count">%d</xliff:g> melodii</item>
     <item quantity="other"><xliff:g id="count">%d</xliff:g> melodii</item>
   </plurals>
+  <plurals name="Ngenres">
+    <item quantity="one"><xliff:g id="count">%d</xliff:g> gen</item>
+    <item quantity="few"><xliff:g id="count">%d</xliff:g> genuri</item>
+    <item quantity="other"><xliff:g id="count">%d</xliff:g> genuri</item>
+  </plurals>
   <plurals name="Nhours">
     <item quantity="one"><xliff:g id="hours">%d</xliff:g>o</item>
     <item quantity="few"><xliff:g id="hours">%d</xliff:g>o</item>

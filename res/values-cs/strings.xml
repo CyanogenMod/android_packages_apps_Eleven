@@ -111,7 +111,7 @@
   <string name="settings_data_category">Data</string>
   <string name="settings_delete_cache_title">Smazat cache</string>
   <string name="settings_delete_cache_summary">Odstranit všechny uložené obrázky</string>
-  <string name="settings_download_only_on_wifi_title">Stahovat pouze přes síť Wi-Fi</string>
+  <string name="settings_download_only_on_wifi_title">Stahovat pouze přes síť Wi\u2011Fi</string>
   <string name="settings_download_only_on_wifi_summary">Pro snížení poplatků za data nestahovat obrázky přes mobilní sítě</string>
   <string name="settings_download_missing_artwork_title">Stáhnout chybějící obaly alb</string>
   <string name="settings_download_artist_images_title">Stáhnout chybějící obrázky umělců</string>

@@ -41,9 +41,9 @@
   <string name="menu_shuffle_last_added">Zuletzt hinzugefügte Titel zufällig wiedergeben</string>
   <string name="menu_play_all">Alle wiedergeben</string>
   <string name="menu_sort_by">Sortieren nach</string>
-  <string name="menu_clear_list">Liste leeren</string>
-  <string name="menu_clear_recents">\"Kürzlich gehört\" leeren</string>
-  <string name="menu_clear_queue">Warteschlange leeren</string>
+  <string name="menu_clear_list">Liste löschen</string>
+  <string name="menu_clear_recents">\"Kürzlich gehört\" löschen</string>
+  <string name="menu_clear_queue">Warteschlange löschen</string>
   <string name="menu_save_queue">Warteschlange als Wiedergabeliste speichern</string>
   <string name="menu_equalizer">Equalizer</string>
   <string name="add_to_playlist">Zur Wiedergabeliste hinzufügen</string>
@@ -75,8 +75,8 @@
   <string name="clear_top_tracks_title">Toptitel löschen?</string>
   <string name="clear_recent_title">Liste der kürzlich gespielten Titel löschen?</string>
   <string name="clear_last_added">Liste der zuletzt hinzugefügten Titel löschen?</string>
-  <string name="cannot_be_undone">Dies kann nicht rückgängig gemacht werden</string>
-  <string name="delete_warning">Alle zwischengespeicherten Bilder werden endgültig gelöscht</string>
+  <string name="cannot_be_undone">Dies kann nicht rückgängig gemacht werden.</string>
+  <string name="delete_warning">Alle zwischengespeicherten Bilder werden hiermit endgültig gelöscht.</string>
   <string name="new_photo">Foto aus Galerie auswählen</string>
   <string name="google_search">Google-Suche</string>
   <string name="use_default">Standardfoto verwenden</string>
@@ -104,7 +104,7 @@
   <string name="accessibility_repeat_one">Aktuellen Titel wiederholen</string>
   <string name="accessibility_queue">Warteschlange öffnen</string>
   <string name="accessibility_browse">Musik durchsuchen</string>
-  <string name="set_as_ringtone">\"<xliff:g id="name" example="Alarm Bell">%s</xliff:g>\" wurde als Klingelton gesetzt</string>
+  <string name="set_as_ringtone">\"<xliff:g id="name" example="Alarm Bell">%s</xliff:g>\" wurde als Klingelton festgelegt</string>
   <string name="playlist_renamed">Wiedergabeliste umbenannt</string>
   <string name="settings_ui_category">Oberfläche</string>
   <string name="settings_storage_category">Speicher</string>
@@ -116,13 +116,13 @@
   <string name="settings_download_missing_artwork_title">Fehlende Albencover laden</string>
   <string name="settings_download_artist_images_title">Fehlende Interpretenbilder laden</string>
   <string name="settings_general_category">Allgemein</string>
-  <string name="settings_show_music_visualization_title">Zeige Musik-Visualisierung</string>
-  <string name="settings_show_lyrics_title">Zeige Songtexte</string>
-  <string name="settings_show_lyrics_summary">Für Titel, die eine srt-Datei haben</string>
-  <string name="settings_shake_to_play">Schütteln, um abzuspielen</string>
+  <string name="settings_show_music_visualization_title">Musik-Visualisierung anzeigen</string>
+  <string name="settings_show_lyrics_title">Songtexte zeigen</string>
+  <string name="settings_show_lyrics_summary">Für Titel mit einer SRT-Datei</string>
+  <string name="settings_shake_to_play">Zum Abspielen schütteln</string>
   <string name="settings_shake_to_play_summary">Schütteln Sie Ihr Gerät, um den nächsten Titel abzuspielen</string>
   <string name="settings_lockscreen_album_art">Albumcover auf Sperrbildschirm</string>
-  <string name="settings_lockscreen_album_art_summary">Ersetzt den Hintergrund des Sperrbildschirms mit dem Albumcover</string>
+  <string name="settings_lockscreen_album_art_summary">Hintergrund des Sperrbildschirms durch Albumcover ersetzen</string>
   <string name="app_widget_small">Musik: 4 \u00d7 1</string>
   <string name="app_widget_large">Musik: 4 \u00d7 2</string>
   <string name="app_widget_large_alt">Musik: 4 \u00d7 2 (alternativ)</string>
@@ -130,7 +130,7 @@
   <string name="no_effects_for_you">Der Equalizer konnte nicht geöffnet werden.</string>
   <string name="empty_music">Verwenden Sie ein USB-Kabel, um Musik von Ihrem Computer auf Ihr Gerät zu kopieren.</string>
   <string name="empty_search">Keine Suchergebnisse gefunden</string>
-  <string name="empty_search_check">Bitte überprüfen Sie, dass Sie die korrekte Schreibweise verwenden oder versuchen Sie ein anderes Stichwort.</string>
+  <string name="empty_search_check">Bitte vergewissern Sie sich, dass Schreibweise korrekt ist, oder versuchen Sie es mit einem anderen Stichwort.</string>
   <string name="empty_favorite">Als Favorit markierte Titel werden hier angezeigt.</string>
   <string name="empty_recent_main">Keine kürzlich gespielten Titel</string>
   <string name="empty_recent">Zuletzt gehörte Titel werden hier angezeigt.</string>
@@ -143,8 +143,8 @@
   <string name="empty_generic_main">Keine Musik gefunden</string>
   <string name="empty_generic_secondary">Verwenden Sie ein USB-Kabel, um Musik von Ihrem Computer auf das Gerät zu übertragen.</string>
   <string name="empty_queue_main">Keine Titel in der Warteschlange</string>
-  <string name="empty_queue_secondary">Um Titel zur Warteschlange hinzuzufügen, wählen sie im Optionsmenü eines Titels, Albums oder Interpreten \"Zur Warteschlange hinzufügen\".</string>
-  <string name="error_playing_track">%1$s konnte nicht abgespielt werden</string>
+  <string name="empty_queue_secondary">Um Titel zur Warteschlange hinzuzufügen, wählen Sie im Optionsmenü eines Titels, Albums oder Interpreten \"Zur Warteschlange hinzufügen\".</string>
+  <string name="error_playing_track">Der Titel \"%1$s\" konnte nicht abgespielt werden.</string>
   <string name="header_unknown_year">Unbekanntes Jahr</string>
   <string name="header_less_than_30s">Weniger als 30 Sekunden</string>
   <string name="header_30_to_60_seconds">30–60 Sekunden</string>
@@ -159,8 +159,8 @@
   <string name="header_1_song">1 Titel</string>
   <string name="header_2_to_4_songs">2–4 Titel</string>
   <string name="header_5_to_9_songs">5–9 Titel</string>
-  <string name="header_10_plus_songs">10+ Titel</string>
-  <string name="header_5_plus_albums">5+ Alben</string>
+  <string name="header_10_plus_songs">Mehr als 10 Titel</string>
+  <string name="header_5_plus_albums">Mehr als 5 Alben</string>
   <string name="header_other">"Anderes"</string>
   <string name="footer_search_artists">Alle Interpreten anzeigen</string>
   <string name="footer_search_albums">Alle Alben anzeigen</string>

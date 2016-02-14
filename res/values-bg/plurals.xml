@@ -26,8 +26,8 @@
     <item quantity="other"><xliff:g id="count">%d </xliff:g> албуми</item>
   </plurals>
   <plurals name="Nsongs">
-    <item quantity="one"><xliff:g id="count">%d</xliff:g> заглавие</item>
-    <item quantity="other"><xliff:g id="count">%d</xliff:g> заглавия</item>
+    <item quantity="one"><xliff:g id="count">%d </xliff:g> песен</item>
+    <item quantity="other"><xliff:g id="count">%d </xliff:g> песни</item>
   </plurals>
   <plurals name="Ngenres">
     <item quantity="one"><xliff:g id="count">%d</xliff:g> жанр</item>
@@ -42,20 +42,20 @@
     <item quantity="other"><xliff:g id="minutes">%d</xliff:g> мин.</item>
   </plurals>
   <plurals name="NNNtrackstoplaylist">
-    <item quantity="one"><xliff:g id="number" example="1">%d</xliff:g> заглавие прибавено към листата.</item>
-    <item quantity="other"><xliff:g id="number" example="1">%d</xliff:g> заглавия прибавени към листата.</item>
+    <item quantity="one"><xliff:g id="number" example="1">%d </xliff:g> песен е добавена към списъка за изпълнение.</item>
+    <item quantity="other"><xliff:g id="number" example="1">%d </xliff:g> песни са добавени към списъка за изпълнение.</item>
   </plurals>
   <plurals name="NNNtracksfromplaylist">
-    <item quantity="one"><xliff:g id="number" example="1">%d </xliff:g> песента е премахната от списъка за изпълнение.</item>
-    <item quantity="other"><xliff:g id="number" example="1">%d </xliff:g> песните са премахнати от списъка за изпълнение.</item>
+    <item quantity="one"><xliff:g id="number" example="1">%d </xliff:g> песен е премахната от списъка за изпълнение.</item>
+    <item quantity="other"><xliff:g id="number" example="1">%d </xliff:g> песни са премахнати от списъка за изпълнение.</item>
   </plurals>
   <plurals name="NNNtrackstoqueue">
-    <item quantity="one"><xliff:g id="number" example="1">%d </xliff:g> песента е добавена към опашката.</item>
-    <item quantity="other"><xliff:g id="number" example="27">%d</xliff:g> песните са добавени към опашката.</item>
+    <item quantity="one"><xliff:g id="number" example="1">%d </xliff:g> песен е добавена към опашката.</item>
+    <item quantity="other"><xliff:g id="number" example="27">%d</xliff:g> песни са добавени към опашката.</item>
   </plurals>
   <plurals name="NNNtrackstofavorites">
-    <item quantity="one"><xliff:g id="number" example="1">%d </xliff:g> песента е добавена към \"Предпочитани\".</item>
-    <item quantity="other"><xliff:g id="number" example="1">%d </xliff:g> песните са добавени към \"Предпочитани\".</item>
+    <item quantity="one"><xliff:g id="number" example="1">%d </xliff:g> песен е добавена към \"Предпочитани\".</item>
+    <item quantity="other"><xliff:g id="number" example="1">%d </xliff:g> песни са добавени към \"Предпочитани\".</item>
   </plurals>
   <plurals name="NNNtracksdeleted">
     <item quantity="one"><xliff:g id="songs_to_delete" example="1">%d </xliff:g> песента е изтрита.</item>

@@ -18,19 +18,19 @@
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
   <plurals name="Nartists">
-    <item quantity="one">1 artist</item>
+    <item quantity="one"><xliff:g id="count">%d</xliff:g> artist</item>
     <item quantity="other"><xliff:g id="count">%d</xliff:g> artister</item>
   </plurals>
   <plurals name="Nalbums">
-    <item quantity="one">1 album</item>
+    <item quantity="one"><xliff:g id="count">%d</xliff:g> album</item>
     <item quantity="other"><xliff:g id="count">%d</xliff:g> album</item>
   </plurals>
   <plurals name="Nsongs">
-    <item quantity="one">1 låt</item>
+    <item quantity="one"><xliff:g id="count">%d</xliff:g> låt</item>
     <item quantity="other"><xliff:g id="count">%d</xliff:g> låtar</item>
   </plurals>
   <plurals name="Ngenres">
-    <item quantity="one">1 genre</item>
+    <item quantity="one"><xliff:g id="count">%d</xliff:g> genre</item>
     <item quantity="other"><xliff:g id="count">%d</xliff:g> genrer</item>
   </plurals>
   <plurals name="Nhours">
@@ -42,23 +42,23 @@
     <item quantity="other"><xliff:g id="minutes">%d</xliff:g>m</item>
   </plurals>
   <plurals name="NNNtrackstoplaylist">
-    <item quantity="one">1 låt lades till spellistan.</item>
+    <item quantity="one"><xliff:g id="number" example="1">%d</xliff:g> låt lades till spellistan.</item>
     <item quantity="other"><xliff:g id="number" example="27">%d</xliff:g> låtar lades till spellistan.</item>
   </plurals>
   <plurals name="NNNtracksfromplaylist">
-    <item quantity="one">1 låt borttagen från spellistan.</item>
+    <item quantity="one"><xliff:g id="number" example="1">%d</xliff:g> låt borttagen från spellistan.</item>
     <item quantity="other"><xliff:g id="number" example="27"> %d </xliff:g> låtar borttagna från spellistan.</item>
   </plurals>
   <plurals name="NNNtrackstoqueue">
-    <item quantity="one">1 låt lades till kön.</item>
+    <item quantity="one"><xliff:g id="number" example="1">%d</xliff:g> låt lades till kön.</item>
     <item quantity="other"><xliff:g id="number" example="27">%d</xliff:g> låtar lades till kön.</item>
   </plurals>
   <plurals name="NNNtrackstofavorites">
-    <item quantity="one">1 låt lades till Favoriter.</item>
+    <item quantity="one"><xliff:g id="number" example="1">%d</xliff:g> låt lades till Favoriter.</item>
     <item quantity="other"><xliff:g id="number" example="27">%d</xliff:g> låtar lades till Favoriter.</item>
   </plurals>
   <plurals name="NNNtracksdeleted">
-    <item quantity="one">1 låt togs bort.</item>
+    <item quantity="one"><xliff:g id="songs_to_delete" example="1">%d</xliff:g> låt togs bort.</item>
     <item quantity="other"><xliff:g id="songs_to_delete">%d</xliff:g> låtar togs bort.</item>
   </plurals>
 </resources>
