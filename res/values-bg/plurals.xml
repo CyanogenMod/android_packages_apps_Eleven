@@ -23,7 +23,7 @@
   </plurals>
   <plurals name="Nalbums">
     <item quantity="one"><xliff:g id="count">%d </xliff:g> албум</item>
-    <item quantity="other"><xliff:g id="count">%d </xliff:g> албуми</item>
+    <item quantity="other"><xliff:g id="count">%d </xliff:g> албума</item>
   </plurals>
   <plurals name="Nsongs">
     <item quantity="one"><xliff:g id="count">%d </xliff:g> песен</item>

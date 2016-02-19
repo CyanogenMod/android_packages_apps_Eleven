@@ -38,14 +38,14 @@
     <item quantity="other"><xliff:g id="count">%d</xliff:g> жанров</item>
   </plurals>
   <plurals name="Nhours">
-    <item quantity="one"><xliff:g id="hours">%d</xliff:g>ч</item>
-    <item quantity="few"><xliff:g id="hours">%d</xliff:g>ч</item>
-    <item quantity="other"><xliff:g id="hours">%d</xliff:g>ч</item>
+    <item quantity="one"><xliff:g id="hours">%d</xliff:g> ч</item>
+    <item quantity="few"><xliff:g id="hours">%d</xliff:g> ч</item>
+    <item quantity="other"><xliff:g id="hours">%d</xliff:g> ч</item>
   </plurals>
   <plurals name="Nminutes">
-    <item quantity="one"><xliff:g id="minutes">%d</xliff:g>м</item>
-    <item quantity="few"><xliff:g id="minutes">%d</xliff:g>м</item>
-    <item quantity="other"><xliff:g id="minutes">%d</xliff:g>м</item>
+    <item quantity="one"><xliff:g id="minutes">%d</xliff:g> мин</item>
+    <item quantity="few"><xliff:g id="minutes">%d</xliff:g> мин</item>
+    <item quantity="other"><xliff:g id="minutes">%d</xliff:g> мин</item>
   </plurals>
   <plurals name="NNNtrackstoplaylist">
     <item quantity="one"><xliff:g id="number" example="1">%d</xliff:g> трек добавлен в плейлист.</item>

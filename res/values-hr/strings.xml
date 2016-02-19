@@ -66,7 +66,7 @@
   <string name="playlist_top_tracks">Moje top pjesme</string>
   <string name="new_playlist">Nova playlista</string>
   <string name="save">Spremi</string>
-  <string name="cancel">Odbaci</string>
+  <string name="cancel">Odustani</string>
   <string name="overwrite">Prepiši</string>
   <string name="clear">Očisti</string>
   <string name="new_playlist_name_template">Playlista <xliff:g id="number">%d</xliff:g></string>
@@ -109,7 +109,7 @@
   <string name="settings_ui_category">Sučelje</string>
   <string name="settings_storage_category">Pohrana</string>
   <string name="settings_data_category">Podaci</string>
-  <string name="settings_delete_cache_title">Obriši cache</string>
+  <string name="settings_delete_cache_title">Obriši predmemoriju</string>
   <string name="settings_delete_cache_summary">Obriši sve cachirane slike</string>
   <string name="settings_download_only_on_wifi_title">Preuzimaj samo preko Wi-Fi-ja</string>
   <string name="settings_download_only_on_wifi_summary">Kako bi smanjili troškove prijenosa, ne preuzimajte preko mobilnih mreža</string>

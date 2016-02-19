@@ -27,24 +27,24 @@
   <string name="page_now_playing">In riproduzione</string>
   <string name="page_play_queue">Coda di riproduzione</string>
   <string name="header_albums">Album</string>
-  <string name="header_top_songs">Canzoni più ascoltate</string>
+  <string name="header_top_songs">Canzoni preferite</string>
   <string name="header_all_songs">Tutte le canzoni</string>
   <string name="menu_settings">Impostazioni</string>
   <string name="menu_search">Cerca</string>
   <string name="menu_shuffle_item">Riproduzione casuale</string>
-  <string name="menu_shuffle_all">Riproduzione casuale di tutte le canzoni</string>
-  <string name="menu_shuffle_playlist">Riproduzione casuale della playlist</string>
-  <string name="menu_shuffle_album">Riproduzione casuale dell\'album</string>
-  <string name="menu_shuffle_artist">Riproduzione casuale dell\'artista</string>
+  <string name="menu_shuffle_all">Riproduzione casuale canzoni</string>
+  <string name="menu_shuffle_playlist">Riproduzione casuale playlist</string>
+  <string name="menu_shuffle_album">Riproduzione casuale album</string>
+  <string name="menu_shuffle_artist">Riproduzione casuale artista</string>
   <string name="menu_shuffle_top_tracks">Riproduzione casuale delle canzoni più ascoltate</string>
   <string name="menu_shuffle_recent">Riproduzione casuale delle canzoni più recenti</string>
-  <string name="menu_shuffle_last_added">Riproduzione casuale delle ultime canzoni aggiunte</string>
+  <string name="menu_shuffle_last_added">Riproduzione casuale nuove canzoni</string>
   <string name="menu_play_all">Riproduci tutto</string>
   <string name="menu_sort_by">Ordina per</string>
   <string name="menu_clear_list">Elimina lista</string>
   <string name="menu_clear_recents">Elimina recenti</string>
   <string name="menu_clear_queue">Elimina coda</string>
-  <string name="menu_save_queue">Salva coda sulla playlist</string>
+  <string name="menu_save_queue">Salva coda su playlist</string>
   <string name="menu_equalizer">Equalizzatore</string>
   <string name="add_to_playlist">Aggiungi alla playlist</string>
   <string name="add_to_queue">Aggiungi alla coda</string>
@@ -56,7 +56,7 @@
   <string name="sort_order_entry_album">Album</string>
   <string name="sort_order_entry_year">Anno</string>
   <string name="sort_order_entry_duration">Durata</string>
-  <string name="sort_order_entry_date_added">Data inserimento</string>
+  <string name="sort_order_entry_date_added">Data aggiunta</string>
   <string name="sort_order_entry_track_list">Elenco brani</string>
   <string name="sort_order_entry_number_of_songs">Numero canzoni</string>
   <string name="sort_order_entry_number_of_albums">Numero album</string>
@@ -72,10 +72,10 @@
   <string name="new_playlist_name_template">Playlist <xliff:g id="number">%d</xliff:g></string>
   <string name="create_playlist_prompt">Nome playlist</string>
   <string name="delete_dialog_title">Eliminare <xliff:g id="item" example="album">%s</xliff:g>?</string>
-  <string name="clear_top_tracks_title">Eliminare le canzoni più ascoltate?</string>
+  <string name="clear_top_tracks_title">Eliminare le canzoni preferite?</string>
   <string name="clear_recent_title">Eliminare riprodotti recentemente?</string>
   <string name="clear_last_added">Eliminare aggiunti recentemente?</string>
-  <string name="cannot_be_undone">Questa azione non può essere annullata</string>
+  <string name="cannot_be_undone">Quest\'azione non può essere annullata</string>
   <string name="delete_warning">Le immagini memorizzate nella cache verranno eliminate permanentemente</string>
   <string name="new_photo">Scegli foto dalla galleria</string>
   <string name="google_search">Ricerca Google</string>
@@ -91,7 +91,7 @@
   <string name="context_menu_fetch_artist_image">Recupera immagine artista</string>
   <string name="context_menu_remove_from_recent">Rimuovi da recenti</string>
   <string name="context_menu_use_as_ringtone">Usa come suoneria</string>
-  <string name="context_menu_remove_from_playlist">Rimuovi dalla playlist</string>
+  <string name="context_menu_remove_from_playlist">Rimuovi da playlist</string>
   <string name="context_menu_change_image">Cambia Immagine</string>
   <string name="accessibility_play">Riproduci</string>
   <string name="accessibility_pause">Pausa</string>
@@ -136,7 +136,7 @@
   <string name="empty_recent">Le canzoni che hai ascoltato recentemente saranno mostrate qui.</string>
   <string name="empty_playlist_main">Nessuna canzone nella playlist</string>
   <string name="empty_playlist_secondary">Per aggiungere canzoni a questa playlist tocca il menu opzioni su una canzone, album o artista e seleziona \"Aggiungi alla playlist\".</string>
-  <string name="empty_top_tracks_main">Nessuna canzone più ascoltata</string>
+  <string name="empty_top_tracks_main">Nessuna canzone preferita</string>
   <string name="empty_top_tracks_secondary">Le canzoni che ascolterai di più verranno mostrate qui.</string>
   <string name="empty_last_added_main">Nessuna canzone aggiunta recentemente</string>
   <string name="empty_last_added">Le canzoni che aggiunte lo scorso mese saranno mostrate qui.</string>
