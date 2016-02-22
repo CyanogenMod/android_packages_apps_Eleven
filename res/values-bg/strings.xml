@@ -33,20 +33,20 @@
   <string name="menu_search">Търсене</string>
   <string name="menu_shuffle_item">Разбъркване</string>
   <string name="menu_shuffle_all">Разбъркване на всички</string>
-  <string name="menu_shuffle_playlist">Разбъркване на листа за изпълнение</string>
+  <string name="menu_shuffle_playlist">Разбъркване на списъка за изпълнение</string>
   <string name="menu_shuffle_album">Разбъркване на албума</string>
   <string name="menu_shuffle_artist">Разбъркване на изпълнители</string>
   <string name="menu_shuffle_top_tracks">Развъркване на топ песните</string>
   <string name="menu_shuffle_recent">Разбъркване на скоро слушаните</string>
   <string name="menu_shuffle_last_added">Разбъркване на последно добавените</string>
   <string name="menu_play_all">Възпроизвеждане на всички</string>
-  <string name="menu_sort_by">Сортиране по</string>
+  <string name="menu_sort_by">Сортирай по</string>
   <string name="menu_clear_list">Изчисти списъка</string>
   <string name="menu_clear_recents">Изчистване на скорошните</string>
   <string name="menu_clear_queue">Изчистване на опашката за изпълнение</string>
-  <string name="menu_save_queue">Запазване на опашката за изпълнение в листа за изпълнение</string>
+  <string name="menu_save_queue">Запазване на опашката за изпълнение в списъка за изпълнение</string>
   <string name="menu_equalizer">Еквалайзер</string>
-  <string name="add_to_playlist">Добави към плейлиста</string>
+  <string name="add_to_playlist">Добави към списък за изпълниние</string>
   <string name="add_to_queue">Добавяне към опашката за изпълнение</string>
   <string name="remove_from_recent">Премахване от последно изпълнявани</string>
   <string name="remove_from_queue">Премахване от опашката за изпълнение</string>
@@ -69,8 +69,8 @@
   <string name="cancel">Отказ</string>
   <string name="overwrite">Презаписване</string>
   <string name="clear">Ясна</string>
-  <string name="new_playlist_name_template">Лист за изпълнение <xliff:g id="number">%d </xliff:g></string>
-  <string name="create_playlist_prompt">Име на листа за изпълнение</string>
+  <string name="new_playlist_name_template">Списък за изпълнение <xliff:g id="number">%d </xliff:g></string>
+  <string name="create_playlist_prompt">Име на списъка за изпълнение</string>
   <string name="delete_dialog_title">Изтриване на <xliff:g id="item" example="album">%s </xliff:g>?</string>
   <string name="clear_top_tracks_title">Да изчистя ли топ песните?</string>
   <string name="clear_recent_title">Да изчистя ли последно изпълнените?</string>
@@ -82,8 +82,8 @@
   <string name="use_default">Използване снимка по подразбиране</string>
   <string name="old_photo">Използвай стара снимка</string>
   <string name="context_menu_play_selection">Изпълни</string>
-  <string name="context_menu_play_next">Изпълни следващата</string>
-  <string name="context_menu_play_album">Изпъни албум</string>
+  <string name="context_menu_play_next">Следваща песен</string>
+  <string name="context_menu_play_album">Изпълни албум</string>
   <string name="context_menu_more_by_artist">Повече от изпълнителя</string>
   <string name="context_menu_rename_playlist">Преименуване</string>
   <string name="context_menu_delete">Изтриване</string>
@@ -116,7 +116,7 @@
   <string name="settings_download_missing_artwork_title">Изтегли липсващата обложка</string>
   <string name="settings_download_artist_images_title">Изтегли липсващите изображения на изпълнителите</string>
   <string name="settings_general_category">Общи</string>
-  <string name="settings_show_music_visualization_title">Покажи визуализация на музиката</string>
+  <string name="settings_show_music_visualization_title">Покажи музикална визуализация</string>
   <string name="settings_show_lyrics_title">Покажи текстовете на песните</string>
   <string name="settings_show_lyrics_summary">За песни, които имат srt файл</string>
   <string name="settings_shake_to_play">Разтърсете, за да изпълни</string>
@@ -165,7 +165,7 @@
   <string name="footer_search_artists">Покажи всички изпълнители</string>
   <string name="footer_search_albums">Покажи всички албуми</string>
   <string name="footer_search_songs">Покажи всички песни</string>
-  <string name="footer_search_playlists">Покажи всички листи за изпълнение</string>
+  <string name="footer_search_playlists">Покажи всички списъци за изпълнение</string>
   <string name="searchHint">Търси музика</string>
   <string name="search_title_artists">Всички изпълнители на \"%s\"</string>
   <string name="search_title_albums">Всички албуми на \"%s\"</string>

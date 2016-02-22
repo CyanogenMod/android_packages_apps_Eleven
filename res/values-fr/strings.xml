@@ -44,7 +44,7 @@
   <string name="menu_clear_list">Effacer la liste</string>
   <string name="menu_clear_recents">Effacer les récents</string>
   <string name="menu_clear_queue">Effacer la liste d\'attente</string>
-  <string name="menu_save_queue">Enregistrer la file d\'attente dans la playlist</string>
+  <string name="menu_save_queue">Enregistrer la file d\'attente dans la liste de lecture</string>
   <string name="menu_equalizer">Égaliseur</string>
   <string name="add_to_playlist">Ajouter à liste de lecture</string>
   <string name="add_to_queue">Ajouter à la file d\'attente</string>
@@ -57,12 +57,12 @@
   <string name="sort_order_entry_year">Année</string>
   <string name="sort_order_entry_duration">Durée</string>
   <string name="sort_order_entry_date_added">Date d\'ajout</string>
-  <string name="sort_order_entry_track_list">Liste de lecture</string>
+  <string name="sort_order_entry_track_list">Liste des pistes</string>
   <string name="sort_order_entry_number_of_songs">Nombre de titres</string>
   <string name="sort_order_entry_number_of_albums">Nombre d\'albums</string>
   <string name="sort_order_entry_filename">Nom de fichier</string>
   <string name="playlist_last_added">Derniers ajouts</string>
-  <string name="playlist_recently_played">Lu récemment</string>
+  <string name="playlist_recently_played">Lue récemment</string>
   <string name="playlist_top_tracks">Mes titres préférés</string>
   <string name="new_playlist">Nouvelle liste de lecture</string>
   <string name="save">Enregistrer</string>
@@ -71,7 +71,7 @@
   <string name="clear">Effacer</string>
   <string name="new_playlist_name_template">Liste de lecture <xliff:g id="number">%d</xliff:g></string>
   <string name="create_playlist_prompt">Nom de la liste de lecture</string>
-  <string name="delete_dialog_title">Effacer <xliff:g id="item" example="album">%s</xliff:g> ?</string>
+  <string name="delete_dialog_title">Supprimer <xliff:g id="item" example="album">%s</xliff:g> ?</string>
   <string name="clear_top_tracks_title">Effacer les titres les plus populaires ?</string>
   <string name="clear_recent_title">Effacer les titres récemment joués ?</string>
   <string name="clear_last_added">Effacer les derniers titres ajoutés ?</string>

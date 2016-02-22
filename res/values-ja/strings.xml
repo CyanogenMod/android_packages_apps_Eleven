@@ -104,7 +104,7 @@
   <string name="accessibility_repeat_one">1曲リピート</string>
   <string name="accessibility_queue">キューを開く</string>
   <string name="accessibility_browse">音楽を参照</string>
-  <string name="set_as_ringtone">「<xliff:g id="name" example="Alarm Bell">%s</xliff:g>」を着信音として設定しました</string>
+  <string name="set_as_ringtone">[<xliff:g id="name" example="Alarm Bell">%s</xliff:g>]を着信音として設定しました</string>
   <string name="playlist_renamed">プレイリスト名を変更しました</string>
   <string name="settings_ui_category">インターフェース</string>
   <string name="settings_storage_category">ストレージ</string>
@@ -135,7 +135,7 @@
   <string name="empty_recent_main">最近の曲はありません</string>
   <string name="empty_recent">最近聴いた曲がここに表示されます。</string>
   <string name="empty_playlist_main">プレイリストに曲がありません</string>
-  <string name="empty_playlist_secondary">このプレイリストに曲を追加するには、曲、アルバムまたはアーティストのオプションメニューをタップして「プレイリストに追加」を選択してください。</string>
+  <string name="empty_playlist_secondary">このプレイリストに曲を追加するには、曲、アルバムまたはアーティストのオプションメニューをタップして[プレイリストに追加]を選択してください。</string>
   <string name="empty_top_tracks_main">トップトラックはありません</string>
   <string name="empty_top_tracks_secondary">よく聴く曲がこのリストに追加されます。</string>
   <string name="empty_last_added_main">最近追加した曲はありません</string>
@@ -143,7 +143,7 @@
   <string name="empty_generic_main">音楽が見つかりませんでした</string>
   <string name="empty_generic_secondary">パソコンから端末に音楽をコピーするには、USBケーブルを使用してください。</string>
   <string name="empty_queue_main">再生キューに曲がありません</string>
-  <string name="empty_queue_secondary">再生キューに曲を追加するには、曲、アルバムまたはアーティストのオプションメニューをタップして「キューに追加」を選択してください。</string>
+  <string name="empty_queue_secondary">再生キューに曲を追加するには、曲、アルバムまたはアーティストのオプションメニューをタップして[キューに追加]を選択してください。</string>
   <string name="error_playing_track">トラック%1$sを再生できません</string>
   <string name="header_unknown_year">不明な年</string>
   <string name="header_less_than_30s">30秒未満</string>
@@ -168,8 +168,8 @@
   <string name="footer_search_playlists">すべてのプレイリストを表示</string>
   <string name="searchHint">音楽を検索</string>
   <string name="search_title_artists">「%s」を含むすべてのアーティスト</string>
-  <string name="search_title_albums">「%s」を含むすべてのアルバム</string>
-  <string name="search_title_songs">「%s」を含むすべての曲</string>
-  <string name="search_title_playlists">「%s」を含むすべてのプレイリスト</string>
+  <string name="search_title_albums">[%s]を含むすべてのアルバム</string>
+  <string name="search_title_songs">[%s]を含むすべての曲</string>
+  <string name="search_title_playlists">[%s]を含むすべてのプレイリスト</string>
   <string name="duration_format"><xliff:g id="hours">%1$s</xliff:g><xliff:g id="minutes">%2$s</xliff:g></string>
 </resources>

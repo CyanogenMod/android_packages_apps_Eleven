@@ -111,7 +111,7 @@
   <string name="settings_data_category">Data</string>
   <string name="settings_delete_cache_title">Ta bort cache</string>
   <string name="settings_delete_cache_summary">Ta bort alla cachade bilder</string>
-  <string name="settings_download_only_on_wifi_title">Ladda enbart ned via Wi-Fi</string>
+  <string name="settings_download_only_on_wifi_title">Ladda enbart ned via Wi\u2011Fi</string>
   <string name="settings_download_only_on_wifi_summary">Undviker att ladda ned över mobila nätverk för att minska datakostnader</string>
   <string name="settings_download_missing_artwork_title">Ladda ned saknade albumomslag</string>
   <string name="settings_download_artist_images_title">Ladda ned saknade artistbilder</string>

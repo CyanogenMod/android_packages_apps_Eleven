@@ -25,7 +25,7 @@
   <string name="page_playlists">Wiedergabelisten</string>
   <string name="page_genres">Genres</string>
   <string name="page_now_playing">Aktuelle Wiedergabe</string>
-  <string name="page_play_queue">Warteschlange abspielen</string>
+  <string name="page_play_queue">Warteschlange wiedergeben</string>
   <string name="header_albums">Alben</string>
   <string name="header_top_songs">Toptitel</string>
   <string name="header_all_songs">Alle Titel</string>
@@ -83,7 +83,7 @@
   <string name="old_photo">Altes Foto verwenden</string>
   <string name="context_menu_play_selection">Wiedergeben</string>
   <string name="context_menu_play_next">Als nächstes wiedergeben</string>
-  <string name="context_menu_play_album">Album abspielen</string>
+  <string name="context_menu_play_album">Album wiedergeben</string>
   <string name="context_menu_more_by_artist">Mehr von diesem Künstler</string>
   <string name="context_menu_rename_playlist">Umbenennen</string>
   <string name="context_menu_delete">Löschen</string>
@@ -93,9 +93,9 @@
   <string name="context_menu_use_as_ringtone">Als Klingelton verwenden</string>
   <string name="context_menu_remove_from_playlist">Aus Wiedergabeliste entfernen</string>
   <string name="context_menu_change_image">Bild ändern</string>
-  <string name="accessibility_play">Abspielen</string>
+  <string name="accessibility_play">Wiedergeben</string>
   <string name="accessibility_pause">Pause</string>
-  <string name="accessibility_next">Nächster Titel</string>
+  <string name="accessibility_next">Weiter</string>
   <string name="accessibility_prev">Vorheriger Titel</string>
   <string name="accessibility_shuffle">Zufällige Wiedergabe</string>
   <string name="accessibility_shuffle_all">Alles zufällig wiedergeben</string>
@@ -104,7 +104,7 @@
   <string name="accessibility_repeat_one">Aktuellen Titel wiederholen</string>
   <string name="accessibility_queue">Warteschlange öffnen</string>
   <string name="accessibility_browse">Musik durchsuchen</string>
-  <string name="set_as_ringtone">\"<xliff:g id="name" example="Alarm Bell">%s</xliff:g>\" wurde als Klingelton festgelegt</string>
+  <string name="set_as_ringtone">\"<xliff:g id="name" example="Alarm Bell">%s</xliff:g>\" wurde als Klingelton festgelegt.</string>
   <string name="playlist_renamed">Wiedergabeliste umbenannt</string>
   <string name="settings_ui_category">Oberfläche</string>
   <string name="settings_storage_category">Speicher</string>
@@ -113,14 +113,14 @@
   <string name="settings_delete_cache_summary">Alle zwischengespeicherten Bilder löschen</string>
   <string name="settings_download_only_on_wifi_title">Nur über WLAN herunterladen</string>
   <string name="settings_download_only_on_wifi_summary">Downloads über Mobilfunknetze vermeiden, um Kosten für die Datenübertragung zu senken</string>
-  <string name="settings_download_missing_artwork_title">Fehlende Albencover laden</string>
-  <string name="settings_download_artist_images_title">Fehlende Interpretenbilder laden</string>
+  <string name="settings_download_missing_artwork_title">Fehlende Albencover herunterladen</string>
+  <string name="settings_download_artist_images_title">Fehlende Interpretenbilder herunterladen</string>
   <string name="settings_general_category">Allgemein</string>
   <string name="settings_show_music_visualization_title">Musik-Visualisierung anzeigen</string>
   <string name="settings_show_lyrics_title">Songtexte zeigen</string>
   <string name="settings_show_lyrics_summary">Für Titel mit einer SRT-Datei</string>
   <string name="settings_shake_to_play">Zum Abspielen schütteln</string>
-  <string name="settings_shake_to_play_summary">Schütteln Sie Ihr Gerät, um den nächsten Titel abzuspielen</string>
+  <string name="settings_shake_to_play_summary">Schütteln Sie Ihr Gerät, um den nächsten Titel abzuspielen.</string>
   <string name="settings_lockscreen_album_art">Albumcover auf Sperrbildschirm</string>
   <string name="settings_lockscreen_album_art_summary">Hintergrund des Sperrbildschirms durch Albumcover ersetzen</string>
   <string name="app_widget_small">Musik: 4 \u00d7 1</string>
@@ -130,18 +130,18 @@
   <string name="no_effects_for_you">Der Equalizer konnte nicht geöffnet werden.</string>
   <string name="empty_music">Verwenden Sie ein USB-Kabel, um Musik von Ihrem Computer auf Ihr Gerät zu kopieren.</string>
   <string name="empty_search">Keine Suchergebnisse gefunden</string>
-  <string name="empty_search_check">Bitte vergewissern Sie sich, dass Schreibweise korrekt ist, oder versuchen Sie es mit einem anderen Stichwort.</string>
+  <string name="empty_search_check">Bitte vergewissern Sie sich, dass die Schreibweise korrekt ist, oder versuchen Sie es mit einem anderen Stichwort.</string>
   <string name="empty_favorite">Als Favorit markierte Titel werden hier angezeigt.</string>
   <string name="empty_recent_main">Keine kürzlich gespielten Titel</string>
   <string name="empty_recent">Zuletzt gehörte Titel werden hier angezeigt.</string>
   <string name="empty_playlist_main">Keine Titel in der Wiedergabeliste</string>
-  <string name="empty_playlist_secondary">Tippen Sie auf einen Titel, Künstler oder ein Album und wählen Sie \"Zur Wiedergabeliste hinzufügen\", um den jeweiligen Eintrag zu dieser Liste hinzuzufügen.</string>
+  <string name="empty_playlist_secondary">Tippen Sie im Optionsmenü auf einen Titel, Künstler oder ein Album und wählen Sie \"Zur Wiedergabeliste hinzufügen\", um den jeweiligen Eintrag zu dieser Liste hinzuzufügen.</string>
   <string name="empty_top_tracks_main">Keine Toptitel</string>
   <string name="empty_top_tracks_secondary">Meistgespielte Titel werden dieser Liste hinzugefügt.</string>
   <string name="empty_last_added_main">Keine kürzlich hinzugefügten Titel</string>
   <string name="empty_last_added">Hier werden Titel angezeigt, die innerhalb des letzten Monats hinzugefügt wurden.</string>
   <string name="empty_generic_main">Keine Musik gefunden</string>
-  <string name="empty_generic_secondary">Verwenden Sie ein USB-Kabel, um Musik von Ihrem Computer auf das Gerät zu übertragen.</string>
+  <string name="empty_generic_secondary">Verwenden Sie ein USB-Kabel, um Musik von Ihrem Computer auf das Gerät zu kopieren.</string>
   <string name="empty_queue_main">Keine Titel in der Warteschlange</string>
   <string name="empty_queue_secondary">Um Titel zur Warteschlange hinzuzufügen, wählen Sie im Optionsmenü eines Titels, Albums oder Interpreten \"Zur Warteschlange hinzufügen\".</string>
   <string name="error_playing_track">Der Titel \"%1$s\" konnte nicht abgespielt werden.</string>
