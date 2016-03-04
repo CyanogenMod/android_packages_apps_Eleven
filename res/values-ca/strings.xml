@@ -18,6 +18,7 @@
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
   <string name="app_name">Música</string>
+  <!-- Page titles -->
   <string name="page_recent">Recent</string>
   <string name="page_artists">Artistes</string>
   <string name="page_albums">Àlbums</string>
@@ -26,9 +27,11 @@
   <string name="page_genres">Gèneres</string>
   <string name="page_now_playing">Ara sona</string>
   <string name="page_play_queue">Reprodueix cua</string>
+  <!-- Section Headers -->
   <string name="header_albums">Àlbums</string>
   <string name="header_top_songs">Cançons més escoltades</string>
   <string name="header_all_songs">Totes les cançons</string>
+  <!-- Option menu items -->
   <string name="menu_settings">Ajustaments</string>
   <string name="menu_search">Cerca</string>
   <string name="menu_shuffle_item">Barreja</string>
@@ -46,10 +49,12 @@
   <string name="menu_clear_queue">Neteja la cua</string>
   <string name="menu_save_queue">Desa-ho en cua a la llista de reproducció</string>
   <string name="menu_equalizer">Equalitzador</string>
+  <!-- Playlist items -->
   <string name="add_to_playlist">Afegeix a la llista de reproducció</string>
   <string name="add_to_queue">Afegeix a la cua</string>
   <string name="remove_from_recent">Treu dels recents</string>
   <string name="remove_from_queue">Treu de la cua</string>
+  <!-- Sort orders -->
   <string name="sort_order_entry_az">A-Z</string>
   <string name="sort_order_entry_za">Z-A</string>
   <string name="sort_order_entry_artist">Artista</string>
@@ -61,9 +66,11 @@
   <string name="sort_order_entry_number_of_songs">Nombre de cançons</string>
   <string name="sort_order_entry_number_of_albums">Nombre d\'àlbums</string>
   <string name="sort_order_entry_filename">Nom del fitxer</string>
+  <!-- Default playlist names -->
   <string name="playlist_last_added">Darrer afegit</string>
   <string name="playlist_recently_played">Reproduïdes recentment</string>
   <string name="playlist_top_tracks">Els meus temes més escoltats</string>
+  <!-- AlertDialog items -->
   <string name="new_playlist">Nova llista de reproducció</string>
   <string name="save">Desa</string>
   <string name="cancel">Cancel·la</string>
@@ -81,6 +88,7 @@
   <string name="google_search">Cerca a Google</string>
   <string name="use_default">Utilitza la foto predefinida</string>
   <string name="old_photo">Utilitza la foto antiga</string>
+  <!-- Context menu items -->
   <string name="context_menu_play_selection">Reprodueix</string>
   <string name="context_menu_play_next">Reprodueix el següent</string>
   <string name="context_menu_play_album">Reprodueix àlbum</string>
@@ -93,6 +101,7 @@
   <string name="context_menu_use_as_ringtone">Utilitza com a to de trucada</string>
   <string name="context_menu_remove_from_playlist">Treu de la llista de reproducció</string>
   <string name="context_menu_change_image">Canvia imatge</string>
+  <!-- Content descriptions -->
   <string name="accessibility_play">Reprodueix</string>
   <string name="accessibility_pause">Pausa</string>
   <string name="accessibility_next">Següent</string>
@@ -104,8 +113,10 @@
   <string name="accessibility_repeat_one">Repeteix un</string>
   <string name="accessibility_queue">Obre la cua</string>
   <string name="accessibility_browse">Navega per la música</string>
+  <!-- Toast messages -->
   <string name="set_as_ringtone">\'<xliff:g id="name" example="Alarm Bell">%s</xliff:g>\' establert com a to de trucada</string>
   <string name="playlist_renamed">Llista de reproducció reanomenada</string>
+  <!-- Settings -->
   <string name="settings_ui_category">Interfície</string>
   <string name="settings_storage_category">Emmagatzematge</string>
   <string name="settings_data_category">Dades</string>
@@ -123,10 +134,12 @@
   <string name="settings_shake_to_play_summary">Agita el teu dispositiu per reproduir la cançó següent</string>
   <string name="settings_lockscreen_album_art">Portada de l\'àlbum a la pantalla de bloqueig</string>
   <string name="settings_lockscreen_album_art_summary">Substitueix el fons de la pantalla de bloqueig amb la portada de l\'àlbum</string>
+  <!-- App widget -->
   <string name="app_widget_small">Música: 4 \u00d7 1</string>
   <string name="app_widget_large">Música: 4 \u00d7 2</string>
   <string name="app_widget_large_alt">Música: 4 \u00d7 2 (alternatiu)</string>
   <string name="app_widget_recent">Música: recentment escoltada</string>
+  <!-- Empty list / error messages -->
   <string name="no_effects_for_you">L\'equalitzador no s\'ha pogut obrir.</string>
   <string name="empty_music">Per copiar música del teu ordenador al teu dispositiu, utilitza un cable USB.</string>
   <string name="empty_search">No s\'han trobat resultats</string>
@@ -145,6 +158,7 @@
   <string name="empty_queue_main">No hi ha cançons a la cua de reproducció</string>
   <string name="empty_queue_secondary">Per afegir cançons a la cua de reproducció, pica al menú opcions en una cançó, àlbum o artista i selecciona \"Afegeix a la cua\".</string>
   <string name="error_playing_track">No s\'ha pogut reproduir la pista %1$s</string>
+  <!-- Section Headers -->
   <string name="header_unknown_year">Any desconegut</string>
   <string name="header_less_than_30s">Menys de 30 segons</string>
   <string name="header_30_to_60_seconds">30 - 60 segons</string>

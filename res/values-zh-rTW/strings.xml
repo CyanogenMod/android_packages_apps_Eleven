@@ -18,6 +18,7 @@
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
   <string name="app_name">音樂</string>
+  <!-- Page titles -->
   <string name="page_recent">最近播放</string>
   <string name="page_artists">演出者</string>
   <string name="page_albums">專輯</string>
@@ -26,9 +27,11 @@
   <string name="page_genres">類型</string>
   <string name="page_now_playing">現正播放</string>
   <string name="page_play_queue">播放佇列</string>
+  <!-- Section Headers -->
   <string name="header_albums">專輯</string>
   <string name="header_top_songs">熱門樂曲</string>
   <string name="header_all_songs">所有樂曲</string>
+  <!-- Option menu items -->
   <string name="menu_settings">設定</string>
   <string name="menu_search">搜尋</string>
   <string name="menu_shuffle_item">隨機播放</string>
@@ -46,10 +49,12 @@
   <string name="menu_clear_queue">清除佇列</string>
   <string name="menu_save_queue">將佇列保存到播放清單</string>
   <string name="menu_equalizer">等化器</string>
+  <!-- Playlist items -->
   <string name="add_to_playlist">加入播放清單</string>
   <string name="add_to_queue">加入佇列</string>
   <string name="remove_from_recent">從最近播放清單移除</string>
   <string name="remove_from_queue">從佇列移除</string>
+  <!-- Sort orders -->
   <string name="sort_order_entry_az">升冪排序</string>
   <string name="sort_order_entry_za">降冪排序</string>
   <string name="sort_order_entry_artist">演出者</string>
@@ -61,9 +66,11 @@
   <string name="sort_order_entry_number_of_songs">樂曲數量</string>
   <string name="sort_order_entry_number_of_albums">專輯數量</string>
   <string name="sort_order_entry_filename">檔案名稱</string>
+  <!-- Default playlist names -->
   <string name="playlist_last_added">最後加入</string>
   <string name="playlist_recently_played">最近播放</string>
   <string name="playlist_top_tracks">我的熱門曲目</string>
+  <!-- AlertDialog items -->
   <string name="new_playlist">新增播放清單</string>
   <string name="save">儲存</string>
   <string name="cancel">取消</string>
@@ -81,6 +88,7 @@
   <string name="google_search">Google 搜尋</string>
   <string name="use_default">使用預設相片</string>
   <string name="old_photo">使用舊的相片</string>
+  <!-- Context menu items -->
   <string name="context_menu_play_selection">播放</string>
   <string name="context_menu_play_next">播放下一個</string>
   <string name="context_menu_play_album">播放專輯</string>
@@ -93,6 +101,7 @@
   <string name="context_menu_use_as_ringtone">設定為鈴聲</string>
   <string name="context_menu_remove_from_playlist">從播放清單刪除</string>
   <string name="context_menu_change_image">變更圖片</string>
+  <!-- Content descriptions -->
   <string name="accessibility_play">播放</string>
   <string name="accessibility_pause">暫停</string>
   <string name="accessibility_next">下一首</string>
@@ -104,8 +113,10 @@
   <string name="accessibility_repeat_one">單曲循環</string>
   <string name="accessibility_queue">開啟佇列</string>
   <string name="accessibility_browse">瀏覽音樂</string>
+  <!-- Toast messages -->
   <string name="set_as_ringtone">將\"<xliff:g id="name" example="Alarm Bell">%s</xliff:g>\"設為鈴聲</string>
   <string name="playlist_renamed">已重新命名播放清單</string>
+  <!-- Settings -->
   <string name="settings_ui_category">介面</string>
   <string name="settings_storage_category">儲存</string>
   <string name="settings_data_category">資料</string>
@@ -123,10 +134,12 @@
   <string name="settings_shake_to_play_summary">搖動您的裝置即可播放下一首歌曲</string>
   <string name="settings_lockscreen_album_art">鎖屏專輯圖片</string>
   <string name="settings_lockscreen_album_art_summary">將鎖屏的背景圖換成專輯圖片</string>
+  <!-- App widget -->
   <string name="app_widget_small">音樂：4 \u00d7 1</string>
   <string name="app_widget_large">音樂：4 \u00d7 2</string>
   <string name="app_widget_large_alt">音樂：4 \u00d7 2 (備用)</string>
   <string name="app_widget_recent">音樂：最近聽過的</string>
+  <!-- Empty list / error messages -->
   <string name="no_effects_for_you">無法開啟等化器。</string>
   <string name="empty_music">請透過 USB 傳輸線從電腦複製音樂到您的裝置。</string>
   <string name="empty_search">未發現搜尋結果</string>
@@ -145,6 +158,7 @@
   <string name="empty_queue_main">播放佇列中沒有樂曲</string>
   <string name="empty_queue_secondary">要新增樂曲至播放佇列，請輕觸樂曲、專輯或演出者，並在功能選單中選擇「新增至佇列」。</string>
   <string name="error_playing_track">無法播放曲目 %1$s</string>
+  <!-- Section Headers -->
   <string name="header_unknown_year">不明年份</string>
   <string name="header_less_than_30s">少於 30 秒</string>
   <string name="header_30_to_60_seconds">30 - 60 秒</string>

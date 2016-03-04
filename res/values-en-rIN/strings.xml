@@ -18,6 +18,7 @@
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
   <string name="app_name">Music</string>
+  <!-- Page titles -->
   <string name="page_recent">Recent</string>
   <string name="page_artists">Artists</string>
   <string name="page_albums">Albums</string>
@@ -26,9 +27,11 @@
   <string name="page_genres">Genres</string>
   <string name="page_now_playing">Now Playing</string>
   <string name="page_play_queue">Play Queue</string>
+  <!-- Section Headers -->
   <string name="header_albums">Albums</string>
   <string name="header_top_songs">Top Songs</string>
   <string name="header_all_songs">All Songs</string>
+  <!-- Option menu items -->
   <string name="menu_settings">Settings</string>
   <string name="menu_search">Search</string>
   <string name="menu_shuffle_item">Shuffle</string>
@@ -46,10 +49,12 @@
   <string name="menu_clear_queue">Clear queue</string>
   <string name="menu_save_queue">Save queue to playlist</string>
   <string name="menu_equalizer">Equalizer</string>
+  <!-- Playlist items -->
   <string name="add_to_playlist">Add to playlist</string>
   <string name="add_to_queue">Add to queue</string>
   <string name="remove_from_recent">Remove from recent</string>
   <string name="remove_from_queue">Remove from queue</string>
+  <!-- Sort orders -->
   <string name="sort_order_entry_az">A-Z</string>
   <string name="sort_order_entry_za">Z-A</string>
   <string name="sort_order_entry_artist">Artist</string>
@@ -61,9 +66,11 @@
   <string name="sort_order_entry_number_of_songs">Number of songs</string>
   <string name="sort_order_entry_number_of_albums">Number of albums</string>
   <string name="sort_order_entry_filename">Filename</string>
+  <!-- Default playlist names -->
   <string name="playlist_last_added">Last added</string>
   <string name="playlist_recently_played">Recently played</string>
   <string name="playlist_top_tracks">My top tracks</string>
+  <!-- AlertDialog items -->
   <string name="new_playlist">New playlist</string>
   <string name="save">Save</string>
   <string name="cancel">Cancel</string>
@@ -81,6 +88,7 @@
   <string name="google_search">Google search</string>
   <string name="use_default">Use default photo</string>
   <string name="old_photo">Use old photo</string>
+  <!-- Context menu items -->
   <string name="context_menu_play_selection">Play</string>
   <string name="context_menu_play_next">Play next</string>
   <string name="context_menu_play_album">Play album</string>
@@ -93,6 +101,7 @@
   <string name="context_menu_use_as_ringtone">Use as ringtone</string>
   <string name="context_menu_remove_from_playlist">Remove from playlist</string>
   <string name="context_menu_change_image">Change image</string>
+  <!-- Content descriptions -->
   <string name="accessibility_play">Play</string>
   <string name="accessibility_pause">Pause</string>
   <string name="accessibility_next">Next</string>
@@ -104,8 +113,10 @@
   <string name="accessibility_repeat_one">Repeat one</string>
   <string name="accessibility_queue">Open queue</string>
   <string name="accessibility_browse">Browse music</string>
+  <!-- Toast messages -->
   <string name="set_as_ringtone">\'<xliff:g id="name" example="Alarm Bell">%s</xliff:g>\' set as ringtone</string>
   <string name="playlist_renamed">Playlist renamed</string>
+  <!-- Settings -->
   <string name="settings_ui_category">Interface</string>
   <string name="settings_storage_category">Storage</string>
   <string name="settings_data_category">Data</string>
@@ -123,10 +134,12 @@
   <string name="settings_shake_to_play_summary">Shake your device to play next song</string>
   <string name="settings_lockscreen_album_art">Lockscreen album art</string>
   <string name="settings_lockscreen_album_art_summary">Replace lockscreen background with album art</string>
+  <!-- App widget -->
   <string name="app_widget_small">Music: 4 \u00d7 1</string>
   <string name="app_widget_large">Music: 4 \u00d7 2</string>
   <string name="app_widget_large_alt">Music: 4 \u00d7 2 (alternate)</string>
   <string name="app_widget_recent">Music: recently listened</string>
+  <!-- Empty list / error messages -->
   <string name="no_effects_for_you">The equalizer could not be opened.</string>
   <string name="empty_music">To copy music from your computer to your device, use a USB cable.</string>
   <string name="empty_search">No search results found</string>
@@ -145,6 +158,7 @@
   <string name="empty_queue_main">No songs in play queue</string>
   <string name="empty_queue_secondary">To add songs to your Play Queue, tap the options menu on a song, album, or artist and select \"Add to queue\".</string>
   <string name="error_playing_track">Unable to play track %1$s</string>
+  <!-- Section Headers -->
   <string name="header_unknown_year">Unknown year</string>
   <string name="header_less_than_30s">Less than 30 seconds</string>
   <string name="header_30_to_60_seconds">30 - 60 seconds</string>

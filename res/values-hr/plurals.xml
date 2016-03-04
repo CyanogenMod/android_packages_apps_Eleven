@@ -17,56 +17,67 @@
      limitations under the License.
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <!-- Used to indicate the number of artists -->
   <plurals name="Nartists">
     <item quantity="one"><xliff:g id="count">%d</xliff:g> autor</item>
     <item quantity="few"><xliff:g id="count">%d</xliff:g> autora</item>
     <item quantity="other"><xliff:g id="count">%d</xliff:g> autora</item>
   </plurals>
+  <!-- Used to indicate the number of albums for an artist -->
   <plurals name="Nalbums">
     <item quantity="one"><xliff:g id="count">%d</xliff:g> album</item>
     <item quantity="few"><xliff:g id="count">%d</xliff:g> albuma</item>
     <item quantity="other"><xliff:g id="count">%d</xliff:g> albuma</item>
   </plurals>
+  <!-- Used to indicate the number of songs for an album -->
   <plurals name="Nsongs">
     <item quantity="one"><xliff:g id="count">%d</xliff:g> pjesma</item>
     <item quantity="few"><xliff:g id="count">%d</xliff:g> pjesme</item>
     <item quantity="other"><xliff:g id="count">%d</xliff:g> pjesama</item>
   </plurals>
+  <!-- Used to indicate the number of genres -->
   <plurals name="Ngenres">
     <item quantity="one"><xliff:g id="count">%d</xliff:g> žanr</item>
     <item quantity="few"><xliff:g id="count">%d</xliff:g> žanra</item>
     <item quantity="other"><xliff:g id="count">%d</xliff:g> žanra</item>
   </plurals>
+  <!-- Used to show a shortened version of hours-->
   <plurals name="Nhours">
     <item quantity="one"><xliff:g id="hours">%d</xliff:g>h</item>
     <item quantity="few"><xliff:g id="hours">%d</xliff:g>h</item>
     <item quantity="other"><xliff:g id="hours">%d</xliff:g>h</item>
   </plurals>
+  <!-- Used to show a shortened version of minutes -->
   <plurals name="Nminutes">
     <item quantity="one"><xliff:g id="minutes">%d</xliff:g>m</item>
     <item quantity="few"><xliff:g id="minutes">%d</xliff:g>m</item>
     <item quantity="other"><xliff:g id="minutes">%d</xliff:g>m</item>
   </plurals>
+  <!-- Toasts after adding song(s) to playlists -->
   <plurals name="NNNtrackstoplaylist">
     <item quantity="one"><xliff:g id="number" example="1">%d</xliff:g> pjesma dodana na popis za reproduciranje.</item>
     <item quantity="few"><xliff:g id="number" example="2">%d</xliff:g> pjesme dodane na popis za reproduciranje.</item>
     <item quantity="other"><xliff:g id="number" example="27">%d</xliff:g> pjesama dodano na popis za reproduciranje.</item>
   </plurals>
+  <!-- Toasts after removing song(s) from playlists -->
   <plurals name="NNNtracksfromplaylist">
     <item quantity="one"><xliff:g id="number" example="1">%d</xliff:g> pjesma uklonjena s popisa za reproduciranje.</item>
     <item quantity="few"><xliff:g id="number" example="2">%d</xliff:g> pjesme uklonjene s popisa za reproduciranje.</item>
     <item quantity="other"><xliff:g id="number" example="27">%d</xliff:g> pjesama uklonjeno s popisa za reproduciranje.</item>
   </plurals>
+  <!-- Toasts after adding song(s) to queue -->
   <plurals name="NNNtrackstoqueue">
     <item quantity="one"><xliff:g id="number" example="1">%d</xliff:g> pjesma dodana u red.</item>
     <item quantity="few"><xliff:g id="number" example="2">%d</xliff:g> pjesme dodane u red.</item>
     <item quantity="other"><xliff:g id="number" example="27">%d</xliff:g> pjesama dodano u red.</item>
   </plurals>
+  <!-- Toasts after adding song(s) to the favorites list -->
   <plurals name="NNNtrackstofavorites">
     <item quantity="one"><xliff:g id="number" example="1">%d</xliff:g> pjesma dodana u favorite.</item>
     <item quantity="few"><xliff:g id="number" example="2">%d</xliff:g> pjesme dodane u favorite.</item>
     <item quantity="other"><xliff:g id="number" example="27">%d</xliff:g> pjesama dodano u favorite.</item>
   </plurals>
+  <!-- Toast confirming that song(s) was/were deleted. -->
   <plurals name="NNNtracksdeleted">
     <item quantity="one"><xliff:g id="songs_to_delete" example="1">%d</xliff:g> pjesma je izbrisana.</item>
     <item quantity="few"><xliff:g id="songs_to_delete" example="2">%d</xliff:g> pjesme su izbrisane.</item>

@@ -18,6 +18,7 @@
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
   <string name="app_name">Musika</string>
+  <!-- Page titles -->
   <string name="page_recent">Azkenak</string>
   <string name="page_artists">Artistak</string>
   <string name="page_albums">Albumak</string>
@@ -26,9 +27,11 @@
   <string name="page_genres">Generoak</string>
   <string name="page_now_playing">Orain erreproduzitzen</string>
   <string name="page_play_queue">Erreproduzitu ilara</string>
+  <!-- Section Headers -->
   <string name="header_albums">Albumak</string>
   <string name="header_top_songs">Gehien entzundako abestiak</string>
   <string name="header_all_songs">Abesti guztiak</string>
+  <!-- Option menu items -->
   <string name="menu_settings">Ezarpenak</string>
   <string name="menu_search">Bilatu</string>
   <string name="menu_shuffle_item">Nahastu</string>
@@ -46,10 +49,12 @@
   <string name="menu_clear_queue">Garbitu ilara</string>
   <string name="menu_save_queue">Gorde ilara erreprodukzio-zerrenda gisa</string>
   <string name="menu_equalizer">Ekualizadorea</string>
+  <!-- Playlist items -->
   <string name="add_to_playlist">Gehitu erreprodukzio zerrendara</string>
   <string name="add_to_queue">Gehitu ilarara</string>
   <string name="remove_from_recent">Kendu azkenetatik</string>
   <string name="remove_from_queue">Kendu Ilaratik</string>
+  <!-- Sort orders -->
   <string name="sort_order_entry_az">A-Z</string>
   <string name="sort_order_entry_za">Z-A</string>
   <string name="sort_order_entry_artist">Artista</string>
@@ -61,9 +66,11 @@
   <string name="sort_order_entry_number_of_songs">Abesti kopurua</string>
   <string name="sort_order_entry_number_of_albums">Album kopurua</string>
   <string name="sort_order_entry_filename">Fitxategi izena</string>
+  <!-- Default playlist names -->
   <string name="playlist_last_added">Berriki gehituak</string>
   <string name="playlist_recently_played">Berriki erreproduzitua</string>
   <string name="playlist_top_tracks">Sarri entzundakoak</string>
+  <!-- AlertDialog items -->
   <string name="new_playlist">Zerrenda berria</string>
   <string name="save">Gorde</string>
   <string name="cancel">Utzi</string>
@@ -81,6 +88,7 @@
   <string name="google_search">Google bilaketa</string>
   <string name="use_default">Erabili argazki lehenetsia</string>
   <string name="old_photo">Erabili aurreko irudia</string>
+  <!-- Context menu items -->
   <string name="context_menu_play_selection">Erreproduzitu</string>
   <string name="context_menu_play_next">Erreproduzitu hurrengoa</string>
   <string name="context_menu_play_album">Erreproduzitu albuma</string>
@@ -93,6 +101,7 @@
   <string name="context_menu_use_as_ringtone">Erabili dei doinu gisa</string>
   <string name="context_menu_remove_from_playlist">Kendu erreprodukzio-zerrendatik</string>
   <string name="context_menu_change_image">Aldatu irudia</string>
+  <!-- Content descriptions -->
   <string name="accessibility_play">Erreproduzitu</string>
   <string name="accessibility_pause">Pausatu</string>
   <string name="accessibility_next">Hurrengoa</string>
@@ -104,8 +113,10 @@
   <string name="accessibility_repeat_one">Errepikatu bat</string>
   <string name="accessibility_queue">Ireki ilara</string>
   <string name="accessibility_browse">Arakatu musika</string>
+  <!-- Toast messages -->
   <string name="set_as_ringtone">\'<xliff:g id="name" example="Alarm Bell">%s</xliff:g>\' dei doinu bezala ezarri da</string>
   <string name="playlist_renamed">Erreprodukzio zerrendaren izena aldatu da</string>
+  <!-- Settings -->
   <string name="settings_ui_category">Interfazea</string>
   <string name="settings_storage_category">Biltegiratzea</string>
   <string name="settings_data_category">Datuak</string>
@@ -123,10 +134,12 @@
   <string name="settings_shake_to_play_summary">Astindu zure gailua hurrengo abestia erreproduzitzeko</string>
   <string name="settings_lockscreen_album_art">Blokeo-pantailako karatulak</string>
   <string name="settings_lockscreen_album_art_summary">Ordeztu blokeo-pantailako atzealdea karatulekin</string>
+  <!-- App widget -->
   <string name="app_widget_small">Musika: 4 \u00d7 1</string>
   <string name="app_widget_large">Musika: 4 \u00d7 2</string>
   <string name="app_widget_large_alt">Musika: 4 \u00d7 2 (txandakatu)</string>
   <string name="app_widget_recent">Musika: berriki entzundakoak</string>
+  <!-- Empty list / error messages -->
   <string name="no_effects_for_you">Ezin izan da ekualizadorea ireki.</string>
   <string name="empty_music">Musika ordenagailutik galiura kopiatzeko USB kablea erabili.</string>
   <string name="empty_search">Ez da bilaketaren emaitzarik aurkitu</string>
@@ -145,6 +158,7 @@
   <string name="empty_queue_main">Ez dago abestirik erreprodukzio-zerrendan</string>
   <string name="empty_queue_secondary">Abestiak erreprodukzio-zerrendara gehitzeko, sakatu abesti, album edo artista bat eta hautatu \"Gehitu ilarara\".</string>
   <string name="error_playing_track">Ezin izan da %1$s. pista erreproduzitu</string>
+  <!-- Section Headers -->
   <string name="header_unknown_year">Urte ezezaguna</string>
   <string name="header_less_than_30s">30 segundo baino gutxiago</string>
   <string name="header_30_to_60_seconds">30 - 60 segundo</string>

@@ -18,6 +18,7 @@
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
   <string name="app_name">Musique</string>
+  <!-- Page titles -->
   <string name="page_recent">Récents</string>
   <string name="page_artists">Artistes</string>
   <string name="page_albums">Albums</string>
@@ -26,9 +27,11 @@
   <string name="page_genres">Genres</string>
   <string name="page_now_playing">Lecture en cours</string>
   <string name="page_play_queue">Lire la file d\'attente</string>
+  <!-- Section Headers -->
   <string name="header_albums">Albums</string>
   <string name="header_top_songs">Titres populaires</string>
   <string name="header_all_songs">Tous les titres</string>
+  <!-- Option menu items -->
   <string name="menu_settings">Paramètres</string>
   <string name="menu_search">Rechercher</string>
   <string name="menu_shuffle_item">Lecture aléatoire</string>
@@ -46,10 +49,12 @@
   <string name="menu_clear_queue">Effacer la liste d\'attente</string>
   <string name="menu_save_queue">Enregistrer la file d\'attente dans la liste de lecture</string>
   <string name="menu_equalizer">Égaliseur</string>
+  <!-- Playlist items -->
   <string name="add_to_playlist">Ajouter à liste de lecture</string>
   <string name="add_to_queue">Ajouter à la file d\'attente</string>
   <string name="remove_from_recent">Supprimer des récents</string>
   <string name="remove_from_queue">Supprimer de la file d\'attente</string>
+  <!-- Sort orders -->
   <string name="sort_order_entry_az">A-Z</string>
   <string name="sort_order_entry_za">Z-A</string>
   <string name="sort_order_entry_artist">Artiste</string>
@@ -61,9 +66,11 @@
   <string name="sort_order_entry_number_of_songs">Nombre de titres</string>
   <string name="sort_order_entry_number_of_albums">Nombre d\'albums</string>
   <string name="sort_order_entry_filename">Nom de fichier</string>
+  <!-- Default playlist names -->
   <string name="playlist_last_added">Derniers ajouts</string>
   <string name="playlist_recently_played">Lue récemment</string>
   <string name="playlist_top_tracks">Mes titres préférés</string>
+  <!-- AlertDialog items -->
   <string name="new_playlist">Nouvelle liste de lecture</string>
   <string name="save">Enregistrer</string>
   <string name="cancel">Annuler</string>
@@ -81,10 +88,11 @@
   <string name="google_search">Recherche Google</string>
   <string name="use_default">Utiliser la photo par défaut</string>
   <string name="old_photo">Utiliser l\'ancienne photo</string>
+  <!-- Context menu items -->
   <string name="context_menu_play_selection">Lire</string>
   <string name="context_menu_play_next">Lire le suivant</string>
   <string name="context_menu_play_album">Lire l\'album</string>
-  <string name="context_menu_more_by_artist">Plus du même artiste</string>
+  <string name="context_menu_more_by_artist">Par le même artiste</string>
   <string name="context_menu_rename_playlist">Renommer</string>
   <string name="context_menu_delete">Supprimer</string>
   <string name="context_menu_fetch_album_art">Récupérer la pochette de l\'album</string>
@@ -93,6 +101,7 @@
   <string name="context_menu_use_as_ringtone">Utiliser comme sonnerie</string>
   <string name="context_menu_remove_from_playlist">Supprimer de la liste de lecture</string>
   <string name="context_menu_change_image">Modifier l’image</string>
+  <!-- Content descriptions -->
   <string name="accessibility_play">Lire</string>
   <string name="accessibility_pause">Pause</string>
   <string name="accessibility_next">Suivant</string>
@@ -100,33 +109,37 @@
   <string name="accessibility_shuffle">Lecture aléatoire</string>
   <string name="accessibility_shuffle_all">Lecture aléatoire de tous les titres</string>
   <string name="accessibility_repeat">Répéter</string>
-  <string name="accessibility_repeat_all">Répéter tout</string>
+  <string name="accessibility_repeat_all">Tout répéter</string>
   <string name="accessibility_repeat_one">Répéter un</string>
   <string name="accessibility_queue">Ouvrir la file d\'attente</string>
   <string name="accessibility_browse">Parcourir la musique</string>
+  <!-- Toast messages -->
   <string name="set_as_ringtone">\'<xliff:g id="name" example="Alarm Bell">%s</xliff:g>\' défini comme sonnerie</string>
   <string name="playlist_renamed">Liste de lecture renommée</string>
+  <!-- Settings -->
   <string name="settings_ui_category">Interface</string>
   <string name="settings_storage_category">Stockage</string>
   <string name="settings_data_category">Données</string>
   <string name="settings_delete_cache_title">Supprimer le cache</string>
   <string name="settings_delete_cache_summary">Supprimer toutes les images du cache</string>
-  <string name="settings_download_only_on_wifi_title">Télécharger par Wi-Fi uniquement</string>
+  <string name="settings_download_only_on_wifi_title">Télécharger via Wi-Fi uniquement</string>
   <string name="settings_download_only_on_wifi_summary">Pour réduire les frais de consommation de données, ne pas télécharger via un réseau mobile</string>
   <string name="settings_download_missing_artwork_title">Télécharger les pochettes manquantes</string>
   <string name="settings_download_artist_images_title">Télécharger les images d\'artistes manquantes</string>
   <string name="settings_general_category">Général</string>
   <string name="settings_show_music_visualization_title">Voir les animations musicales</string>
-  <string name="settings_show_lyrics_title">Voir les paroles</string>
+  <string name="settings_show_lyrics_title">Afficher les paroles</string>
   <string name="settings_show_lyrics_summary">Pour les titres ayant un fichier srt</string>
   <string name="settings_shake_to_play">Secouer pour lire</string>
-  <string name="settings_shake_to_play_summary">Secouer votre appareil pour lire la chanson suivante</string>
+  <string name="settings_shake_to_play_summary">Secouer votre appareil pour écouter le titre suivant</string>
   <string name="settings_lockscreen_album_art">Pochettes d\'album sur l\'écran de verrouillage</string>
-  <string name="settings_lockscreen_album_art_summary">Remplacer le fond d\'écran de verrouillage avec les pochettes d\'album</string>
+  <string name="settings_lockscreen_album_art_summary">Remplacer le fond d\'écran de verrouillage par des pochettes d\'album</string>
+  <!-- App widget -->
   <string name="app_widget_small">Musique : 4 \u00d7 1</string>
   <string name="app_widget_large">Musique : 4 \u00d7 2</string>
   <string name="app_widget_large_alt">Musique : 4 \u00d7 2 (alterné)</string>
   <string name="app_widget_recent">Musique : récemment écouté</string>
+  <!-- Empty list / error messages -->
   <string name="no_effects_for_you">L\'égaliseur ne peut pas être ouvert.</string>
   <string name="empty_music">Utilisez un câble USB pour copier de la musique depuis votre ordinateur vers votre appareil.</string>
   <string name="empty_search">Aucun résultat trouvé</string>
@@ -135,7 +148,7 @@
   <string name="empty_recent_main">Aucun titre récent</string>
   <string name="empty_recent">Les titres écoutés récemment seront affichés ici.</string>
   <string name="empty_playlist_main">Aucun titre dans la liste de lecture</string>
-  <string name="empty_playlist_secondary">Pour ajouter des titres à cette liste de lecture, appuyez sur le menu d\'options d\'un titre, album ou artiste et sélectionnez \"Ajouter à la liste de lecture\".</string>
+  <string name="empty_playlist_secondary">Pour ajouter des titres à cette liste de lecture, appuyez sur le menu d\'options d\'un titre, album ou artiste et sélectionnez « Ajouter à la liste de lecture ».</string>
   <string name="empty_top_tracks_main">Aucun titre populaire</string>
   <string name="empty_top_tracks_secondary">Les titres écoutés fréquemment s\'ajouteront à cette liste.</string>
   <string name="empty_last_added_main">Aucun titre ajouté récemment</string>
@@ -143,8 +156,9 @@
   <string name="empty_generic_main">Aucune musique trouvée</string>
   <string name="empty_generic_secondary">Utilisez un câble USB pour copier de la musique depuis votre ordinateur vers votre appareil.</string>
   <string name="empty_queue_main">Aucun titre dans la file d\'attente</string>
-  <string name="empty_queue_secondary">Pour ajouter des titres à votre file d\'attente, appuyez sur le menu d\'options d\'un titre, album ou artiste et sélectionnez \"Ajouter à la file d\'attente\".</string>
+  <string name="empty_queue_secondary">Pour ajouter des titres à votre file d\'attente, appuyez sur le menu d\'options d\'un titre, album ou artiste et sélectionnez « Ajouter à la file d\'attente ».</string>
   <string name="error_playing_track">Impossible de lire %1$s</string>
+  <!-- Section Headers -->
   <string name="header_unknown_year">Année inconnue</string>
   <string name="header_less_than_30s">Moins de 30 secondes</string>
   <string name="header_30_to_60_seconds">30 à 60 secondes</string>

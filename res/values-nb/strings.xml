@@ -18,6 +18,7 @@
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
   <string name="app_name">Musikk</string>
+  <!-- Page titles -->
   <string name="page_recent">Siste</string>
   <string name="page_artists">Artister</string>
   <string name="page_albums">Albumer</string>
@@ -26,9 +27,11 @@
   <string name="page_genres">Sjangrer</string>
   <string name="page_now_playing">Nå spilles</string>
   <string name="page_play_queue">Avspillingskø</string>
+  <!-- Section Headers -->
   <string name="header_albums">Albumer</string>
   <string name="header_top_songs">Topp sanger</string>
   <string name="header_all_songs">Alle sanger</string>
+  <!-- Option menu items -->
   <string name="menu_settings">Innstillinger</string>
   <string name="menu_search">Søk</string>
   <string name="menu_shuffle_item">Shuffle</string>
@@ -46,10 +49,12 @@
   <string name="menu_clear_queue">Slett kø</string>
   <string name="menu_save_queue">Lagre kø til spillelisten</string>
   <string name="menu_equalizer">Equalizer</string>
+  <!-- Playlist items -->
   <string name="add_to_playlist">Legg til i spilleliste</string>
   <string name="add_to_queue">Legg til i køen</string>
   <string name="remove_from_recent">Fjern fra siste</string>
   <string name="remove_from_queue">Fjern fra køen</string>
+  <!-- Sort orders -->
   <string name="sort_order_entry_az">A-Z</string>
   <string name="sort_order_entry_za">Z-A</string>
   <string name="sort_order_entry_artist">Artist</string>
@@ -61,9 +66,11 @@
   <string name="sort_order_entry_number_of_songs">Antall sanger</string>
   <string name="sort_order_entry_number_of_albums">Antall album</string>
   <string name="sort_order_entry_filename">Filnavn</string>
+  <!-- Default playlist names -->
   <string name="playlist_last_added">Sist lagt til</string>
   <string name="playlist_recently_played">Nylig spilte</string>
   <string name="playlist_top_tracks">Mine topp spor</string>
+  <!-- AlertDialog items -->
   <string name="new_playlist">Ny spilleliste</string>
   <string name="save">Lagre</string>
   <string name="cancel">Avbryt</string>
@@ -81,6 +88,7 @@
   <string name="google_search">Google søk</string>
   <string name="use_default">Bruk standard bilde</string>
   <string name="old_photo">Bruk gammelt bilde</string>
+  <!-- Context menu items -->
   <string name="context_menu_play_selection">Spill av</string>
   <string name="context_menu_play_next">Spill neste</string>
   <string name="context_menu_play_album">Spill album</string>
@@ -93,6 +101,7 @@
   <string name="context_menu_use_as_ringtone">Bruk som ringetone</string>
   <string name="context_menu_remove_from_playlist">Fjern fra spillelisten</string>
   <string name="context_menu_change_image">Endre bilde</string>
+  <!-- Content descriptions -->
   <string name="accessibility_play">Spill av</string>
   <string name="accessibility_pause">Pause</string>
   <string name="accessibility_next">Neste</string>
@@ -104,8 +113,10 @@
   <string name="accessibility_repeat_one">Gjenta én</string>
   <string name="accessibility_queue">Åpne kø</string>
   <string name="accessibility_browse">Bla gjennom musikken</string>
+  <!-- Toast messages -->
   <string name="set_as_ringtone">\'<xliff:g id="name" example="Alarm Bell">%s</xliff:g>\' Sett som ringetone</string>
   <string name="playlist_renamed">Spillelisten fikk et nytt navn</string>
+  <!-- Settings -->
   <string name="settings_ui_category">Grensesnitt</string>
   <string name="settings_storage_category">Lagring</string>
   <string name="settings_data_category">Data</string>
@@ -123,10 +134,12 @@
   <string name="settings_shake_to_play_summary">Rist enheten for å spille neste sang</string>
   <string name="settings_lockscreen_album_art">Albumgrafikk på låseskjerm</string>
   <string name="settings_lockscreen_album_art_summary">Erstatt låseskjermsbakgrunn med albumgrafikk</string>
+  <!-- App widget -->
   <string name="app_widget_small">Musikk: 4 \u00d7 1</string>
   <string name="app_widget_large">Musikk: 4 \u00d7 2</string>
   <string name="app_widget_large_alt">Musikk: 4 \u00d7 2 (alternativ)</string>
   <string name="app_widget_recent">Musikk: nylig hørte</string>
+  <!-- Empty list / error messages -->
   <string name="no_effects_for_you">Equalizeren kan ikke åpnes.</string>
   <string name="empty_music">For å kopiere musikk fra en datamaskin til enheten, bruk en USB kabel.</string>
   <string name="empty_search">Ingen resultater funnet</string>
@@ -145,6 +158,7 @@
   <string name="empty_queue_main">Ingen sanger i avspillingskøen</string>
   <string name="empty_queue_secondary">For å legge til sanger i spillekøen, trykk på Alternativer-menyen på en sang, et album eller en artist og velg \"Legg til i kø\".</string>
   <string name="error_playing_track">Kan ikke spille spor %1$s</string>
+  <!-- Section Headers -->
   <string name="header_unknown_year">Ukjent år</string>
   <string name="header_less_than_30s">Mindre enn 30 sekunder</string>
   <string name="header_30_to_60_seconds">30 - 60 sekunder</string>

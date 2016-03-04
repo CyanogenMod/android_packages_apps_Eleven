@@ -18,6 +18,7 @@
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
   <string name="app_name">Hudba</string>
+  <!-- Page titles -->
   <string name="page_recent">Nedávné</string>
   <string name="page_artists">Umělci</string>
   <string name="page_albums">Alba</string>
@@ -26,9 +27,11 @@
   <string name="page_genres">Žánry</string>
   <string name="page_now_playing">Přehrává se</string>
   <string name="page_play_queue">Fronta přehrávání</string>
+  <!-- Section Headers -->
   <string name="header_albums">Alba</string>
   <string name="header_top_songs">Nejlepší skladby</string>
   <string name="header_all_songs">Všechny skladby</string>
+  <!-- Option menu items -->
   <string name="menu_settings">Nastavení</string>
   <string name="menu_search">Vyhledat</string>
   <string name="menu_shuffle_item">Náhodně</string>
@@ -46,10 +49,12 @@
   <string name="menu_clear_queue">Vyčistit frontu</string>
   <string name="menu_save_queue">Uložit frontu do seznamu skladeb</string>
   <string name="menu_equalizer">Ekvalizér</string>
+  <!-- Playlist items -->
   <string name="add_to_playlist">Přidat do seznamu skladeb</string>
   <string name="add_to_queue">Přidat do fronty</string>
   <string name="remove_from_recent">Odebrat z nedávných</string>
   <string name="remove_from_queue">Odebrat z fronty</string>
+  <!-- Sort orders -->
   <string name="sort_order_entry_az">A-Z</string>
   <string name="sort_order_entry_za">Z-A</string>
   <string name="sort_order_entry_artist">Umělce</string>
@@ -61,9 +66,11 @@
   <string name="sort_order_entry_number_of_songs">Počtu skladeb</string>
   <string name="sort_order_entry_number_of_albums">Počtu alb</string>
   <string name="sort_order_entry_filename">Jména souboru</string>
+  <!-- Default playlist names -->
   <string name="playlist_last_added">Naposledy přidaných</string>
   <string name="playlist_recently_played">Nedávno hraných</string>
   <string name="playlist_top_tracks">Mé nejlepší skladby</string>
+  <!-- AlertDialog items -->
   <string name="new_playlist">Nový seznam skladeb</string>
   <string name="save">Uložit</string>
   <string name="cancel">Zrušit</string>
@@ -81,6 +88,7 @@
   <string name="google_search">Vyhledávání Google</string>
   <string name="use_default">Použít výchozí obrázek</string>
   <string name="old_photo">Použít starý obrázek</string>
+  <!-- Context menu items -->
   <string name="context_menu_play_selection">Přehrát</string>
   <string name="context_menu_play_next">Přehrát další</string>
   <string name="context_menu_play_album">Přehrát album</string>
@@ -93,6 +101,7 @@
   <string name="context_menu_use_as_ringtone">Použít jako zvuk vyzvánění</string>
   <string name="context_menu_remove_from_playlist">Odstranit ze seznamu skladeb</string>
   <string name="context_menu_change_image">Změnit obrázek</string>
+  <!-- Content descriptions -->
   <string name="accessibility_play">Přehrát</string>
   <string name="accessibility_pause">Pozastavit</string>
   <string name="accessibility_next">Další</string>
@@ -104,8 +113,10 @@
   <string name="accessibility_repeat_one">Opakovat jednu</string>
   <string name="accessibility_queue">Otevřít frontu</string>
   <string name="accessibility_browse">Procházet hudbu</string>
+  <!-- Toast messages -->
   <string name="set_as_ringtone">„<xliff:g id="name" example="Alarm Bell">%s</xliff:g>“ nastaveno jako vyzvánění</string>
   <string name="playlist_renamed">Seznam skladeb přejmenován</string>
+  <!-- Settings -->
   <string name="settings_ui_category">Rozhraní</string>
   <string name="settings_storage_category">Úložiště</string>
   <string name="settings_data_category">Data</string>
@@ -123,10 +134,12 @@
   <string name="settings_shake_to_play_summary">Zatřeste se zařízením pro přehrání další skladby</string>
   <string name="settings_lockscreen_album_art">Obal alba na zámku obrazovky</string>
   <string name="settings_lockscreen_album_art_summary">Nahradit pozadí zámku obrazovky obalem alba</string>
+  <!-- App widget -->
   <string name="app_widget_small">Hudba: 4 \u00d7 1</string>
   <string name="app_widget_large">Hudba: 4 \u00d7 2</string>
   <string name="app_widget_large_alt">Hudba: 4 \u00d7 2 (alternativní)</string>
   <string name="app_widget_recent">Hudba: nedávno poslouchané</string>
+  <!-- Empty list / error messages -->
   <string name="no_effects_for_you">Nelze otevřít ekvalizér.</string>
   <string name="empty_music">Pro kopírování hudebních souborů z počítače do zařízení použijte USB kabel.</string>
   <string name="empty_search">Nenalezeny žádné výsledky</string>
@@ -145,6 +158,7 @@
   <string name="empty_queue_main">Žádné skladby ve frontě</string>
   <string name="empty_queue_secondary">Chcete-li přidat skladby do fronty, otevřete nabídku dotykem na skladbě, albu či umělci a zvolte „Přidat do fronty“.</string>
   <string name="error_playing_track">Nelze přehrát skladbu %1$s</string>
+  <!-- Section Headers -->
   <string name="header_unknown_year">Neznámý rok</string>
   <string name="header_less_than_30s">Méně než 30 sekund</string>
   <string name="header_30_to_60_seconds">30 - 60 sekund</string>

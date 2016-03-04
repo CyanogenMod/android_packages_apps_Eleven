@@ -17,46 +17,57 @@
      limitations under the License.
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <!-- Used to indicate the number of artists -->
   <plurals name="Nartists">
     <item quantity="one"><xliff:g id="count">%d</xliff:g> Interpret</item>
     <item quantity="other"><xliff:g id="count">%d</xliff:g> Interpreten</item>
   </plurals>
+  <!-- Used to indicate the number of albums for an artist -->
   <plurals name="Nalbums">
     <item quantity="one"><xliff:g id="count">%d</xliff:g> Album</item>
     <item quantity="other"><xliff:g id="count">%d</xliff:g> Alben</item>
   </plurals>
+  <!-- Used to indicate the number of songs for an album -->
   <plurals name="Nsongs">
     <item quantity="one"><xliff:g id="count">%d</xliff:g> Lidd</item>
     <item quantity="other"><xliff:g id="count">%d</xliff:g> Lidder</item>
   </plurals>
+  <!-- Used to indicate the number of genres -->
   <plurals name="Ngenres">
     <item quantity="one"><xliff:g id="count">%d</xliff:g> Genre</item>
     <item quantity="other"><xliff:g id="count">%d</xliff:g> Genren</item>
   </plurals>
+  <!-- Used to show a shortened version of hours-->
   <plurals name="Nhours">
     <item quantity="one"><xliff:g id="hours">%d</xliff:g> St.</item>
     <item quantity="other"><xliff:g id="hours">%d</xliff:g> St.</item>
   </plurals>
+  <!-- Used to show a shortened version of minutes -->
   <plurals name="Nminutes">
     <item quantity="one"><xliff:g id="minutes">%d</xliff:g> Min.</item>
     <item quantity="other"><xliff:g id="minutes">%d</xliff:g> Min.</item>
   </plurals>
+  <!-- Toasts after adding song(s) to playlists -->
   <plurals name="NNNtrackstoplaylist">
     <item quantity="one"><xliff:g id="number" example="1">%d</xliff:g> Lidd an d\'Ofspilllëscht dobäigesat.</item>
     <item quantity="other"><xliff:g id="number" example="27">%d</xliff:g> Lidder an d\'Ofspilllëscht dobäigesat.</item>
   </plurals>
+  <!-- Toasts after removing song(s) from playlists -->
   <plurals name="NNNtracksfromplaylist">
     <item quantity="one"><xliff:g id="number" example="1">%d</xliff:g> Lidd vun der Ofspilllëscht geläscht.</item>
     <item quantity="other"><xliff:g id="number" example="27">%d</xliff:g> Lidder vun der Ofspilllëscht geläscht.</item>
   </plurals>
+  <!-- Toasts after adding song(s) to queue -->
   <plurals name="NNNtrackstoqueue">
     <item quantity="one"><xliff:g id="number" example="1">%d</xliff:g> Lidd an d\'Ofspilllëscht dobäigesat.</item>
     <item quantity="other"><xliff:g id="number" example="1">%d</xliff:g> Lidder an d\'Ofspilllëscht dobäigesat.</item>
   </plurals>
+  <!-- Toasts after adding song(s) to the favorites list -->
   <plurals name="NNNtrackstofavorites">
     <item quantity="one"><xliff:g id="number" example="1">%d</xliff:g> Lidd bei d\'Favoritten dobäigesat.</item>
     <item quantity="other"><xliff:g id="number" example="27">%d</xliff:g> Lidder bei d\'Favoritten dobäigesat.</item>
   </plurals>
+  <!-- Toast confirming that song(s) was/were deleted. -->
   <plurals name="NNNtracksdeleted">
     <item quantity="one"><xliff:g id="songs_to_delete" example="1">%d</xliff:g> Lidd gouf geläscht.</item>
     <item quantity="other"><xliff:g id="songs_to_delete">%d</xliff:g> Lidder goufe geläscht.</item>

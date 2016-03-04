@@ -17,14 +17,17 @@
      limitations under the License.
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <!-- Page titles -->
   <string name="page_recent">最近播放</string>
   <string name="page_songs">歌曲</string>
   <string name="page_playlists">播放清單</string>
   <string name="page_genres">內容類型</string>
   <string name="page_now_playing">正在播放</string>
   <string name="page_play_queue">播放佇列</string>
+  <!-- Section Headers -->
   <string name="header_top_songs">熱門歌曲</string>
   <string name="header_all_songs">所有歌曲</string>
+  <!-- Option menu items -->
   <string name="menu_settings">設定</string>
   <string name="menu_search">搜尋</string>
   <string name="menu_shuffle_item">隨機播放</string>
@@ -41,10 +44,12 @@
   <string name="menu_clear_recents">清除最近播放</string>
   <string name="menu_clear_queue">清除佇列</string>
   <string name="menu_equalizer">等化器</string>
+  <!-- Playlist items -->
   <string name="add_to_playlist">新增至播放清單</string>
   <string name="add_to_queue">新增至佇列</string>
   <string name="remove_from_recent">從最近播放中移除</string>
   <string name="remove_from_queue">從佇列中移除</string>
+  <!-- Sort orders -->
   <string name="sort_order_entry_az">A-Z</string>
   <string name="sort_order_entry_za">Z-A</string>
   <string name="sort_order_entry_artist">演出者</string>
@@ -55,9 +60,11 @@
   <string name="sort_order_entry_track_list">曲目清單</string>
   <string name="sort_order_entry_number_of_songs">歌曲數量</string>
   <string name="sort_order_entry_filename">檔案名稱</string>
+  <!-- Default playlist names -->
   <string name="playlist_last_added">最後新增</string>
   <string name="playlist_recently_played">最近播放</string>
   <string name="playlist_top_tracks">我的熱門曲目</string>
+  <!-- AlertDialog items -->
   <string name="new_playlist">新的播放清單</string>
   <string name="cancel">取消</string>
   <string name="overwrite">覆寫</string>
@@ -74,6 +81,7 @@
   <string name="google_search">Google 搜尋</string>
   <string name="use_default">使用預設相片</string>
   <string name="old_photo">使用舊圖片</string>
+  <!-- Context menu items -->
   <string name="context_menu_play_selection">播放</string>
   <string name="context_menu_play_next">播放下一首</string>
   <string name="context_menu_play_album">播放專輯</string>
@@ -85,6 +93,7 @@
   <string name="context_menu_remove_from_recent">從最近播放中移除</string>
   <string name="context_menu_remove_from_playlist">從播放清單中移除</string>
   <string name="context_menu_change_image">變更圖像</string>
+  <!-- Content descriptions -->
   <string name="accessibility_play">播放</string>
   <string name="accessibility_pause">暫停</string>
   <string name="accessibility_next">下一首</string>
@@ -96,7 +105,9 @@
   <string name="accessibility_repeat_one">單曲重複播放</string>
   <string name="accessibility_queue">打開佇列</string>
   <string name="accessibility_browse">瀏覽音樂</string>
+  <!-- Toast messages -->
   <string name="playlist_renamed">已重新命名播放清單</string>
+  <!-- Settings -->
   <string name="settings_ui_category">介面</string>
   <string name="settings_storage_category">儲存空間</string>
   <string name="settings_data_category">數據</string>
@@ -113,10 +124,12 @@
   <string name="settings_shake_to_play_summary">搖動您的裝置即可播放下一首歌曲</string>
   <string name="settings_lockscreen_album_art">鎖屏專輯圖片</string>
   <string name="settings_lockscreen_album_art_summary">將鎖屏背景替換成專輯圖片</string>
+  <!-- App widget -->
   <string name="app_widget_small">音樂：4 \u00d7 1</string>
   <string name="app_widget_large">音樂：4 \u00d7 2</string>
   <string name="app_widget_large_alt">音樂：4 \u00d7 2（交替）</string>
   <string name="app_widget_recent">音樂：最近聽過</string>
+  <!-- Empty list / error messages -->
   <string name="no_effects_for_you">無法打開等化器。</string>
   <string name="empty_music">使用 USB 連接線將音樂從電腦複製至裝置。</string>
   <string name="empty_search">未找到搜尋結果</string>
@@ -135,6 +148,7 @@
   <string name="empty_queue_main">播放佇列中沒有歌曲</string>
   <string name="empty_queue_secondary">要向您的播放佇列新增歌曲，請按下選單中的歌曲、專輯或演出者，並在選擇「新增至佇列」。</string>
   <string name="error_playing_track">無法播放曲目 %1$s</string>
+  <!-- Section Headers -->
   <string name="header_unknown_year">不明年份</string>
   <string name="header_less_than_30s">少於 30 秒</string>
   <string name="header_30_to_60_seconds">30 - 60 秒</string>

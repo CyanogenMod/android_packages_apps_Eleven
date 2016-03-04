@@ -17,56 +17,67 @@
      limitations under the License.
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <!-- Used to indicate the number of artists -->
   <plurals name="Nartists">
     <item quantity="one"><xliff:g id="count">%d</xliff:g> уметник</item>
     <item quantity="few"><xliff:g id="count">%d</xliff:g> уметника</item>
     <item quantity="other"><xliff:g id="count">%d</xliff:g> уметника</item>
   </plurals>
+  <!-- Used to indicate the number of albums for an artist -->
   <plurals name="Nalbums">
     <item quantity="one"><xliff:g id="count">%d</xliff:g> албум</item>
     <item quantity="few"><xliff:g id="count">%d</xliff:g> албума</item>
     <item quantity="other"><xliff:g id="count">%d</xliff:g> албума</item>
   </plurals>
+  <!-- Used to indicate the number of songs for an album -->
   <plurals name="Nsongs">
     <item quantity="one"><xliff:g id="count">%d</xliff:g> песма</item>
     <item quantity="few"><xliff:g id="count">%d</xliff:g> песме</item>
     <item quantity="other"><xliff:g id="count">%d</xliff:g> песама</item>
   </plurals>
+  <!-- Used to indicate the number of genres -->
   <plurals name="Ngenres">
     <item quantity="one"><xliff:g id="count">%d</xliff:g> жанр</item>
     <item quantity="few"><xliff:g id="count">%d</xliff:g> жанра</item>
     <item quantity="other"><xliff:g id="count">%d</xliff:g> жанрова</item>
   </plurals>
+  <!-- Used to show a shortened version of hours-->
   <plurals name="Nhours">
     <item quantity="one"><xliff:g id="hours">%d</xliff:g>ч</item>
     <item quantity="few"><xliff:g id="hours">%d</xliff:g>ч</item>
     <item quantity="other"><xliff:g id="hours">%d</xliff:g>ч</item>
   </plurals>
+  <!-- Used to show a shortened version of minutes -->
   <plurals name="Nminutes">
     <item quantity="one"><xliff:g id="minutes">%d</xliff:g>м</item>
     <item quantity="few"><xliff:g id="minutes">%d</xliff:g>м</item>
     <item quantity="other"><xliff:g id="minutes">%d</xliff:g>м</item>
   </plurals>
+  <!-- Toasts after adding song(s) to playlists -->
   <plurals name="NNNtrackstoplaylist">
     <item quantity="one"><xliff:g id="number" example="1">%d</xliff:g> песма додата на плејлисту.</item>
     <item quantity="few"><xliff:g id="number" example="27">%d</xliff:g> песме додате на плејлисту.</item>
     <item quantity="other"><xliff:g id="number" example="27">%d</xliff:g> песама додато на плејлисту.</item>
   </plurals>
+  <!-- Toasts after removing song(s) from playlists -->
   <plurals name="NNNtracksfromplaylist">
     <item quantity="one"><xliff:g id="number" example="1">%d</xliff:g> песма уклоњена са плејлисте.</item>
     <item quantity="few"><xliff:g id="number" example="27">%d</xliff:g> песме уклоњене са плејлисте.</item>
     <item quantity="other"><xliff:g id="number" example="27">%d</xliff:g> песама уклоњено са плејлисте.</item>
   </plurals>
+  <!-- Toasts after adding song(s) to queue -->
   <plurals name="NNNtrackstoqueue">
     <item quantity="one"><xliff:g id="number" example="1">%d</xliff:g> песма додата у ред.</item>
     <item quantity="few"><xliff:g id="number" example="27">%d</xliff:g> песме додате у ред.</item>
     <item quantity="other"><xliff:g id="number" example="27">%d</xliff:g> песама додато у ред.</item>
   </plurals>
+  <!-- Toasts after adding song(s) to the favorites list -->
   <plurals name="NNNtrackstofavorites">
     <item quantity="one"><xliff:g id="number" example="1">%d</xliff:g> песма додата у омиљене.</item>
     <item quantity="few"><xliff:g id="number" example="27">%d</xliff:g> песме додате у омиљене.</item>
     <item quantity="other"><xliff:g id="number" example="27">%d</xliff:g> песама додато у омиљене.</item>
   </plurals>
+  <!-- Toast confirming that song(s) was/were deleted. -->
   <plurals name="NNNtracksdeleted">
     <item quantity="one"><xliff:g id="songs_to_delete" example="1">%d</xliff:g> песма је избрисана.</item>
     <item quantity="few"><xliff:g id="songs_to_delete">%d</xliff:g> песме су избрисане.</item>

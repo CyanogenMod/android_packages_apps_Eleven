@@ -18,6 +18,7 @@
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
   <string name="app_name">Музыка</string>
+  <!-- Page titles -->
   <string name="page_recent">Недавние</string>
   <string name="page_artists">Исполнители</string>
   <string name="page_albums">Альбомы</string>
@@ -26,9 +27,11 @@
   <string name="page_genres">Жанры</string>
   <string name="page_now_playing">Сейчас играет</string>
   <string name="page_play_queue">Очередь воспроизведения</string>
+  <!-- Section Headers -->
   <string name="header_albums">Альбомы</string>
   <string name="header_top_songs">Топ-треки</string>
   <string name="header_all_songs">Все треки</string>
+  <!-- Option menu items -->
   <string name="menu_settings">Настройки</string>
   <string name="menu_search">Поиск</string>
   <string name="menu_shuffle_item">Перемешать</string>
@@ -46,10 +49,12 @@
   <string name="menu_clear_queue">Очистить очередь</string>
   <string name="menu_save_queue">Сохранить в плейлист</string>
   <string name="menu_equalizer">Эквалайзер</string>
+  <!-- Playlist items -->
   <string name="add_to_playlist">Добавить в плейлист</string>
   <string name="add_to_queue">Добавить в очередь</string>
   <string name="remove_from_recent">Удалить из недавних</string>
   <string name="remove_from_queue">Удалить из очереди</string>
+  <!-- Sort orders -->
   <string name="sort_order_entry_az">Алфавиту</string>
   <string name="sort_order_entry_za">Алфавиту в обр. порядке</string>
   <string name="sort_order_entry_artist">Исполнителю</string>
@@ -61,9 +66,11 @@
   <string name="sort_order_entry_number_of_songs">Количеству треков</string>
   <string name="sort_order_entry_number_of_albums">Количеству альбомов</string>
   <string name="sort_order_entry_filename">Имени файла</string>
+  <!-- Default playlist names -->
   <string name="playlist_last_added">Недавно добавленные</string>
   <string name="playlist_recently_played">Недавно воспроизведённые</string>
   <string name="playlist_top_tracks">Мои топ-треки</string>
+  <!-- AlertDialog items -->
   <string name="new_playlist">Новый плейлист</string>
   <string name="save">Сохранить</string>
   <string name="cancel">Отмена</string>
@@ -81,6 +88,7 @@
   <string name="google_search">Найти в Google</string>
   <string name="use_default">Изображение по умолчанию</string>
   <string name="old_photo">Исходное изображение</string>
+  <!-- Context menu items -->
   <string name="context_menu_play_selection">Воспроизвести</string>
   <string name="context_menu_play_next">Воспр. следующим</string>
   <string name="context_menu_play_album">Воспр. альбом</string>
@@ -93,6 +101,7 @@
   <string name="context_menu_use_as_ringtone">Использовать как рингтон</string>
   <string name="context_menu_remove_from_playlist">Удалить из плейлиста</string>
   <string name="context_menu_change_image">Изменить изображение</string>
+  <!-- Content descriptions -->
   <string name="accessibility_play">Воспроизвести</string>
   <string name="accessibility_pause">Пауза</string>
   <string name="accessibility_next">След.</string>
@@ -104,8 +113,10 @@
   <string name="accessibility_repeat_one">Повтор трека</string>
   <string name="accessibility_queue">Открыть очередь</string>
   <string name="accessibility_browse">Обзор музыки</string>
+  <!-- Toast messages -->
   <string name="set_as_ringtone">Трек «<xliff:g id="name" example="Alarm Bell">%s</xliff:g>» установлен как рингтон</string>
   <string name="playlist_renamed">Плейлист переименован</string>
+  <!-- Settings -->
   <string name="settings_ui_category">Интерфейс</string>
   <string name="settings_storage_category">Хранилище</string>
   <string name="settings_data_category">Данные</string>
@@ -123,10 +134,12 @@
   <string name="settings_shake_to_play_summary">Встряхните устройство для перехода к следующему треку</string>
   <string name="settings_lockscreen_album_art">Обложка альбома</string>
   <string name="settings_lockscreen_album_art_summary">Заменять обои экрана блокировки обложкой воспроизводимого альбома</string>
+  <!-- App widget -->
   <string name="app_widget_small">Музыка: 4 \u00d7 1</string>
   <string name="app_widget_large">Музыка: 4 \u00d7 2</string>
   <string name="app_widget_large_alt">Музыка: 4 \u00d7 2 (альтернативный)</string>
   <string name="app_widget_recent">Музыка: недавно прослушанные</string>
+  <!-- Empty list / error messages -->
   <string name="no_effects_for_you">Не удалось открыть эквалайзер.</string>
   <string name="empty_music">Чтобы скопировать музыку с ПК, используйте USB-кабель.</string>
   <string name="empty_search">Поиск не дал результатов</string>
@@ -135,7 +148,7 @@
   <string name="empty_recent_main">Нет недавних треков</string>
   <string name="empty_recent">Здесь появятся треки, которые вы недавно слушали.</string>
   <string name="empty_playlist_main">Нет треков в плейлисте</string>
-  <string name="empty_playlist_secondary">Чтобы добавить треки в плейлист, нажмите на меню опций трека, альбома или исполнителя и выберите «Добавить в плейлист».</string>
+  <string name="empty_playlist_secondary">Чтобы добавить треки в плейлист, нажмите меню параметров трека, альбома или исполнителя и выберите «Добавить в плейлист».</string>
   <string name="empty_top_tracks_main">Нет топ-треков</string>
   <string name="empty_top_tracks_secondary">В этот список добавятся треки, которые вы слушаете чаще всего.</string>
   <string name="empty_last_added_main">Нет недавно добавленных треков</string>
@@ -143,8 +156,9 @@
   <string name="empty_generic_main">Музыка не найдена</string>
   <string name="empty_generic_secondary">Чтобы скопировать музыку с ПК, используйте USB-кабель.</string>
   <string name="empty_queue_main">Нет треков в очереди</string>
-  <string name="empty_queue_secondary">Чтобы добавить треки в очередь воспроизведения, нажмите на меню опций трека, альбома или исполнителя и выберите «Добавить в очередь».</string>
+  <string name="empty_queue_secondary">Чтобы добавить треки в очередь воспроизведения, нажмите меню параметров трека, альбома или исполнителя и выберите «Добавить в очередь».</string>
   <string name="error_playing_track">Невозможно воспроизвести трек «%1$s»</string>
+  <!-- Section Headers -->
   <string name="header_unknown_year">Неизвестный год</string>
   <string name="header_less_than_30s">Меньше 30 секунд</string>
   <string name="header_30_to_60_seconds">30−60 секунд</string>

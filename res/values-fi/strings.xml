@@ -18,6 +18,7 @@
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
   <string name="app_name">Musiikki</string>
+  <!-- Page titles -->
   <string name="page_recent">Äskettäin kuunnellut</string>
   <string name="page_artists">Esittäjät</string>
   <string name="page_albums">Albumit</string>
@@ -26,9 +27,11 @@
   <string name="page_genres">Tyylilajit</string>
   <string name="page_now_playing">Nyt soi</string>
   <string name="page_play_queue">Toistojono</string>
+  <!-- Section Headers -->
   <string name="header_albums">Albumi</string>
   <string name="header_top_songs">Suosituimmat kappaleet</string>
   <string name="header_all_songs">Kaikki kappaleet</string>
+  <!-- Option menu items -->
   <string name="menu_settings">Asetukset</string>
   <string name="menu_search">Haku</string>
   <string name="menu_shuffle_item">Sekoita</string>
@@ -46,10 +49,12 @@
   <string name="menu_clear_queue">Tyhjennä jono</string>
   <string name="menu_save_queue">Tallenna jono soittolistalle</string>
   <string name="menu_equalizer">Taajuuskorjain</string>
+  <!-- Playlist items -->
   <string name="add_to_playlist">Lisää soittolistalle</string>
   <string name="add_to_queue">Lisää jonoon</string>
   <string name="remove_from_recent">Poista äskettäin kuunnelluista</string>
   <string name="remove_from_queue">Poista jonosta</string>
+  <!-- Sort orders -->
   <string name="sort_order_entry_az">A-Ö</string>
   <string name="sort_order_entry_za">Ö-A</string>
   <string name="sort_order_entry_artist">Esittäjä</string>
@@ -61,9 +66,11 @@
   <string name="sort_order_entry_number_of_songs">Kappaleiden määrä</string>
   <string name="sort_order_entry_number_of_albums">Albumeiden määrä</string>
   <string name="sort_order_entry_filename">Tiedostonimi</string>
+  <!-- Default playlist names -->
   <string name="playlist_last_added">Viimeksi lisätyt</string>
   <string name="playlist_recently_played">Äskettäin kuunnellut</string>
   <string name="playlist_top_tracks">Suosikkikappaleeni</string>
+  <!-- AlertDialog items -->
   <string name="new_playlist">Uusi soittolista</string>
   <string name="save">Tallenna</string>
   <string name="cancel">Peruuta</string>
@@ -81,6 +88,7 @@
   <string name="google_search">Google-haku</string>
   <string name="use_default">Käytä oletusvalokuvaa</string>
   <string name="old_photo">Käytä vanhaa valokuvaa</string>
+  <!-- Context menu items -->
   <string name="context_menu_play_selection">Toista</string>
   <string name="context_menu_play_next">Toista seuraava</string>
   <string name="context_menu_play_album">Toista albumi</string>
@@ -93,6 +101,7 @@
   <string name="context_menu_use_as_ringtone">Käytä soittoäänenä</string>
   <string name="context_menu_remove_from_playlist">Poista soittolistalta</string>
   <string name="context_menu_change_image">Vaihda kuvaa</string>
+  <!-- Content descriptions -->
   <string name="accessibility_play">Toista</string>
   <string name="accessibility_pause">Pysäytä</string>
   <string name="accessibility_next">Seuraava</string>
@@ -104,8 +113,10 @@
   <string name="accessibility_repeat_one">Uudelleentoista yksi</string>
   <string name="accessibility_queue">Avaa jono</string>
   <string name="accessibility_browse">Selaa musiikkia</string>
+  <!-- Toast messages -->
   <string name="set_as_ringtone">\'<xliff:g id="name" example="Alarm Bell">%s</xliff:g>\' asetettu soittoääneksi</string>
   <string name="playlist_renamed">Soittolista nimetty uudelleen</string>
+  <!-- Settings -->
   <string name="settings_ui_category">Käyttöliittymä</string>
   <string name="settings_storage_category">Tallennustila</string>
   <string name="settings_data_category">Tiedot</string>
@@ -123,10 +134,12 @@
   <string name="settings_shake_to_play_summary">Ravista laitettasi toistaaksesi seuraavan kappaleen</string>
   <string name="settings_lockscreen_album_art">Lukitusnäytön albumikuvitus</string>
   <string name="settings_lockscreen_album_art_summary">Korvaa lukitusnäytön tausta albumin kuvituksella</string>
+  <!-- App widget -->
   <string name="app_widget_small">Musiikki: 4 \u00d7 1</string>
   <string name="app_widget_large">Musiikki: 4 \u00d7 2</string>
   <string name="app_widget_large_alt">Musiikki: 4 \u00d7 2 (vaihtoehtoinen)</string>
   <string name="app_widget_recent">Apollo: äskettäin kuunneltu</string>
+  <!-- Empty list / error messages -->
   <string name="no_effects_for_you">Taajuuskorjainta ei voitu avata.</string>
   <string name="empty_music">Kopioi musiikkia tietokoneelta laitteeseen käyttämällä USB-kaapelia.</string>
   <string name="empty_search">Hakutuloksia ei löytynyt</string>
@@ -145,6 +158,7 @@
   <string name="empty_queue_main">Ei kappaleita jonossa</string>
   <string name="empty_queue_secondary">Lisätäksesi kappaleita jonoon, avaa valikko kappaleen, albumin tai esittäjän kohdalla ja valitse \"Lisää jonoon\".</string>
   <string name="error_playing_track">Ei voi toistaa kappaletta \"%1$s\"</string>
+  <!-- Section Headers -->
   <string name="header_unknown_year">Tuntematon vuosi</string>
   <string name="header_less_than_30s">Alle 30 sekuntia</string>
   <string name="header_30_to_60_seconds">30 - 60 sekuntia</string>

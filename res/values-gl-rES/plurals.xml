@@ -17,16 +17,27 @@
      limitations under the License.
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <!-- Used to indicate the number of artists -->
+  <!-- Used to indicate the number of albums for an artist -->
   <plurals name="Nalbums">
     <item quantity="one"><xliff:g id="count">%d</xliff:g> álbum</item>
     <item quantity="other"><xliff:g id="count">%d</xliff:g> álbums</item>
   </plurals>
+  <!-- Used to indicate the number of songs for an album -->
+  <!-- Used to indicate the number of genres -->
+  <!-- Used to show a shortened version of hours-->
   <plurals name="Nhours">
     <item quantity="one"><xliff:g id="hours">%d</xliff:g>h</item>
     <item quantity="other"><xliff:g id="hours">%d</xliff:g>h</item>
   </plurals>
+  <!-- Used to show a shortened version of minutes -->
   <plurals name="Nminutes">
     <item quantity="one"><xliff:g id="minutes">%d</xliff:g>m</item>
     <item quantity="other"><xliff:g id="minutes">%d</xliff:g>m</item>
   </plurals>
+  <!-- Toasts after adding song(s) to playlists -->
+  <!-- Toasts after removing song(s) from playlists -->
+  <!-- Toasts after adding song(s) to queue -->
+  <!-- Toasts after adding song(s) to the favorites list -->
+  <!-- Toast confirming that song(s) was/were deleted. -->
 </resources>

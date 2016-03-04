@@ -18,6 +18,7 @@
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
   <string name="app_name">Musica</string>
+  <!-- Page titles -->
   <string name="page_recent">Recente</string>
   <string name="page_artists">Artisti</string>
   <string name="page_albums">Album</string>
@@ -26,9 +27,11 @@
   <string name="page_genres">Generi</string>
   <string name="page_now_playing">In riproduzione</string>
   <string name="page_play_queue">Coda di riproduzione</string>
+  <!-- Section Headers -->
   <string name="header_albums">Album</string>
   <string name="header_top_songs">Canzoni preferite</string>
   <string name="header_all_songs">Tutte le canzoni</string>
+  <!-- Option menu items -->
   <string name="menu_settings">Impostazioni</string>
   <string name="menu_search">Cerca</string>
   <string name="menu_shuffle_item">Riproduzione casuale</string>
@@ -46,10 +49,12 @@
   <string name="menu_clear_queue">Elimina coda</string>
   <string name="menu_save_queue">Salva coda su playlist</string>
   <string name="menu_equalizer">Equalizzatore</string>
+  <!-- Playlist items -->
   <string name="add_to_playlist">Aggiungi alla playlist</string>
   <string name="add_to_queue">Aggiungi alla coda</string>
   <string name="remove_from_recent">Rimuovi da recenti</string>
   <string name="remove_from_queue">Rimuovi dalla coda</string>
+  <!-- Sort orders -->
   <string name="sort_order_entry_az">A-Z</string>
   <string name="sort_order_entry_za">Z-A</string>
   <string name="sort_order_entry_artist">Artista</string>
@@ -61,9 +66,11 @@
   <string name="sort_order_entry_number_of_songs">Numero canzoni</string>
   <string name="sort_order_entry_number_of_albums">Numero album</string>
   <string name="sort_order_entry_filename">Nome file</string>
+  <!-- Default playlist names -->
   <string name="playlist_last_added">Aggiunti recentemente</string>
   <string name="playlist_recently_played">Ascoltati di recente</string>
   <string name="playlist_top_tracks">Canzoni preferite</string>
+  <!-- AlertDialog items -->
   <string name="new_playlist">Nuova playlist</string>
   <string name="save">Salva</string>
   <string name="cancel">Annulla</string>
@@ -81,6 +88,7 @@
   <string name="google_search">Ricerca Google</string>
   <string name="use_default">Usa foto predefinita</string>
   <string name="old_photo">Usa foto vecchia</string>
+  <!-- Context menu items -->
   <string name="context_menu_play_selection">Riproduci</string>
   <string name="context_menu_play_next">Riproduci successivo</string>
   <string name="context_menu_play_album">Riproduci album</string>
@@ -93,6 +101,7 @@
   <string name="context_menu_use_as_ringtone">Usa come suoneria</string>
   <string name="context_menu_remove_from_playlist">Rimuovi da playlist</string>
   <string name="context_menu_change_image">Cambia Immagine</string>
+  <!-- Content descriptions -->
   <string name="accessibility_play">Riproduci</string>
   <string name="accessibility_pause">Pausa</string>
   <string name="accessibility_next">Successivo</string>
@@ -104,8 +113,10 @@
   <string name="accessibility_repeat_one">Ripeti singolo</string>
   <string name="accessibility_queue">Apri coda</string>
   <string name="accessibility_browse">Sfoglia musica</string>
+  <!-- Toast messages -->
   <string name="set_as_ringtone">\'<xliff:g id="name" example="Alarm Bell">%s</xliff:g>\' impostata come suoneria</string>
   <string name="playlist_renamed">Playlist rinominata</string>
+  <!-- Settings -->
   <string name="settings_ui_category">Interfaccia</string>
   <string name="settings_storage_category">Archivio</string>
   <string name="settings_data_category">Dati</string>
@@ -123,10 +134,12 @@
   <string name="settings_shake_to_play_summary">Scuoti il dispositivo per riprodurre la prossima canzone</string>
   <string name="settings_lockscreen_album_art">Cover schermata sblocco</string>
   <string name="settings_lockscreen_album_art_summary">Sostituisci lo sfondo della schermata di sblocco con la copertina dell\'album</string>
+  <!-- App widget -->
   <string name="app_widget_small">Musica: 4 \u00d7 1</string>
   <string name="app_widget_large">Musica: 4 \u00d7 2</string>
   <string name="app_widget_large_alt">Musica: 4 \u00d7 2 (alternativo)</string>
   <string name="app_widget_recent">Musica: ascoltati recentemente</string>
+  <!-- Empty list / error messages -->
   <string name="no_effects_for_you">L\'equalizzazione non può essere aperto.</string>
   <string name="empty_music">Per copiare musica dal tuo computer al tuo dispositivo, utilizza un cavo USB.</string>
   <string name="empty_search">La ricerca non ha prodotto risultati</string>
@@ -145,6 +158,7 @@
   <string name="empty_queue_main">Nessuna canzone nella coda di riproduzione</string>
   <string name="empty_queue_secondary">Per aggiungere canzoni alla tua coda di riproduzione, tocca il menu di opzioni su una canzone, un album o un artista e seleziona \"Aggiungi alla coda\".</string>
   <string name="error_playing_track">Impossibile riprodurre la traccia %1$s</string>
+  <!-- Section Headers -->
   <string name="header_unknown_year">Anno sconosciuto</string>
   <string name="header_less_than_30s">Meno di 30 secondi</string>
   <string name="header_30_to_60_seconds">30 - 60 secondi</string>

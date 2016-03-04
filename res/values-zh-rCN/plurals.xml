@@ -17,36 +17,47 @@
      limitations under the License.
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <!-- Used to indicate the number of artists -->
   <plurals name="Nartists">
     <item quantity="other"><xliff:g id="count">%d</xliff:g> 位艺术家</item>
   </plurals>
+  <!-- Used to indicate the number of albums for an artist -->
   <plurals name="Nalbums">
     <item quantity="other"><xliff:g id="count">%d</xliff:g> 张专辑</item>
   </plurals>
+  <!-- Used to indicate the number of songs for an album -->
   <plurals name="Nsongs">
     <item quantity="other"><xliff:g id="count">%d</xliff:g> 首歌曲</item>
   </plurals>
+  <!-- Used to indicate the number of genres -->
   <plurals name="Ngenres">
     <item quantity="other"><xliff:g id="count">%d</xliff:g> 种类型</item>
   </plurals>
+  <!-- Used to show a shortened version of hours-->
   <plurals name="Nhours">
     <item quantity="other"><xliff:g id="hours">%d</xliff:g> 小时</item>
   </plurals>
+  <!-- Used to show a shortened version of minutes -->
   <plurals name="Nminutes">
     <item quantity="other"><xliff:g id="minutes">%d</xliff:g> 分钟</item>
   </plurals>
+  <!-- Toasts after adding song(s) to playlists -->
   <plurals name="NNNtrackstoplaylist">
     <item quantity="other">已添加 <xliff:g id="number" example="27">%d</xliff:g> 首歌曲到播放列表。</item>
   </plurals>
+  <!-- Toasts after removing song(s) from playlists -->
   <plurals name="NNNtracksfromplaylist">
     <item quantity="other"><xliff:g id="number" example="27">%d</xliff:g> 首歌曲已从播放列表中移除。</item>
   </plurals>
+  <!-- Toasts after adding song(s) to queue -->
   <plurals name="NNNtrackstoqueue">
     <item quantity="other"><xliff:g id="number" example="27">%d</xliff:g> 首歌曲已添加到队列。</item>
   </plurals>
+  <!-- Toasts after adding song(s) to the favorites list -->
   <plurals name="NNNtrackstofavorites">
     <item quantity="other">已添加 <xliff:g id="number" example="27">%d</xliff:g> 首歌曲到收藏夹。</item>
   </plurals>
+  <!-- Toast confirming that song(s) was/were deleted. -->
   <plurals name="NNNtracksdeleted">
     <item quantity="other">已删除 <xliff:g id="songs_to_delete">%d</xliff:g>首歌曲。</item>
   </plurals>

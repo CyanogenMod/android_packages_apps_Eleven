@@ -17,9 +17,23 @@
      limitations under the License.
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <!-- Page titles -->
+  <!-- Section Headers -->
+  <!-- Option menu items -->
   <string name="menu_settings">Ynstellingen</string>
+  <!-- Playlist items -->
+  <!-- Sort orders -->
+  <!-- Default playlist names -->
+  <!-- AlertDialog items -->
   <string name="save">Bewarje</string>
   <string name="cancel">Annulearje</string>
+  <!-- Context menu items -->
+  <!-- Content descriptions -->
+  <!-- Toast messages -->
+  <!-- Settings -->
+  <!-- App widget -->
+  <!-- Empty list / error messages -->
+  <!-- Section Headers -->
   <string name="header_1_to_2_minutes">1 - 2 minuten</string>
   <string name="header_2_to_3_minutes">2 - 3 minuten</string>
   <string name="header_3_to_4_minutes">3 - 4 minuten</string>
