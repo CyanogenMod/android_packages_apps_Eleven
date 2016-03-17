@@ -18,14 +18,50 @@
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
   <!-- Used to indicate the number of artists -->
+  <plurals name="Nartists">
+    <item quantity="one"><xliff:g id="count">%d</xliff:g> শিল্পী</item>
+    <item quantity="other"><xliff:g id="count">%d</xliff:g> শিল্পী</item>
+  </plurals>
   <!-- Used to indicate the number of albums for an artist -->
+  <plurals name="Nalbums">
+    <item quantity="one"><xliff:g id="count">%d</xliff:g> এলবাম</item>
+    <item quantity="other"><xliff:g id="count">%d</xliff:g> এলবামসমূহ</item>
+  </plurals>
   <!-- Used to indicate the number of songs for an album -->
+  <plurals name="Nsongs">
+    <item quantity="one"><xliff:g id="count">%d</xliff:g> গীত</item>
+    <item quantity="other"><xliff:g id="count">%d</xliff:g> গীতসমূহ</item>
+  </plurals>
   <!-- Used to indicate the number of genres -->
+  <plurals name="Ngenres">
+    <item quantity="one"><xliff:g id="count">%d</xliff:g> ৰকম</item>
+    <item quantity="other"><xliff:g id="count">%d</xliff:g> ৰকম</item>
+  </plurals>
   <!-- Used to show a shortened version of hours-->
   <!-- Used to show a shortened version of minutes -->
   <!-- Toasts after adding song(s) to playlists -->
+  <plurals name="NNNtrackstoplaylist">
+    <item quantity="one"><xliff:g id="number" example="1">%d</xliff:g> গীত প্লে’লিষ্টত যোগ কৰা হৈছে।</item>
+    <item quantity="other"><xliff:g id="number" example="27">%d</xliff:g> প্লে’লিষ্টত গীতসমূহ যোগ কৰা হৈছে</item>
+  </plurals>
   <!-- Toasts after removing song(s) from playlists -->
+  <plurals name="NNNtracksfromplaylist">
+    <item quantity="one"><xliff:g id="number" example="1">%d</xliff:g> গীত প্লে’লিষ্টৰ পৰা আঁতৰোৱা হৈছে।</item>
+    <item quantity="other"><xliff:g id="number" example="27">%d</xliff:g> গীত প্লে’লিষ্টৰ পৰা আঁতৰোৱা হৈছে।</item>
+  </plurals>
   <!-- Toasts after adding song(s) to queue -->
+  <plurals name="NNNtrackstoqueue">
+    <item quantity="one"><xliff:g id="number" example="1">%d</xliff:g> গীত লানি যোগ কৰা হৈছে।</item>
+    <item quantity="other"><xliff:g id="number" example="27">%d</xliff:g> গীত কিউত যোগ কৰা হৈছে।</item>
+  </plurals>
   <!-- Toasts after adding song(s) to the favorites list -->
+  <plurals name="NNNtrackstofavorites">
+    <item quantity="one"><xliff:g id="number" example="1">%d</xliff:g> গীত প্ৰিয়ত যোগ কৰা হৈছে।</item>
+    <item quantity="other"><xliff:g id="number" example="27">%d</xliff:g> গীত প্ৰিয়ত যোগ কৰা হৈছে।</item>
+  </plurals>
   <!-- Toast confirming that song(s) was/were deleted. -->
+  <plurals name="NNNtracksdeleted">
+    <item quantity="one"><xliff:g id="songs_to_delete" example="1">%d</xliff:g> গীত বিলোপ কৰা হৈছে।</item>
+    <item quantity="other"><xliff:g id="songs_to_delete">%d</xliff:g> গীতসমূহ মচি দিয়া হৈছে</item>
+  </plurals>
 </resources>

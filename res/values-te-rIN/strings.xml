@@ -17,18 +17,173 @@
      limitations under the License.
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string name="app_name">సంగీతం</string>
   <!-- Page titles -->
+  <string name="page_recent">ఇటీవలివి</string>
+  <string name="page_artists">ఆర్టిస్టులు</string>
+  <string name="page_albums">ఆల్బమ్‌లు</string>
+  <string name="page_songs">పాటలు</string>
+  <string name="page_playlists">ప్లేజాబితాలు</string>
+  <string name="page_genres">శైలులు</string>
+  <string name="page_now_playing">ఇప్పుడు ప్లే చేయబడుతున్నది</string>
+  <string name="page_play_queue">ప్లే నిరీక్షణ క్రమం</string>
   <!-- Section Headers -->
+  <string name="header_albums">ఆల్బమ్‌లు</string>
+  <string name="header_top_songs">ఉత్తమ పాటలు</string>
+  <string name="header_all_songs">అన్ని పాటలు</string>
   <!-- Option menu items -->
+  <string name="menu_settings">సెట్టింగ్‌లు</string>
+  <string name="menu_search">శోధించు</string>
+  <string name="menu_shuffle_item">మార్చు</string>
+  <string name="menu_shuffle_all">అన్నీ షఫుల్ చేయి</string>
+  <string name="menu_shuffle_playlist">ప్లేజాబితాను కలగాపులగం చేయుము</string>
+  <string name="menu_shuffle_album">ఆల్బములను కలగాపులగం చేయుము</string>
+  <string name="menu_shuffle_artist">కళాకారులను కలగాపులగం చేయుము</string>
+  <string name="menu_shuffle_top_tracks">ఉత్తమ పాటలను కలగాపులగం చేయుము</string>
+  <string name="menu_shuffle_recent">ఇటీవల ప్లే చేయబడిన వాటిని కలగాపులగం చేయుము</string>
+  <string name="menu_shuffle_last_added">ఆఖరిన జోడించబడిన వాటిని కలగాపులగం చేయుము</string>
+  <string name="menu_play_all">అన్నీ ప్లే చేయండి</string>
+  <string name="menu_sort_by">దీనిద్వారా క్రమబద్ధీకరణ</string>
+  <string name="menu_clear_list">జాబితాను క్లియర్ చేయి</string>
+  <string name="menu_clear_recents">ఇటీవలి వాటిని క్లియర్ చేయుము</string>
+  <string name="menu_clear_queue">నిరీక్షణ క్రమాన్ని క్లియర్ చేయుము</string>
+  <string name="menu_save_queue">నిరీక్షణ క్రమాన్ని ప్లేజాబితాకు సేవ్ చేయుము</string>
+  <string name="menu_equalizer">ఈక్వలైజర్</string>
   <!-- Playlist items -->
+  <string name="add_to_playlist">ప్లేజాబితాకు చేర్చు</string>
+  <string name="add_to_queue">నిరీక్షణ క్రమానికి జోడించుము</string>
+  <string name="remove_from_recent">ఇటీవలి వాటి నుండి తొలగించుము</string>
+  <string name="remove_from_queue">నిరీక్షణ క్రమం నుండి తొలిగించుము</string>
   <!-- Sort orders -->
+  <string name="sort_order_entry_az">A-Z</string>
+  <string name="sort_order_entry_za">Z-A</string>
+  <string name="sort_order_entry_artist">ఆర్టిస్టు</string>
+  <string name="sort_order_entry_album">ఆల్బమ్</string>
+  <string name="sort_order_entry_year">సంవత్సరం</string>
+  <string name="sort_order_entry_duration">వ్యవధి</string>
+  <string name="sort_order_entry_date_added">చేర్చబడిన తేదీ</string>
+  <string name="sort_order_entry_track_list">ట్రాక్ జాబితా</string>
+  <string name="sort_order_entry_number_of_songs">పాటల సంఖ్య</string>
+  <string name="sort_order_entry_number_of_albums">ఆల్బముల సంఖ్య</string>
+  <string name="sort_order_entry_filename">ఫైల్ పేరు</string>
   <!-- Default playlist names -->
+  <string name="playlist_last_added">చివరిగా జోడించబడిన</string>
+  <string name="playlist_recently_played">ఇటీవల ప్లే చేయబడిన</string>
+  <string name="playlist_top_tracks">నా యొక్క ఉత్తమ ట్రాకులు</string>
   <!-- AlertDialog items -->
+  <string name="new_playlist">క్రొత్త ప్లేజాబితా</string>
+  <string name="save">సేవ్ చేయి</string>
+  <string name="cancel">రద్దు చేయి</string>
+  <string name="overwrite">భర్తీ చేయి</string>
+  <string name="clear">క్లియర్ చేయండి</string>
+  <string name="new_playlist_name_template">ప్లేజాబితా <xliff:g id="number">%d</xliff:g></string>
+  <string name="create_playlist_prompt">ప్లేజాబితా పేరు</string>
+  <string name="delete_dialog_title"><xliff:g id="item" example="album">%s</xliff:g>ను తొలగించాలా?</string>
+  <string name="clear_top_tracks_title">ఉత్తమ ట్రాకులను క్లియర్ చేయాలా?</string>
+  <string name="clear_recent_title">ఇటీవల ప్లే చేయబడిన వాటిని తొలిగించాలా?</string>
+  <string name="clear_last_added">చివరిగా జోడించబడిన దానిని క్లియర్ చేయాలా?</string>
+  <string name="cannot_be_undone">ఈ చర్యని రద్దు చేయడం సాధ్యపడదు</string>
+  <string name="delete_warning">ఇది శాశ్వతంగా క్యాష్ చేసిన చిత్రాల ఎంట్రీలను తొలిగిస్తుంది</string>
+  <string name="new_photo">గ్యాలరీ నుండి ఫోటోను ఎంచుకోండి</string>
+  <string name="google_search">Google శోధన</string>
+  <string name="use_default">స్వయంసిద్ధ ఫోటోను ఉపయోగించుము</string>
+  <string name="old_photo">పాత ఫోటోను ఉపయోగించుము</string>
   <!-- Context menu items -->
+  <string name="context_menu_play_selection">ప్లే చేయి</string>
+  <string name="context_menu_play_next">తరువాతి దానిని ప్లే చేయుము</string>
+  <string name="context_menu_play_album">ఆల్బమును ప్లే చేయుము</string>
+  <string name="context_menu_more_by_artist">కళాకారునిచే మరిన్ని</string>
+  <string name="context_menu_rename_playlist">పేరు మార్చు</string>
+  <string name="context_menu_delete">తొలగించు</string>
+  <string name="context_menu_fetch_album_art">ఆల్బమ్ ఆర్టును పొందుము</string>
+  <string name="context_menu_fetch_artist_image">కళాకారుని చిత్రాన్ని పొందుము</string>
+  <string name="context_menu_remove_from_recent">ఇటీవలి వాటి నుండి తొలగించుము</string>
+  <string name="context_menu_use_as_ringtone">రింగ్‌టోన్ ఉపయోగించు</string>
+  <string name="context_menu_remove_from_playlist">ప్లేజాబితా నుంచి తీసివేయి</string>
+  <string name="context_menu_change_image">చిత్రాన్ని మార్చుము</string>
   <!-- Content descriptions -->
+  <string name="accessibility_play">ప్లే చేయి</string>
+  <string name="accessibility_pause">పాజ్ చేయి</string>
+  <string name="accessibility_next">తదుపరి</string>
+  <string name="accessibility_prev">మునుపటి</string>
+  <string name="accessibility_shuffle">మార్చు</string>
+  <string name="accessibility_shuffle_all">అన్నీ షఫుల్ చేయి</string>
+  <string name="accessibility_repeat">పునరావృతం చేయండి</string>
+  <string name="accessibility_repeat_all">అన్నింటినీ పునరావృతం చేయుము</string>
+  <string name="accessibility_repeat_one">ఒకదానిని పునరావృతం చేయుము</string>
+  <string name="accessibility_queue">నిరీక్షణ క్రమాన్ని తెరువుము</string>
+  <string name="accessibility_browse">సంగీతాన్ని బ్రౌజ్ చేయుము</string>
   <!-- Toast messages -->
+  <string name="set_as_ringtone">\'<xliff:g id="name" example="Alarm Bell">%s</xliff:g>\' న్ని రింగ్‌టోనుగా సెట్ చేయుము</string>
+  <string name="playlist_renamed">ప్లేజాబితా పేరు మార్చబడింది</string>
   <!-- Settings -->
+  <string name="settings_ui_category">ఇంటర్‌ఫేస్</string>
+  <string name="settings_storage_category">నిల్వ</string>
+  <string name="settings_data_category">డేటా</string>
+  <string name="settings_delete_cache_title">కాషును తొలిగించుము</string>
+  <string name="settings_delete_cache_summary">కాష్ చేయబడిన అన్ని చిత్రాలను తొలిగించుము</string>
+  <string name="settings_download_only_on_wifi_title">Wi-Fi ద్వారా మాత్రమే డౌన్లోడ్ చేయుము</string>
+  <string name="settings_download_only_on_wifi_summary">కారియర్ ఛార్జీలను తగ్గించేందుకు, మొబైల్ నెట్వర్కుల ద్వారా డౌన్లోడ్ చేయవద్దు</string>
+  <string name="settings_download_missing_artwork_title">కనిపించకుండా పోయిన ఆల్బమ్ ఆర్టును డౌన్లోడ్ చేయుము</string>
+  <string name="settings_download_artist_images_title">కనిపించకుండా పోయిన కళాకారుని చిత్రాలు డౌన్లోడ్ చేయుము</string>
+  <string name="settings_general_category">సాధారణం</string>
+  <string name="settings_show_music_visualization_title">సంగీత విజువలైజేషనును చూపుము</string>
+  <string name="settings_show_lyrics_title">పాట సాహిత్యాన్ని చూపుము</string>
+  <string name="settings_show_lyrics_summary">srt ఫైల్ కలిగిన పాటల కొరకు</string>
+  <string name="settings_shake_to_play">ప్లే చేసేందుకు కదపండి</string>
+  <string name="settings_shake_to_play_summary">తరువాతి పాటను ప్లే చేసేందుకు మీ పరికరాన్ని కదపండి</string>
+  <string name="settings_lockscreen_album_art">లాక్‌స్కీన్ ఆల్బమ్ ఆర్ట్</string>
+  <string name="settings_lockscreen_album_art_summary">లాక్‌స్కీన్ నేపధ్యాన్ని ఆల్బమ్ ఆర్టుతో భర్తీ చేయండి</string>
   <!-- App widget -->
+  <string name="app_widget_small">సంగీతం: 4 \u00d7 1</string>
+  <string name="app_widget_large">సంగీతం: 4 \u00d7 2</string>
+  <string name="app_widget_large_alt">సంగీతం: 4 \u00d7 2 (ప్రత్యామ్నాయ)</string>
+  <string name="app_widget_recent">సంగీతం: ఇటీవల విన్నవి</string>
   <!-- Empty list / error messages -->
+  <string name="no_effects_for_you">ఈక్వలైజరును తెరవడం సాధ్యపడలేదు.</string>
+  <string name="empty_music">మీ కంప్యూటర్ నుండి మీ యొక్క పరికరానికి సంగీతాన్ని కాపీ చేసేందుకు, USB కేబులును ఉపయోగించండి.</string>
+  <string name="empty_search">శోధన ఫలితాలు ఏవీ దొరకలేదు</string>
+  <string name="empty_search_check">దయచేసి మీరు సరైన అక్షరక్రమాన్ని కలిగి ఉన్నారో లేదో చూడండి లేదా వేరొక కీలకపదంతో ప్రయత్నించండి.</string>
+  <string name="empty_favorite">మీరు ఇష్టమైనవిగా గుర్తించిన పాటలు ఇక్కడ చూపించబడతాయి.</string>
+  <string name="empty_recent_main">ఇటీవలి పాటలు ఏమీ లేవు</string>
+  <string name="empty_recent">మీరు ఇటీవల విన్న పాటలు ఇక్కడ చూపించబడతాయి.</string>
+  <string name="empty_playlist_main">ప్లేజాబితాలో పాటలు లేవు</string>
+  <string name="empty_playlist_secondary">ప్లేజాబితాకు పాటలను జోడించడానికి, పాట, ఆల్బమ్ లేదా కళాకారుడు పైన ఉన్నఆప్షనుల మెనూను ట్యాప్ చేయండి మరియు \&quot;ప్లేజాబితాకు జోడించుము\&quot; ఎంచుకోండి.</string>
+  <string name="empty_top_tracks_main">ఉత్తమ ట్రాకులు ఏమీ లేవు</string>
+  <string name="empty_top_tracks_secondary">మీరు ఎక్కువగా వినే పాటలు జాబితాకు జోడించబడతాయి.</string>
+  <string name="empty_last_added_main">ఇటీవలి కాలంలో పాటలు జోడించబడలేదు</string>
+  <string name="empty_last_added">మీరు గత నెల కాలంలో జోడించిన పాటలు ఇక్కడ చూపించబడతాయి.</string>
+  <string name="empty_generic_main">ఏ సంగీతం కనుగొనబడలేదు</string>
+  <string name="empty_generic_secondary">మీ కంప్యూటర్ నుండి మీ యొక్క పరికరానికి సంగీతాన్ని కాపీ చేసేందుకు, USB కేబులును ఉపయోగించండి.</string>
+  <string name="empty_queue_main">ప్లే నిరీక్షణ క్రమంలో పాటలు లేవు</string>
+  <string name="empty_queue_secondary">మీరు ప్లే నిరీక్షణ క్రమానికి పాటలను జోడించేందుకు, పాట, ఆల్బమ్ లేదా కళాకారుడు పైన ఉన్నఆప్షనుల మెనూను ట్యాప్ చేయండి మరియు \&quot;నిరీక్షణ క్రమానికి జోడించుము\&quot; ఎంచుకోండి.</string>
+  <string name="error_playing_track">ట్రాక్ %1$s ను ప్లే చేయడం సాధ్యపడలేదు</string>
   <!-- Section Headers -->
+  <string name="header_unknown_year">సంవత్సరం తెలియదు</string>
+  <string name="header_less_than_30s">30 సెకనుల కంటే తక్కువ</string>
+  <string name="header_30_to_60_seconds">30 - 60 సెకనులు</string>
+  <string name="header_1_to_2_minutes">1 - 2 నిమిషాలు</string>
+  <string name="header_2_to_3_minutes">2 - 3 నిమిషాలు</string>
+  <string name="header_3_to_4_minutes">3 - 4 నిమిషాలు</string>
+  <string name="header_4_to_5_minutes">4 - 5 నిమిషాలు</string>
+  <string name="header_5_to_10_minutes">5 - 10 నిమిషాలు</string>
+  <string name="header_10_to_30_minutes">10 - 30 నిమిషాలు</string>
+  <string name="header_30_to_60_minutes">30 - 60 నిమిషాలు</string>
+  <string name="header_greater_than_60_minutes">60 నిమిషాల కంటే ఎక్కువ</string>
+  <string name="header_1_song">1 పాట</string>
+  <string name="header_2_to_4_songs">2 - 4 పాటలు</string>
+  <string name="header_5_to_9_songs">5 - 9 పాటలు</string>
+  <string name="header_10_plus_songs">10+ పాటలు</string>
+  <string name="header_5_plus_albums">5+ ఆల్బములు</string>
+  <string name="header_other">"&quot;ఇతర&quot;"</string>
+  <string name="footer_search_artists">అందరు కళాకారులను చూపుము</string>
+  <string name="footer_search_albums">అన్ని ఆల్బములను చూపుము</string>
+  <string name="footer_search_songs">అన్ని పాటలను చూపుము</string>
+  <string name="footer_search_playlists">అన్ని ప్లేజాబితాలను చూపుము</string>
+  <string name="searchHint">సంగీతాన్ని శోధించుము</string>
+  <string name="search_title_artists">అందరు \&quot;%s\&quot; కళాకారులు</string>
+  <string name="search_title_albums">అన్ని \&quot;%s\&quot; ఆల్బములు</string>
+  <string name="search_title_songs">అన్ని \&quot;%s\&quot; పాటలు</string>
+  <string name="search_title_playlists">అన్ని \&quot;%s\&quot; ప్లేజాబితాలు</string>
+  <string name="duration_format"><xliff:g id="hours">%1$s</xliff:g> <xliff:g id="minutes">%2$s</xliff:g></string>
 </resources>

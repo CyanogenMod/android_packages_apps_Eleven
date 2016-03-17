@@ -18,14 +18,58 @@
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
   <!-- Used to indicate the number of artists -->
+  <plurals name="Nartists">
+    <item quantity="one"><xliff:g id="count">%d</xliff:g> కళాకారుడు</item>
+    <item quantity="other"><xliff:g id="count">%d</xliff:g> కళాకారులు</item>
+  </plurals>
   <!-- Used to indicate the number of albums for an artist -->
+  <plurals name="Nalbums">
+    <item quantity="one"><xliff:g id="count">%d</xliff:g> ఆల్బమ్</item>
+    <item quantity="other"><xliff:g id="count">%d</xliff:g> ఆల్బములు</item>
+  </plurals>
   <!-- Used to indicate the number of songs for an album -->
+  <plurals name="Nsongs">
+    <item quantity="one"><xliff:g id="count">%d</xliff:g> పాట</item>
+    <item quantity="other"><xliff:g id="count">%d</xliff:g> పాటలు</item>
+  </plurals>
   <!-- Used to indicate the number of genres -->
+  <plurals name="Ngenres">
+    <item quantity="one"><xliff:g id="count">%d</xliff:g> శైలి</item>
+    <item quantity="other"><xliff:g id="count">%d</xliff:g> శైలులు</item>
+  </plurals>
   <!-- Used to show a shortened version of hours-->
+  <plurals name="Nhours">
+    <item quantity="one"><xliff:g id="hours">%d</xliff:g>h</item>
+    <item quantity="other"><xliff:g id="hours">%d</xliff:g>గ</item>
+  </plurals>
   <!-- Used to show a shortened version of minutes -->
+  <plurals name="Nminutes">
+    <item quantity="one"><xliff:g id="minutes">%d</xliff:g>m</item>
+    <item quantity="other"><xliff:g id="minutes">%d</xliff:g>ని</item>
+  </plurals>
   <!-- Toasts after adding song(s) to playlists -->
+  <plurals name="NNNtrackstoplaylist">
+    <item quantity="one"><xliff:g id="number" example="1">%d</xliff:g> పాట  ప్లేజాబితాకు జోడించబడింది.</item>
+    <item quantity="other"><xliff:g id="number" example="27">%d</xliff:g> పాటలు  ప్లేజాబితాకు జోడించబడింది.</item>
+  </plurals>
   <!-- Toasts after removing song(s) from playlists -->
+  <plurals name="NNNtracksfromplaylist">
+    <item quantity="one"><xliff:g id="number" example="1">%d</xliff:g> పాట ప్లేజాబితా నుండి తొలిగించబడింది.</item>
+    <item quantity="other"><xliff:g id="number" example="27">%d</xliff:g> పాటలు ప్లేజాబితా నుండి తొలిగించబడ్డాయి.</item>
+  </plurals>
   <!-- Toasts after adding song(s) to queue -->
+  <plurals name="NNNtrackstoqueue">
+    <item quantity="one"><xliff:g id="number" example="1">%d</xliff:g> పాట నిరీక్షణ క్రమానికి జోడించబడింది.</item>
+    <item quantity="other"><xliff:g id="number" example="27">%d</xliff:g> పాటలు నిరీక్షణ క్రమానికి జోడించబడ్డాయి.</item>
+  </plurals>
   <!-- Toasts after adding song(s) to the favorites list -->
+  <plurals name="NNNtrackstofavorites">
+    <item quantity="one"><xliff:g id="number" example="1">%d</xliff:g> పాట ఇష్టమైన వాటి జాబితాకు జోడించబడింది.</item>
+    <item quantity="other"><xliff:g id="number" example="27">%d</xliff:g> పాటలు ఇష్టమైన వాటి జాబితాకు జోడించబడ్డాయి.</item>
+  </plurals>
   <!-- Toast confirming that song(s) was/were deleted. -->
+  <plurals name="NNNtracksdeleted">
+    <item quantity="one"><xliff:g id="songs_to_delete" example="1">%d</xliff:g> పాట తొలగించబడింది.</item>
+    <item quantity="other"><xliff:g id="songs_to_delete">%d</xliff:g> పాటలు తొలగించబడ్డాయి.</item>
+  </plurals>
 </resources>

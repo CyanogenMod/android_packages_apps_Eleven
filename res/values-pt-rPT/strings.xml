@@ -34,14 +34,14 @@
   <!-- Option menu items -->
   <string name="menu_settings">Definições</string>
   <string name="menu_search">Procurar</string>
-  <string name="menu_shuffle_item">Misturar</string>
-  <string name="menu_shuffle_all">Misturar todas</string>
-  <string name="menu_shuffle_playlist">Misturar lista de reprodução</string>
-  <string name="menu_shuffle_album">Misturar álbum</string>
-  <string name="menu_shuffle_artist">Misturar artista</string>
-  <string name="menu_shuffle_top_tracks">Misturar Top de Músicas</string>
-  <string name="menu_shuffle_recent">Misturar tocadas recentemente</string>
-  <string name="menu_shuffle_last_added">Misturar última adicionada</string>
+  <string name="menu_shuffle_item">Reproduzir aleatoriamente</string>
+  <string name="menu_shuffle_all">Reproduzir todas aleatoriamente</string>
+  <string name="menu_shuffle_playlist">Reproduzir lista de reprodução aleatoriamente</string>
+  <string name="menu_shuffle_album">Reproduzir álbum aleatoriamente</string>
+  <string name="menu_shuffle_artist">Reproduzir artista aleatoriamente</string>
+  <string name="menu_shuffle_top_tracks">Reproduzir Top de músicas aleatoriamente</string>
+  <string name="menu_shuffle_recent">Reproduzir tocadas recentemente aleatoriamente</string>
+  <string name="menu_shuffle_last_added">Reproduzir últimas adicionadas aleatoriamente</string>
   <string name="menu_play_all">Reproduzir todas</string>
   <string name="menu_sort_by">Ordenar por</string>
   <string name="menu_clear_list">Limpar lista</string>
@@ -67,9 +67,9 @@
   <string name="sort_order_entry_number_of_albums">Número de álbuns</string>
   <string name="sort_order_entry_filename">Nome do ficheiro</string>
   <!-- Default playlist names -->
-  <string name="playlist_last_added">Última adicionada</string>
+  <string name="playlist_last_added">Últimas adicionadas</string>
   <string name="playlist_recently_played">Tocadas recentemente</string>
-  <string name="playlist_top_tracks">Meu top de músicas</string>
+  <string name="playlist_top_tracks">O meu Top de músicas</string>
   <!-- AlertDialog items -->
   <string name="new_playlist">Nova lista de reprodução</string>
   <string name="save">Guardar</string>
@@ -80,8 +80,8 @@
   <string name="create_playlist_prompt">Nome da lista de reprodução</string>
   <string name="delete_dialog_title">Remover <xliff:g id="item" example="album">%s</xliff:g>?</string>
   <string name="clear_top_tracks_title">Limpar Top de Músicas?</string>
-  <string name="clear_recent_title">Limpar tocadas recentemente?</string>
-  <string name="clear_last_added">Limpar última adicionada?</string>
+  <string name="clear_recent_title">Limpar as tocadas recentemente?</string>
+  <string name="clear_last_added">Limpar as últimas adicionadas?</string>
   <string name="cannot_be_undone">Não pode ser desfeito</string>
   <string name="delete_warning">Isto vai remover permanentemente as imagens em cache</string>
   <string name="new_photo">Escolher foto da Galeria</string>
@@ -106,8 +106,8 @@
   <string name="accessibility_pause">Pausa</string>
   <string name="accessibility_next">Próxima</string>
   <string name="accessibility_prev">Anterior</string>
-  <string name="accessibility_shuffle">Misturar</string>
-  <string name="accessibility_shuffle_all">Misturar todas</string>
+  <string name="accessibility_shuffle">Reproduzir aleatoriamente</string>
+  <string name="accessibility_shuffle_all">Reproduzir todas aleatoriamente</string>
   <string name="accessibility_repeat">Repetir</string>
   <string name="accessibility_repeat_all">Repetir todas</string>
   <string name="accessibility_repeat_one">Repetir uma</string>
@@ -151,7 +151,7 @@
   <string name="empty_playlist_secondary">Para adicionar músicas a esta lista de reprodução, toque no menu de opções numa música, álbum ou artista e selecione \"Adicionar à lista de reprodução\".</string>
   <string name="empty_top_tracks_main">O Top de Músicas não existe</string>
   <string name="empty_top_tracks_secondary">As músicas que mais ouvir serão adicionadas a esta lista.</string>
-  <string name="empty_last_added_main">Não há músicas adicionadas recentemente</string>
+  <string name="empty_last_added_main">Não foram adicionadas músicas recentemente</string>
   <string name="empty_last_added">Vão ser mostradas aqui as músicas que adicionou no último mês.</string>
   <string name="empty_generic_main">Nenhuma música encontrada</string>
   <string name="empty_generic_secondary">Para copiar a música do seu computador para o seu dispositivo, utilize um cabo USB.</string>
