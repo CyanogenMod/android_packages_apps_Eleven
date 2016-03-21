@@ -22,7 +22,5 @@
         android:id="@+id/audio_player_album_art"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_centerHorizontal="true"
-        android:scaleType="fitXY"
-        android:background="@drawable/default_artwork"/>
+        android:src="@drawable/default_artwork"/>
 </FrameLayout>
