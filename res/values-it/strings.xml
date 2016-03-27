@@ -133,7 +133,7 @@
   <string name="settings_shake_to_play">Scuoti per riprodurre</string>
   <string name="settings_shake_to_play_summary">Scuoti il dispositivo per riprodurre la prossima canzone</string>
   <string name="settings_lockscreen_album_art">Cover schermata sblocco</string>
-  <string name="settings_lockscreen_album_art_summary">Sostituisci lo sfondo della schermata di sblocco con la copertina dell\'album</string>
+  <string name="settings_lockscreen_album_art_summary">Sostituisci lo sfondo della schermata di blocco con la copertina dell\'album</string>
   <!-- App widget -->
   <string name="app_widget_small">Musica: 4 \u00d7 1</string>
   <string name="app_widget_large">Musica: 4 \u00d7 2</string>

@@ -18,47 +18,14 @@
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
   <!-- Used to indicate the number of artists -->
-  <plurals name="Nartists">
-    <item quantity="other"><xliff:g id="count">%d</xliff:g> artis</item>
-  </plurals>
   <!-- Used to indicate the number of albums for an artist -->
-  <plurals name="Nalbums">
-    <item quantity="other"><xliff:g id="count">%d</xliff:g> album</item>
-  </plurals>
   <!-- Used to indicate the number of songs for an album -->
-  <plurals name="Nsongs">
-    <item quantity="other"><xliff:g id="count">%d</xliff:g> lagu</item>
-  </plurals>
   <!-- Used to indicate the number of genres -->
-  <plurals name="Ngenres">
-    <item quantity="other"><xliff:g id="count">%d</xliff:g> genre</item>
-  </plurals>
   <!-- Used to show a shortened version of hours-->
-  <plurals name="Nhours">
-    <item quantity="other"><xliff:g id="hours">%d</xliff:g>j</item>
-  </plurals>
   <!-- Used to show a shortened version of minutes -->
-  <plurals name="Nminutes">
-    <item quantity="other"><xliff:g id="minutes">%d</xliff:g>m</item>
-  </plurals>
   <!-- Toasts after adding song(s) to playlists -->
-  <plurals name="NNNtrackstoplaylist">
-    <item quantity="other"><xliff:g id="number" example="1">%d</xliff:g> lagu telah ditambahkan ke daftar putar.</item>
-  </plurals>
   <!-- Toasts after removing song(s) from playlists -->
-  <plurals name="NNNtracksfromplaylist">
-    <item quantity="other"><xliff:g id="number" example="1">%d</xliff:g> lagu dihapus dari daftar putar.</item>
-  </plurals>
   <!-- Toasts after adding song(s) to queue -->
-  <plurals name="NNNtrackstoqueue">
-    <item quantity="other"><xliff:g id="number" example="1">%d</xliff:g> lagu telah ditambahkan ke antrian.</item>
-  </plurals>
   <!-- Toasts after adding song(s) to the favorites list -->
-  <plurals name="NNNtrackstofavorites">
-    <item quantity="other"><xliff:g id="number" example="1">%d</xliff:g> lagu telah ditambahkan ke favorit.</item>
-  </plurals>
   <!-- Toast confirming that song(s) was/were deleted. -->
-  <plurals name="NNNtracksdeleted">
-    <item quantity="other"><xliff:g id="songs_to_delete" example="1">%d</xliff:g> lagu telah dihapus.</item>
-  </plurals>
 </resources>
