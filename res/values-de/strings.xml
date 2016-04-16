@@ -26,7 +26,7 @@
   <string name="page_playlists">Wiedergabelisten</string>
   <string name="page_genres">Genres</string>
   <string name="page_now_playing">Aktuelle Wiedergabe</string>
-  <string name="page_play_queue">Warteschlange wiedergeben</string>
+  <string name="page_play_queue">Wiedergabe-Warteschlange</string>
   <!-- Section Headers -->
   <string name="header_albums">Alben</string>
   <string name="header_top_songs">Toptitel</string>
