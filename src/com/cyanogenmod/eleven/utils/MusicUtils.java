@@ -817,11 +817,10 @@ public final class MusicUtils {
         final String[] projection = new String[] {
             BaseColumns._ID
         };
-        final StringBuilder selection = new StringBuilder();
-        selection.append(AudioColumns.IS_MUSIC + "=1");
-        selection.append(" AND " + MediaColumns.TITLE + "!=''");
+        String selection = (AudioColumns.IS_MUSIC + "=1") +
+                " AND " + MediaColumns.TITLE + "!=''";
         final Uri uri = MediaStore.Audio.Genres.Members.getContentUri("external", Long.valueOf(id));
-        Cursor cursor = context.getContentResolver().query(uri, projection, selection.toString(),
+        Cursor cursor = context.getContentResolver().query(uri, projection, selection,
                 null, null);
         if (cursor != null) {
             final long[] mList = getSongListForCursor(cursor);
@@ -1278,9 +1277,8 @@ public final class MusicUtils {
     }
 
     public static final AlbumArtistDetails getAlbumArtDetails(final Context context, final long trackId) {
-        final StringBuilder selection = new StringBuilder();
-        selection.append(MediaStore.Audio.AudioColumns.IS_MUSIC + "=1");
-        selection.append(" AND " + BaseColumns._ID + " = '").append(trackId).append("'");
+        String selection = (AudioColumns.IS_MUSIC + "=1") +
+                " AND " + BaseColumns._ID + " = '" + trackId + "'";
 
         Cursor cursor = context.getContentResolver().query(
             MediaStore.Audio.Media.EXTERNAL_CONTENT_URI,
@@ -1291,7 +1289,7 @@ public final class MusicUtils {
                 MediaStore.Audio.AudioColumns.ALBUM,
                     /* 2 */
                 MediaStore.Audio.AlbumColumns.ARTIST,
-            }, selection.toString(), null, null
+            }, selection, null, null
         );
 
         if (!cursor.moveToFirst()) {

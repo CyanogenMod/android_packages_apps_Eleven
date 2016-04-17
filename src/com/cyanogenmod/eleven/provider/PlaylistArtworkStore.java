@@ -75,26 +75,21 @@ public class PlaylistArtworkStore {
 
     public void onCreate(final SQLiteDatabase db) {
         // create the table
-        StringBuilder builder = new StringBuilder();
-        builder.append("CREATE TABLE IF NOT EXISTS ");
-        builder.append(PlaylistArtworkStoreColumns.NAME);
-        builder.append("(");
-        builder.append(PlaylistArtworkStoreColumns.ID);
-        builder.append(" INT UNIQUE,");
+        String builder = "CREATE TABLE IF NOT EXISTS " +
+                PlaylistArtworkStoreColumns.NAME +
+                "(" +
+                PlaylistArtworkStoreColumns.ID +
+                " INT UNIQUE," +
+                PlaylistArtworkStoreColumns.LAST_UPDATE_ARTIST +
+                " LONG DEFAULT 0," +
+                PlaylistArtworkStoreColumns.NUM_SONGS_LAST_UPDATE_ARTIST +
+                " INT DEFAULT 0," +
+                PlaylistArtworkStoreColumns.LAST_UPDATE_COVER +
+                " LONG DEFAULT 0," +
+                PlaylistArtworkStoreColumns.NUM_SONGS_LAST_UPDATE_COVER +
+                " INT DEFAULT 0);";
 
-        builder.append(PlaylistArtworkStoreColumns.LAST_UPDATE_ARTIST);
-        builder.append(" LONG DEFAULT 0,");
-
-        builder.append(PlaylistArtworkStoreColumns.NUM_SONGS_LAST_UPDATE_ARTIST);
-        builder.append(" INT DEFAULT 0,");
-
-        builder.append(PlaylistArtworkStoreColumns.LAST_UPDATE_COVER);
-        builder.append(" LONG DEFAULT 0,");
-
-        builder.append(PlaylistArtworkStoreColumns.NUM_SONGS_LAST_UPDATE_COVER);
-        builder.append(" INT DEFAULT 0);");
-
-        db.execSQL(builder.toString());
+        db.execSQL(builder);
     }
 
     public void onUpgrade(final SQLiteDatabase db, final int oldVersion, final int newVersion) {

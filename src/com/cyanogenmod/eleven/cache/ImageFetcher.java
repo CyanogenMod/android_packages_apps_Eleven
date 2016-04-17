@@ -222,12 +222,7 @@ public class ImageFetcher extends ImageWorker {
         if (albumName == null || artistName == null) {
             return null;
         }
-        return new StringBuilder(albumName)
-                .append("_")
-                .append(artistName)
-                .append("_")
-                .append(Config.ALBUM_ART_SUFFIX)
-                .toString();
+        return albumName + "_" + artistName + "_" + Config.ALBUM_ART_SUFFIX;
     }
 
     /**
