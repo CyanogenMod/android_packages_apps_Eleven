@@ -20,7 +20,7 @@
     android:layout_width="match_parent"
     android:layout_height="@dimen/app_widget_large_min_height"
     android:columnCount="2"
-    android:rowCount="4"
+    android:rowCount="2"
     android:background="@color/black"
     tools:ignore="ContentDescription" >
 
@@ -28,7 +28,7 @@
         android:id="@+id/app_widget_large_image"
         android:layout_width="@dimen/notification_expanded_height"
         android:layout_height="@dimen/notification_expanded_height"
-        android:layout_rowSpan="4"
+        android:layout_rowSpan="2"
         android:layout_marginBottom="@dimen/app_widget_bottom_margin"
         android:scaleType="fitXY" />
 
