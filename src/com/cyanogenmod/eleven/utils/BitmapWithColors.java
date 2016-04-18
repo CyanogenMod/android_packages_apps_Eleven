@@ -18,16 +18,42 @@ package com.cyanogenmod.eleven.utils;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.support.v7.graphics.Palette;
+import android.support.v7.graphics.Target;
 import android.util.LruCache;
 
 public class BitmapWithColors {
     private static final class BitmapColors {
-        public int mVibrantColor;
-        public int mVibrantDarkColor;
+        public final int mVibrantColor;
+        public final int mVibrantDarkColor;
+        public final int mVibrantLightColor;
+        public final int mDominantColor;
+
+        public BitmapColors(Palette palette) {
+            mVibrantColor = determineColor(palette.getVibrantSwatch());
+            mVibrantDarkColor = determineColor(palette.getDarkVibrantSwatch());
+            mVibrantLightColor = determineColor(palette.getLightVibrantSwatch());
+            mDominantColor = determineColor(getDominantSwatch(palette));
+        }
 
         public BitmapColors(int vibrantColor, int vibrantDarkColor) {
             mVibrantColor = vibrantColor;
             mVibrantDarkColor = vibrantDarkColor;
+            mVibrantLightColor = Color.TRANSPARENT;
+            mDominantColor = vibrantColor;
+        }
+
+        private int determineColor(Palette.Swatch swatch) {
+            return swatch != null ? swatch.getRgb() : Color.TRANSPARENT;
+        }
+
+        private static Palette.Swatch getDominantSwatch(Palette palette) {
+            Palette.Swatch dominant = null;
+            for (Palette.Swatch swatch : palette.getSwatches()) {
+                if (dominant == null || swatch.getPopulation() > dominant.getPopulation()) {
+                    dominant = swatch;
+                }
+            }
+            return dominant;
         }
     }
 
@@ -70,6 +96,59 @@ public class BitmapWithColors {
         return mColors.mVibrantDarkColor;
     }
 
+    public int getContrastingColor() {
+        loadColorsIfNeeded();
+
+        float contrastToDark = computeContrastBetweenColors(mColors.mDominantColor,
+                mColors.mVibrantDarkColor);
+        float contrastToLight = computeContrastBetweenColors(mColors.mDominantColor,
+                mColors.mVibrantLightColor);
+        float contrastToVibrant = computeContrastBetweenColors(mColors.mDominantColor,
+                mColors.mVibrantColor);
+
+        int bestColor = mColors.mDominantColor;
+        float bestContrast = -1;
+        if (contrastToVibrant > bestContrast) {
+            bestColor = mColors.mVibrantColor;
+            bestContrast = contrastToVibrant;
+        }
+        if (contrastToDark > bestContrast) {
+            bestColor = mColors.mVibrantDarkColor;
+            bestContrast = contrastToDark;
+        }
+        if (contrastToLight > bestContrast) {
+            bestColor = mColors.mVibrantLightColor;
+            bestContrast = contrastToLight;
+        }
+
+        return bestColor;
+    }
+
+    /** Calculates the constrast between two colors, using the algorithm provided by the WCAG v2. */
+    private static float computeContrastBetweenColors(int bg, int fg) {
+        if (bg == Color.TRANSPARENT || fg == Color.TRANSPARENT || bg == fg) {
+            return -1;
+        }
+
+        float bgR = Color.red(bg) / 255f;
+        float bgG = Color.green(bg) / 255f;
+        float bgB = Color.blue(bg) / 255f;
+        bgR = (bgR < 0.03928f) ? bgR / 12.92f : (float) Math.pow((bgR + 0.055f) / 1.055f, 2.4f);
+        bgG = (bgG < 0.03928f) ? bgG / 12.92f : (float) Math.pow((bgG + 0.055f) / 1.055f, 2.4f);
+        bgB = (bgB < 0.03928f) ? bgB / 12.92f : (float) Math.pow((bgB + 0.055f) / 1.055f, 2.4f);
+        float bgL = 0.2126f * bgR + 0.7152f * bgG + 0.0722f * bgB;
+
+        float fgR = Color.red(fg) / 255f;
+        float fgG = Color.green(fg) / 255f;
+        float fgB = Color.blue(fg) / 255f;
+        fgR = (fgR < 0.03928f) ? fgR / 12.92f : (float) Math.pow((fgR + 0.055f) / 1.055f, 2.4f);
+        fgG = (fgG < 0.03928f) ? fgG / 12.92f : (float) Math.pow((fgG + 0.055f) / 1.055f, 2.4f);
+        fgB = (fgB < 0.03928f) ? fgB / 12.92f : (float) Math.pow((fgB + 0.055f) / 1.055f, 2.4f);
+        float fgL = 0.2126f * fgR + 0.7152f * fgG + 0.0722f * fgB;
+
+        return Math.abs((fgL + 0.05f) / (bgL + 0.05f));
+    }
+
     private synchronized void loadColorsIfNeeded() {
         if (mColors != null) {
             return;
@@ -82,24 +161,17 @@ public class BitmapWithColors {
             return;
         }
 
-        final Palette p = Palette.generate(mBitmap);
+        final Palette p = Palette.from(mBitmap)
+                .clearTargets()
+                .addTarget(Target.VIBRANT)
+                .addTarget(Target.LIGHT_VIBRANT)
+                .addTarget(Target.DARK_VIBRANT)
+                .generate();
         if (p == null) {
             return;
         }
 
-        int vibrantColor = Color.TRANSPARENT;
-        int vibrantDarkColor = Color.TRANSPARENT;
-
-        Palette.Swatch swatch = p.getDarkVibrantSwatch();
-        if (swatch != null) {
-            vibrantDarkColor = swatch.getRgb();
-        }
-        swatch = p.getVibrantSwatch();
-        if (swatch != null) {
-            vibrantColor = swatch.getRgb();
-        }
-
-        mColors = new BitmapColors(vibrantColor, vibrantDarkColor);
+        mColors = new BitmapColors(p);
         synchronized (sCachedColors) {
             sCachedColors.put(mBitmapKey, mColors);
         }
