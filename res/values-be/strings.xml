@@ -18,6 +18,7 @@
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
   <string name="app_name">Музыка</string>
+  <!-- Page titles -->
   <string name="page_recent">Апошнія</string>
   <string name="page_artists">Выканаўцы</string>
   <string name="page_albums">Альбомы</string>
@@ -26,9 +27,11 @@
   <string name="page_genres">Жанры</string>
   <string name="page_now_playing">Зараз грае</string>
   <string name="page_play_queue">Чарга прайгравання</string>
+  <!-- Section Headers -->
   <string name="header_albums">Альбомы</string>
   <string name="header_top_songs">Топ-трэкі</string>
   <string name="header_all_songs">Усе трэкі</string>
+  <!-- Option menu items -->
   <string name="menu_settings">Налады</string>
   <string name="menu_search">Пошук</string>
   <string name="menu_shuffle_item">Перамяшаць</string>
@@ -46,10 +49,12 @@
   <string name="menu_clear_queue">Ачысціць чаргу</string>
   <string name="menu_save_queue">Захаваць у плэйліст</string>
   <string name="menu_equalizer">Эквалайзер</string>
+  <!-- Playlist items -->
   <string name="add_to_playlist">Дадаць у плэйліст</string>
   <string name="add_to_queue">Дадаць у чаргу</string>
   <string name="remove_from_recent">Выдаліць з апошніх</string>
   <string name="remove_from_queue">Выдаліць з чаргі</string>
+  <!-- Sort orders -->
   <string name="sort_order_entry_az">Алфавіту</string>
   <string name="sort_order_entry_za">Алфавіту ў зваротным парадку</string>
   <string name="sort_order_entry_artist">Выканаўцу</string>
@@ -61,9 +66,11 @@
   <string name="sort_order_entry_number_of_songs">Колькасці трэкаў</string>
   <string name="sort_order_entry_number_of_albums">Колькасці альбомаў</string>
   <string name="sort_order_entry_filename">Імя файла</string>
+  <!-- Default playlist names -->
   <string name="playlist_last_added">Апошнія дададзеныя</string>
   <string name="playlist_recently_played">Апошнія граныя</string>
   <string name="playlist_top_tracks">Мае топ-трэкі</string>
+  <!-- AlertDialog items -->
   <string name="new_playlist">Новы плэйліст</string>
   <string name="save">Захаваць</string>
   <string name="cancel">Скасаванне</string>
@@ -81,6 +88,7 @@
   <string name="google_search">Знайсці ў Google</string>
   <string name="use_default">Відарыс па змаўчанні</string>
   <string name="old_photo">Зыходная выява\"</string>
+  <!-- Context menu items -->
   <string name="context_menu_play_selection">Прайграць</string>
   <string name="context_menu_play_next">Уключыць наступным</string>
   <string name="context_menu_play_album">Прайграць</string>
@@ -93,6 +101,7 @@
   <string name="context_menu_use_as_ringtone">Выкарыстаць як рынгтон</string>
   <string name="context_menu_remove_from_playlist">Выдаліць з плэйліста</string>
   <string name="context_menu_change_image">Змяніць выяву</string>
+  <!-- Content descriptions -->
   <string name="accessibility_play">Прайграць</string>
   <string name="accessibility_pause">Паўза</string>
   <string name="accessibility_next">Наступны</string>
@@ -104,8 +113,10 @@
   <string name="accessibility_repeat_one">Паўтор трэка</string>
   <string name="accessibility_queue">Адчыніць чаргу</string>
   <string name="accessibility_browse">Агляд музыкі</string>
+  <!-- Toast messages -->
   <string name="set_as_ringtone">Трэк <xliff:g id="name" example="Alarm Bell">%s</xliff:g> усталяваны як рынгтон</string>
   <string name="playlist_renamed">Плэйліст пераназваны</string>
+  <!-- Settings -->
   <string name="settings_ui_category">Інтэрфейс</string>
   <string name="settings_storage_category">Сховішча</string>
   <string name="settings_data_category">Дадзеныя</string>
@@ -123,10 +134,12 @@
   <string name="settings_shake_to_play_summary">Страсяніце прыладу для пераходу да наступнага трэка</string>
   <string name="settings_lockscreen_album_art">Вокладка альбома</string>
   <string name="settings_lockscreen_album_art_summary">Замяняць шпалеры экрана блакавання вокладкай прайграванага альбома</string>
+  <!-- App widget -->
   <string name="app_widget_small">Музыка: 4 \u00d7 1</string>
   <string name="app_widget_large">Музыка: 4 \u00d7 2</string>
   <string name="app_widget_large_alt">Музыка: 4 \u00d7 2 (альтэрнатыўны)</string>
   <string name="app_widget_recent">Музыка: нядаўна праслуханыя</string>
+  <!-- Empty list / error messages -->
   <string name="no_effects_for_you">Эквалайзер не можа быць адчынены.</string>
   <string name="empty_music">Каб скапіяваць музыку з ПК, выкарыстайце USB-кабель.</string>
   <string name="empty_search">Пошук не даў вынікаў</string>
@@ -145,6 +158,7 @@
   <string name="empty_queue_main">Няма трэкаў у чарзе</string>
   <string name="empty_queue_secondary">Каб дадаць трэкі ў чаргу прайгравання, націсніце на меню опцый трэка, альбома ці выканаўца і выберыце \"Дадаць у чаргу\".</string>
   <string name="error_playing_track">Немагчыма прайграць трэк %1$s</string>
+  <!-- Section Headers -->
   <string name="header_unknown_year">Невядомы год</string>
   <string name="header_less_than_30s">Менш 30 секундаў</string>
   <string name="header_30_to_60_seconds">30 - 60 секундаў</string>

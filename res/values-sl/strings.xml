@@ -18,6 +18,7 @@
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
   <string name="app_name">Glasba</string>
+  <!-- Page titles -->
   <string name="page_recent">Nedavno</string>
   <string name="page_artists">Izvajalci</string>
   <string name="page_albums">Albumi</string>
@@ -26,9 +27,11 @@
   <string name="page_genres">Zvrsti</string>
   <string name="page_now_playing">Trenutno se predvaja</string>
   <string name="page_play_queue">Predvajaj čakalno vrsto</string>
+  <!-- Section Headers -->
   <string name="header_albums">Albumi</string>
   <string name="header_top_songs">Največkrat predvajane</string>
   <string name="header_all_songs">Vse skladbe</string>
+  <!-- Option menu items -->
   <string name="menu_settings">Nastavitve</string>
   <string name="menu_search">Iskanje</string>
   <string name="menu_shuffle_item">Premešaj</string>
@@ -46,10 +49,12 @@
   <string name="menu_clear_queue">Počisti čakalno vrsto</string>
   <string name="menu_save_queue">Shrani čakalno vrsto na seznam predvajanja</string>
   <string name="menu_equalizer">Izenačevalnik</string>
+  <!-- Playlist items -->
   <string name="add_to_playlist">Dodaj na seznam predvajanja</string>
   <string name="add_to_queue">Dodaj v čakalno vrsto</string>
   <string name="remove_from_recent">Odstrani iz nedavnih</string>
   <string name="remove_from_queue">Odstrani iz čakalne vrste</string>
+  <!-- Sort orders -->
   <string name="sort_order_entry_az">A-Ž</string>
   <string name="sort_order_entry_za">Ž-A</string>
   <string name="sort_order_entry_artist">Izvajalec</string>
@@ -61,9 +66,11 @@
   <string name="sort_order_entry_number_of_songs">številu skladb</string>
   <string name="sort_order_entry_number_of_albums">številu albumov</string>
   <string name="sort_order_entry_filename">Ime datoteke</string>
+  <!-- Default playlist names -->
   <string name="playlist_last_added">Nazadnje dodano</string>
   <string name="playlist_recently_played">Nazadnje predvajano</string>
   <string name="playlist_top_tracks">Moje največkrat predvajane</string>
+  <!-- AlertDialog items -->
   <string name="new_playlist">Nov seznam predvajanja</string>
   <string name="save">Shrani</string>
   <string name="cancel">Prekliči</string>
@@ -81,6 +88,7 @@
   <string name="google_search">Iskanje Google</string>
   <string name="use_default">Uporabi privzeto fotografijo</string>
   <string name="old_photo">Uporabi staro fotografijo</string>
+  <!-- Context menu items -->
   <string name="context_menu_play_selection">Predvajaj</string>
   <string name="context_menu_play_next">Predvajaj naslednjo</string>
   <string name="context_menu_play_album">Predvajaj album</string>
@@ -93,6 +101,7 @@
   <string name="context_menu_use_as_ringtone">Uporabi kot melodijo zvonjenja</string>
   <string name="context_menu_remove_from_playlist">Odstrani iz seznama predvajanja</string>
   <string name="context_menu_change_image">Spremeni sliko</string>
+  <!-- Content descriptions -->
   <string name="accessibility_play">Predvajaj</string>
   <string name="accessibility_pause">Premor</string>
   <string name="accessibility_next">Naslednja</string>
@@ -104,8 +113,10 @@
   <string name="accessibility_repeat_one">Ponovi eno</string>
   <string name="accessibility_queue">Odpri čakalno vrsto</string>
   <string name="accessibility_browse">Prebrskaj glasbo</string>
+  <!-- Toast messages -->
   <string name="set_as_ringtone"><xliff:g id="name" example="Alarm Bell">%s</xliff:g> nastavljena kot melodijo zvonjenja</string>
   <string name="playlist_renamed">Seznam predvajanja preimenovan</string>
+  <!-- Settings -->
   <string name="settings_ui_category">Vmesnik</string>
   <string name="settings_storage_category">Shranjevanje</string>
   <string name="settings_data_category">Podatki</string>
@@ -122,11 +133,13 @@
   <string name="settings_shake_to_play">Stresi za predvajanje</string>
   <string name="settings_shake_to_play_summary">Stresite svojo napravo za predvajanje naslednje skladbe</string>
   <string name="settings_lockscreen_album_art">Naslovnica zaslona za zakl.</string>
-  <string name="settings_lockscreen_album_art_summary">Nadomesti ozadje zaslona za zaklepanje z naslovnico</string>
+  <string name="settings_lockscreen_album_art_summary">Nadomesti ozadje zaklenjenega zaslona z naslovnico</string>
+  <!-- App widget -->
   <string name="app_widget_small">Glasba: 4 \u00d7 1</string>
   <string name="app_widget_large">Glasba: 4 \u00d7 2</string>
   <string name="app_widget_large_alt">Glasba: 4 \u00d7 2 (nadomestno)</string>
   <string name="app_widget_recent">Glasba: nedavno poslušano</string>
+  <!-- Empty list / error messages -->
   <string name="no_effects_for_you">Izenačevalnika ni mogoče odpreti.</string>
   <string name="empty_music">Za kopiranje glasbe iz vašega računalnika na vašo napravo uporabite kabel USB.</string>
   <string name="empty_search">Rezultatov iskanja ni bilo najdenih</string>
@@ -145,6 +158,7 @@
   <string name="empty_queue_main">Ni skladb v čakalni vrsti predvajanja</string>
   <string name="empty_queue_secondary">Za dodajanje skladb v čakalno vrsto predvajanja tapnite meni možnosti na skladbi, albumu ali izvajalcu in izberite \"Dodaj v čakalno vrsto\".</string>
   <string name="error_playing_track">Skladbe %1$s ni mogoče predvajati</string>
+  <!-- Section Headers -->
   <string name="header_unknown_year">Neznano leto</string>
   <string name="header_less_than_30s">Manj kot 30 sekund</string>
   <string name="header_30_to_60_seconds">30 - 60 sekund</string>

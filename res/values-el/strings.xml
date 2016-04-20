@@ -18,6 +18,7 @@
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
   <string name="app_name">Μουσική</string>
+  <!-- Page titles -->
   <string name="page_recent">Πρόσφατα</string>
   <string name="page_artists">Καλλιτέχνες</string>
   <string name="page_albums">Άλμπουμ</string>
@@ -26,9 +27,11 @@
   <string name="page_genres">Είδη</string>
   <string name="page_now_playing">Παίζει Τώρα</string>
   <string name="page_play_queue">Ουρά αναπαραγωγής</string>
+  <!-- Section Headers -->
   <string name="header_albums">Άλμπουμ</string>
   <string name="header_top_songs">Κορυφαία τραγούδια</string>
   <string name="header_all_songs">Όλα τα τραγούδια</string>
+  <!-- Option menu items -->
   <string name="menu_settings">Ρυθμίσεις</string>
   <string name="menu_search">Αναζήτηση</string>
   <string name="menu_shuffle_item">Τυχαία αναπαραγωγή</string>
@@ -46,10 +49,12 @@
   <string name="menu_clear_queue">Εκκαθάριση ουράς</string>
   <string name="menu_save_queue">Αποθήκευση ουράς σε λίστα αναπαραγωγής</string>
   <string name="menu_equalizer">Ισοσταθμιστής</string>
+  <!-- Playlist items -->
   <string name="add_to_playlist">Προσθήκη στη λίστα αναπαραγωγής</string>
   <string name="add_to_queue">Προσθήκη στην ουρά</string>
   <string name="remove_from_recent">Κατάργηση από τα πρόσφατα</string>
   <string name="remove_from_queue">Κατάργηση από την ουρά</string>
+  <!-- Sort orders -->
   <string name="sort_order_entry_az">Α-Ω</string>
   <string name="sort_order_entry_za">Ω-Α</string>
   <string name="sort_order_entry_artist">Καλλιτέχνης</string>
@@ -61,9 +66,11 @@
   <string name="sort_order_entry_number_of_songs">Αριθμός τραγουδιών</string>
   <string name="sort_order_entry_number_of_albums">Αριθμός άλμπουμ</string>
   <string name="sort_order_entry_filename">Όνομα αρχείου</string>
+  <!-- Default playlist names -->
   <string name="playlist_last_added">Τελευταίες αφίξεις</string>
   <string name="playlist_recently_played">Έπαιξαν πρόσφατα</string>
   <string name="playlist_top_tracks">Τα κορυφαία κομμάτια μου</string>
+  <!-- AlertDialog items -->
   <string name="new_playlist">Νέα λίστα αναπαραγωγής</string>
   <string name="save">Αποθήκευση</string>
   <string name="cancel">Ακύρωση</string>
@@ -81,6 +88,7 @@
   <string name="google_search">Αναζήτηση Google</string>
   <string name="use_default">Χρήση προεπιλεγμένης φωτογραφίας</string>
   <string name="old_photo">Χρήση παλιάς φωτογραφίας</string>
+  <!-- Context menu items -->
   <string name="context_menu_play_selection">Αναπαραγωγή</string>
   <string name="context_menu_play_next">Αναπαραγωγή επόμενου</string>
   <string name="context_menu_play_album">Αναπαραγωγή άλμπουμ</string>
@@ -93,6 +101,7 @@
   <string name="context_menu_use_as_ringtone">Χρήση ως ήχος κλήσης</string>
   <string name="context_menu_remove_from_playlist">Αφαίρεση από τη λίστα</string>
   <string name="context_menu_change_image">Αλλαγή εικόνας</string>
+  <!-- Content descriptions -->
   <string name="accessibility_play">Αναπαραγωγή</string>
   <string name="accessibility_pause">Παύση</string>
   <string name="accessibility_next">Επόμενο</string>
@@ -104,8 +113,10 @@
   <string name="accessibility_repeat_one">Επανάληψη ενός</string>
   <string name="accessibility_queue">Άνοιγμα ουράς</string>
   <string name="accessibility_browse">Περιήγηση μουσικής</string>
+  <!-- Toast messages -->
   <string name="set_as_ringtone">\'<xliff:g id="name" example="Alarm Bell">%s</xliff:g>\' ορίστηκε ως ήχος κλήσης</string>
   <string name="playlist_renamed">Η λίστα αναπαραγωγής μετονομάστηκε</string>
+  <!-- Settings -->
   <string name="settings_ui_category">Διεπαφή</string>
   <string name="settings_storage_category">Αποθ. χώρος</string>
   <string name="settings_data_category">Δεδομένα</string>
@@ -123,10 +134,12 @@
   <string name="settings_shake_to_play_summary">Κουνήστε τη συσκευή σας για αναπαραγωγή του επόμενου τραγουδιού</string>
   <string name="settings_lockscreen_album_art">Εξώφυλλο άλμπουμ στην οθόνη κλειδώματος</string>
   <string name="settings_lockscreen_album_art_summary">Αντικατάσταση της ταπετσαρίας οθόνης κλειδώματος με το εξώφυλλο άλμπουμ</string>
+  <!-- App widget -->
   <string name="app_widget_small">Μουσική: 4 \u00d7 1</string>
   <string name="app_widget_large">Μουσική: 4 \u00d7 2</string>
   <string name="app_widget_large_alt">Μουσική: 4 \u00d7 2 (εναλλακτικό)</string>
   <string name="app_widget_recent">Μουσική: ακούστηκαν πρόσφατα</string>
+  <!-- Empty list / error messages -->
   <string name="no_effects_for_you">Δεν ήταν δυνατό το άνοιγμα του ισοσταθμιστή.</string>
   <string name="empty_music">Για να αντιγράψετε μουσική από τον υπολογιστή στη συσκευή σας, χρησιμοποιήστε ένα καλώδιο USB.</string>
   <string name="empty_search">Δεν βρέθηκαν αποτελέσματα αναζήτησης</string>
@@ -145,6 +158,7 @@
   <string name="empty_queue_main">Δεν υπάρχουν τραγούδια στην ουρά αναπαραγωγής</string>
   <string name="empty_queue_secondary">Για να προσθέσετε τραγούδια στην ουρά αναπαραγωγής, ανοίξτε το μενού επιλογών σε ένα τραγούδι, άλμπουμ ή καλλιτέχνη και επιλέξτε \"Προσθήκη στην ουρά\".</string>
   <string name="error_playing_track">Δεν είναι δυνατή η αναπαραγωγή του κομματιού %1$s</string>
+  <!-- Section Headers -->
   <string name="header_unknown_year">Άγνωστο έτος</string>
   <string name="header_less_than_30s">Λιγότερο από 30 δευτερόλεπτα</string>
   <string name="header_30_to_60_seconds">30 - 60 δευτερόλεπτα</string>

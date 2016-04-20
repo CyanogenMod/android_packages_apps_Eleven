@@ -18,6 +18,7 @@
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
   <string name="app_name">Müzik</string>
+  <!-- Page titles -->
   <string name="page_recent">Son çalınanlar</string>
   <string name="page_artists">Sanatçılar</string>
   <string name="page_albums">Albümler</string>
@@ -26,9 +27,11 @@
   <string name="page_genres">Türler</string>
   <string name="page_now_playing">Şimdi Çalınıyor</string>
   <string name="page_play_queue">Kuyruğu Çal</string>
+  <!-- Section Headers -->
   <string name="header_albums">Albümler</string>
   <string name="header_top_songs">Üst Şarkılar</string>
   <string name="header_all_songs">Tüm Şarkılar</string>
+  <!-- Option menu items -->
   <string name="menu_settings">Ayarlar</string>
   <string name="menu_search">Ara</string>
   <string name="menu_shuffle_item">Karıştır</string>
@@ -46,10 +49,12 @@
   <string name="menu_clear_queue">Kuyruğu sil</string>
   <string name="menu_save_queue">Kuyruğu çalma listesine kaydet</string>
   <string name="menu_equalizer">Equalizer / Dengeleyici</string>
+  <!-- Playlist items -->
   <string name="add_to_playlist">Çalma listesine ekle</string>
   <string name="add_to_queue">Kuyruğa ekle</string>
   <string name="remove_from_recent">Sonkilerden kaldır</string>
   <string name="remove_from_queue">Kuyruktan çıkar</string>
+  <!-- Sort orders -->
   <string name="sort_order_entry_az">A-Z</string>
   <string name="sort_order_entry_za">Z-A</string>
   <string name="sort_order_entry_artist">Sanatçı</string>
@@ -61,9 +66,11 @@
   <string name="sort_order_entry_number_of_songs">Şarkı sayısı</string>
   <string name="sort_order_entry_number_of_albums">Albüm sayısı</string>
   <string name="sort_order_entry_filename">Dosya adı</string>
+  <!-- Default playlist names -->
   <string name="playlist_last_added">Son eklenenler</string>
   <string name="playlist_recently_played">Son çalınanlar</string>
   <string name="playlist_top_tracks">Üst parçalarım</string>
+  <!-- AlertDialog items -->
   <string name="new_playlist">Yeni çalma listesi</string>
   <string name="save">Kaydet</string>
   <string name="cancel">İptal</string>
@@ -81,6 +88,7 @@
   <string name="google_search">Google arama</string>
   <string name="use_default">Varsayılan fotoğrafı kullan</string>
   <string name="old_photo">Eski fotoğrafı kullan</string>
+  <!-- Context menu items -->
   <string name="context_menu_play_selection">Çal</string>
   <string name="context_menu_play_next">Sonrakini çal</string>
   <string name="context_menu_play_album">Albümü oynat</string>
@@ -93,6 +101,7 @@
   <string name="context_menu_use_as_ringtone">Zil sesi olarak kullan</string>
   <string name="context_menu_remove_from_playlist">Çalma listesinden sil</string>
   <string name="context_menu_change_image">Görseli değiştir</string>
+  <!-- Content descriptions -->
   <string name="accessibility_play">Çal</string>
   <string name="accessibility_pause">Duraklat</string>
   <string name="accessibility_next">Sonraki</string>
@@ -104,8 +113,10 @@
   <string name="accessibility_repeat_one">Birini tekrarla</string>
   <string name="accessibility_queue">Kuyruğu aç</string>
   <string name="accessibility_browse">Müziğe gözat</string>
+  <!-- Toast messages -->
   <string name="set_as_ringtone">\'<xliff:g id="name" example="Alarm Bell">%s</xliff:g>\' zil sesi olarak ayarlandı</string>
   <string name="playlist_renamed">Çalma listesi yeniden adlandırıldı</string>
+  <!-- Settings -->
   <string name="settings_ui_category">Arayüz</string>
   <string name="settings_storage_category">Depolama</string>
   <string name="settings_data_category">Veri</string>
@@ -123,10 +134,12 @@
   <string name="settings_shake_to_play_summary">Sıradaki şarkıyı oynatmak için cihazınızı sallayın</string>
   <string name="settings_lockscreen_album_art">Kilit ekranı albüm görseli</string>
   <string name="settings_lockscreen_album_art_summary">Kilit ekranı arkaplanını albüm görseli ile değiştirir</string>
+  <!-- App widget -->
   <string name="app_widget_small">Müzik: 4 \u00d7 1</string>
   <string name="app_widget_large">Müzik: 4 \u00d7 2</string>
   <string name="app_widget_large_alt">Müzik: 4 \u00d7 2 (değiştir)</string>
   <string name="app_widget_recent">Müzik: son zamanlarda dinlenen</string>
+  <!-- Empty list / error messages -->
   <string name="no_effects_for_you">Equalizer açılamadı.</string>
   <string name="empty_music">Bilgisayarınızdan cihazınıza müzik kopyalamak için USB kablo kullanın.</string>
   <string name="empty_search">Arama sonucu bulunamadı</string>
@@ -145,6 +158,7 @@
   <string name="empty_queue_main">Çalma kuyruğunda şarkı yok</string>
   <string name="empty_queue_secondary">Çalma Kuyruğuna şarkı eklemek için şarkı, albüm veya sanatçı üzerindeki seçenekler menüsüne tıklayın ve \"Kuyruğa ekle\"yi seçin.</string>
   <string name="error_playing_track">%1$s parçası oynatılamıyor</string>
+  <!-- Section Headers -->
   <string name="header_unknown_year">Bilinmeyen yıl</string>
   <string name="header_less_than_30s">30 saniyeden daha az</string>
   <string name="header_30_to_60_seconds">30 - 60 saniye</string>

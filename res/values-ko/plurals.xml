@@ -17,36 +17,47 @@
      limitations under the License.
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <!-- Used to indicate the number of artists -->
   <plurals name="Nartists">
     <item quantity="other"><xliff:g id="count">%d</xliff:g>명의 아티스트</item>
   </plurals>
+  <!-- Used to indicate the number of albums for an artist -->
   <plurals name="Nalbums">
     <item quantity="other"><xliff:g id="count">%d</xliff:g>개의 앨범</item>
   </plurals>
+  <!-- Used to indicate the number of songs for an album -->
   <plurals name="Nsongs">
     <item quantity="other"><xliff:g id="count">%d</xliff:g>곡의 음악</item>
   </plurals>
+  <!-- Used to indicate the number of genres -->
   <plurals name="Ngenres">
     <item quantity="other"><xliff:g id="count">%d</xliff:g>개의 장르</item>
   </plurals>
+  <!-- Used to show a shortened version of hours-->
   <plurals name="Nhours">
     <item quantity="other"><xliff:g id="hours">%d</xliff:g>시간</item>
   </plurals>
+  <!-- Used to show a shortened version of minutes -->
   <plurals name="Nminutes">
     <item quantity="other"><xliff:g id="minutes">%d</xliff:g>분</item>
   </plurals>
+  <!-- Toasts after adding song(s) to playlists -->
   <plurals name="NNNtrackstoplaylist">
     <item quantity="other"><xliff:g id="number" example="27">%d</xliff:g>곡의 음악이 재생목록에 추가되었습니다.</item>
   </plurals>
+  <!-- Toasts after removing song(s) from playlists -->
   <plurals name="NNNtracksfromplaylist">
     <item quantity="other"><xliff:g id="number" example="27">%d</xliff:g>곡의 음악이 재생목록에서 제거되었습니다.</item>
   </plurals>
+  <!-- Toasts after adding song(s) to queue -->
   <plurals name="NNNtrackstoqueue">
     <item quantity="other"><xliff:g id="number" example="27">%d</xliff:g>곡의 음악이 대기열에 추가되었습니다.</item>
   </plurals>
+  <!-- Toasts after adding song(s) to the favorites list -->
   <plurals name="NNNtrackstofavorites">
     <item quantity="other"><xliff:g id="number" example="27">%d</xliff:g>곡의 음악이 즐겨찾기에 추가되었습니다.</item>
   </plurals>
+  <!-- Toast confirming that song(s) was/were deleted. -->
   <plurals name="NNNtracksdeleted">
     <item quantity="other"><xliff:g id="songs_to_delete">%d</xliff:g>곡의 음악이 삭제되었습니다.</item>
   </plurals>

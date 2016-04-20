@@ -18,6 +18,7 @@
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
   <string name="app_name">Muzică</string>
+  <!-- Page titles -->
   <string name="page_recent">Recent</string>
   <string name="page_artists">Artiști</string>
   <string name="page_albums">Albume</string>
@@ -26,9 +27,11 @@
   <string name="page_genres">Genuri</string>
   <string name="page_now_playing">Rulează acum</string>
   <string name="page_play_queue">Coadă de redare</string>
+  <!-- Section Headers -->
   <string name="header_albums">Albume</string>
   <string name="header_top_songs">Melodii de top</string>
   <string name="header_all_songs">Toate melodiile</string>
+  <!-- Option menu items -->
   <string name="menu_settings">Setări</string>
   <string name="menu_search">Căutare</string>
   <string name="menu_shuffle_item">Amestecare</string>
@@ -46,10 +49,12 @@
   <string name="menu_clear_queue">Curăță coada</string>
   <string name="menu_save_queue">Salvați lista pentru redare</string>
   <string name="menu_equalizer">Egalizator</string>
+  <!-- Playlist items -->
   <string name="add_to_playlist">Adaugă la lista de redare</string>
   <string name="add_to_queue">Adaugă la coadă</string>
   <string name="remove_from_recent">Elimină din recente</string>
   <string name="remove_from_queue">Elimină din coadă</string>
+  <!-- Sort orders -->
   <string name="sort_order_entry_az">A-Z</string>
   <string name="sort_order_entry_za">Z-A</string>
   <string name="sort_order_entry_artist">Artist</string>
@@ -61,9 +66,11 @@
   <string name="sort_order_entry_number_of_songs">Numărul de melodii</string>
   <string name="sort_order_entry_number_of_albums">Numărul de albume</string>
   <string name="sort_order_entry_filename">Nume fișier</string>
+  <!-- Default playlist names -->
   <string name="playlist_last_added">Ultimele adăugate</string>
   <string name="playlist_recently_played">Redate recent</string>
   <string name="playlist_top_tracks">Piesele mele de top</string>
+  <!-- AlertDialog items -->
   <string name="new_playlist">Listă redare nouă</string>
   <string name="save">Salvare</string>
   <string name="cancel">Anulare</string>
@@ -81,6 +88,7 @@
   <string name="google_search">Căutare pe Google</string>
   <string name="use_default">Utilizare foto implicită</string>
   <string name="old_photo">Utilizare foto veche</string>
+  <!-- Context menu items -->
   <string name="context_menu_play_selection">Redare</string>
   <string name="context_menu_play_next">Redă următoarea</string>
   <string name="context_menu_play_album">Redă album</string>
@@ -93,6 +101,7 @@
   <string name="context_menu_use_as_ringtone">Folosește ca ton de apel</string>
   <string name="context_menu_remove_from_playlist">Elimină din lista de redare</string>
   <string name="context_menu_change_image">Modificare imagine</string>
+  <!-- Content descriptions -->
   <string name="accessibility_play">Redare</string>
   <string name="accessibility_pause">Pauză</string>
   <string name="accessibility_next">Înainte</string>
@@ -104,8 +113,10 @@
   <string name="accessibility_repeat_one">Repetă una</string>
   <string name="accessibility_queue">Deschide coada</string>
   <string name="accessibility_browse">Răsfoire muzică</string>
+  <!-- Toast messages -->
   <string name="set_as_ringtone">\'<xliff:g id="name" example="Alarm Bell">%s</xliff:g>\' este ton de apel</string>
   <string name="playlist_renamed">Listă de redare redenumită</string>
+  <!-- Settings -->
   <string name="settings_ui_category">Interfața</string>
   <string name="settings_storage_category">Stocare</string>
   <string name="settings_data_category">Date</string>
@@ -121,12 +132,14 @@
   <string name="settings_show_lyrics_summary">Pentru melodii care au un fișier srt</string>
   <string name="settings_shake_to_play">Scuturați pentru a reda</string>
   <string name="settings_shake_to_play_summary">Se agită dispozitivul pentru a reda melodia următoare</string>
+  <!-- App widget -->
   <string name="app_widget_small">Muzică: 4 \u00d7 1</string>
   <string name="app_widget_large">Muzică: 4 \u00d7 2</string>
   <string name="app_widget_large_alt">Muzică: 4 \u00d7 2 (alternativ)</string>
   <string name="app_widget_recent">Muzică: recent ascultate</string>
+  <!-- Empty list / error messages -->
   <string name="no_effects_for_you">Egalizatorul nu a putut fi deschis.</string>
-  <string name="empty_music">Pentru a copia muzică de pe computer în dispozitivul dvs, folosiți un cablu USB.</string>
+  <string name="empty_music">Pentru a copia muzică de pe calculator în dispozitivul dvs, folosiți un cablu USB.</string>
   <string name="empty_search">Nu am găsit rezultate la căutare</string>
   <string name="empty_search_check">Vă rugăm să verificați că aveți ortografia corectă sau încercați un cuvânt cheie diferit.</string>
   <string name="empty_favorite">Melodiile marcate de dvs ca favorite vor fi afișate aici.</string>
@@ -142,6 +155,7 @@
   <string name="empty_generic_secondary">Pentru a copia muzică de pe computer în dispozitivul dvs, folosiți un cablu USB.</string>
   <string name="empty_queue_secondary">Pentru a adăuga melodii în coada de redare, atingeți meniul de opțiuni pe un cântec, album sau artist și selectați \"Adăugați la coadă\".</string>
   <string name="error_playing_track">Melodia %1$s nu poate fi redată</string>
+  <!-- Section Headers -->
   <string name="header_unknown_year">An necunoscut</string>
   <string name="header_less_than_30s">Mai puțin de 30 de secunde</string>
   <string name="header_30_to_60_seconds">30 - 60 de secunde</string>

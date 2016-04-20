@@ -18,6 +18,7 @@
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
   <string name="app_name">Hudba</string>
+  <!-- Page titles -->
   <string name="page_recent">Nedávne</string>
   <string name="page_artists">Interpreti</string>
   <string name="page_albums">Albumy</string>
@@ -26,9 +27,11 @@
   <string name="page_genres">Žánre</string>
   <string name="page_now_playing">Práve sa prehráva</string>
   <string name="page_play_queue">Prehrať poradie</string>
+  <!-- Section Headers -->
   <string name="header_albums">Albumy</string>
   <string name="header_top_songs">Najlepšie skladby</string>
   <string name="header_all_songs">Všetky skladby</string>
+  <!-- Option menu items -->
   <string name="menu_settings">Nastavenia</string>
   <string name="menu_search">Hľadať</string>
   <string name="menu_shuffle_item">Prehrať náhodne</string>
@@ -46,10 +49,12 @@
   <string name="menu_clear_queue">Vyčistiť poradie</string>
   <string name="menu_save_queue">Uložiť poradie do zoznamu skladieb</string>
   <string name="menu_equalizer">Ekvalizér</string>
+  <!-- Playlist items -->
   <string name="add_to_playlist">Pridať do zoznamu skladieb</string>
   <string name="add_to_queue">Pridať do poradia</string>
   <string name="remove_from_recent">Odstrániť z nedávnych</string>
   <string name="remove_from_queue">Odstrániť z poradia</string>
+  <!-- Sort orders -->
   <string name="sort_order_entry_az">A-Z</string>
   <string name="sort_order_entry_za">Z-A</string>
   <string name="sort_order_entry_artist">Interpreta</string>
@@ -61,9 +66,11 @@
   <string name="sort_order_entry_number_of_songs">Počtu skladieb</string>
   <string name="sort_order_entry_number_of_albums">Počtu albumov</string>
   <string name="sort_order_entry_filename">Názvu súboru</string>
+  <!-- Default playlist names -->
   <string name="playlist_last_added">Naposledy pridané</string>
   <string name="playlist_recently_played">Nedávno prehrávané</string>
   <string name="playlist_top_tracks">Moje najlepšie skladby</string>
+  <!-- AlertDialog items -->
   <string name="new_playlist">Nový zoznam skladieb</string>
   <string name="save">Uložiť</string>
   <string name="cancel">Zrušiť</string>
@@ -81,6 +88,7 @@
   <string name="google_search">Vyhľadať pomocou Google</string>
   <string name="use_default">Použiť predvolenú fotografiu</string>
   <string name="old_photo">Použiť pôvodnú fotografiu</string>
+  <!-- Context menu items -->
   <string name="context_menu_play_selection">Prehrať</string>
   <string name="context_menu_play_next">Prehrať ďalšiu</string>
   <string name="context_menu_play_album">Prehrať album</string>
@@ -93,6 +101,7 @@
   <string name="context_menu_use_as_ringtone">Nastaviť ako vyzváňanie</string>
   <string name="context_menu_remove_from_playlist">Odstrániť zo zoznamu skladieb</string>
   <string name="context_menu_change_image">Zmeniť obrázok</string>
+  <!-- Content descriptions -->
   <string name="accessibility_play">Prehrať</string>
   <string name="accessibility_pause">Pozastaviť</string>
   <string name="accessibility_next">Ďalšia</string>
@@ -104,8 +113,10 @@
   <string name="accessibility_repeat_one">Opakovať jednu</string>
   <string name="accessibility_queue">Otvoriť poradie</string>
   <string name="accessibility_browse">Prehľadávať hudbu</string>
+  <!-- Toast messages -->
   <string name="set_as_ringtone">Skladba \'<xliff:g id="name" example="Alarm Bell">%s</xliff:g>\' bola nastavená ako vyzváňanie</string>
   <string name="playlist_renamed">Zoznam skladieb bol premenovaný</string>
+  <!-- Settings -->
   <string name="settings_ui_category">Rozhranie</string>
   <string name="settings_storage_category">Úložisko</string>
   <string name="settings_data_category">Údaje</string>
@@ -123,10 +134,12 @@
   <string name="settings_shake_to_play_summary">Prehrať ďalšiu skladbu zatrasením vášho zariadenia</string>
   <string name="settings_lockscreen_album_art">Obal albumu na obrazovke uzamknutia</string>
   <string name="settings_lockscreen_album_art_summary">Nahradiť pozadie na obrazovke uzamknutia s obalom albumu</string>
+  <!-- App widget -->
   <string name="app_widget_small">Hudba: 4 \u00d7 1</string>
   <string name="app_widget_large">Hudba: 4 \u00d7 2</string>
   <string name="app_widget_large_alt">Hudba: 4 \u00d7 2 (alternatívna)</string>
   <string name="app_widget_recent">Hudba: nedávno počúvané</string>
+  <!-- Empty list / error messages -->
   <string name="no_effects_for_you">Nedá sa otvoriť ekvalizér.</string>
   <string name="empty_music">Na kopírovanie hudby z vášho počítača do vášho zariadenia použite USB kábel.</string>
   <string name="empty_search">Žiadne výsledky hľadania</string>
@@ -145,6 +158,7 @@
   <string name="empty_queue_main">Žiadne skladby v poradí na prehrávanie</string>
   <string name="empty_queue_secondary">Pre pridanie skladieb do poradia na prehrávanie kliknite na ponuku s možnosťami na skladbe, albume alebo interpretovi a vyberte \"Pridať do poradia\".</string>
   <string name="error_playing_track">Nepodarilo sa prehrať skladbu %1$s</string>
+  <!-- Section Headers -->
   <string name="header_unknown_year">Neznámy rok</string>
   <string name="header_less_than_30s">Menej ako 30 sekúnd</string>
   <string name="header_30_to_60_seconds">30 - 60 sekúnd</string>

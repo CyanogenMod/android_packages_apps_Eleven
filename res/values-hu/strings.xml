@@ -18,6 +18,7 @@
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
   <string name="app_name">Zene</string>
+  <!-- Page titles -->
   <string name="page_recent">Előzmények</string>
   <string name="page_artists">Előadók</string>
   <string name="page_albums">Albumok</string>
@@ -26,9 +27,11 @@
   <string name="page_genres">Műfajok</string>
   <string name="page_now_playing">Most hallható</string>
   <string name="page_play_queue">Lejátszási sor lejátszása</string>
+  <!-- Section Headers -->
   <string name="header_albums">Albumok</string>
   <string name="header_top_songs">Legtöbbet hallgatottak</string>
   <string name="header_all_songs">Összes zeneszám</string>
+  <!-- Option menu items -->
   <string name="menu_settings">Beállítások</string>
   <string name="menu_search">Keresés</string>
   <string name="menu_shuffle_item">Véletlenszerű</string>
@@ -46,10 +49,12 @@
   <string name="menu_clear_queue">Lejátszási sor törlése</string>
   <string name="menu_save_queue">Várólista lista mentése</string>
   <string name="menu_equalizer">Hangszínszabályzó</string>
+  <!-- Playlist items -->
   <string name="add_to_playlist">Hozzáadás a lejátszási lista</string>
   <string name="add_to_queue">Hozzáadás a lejátszási sorhoz</string>
   <string name="remove_from_recent">Törlés az előzményekből</string>
   <string name="remove_from_queue">Törlés a lejátszási sorból</string>
+  <!-- Sort orders -->
   <string name="sort_order_entry_az">A-Z</string>
   <string name="sort_order_entry_za">Z-A</string>
   <string name="sort_order_entry_artist">Előadó</string>
@@ -61,9 +66,11 @@
   <string name="sort_order_entry_number_of_songs">Dalok száma</string>
   <string name="sort_order_entry_number_of_albums">Albumok száma</string>
   <string name="sort_order_entry_filename">Fájlnév</string>
+  <!-- Default playlist names -->
   <string name="playlist_last_added">Legutóbb hozzáadott</string>
   <string name="playlist_recently_played">Nemrég Játszott</string>
   <string name="playlist_top_tracks">Kedvenceim</string>
+  <!-- AlertDialog items -->
   <string name="new_playlist">Új lejátszási lista</string>
   <string name="save">Mentés</string>
   <string name="cancel">Elvet</string>
@@ -81,6 +88,7 @@
   <string name="google_search">Google keresés</string>
   <string name="use_default">Alapértelmezett kép használata</string>
   <string name="old_photo">Régi kép használata</string>
+  <!-- Context menu items -->
   <string name="context_menu_play_selection">Lejátszás</string>
   <string name="context_menu_play_next">Következő lejátszása</string>
   <string name="context_menu_play_album">Album lejátszása</string>
@@ -93,6 +101,7 @@
   <string name="context_menu_use_as_ringtone">Beállítás csengőhangként</string>
   <string name="context_menu_remove_from_playlist">Eltávolítás a lejátszási listából</string>
   <string name="context_menu_change_image">Kép módosítása</string>
+  <!-- Content descriptions -->
   <string name="accessibility_play">Lejátszás</string>
   <string name="accessibility_pause">Szünet</string>
   <string name="accessibility_next">Következő</string>
@@ -104,8 +113,10 @@
   <string name="accessibility_repeat_one">Egy dal ismétlése</string>
   <string name="accessibility_queue">Lejátszási sor megnyitása</string>
   <string name="accessibility_browse">Zene böngészése</string>
+  <!-- Toast messages -->
   <string name="set_as_ringtone">\"<xliff:g id="name" example="Alarm Bell">%s</xliff:g>\" beállítva csengőhangként</string>
   <string name="playlist_renamed">Lejátszási lista átnevezve</string>
+  <!-- Settings -->
   <string name="settings_ui_category">Felhasználói felület</string>
   <string name="settings_storage_category">Tárhely</string>
   <string name="settings_data_category">Adat</string>
@@ -123,10 +134,12 @@
   <string name="settings_shake_to_play_summary">Rázza meg a készülékét a következő szám lejátszásához</string>
   <string name="settings_lockscreen_album_art">Zárképernyő lemezborítók</string>
   <string name="settings_lockscreen_album_art_summary">Zárképernyő hátterének cseréje lemezborítóval</string>
+  <!-- App widget -->
   <string name="app_widget_small">Zene: 4 \u00d7 1</string>
   <string name="app_widget_large">Zene: 4 \u00d7 2</string>
   <string name="app_widget_large_alt">Zene: 4 \u00d7 2 (alternatív)</string>
   <string name="app_widget_recent">Zene: nemrégiben hallgatott</string>
+  <!-- Empty list / error messages -->
   <string name="no_effects_for_you">A hangszínszabályzót nem lehet megnyitni.</string>
   <string name="empty_music">Számítógépről történő zene másoláshoz használjon USB kábelt.</string>
   <string name="empty_search">Nincs találat</string>
@@ -145,6 +158,7 @@
   <string name="empty_queue_main">Nincsenek számok a lejátszási sorban</string>
   <string name="empty_queue_secondary">Zeneszámok hozzáadása a lejátszási sorhoz, koppintson a beállítások menü, dal, album vagy előadó lehetőségre, és válassza a \"Hozzáadás a lejátszólistához\" opciót.</string>
   <string name="error_playing_track">Nem lehet lejátszani a következőt: %1$s</string>
+  <!-- Section Headers -->
   <string name="header_unknown_year">Ismeretlen év</string>
   <string name="header_less_than_30s">Kevesebb, mint 30 másodperc</string>
   <string name="header_30_to_60_seconds">30 - 60 másodperc</string>

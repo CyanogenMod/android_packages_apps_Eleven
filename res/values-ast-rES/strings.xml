@@ -18,6 +18,7 @@
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
   <string name="app_name">Música</string>
+  <!-- Page titles -->
   <string name="page_recent">Reciente</string>
   <string name="page_artists">Artistes</string>
   <string name="page_albums">Álbumes</string>
@@ -26,9 +27,11 @@
   <string name="page_genres">Xéneros</string>
   <string name="page_now_playing">Reproduciendo agora</string>
   <string name="page_play_queue">Cola de reproducción</string>
+  <!-- Section Headers -->
   <string name="header_albums">Álbumes</string>
   <string name="header_top_songs">Canciones más escuchaes</string>
   <string name="header_all_songs">Toles canciones</string>
+  <!-- Option menu items -->
   <string name="menu_settings">Axustes</string>
   <string name="menu_search">Guetar</string>
   <string name="menu_shuffle_item">Al debalu</string>
@@ -46,10 +49,12 @@
   <string name="menu_clear_queue">Llimpiar cola</string>
   <string name="menu_save_queue">Guardar cola a la llista de reproducción</string>
   <string name="menu_equalizer">Ecualizador</string>
+  <!-- Playlist items -->
   <string name="add_to_playlist">Amestar a la llista reproducción</string>
   <string name="add_to_queue">Amestar a la cola</string>
   <string name="remove_from_recent">Desaniciar de reciente</string>
   <string name="remove_from_queue">Desaniciar de la cola</string>
+  <!-- Sort orders -->
   <string name="sort_order_entry_az">A-Z</string>
   <string name="sort_order_entry_za">Z-A</string>
   <string name="sort_order_entry_artist">Artista</string>
@@ -61,9 +66,11 @@
   <string name="sort_order_entry_number_of_songs">Númberu de canciones</string>
   <string name="sort_order_entry_number_of_albums">Númberu d\'álbumes</string>
   <string name="sort_order_entry_filename">Nome de ficheru</string>
+  <!-- Default playlist names -->
   <string name="playlist_last_added">Recientes</string>
   <string name="playlist_recently_played">Reproducío apocayá</string>
   <string name="playlist_top_tracks">Les canciones más escuchaes</string>
+  <!-- AlertDialog items -->
   <string name="new_playlist">Llista de reproducción nueva</string>
   <string name="save">Guardar</string>
   <string name="cancel">Encaboxar</string>
@@ -81,6 +88,7 @@
   <string name="google_search">Guetar en Google</string>
   <string name="use_default">Usar imaxe por defeutu</string>
   <string name="old_photo">Usar imaxe previa</string>
+  <!-- Context menu items -->
   <string name="context_menu_play_selection">Reproducir</string>
   <string name="context_menu_play_next">Siguiente</string>
   <string name="context_menu_play_album">Reproducir álbum</string>
@@ -93,6 +101,7 @@
   <string name="context_menu_use_as_ringtone">Usar como tonu</string>
   <string name="context_menu_remove_from_playlist">Quitar de la llista</string>
   <string name="context_menu_change_image">Camudar imaxe</string>
+  <!-- Content descriptions -->
   <string name="accessibility_play">Reproducir</string>
   <string name="accessibility_pause">Posar</string>
   <string name="accessibility_next">Siguiente</string>
@@ -104,8 +113,10 @@
   <string name="accessibility_repeat_one">Repitir una</string>
   <string name="accessibility_queue">Abrir cola</string>
   <string name="accessibility_browse">Restolar pente la música</string>
+  <!-- Toast messages -->
   <string name="set_as_ringtone">\'<xliff:g id="name" example="Alarm Bell">%s</xliff:g>\' afitóse como tonu de llamada</string>
   <string name="playlist_renamed">Llista renomada</string>
+  <!-- Settings -->
   <string name="settings_ui_category">Interfaz</string>
   <string name="settings_storage_category">Almacenamientu</string>
   <string name="settings_data_category">Datos</string>
@@ -123,10 +134,12 @@
   <string name="settings_shake_to_play_summary">Xiringa\'l preséu pa reproducir la siguiente canción</string>
   <string name="settings_lockscreen_album_art">Portada en pantalla de bloquéu</string>
   <string name="settings_lockscreen_album_art_summary">Trocar la pantalla de bloquéu cola imaxe del álbum</string>
+  <!-- App widget -->
   <string name="app_widget_small">Música: 4 \u00d7 1</string>
   <string name="app_widget_large">Música: 4 \u00d7 2</string>
   <string name="app_widget_large_alt">Música: 4 \u00d7 2 (alternativu)</string>
   <string name="app_widget_recent">Música: Escuchaes recientemente</string>
+  <!-- Empty list / error messages -->
   <string name="no_effects_for_you">L\'ecualizador nun pudo abrise.</string>
   <string name="empty_music">Pa copiar música del to ordenador al to preséu, usa un cable USB.</string>
   <string name="empty_search">Nun s\'atoparon resultaos</string>
@@ -145,6 +158,7 @@
   <string name="empty_queue_main">Nun hai canciones na cola</string>
   <string name="empty_queue_secondary">P\'amestar canciones a la cola, toca nel menú d\'opciones d\'una canción, álbum o artista y seleiciona \u00ABAmestar a la cola\u00BB.</string>
   <string name="error_playing_track">Nun pudo lleese la pista %1$s</string>
+  <!-- Section Headers -->
   <string name="header_unknown_year">Añu desconocíu</string>
   <string name="header_less_than_30s">Menos de 30 segundos</string>
   <string name="header_30_to_60_seconds">30 - 60 segundos</string>
