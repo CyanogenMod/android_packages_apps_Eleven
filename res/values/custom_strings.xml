@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="menu_sleep_mode">Sleep Timer</string>
+    <string name="cancel_sleep_mode">Cancel Sleep Timer</string>
+    <string name="select_quit_time">Set timer to stop the player (in mins)</string>
+    <string name="quit_warining">Player will stop playing after %1$s minute(s)</string>
+    <string name="min_interval" translatable="false">1</string>
+    <string name="max_interval" translatable="false">90</string>
+    <string name="default_interval" translatable="false">30</string>
+</resources>
+
