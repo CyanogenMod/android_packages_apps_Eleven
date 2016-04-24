@@ -81,8 +81,8 @@
     <style name="ActionOverFlowButton" parent="@android:style/Widget.Material.ActionButton.Overflow">
         <item name="android:src">@drawable/menu_button_light</item>
         <item name="android:minWidth">0dip</item>
-        <item name="android:paddingLeft">8dip</item>
-        <item name="android:paddingRight">8dip</item>
+        <item name="android:paddingStart">8dip</item>
+        <item name="android:paddingEnd">8dip</item>
     </style>
 
     <!-- The list item main text style/color -->
@@ -160,8 +160,8 @@
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:ellipsize">end</item>
-        <item name="android:paddingLeft">5dp</item>
-        <item name="android:paddingRight">16dp</item>
+        <item name="android:paddingStart">5dp</item>
+        <item name="android:paddingEnd">16dp</item>
         <item name="android:gravity">top|left|center</item>
         <item name="android:singleLine">true</item>
         <item name="android:textColor">@color/bottom_action_bar_text_color</item>
@@ -182,8 +182,8 @@
         <item name="android:layout_width">0dp</item>
         <item name="android:layout_height">match_parent</item>
         <item name="android:gravity">center|right</item>
-        <item name="android:paddingLeft">@dimen/bottom_action_bar_item_padding_left</item>
-        <item name="android:paddingRight">@dimen/bottom_action_bar_item_padding_right</item>
+        <item name="android:paddingStart">@dimen/bottom_action_bar_item_padding_left</item>
+        <item name="android:paddingEnd">@dimen/bottom_action_bar_item_padding_right</item>
         <item name="android:scaleType">centerInside</item>
     </style>
 

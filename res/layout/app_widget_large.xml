@@ -38,7 +38,7 @@
         android:layout_gravity="fill"
         android:gravity="center_vertical"
         android:orientation="vertical"
-        android:paddingLeft="@dimen/notification_info_container_padding_left" >
+        android:paddingStart="@dimen/notification_info_container_padding_left" >
 
         <TextView
             android:id="@+id/app_widget_large_line_one"

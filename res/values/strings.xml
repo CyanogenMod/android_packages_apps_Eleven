@@ -20,18 +20,14 @@
     <string name="app_name">Music</string>
 
     <!-- Page titles -->
-    <string name="page_recent">Recent</string>
     <string name="page_artists">Artists</string>
     <string name="page_albums">Albums</string>
     <string name="page_songs">Songs</string>
     <string name="page_playlists">Playlists</string>
-    <string name="page_genres">Genres</string>
-    <string name="page_now_playing">Now Playing</string>
     <string name="page_play_queue">Play Queue</string>
 
     <!-- Section Headers -->
     <string name="header_albums">Albums</string>
-    <string name="header_top_songs">Top Songs</string>
     <string name="header_all_songs">All Songs</string>
 
     <!-- Option menu items -->
@@ -45,10 +41,8 @@
     <string name="menu_shuffle_top_tracks">Shuffle top tracks</string>
     <string name="menu_shuffle_recent">Shuffle recently played</string>
     <string name="menu_shuffle_last_added">Shuffle last added</string>
-    <string name="menu_play_all">Play all</string>
     <string name="menu_sort_by">Sort by</string>
     <string name="menu_clear_list">Clear list</string>
-    <string name="menu_clear_recents">Clear recent</string>
     <string name="menu_clear_queue">Clear queue</string>
     <string name="menu_save_queue">Save queue to playlist</string>
     <string name="menu_equalizer">Equalizer</string>
@@ -56,7 +50,6 @@
     <!-- Playlist items -->
     <string name="add_to_playlist">Add to playlist</string>
     <string name="add_to_queue">Add to queue</string>
-    <string name="remove_from_recent">Remove from recent</string>
     <string name="remove_from_queue">Remove from queue</string>
 
     <!-- Sort orders -->
@@ -67,7 +60,6 @@
     <string name="sort_order_entry_year">Year</string>
     <string name="sort_order_entry_duration">Duration</string>
     <string name="sort_order_entry_date_added">Date added</string>
-    <string name="sort_order_entry_track_list">Track list</string>
     <string name="sort_order_entry_number_of_songs">Number of songs</string>
     <string name="sort_order_entry_number_of_albums">Number of albums</string>
     <string name="sort_order_entry_filename">Filename</string>
@@ -92,9 +84,6 @@
     <string name="cannot_be_undone">This cannot be undone</string>
     <string name="delete_warning">This will permanently delete the cached image entries</string>
     <string name="new_photo">Choose photo from Gallery</string>
-    <string name="google_search">Google search</string>
-    <string name="use_default">Use default photo</string>
-    <string name="old_photo">Use old photo</string>
 
     <!-- Context menu items -->
     <string name="context_menu_play_selection">Play</string>
@@ -120,23 +109,14 @@
     <string name="accessibility_repeat">Repeat</string>
     <string name="accessibility_repeat_all">Repeat all</string>
     <string name="accessibility_repeat_one">Repeat one</string>
-    <string name="accessibility_queue">Open queue</string>
-    <string name="accessibility_browse">Browse music</string>
 
     <!-- Toast messages -->
     <string name="set_as_ringtone">\'<xliff:g id="name" example="Alarm Bell">%s</xliff:g>\' set as ringtone</string>
-    <string name="playlist_renamed">Playlist renamed</string>
 
     <!-- Settings -->
-    <string name="settings_ui_category">Interface</string>
     <string name="settings_storage_category">Storage</string>
-    <string name="settings_data_category">Data</string>
     <string name="settings_delete_cache_title">Delete cache</string>
     <string name="settings_delete_cache_summary">Remove all cached images</string>
-    <string name="settings_download_only_on_wifi_title">Download via Wi-Fi only</string>
-    <string name="settings_download_only_on_wifi_summary">To reduce carrier charges, don\'t download over mobile networks</string>
-    <string name="settings_download_missing_artwork_title">Download missing album art</string>
-    <string name="settings_download_artist_images_title">Download missing artist images</string>
     <string name="settings_general_category">General</string>
     <string name="settings_show_music_visualization_title">Show music visualization</string>
     <string name="settings_show_lyrics_title">Show song lyrics</string>
@@ -150,15 +130,12 @@
     <string name="app_widget_small">Music: 4 \u00d7 1</string>
     <string name="app_widget_large">Music: 4 \u00d7 2</string>
     <string name="app_widget_large_alt">Music: 4 \u00d7 2 (alternate)</string>
-    <string name="app_widget_recent">Music: recently listened</string>
     <string name="app_widget_text_separator" translatable="false">-</string>
 
     <!-- Empty list / error messages -->
     <string name="no_effects_for_you">The equalizer could not be opened.</string>
-    <string name="empty_music">To copy music from your computer to your device, use a USB cable.</string>
     <string name="empty_search">No search results found</string>
     <string name="empty_search_check">Please check that you have the correct spelling or try a different keyword.</string>
-    <string name="empty_favorite">Songs you mark as favorites will be shown here.</string>
     <string name="empty_recent_main">No recent songs</string>
     <string name="empty_recent">Songs you have listened to recently will show up here.</string>
     <string name="empty_playlist_main">No songs in playlist</string>

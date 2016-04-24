@@ -27,8 +27,8 @@
         android:layout_height="match_parent"
         android:gravity="center_vertical"
         android:paddingBottom="@dimen/list_item_padding_bottom"
-        android:paddingLeft="@dimen/list_item_general_margin"
-        android:paddingRight="@dimen/list_item_general_margin"
+        android:paddingStart="@dimen/list_item_general_margin"
+        android:paddingEnd="@dimen/list_item_general_margin"
         android:paddingTop="@dimen/list_item_padding_top">
 
         <include layout="@layout/list_item_common" />

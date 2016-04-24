@@ -6,11 +6,11 @@
         android:id="@+id/right_container"
         android:layout_width="wrap_content"
         android:layout_height="fill_parent"
-        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
         android:layout_centerVertical="true"
         android:gravity="center_vertical"
         android:orientation="horizontal"
-        android:layout_marginRight="@dimen/list_item_general_margin" >
+        android:layout_marginEnd="@dimen/list_item_general_margin" >
         <ImageView
             android:id="@+id/now_playing"
             android:layout_width="wrap_content"
@@ -30,8 +30,8 @@
         android:id="@+id/song_info"
         android:layout_width="wrap_content"
         android:layout_height="fill_parent"
-        android:layout_toLeftOf="@id/right_container"
-        android:layout_marginLeft="@dimen/list_item_general_margin"
+        android:layout_toStartOf="@id/right_container"
+        android:layout_marginStart="@dimen/list_item_general_margin"
         android:gravity="center_vertical">
 
         <TextView

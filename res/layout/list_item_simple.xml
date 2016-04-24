@@ -27,15 +27,15 @@
         android:gravity="center_vertical"
         android:paddingBottom="@dimen/list_item_padding_bottom"
         android:paddingTop="@dimen/list_item_padding_top"
-        android:paddingLeft="@dimen/list_preferred_item_padding"
-        android:paddingRight="@dimen/list_preferred_item_padding">
+        android:paddingStart="@dimen/list_preferred_item_padding"
+        android:paddingEnd="@dimen/list_preferred_item_padding">
 
         <!-- center the text views vertically -->
         <LinearLayout
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
-            android:layout_alignParentLeft="true"
-            android:layout_toLeftOf="@+id/line_one_right"
+            android:layout_alignParentStart="true"
+            android:layout_toStartOf="@+id/line_one_right"
             android:gravity="center_vertical"
             android:orientation="vertical">
             <TextView
@@ -56,14 +56,14 @@
             style="@style/ListItemSecondaryText.Single"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_toLeftOf="@+id/popup_menu_button"
+            android:layout_toStartOf="@+id/popup_menu_button"
             android:layout_centerVertical="true" />
 
         <com.cyanogenmod.eleven.widgets.PopupMenuButton
             android:id="@id/popup_menu_button"
             android:layout_width="@dimen/overflow_width"
             android:layout_height="@dimen/overflow_height"
-            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
             android:layout_centerVertical="true"
             android:src="@drawable/menu_button" />
     </RelativeLayout>

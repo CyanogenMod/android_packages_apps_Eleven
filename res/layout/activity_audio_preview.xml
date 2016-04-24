@@ -71,7 +71,7 @@
                 android:enabled="false"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"
                 android:layout_alignParentTop="true"
                 android:src="@drawable/btn_playback_play"/>
 
@@ -79,10 +79,10 @@
                 android:id="@+id/tv_title"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
                 android:layout_alignParentTop="true"
                 android:gravity="top"
-                android:layout_toLeftOf="@id/ib_playpause"
+                android:layout_toStartOf="@id/ib_playpause"
                 android:ellipsize="end"
                 android:textSize="@dimen/preview_title_textSize"
                 android:textStyle="bold"/>
@@ -91,9 +91,9 @@
                 android:id="@+id/tv_artist"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
                 android:layout_below="@id/tv_title"
-                android:layout_toLeftOf="@id/ib_playpause"
+                android:layout_toStartOf="@id/ib_playpause"
                 android:ellipsize="end"
                 android:textSize="@dimen/preview_artist_textSize"
                 android:textStyle="italic"/>

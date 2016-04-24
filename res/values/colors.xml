@@ -18,7 +18,6 @@
     <!-- Material -->
     <color name="primary">#333333</color>
     <color name="primary_dark">#282828</color>
-    <color name="primary_light">#444444</color>
     <color name="accent">#009688</color>
 
     <!-- Main colors -->
@@ -55,9 +54,6 @@
 
     <!-- Transparent colors -->
     <color name="transparent">#00000000</color>
-    <color name="transparent_black">#99212121</color>
-    <color name="transparent_white">#99fafafa</color>
-    <color name="transparent_blue">#993F51B5</color>
 
     <color name="background_color">@color/white</color>
 
@@ -74,7 +70,6 @@
     <color name="header_shadow_color">#ea212121</color>
 
     <!-- Color for the pop up menu -->
-    <color name="menu_divider_color">@color/transparent</color>
     <color name="menu_text_color">@color/black</color>
 
     <!-- List view related colors -->
@@ -89,14 +84,10 @@
 
     <!-- Top title page colors -->
     <color name="tab_ripple_color">@color/white</color>
-    <color name="tab_accent_color">@color/white</color>
     <color name="tab_selected_underline_color">@color/white</color>
 
     <!-- Search Colors -->
     <color name="search_hint_color">@color/white</color>
-
-    <!-- Color for the text on the audio player -->
-    <color name="audio_player_text_color">@color/default_text_color_light</color>
 
     <!-- Color for the Progress bar -->
     <color name="circular_progress_bar_background">#40ffffff</color>

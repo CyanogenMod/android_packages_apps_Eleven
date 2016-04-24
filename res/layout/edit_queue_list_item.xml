@@ -32,7 +32,7 @@
         android:id="@+id/edit_track_list_container"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_toRightOf="@+id/edit_track_list_item_handle"
+        android:layout_toEndOf="@+id/edit_track_list_item_handle"
         android:gravity="center_vertical">
 
         <include layout="@layout/list_item_queue" />

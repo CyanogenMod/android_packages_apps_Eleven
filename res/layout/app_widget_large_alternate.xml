@@ -35,7 +35,7 @@
         android:layout_width="0dp"
         android:layout_gravity="center_vertical|fill_horizontal"
         android:orientation="vertical"
-        android:paddingLeft="@dimen/notification_info_container_padding_left" >
+        android:paddingStart="@dimen/notification_info_container_padding_left" >
 
         <TextView
             android:id="@+id/app_widget_large_alternate_line_one"

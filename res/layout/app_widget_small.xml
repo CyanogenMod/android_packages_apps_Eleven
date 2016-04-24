@@ -85,8 +85,8 @@
         android:focusable="true"
         android:gravity="center_vertical"
         android:orientation="horizontal"
-        android:paddingLeft="@dimen/app_widget_small_info_container_padding_left"
-        android:paddingRight="@dimen/app_widget_small_info_container_padding_right" >
+        android:paddingStart="@dimen/app_widget_small_info_container_padding_left"
+        android:paddingEnd="@dimen/app_widget_small_info_container_padding_right" >
 
         <TextView
             android:id="@+id/app_widget_small_line_one"
@@ -103,8 +103,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:ellipsize="none"
-            android:paddingLeft="5dp"
-            android:paddingRight="5dp"
+            android:paddingStart="5dp"
+            android:paddingEnd="5dp"
             android:singleLine="true"
             android:text="@string/app_widget_text_separator"
             android:textColor="@color/widget_text"
