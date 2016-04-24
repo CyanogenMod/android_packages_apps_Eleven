@@ -30,7 +30,7 @@ import java.util.Set;
 /**
  * Abstract superclass for all items that may contain images (such as
  * {@link Artist}s, {@link Album}s or {@link Track}s).
- * 
+ *
  * @author Janni Kovacs
  */
 public abstract class ImageHolder {
@@ -39,7 +39,7 @@ public abstract class ImageHolder {
 
     /**
      * Returns a Set of all {@link ImageSize}s available.
-     * 
+     *
      * @return all sizes
      */
     public Set<ImageSize> availableSizes() {
@@ -49,7 +49,7 @@ public abstract class ImageHolder {
     /**
      * Returns the URL of the image in the specified size, or <code>null</code>
      * if not available.
-     * 
+     *
      * @param size The preferred size
      * @return an image URL
      */

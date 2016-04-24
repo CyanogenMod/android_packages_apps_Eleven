@@ -23,7 +23,7 @@ import android.graphics.drawable.Drawable;
  * This drawable that draws a simple white and gray chess board pattern. It's
  * pattern you will often see as a background behind a partly transparent image
  * in many applications.
- * 
+ *
  * @author Daniel Nilsson
  */
 public class AlphaPatternDrawable extends Drawable {

@@ -48,7 +48,7 @@ public class PagerAdapter extends FragmentPagerAdapter {
 
     /**
      * Constructor of <code>PagerAdatper<code>
-     * 
+     *
      * @param fragmentManager The supporting fragment manager
      */
     public PagerAdapter(final Context context, final FragmentManager fragmentManager) {
@@ -59,7 +59,7 @@ public class PagerAdapter extends FragmentPagerAdapter {
     /**
      * Method that adds a new fragment class to the viewer (the fragment is
      * internally instantiate)
-     * 
+     *
      * @param className The full qualified name of fragment class.
      * @param params The instantiate params.
      */
@@ -77,7 +77,7 @@ public class PagerAdapter extends FragmentPagerAdapter {
     /**
      * Method that returns the {@link Fragment} in the argument
      * position.
-     * 
+     *
      * @param position The position of the fragment to return.
      * @return Fragment The {@link Fragment} in the argument position.
      */
@@ -145,7 +145,7 @@ public class PagerAdapter extends FragmentPagerAdapter {
 
     /**
      * Method that returns the current page position.
-     * 
+     *
      * @return int The current page.
      */
     public int getCurrentPage() {
@@ -154,7 +154,7 @@ public class PagerAdapter extends FragmentPagerAdapter {
 
     /**
      * Method that sets the current page position.
-     * 
+     *
      * @param currentPage The current page.
      */
     protected void setCurrentPage(final int currentPage) {
@@ -186,7 +186,7 @@ public class PagerAdapter extends FragmentPagerAdapter {
 
         /**
          * Constructor of <code>MusicFragments</code>
-         * 
+         *
          * @param fragmentClass The fragment class
          */
         private MusicFragments(final Class<? extends Fragment> fragmentClass) {
@@ -195,7 +195,7 @@ public class PagerAdapter extends FragmentPagerAdapter {
 
         /**
          * Method that returns the fragment class.
-         * 
+         *
          * @return Class<? extends Fragment> The fragment class.
          */
         public Class<? extends Fragment> getFragmentClass() {

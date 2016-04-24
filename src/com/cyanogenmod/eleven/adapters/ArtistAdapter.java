@@ -33,7 +33,7 @@ import com.cyanogenmod.eleven.widgets.IPopupMenuCallback;
 /**
  * This {@link ArrayAdapter} is used to display all of the artists on a user's
  * device for {@link ArtistFragment}.
- * 
+ *
  * @author Andrew Neal (andrewdneal@gmail.com)
  */
 /**
@@ -73,7 +73,7 @@ public class ArtistAdapter extends ArrayAdapter<Artist> implements BasicAdapter,
 
     /**
      * Constructor of <code>ArtistAdapter</code>
-     * 
+     *
      * @param context The {@link Context} to use.
      * @param layoutId The resource Id of the view to inflate.
      */

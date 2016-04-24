@@ -25,7 +25,7 @@ package com.cyanogenmod.eleven.lastfm;
  * An <code>ItemFactory</code> can be used to instantiate a value object - such
  * as Artist, Album, Track, Tag - from an XML element. Use the
  * {@link ItemFactoryBuilder} to obtain item factories for a specific type.
- * 
+ *
  * @author Janni Kovacs
  * @see com.cyanogenmod.eleven.lastfm.api.ItemFactoryBuilder
  * @see ResponseBuilder
@@ -35,7 +35,7 @@ interface ItemFactory<T> {
     /**
      * Create a new instance of the type <code>T</code>, based on the passed
      * {@link DomElement}.
-     * 
+     *
      * @param element the XML element
      * @return a new object
      */

@@ -25,7 +25,7 @@ package com.cyanogenmod.eleven.lastfm;
  * An <code>Image</code> contains metadata and URLs for an artist's image.
  * Metadata contains title, votes, format and other. Images are available in
  * various sizes, see {@link ImageSize} for all sizes.
- * 
+ *
  * @author Janni Kovacs
  * @see ImageSize
  * @see Artist#getImages(String, String)

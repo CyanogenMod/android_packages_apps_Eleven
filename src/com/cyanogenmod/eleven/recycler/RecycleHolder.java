@@ -21,7 +21,7 @@ import com.cyanogenmod.eleven.ui.MusicHolder;
 
 /**
  * A @ {@link RecyclerListener} for {@link MusicHolder}'s views.
- * 
+ *
  * @author Andrew Neal (andrewdneal@gmail.com)
  */
 public class RecycleHolder implements RecyclerListener {

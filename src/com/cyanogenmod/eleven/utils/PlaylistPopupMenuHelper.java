@@ -83,7 +83,7 @@ public abstract class PlaylistPopupMenuHelper extends PopupMenuHelper {
 
     /**
      * Create a new {@link AlertDialog} for easy playlist deletion
-     * 
+     *
      * @param playlistName The title of the playlist being deleted
      * @param playlistId The ID of the playlist being deleted
      * @return A new {@link AlertDialog} used to delete playlists

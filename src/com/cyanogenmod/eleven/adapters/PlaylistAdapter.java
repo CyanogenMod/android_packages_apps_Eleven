@@ -32,7 +32,7 @@ import com.cyanogenmod.eleven.widgets.IPopupMenuCallback;
 /**
  * This {@link ArrayAdapter} is used to display all of the playlists on a user's
  * device for {@link PlaylistFragment}.
- * 
+ *
  * @author Andrew Neal (andrewdneal@gmail.com)
  */
 public class PlaylistAdapter extends ArrayAdapter<Playlist> implements IPopupMenuCallback {
@@ -59,7 +59,7 @@ public class PlaylistAdapter extends ArrayAdapter<Playlist> implements IPopupMen
 
     /**
      * Constructor of <code>PlaylistAdapter</code>
-     * 
+     *
      * @param context The {@link Context} to use.
      */
     public PlaylistAdapter(final Context context) {

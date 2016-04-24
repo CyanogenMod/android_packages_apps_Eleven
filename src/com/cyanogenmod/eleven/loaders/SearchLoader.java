@@ -43,7 +43,7 @@ public class SearchLoader extends WrappedAsyncTaskLoader<List<Song>> {
 
     /**
      * Constructor of <code>SongLoader</code>
-     * 
+     *
      * @param context The {@link Context} to use
      * @param query The search query
      */
@@ -115,7 +115,7 @@ public class SearchLoader extends WrappedAsyncTaskLoader<List<Song>> {
 
     /**
      * * @param context The {@link Context} to use.
-     * 
+     *
      * @param query The user's query.
      * @return The {@link Cursor} used to perform the search.
      */

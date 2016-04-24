@@ -206,7 +206,7 @@ public final class DiskLruCache implements Closeable {
     /**
      * Returns the ASCII characters up to but not including the next "\r\n", or
      * "\n".
-     * 
+     *
      * @throws java.io.EOFException if the stream is exhausted before the next
      *             newline character.
      */
@@ -299,7 +299,7 @@ public final class DiskLruCache implements Closeable {
     /**
      * Opens the cache in {@code directory}, creating a cache if none exists
      * there.
-     * 
+     *
      * @param directory a writable directory
      * @param appVersion
      * @param valueCount the number of values per cache entry. Must be positive.
@@ -629,7 +629,7 @@ public final class DiskLruCache implements Closeable {
     /**
      * Drops the entry for {@code key} if it exists and can be removed. Entries
      * actively being edited cannot be removed.
-     * 
+     *
      * @return true if an entry was removed.
      */
     public synchronized boolean remove(final String key) throws IOException {
@@ -967,4 +967,3 @@ public final class DiskLruCache implements Closeable {
         }
     }
 }
-

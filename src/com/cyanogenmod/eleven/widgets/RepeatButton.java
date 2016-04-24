@@ -24,7 +24,7 @@ import com.cyanogenmod.eleven.utils.MusicUtils;
 
 /**
  * A custom {@link ImageButton} that represents the "repeat" button.
- * 
+ *
  * @author Andrew Neal (andrewdneal@gmail.com)
  */
 public class RepeatButton extends AudioButton {

@@ -31,7 +31,7 @@ import java.util.List;
 /**
  * Used to query {@link MediaStore.Audio.Playlists.EXTERNAL_CONTENT_URI} and
  * return the playlists on a user's device.
- * 
+ *
  * @author Andrew Neal (andrewdneal@gmail.com)
  */
 public class PlaylistLoader extends WrappedAsyncTaskLoader<List<Playlist>> {
@@ -48,7 +48,7 @@ public class PlaylistLoader extends WrappedAsyncTaskLoader<List<Playlist>> {
 
     /**
      * Constructor of <code>PlaylistLoader</code>
-     * 
+     *
      * @param context The {@link Context} to use
      */
     public PlaylistLoader(final Context context) {
@@ -113,7 +113,7 @@ public class PlaylistLoader extends WrappedAsyncTaskLoader<List<Playlist>> {
 
     /**
      * Creates the {@link Cursor} used to run the query.
-     * 
+     *
      * @param context The {@link Context} to use.
      * @return The {@link Cursor} used to run the playlist query.
      */

@@ -17,7 +17,7 @@ import android.text.TextUtils;
 
 /**
  * A class that represents a genre.
- * 
+ *
  * @author Andrew Neal (andrewdneal@gmail.com)
  */
 public class Genre {
@@ -34,7 +34,7 @@ public class Genre {
 
     /**
      * Constructor of <code>Genre</code>
-     * 
+     *
      * @param genreId The Id of the genre
      * @param genreName The genre name
      */

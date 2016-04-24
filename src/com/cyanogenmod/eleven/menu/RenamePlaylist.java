@@ -27,7 +27,7 @@ import com.cyanogenmod.eleven.utils.MusicUtils;
 
 /**
  * Alert dialog used to rename playlits.
- * 
+ *
  * @author Andrew Neal (andrewdneal@gmail.com)
  */
 public class RenamePlaylist extends BasePlaylistDialog {

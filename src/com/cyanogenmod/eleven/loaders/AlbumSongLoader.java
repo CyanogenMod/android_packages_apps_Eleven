@@ -29,7 +29,7 @@ import java.util.List;
 /**
  * Used to query {@link MediaStore.Audio.Media.EXTERNAL_CONTENT_URI} and return
  * the Song for a particular album.
- * 
+ *
  * @author Andrew Neal (andrewdneal@gmail.com)
  */
 public class AlbumSongLoader extends WrappedAsyncTaskLoader<List<Song>> {
@@ -51,7 +51,7 @@ public class AlbumSongLoader extends WrappedAsyncTaskLoader<List<Song>> {
 
     /**
      * Constructor of <code>AlbumSongHandler</code>
-     * 
+     *
      * @param context The {@link Context} to use.
      * @param albumId The Id of the album the songs belong to.
      */
@@ -135,4 +135,3 @@ public class AlbumSongLoader extends WrappedAsyncTaskLoader<List<Song>> {
     }
 
 }
-

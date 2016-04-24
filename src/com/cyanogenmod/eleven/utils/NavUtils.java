@@ -35,14 +35,14 @@ import java.util.List;
 
 /**
  * Various navigation helpers.
- * 
+ *
  * @author Andrew Neal (andrewdneal@gmail.com)
  */
 public final class NavUtils {
 
     /**
      * Opens the profile of an artist.
-     * 
+     *
      * @param context The {@link Activity} to use.
      * @param artistName The name of the artist
      */
@@ -62,7 +62,7 @@ public final class NavUtils {
 
     /**
      * Opens the profile of an album.
-     * 
+     *
      * @param context The {@link Activity} to use.
      * @param albumName The name of the album
      * @param artistName The name of the album artist
@@ -127,7 +127,7 @@ public final class NavUtils {
 
     /**
      * Opens the sound effects panel or DSP manager in CM
-     * 
+     *
      * @param context The {@link Activity} to use.
      * @param requestCode The request code passed into startActivityForResult
      */
@@ -152,7 +152,7 @@ public final class NavUtils {
 
     /**
      * Opens to {@link SettingsActivity}.
-     * 
+     *
      * @param activity The {@link Activity} to use.
      */
     public static void openSettings(final Activity activity) {
@@ -162,7 +162,7 @@ public final class NavUtils {
 
     /**
      * Opens to {@link com.cyanogenmod.eleven.ui.activities.SearchActivity}.
-     * 
+     *
      * @param activity The {@link Activity} to use.
      * @param query The search query.
      */
@@ -176,7 +176,7 @@ public final class NavUtils {
 
     /**
      * Opens to {@link com.cyanogenmod.eleven.ui.activities.HomeActivity}.
-     * 
+     *
      * @param activity The {@link Activity} to use.
      */
     public static void goHome(final Activity activity, final int browseIndex) {

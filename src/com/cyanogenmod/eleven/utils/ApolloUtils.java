@@ -42,7 +42,7 @@ import java.util.concurrent.ThreadPoolExecutor;
 
 /**
  * Mostly general and UI helpers.
- * 
+ *
  * @author Andrew Neal (andrewdneal@gmail.com)
  */
 public final class ApolloUtils {
@@ -80,7 +80,7 @@ public final class ApolloUtils {
 
     /**
      * Used to determine if the device is a tablet or not
-     * 
+     *
      * @param context The {@link Context} to use.
      * @return True if the device is a tablet, false otherwise.
      */
@@ -91,7 +91,7 @@ public final class ApolloUtils {
 
     /**
      * Used to determine if the device is currently in landscape mode
-     * 
+     *
      * @param context The {@link Context} to use.
      * @return True if the device is in landscape mode, false otherwise.
      */
@@ -102,7 +102,7 @@ public final class ApolloUtils {
 
     /**
      * Execute an {@link AsyncTask} on a thread pool
-     * 
+     *
      * @param forceSerial True to force the task to run in serial order
      * @param task Task to execute
      * @param args Optional arguments to pass to
@@ -126,7 +126,7 @@ public final class ApolloUtils {
     /**
      * Used to determine if there is an active data connection and what type of
      * connection it is if there is one
-     * 
+     *
      * @param context The {@link Context} to use
      * @return True if there is an active data connection, false otherwise.
      *         Also, if the user has checked to only download via Wi-Fi in the
@@ -179,7 +179,7 @@ public final class ApolloUtils {
     /**
      * Display a {@link Toast} letting the user know what an item does when long
      * pressed.
-     * 
+     *
      * @param view The {@link View} to copy the content description from.
      */
     public static void showCheatSheet(final View view) {
@@ -217,7 +217,7 @@ public final class ApolloUtils {
     /**
      * Calculate whether a color is light or dark, based on a commonly known
      * brightness formula.
-     * 
+     *
      * @see {@literal http://en.wikipedia.org/wiki/HSV_color_space%23Lightness}
      */
     public static final boolean isColorDark(final int color) {
@@ -226,7 +226,7 @@ public final class ApolloUtils {
 
     /**
      * Runs a piece of code after the next layout run
-     * 
+     *
      * @param view The {@link View} used.
      * @param runnable The {@link Runnable} used after the next layout run
      */
@@ -246,7 +246,7 @@ public final class ApolloUtils {
 
     /**
      * Creates a new instance of the {@link ImageCache} and {@link ImageFetcher}
-     * 
+     *
      * @param activity The {@link Activity} to use.
      * @return A new {@link ImageFetcher} used to fetch images asynchronously.
      */

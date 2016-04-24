@@ -20,7 +20,7 @@ import android.widget.ImageView;
 /**
  * A custom {@link ImageView} that is sized to be a perfect square, otherwise
  * functions like a typical {@link ImageView}.
- * 
+ *
  * @author Andrew Neal (andrewdneal@gmail.com)
  */
 public class SquareImageView extends LayoutSuppressingImageView {

@@ -7,7 +7,7 @@ import android.support.v4.content.AsyncTaskLoader;
 /**
  * <a href="http://code.google.com/p/android/issues/detail?id=14944">Issue
  * 14944</a>
- * 
+ *
  * @author Alexander Blom
  */
 public abstract class WrappedAsyncTaskLoader<D> extends AsyncTaskLoader<D> {
@@ -16,7 +16,7 @@ public abstract class WrappedAsyncTaskLoader<D> extends AsyncTaskLoader<D> {
 
     /**
      * Constructor of <code>WrappedAsyncTaskLoader</code>
-     * 
+     *
      * @param context The {@link Context} to use.
      */
     public WrappedAsyncTaskLoader(Context context) {

@@ -24,7 +24,7 @@ import java.util.List;
 
 /**
  * Used to return the current playlist or queue.
- * 
+ *
  * @author Andrew Neal (andrewdneal@gmail.com)
  */
 public class QueueLoader extends WrappedAsyncTaskLoader<List<Song>> {
@@ -41,7 +41,7 @@ public class QueueLoader extends WrappedAsyncTaskLoader<List<Song>> {
 
     /**
      * Constructor of <code>QueueLoader</code>
-     * 
+     *
      * @param context The {@link Context} to use
      */
     public QueueLoader(final Context context) {
@@ -99,7 +99,7 @@ public class QueueLoader extends WrappedAsyncTaskLoader<List<Song>> {
 
     /**
      * Creates the {@link Cursor} used to run the query.
-     * 
+     *
      * @param context The {@link Context} to use.
      * @return The {@link Cursor} used to run the song query.
      */

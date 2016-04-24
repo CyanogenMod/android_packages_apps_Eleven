@@ -27,7 +27,7 @@ import java.util.Collection;
 /**
  * This {@link ArrayAdapter} is used to display the songs for a particular playlist
  * {@link com.cyanogenmod.eleven.ui.fragments.PlaylistDetailFragment}
- * 
+ *
  * @author Andrew Neal (andrewdneal@gmail.com)
  */
 public class ProfileSongAdapter extends SongAdapter {
@@ -44,7 +44,7 @@ public class ProfileSongAdapter extends SongAdapter {
 
     /**
      * Constructor of <code>ProfileSongAdapter</code>
-     * 
+     *
      * @param activity The {@link Activity} to use
      * @param layoutId The resource Id of the view to inflate.
      */

@@ -76,7 +76,7 @@ public class DragSortController extends SimpleFloatViewManager implements View.O
      * Calls {@link #DragSortController(DragSortListView, int)} with a 0 drag
      * handle id, FLING_RIGHT_REMOVE remove mode, and ON_DOWN drag init. By
      * default, sorting is enabled, and removal is disabled.
-     * 
+     *
      * @param dslv The DSLV instance
      */
     public DragSortController(DragSortListView dslv) {
@@ -85,7 +85,7 @@ public class DragSortController extends SimpleFloatViewManager implements View.O
 
     /**
      * By default, sorting is enabled, and removal is disabled.
-     * 
+     *
      * @param dslv The DSLV instance
      * @param dragHandleId The resource id of the View that represents the drag
      *            handle in a list item.
@@ -114,7 +114,7 @@ public class DragSortController extends SimpleFloatViewManager implements View.O
     /**
      * Set how a drag is initiated. Needs to be one of {@link ON_DOWN},
      * {@link ON_DRAG}, or {@link ON_LONG_PRESS}.
-     * 
+     *
      * @param mode The drag init mode.
      */
     public void setDragInitMode(int mode) {
@@ -124,7 +124,7 @@ public class DragSortController extends SimpleFloatViewManager implements View.O
     /**
      * Enable/Disable list item sorting. Disabling is useful if only item
      * removal is desired. Prevents drags in the vertical direction.
-     * 
+     *
      * @param enabled Set <code>true</code> to enable list item sorting.
      */
     public void setSortEnabled(boolean enabled) {
@@ -170,7 +170,7 @@ public class DragSortController extends SimpleFloatViewManager implements View.O
     /**
      * Set the resource id for the View that represents the drag handle in a
      * list item.
-     * 
+     *
      * @param id An android resource id.
      */
     public void setDragHandleId(int id) {
@@ -181,7 +181,7 @@ public class DragSortController extends SimpleFloatViewManager implements View.O
      * Sets flags to restrict certain motions of the floating View based on
      * DragSortController settings (such as remove mode). Starts the drag on the
      * DragSortListView.
-     * 
+     *
      * @param position The list item position (includes headers).
      * @param deltaX Touch x-coord minus left edge of floating View.
      * @param deltaY Touch y-coord minus top edge of floating View.
@@ -286,7 +286,7 @@ public class DragSortController extends SimpleFloatViewManager implements View.O
      * This function simply calls {@link #dragHandleHitPosition(MotionEvent)}.
      * Override to change drag handle behavior; this function is called
      * internally when an ACTION_DOWN event is detected.
-     * 
+     *
      * @param ev The ACTION_DOWN MotionEvent.
      * @return The list position to drag if a drag-init gesture is detected;
      *         MISS if unsuccessful.
@@ -299,7 +299,7 @@ public class DragSortController extends SimpleFloatViewManager implements View.O
      * Checks for the touch of an item's drag handle (specified by
      * {@link #setDragHandleId(int)}), and returns that item's position if a
      * drag handle touch was detected.
-     * 
+     *
      * @param ev The ACTION_DOWN MotionEvent.
      * @return The list position of the item whose drag handle was touched; MISS
      *         if unsuccessful.

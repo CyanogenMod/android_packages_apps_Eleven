@@ -234,7 +234,7 @@ public class ArtistDetailFragment extends FadingBarFragment implements IChildFra
         LoaderManager lm = getLoaderManager();
         lm.restartLoader(ALBUM_LOADER_ID, arguments, mAlbumAdapter);
         lm.restartLoader(SONG_LOADER_ID, arguments, mSongAdapter);
-        
+
         ImageFetcher.getInstance(getActivity()).loadArtistImage(mArtistName, mHero, true);
     }
 

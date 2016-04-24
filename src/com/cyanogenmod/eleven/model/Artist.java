@@ -17,7 +17,7 @@ import android.text.TextUtils;
 
 /**
  * A class that represents an artist.
- * 
+ *
  * @author Andrew Neal (andrewdneal@gmail.com)
  */
 public class Artist {
@@ -49,7 +49,7 @@ public class Artist {
 
     /**
      * Constructor of <code>Artist</code>
-     * 
+     *
      * @param artistId The Id of the artist
      * @param artistName The artist name
      * @param songNumber The number of songs for the artist

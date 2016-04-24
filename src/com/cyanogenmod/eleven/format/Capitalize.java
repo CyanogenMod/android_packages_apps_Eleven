@@ -15,7 +15,7 @@ public class Capitalize {
 
     /**
      * Capitalizes the first character in a string
-     * 
+     *
      * @param str The string to capitalize
      * @param delimiters The delimiters
      * @return A captitalized string
@@ -41,7 +41,7 @@ public class Capitalize {
 
     /**
      * Is the character a delimiter.
-     * 
+     *
      * @param ch the character to check
      * @param delimiters the delimiters
      * @return true if it is a delimiter

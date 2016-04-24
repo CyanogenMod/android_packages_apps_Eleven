@@ -33,7 +33,7 @@ import android.view.View;
  * Displays a color picker to the user and allow them to select a color. A
  * slider for the alpha channel is also available. Enable it by setting
  * setAlphaSliderVisible(boolean) to true.
- * 
+ *
  * @author Daniel Nilsson
  */
 public class ColorPickerView extends View {
@@ -790,7 +790,7 @@ public class ColorPickerView extends View {
     /**
      * Set a OnColorChangedListener to get notified when the color selected by
      * the user has changed.
-     * 
+     *
      * @param listener
      */
     public void setOnColorChangedListener(final OnColorChangedListener listener) {
@@ -799,7 +799,7 @@ public class ColorPickerView extends View {
 
     /**
      * Set the color of the border surrounding all panels.
-     * 
+     *
      * @param color
      */
     public void setBorderColor(final int color) {
@@ -816,7 +816,7 @@ public class ColorPickerView extends View {
 
     /**
      * Get the current color this view is showing.
-     * 
+     *
      * @return the current color.
      */
     public int getColor() {
@@ -827,7 +827,7 @@ public class ColorPickerView extends View {
 
     /**
      * Set the color the view should show.
-     * 
+     *
      * @param color The color that should be selected.
      */
     public void setColor(final int color) {
@@ -836,7 +836,7 @@ public class ColorPickerView extends View {
 
     /**
      * Set the color this view should show.
-     * 
+     *
      * @param color The color that should be selected.
      * @param callback If you want to get a callback to your
      *            OnColorChangedListener.
@@ -871,7 +871,7 @@ public class ColorPickerView extends View {
      * the distance from the side of a panel to the side of the view minus the
      * padding. Useful if you want to have your own panel below showing the
      * currently selected color and want to align it perfectly.
-     * 
+     *
      * @return The offset in pixels.
      */
     public float getDrawingOffset() {
@@ -881,7 +881,7 @@ public class ColorPickerView extends View {
     /**
      * Set if the user is allowed to adjust the alpha panel. Default is false.
      * If it is set to false no alpha will be set.
-     * 
+     *
      * @param visible
      */
     public void setAlphaSliderVisible(final boolean visible) {
@@ -918,7 +918,7 @@ public class ColorPickerView extends View {
     /**
      * Set the text that should be shown in the alpha slider. Set to null to
      * disable text.
-     * 
+     *
      * @param res string resource id.
      */
     public void setAlphaSliderText(final int res) {
@@ -929,7 +929,7 @@ public class ColorPickerView extends View {
     /**
      * Set the text that should be shown in the alpha slider. Set to null to
      * disable text.
-     * 
+     *
      * @param text Text that should be shown.
      */
     public void setAlphaSliderText(final String text) {
@@ -939,7 +939,7 @@ public class ColorPickerView extends View {
 
     /**
      * Get the current value of the text that will be shown in the alpha slider.
-     * 
+     *
      * @return
      */
     public String getAlphaSliderText() {

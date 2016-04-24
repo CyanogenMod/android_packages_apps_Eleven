@@ -25,7 +25,7 @@ import java.util.Map;
 
 /**
  * Utility class to perform various operations on Maps.
- * 
+ *
  * @author Adrian Woodhead
  */
 public final class MapUtilities {
@@ -35,7 +35,7 @@ public final class MapUtilities {
 
     /**
      * Puts the passed key and value into the map only if the value is not null.
-     * 
+     *
      * @param map Map to add key and value to.
      * @param key Map key.
      * @param value Map value, if null will not be added to map.
@@ -49,7 +49,7 @@ public final class MapUtilities {
 
     /**
      * Puts the passed key and value into the map only if the value is not null.
-     * 
+     *
      * @param map Map to add key and value to.
      * @param key Map key.
      * @param value Map value, if null will not be added to map.
@@ -63,7 +63,7 @@ public final class MapUtilities {
 
     /**
      * Puts the passed key and value into the map only if the value is not -1.
-     * 
+     *
      * @param map Map to add key and value to.
      * @param key Map key.
      * @param value Map value, if -1 will not be added to map.
@@ -76,7 +76,7 @@ public final class MapUtilities {
 
     /**
      * Puts the passed key and value into the map only if the value is not -1.
-     * 
+     *
      * @param map Map to add key and value to.
      * @param key Map key.
      * @param value Map value, if -1 will not be added to map.

@@ -17,7 +17,7 @@ import android.text.TextUtils;
 
 /**
  * A class that represents an album.
- * 
+ *
  * @author Andrew Neal (andrewdneal@gmail.com)
  */
 public class Album {
@@ -55,7 +55,7 @@ public class Album {
 
     /**
      * Constructor of <code>Album</code>
-     * 
+     *
      * @param albumId The Id of the album
      * @param albumName The name of the album
      * @param artistName The album artist

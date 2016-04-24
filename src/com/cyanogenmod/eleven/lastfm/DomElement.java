@@ -31,7 +31,7 @@ import java.util.List;
 /**
  * <code>DomElement</code> wraps around an {@link Element} and provides
  * convenience methods.
- * 
+ *
  * @author Janni Kovacs
  */
 public class DomElement {
@@ -39,7 +39,7 @@ public class DomElement {
 
     /**
      * Creates a new wrapper around the given {@link Element}.
-     * 
+     *
      * @param elem An w3c Element
      */
     public DomElement(final Element elem) {
@@ -55,7 +55,7 @@ public class DomElement {
 
     /**
      * Tests if this element has an attribute with the specified name.
-     * 
+     *
      * @param name Name of the attribute.
      * @return <code>true</code> if this element has an attribute with the
      *         specified name.
@@ -67,7 +67,7 @@ public class DomElement {
     /**
      * Returns the attribute value to a given attribute name or
      * <code>null</code> if the attribute doesn't exist.
-     * 
+     *
      * @param name The attribute's name
      * @return Attribute value or <code>null</code>
      */
@@ -89,7 +89,7 @@ public class DomElement {
 
     /**
      * Checks if this element has a child element with the given name.
-     * 
+     *
      * @param name The child's name
      * @return <code>true</code> if this element has a child element with the
      *         given name
@@ -108,7 +108,7 @@ public class DomElement {
     /**
      * Returns the child element with the given name or <code>null</code> if it
      * doesn't exist.
-     * 
+     *
      * @param name The child's name
      * @return the child element or <code>null</code>
      */
@@ -130,7 +130,7 @@ public class DomElement {
      * Returns the text content of a child node with the given name. If no such
      * child exists or the child does not have text content, <code>null</code>
      * is returned.
-     * 
+     *
      * @param name The child's name
      * @return the child's text content or <code>null</code>
      */
@@ -148,7 +148,7 @@ public class DomElement {
 
     /**
      * Returns all children of this element with the given tag name.
-     * 
+     *
      * @param name The children's tag name
      * @return all matching children
      */
@@ -166,7 +166,7 @@ public class DomElement {
 
     /**
      * Returns this element's tag name.
-     * 
+     *
      * @return the tag name
      */
     public String getTagName() {
