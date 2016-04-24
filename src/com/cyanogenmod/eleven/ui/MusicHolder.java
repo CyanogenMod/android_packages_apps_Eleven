@@ -28,7 +28,7 @@ import java.lang.ref.WeakReference;
 /**
  * Used to efficiently cache and recyle the {@link View}s used in the artist,
  * album, song, playlist, and genre adapters.
- * 
+ *
  * @author Andrew Neal (andrewdneal@gmail.com)
  */
 public class MusicHolder {
@@ -46,7 +46,7 @@ public class MusicHolder {
 
     /**
      * This is the first line displayed in the list or grid
-     * 
+     *
      * @see {@code #getView()} of a specific adapter for more detailed info
      */
     public WeakReference<TextView> mLineOne;
@@ -60,7 +60,7 @@ public class MusicHolder {
 
     /**
      * This is the second line displayed in the list or grid
-     * 
+     *
      * @see {@code #getView()} of a specific adapter for more detailed info
      */
     public WeakReference<TextView> mLineTwo;
@@ -94,7 +94,7 @@ public class MusicHolder {
 
     /**
      * Constructor of <code>ViewHolder</code>
-     * 
+     *
      * @param context The {@link Context} to use.
      */
     public MusicHolder(final View view) {
@@ -142,7 +142,7 @@ public class MusicHolder {
 
         /**
          * This is the first line displayed in the list or grid
-         * 
+         *
          * @see {@code #getView()} of a specific adapter for more detailed info
          */
         public String mLineOne;
@@ -156,7 +156,7 @@ public class MusicHolder {
 
         /**
          * This is the second line displayed in the list or grid
-         * 
+         *
          * @see {@code #getView()} of a specific adapter for more detailed info
          */
         public String mLineTwo;

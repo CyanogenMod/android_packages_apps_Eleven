@@ -116,7 +116,7 @@ public class LruCache<K, V> {
     /**
      * Caches {@code value} for {@code key}. The value is moved to the head of
      * the queue.
-     * 
+     *
      * @return the previous value mapped by {@code key}.
      */
     public final V put(final K key, final V value) {
@@ -174,7 +174,7 @@ public class LruCache<K, V> {
 
     /**
      * Removes the entry for {@code key} if it exists.
-     * 
+     *
      * @return the previous value mapped by {@code key}.
      */
     public final V remove(final K key) {
@@ -205,7 +205,7 @@ public class LruCache<K, V> {
      * <p>
      * The method is called without synchronization: other threads may access
      * the cache while this method is executing.
-     * 
+     *
      * @param evicted true if the entry is being removed to make space, false if
      *            the removal was caused by a {@link #put} or {@link #remove}.
      * @param newValue the new value for {@code key}, if it exists. If non-null,

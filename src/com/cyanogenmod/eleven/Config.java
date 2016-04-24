@@ -15,7 +15,7 @@ package com.cyanogenmod.eleven;
 
 /**
  * App-wide constants.
- * 
+ *
  * @author Andrew Neal (andrewdneal@gmail.com)
  */
 public final class Config {

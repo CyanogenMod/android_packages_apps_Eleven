@@ -32,7 +32,7 @@ import java.util.regex.Pattern;
 
 /**
  * Utilitiy class with methods to calculate an md5 hash and to encode URLs.
- * 
+ *
  * @author Janni Kovacs
  */
 public final class StringUtilities {
@@ -51,7 +51,7 @@ public final class StringUtilities {
     /**
      * Returns a 32 chararacter hexadecimal representation of an MD5 hash of the
      * given String.
-     * 
+     *
      * @param s the String to hash
      * @return the md5 hash
      */
@@ -75,7 +75,7 @@ public final class StringUtilities {
     /**
      * URL Encodes the given String <code>s</code> using the UTF-8 character
      * encoding.
-     * 
+     *
      * @param s a String
      * @return url encoded string
      */
@@ -93,7 +93,7 @@ public final class StringUtilities {
     /**
      * Decodes an URL encoded String <code>s</code> using the UTF-8 character
      * encoding.
-     * 
+     *
      * @param s an encoded String
      * @return the decoded String
      */
@@ -110,7 +110,7 @@ public final class StringUtilities {
 
     /**
      * Creates a Map out of an array with Strings.
-     * 
+     *
      * @param strings input strings, key-value alternating
      * @return a parameter map
      */
@@ -130,7 +130,7 @@ public final class StringUtilities {
      * file names. By default <tt>: / \ < > | ? " *</tt> are all replaced by
      * <tt>-</tt>. Note that this is no guarantee that the returned name will be
      * definately valid.
-     * 
+     *
      * @param s the String to clean up
      * @return the cleaned up String
      */
@@ -140,7 +140,7 @@ public final class StringUtilities {
 
     /**
      * Tests if the given string <i>might</i> already be a 32-char md5 string.
-     * 
+     *
      * @param s String to test
      * @return <code>true</code> if the given String might be a md5 string
      */
@@ -150,7 +150,7 @@ public final class StringUtilities {
 
     /**
      * Converts a Last.fm boolean result string to a boolean.
-     * 
+     *
      * @param resultString A Last.fm boolean result string.
      * @return <code>true</code> if the given String represents a true,
      *         <code>false</code> otherwise.
@@ -161,7 +161,7 @@ public final class StringUtilities {
 
     /**
      * Converts from a boolean to a Last.fm boolean result string.
-     * 
+     *
      * @param value A boolean value.
      * @return A string representing a Last.fm boolean.
      */

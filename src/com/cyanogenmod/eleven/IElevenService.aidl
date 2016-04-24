@@ -51,4 +51,3 @@ interface IElevenService
     void setShakeToPlayEnabled(boolean enabled);
     void setLockscreenAlbumArt(boolean enabled);
 }
-

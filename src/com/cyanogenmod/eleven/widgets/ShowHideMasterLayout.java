@@ -213,7 +213,7 @@ public class ShowHideMasterLayout extends ViewGroup implements Animator.Animator
     /**
      * Allow or disallow the user to flick right on the detail pane to expose
      * the master pane.
-     * 
+     *
      * @param enabled Whether or not to enable this interaction.
      */
     public void setFlingToExposeMasterEnabled(final boolean enabled) {
@@ -223,7 +223,7 @@ public class ShowHideMasterLayout extends ViewGroup implements Animator.Animator
     /**
      * Request the given listener be notified when the master pane is shown or
      * hidden.
-     * 
+     *
      * @param listener The listener to notify when the master pane is shown or
      *            hidden.
      */
@@ -234,7 +234,7 @@ public class ShowHideMasterLayout extends ViewGroup implements Animator.Animator
 
     /**
      * Returns whether or not the master pane is visible.
-     * 
+     *
      * @return True if the master pane is visible.
      */
     public boolean isMasterVisible() {
@@ -250,7 +250,7 @@ public class ShowHideMasterLayout extends ViewGroup implements Animator.Animator
 
     /**
      * Shows or hides the master pane.
-     * 
+     *
      * @param show Whether or not to show the master pane.
      * @param flags {@link #FLAG_IMMEDIATE} to show/hide immediately, or 0 to
      *            animate.

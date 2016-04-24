@@ -29,7 +29,7 @@ import java.util.Collections;
  * This utility class can be used to generically generate Result objects
  * (usually Lists or {@link PaginatedResult}s) from an XML response using
  * {@link ItemFactory ItemFactories}.
- * 
+ *
  * @author Janni Kovacs
  */
 public final class ResponseBuilder {

@@ -30,7 +30,7 @@ import com.cyanogenmod.eleven.utils.MusicUtils;
  * Alert dialog used to delete tracks.
  * <p>
  * TODO: Remove albums from the recents list upon deletion.
- * 
+ *
  * @author Andrew Neal (andrewdneal@gmail.com)
  */
 public class DeleteDialog extends DialogFragment {

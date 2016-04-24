@@ -39,7 +39,7 @@ import com.cyanogenmod.eleven.widgets.PlayPauseProgressButton;
  * This {@link ArrayAdapter} is used to display all of the songs on a user's
  * device for {@link SongFragment}. It is also used to show the queue in
  * {@link QueueFragment}.
- * 
+ *
  * @author Andrew Neal (andrewdneal@gmail.com)
  */
 public class SongAdapter extends ArrayAdapter<Song>
@@ -90,7 +90,7 @@ public class SongAdapter extends ArrayAdapter<Song>
 
     /**
      * Constructor of <code>SongAdapter</code>
-     * 
+     *
      * @param context The {@link Context} to use.
      * @param layoutId The resource Id of the view to inflate.
      * @param sourceId The source id that the adapter is created from

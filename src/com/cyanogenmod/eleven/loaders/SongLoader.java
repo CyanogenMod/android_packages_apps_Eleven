@@ -34,7 +34,7 @@ import java.util.List;
 /**
  * Used to query {@link MediaStore.Audio.Media.EXTERNAL_CONTENT_URI} and return
  * the songs on a user's device.
- * 
+ *
  * @author Andrew Neal (andrewdneal@gmail.com)
  */
 public class SongLoader extends SectionCreator.SimpleListLoader<Song> {
@@ -153,7 +153,7 @@ public class SongLoader extends SectionCreator.SimpleListLoader<Song> {
 
     /**
      * Creates the {@link Cursor} used to run the query.
-     * 
+     *
      * @param context The {@link Context} to use.
      * @param selection Additional selection statement to use
      * @return The {@link Cursor} used to run the song query.

@@ -38,7 +38,7 @@ import java.io.IOException;
 
 /**
  * ListView subclass that mediates drag and drop resorting of items.
- * 
+ *
  * @author heycosmo
  */
 public class DragSortListView extends ListView {
@@ -445,7 +445,7 @@ public class DragSortListView extends ListView {
     /**
      * Set maximum drag scroll speed in positions/second. Only applies if using
      * default ScrollSpeedProfile.
-     * 
+     *
      * @param max Maximum scroll speed.
      */
     public void setMaxScrollSpeed(final float max) {
@@ -466,7 +466,7 @@ public class DragSortListView extends ListView {
      * As opposed to {@link ListView#getAdapter()}, which returns a heavily
      * wrapped ListAdapter (DragSortListView wraps the input ListAdapter {\emph
      * and} ListView wraps the wrapped one).
-     * 
+     *
      * @return The ListAdapter set as the argument of {@link setAdapter()}
      */
     public ListAdapter getInputAdapter() {
@@ -642,7 +642,7 @@ public class DragSortListView extends ListView {
 
     /**
      * Get the height of the given wrapped item and its child.
-     * 
+     *
      * @param position Position from which item was obtained.
      * @param item List item (usually obtained from
      *            {@link ListView#getChildAt()}).
@@ -667,7 +667,7 @@ public class DragSortListView extends ListView {
      * This function works for arbitrary positions (could be off-screen). If
      * requested position is off-screen, this function calls
      * <code>getView</code> to get height information.
-     * 
+     *
      * @param position ListView position.
      * @param heights Object to fill with heights of item at
      *            <code>position</code>.
@@ -716,7 +716,7 @@ public class DragSortListView extends ListView {
     /**
      * Get the shuffle edge for item at position when top of item is at y-coord
      * top
-     * 
+     *
      * @param position
      * @param top
      * @param height Height of item at position. If -1, this function calculates
@@ -957,7 +957,7 @@ public class DragSortListView extends ListView {
     /**
      * Stop a drag in progress. Pass <code>true</code> if you would like to
      * remove the dragged item from the list.
-     * 
+     *
      * @param remove Remove the dragged item from the list. Calls a registered
      *            DropListener, if one exists.
      * @return True if the stop was successful.
@@ -1099,7 +1099,7 @@ public class DragSortListView extends ListView {
     /**
      * Set the width of each drag scroll region by specifying a fraction of the
      * ListView height.
-     * 
+     *
      * @param heightFraction Fraction of ListView height. Capped at 0.5f.
      */
     public void setDragScrollStart(final float heightFraction) {
@@ -1109,7 +1109,7 @@ public class DragSortListView extends ListView {
     /**
      * Set the width of each drag scroll region by specifying a fraction of the
      * ListView height.
-     * 
+     *
      * @param upperFrac Fraction of ListView height for up-scroll bound. Capped
      *            at 0.5f.
      * @param lowerFrac Fraction of ListView height for down-scroll bound.
@@ -1497,10 +1497,10 @@ public class DragSortListView extends ListView {
      * FloatViewManager. Calls through to
      * {@link #startDrag(int,View,int,int,int)} after obtaining the floating
      * View from the FloatViewManager.
-     * 
+     *
      * @param position Item to drag.
      * @param dragFlags Flags that restrict some movements of the floating View.
-     *            For example, set <code>dragFlags |= 
+     *            For example, set <code>dragFlags |=
      * ~{@link #DRAG_NEG_X}</code> to allow dragging the floating View in all
      *            directions except off the screen to the left.
      * @param deltaX Offset in x of the touch coordinate from the left edge of
@@ -1531,11 +1531,11 @@ public class DragSortListView extends ListView {
     /**
      * Start a drag of item at <code>position</code> without using a
      * FloatViewManager.
-     * 
+     *
      * @param position Item to drag.
      * @param floatView Floating View.
      * @param dragFlags Flags that restrict some movements of the floating View.
-     *            For example, set <code>dragFlags |= 
+     *            For example, set <code>dragFlags |=
      * ~{@link #DRAG_NEG_X}</code> to allow dragging the floating View in all
      *            directions except off the screen to the left.
      * @param deltaX Offset in x of the touch coordinate from the left edge of
@@ -1706,7 +1706,7 @@ public class DragSortListView extends ListView {
          * {@link ViewGroup.LayoutParams} on this View; otherwise it will set
          * some for you (with a width of FILL_PARENT and a height of
          * WRAP_CONTENT).
-         * 
+         *
          * @param position Position of item to drag (NOTE: <code>position</code>
          *            excludes header Views; thus, if you want to call
          *            {@link ListView#getChildAt(int)}, you will need to add
@@ -1720,7 +1720,7 @@ public class DragSortListView extends ListView {
          * can be changed here. Also, the upcoming location of the float View
          * can be altered by setting <code>location.x</code> and
          * <code>location.y</code>.
-         * 
+         *
          * @param floatView The floating View.
          * @param location The location (top-left; relative to DSLV top-left) at
          *            which the float View would like to appear, given the
@@ -1734,7 +1734,7 @@ public class DragSortListView extends ListView {
          * Called when the float View is dropped; lets you perform any necessary
          * cleanup. The internal DSLV floating View reference is set to null
          * immediately after this is called.
-         * 
+         *
          * @param floatView The floating View passed to
          *            {@link #onCreateFloatView(int)}.
          */
@@ -1754,7 +1754,7 @@ public class DragSortListView extends ListView {
      * ListView. If enabled, items are draggable, where the drag init mode
      * determines how items are lifted (see {@link setDragInitMode(int)}). If
      * disabled, items cannot be dragged.
-     * 
+     *
      * @param enabled Set <code>true</code> to enable list item dragging
      */
     public void setDragEnabled(final boolean enabled) {
@@ -1770,7 +1770,7 @@ public class DragSortListView extends ListView {
      * for you; doesn't make sense to. Make sure
      * {@link BaseAdapter#notifyDataSetChanged()} or something like it is called
      * in your implementation.
-     * 
+     *
      * @param l
      */
     public void setDropListener(final DropListener l) {
@@ -1783,7 +1783,7 @@ public class DragSortListView extends ListView {
      * item removal occurs, DragSortListView relies on a redraw of all the items
      * to recover invisible views and such. Strictly speaking, if you remove
      * something, your dataset has changed...
-     * 
+     *
      * @param l
      */
     public void setRemoveListener(final RemoveListener l) {
@@ -1801,7 +1801,7 @@ public class DragSortListView extends ListView {
      * Your implementation of this has to reorder your ListAdapter! Make sure to
      * call {@link BaseAdapter#notifyDataSetChanged()} or something like it in
      * your implementation.
-     * 
+     *
      * @author heycosmo
      */
     public interface DropListener {
@@ -1811,7 +1811,7 @@ public class DragSortListView extends ListView {
     /**
      * Make sure to call {@link BaseAdapter#notifyDataSetChanged()} or something
      * like it in your implementation.
-     * 
+     *
      * @author heycosmo
      */
     public interface RemoveListener {
@@ -1831,7 +1831,7 @@ public class DragSortListView extends ListView {
      * Completely custom scroll speed profile. Default increases linearly with
      * position and is constant in time. Create your own by implementing
      * {@link DragSortListView.DragScrollProfile}.
-     * 
+     *
      * @param ssp
      */
     public void setDragScrollProfile(final DragScrollProfile ssp) {
@@ -1845,14 +1845,14 @@ public class DragSortListView extends ListView {
      * and time. Use
      * {@link DragSortListView#setDragScrollProfile(DragScrollProfile)} to set
      * custom profile.
-     * 
+     *
      * @author heycosmo
      */
     public interface DragScrollProfile {
         /**
          * Return a scroll speed in pixels/millisecond. Always return a positive
          * number.
-         * 
+         *
          * @param w Normalized position in scroll region (i.e. w \in [0,1]).
          *            Small w typically means slow scrolling.
          * @param t Time (in milliseconds) since start of scroll (handy if you

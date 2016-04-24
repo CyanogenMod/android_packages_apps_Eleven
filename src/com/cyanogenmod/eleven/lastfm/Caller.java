@@ -61,7 +61,7 @@ import javax.xml.parsers.ParserConfigurationException;
  * by the Java API are necessary this class may be used directly.<br/>
  * Supports the setting of a custom {@link Proxy} and a custom
  * <code>User-Agent</code> HTTP header.
- * 
+ *
  * @author Janni Kovacs
  */
 public class Caller {
@@ -114,7 +114,7 @@ public class Caller {
      * <code>null</code> then an unauthenticated call is made.<br/>
      * The <code>apiKey</code> parameter is always required, even when a valid
      * session is passed to this method.
-     * 
+     *
      * @param method The method to call
      * @param apiKey A Last.fm API key
      * @param params Parameters
@@ -162,7 +162,7 @@ public class Caller {
     /**
      * Creates a new {@link HttpURLConnection}, sets the proxy, if available,
      * and sets the User-Agent property.
-     * 
+     *
      * @param url URL to connect to
      * @return a new connection.
      * @throws IOException if an I/O exception occurs.

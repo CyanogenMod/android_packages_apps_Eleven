@@ -27,7 +27,7 @@ import java.util.Map;
 /**
  * The <code>ItemFactoryBuilder</code> can be used to obtain {@link ItemFactory
  * ItemFactories} for a specific type.
- * 
+ *
  * @author Janni Kovacs
  * @see ItemFactory
  */
@@ -47,7 +47,7 @@ final class ItemFactoryBuilder {
 
     /**
      * Retrieve the instance of the <code>ItemFactoryBuilder</code>.
-     * 
+     *
      * @return the instance
      */
     public static ItemFactoryBuilder getFactoryBuilder() {
@@ -66,7 +66,7 @@ final class ItemFactoryBuilder {
     /**
      * Retrieves an {@link ItemFactory} for the given type, or <code>null</code>
      * if no such factory was registered.
-     * 
+     *
      * @param itemClass the type's Class object
      * @return the <code>ItemFactory</code> or <code>null</code>
      */

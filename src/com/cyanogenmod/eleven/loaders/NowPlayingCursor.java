@@ -54,7 +54,7 @@ public class NowPlayingCursor extends AbstractCursor {
 
     /**
      * Constructor of <code>NowPlayingCursor</code>
-     * 
+     *
      * @param context The {@link Context} to use
      */
     public NowPlayingCursor(final Context context) {

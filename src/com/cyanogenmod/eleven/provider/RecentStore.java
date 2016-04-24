@@ -28,7 +28,7 @@ public class RecentStore {
 
     /**
      * Constructor of <code>RecentStore</code>
-     * 
+     *
      * @param context The {@link Context} to use
      */
     public RecentStore(final Context context) {
@@ -64,7 +64,7 @@ public class RecentStore {
 
     /**
      * Used to store song IDs in the database.
-     * 
+     *
      * @param songId The song id to store
      */
     public void addSongId(final long songId) {

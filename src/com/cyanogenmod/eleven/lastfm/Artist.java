@@ -34,7 +34,7 @@ import java.util.WeakHashMap;
  * This class contains static methods that executes API methods relating to
  * artists.<br/>
  * Method names are equivalent to the last.fm API method names.
- * 
+ *
  * @author Janni Kovacs
  */
 public class Artist extends MusicEntry {
@@ -47,7 +47,7 @@ public class Artist extends MusicEntry {
 
     /**
      * Retrieves detailed artist info for the given artist or mbid entry.
-     * 
+     *
      * @param artistOrMbid Name of the artist or an mbid
      * @return detailed artist info
      */
@@ -57,7 +57,7 @@ public class Artist extends MusicEntry {
 
     /**
      * Retrieves detailed artist info for the given artist or mbid entry.
-     * 
+     *
      * @param artistOrMbid Name of the artist or an mbid
      * @param locale The language to fetch info in, or <code>null</code>
      * @param apiKey The API key
@@ -79,7 +79,7 @@ public class Artist extends MusicEntry {
      * a correction to a canonical artist. This method returns a new
      * {@link Artist} object containing the corrected data, or <code>null</code>
      * if the supplied Artist was not found.
-     * 
+     *
      * @param artist The artist name to correct
      * @return a new {@link Artist}, or <code>null</code>
      */

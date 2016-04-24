@@ -30,7 +30,7 @@ import java.util.Map;
 
 /**
  * Wrapper class for Album related API calls and Album Bean.
- * 
+ *
  * @author Janni Kovacs
  */
 public class Album extends MusicEntry {
@@ -52,7 +52,7 @@ public class Album extends MusicEntry {
     /**
      * Get the metadata for an album on Last.fm using the album name or a
      * musicbrainz id. See playlist.fetch on how to get the album playlist.
-     * 
+     *
      * @param artist Artist's name
      * @param albumOrMbid Album name or MBID
      * @return Album metadata
@@ -65,7 +65,7 @@ public class Album extends MusicEntry {
     /**
      * Get the metadata for an album on Last.fm using the album name or a
      * musicbrainz id. See playlist.fetch on how to get the album playlist.
-     * 
+     *
      * @param artist Artist's name
      * @param albumOrMbid Album name or MBID
      * @param username The username for the context of the request. If supplied,

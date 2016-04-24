@@ -25,7 +25,7 @@ package com.cyanogenmod.eleven.lastfm;
  * <code>MusicEntry</code> is the abstract superclass for {@link Track},
  * {@link Artist} and {@link Album}. It encapsulates data and provides methods
  * used in all subclasses, for example: name, playcount, images and more.
- * 
+ *
  * @author Janni Kovacs
  */
 public abstract class MusicEntry extends ImageHolder {
@@ -72,7 +72,7 @@ public abstract class MusicEntry extends ImageHolder {
      * <li>image</li>
      * <li>tags</li>
      * </ul>
-     * 
+     *
      * @param entry An entry
      * @param element XML source element
      */

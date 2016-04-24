@@ -19,7 +19,7 @@ import android.graphics.Paint;
 
 /**
  * {@link Bitmap} specific helpers.
- * 
+ *
  * @author Andrew Neal (andrewdneal@gmail.com)
  */
 public final class BitmapUtils {
@@ -33,7 +33,7 @@ public final class BitmapUtils {
 
     /**
      * Takes a bitmap and creates a new slightly blurry version of it.
-     * 
+     *
      * @param sentBitmap The {@link Bitmap} to blur.
      * @return A blurred version of the given {@link Bitmap}.
      */
@@ -266,7 +266,7 @@ public final class BitmapUtils {
 
     /**
      * This is only used when the launcher shortcut is created.
-     * 
+     *
      * @param bitmap The artist, album, genre, or playlist image that's going to
      *            be cropped.
      * @param size The new size.

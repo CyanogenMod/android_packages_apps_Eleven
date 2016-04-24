@@ -135,4 +135,3 @@ public class SrtParser {
         return hours * 60 * 60 * 1000 + minutes * 60 * 1000 + seconds * 1000 + millies;
     }
 }
-

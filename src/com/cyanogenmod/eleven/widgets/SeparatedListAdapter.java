@@ -23,7 +23,7 @@ public class SeparatedListAdapter extends BaseAdapter {
 
     /**
      * Constructor of <code>SeparatedListAdapter</code>
-     * 
+     *
      * @param context The {@link Context} to use.
      */
     public SeparatedListAdapter(final Context context) {

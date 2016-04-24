@@ -47,7 +47,7 @@ import com.cyanogenmod.eleven.widgets.LoadingEmptyContainer;
 
 /**
  * This class is used to display all of the albums on a user's device.
- * 
+ *
  * @author Andrew Neal (andrewdneal@gmail.com)
  */
 public class AlbumFragment extends MusicBrowserFragment implements
@@ -290,7 +290,7 @@ public class AlbumFragment extends MusicBrowserFragment implements
 
     /**
      * Sets up various helpers for both the list and grid
-     * 
+     *
      * @param list The list or grid
      */
     private void initAbsListView(final AbsListView list) {

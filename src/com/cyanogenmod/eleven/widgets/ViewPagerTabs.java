@@ -221,4 +221,3 @@ public class ViewPagerTabs extends HorizontalScrollView implements ViewPager.OnP
         return position;
     }
 }
-

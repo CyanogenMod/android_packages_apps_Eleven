@@ -29,7 +29,7 @@ import java.util.Iterator;
  * be so large that it needs to be paginated. Each <code>PaginatedResult</code>
  * contains the total number of result pages, the current page and a
  * <code>Collection</code> of entries for the current page.
- * 
+ *
  * @author Janni Kovacs
  */
 public class PaginatedResult<T> implements Iterable<T> {
@@ -53,7 +53,7 @@ public class PaginatedResult<T> implements Iterable<T> {
 
     /**
      * Returns the page number of this result.
-     * 
+     *
      * @return page number
      */
     public int getPage() {
@@ -62,7 +62,7 @@ public class PaginatedResult<T> implements Iterable<T> {
 
     /**
      * Returns the total number of pages available.
-     * 
+     *
      * @return total pages
      */
     public int getTotalPages() {
@@ -73,7 +73,7 @@ public class PaginatedResult<T> implements Iterable<T> {
      * Returns <code>true</code> if this Result contains no elements, which is
      * the case for service calls that would have returned a
      * <code>PaginatedResult</code> but fail.
-     * 
+     *
      * @return <code>true</code> if this result contains no elements
      */
     public boolean isEmpty() {

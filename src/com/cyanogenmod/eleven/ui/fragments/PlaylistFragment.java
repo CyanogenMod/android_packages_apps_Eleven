@@ -44,7 +44,7 @@ import java.util.List;
 
 /**
  * This class is used to display all of the playlists on a user's device.
- * 
+ *
  * @author Andrew Neal (andrewdneal@gmail.com)
  */
 public class PlaylistFragment extends MusicBrowserFragment implements

@@ -25,7 +25,7 @@ import java.util.logging.Logger;
  * Used to turn off logging for jaudiotagger and free up memory when
  * {@code #onLowMemory()} is called on pre-ICS devices. On post-ICS memory is
  * released within {@link ImageCache}.
- * 
+ *
  * @author Andrew Neal (andrewdneal@gmail.com)
  */
 public class ElevenApplication extends Application {

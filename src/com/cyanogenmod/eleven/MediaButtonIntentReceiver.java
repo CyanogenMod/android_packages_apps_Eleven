@@ -221,4 +221,3 @@ public class MediaButtonIntentReceiver extends WakefulBroadcastReceiver {
         }
     }
 }
-

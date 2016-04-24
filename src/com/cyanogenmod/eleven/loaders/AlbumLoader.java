@@ -35,7 +35,7 @@ import java.util.List;
 /**
  * Used to query {@link MediaStore.Audio.Albums.EXTERNAL_CONTENT_URI} and return
  * the albums on a user's device.
- * 
+ *
  * @author Andrew Neal (andrewdneal@gmail.com)
  */
 public class AlbumLoader extends SectionCreator.SimpleListLoader<Album> {
@@ -139,7 +139,7 @@ public class AlbumLoader extends SectionCreator.SimpleListLoader<Album> {
 
     /**
      * Creates the {@link Cursor} used to run the query.
-     * 
+     *
      * @param context The {@link Context} to use.
      * @param artistId The artistId we want to find albums for or null if we want all albums
      * @return The {@link Cursor} used to run the album query.

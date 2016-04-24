@@ -82,7 +82,7 @@ import static com.cyanogenmod.eleven.utils.MusicUtils.mService;
 
 /**
  * Provides the search interface for Apollo.
- * 
+ *
  * @author Andrew Neal (andrewdneal@gmail.com)
  */
 public class SearchActivity extends FragmentActivity implements

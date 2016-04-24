@@ -30,7 +30,7 @@ import java.util.List;
 /**
  * Used to query {@link MediaStore.Audio.Media.EXTERNAL_CONTENT_URI} and return
  * the Song the user added over the past four of weeks.
- * 
+ *
  * @author Andrew Neal (andrewdneal@gmail.com)
  */
 public class LastAddedLoader extends SectionCreator.SimpleListLoader<Song> {
@@ -46,7 +46,7 @@ public class LastAddedLoader extends SectionCreator.SimpleListLoader<Song> {
 
     /**
      * Constructor of <code>LastAddedHandler</code>
-     * 
+     *
      * @param context The {@link Context} to use.
      */
     public LastAddedLoader(final Context context) {

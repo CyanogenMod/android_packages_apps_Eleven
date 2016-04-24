@@ -31,7 +31,7 @@ import com.cyanogenmod.eleven.utils.MusicUtils;
 
 /**
  * A simple base class for the playlist dialogs.
- * 
+ *
  * @author Andrew Neal (andrewdneal@gmail.com)
  */
 public abstract class BasePlaylistDialog extends DialogFragment {

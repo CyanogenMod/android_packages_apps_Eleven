@@ -51,7 +51,7 @@ import com.cyanogenmod.eleven.widgets.LoadingEmptyContainer;
 
 /**
  * This class is used to display all of the artists on a user's device.
- * 
+ *
  * @author Andrew Neal (andrewdneal@gmail.com)
  */
 public class ArtistFragment extends MusicBrowserFragment implements
@@ -298,7 +298,7 @@ public class ArtistFragment extends MusicBrowserFragment implements
 
     /**
      * Sets up various helpers for both the list and grid
-     * 
+     *
      * @param list The list or grid
      */
     private void initAbsListView(final AbsListView list) {

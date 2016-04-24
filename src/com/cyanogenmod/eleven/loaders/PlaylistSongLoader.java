@@ -250,7 +250,7 @@ public class PlaylistSongLoader extends WrappedAsyncTaskLoader<List<Song>> {
 
     /**
      * Creates the {@link Cursor} used to run the query.
-     * 
+     *
      * @param context The {@link Context} to use.
      * @param playlistID The playlist the songs belong to.
      * @return The {@link Cursor} used to run the song query.

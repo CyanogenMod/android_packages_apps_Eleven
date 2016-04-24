@@ -17,7 +17,7 @@ import android.text.TextUtils;
 
 /**
  * A class that represents a playlist.
- * 
+ *
  * @author Andrew Neal (andrewdneal@gmail.com)
  */
 public class Playlist {
@@ -39,7 +39,7 @@ public class Playlist {
 
     /**
      * Constructor of <code>Genre</code>
-     * 
+     *
      * @param playlistId The Id of the playlist
      * @param playlistName The playlist name
      */

@@ -39,7 +39,7 @@ public class PrefixHighlighter {
     /**
      * Sets the text on the given {@link TextView}, highlighting the word that
      * matches the given prefix.
-     * 
+     *
      * @param view The {@link TextView} on which to set the text
      * @param text The string to use as the text
      * @param prefix The prefix to look for
@@ -54,7 +54,7 @@ public class PrefixHighlighter {
     /**
      * Returns a {@link CharSequence} which highlights the given prefix if found
      * in the given text.
-     * 
+     *
      * @param text the text to which to apply the highlight
      * @param prefix the prefix to look for
      */
@@ -80,7 +80,7 @@ public class PrefixHighlighter {
     /**
      * Finds the index of the first character that starts with the given prefix. If
      * not found, returns -1.
-     * 
+     *
      * @param text the text in which to search for the prefix
      * @param prefix the text to find, in upper case letters
      * @param wordOnly only search for word prefixes if true

@@ -35,7 +35,7 @@ import java.util.List;
 /**
  * This {@link ArrayAdapter} is used to display all of the albums on a user's
  * device for {@link RecentsFragment} and {@link AlbumsFragment}.
- * 
+ *
  * @author Andrew Neal (andrewdneal@gmail.com)
  */
 public class AlbumAdapter extends BaseAdapter implements IPopupMenuCallback {
@@ -69,7 +69,7 @@ public class AlbumAdapter extends BaseAdapter implements IPopupMenuCallback {
 
     /**
      * Constructor of <code>AlbumAdapter</code>
-     * 
+     *
      * @param context The {@link Context} to use.
      * @param layoutId The resource Id of the view to inflate.
      * @param style Determines which layout to use and therefore which items to

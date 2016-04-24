@@ -33,7 +33,7 @@ import java.util.List;
 /**
  * Used to query {@link MediaStore.Audio.Artists.EXTERNAL_CONTENT_URI} and
  * return the artists on a user's device.
- * 
+ *
  * @author Andrew Neal (andrewdneal@gmail.com)
  */
 public class ArtistLoader extends SectionCreator.SimpleListLoader<Artist> {
@@ -50,7 +50,7 @@ public class ArtistLoader extends SectionCreator.SimpleListLoader<Artist> {
 
     /**
      * Constructor of <code>ArtistLoader</code>
-     * 
+     *
      * @param context The {@link Context} to use
      */
     public ArtistLoader(final Context context) {
@@ -117,7 +117,7 @@ public class ArtistLoader extends SectionCreator.SimpleListLoader<Artist> {
     }
     /**
      * Creates the {@link Cursor} used to run the query.
-     * 
+     *
      * @param context The {@link Context} to use.
      * @return The {@link Cursor} used to run the artist query.
      */

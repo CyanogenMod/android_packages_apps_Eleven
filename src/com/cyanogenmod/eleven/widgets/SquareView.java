@@ -21,7 +21,7 @@ import android.view.ViewGroup;
 /**
  * A custom {@link ViewGroup} used to make it's children into perfect squares.
  * Useful when dealing with grid images and especially album art.
- * 
+ *
  * @author Andrew Neal (andrewdneal@gmail.com)
  */
 public class SquareView extends ViewGroup {
