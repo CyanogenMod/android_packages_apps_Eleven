@@ -34,9 +34,9 @@
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:gravity="center_vertical"
-        android:layout_toLeftOf="@+id/play_pause_container"
-        android:layout_toRightOf="@id/image"
-        android:paddingLeft="@dimen/list_item_queue_text_padding_left"
+        android:layout_toStartOf="@+id/play_pause_container"
+        android:layout_toEndOf="@id/image"
+        android:paddingStart="@dimen/list_item_queue_text_padding_left"
         android:orientation="vertical">
         <TextView
             android:id="@+id/line_one"
@@ -56,13 +56,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"
-        android:layout_toLeftOf="@+id/popup_menu_button"
-        android:paddingLeft="@dimen/list_item_progress_padding_left"
-        android:paddingRight="@dimen/list_item_progress_padding_right">
+        android:layout_toStartOf="@+id/popup_menu_button"
+        android:paddingStart="@dimen/list_item_progress_padding_left"
+        android:paddingEnd="@dimen/list_item_progress_padding_right">
         <include
             android:layout_width="@dimen/list_item_progress_width"
             android:layout_height="@dimen/list_item_progress_height"
-            android:layout_centerVertical="true"
             layout="@layout/play_pause_progress_button"/>
     </FrameLayout>
 
@@ -70,7 +69,7 @@
         android:id="@id/popup_menu_button"
         android:layout_width="@dimen/overflow_width"
         android:layout_height="@dimen/overflow_height"
-        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
         android:layout_centerVertical="true"
         android:src="@drawable/menu_button_light" />
 </RelativeLayout>

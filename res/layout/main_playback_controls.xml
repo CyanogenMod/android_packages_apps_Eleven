@@ -44,16 +44,16 @@
         <RelativeLayout
             android:layout_width="wrap_content"
             android:layout_height="fill_parent"
-            android:layout_toLeftOf="@id/playPauseProgressButton">
+            android:layout_toStartOf="@id/playPauseProgressButton">
 
             <TextView
                 android:id="@+id/audio_player_current_time"
                 android:layout_width="52dp"
                 android:layout_height="@dimen/audio_player_controls_end_button_height"
-                android:gravity="left|center_vertical"
-                android:layout_alignParentRight="true"
+                android:gravity="start|center_vertical"
+                android:layout_alignParentEnd="true"
                 android:layout_centerVertical="true"
-                android:paddingLeft="@dimen/audio_player_time_text_padding"
+                android:paddingStart="@dimen/audio_player_time_text_padding"
                 android:textColor="@color/white"
                 android:textSize="@dimen/audio_player_time_text_size"
                 android:textStyle="bold"/>
@@ -62,7 +62,7 @@
                 android:id="@+id/action_button_previous"
                 android:layout_width="@dimen/audio_player_controls_end_button_width"
                 android:layout_height="@dimen/audio_player_controls_end_button_height"
-                android:layout_toLeftOf="@id/audio_player_current_time"
+                android:layout_toStartOf="@id/audio_player_current_time"
                 android:layout_centerVertical="true"
                 android:scaleType="fitCenter"
                 android:src="@drawable/btn_playback_previous" />
@@ -72,8 +72,8 @@
                 android:id="@+id/action_button_left_bottom_divider"
                 android:layout_height="@dimen/audio_player_divider_height"
                 android:layout_width="@dimen/audio_player_divider_length"
-                android:layout_marginRight="@dimen/audio_player_divider_horizontal_offset"
-                android:layout_alignParentRight="true"
+                android:layout_marginEnd="@dimen/audio_player_divider_horizontal_offset"
+                android:layout_alignParentEnd="true"
                 android:layout_below="@id/audio_player_current_time"
                 android:background="@color/now_playing_divider" />
 
@@ -82,8 +82,8 @@
                 android:layout_width="@dimen/audio_player_controls_end_button_width"
                 android:layout_height="@dimen/audio_player_controls_end_button_height"
                 android:layout_below="@id/action_button_left_bottom_divider"
-                android:layout_alignLeft="@id/action_button_previous"
-                android:layout_marginLeft="@dimen/audio_player_controls_end_button_half_width"
+                android:layout_alignStart="@id/action_button_previous"
+                android:layout_marginStart="@dimen/audio_player_controls_end_button_half_width"
                 android:contentDescription="@string/accessibility_shuffle"
                 android:scaleType="fitCenter"
                 android:src="@drawable/btn_playback_shuffle_all" />
@@ -94,16 +94,16 @@
         <RelativeLayout
             android:layout_width="wrap_content"
             android:layout_height="fill_parent"
-            android:layout_toRightOf="@id/playPauseProgressButton">
+            android:layout_toEndOf="@id/playPauseProgressButton">
 
             <TextView
                 android:id="@+id/audio_player_total_time"
                 android:layout_width="52dp"
                 android:layout_height="@dimen/audio_player_controls_end_button_height"
-                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
                 android:layout_centerVertical="true"
-                android:paddingRight="@dimen/audio_player_time_text_padding"
-                android:gravity="right|center_vertical"
+                android:paddingEnd="@dimen/audio_player_time_text_padding"
+                android:gravity="end|center_vertical"
                 android:textColor="@color/white"
                 android:textSize="@dimen/audio_player_time_text_size"
                 android:textStyle="bold"/>
@@ -112,7 +112,7 @@
                 android:id="@+id/action_button_next"
                 android:layout_width="@dimen/audio_player_controls_end_button_width"
                 android:layout_height="@dimen/audio_player_controls_end_button_height"
-                android:layout_toRightOf="@id/audio_player_total_time"
+                android:layout_toEndOf="@id/audio_player_total_time"
                 android:layout_centerVertical="true"
                 android:scaleType="fitCenter"
                 android:src="@drawable/btn_playback_next" />
@@ -122,8 +122,8 @@
                 android:id="@+id/action_button_right_bottom_divider"
                 android:layout_height="@dimen/audio_player_divider_height"
                 android:layout_width="@dimen/audio_player_divider_length"
-                android:layout_marginLeft="@dimen/audio_player_divider_horizontal_offset"
-                android:layout_alignParentLeft="true"
+                android:layout_marginStart="@dimen/audio_player_divider_horizontal_offset"
+                android:layout_alignParentStart="true"
                 android:layout_below="@id/audio_player_total_time" />
 
             <com.cyanogenmod.eleven.widgets.RepeatButton
@@ -131,8 +131,8 @@
                 android:layout_width="@dimen/audio_player_controls_end_button_width"
                 android:layout_height="@dimen/audio_player_controls_end_button_height"
                 android:layout_below="@id/audio_player_total_time"
-                android:layout_alignRight="@id/action_button_next"
-                android:layout_marginRight="@dimen/audio_player_controls_end_button_half_width"
+                android:layout_alignEnd="@id/action_button_next"
+                android:layout_marginEnd="@dimen/audio_player_controls_end_button_half_width"
                 android:contentDescription="@string/accessibility_repeat"
                 android:focusable="true"
                 android:scaleType="fitCenter"

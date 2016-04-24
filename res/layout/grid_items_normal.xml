@@ -34,7 +34,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="@dimen/grid_bottom_height"
-            android:paddingLeft="@dimen/grid_item_padding_left"
+            android:paddingStart="@dimen/grid_item_padding_left"
             android:orientation="horizontal">
 
             <LinearLayout
@@ -65,7 +65,7 @@
                 android:id="@+id/popup_menu_button"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:paddingRight="@dimen/grid_item_padding_right"
+                android:paddingEnd="@dimen/grid_item_padding_right"
                 android:src="@drawable/menu_button_light" />
 
         </LinearLayout>
