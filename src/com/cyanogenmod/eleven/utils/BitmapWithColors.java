@@ -17,6 +17,7 @@ package com.cyanogenmod.eleven.utils;
 
 import android.graphics.Bitmap;
 import android.graphics.Color;
+import android.os.Looper;
 import android.support.v7.graphics.Palette;
 import android.support.v7.graphics.Target;
 import android.util.LruCache;
@@ -68,6 +69,12 @@ public class BitmapWithColors {
     public BitmapWithColors(Bitmap bitmap, int bitmapKey) {
         mBitmap = bitmap;
         mBitmapKey = bitmapKey;
+
+        if (Thread.currentThread() != Looper.getMainLooper().getThread()) {
+            // we're already running in background, so do the
+            // (costly) palette initialization immediately
+            loadColorsIfNeeded();
+        }
     }
 
     public BitmapWithColors(Bitmap bitmap, int bitmapKey, int vibrantColor, int vibrantDarkColor) {
