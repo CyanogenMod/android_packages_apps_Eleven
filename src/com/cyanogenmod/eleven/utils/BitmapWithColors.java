@@ -56,6 +56,14 @@ public class BitmapWithColors {
             }
             return dominant;
         }
+
+        @Override
+        public String toString() {
+            return "BitmapColors[vibrant=" + Integer.toHexString(mVibrantColor)
+                    + ", vibrantDark=" + Integer.toHexString(mVibrantDarkColor)
+                    + ", vibrantLight=" + Integer.toHexString(mVibrantLightColor)
+                    + ", dominant=" + Integer.toHexString(mDominantColor) + "]";
+        }
     }
 
     private static final int CACHE_SIZE_MAX = 20;
@@ -182,5 +190,10 @@ public class BitmapWithColors {
         synchronized (sCachedColors) {
             sCachedColors.put(mBitmapKey, mColors);
         }
+    }
+
+    @Override
+    public String toString() {
+        return "BitmapWithColors[key=" + mBitmapKey + ", colors=" + mColors + "]";
     }
 }
