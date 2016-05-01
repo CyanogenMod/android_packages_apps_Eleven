@@ -215,4 +215,8 @@
     <dimen name="preview_title_textSize">12sp</dimen>
     <dimen name="preview_artist_textSize">10sp</dimen>
 
+    <!-- Audio Player Controls Card -->
+    <dimen name="audio_player_controls_card_corner_radius">2dp</dimen>
+    <dimen name="audio_player_controls_card_content_padding">8dp</dimen>
+    <dimen name="audio_player_controls_card_elevation">4dp</dimen>
 </resources>

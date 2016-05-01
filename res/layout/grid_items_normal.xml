@@ -47,7 +47,7 @@
                 <TextView
                     android:id="@+id/line_one"
                     style="@style/ListItemMainText.Grid.Single"
-                    android:textColor="@color/cardOne"
+                    android:textColor="@color/grid_items_normal_line_one"
                     android:paddingBottom="1dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" />
@@ -55,7 +55,7 @@
                 <TextView
                     android:id="@+id/line_two"
                     style="@style/ListItemSecondaryText.Grid.Single"
-                    android:textColor="@color/cardTwo"
+                    android:textColor="@color/grid_items_normal_line_two"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" />
 

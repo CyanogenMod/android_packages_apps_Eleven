@@ -35,8 +35,8 @@
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="?android:attr/actionBarSize"
-            android:theme="@android:style/ThemeOverlay.Material.Dark.ActionBar"
-            android:popupTheme="@android:style/Theme.Material.Light"
+            android:theme="@style/ToolBarTheme"
+            android:popupTheme="@style/ToolBarPopupTheme"
             android:elevation="@dimen/action_bar_elevation" />
 
         <FrameLayout
@@ -48,7 +48,7 @@
 
     <com.cyanogenmod.eleven.slidinguppanel.SlidingUpPanelLayout
         android:id="@+id/sliding_layout2"
-        android:background="@color/background_color"
+        android:background="@color/activity_base_background_color"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:gravity="bottom"

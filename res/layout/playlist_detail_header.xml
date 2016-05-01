@@ -50,7 +50,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:paddingRight="16dp"
-                android:textColor="@color/white"
+                android:textColor="@color/number_of_songs_text_color"
                 android:textSize="@dimen/text_size_micro" />
 
             <ImageView
@@ -63,7 +63,7 @@
                 android:id="@+id/duration_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/white"
+                android:textColor="@color/duration_text_color"
                 android:textSize="@dimen/text_size_micro" />
         </LinearLayout>
     </FrameLayout>
