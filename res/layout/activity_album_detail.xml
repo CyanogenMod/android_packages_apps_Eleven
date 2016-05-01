@@ -1,7 +1,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/background_color" >
+    android:background="@color/activity_album_detail_background_color" >
 
     <RelativeLayout
         android:id="@+id/header"
@@ -36,7 +36,7 @@
                 android:singleLine="true"
                 android:textStyle="bold"
                 android:textSize="@dimen/text_size_large"
-                android:textColor="@color/default_text_color" />
+                android:textColor="@color/album_detail_title_text_color" />
 
             <TextView
                 android:id="@+id/song_count_and_year"
@@ -45,7 +45,7 @@
                 android:layout_below="@id/title"
                 android:singleLine="true"
                 android:textSize="@dimen/text_size_micro"
-                android:textColor="@color/default_text_color" />
+                android:textColor="@color/album_detail_song_count_and_year_text_color" />
 
             <TextView
                 android:id="@+id/genre"
@@ -55,7 +55,7 @@
                 android:layout_marginRight="@dimen/standard_padding"
                 android:singleLine="true"
                 android:textSize="@dimen/text_size_micro"
-                android:textColor="@color/default_text_color"
+                android:textColor="@color/album_detail_genre_text_color"
                 android:visibility="gone"
                 android:layout_marginTop="4dp" />
 
@@ -79,7 +79,7 @@
                 android:layout_toRightOf="@id/duration_icon"
                 android:singleLine="true"
                 android:textSize="@dimen/text_size_micro"
-                android:textColor="@color/default_text_color"
+                android:textColor="@color/album_detail_duration_text_color"
                 android:layout_marginTop="4dp" />
         </RelativeLayout>
 

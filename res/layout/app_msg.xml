@@ -12,7 +12,7 @@
         android:layout_height="wrap_content"
         android:gravity="center"
         android:padding="8dp"
-        android:textColor="?android:textColorPrimaryInverse"
+        android:textColor="@color/app_msg_text_color"
         android:textIsSelectable="false"
         android:textSize="14sp"
         android:textStyle="bold" />
