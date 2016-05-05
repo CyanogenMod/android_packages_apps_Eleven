@@ -20,9 +20,9 @@
     xmlns:card_view="http://schemas.android.com/apk/res-auto"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    card_view:cardCornerRadius="2dp"
-    card_view:contentPadding="8dp"
-    card_view:cardElevation="4dp"
+    card_view:cardCornerRadius="@dimen/audio_player_controls_card_corner_radius"
+    card_view:contentPadding="@dimen/audio_player_controls_card_content_padding"
+    card_view:cardElevation="@dimen/audio_player_controls_card_elevation"
     card_view:cardUseCompatPadding="true"
     card_view:cardBackgroundColor="@color/semitransparent_black" >
     <RelativeLayout
@@ -54,7 +54,7 @@
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
                 android:paddingLeft="@dimen/audio_player_time_text_padding"
-                android:textColor="@color/white"
+                android:textColor="@color/audio_player_current_time_color"
                 android:textSize="@dimen/audio_player_time_text_size"
                 android:textStyle="bold"/>
 
@@ -104,7 +104,7 @@
                 android:layout_centerVertical="true"
                 android:paddingRight="@dimen/audio_player_time_text_padding"
                 android:gravity="right|center_vertical"
-                android:textColor="@color/white"
+                android:textColor="@color/audio_player_total_time_color"
                 android:textSize="@dimen/audio_player_time_text_size"
                 android:textStyle="bold"/>
 

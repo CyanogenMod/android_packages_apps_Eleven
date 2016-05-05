@@ -65,7 +65,7 @@
                 android:textSize="@dimen/text_size_micro"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textColor="@color/cardOne" />
+                android:textColor="@color/artist_detail_album_title_text_color" />
 
             <TextView
                 android:id="@+id/year"
@@ -73,7 +73,7 @@
                 android:textSize="@dimen/text_size_extra_micro"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textColor="@color/cardTwo" />
+                android:textColor="@color/artist_detail_album_year_text_color" />
 
         </LinearLayout>
 

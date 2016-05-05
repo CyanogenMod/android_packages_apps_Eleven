@@ -191,4 +191,8 @@
         <item name="android:textColor">@color/tab_text_color</item>
         <item name="android:textSize">@dimen/tab_text_size</item>
     </style>
+
+    <style name="ToolBarTheme" parent="android:style/ThemeOverlay.Material.Dark.ActionBar" />
+
+    <style name="ToolBarPopupTheme" parent="android:style/Theme.Material.Light" />
 </resources>

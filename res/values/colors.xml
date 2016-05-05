@@ -143,4 +143,29 @@
 
     <!-- Color for the visualizer bars -->
     <color name="visualizer_fill_color">#bffafafa</color>
+
+    <!-- Separated and exposed values for themes -->
+    <color name="widget_background_color">@color/black</color>
+    <color name="list_base_container_background_color">@color/white</color>
+    <color name="activity_album_detail_background_color">@color/background_color</color>
+    <color name="activity_artist_detail_background_color">@color/background_color</color>
+    <color name="activity_base_background_color">@color/background_color</color>
+    <color name="artist_detail_header_background_color">@color/background_color</color>
+    <color name="album_detail_title_text_color">@color/default_text_color</color>
+    <color name="album_detail_song_count_and_year_text_color">@color/default_text_color</color>
+    <color name="album_detail_genre_text_color">@color/default_text_color</color>
+    <color name="album_detail_duration_text_color">@color/default_text_color</color>
+    <color name="app_msg_text_color">?android:textColorPrimaryInverse</color>
+    <color name="artist_detail_album_title_text_color">@color/cardOne</color>
+    <color name="artist_detail_album_year_text_color">@color/cardTwo</color>
+    <color name="artist_detail_header_albums_label_text_color">@color/list_item_header_text_color</color>
+    <color name="artist_detail_header_songs_label_text_color">@color/list_item_header_text_color</color>
+    <color name="grid_items_normal_line_one">@color/cardOne</color>
+    <color name="grid_items_normal_line_two">@color/cardTwo</color>
+    <color name="position_number_color">@color/white</color>
+    <color name="audio_player_lyrics_text_color">@color/white</color>
+    <color name="audio_player_current_time_color">@color/white</color>
+    <color name="audio_player_total_time_color">@color/white</color>
+    <color name="number_of_songs_text_color">@color/white</color>
+    <color name="duration_text_color">@color/white</color>
 </resources>

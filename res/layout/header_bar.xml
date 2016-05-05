@@ -23,7 +23,7 @@
     android:paddingStart="@dimen/drag_and_drop_width"
     android:background="@color/header_action_bar_color"
     android:elevation="@dimen/action_bar_elevation"
-    android:theme="@android:style/ThemeOverlay.Material.Dark.ActionBar">
+    android:theme="@style/ToolBarTheme">
 
     <ImageView
         android:id="@+id/header_bar_up"

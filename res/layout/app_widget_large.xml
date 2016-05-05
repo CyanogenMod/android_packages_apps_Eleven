@@ -21,7 +21,7 @@
     android:layout_height="@dimen/app_widget_large_min_height"
     android:columnCount="2"
     android:rowCount="2"
-    android:background="@color/black"
+    android:background="@color/widget_background_color"
     tools:ignore="ContentDescription" >
 
     <ImageView
