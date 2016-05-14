@@ -35,11 +35,11 @@
   </plurals>
   <!-- Used to show a shortened version of hours-->
   <plurals name="Nhours">
-    <item quantity="other"><xliff:g id="hours">%d</xliff:g>ชม.</item>
+    <item quantity="other"><xliff:g id="hours"> %d</xliff:g>ชม.</item>
   </plurals>
   <!-- Used to show a shortened version of minutes -->
   <plurals name="Nminutes">
-    <item quantity="other"><xliff:g id="minutes">%d</xliff:g>นาที</item>
+    <item quantity="other"><xliff:g id="minutes"> %d</xliff:g>นาที</item>
   </plurals>
   <!-- Toasts after adding song(s) to playlists -->
   <plurals name="NNNtrackstoplaylist">
@@ -51,11 +51,11 @@
   </plurals>
   <!-- Toasts after adding song(s) to queue -->
   <plurals name="NNNtrackstoqueue">
-    <item quantity="other"><xliff:g id="number" example="27">%d</xliff:g> เพลงถูกเพิ่มเข้าในคิว</item>
+    <item quantity="other">มี <xliff:g id="number" example="27">%d</xliff:g> เพลงถูกเพิ่มอยู่ในคิว</item>
   </plurals>
   <!-- Toasts after adding song(s) to the favorites list -->
   <plurals name="NNNtrackstofavorites">
-    <item quantity="other"><xliff:g id="number" example="27">%d</xliff:g> เพลงถูกเพิ่มในรายการโปรด</item>
+    <item quantity="other"><xliff:g id="number" example="27">%d</xliff:g> เพลงถูกเพิ่มไปยังรายการโปรด</item>
   </plurals>
   <!-- Toast confirming that song(s) was/were deleted. -->
   <plurals name="NNNtracksdeleted">

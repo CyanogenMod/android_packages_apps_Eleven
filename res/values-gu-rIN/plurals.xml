@@ -38,10 +38,6 @@
     <item quantity="other"><xliff:g id="count">%d</xliff:g> ઝાનરો</item>
   </plurals>
   <!-- Used to show a shortened version of hours-->
-  <plurals name="Nhours">
-    <item quantity="one"><xliff:g id="hours">%d</xliff:g> કલાક</item>
-    <item quantity="other"><xliff:g id="hours">%d</xliff:g> કલાક</item>
-  </plurals>
   <!-- Used to show a shortened version of minutes -->
   <plurals name="Nminutes">
     <item quantity="one"><xliff:g id="hours">%d</xliff:g>મિનીટ</item>
