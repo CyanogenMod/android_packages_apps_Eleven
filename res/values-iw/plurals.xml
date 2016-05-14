@@ -39,12 +39,12 @@
   </plurals>
   <!-- Used to show a shortened version of hours-->
   <plurals name="Nhours">
-    <item quantity="one"><xliff:g id="hours">%d</xliff:g> ש\'</item>
+    <item quantity="one">ש\' <xliff:g id="hours">%d</xliff:g></item>
     <item quantity="other"><xliff:g id="hours">%d</xliff:g> ש\'</item>
   </plurals>
   <!-- Used to show a shortened version of minutes -->
   <plurals name="Nminutes">
-    <item quantity="one"><xliff:g id="minutes">%d</xliff:g> דק\'</item>
+    <item quantity="one">דק\' <xliff:g id="minutes">%d</xliff:g></item>
     <item quantity="other"><xliff:g id="minutes">%d</xliff:g> דק\'</item>
   </plurals>
   <!-- Toasts after adding song(s) to playlists -->
@@ -59,7 +59,7 @@
   </plurals>
   <!-- Toasts after adding song(s) to queue -->
   <plurals name="NNNtrackstoqueue">
-    <item quantity="one">שיר <xliff:g id="number" example="1">%d</xliff:g> הוסף לתור ההשמעה.</item>
+    <item quantity="one">שיר <xliff:g id="number" example="1">%d</xliff:g> נוסף לתור ההשמעה.</item>
     <item quantity="other"><xliff:g id="number" example="27">%d</xliff:g> שירים נוספו לתור ההשמעה.</item>
   </plurals>
   <!-- Toasts after adding song(s) to the favorites list -->

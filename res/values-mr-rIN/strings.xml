@@ -17,18 +17,173 @@
      limitations under the License.
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string name="app_name">संगीत</string>
   <!-- Page titles -->
+  <string name="page_recent">अलीकडील</string>
+  <string name="page_artists">कलाकार</string>
+  <string name="page_albums">अल्बम्स</string>
+  <string name="page_songs">गाणी</string>
+  <string name="page_playlists">प्लेलिस्ट</string>
+  <string name="page_genres">जेनेर्स</string>
+  <string name="page_now_playing">आता प्ले करत आहे</string>
+  <string name="page_play_queue">प्ले रांग</string>
   <!-- Section Headers -->
+  <string name="header_albums">अल्बम्स</string>
+  <string name="header_top_songs">सर्वोच्च गाणी</string>
+  <string name="header_all_songs">सर्व गाणी</string>
   <!-- Option menu items -->
+  <string name="menu_settings">सेटिंग्ज</string>
+  <string name="menu_search">शोधा</string>
+  <string name="menu_shuffle_item">शफल</string>
+  <string name="menu_shuffle_all">सर्व शफल करा</string>
+  <string name="menu_shuffle_playlist">प्लेलिस्ट शफल करा</string>
+  <string name="menu_shuffle_album">अल्बम शफल करा</string>
+  <string name="menu_shuffle_artist">कलाकार शफल करा</string>
+  <string name="menu_shuffle_top_tracks">सर्वोच्च ट्रॅक्स शफल करा</string>
+  <string name="menu_shuffle_recent">अलीकडेच प्ले केलेले शफल करा</string>
+  <string name="menu_shuffle_last_added">शेवटचे जोडलेले शफल करा</string>
+  <string name="menu_play_all">सर्व प्ले करा</string>
+  <string name="menu_sort_by">नुसार क्रमवारी लावा</string>
+  <string name="menu_clear_list">सूची साफ करा</string>
+  <string name="menu_clear_recents">अलीकडील साफ करा</string>
+  <string name="menu_clear_queue">रांग साफ करा</string>
+  <string name="menu_save_queue">रांग प्लेलिस्टमध्ये जतन करा</string>
+  <string name="menu_equalizer">संतुलक</string>
   <!-- Playlist items -->
+  <string name="add_to_playlist">प्लेलिस्टमध्ये जोडा</string>
+  <string name="add_to_queue">रांगेत जोडा</string>
+  <string name="remove_from_recent">अलीकडील मधून काढा</string>
+  <string name="remove_from_queue">रांगेतून काढा</string>
   <!-- Sort orders -->
+  <string name="sort_order_entry_az">A-Z</string>
+  <string name="sort_order_entry_za">Z-A</string>
+  <string name="sort_order_entry_artist">कलाकार</string>
+  <string name="sort_order_entry_album">अल्बम</string>
+  <string name="sort_order_entry_year">वर्ष</string>
+  <string name="sort_order_entry_duration">कालावधी</string>
+  <string name="sort_order_entry_date_added">तारीख जोडली</string>
+  <string name="sort_order_entry_track_list">ट्रॅक यादी</string>
+  <string name="sort_order_entry_number_of_songs">गाण्यांची संख्या</string>
+  <string name="sort_order_entry_number_of_albums">अल्बम्सची संख्या</string>
+  <string name="sort_order_entry_filename">फाइलनाव</string>
   <!-- Default playlist names -->
+  <string name="playlist_last_added">शेवटचे जोडले</string>
+  <string name="playlist_recently_played">अलीकडेच प्ले केले</string>
+  <string name="playlist_top_tracks">माझे सर्वोच्च ट्रॅक्स</string>
   <!-- AlertDialog items -->
+  <string name="new_playlist">नवीन प्लेलिस्ट</string>
+  <string name="save">जतन करा</string>
+  <string name="cancel">रद्द करा</string>
+  <string name="overwrite">खोडून त्याजागी लिहा</string>
+  <string name="clear">साफ करा</string>
+  <string name="new_playlist_name_template">प्लेलिस्ट <xliff:g id="number">%d</xliff:g></string>
+  <string name="create_playlist_prompt">प्लेलिस्ट नाव</string>
+  <string name="delete_dialog_title"><xliff:g id="item" example="album">%s</xliff:g>हटवायचे?</string>
+  <string name="clear_top_tracks_title">सर्वोच ट्रॅक्स साफ करायचे?</string>
+  <string name="clear_recent_title">अलीकडेच प्ले केलेले साफ करायचे?</string>
+  <string name="clear_last_added">शेवटचे जोडलेले साफ करायचे?</string>
+  <string name="cannot_be_undone">हे पुनर्स्थापित करता येत नाही</string>
+  <string name="delete_warning">यामुळे कॅशे केलेल्या प्रतिमा प्रविष्ठी कायमस्वरूपी हटवल्या जातील</string>
+  <string name="new_photo">गॅलरीमधून फोटो निवडा</string>
+  <string name="google_search">Google शोध</string>
+  <string name="use_default">डिफॉल्ट फोटो वापरा</string>
+  <string name="old_photo">जुना फोटो वापरा</string>
   <!-- Context menu items -->
+  <string name="context_menu_play_selection">प्ले करा</string>
+  <string name="context_menu_play_next">पुढील प्ले करा</string>
+  <string name="context_menu_play_album">अल्बम प्ले करा</string>
+  <string name="context_menu_more_by_artist">कलाकाराकडून अधिक</string>
+  <string name="context_menu_rename_playlist">पुनर्नामित करा</string>
+  <string name="context_menu_delete">हटवायचे?</string>
+  <string name="context_menu_fetch_album_art">अल्बम कला मिळवा</string>
+  <string name="context_menu_fetch_artist_image">कलाकार प्रतिमा मिळवा</string>
+  <string name="context_menu_remove_from_recent">अलीकडील मधून काढा</string>
+  <string name="context_menu_use_as_ringtone">रींग टोन म्हणून वापरा</string>
+  <string name="context_menu_remove_from_playlist">प्लेलिस्टतून काढा</string>
+  <string name="context_menu_change_image">प्रतिमा बदला</string>
   <!-- Content descriptions -->
+  <string name="accessibility_play">प्ले करा</string>
+  <string name="accessibility_pause">विराम द्या</string>
+  <string name="accessibility_next">पुढील</string>
+  <string name="accessibility_prev">मागील</string>
+  <string name="accessibility_shuffle">शफल</string>
+  <string name="accessibility_shuffle_all">सर्व शफल करा</string>
+  <string name="accessibility_repeat">पुनरावृत्ती</string>
+  <string name="accessibility_repeat_all">सर्व पुनरावृत्ती करा</string>
+  <string name="accessibility_repeat_one">एक पुनरावृत्ती करा</string>
+  <string name="accessibility_queue">रांग उघडा</string>
+  <string name="accessibility_browse">संगीत ब्राउझ करा</string>
   <!-- Toast messages -->
+  <string name="set_as_ringtone">\'<xliff:g id="name" example="Alarm Bell">%s</xliff:g>\' रींग टोन म्हणून सेट करा</string>
+  <string name="playlist_renamed">प्लेलिस्ट पुनर्नामित केली</string>
   <!-- Settings -->
+  <string name="settings_ui_category">इंटरफेस</string>
+  <string name="settings_storage_category">संचयन</string>
+  <string name="settings_data_category">डेटा</string>
+  <string name="settings_delete_cache_title">कॅशे हटवा</string>
+  <string name="settings_delete_cache_summary">सर्व कॅशे केलेल्या प्रतिमा काढा</string>
+  <string name="settings_download_only_on_wifi_title">फक्त Wi-Fi द्वारे डाउनलोड करा</string>
+  <string name="settings_download_only_on_wifi_summary">वाहक शुल्क कमी करण्यासाठी, मोबाईल नेटवर्क्सवर डाउनलोड करू नका</string>
+  <string name="settings_download_missing_artwork_title">गहाळ अल्बमकला डाउनलोड करा</string>
+  <string name="settings_download_artist_images_title">गहाळ कलाकार प्रतिमा डाउनलोड करा</string>
+  <string name="settings_general_category">सामान्य</string>
+  <string name="settings_show_music_visualization_title">संगीत व्हिज्युअलायझेशन दर्शवा</string>
+  <string name="settings_show_lyrics_title">गाण्याच्या शब्दरचना दर्शवा</string>
+  <string name="settings_show_lyrics_summary">srt फाइल असलेल्या गाण्यांसाठी</string>
+  <string name="settings_shake_to_play">प्ले करण्यासाठी हलवा</string>
+  <string name="settings_shake_to_play_summary">पुढील गाणे प्ले करण्यासाठी तुमचे डिव्हाइस हलवा</string>
+  <string name="settings_lockscreen_album_art">लॉकस्क्रीन अल्बम कला</string>
+  <string name="settings_lockscreen_album_art_summary">लॉकस्क्रीन पार्श्वभूमीच्या जागी अल्बम कला आणा</string>
   <!-- App widget -->
+  <string name="app_widget_small">संगीत: 4 \u00d7 1</string>
+  <string name="app_widget_large">संगीत: 4 \u00d7 2</string>
+  <string name="app_widget_large_alt">संगीत: 4 \u00d7 2 (पर्यायी)</string>
+  <string name="app_widget_recent">संगीत: अलीकडेच ऐकलेले</string>
   <!-- Empty list / error messages -->
+  <string name="no_effects_for_you">इक्वेलायझर उघडता आला नाही.</string>
+  <string name="empty_music">तुमच्या कॉम्प्युटरवरून तुमच्या डिव्हाइसला कॉपी करण्यासाठी, एक USB केबल वापरा.</string>
+  <string name="empty_search">शोध निकाल आढळले नाहीत</string>
+  <string name="empty_search_check">तुमचे स्पेलिंग अचूक असल्याचे कृपया तपासा किंवा भिन्न कळशब्द वापरून पाहा.</string>
+  <string name="empty_favorite">तुम्ही मनपसंत म्हणून खूण केलेली गाणी इथे दाखवली जातील.</string>
+  <string name="empty_recent_main">हल्लीची गाणी नाहीत</string>
+  <string name="empty_recent">तुम्ही अलीकडेच ऐकलेली गाणी इथे दाखवली जातील.</string>
+  <string name="empty_playlist_main">प्लेलिस्टमध्ये गाणी नाहीत</string>
+  <string name="empty_playlist_secondary">प्लेलिस्टमध्ये गाणी जोडण्यासाठी, गाणे, अल्बम किंवा कलाकारावरील पर्याय मेनू टॅप करा आणि \&quot;प्लेलिस्टमध्ये जोडा\&quot; निवडा.</string>
+  <string name="empty_top_tracks_main">सर्वोच्च ट्रॅक्स नाहीत</string>
+  <string name="empty_top_tracks_secondary">तुम्ही जी गाणी सर्वाधिक ऐकता ती या यादीमध्ये जोडली जातील.</string>
+  <string name="empty_last_added_main">कोणतीही गाणी अलीकडे जोडलेली नाहीत</string>
+  <string name="empty_last_added">गेल्या महिन्यात तुम्ही जोडलेली गाणी इथे दाखवली जातील.</string>
+  <string name="empty_generic_main">कोणतेही संगीत सापडले नाही</string>
+  <string name="empty_generic_secondary">तुमच्या कॉम्प्युटरवरून तुमच्या डिव्हाइसला कॉपी करण्यासाठी, एक USB केबल वापरा.</string>
+  <string name="empty_queue_main">प्ले रांगेमध्ये गाणी नाहीत</string>
+  <string name="empty_queue_secondary">प्ले रांगेमध्ये गाणी जोडण्यासाठी, गाणे, अल्बम किंवा कलाकारावरील पर्याय मेनू टॅप करा आणि \&quot;प्ले रांगेमध्ये जोडा\&quot; निवडा.</string>
+  <string name="error_playing_track">ट्रॅक प्ले करण्यात अक्षम %1$s</string>
   <!-- Section Headers -->
+  <string name="header_unknown_year">अज्ञात वर्ष</string>
+  <string name="header_less_than_30s">30 सेकंदांहून कमी</string>
+  <string name="header_30_to_60_seconds">30 - 60 सेकंद</string>
+  <string name="header_1_to_2_minutes">1 - 2 मिनिटे</string>
+  <string name="header_2_to_3_minutes">2 - 3 मिनिटे</string>
+  <string name="header_3_to_4_minutes">3 - 4 मिनिटे</string>
+  <string name="header_4_to_5_minutes">4 - 5 मिनिटे</string>
+  <string name="header_5_to_10_minutes">5 - 10 मिनिटे</string>
+  <string name="header_10_to_30_minutes">10 - 30 मिनिटे</string>
+  <string name="header_30_to_60_minutes">30 - 60 मिनिटे</string>
+  <string name="header_greater_than_60_minutes">60 मिनिटांहून अधिक</string>
+  <string name="header_1_song">1 गाणे</string>
+  <string name="header_2_to_4_songs">2 - 4 गाणी</string>
+  <string name="header_5_to_9_songs">5 - 9 गाणी</string>
+  <string name="header_10_plus_songs">10+ गाणी</string>
+  <string name="header_5_plus_albums">5+ अल्बम्स</string>
+  <string name="header_other">"&quot;इतर&quot;"</string>
+  <string name="footer_search_artists">सर्व कलाकार दर्शवा</string>
+  <string name="footer_search_albums">सर्व अल्बम्स दर्शवा</string>
+  <string name="footer_search_songs">सर्व गाणी दर्शवा</string>
+  <string name="footer_search_playlists">सर्व प्लेलिस्ट दर्शवा</string>
+  <string name="searchHint">संगीत शोधा</string>
+  <string name="search_title_artists">सर्व \&quot;%s\&quot; कलाकार</string>
+  <string name="search_title_albums">सर्व \&quot;%s\&quot; अल्बम्स</string>
+  <string name="search_title_songs">सर्व \&quot;%s\&quot; गाणी</string>
+  <string name="search_title_playlists">सर्व \&quot;%s\&quot; प्लेलिस्ट</string>
+  <string name="duration_format"><xliff:g id="hours">%1$s</xliff:g> <xliff:g id="minutes">%2$s</xliff:g></string>
 </resources>

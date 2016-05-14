@@ -43,21 +43,21 @@
   </plurals>
   <!-- Used to show a shortened version of hours-->
   <plurals name="Nhours">
-    <item quantity="one"><xliff:g id="hours">%d</xliff:g>h</item>
-    <item quantity="few"><xliff:g id="hours">%d</xliff:g>h</item>
-    <item quantity="other"><xliff:g id="hours">%d</xliff:g>h</item>
+    <item quantity="one"><xliff:g id="hours">%d</xliff:g> h</item>
+    <item quantity="few"><xliff:g id="hours">%d </xliff:g> h</item>
+    <item quantity="other"><xliff:g id="hours">%d</xliff:g> h</item>
   </plurals>
   <!-- Used to show a shortened version of minutes -->
   <plurals name="Nminutes">
-    <item quantity="one"><xliff:g id="minutes">%d</xliff:g>m</item>
-    <item quantity="few"><xliff:g id="minutes">%d</xliff:g>m</item>
-    <item quantity="other"><xliff:g id="minutes">%d</xliff:g>m</item>
+    <item quantity="one"><xliff:g id="minutes">%d</xliff:g> m</item>
+    <item quantity="few"><xliff:g id="minutes">%d </xliff:g> m</item>
+    <item quantity="other"><xliff:g id="minutes">%d</xliff:g> m</item>
   </plurals>
   <!-- Toasts after adding song(s) to playlists -->
   <plurals name="NNNtrackstoplaylist">
     <item quantity="one"><xliff:g id="number" example="1">%d</xliff:g> pjesma dodana na popis za reproduciranje.</item>
     <item quantity="few"><xliff:g id="number" example="2">%d</xliff:g> pjesme dodane na popis za reproduciranje.</item>
-    <item quantity="other"><xliff:g id="number" example="27">%d</xliff:g> pjesama dodano na popis za reproduciranje.</item>
+    <item quantity="other"><xliff:g id="number" example="27">%d </xliff:g> pjesme dodao na popis za reproduciranje.</item>
   </plurals>
   <!-- Toasts after removing song(s) from playlists -->
   <plurals name="NNNtracksfromplaylist">
@@ -80,7 +80,7 @@
   <!-- Toast confirming that song(s) was/were deleted. -->
   <plurals name="NNNtracksdeleted">
     <item quantity="one"><xliff:g id="songs_to_delete" example="1">%d</xliff:g> pjesma je izbrisana.</item>
-    <item quantity="few"><xliff:g id="songs_to_delete" example="2">%d</xliff:g> pjesme su izbrisane.</item>
+    <item quantity="few"><xliff:g id="songs_to_delete">%d</xliff:g> pjesme su izbrisane.</item>
     <item quantity="other"><xliff:g id="songs_to_delete">%d</xliff:g> pjesama je izbrisano.</item>
   </plurals>
 </resources>

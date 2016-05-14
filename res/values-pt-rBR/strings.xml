@@ -25,29 +25,29 @@
   <string name="page_songs">Músicas</string>
   <string name="page_playlists">Listas de reprodução</string>
   <string name="page_genres">Gêneros</string>
-  <string name="page_now_playing">Reproduzindo agora</string>
+  <string name="page_now_playing">Tocando</string>
   <string name="page_play_queue">Fila de reprodução</string>
   <!-- Section Headers -->
   <string name="header_albums">Álbuns</string>
-  <string name="header_top_songs">Músicas preferidas</string>
+  <string name="header_top_songs">Mais tocadas</string>
   <string name="header_all_songs">Todas as músicas</string>
   <!-- Option menu items -->
   <string name="menu_settings">Configurações</string>
   <string name="menu_search">Busca</string>
   <string name="menu_shuffle_item">Aleatório</string>
   <string name="menu_shuffle_all">Todas aleatório</string>
-  <string name="menu_shuffle_playlist">Aleatório na lista de reprodução</string>
+  <string name="menu_shuffle_playlist">Aleatório na lista</string>
   <string name="menu_shuffle_album">Aleatório no álbum</string>
   <string name="menu_shuffle_artist">Aleatório no artista</string>
-  <string name="menu_shuffle_top_tracks">Aleatório nas músicas preferidas</string>
+  <string name="menu_shuffle_top_tracks">Aleatório nas mais tocadas</string>
   <string name="menu_shuffle_recent">Aleatório nas tocadas recentemente</string>
   <string name="menu_shuffle_last_added">Aleatório nas últimas adicionadas</string>
-  <string name="menu_play_all">Reproduzir todas</string>
+  <string name="menu_play_all">Tocar todas</string>
   <string name="menu_sort_by">Ordenar por</string>
   <string name="menu_clear_list">Limpar lista</string>
   <string name="menu_clear_recents">Limpar recentes</string>
   <string name="menu_clear_queue">Limpar fila</string>
-  <string name="menu_save_queue">Salvar fila à lista de reprodução</string>
+  <string name="menu_save_queue">Salvar fila como lista de reprodução</string>
   <string name="menu_equalizer">Equalizador</string>
   <!-- Playlist items -->
   <string name="add_to_playlist">Adicionar à lista de reprodução</string>
@@ -62,35 +62,35 @@
   <string name="sort_order_entry_year">Ano</string>
   <string name="sort_order_entry_duration">Duração</string>
   <string name="sort_order_entry_date_added">Data adicionada</string>
-  <string name="sort_order_entry_track_list">Lista de reprodução</string>
+  <string name="sort_order_entry_track_list">Lista de faixas</string>
   <string name="sort_order_entry_number_of_songs">Número de músicas</string>
   <string name="sort_order_entry_number_of_albums">Número de álbuns</string>
   <string name="sort_order_entry_filename">Nome do arquivo</string>
   <!-- Default playlist names -->
-  <string name="playlist_last_added">Última adicionada</string>
-  <string name="playlist_recently_played">Reproduzidas recentemente</string>
-  <string name="playlist_top_tracks">Minhas músicas preferidas</string>
+  <string name="playlist_last_added">Última adição</string>
+  <string name="playlist_recently_played">Tocadas recentemente</string>
+  <string name="playlist_top_tracks">Minhas mais tocadas</string>
   <!-- AlertDialog items -->
   <string name="new_playlist">Nova lista de reprodução</string>
   <string name="save">Salvar</string>
   <string name="cancel">Cancelar</string>
-  <string name="overwrite">Sobrescrever</string>
+  <string name="overwrite">Substituir</string>
   <string name="clear">Limpar</string>
   <string name="new_playlist_name_template">Lista de reprodução <xliff:g id="number">%d</xliff:g></string>
   <string name="create_playlist_prompt">Nome da lista de reprodução</string>
   <string name="delete_dialog_title">Apagar <xliff:g id="item" example="album">%s</xliff:g>?</string>
-  <string name="clear_top_tracks_title">Limpar músicas preferidas?</string>
+  <string name="clear_top_tracks_title">Limpar mais tocadas?</string>
   <string name="clear_recent_title">Limpar tocadas recentemente?</string>
   <string name="clear_last_added">Limpar últimas adicionadas?</string>
-  <string name="cannot_be_undone">Isto não pode ser desfeito</string>
+  <string name="cannot_be_undone">Não pode ser desfeito</string>
   <string name="delete_warning">Isso vai apagar permanentemente o cache de imagens</string>
   <string name="new_photo">Escolher foto da Galeria</string>
   <string name="google_search">Pesquisa no Google</string>
   <string name="use_default">Usar foto padrão</string>
   <string name="old_photo">Usar foto antiga</string>
   <!-- Context menu items -->
-  <string name="context_menu_play_selection">Reproduzir</string>
-  <string name="context_menu_play_next">Reproduzir próxima</string>
+  <string name="context_menu_play_selection">Tocar</string>
+  <string name="context_menu_play_next">Tocar seguinte</string>
   <string name="context_menu_play_album">Tocar o álbum</string>
   <string name="context_menu_more_by_artist">Mais do artista</string>
   <string name="context_menu_rename_playlist">Renomear</string>
@@ -102,7 +102,7 @@
   <string name="context_menu_remove_from_playlist">Remover da lista de reprodução</string>
   <string name="context_menu_change_image">Alterar imagem</string>
   <!-- Content descriptions -->
-  <string name="accessibility_play">Reproduzir</string>
+  <string name="accessibility_play">Tocar</string>
   <string name="accessibility_pause">Pausar</string>
   <string name="accessibility_next">Próxima</string>
   <string name="accessibility_prev">Anterior</string>
@@ -121,43 +121,43 @@
   <string name="settings_storage_category">Armazenamento</string>
   <string name="settings_data_category">Dados</string>
   <string name="settings_delete_cache_title">Apagar cache</string>
-  <string name="settings_delete_cache_summary">Remove todas as imagens em cache</string>
+  <string name="settings_delete_cache_summary">Remover todas as imagens em cache</string>
   <string name="settings_download_only_on_wifi_title">Baixar somente via Wi-Fi</string>
   <string name="settings_download_only_on_wifi_summary">Não baixar pela rede móvel para reduzir cobranças da operadora</string>
-  <string name="settings_download_missing_artwork_title">Baixar a arte do álbum faltando</string>
-  <string name="settings_download_artist_images_title">Baixar imagens faltando dos artistas</string>
+  <string name="settings_download_missing_artwork_title">Baixar a arte dos álbuns que faltam</string>
+  <string name="settings_download_artist_images_title">Baixar imagens dos artistas que faltam</string>
   <string name="settings_general_category">Geral</string>
   <string name="settings_show_music_visualization_title">Mostrar visualização de música</string>
   <string name="settings_show_lyrics_title">Mostrar letras de músicas</string>
-  <string name="settings_show_lyrics_summary">Para as músicas que tem um arquivo srt</string>
-  <string name="settings_shake_to_play">Agite para reproduzir</string>
-  <string name="settings_shake_to_play_summary">Agite seu dispositivo para reproduzir a próxima música</string>
-  <string name="settings_lockscreen_album_art">Arte de álbum na tela de bloqueio</string>
+  <string name="settings_show_lyrics_summary">Para as músicas que tenham um arquivo srt</string>
+  <string name="settings_shake_to_play">Agite para tocar</string>
+  <string name="settings_shake_to_play_summary">Agite seu dispositivo para tocar a próxima música</string>
+  <string name="settings_lockscreen_album_art">Arte do álbum na tela de bloqueio</string>
   <string name="settings_lockscreen_album_art_summary">Substitui o fundo da tela de bloqueio pela arte do álbum</string>
   <!-- App widget -->
   <string name="app_widget_small">Música: 4 \u00d7 1</string>
   <string name="app_widget_large">Música: 4 \u00d7 2</string>
-  <string name="app_widget_large_alt">Música: 4 \u00d7 2 (alternativo)</string>
-  <string name="app_widget_recent">Música: escutada recentemente</string>
+  <string name="app_widget_large_alt">Música: 4 \u00d7 2 (alternativa)</string>
+  <string name="app_widget_recent">Música: ouvidas recentemente</string>
   <!-- Empty list / error messages -->
   <string name="no_effects_for_you">O equalizador não pôde ser aberto.</string>
-  <string name="empty_music">Para copiar a música de seu computador para seu dispositivo, use um cabo USB.</string>
+  <string name="empty_music">Para copiar músicas do seu computador para seu dispositivo, use um cabo USB.</string>
   <string name="empty_search">Nenhum resultado de busca</string>
-  <string name="empty_search_check">Por favor, verifique se está escrito corretamente ou tente uma palavra diferente.</string>
-  <string name="empty_favorite">Vão ser exibidas aqui as músicas que você marcou como favoritas.</string>
+  <string name="empty_search_check">Verifique se está escrito corretamente ou tente uma palavra diferente.</string>
+  <string name="empty_favorite">As músicas marcadas como favoritas serão exibidas aqui.</string>
   <string name="empty_recent_main">Não há músicas recentes</string>
   <string name="empty_recent">Músicas ouvidas recentemente serão mostradas aqui.</string>
   <string name="empty_playlist_main">Não há músicas na lista de reprodução</string>
-  <string name="empty_playlist_secondary">Para adicionar músicas à esta lista de reprodução, toque no menu de opções de uma música, álbum ou artista e selecione \"Adicionar à lista de reprodução\".</string>
-  <string name="empty_top_tracks_main">Não há músicas preferidas</string>
+  <string name="empty_playlist_secondary">Para adicionar músicas a esta lista de reprodução, toque no menu de opções de uma música, álbum ou artista e selecione \"Adicionar à lista de reprodução\".</string>
+  <string name="empty_top_tracks_main">Não há mais tocadas</string>
   <string name="empty_top_tracks_secondary">As músicas mais ouvidas serão adicionadas a esta lista.</string>
   <string name="empty_last_added_main">Não há músicas adicionadas recentemente</string>
-  <string name="empty_last_added">Vão ser exibidas aqui as músicas que você adicionou no último mês.</string>
+  <string name="empty_last_added">As músicas que você adicionou no último mês serão exibidas aqui.</string>
   <string name="empty_generic_main">Nenhuma música encontrada</string>
-  <string name="empty_generic_secondary">Para copiar a música de seu computador para seu dispositivo, use um cabo USB.</string>
+  <string name="empty_generic_secondary">Para copiar músicas do seu computador para seu dispositivo, use um cabo USB.</string>
   <string name="empty_queue_main">Não há músicas na fila de reprodução</string>
   <string name="empty_queue_secondary">Para adicionar músicas à sua fila de reprodução, toque no menu de opções de uma música, álbum ou artista e selecione \"Adicionar à fila\".</string>
-  <string name="error_playing_track">Incapaz de reproduzir %1$s</string>
+  <string name="error_playing_track">Impossível tocar %1$s</string>
   <!-- Section Headers -->
   <string name="header_unknown_year">Ano desconhecido</string>
   <string name="header_less_than_30s">Menos de 30 segundos</string>

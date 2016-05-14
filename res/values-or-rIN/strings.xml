@@ -17,18 +17,173 @@
      limitations under the License.
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string name="app_name">ସଙ୍ଗୀତ</string>
   <!-- Page titles -->
+  <string name="page_recent">ସାମ୍ପ୍ରତିକ</string>
+  <string name="page_artists">କଳାକାରଗଣ</string>
+  <string name="page_albums">ଆଲବମଗୁଡିକ</string>
+  <string name="page_songs">ସଙ୍ଗୀତଗୁଡିକ</string>
+  <string name="page_playlists">ଚାଳନାତାଲିକା‌ଗୁଡିକ</string>
+  <string name="page_genres">ଜେନେରେସ୍‍</string>
+  <string name="page_now_playing">ବର୍ତ୍ତମାନ ଚାଳନ କରନ୍ତୁ</string>
+  <string name="page_play_queue">ପ୍ଲେ ଧାଡି</string>
   <!-- Section Headers -->
+  <string name="header_albums">ଆଲବମଗୁଡିକ</string>
+  <string name="header_top_songs">ଶ୍ରେଷ୍ଠ ଗୀତଗୁଡିକ</string>
+  <string name="header_all_songs">ସମସ୍ତ ସଂଗୀତ</string>
   <!-- Option menu items -->
+  <string name="menu_settings">ସେଟିଂସ୍</string>
+  <string name="menu_search">ସନ୍ଧାନ</string>
+  <string name="menu_shuffle_item">ସଫଲ୍</string>
+  <string name="menu_shuffle_all">ସମସ୍ତ ସଫଲ୍ କରନ୍ତୁ</string>
+  <string name="menu_shuffle_playlist">ଚାଳନତାଲିକା ସ୍ଥାନ ବଦଳ କରନ୍ତୁ</string>
+  <string name="menu_shuffle_album">ଆଲ୍‍ବମ୍‍ ସ୍ଥାନ ବଦଳ କରନ୍ତୁ</string>
+  <string name="menu_shuffle_artist">କଳାକାର ସ୍ଥାନ ବଦଳ କରନ୍ତୁ</string>
+  <string name="menu_shuffle_top_tracks">ଶୀ‍ର୍ଷ ଟ୍ରାକ୍‍  ସ୍ଥାନ ବଦଳ କରନ୍ତୁ</string>
+  <string name="menu_shuffle_recent">ସମ୍ପ୍ରତି ପ୍ଲେ ସ୍ଥାନ ବଦଳ କରନ୍ତୁ</string>
+  <string name="menu_shuffle_last_added">ଶେଷରେ ଯାହା ଯୋଗ ହୋଇଛି ତାହା ସ୍ଥାନ ବଦଳ କରନ୍ତୁ</string>
+  <string name="menu_play_all">ସମସ୍ତ ଚାଳନ କରନ୍ତୁ</string>
+  <string name="menu_sort_by">ଦ୍ଵାରା ସର୍ଟ୍</string>
+  <string name="menu_clear_list">ତାଲିକା ଖାଲି କରନ୍ତୁ</string>
+  <string name="menu_clear_recents">ସମ୍ପ୍ରତି ଖାଲି କରନ୍ତୁ</string>
+  <string name="menu_clear_queue">ଧାଡି ଖାଲି କରନ୍ତୁ</string>
+  <string name="menu_save_queue">ଚାଳନତାଲିକାରେ ଧାଡି ସଂରକ୍ଷଣ କରନ୍ତୁ</string>
+  <string name="menu_equalizer">ସମାନକାରୀ</string>
   <!-- Playlist items -->
+  <string name="add_to_playlist">ଚାଳନତାଲିକାରେ ଯୋଡନ୍ତୁ</string>
+  <string name="add_to_queue">ଧାଡି ଯୋଗ କରନ୍ତୁ</string>
+  <string name="remove_from_recent">ସମ୍ପ୍ରତିରୁ ଅପସାରଣ କରନ୍ତୁ</string>
+  <string name="remove_from_queue">ଧାଡିରୁ  ଅପସାରଣ କରନ୍ତୁ</string>
   <!-- Sort orders -->
+  <string name="sort_order_entry_az">A-Z</string>
+  <string name="sort_order_entry_za">Z-A</string>
+  <string name="sort_order_entry_artist">କଳାକାର</string>
+  <string name="sort_order_entry_album">ଆଲ୍‍ବମ୍‍</string>
+  <string name="sort_order_entry_year">ବ‍ର୍ଷ</string>
+  <string name="sort_order_entry_duration">ଅବଧି</string>
+  <string name="sort_order_entry_date_added">ତାରିଖ ଯୋଗ କରାଯାଇଛି</string>
+  <string name="sort_order_entry_track_list">ଟ୍ରାକ୍‍ ତାଲିକା</string>
+  <string name="sort_order_entry_number_of_songs">ଗୀତ ସଂଖ୍ୟା</string>
+  <string name="sort_order_entry_number_of_albums">ଆଲ୍‍ବମ୍‍ ସଂଖ୍ୟା</string>
+  <string name="sort_order_entry_filename">ଫାଇଲ୍‌ ନାମ</string>
   <!-- Default playlist names -->
+  <string name="playlist_last_added">ଶେଷରେ ଯୋଗ କରାଯାଇଥିବା</string>
+  <string name="playlist_recently_played">ସମ୍ପ୍ରତି ପ୍ଲେ ହୋଇଥିବା</string>
+  <string name="playlist_top_tracks">ମୋ ଶୀ‍ର୍ଷ ଟ୍ରାକ୍‍</string>
   <!-- AlertDialog items -->
+  <string name="new_playlist">ନୂଆ ପ୍ଲେତାଲିକା</string>
+  <string name="save">ସଞ୍ଚୟ</string>
+  <string name="cancel">ବାତିଲ</string>
+  <string name="overwrite">ଅଧିଲିଖନ</string>
+  <string name="clear">ଖାଲି</string>
+  <string name="new_playlist_name_template">ଚାଳନତାଲିକା <xliff:g id="number">%d</xliff:g></string>
+  <string name="create_playlist_prompt">ଚାଳନତାଲିକା ନାମ</string>
+  <string name="delete_dialog_title">ଏହା ବିଲୋପ କରିବେ କି <xliff:g id="item" example="album">%s</xliff:g>?</string>
+  <string name="clear_top_tracks_title">ଶୀ‍ର୍ଷ ଟ୍ରାକ୍‍ ହଟାଇବେ କି?</string>
+  <string name="clear_recent_title">ସଂପ୍ରତି ପ୍ଲେଗୁଡିକୁ ହଟାଇବେ କି?</string>
+  <string name="clear_last_added">ଶେଷରେ ଯାହା ଯୋଗ କରାଯାଇଛି, ତାହା ଖାଲି କରିବେ କି?</string>
+  <string name="cannot_be_undone">ଏହା ଅନ୍‍ଡନ୍‍ ହୋଇପାରିବ ନାହିଁ</string>
+  <string name="delete_warning">ଏହା କ୍ୟାଚ୍‍ରେ ଥିବା ଚିତ୍ର ପ୍ରବେଶ ‍ସ୍ଥାୟୀ ଭାବେ ବିଲୋପ କରିଦେବ</string>
+  <string name="new_photo">ଗ୍ୟାଲେରୀରୁ ଫଟୋ ପରିବର୍ତ୍ତନ କରନ୍ତୁ</string>
+  <string name="google_search">Google ସନ୍ଧାନ</string>
+  <string name="use_default">ଡିଫଲ୍ଟ ଫଟୋ ବ୍ୟବହାର କରନ୍ତୁ</string>
+  <string name="old_photo">ପୁରୁଣା ଫଟୋ ବ୍ୟବହାର କରନ୍ତୁ</string>
   <!-- Context menu items -->
+  <string name="context_menu_play_selection">ଚଳାଅ</string>
+  <string name="context_menu_play_next">ପରବର୍ତ୍ତୀ ପ୍ଲେ କରନ୍ତୁ</string>
+  <string name="context_menu_play_album">ଆଲ୍‍ବମ୍‍ ପ୍ଲେ କରନ୍ତୁ</string>
+  <string name="context_menu_more_by_artist">କଳାକାରଙ୍କ ଦ୍ୱାରା ଅଧିକ</string>
+  <string name="context_menu_rename_playlist">ପୁନଃନାମ</string>
+  <string name="context_menu_delete">ବିଲୋପ କରନ୍ତୁ</string>
+  <string name="context_menu_fetch_album_art">ଅଲ୍‍ବମ୍‍ ର୍ଟ୍‍ ପ୍ରାପ୍ତ କରନ୍ତୁ</string>
+  <string name="context_menu_fetch_artist_image">କଳାକାର ଚିତ୍ର ପ୍ରାପ୍ତ କରନ୍ତୁ</string>
+  <string name="context_menu_remove_from_recent">ସମ୍ପ୍ରତିରୁ ଅପସାରଣ କରନ୍ତୁ</string>
+  <string name="context_menu_use_as_ringtone">ରିଂଗଟୋନ ଭାବେ ବ୍ୟବହାର</string>
+  <string name="context_menu_remove_from_playlist">ଚାଳନାତାଲିକା‌ରୁ ଅପସାରଣ କରନ୍ତୁ</string>
+  <string name="context_menu_change_image">ଚିତ୍ର ପରିବର୍ତ୍ତନ କରନ୍ତୁ</string>
   <!-- Content descriptions -->
+  <string name="accessibility_play">ଚଳାଅ</string>
+  <string name="accessibility_pause">ବିରତ</string>
+  <string name="accessibility_next">ପରବର୍ତ୍ତୀ</string>
+  <string name="accessibility_prev">ପୂର୍ବବର୍ତ୍ତୀ</string>
+  <string name="accessibility_shuffle">ସଫଲ୍</string>
+  <string name="accessibility_shuffle_all">ସମସ୍ତ ସଫଲ୍ କରନ୍ତୁ</string>
+  <string name="accessibility_repeat">ପୁନରାବୃତ୍ତି</string>
+  <string name="accessibility_repeat_all">ସମସ୍ତ ପୁନରାବୃତ୍ତି</string>
+  <string name="accessibility_repeat_one">ଏକ ପୁନରାବୃତ୍ତି</string>
+  <string name="accessibility_queue">ଧାଡି ଖୋଲନ୍ତୁ</string>
+  <string name="accessibility_browse">ଗୀତ ବ୍ରାଉଜ୍‍ କରନ୍ତୁ</string>
   <!-- Toast messages -->
+  <string name="set_as_ringtone">\'<xliff:g id="name" example="Alarm Bell">%s</xliff:g>\' ରିଙ୍ଗ୍‍ଟୋନ୍‍ ଭାବେ ସେଟ୍‍ କରନ୍ତୁ</string>
+  <string name="playlist_renamed">ପ୍ଲେତାଲିକା ପୁନଃନାମ ହୋଇଛି।</string>
   <!-- Settings -->
+  <string name="settings_ui_category">ଇଂଟରଫେସ୍‍</string>
+  <string name="settings_storage_category">ଷ୍ଟୋରେଜ୍</string>
+  <string name="settings_data_category">ଡାଟା</string>
+  <string name="settings_delete_cache_title">କ୍ୟାସେ ବିଲୋପ କରନ୍ତୁ</string>
+  <string name="settings_delete_cache_summary">ସମସ୍ତ କ୍ୟାସେର ଚିତ୍ର ଅପସାରଣ କରନ୍ତୁ</string>
+  <string name="settings_download_only_on_wifi_title">କେବଳ Wi-Fi ମାଧ୍ୟମରେ ଡାଉନ୍‍ଲୋଡ୍‍ କରନ୍ତୁ</string>
+  <string name="settings_download_only_on_wifi_summary">ମୋବାଇଲ୍‍ ଅପ୍ରେଟର ଶୁଳ୍କ ହ୍ରାସ କରିବା ପାଇଁ, ମୋବାଇଲ୍‍ ନେତ୍‍ୱାର୍କ୍‍ରେ ଡାଉନ୍‍ଲୋଡ୍‍ କରନ୍ତୁ ନାହିଁ</string>
+  <string name="settings_download_missing_artwork_title">ହଜିଯାଇଥିବା ଆଲ୍‍ବମ୍‍ ଆର୍ଟ ଡାଉନ୍‍ଲୋଡ୍‍ କରନ୍ତୁ</string>
+  <string name="settings_download_artist_images_title">ହଜିଯାଇଥିବା କଳାକାର ଚିତ୍ର ଡାଉନ୍‍ଲୋଡ୍‍ କରନ୍ତୁ</string>
+  <string name="settings_general_category">ସାଧାରଣ</string>
+  <string name="settings_show_music_visualization_title">ମ୍ୟୁଜିକ୍‍ ଭିଜୁଆଲାଇଜେସନ୍‍ ଦେଖାନ୍ତୁ</string>
+  <string name="settings_show_lyrics_title">ଗୀତ ଲିରିକ୍ସ ଦେଖାନ୍ତୁ</string>
+  <string name="settings_show_lyrics_summary">ଯେଉଁ ଗୀତଗୁଡିକର srt ଫାଇଲ୍‍ ଅଛି ତାହା ପାଇଁ</string>
+  <string name="settings_shake_to_play">ପ୍ଲେ କରିବା ପାଇଁ ହଲାନ୍ତୁ</string>
+  <string name="settings_shake_to_play_summary">ପର ଗୀତ ପ୍ଲେ କରିବା ପାଇଁ ଆପଣଙ୍କ ଡିଭାଇସ୍‍ ହଲାନ୍ତୁ</string>
+  <string name="settings_lockscreen_album_art">ଲକ୍‍ସ୍କ୍ରିନ୍‍ ଆଲ୍‍ବମ୍‍ ଆର୍ଟ</string>
+  <string name="settings_lockscreen_album_art_summary">ଆଲ୍‍ବମ୍‍ ଆର୍ଟ ସହିତ ଲକ୍‍ସ୍କ୍ରିନ୍ ପ୍ରତି‍ସ୍ଥାପନ କରନ୍ତୁ</string>
   <!-- App widget -->
+  <string name="app_widget_small">ସଙ୍ଗୀତ: 4 \u00d7 1</string>
+  <string name="app_widget_large">ସଙ୍ଗୀତ: 4 \u00d7 2</string>
+  <string name="app_widget_large_alt">ସଙ୍ଗୀତ: 4 \u00d7 2 (ବିକଳ୍ପ)</string>
+  <string name="app_widget_recent">ସଙ୍ଗୀତ: ସମ୍ପ୍ରତି ଶୁଣାଯାଇଥିବା</string>
   <!-- Empty list / error messages -->
+  <string name="no_effects_for_you">ଇକ୍ୱାଲାଇଜର୍‍ ଖୋଲାଯାଇପାରିବ ନାହିଁ।</string>
+  <string name="empty_music">ସଙ୍ଗୀତ ଆପଣଙ୍କ କମ୍ପ୍ୟୁଟରରୁ ଆପଣଙ୍କ ଡିଭାଇସ୍‍କୁ କପି କରିବା ପାଇଁ, ଏକ USB ତାର ବ୍ୟବହାର କରନ୍ତୁ।</string>
+  <string name="empty_search">କୌଣସି ସନ୍ଧାନ ଫଳାଫଳ ମିଳିଲା ନାହିଁ</string>
+  <string name="empty_search_check">ଆପଣ ବନାନ ଠିକ୍‍ କରିଥିବା ଦୟାକରି ପରୀକ୍ଷିତ କରନ୍ତୁ ବା ଏକ ଭିନ୍ନ କିଓ୍ୱାର୍ଡ ଚେଷ୍ଟା କରନ୍ତୁ।</string>
+  <string name="empty_favorite">ଆପଣ ପସନ୍ଦିତାସମୂହ ଚିହ୍ନିତ କରିଥିବା ଗୀତଗୁଡିକ ଏଠାରେ ଦେଖାଯିବ।</string>
+  <string name="empty_recent_main">କୌଣସି ସମ୍ପ୍ରତି ଗୀତ ନାହିଁ</string>
+  <string name="empty_recent">ସମ୍ପ୍ରତି ଆପଣ ଶୁଣୁଥିବା ଗୀତଗୁଡିକ ଏଠାରେ ପ୍ରଦର୍ଶନ କରିବା।</string>
+  <string name="empty_playlist_main">ଚାଳନତାଲିକାରେ କିଛି ଗୀତ ନାହିଁ</string>
+  <string name="empty_playlist_secondary">ଏହି ଚାଳନତାଲିକାରେ ଗୀତ ଯୋଗ କରିବା ପାଇଁ, ଗୀତ, ଆଲ୍‍ବମ୍‍ ବା କଳାକାରରେ ଥିବା ବିକଳ୍ପ ମେନ୍ୟୁରେ ଟ୍ୟାପ୍‍ କରନ୍ତୁ ଓ \&quot;ଚାଳନତାଲିକାରେ ଯୋଗ କରନ୍ତୁ\&quot;ରେ ଚୟନ କରନ୍ତୁ।</string>
+  <string name="empty_top_tracks_main">କୌଣସି ଶୀ‍ର୍ଷ ଟ୍ରାକ୍‍ ନାହିଁ</string>
+  <string name="empty_top_tracks_secondary">ଆପଣ ଅଧିକ ଥର ଶୁଣୁ୍ଥିବା ଗୀତଗୁଡିକ ଏହି ତାଲିକାରେ ଯୋଗ ହୋଇଯିବ।</string>
+  <string name="empty_last_added_main">ସମ୍ପ୍ରତି କୌଣସି ଗୀତ ଯୋଗ ହୋଇନାହିଁ</string>
+  <string name="empty_last_added">ଆପଣ ବିଗତ ମାସରେ ଯୋଗ କରିଥିବା ଗୀତଗୁଡିକ ଏଠାରେ ଦେଖାଯିବ।</string>
+  <string name="empty_generic_main">କୌଣସି ସଙ୍ଗୀତ ମିଳିଲା ନାହିଁ</string>
+  <string name="empty_generic_secondary">ସଙ୍ଗୀତ ଆପଣଙ୍କ କମ୍ପ୍ୟୁଟରରୁ ଆପଣଙ୍କ ଡିଭାଇସ୍‍କୁ କପି କରିବା ପାଇଁ, ଏକ USB ତାର ବ୍ୟବହାର କରନ୍ତୁ।</string>
+  <string name="empty_queue_main">ପ୍ଲେ ଧାଡିରେ କୌଣସି ଗୀତ ନାହିଁ</string>
+  <string name="empty_queue_secondary">ଏହି ପ୍ଲେତାଲିକାରେ ଗୀତ ଯୋଗ କରିବା ପାଇଁ, ଗୀତ, ଆଲ୍‍ବମ୍‍ ବା କଳାକାରରେ ଥିବା ବିକଳ୍ପ ମେନ୍ୟୁରେ ଟ୍ୟାପ୍‍ କରନ୍ତୁ ଓ \&quot;ପ୍ଲେତାଲିକାରେ ଯୋଗ କରନ୍ତୁ\&quot;ରେ ଚୟନ କରନ୍ତୁ।</string>
+  <string name="error_playing_track">ଟ୍ରାକ୍‍ %1$s ପ୍ଲେ କରିବାରେ ଅ‍କ୍ଷମ</string>
   <!-- Section Headers -->
+  <string name="header_unknown_year">ଅଜ୍ଞାତ ବ‍ର୍ଷ</string>
+  <string name="header_less_than_30s">30 ସେକେଣ୍ଡରୁ କମ୍‍</string>
+  <string name="header_30_to_60_seconds">30 - 60 ସେକେଣ୍ଡ</string>
+  <string name="header_1_to_2_minutes">1 - 2 ମିନିଟ୍‍</string>
+  <string name="header_2_to_3_minutes">2 - 3 ମିନିଟ୍‍</string>
+  <string name="header_3_to_4_minutes">3 - 4 ମିନିଟ୍‍</string>
+  <string name="header_4_to_5_minutes">4 - 5 ମିନିଟ୍‍</string>
+  <string name="header_5_to_10_minutes">5 - 10 ମିନିଟ୍‍</string>
+  <string name="header_10_to_30_minutes">10 - 30 ମିନିଟ୍‍</string>
+  <string name="header_30_to_60_minutes">30 - 60 ମିନିଟ୍‍</string>
+  <string name="header_greater_than_60_minutes">60 ମିନିଟ୍‍ରୁ ଅଧିକ</string>
+  <string name="header_1_song">1 ଗୀତ</string>
+  <string name="header_2_to_4_songs">2 - 4 ଗୀତ</string>
+  <string name="header_5_to_9_songs">5 - 9 ଗୀତ</string>
+  <string name="header_10_plus_songs">10+ ଗୀତ</string>
+  <string name="header_5_plus_albums">5+ ଆଲ୍‍ବମ୍‍</string>
+  <string name="header_other">"&quot;ଅନ୍ୟାନ୍ୟ&quot;"</string>
+  <string name="footer_search_artists">ସମସ୍ତ କଳାକାର ଦେଖାନ୍ତୁ</string>
+  <string name="footer_search_albums">ସମସ୍ତ ଆଲ୍‍ବମ୍‍ ଦେଖାନ୍ତୁ</string>
+  <string name="footer_search_songs">ସମସ୍ତ ଗୀତ ଦେଖାନ୍ତୁ</string>
+  <string name="footer_search_playlists">ସମସ୍ତ ପ୍ଲେତାଲିକା ପ୍ରଦର୍ଶନ କରନ୍ତୁ</string>
+  <string name="searchHint">ସଙ୍ଗୀତ ସନ୍ଧାନ କରନ୍ତୁ</string>
+  <string name="search_title_artists">ସମ୍ସ୍ତ \&quot;%s\&quot; କଳାକାର</string>
+  <string name="search_title_albums">ସମ୍ସ୍ତ \&quot;%s\&quot; ଆଲ୍‍ବମ୍‍</string>
+  <string name="search_title_songs">ସମ୍ସ୍ତ \&quot;%s\&quot; ଗୀତ</string>
+  <string name="search_title_playlists">ସମ୍ସ୍ତ \&quot;%s\&quot; ପ୍ଲେତାଲିକା</string>
+  <string name="duration_format"><xliff:g id="hours">%1$s</xliff:g> <xliff:g id="minutes">%2$s</xliff:g></string>
 </resources>

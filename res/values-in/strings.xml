@@ -26,14 +26,14 @@
   <string name="page_playlists">Daftar Putar</string>
   <string name="page_genres">Genre</string>
   <string name="page_now_playing">Sedang diputar</string>
-  <string name="page_play_queue">Putar daftar antrian</string>
+  <string name="page_play_queue">Putar daftar antrean</string>
   <!-- Section Headers -->
   <string name="header_albums">Album</string>
   <string name="header_top_songs">Lagu Top</string>
   <string name="header_all_songs">Semua Lagu</string>
   <!-- Option menu items -->
-  <string name="menu_settings">Setelan</string>
-  <string name="menu_search">Cari</string>
+  <string name="menu_settings">Pengaturan</string>
+  <string name="menu_search">Telusuri</string>
   <string name="menu_shuffle_item">Putar acak</string>
   <string name="menu_shuffle_all">Putar acak semua</string>
   <string name="menu_shuffle_playlist">Putar acak daftar putar</string>
@@ -45,15 +45,15 @@
   <string name="menu_play_all">Putar semua</string>
   <string name="menu_sort_by">Urut berdasarkan</string>
   <string name="menu_clear_list">Hapus daftar</string>
-  <string name="menu_clear_recents">Hapus recent</string>
-  <string name="menu_clear_queue">Bersihkan antrian</string>
+  <string name="menu_clear_recents">Hapus yang terbaru</string>
+  <string name="menu_clear_queue">Bersihkan antrean</string>
   <string name="menu_save_queue">Simpan antrean ke daftar putar</string>
   <string name="menu_equalizer">Equalizer</string>
   <!-- Playlist items -->
   <string name="add_to_playlist">Tambahkan ke daftar putar</string>
-  <string name="add_to_queue">Tambahkan ke antrian</string>
-  <string name="remove_from_recent">Hapus dari terakhir</string>
-  <string name="remove_from_queue">Hapus dari antrian</string>
+  <string name="add_to_queue">Tambahkan ke antrean</string>
+  <string name="remove_from_recent">Hapus dari yang terakhir</string>
+  <string name="remove_from_queue">Hapus dari antrean</string>
   <!-- Sort orders -->
   <string name="sort_order_entry_az">A-Z</string>
   <string name="sort_order_entry_za">Z-A</string>
@@ -65,7 +65,7 @@
   <string name="sort_order_entry_track_list">Daftar lagu</string>
   <string name="sort_order_entry_number_of_songs">Jumlah lagu</string>
   <string name="sort_order_entry_number_of_albums">Jumlah album</string>
-  <string name="sort_order_entry_filename">Nama file</string>
+  <string name="sort_order_entry_filename">Nama berkas</string>
   <!-- Default playlist names -->
   <string name="playlist_last_added">Terakhir ditambahkan</string>
   <string name="playlist_recently_played">Terakhir diputar</string>
@@ -82,11 +82,11 @@
   <string name="clear_top_tracks_title">Hapus lagu teratas?</string>
   <string name="clear_recent_title">Hapus yang terakhir diputar?</string>
   <string name="clear_last_added">Hapus yang terakhir ditambahkan?</string>
-  <string name="cannot_be_undone">Ini tidak dapat dibatalkan</string>
+  <string name="cannot_be_undone">Ini tidak dapat diurungkan</string>
   <string name="delete_warning">Ini akan menghapus cache gambar secara permanen</string>
   <string name="new_photo">Pilih foto dari Galeri</string>
-  <string name="google_search">Pencarian Google</string>
-  <string name="use_default">Gunakan foto default</string>
+  <string name="google_search">Penelusuran Google</string>
+  <string name="use_default">Gunakan foto baku</string>
   <string name="old_photo">Gunakan foto lama</string>
   <!-- Context menu items -->
   <string name="context_menu_play_selection">Putar</string>
@@ -111,7 +111,7 @@
   <string name="accessibility_repeat">Ulang</string>
   <string name="accessibility_repeat_all">Ulangi semua</string>
   <string name="accessibility_repeat_one">Ulangi sekali</string>
-  <string name="accessibility_queue">Buka antrian</string>
+  <string name="accessibility_queue">Buka antrean</string>
   <string name="accessibility_browse">Telusuri musik</string>
   <!-- Toast messages -->
   <string name="set_as_ringtone">\'<xliff:g id="name" example="Alarm Bell">%s</xliff:g>\' dijadikan sebagai nada dering</string>
@@ -129,11 +129,11 @@
   <string name="settings_general_category">Umum</string>
   <string name="settings_show_music_visualization_title">Tampilkan visualisasi musik</string>
   <string name="settings_show_lyrics_title">Tampilkan lirik lagu</string>
-  <string name="settings_show_lyrics_summary">Untuk lagu-lagu yang memiliki file srt</string>
+  <string name="settings_show_lyrics_summary">Untuk lagu-lagu yang memiliki berkas srt</string>
   <string name="settings_shake_to_play">Kocok untuk memutar</string>
-  <string name="settings_shake_to_play_summary">Kocok perangkat anda untuk memutar lagu berikutnya</string>
-  <string name="settings_lockscreen_album_art">Album art pada Layar kunci</string>
-  <string name="settings_lockscreen_album_art_summary">Ganti latar belakang Layar Kunci dengan album art</string>
+  <string name="settings_shake_to_play_summary">Kocok perangkat Anda untuk memutar lagu berikutnya</string>
+  <string name="settings_lockscreen_album_art">Seni album pada layar kunci</string>
+  <string name="settings_lockscreen_album_art_summary">Ganti latar belakang layar kunci dengan seni album</string>
   <!-- App widget -->
   <string name="app_widget_small">Musik: 4 \u00d7 1</string>
   <string name="app_widget_large">Musik: 4 \u00d7 2</string>
@@ -142,7 +142,7 @@
   <!-- Empty list / error messages -->
   <string name="no_effects_for_you">Equalizer tidak dapat dibuka.</string>
   <string name="empty_music">Untuk menyalin musik dari komputer ke perangkat Anda, gunakan kabel USB.</string>
-  <string name="empty_search">Hasil pencarian tidak ditemukan</string>
+  <string name="empty_search">Hasil penelusuran tidak ditemukan</string>
   <string name="empty_search_check">Periksa bahwa Anda memiliki ejaan yang benar atau coba kata kunci yang berbeda.</string>
   <string name="empty_favorite">Lagu-lagu yang Anda Tandai sebagai favorit akan ditampilkan di sini.</string>
   <string name="empty_recent_main">Tidak ada lagu terbaru</string>
@@ -155,8 +155,8 @@
   <string name="empty_last_added">Lagu-lagu yang telah Anda tambahkan selama satu bulan terakhir akan ditampilkan di sini.</string>
   <string name="empty_generic_main">Tidak ada musik yang ditemukan</string>
   <string name="empty_generic_secondary">Untuk menyalin musik dari komputer ke perangkat Anda, gunakan kabel USB.</string>
-  <string name="empty_queue_main">Tidak ada lagu dalam antrian putar</string>
-  <string name="empty_queue_secondary">Untuk menambahkan lagu ke Antrian Putar Anda, tekan menu pilihan pada lagu, album, atau artis dan pilih \"Tambahkan ke antrian\".</string>
+  <string name="empty_queue_main">Tidak ada lagu dalam antrean putar</string>
+  <string name="empty_queue_secondary">Untuk menambahkan lagu ke Antrean Putar Anda, tekan menu pilihan pada lagu, album, atau artis dan pilih \"Tambahkan ke antrean\".</string>
   <string name="error_playing_track">Tidak dapat memutar trek %1$s</string>
   <!-- Section Headers -->
   <string name="header_unknown_year">Tahun tidak diketahui</string>
@@ -180,7 +180,7 @@
   <string name="footer_search_albums">Tampilkan semua album</string>
   <string name="footer_search_songs">Tampilkan semua lagu</string>
   <string name="footer_search_playlists">Tampilkan semua daftar putar</string>
-  <string name="searchHint">Cari musik</string>
+  <string name="searchHint">Telusuri musik</string>
   <string name="search_title_artists">Semua \"%s\" artis</string>
   <string name="search_title_albums">Semua \"%s\" album</string>
   <string name="search_title_songs">Semua \"%s\" lagu</string>

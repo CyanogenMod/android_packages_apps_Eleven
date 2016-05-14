@@ -133,7 +133,7 @@
   <string name="settings_shake_to_play">Stresi za predvajanje</string>
   <string name="settings_shake_to_play_summary">Stresite svojo napravo za predvajanje naslednje skladbe</string>
   <string name="settings_lockscreen_album_art">Naslovnica zaslona za zakl.</string>
-  <string name="settings_lockscreen_album_art_summary">Nadomesti ozadje zaslona za zaklepanje z naslovnico</string>
+  <string name="settings_lockscreen_album_art_summary">Nadomesti ozadje zaklenjenega zaslona z naslovnico</string>
   <!-- App widget -->
   <string name="app_widget_small">Glasba: 4 \u00d7 1</string>
   <string name="app_widget_large">Glasba: 4 \u00d7 2</string>

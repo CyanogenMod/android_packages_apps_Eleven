@@ -92,7 +92,7 @@
   <string name="context_menu_play_selection">Изпълни</string>
   <string name="context_menu_play_next">Следваща песен</string>
   <string name="context_menu_play_album">Изпълни албум</string>
-  <string name="context_menu_more_by_artist">Повече от изпълнителя</string>
+  <string name="context_menu_more_by_artist">Още от изпълнителя</string>
   <string name="context_menu_rename_playlist">Преименуване</string>
   <string name="context_menu_delete">Изтриване</string>
   <string name="context_menu_fetch_album_art">Сложи обложка на албума</string>
@@ -131,9 +131,9 @@
   <string name="settings_show_lyrics_title">Покажи текстовете на песните</string>
   <string name="settings_show_lyrics_summary">За песни, които имат srt файл</string>
   <string name="settings_shake_to_play">Разтърсете, за да изпълни</string>
-  <string name="settings_shake_to_play_summary">Разклащане на вашето устройство за да изпълни следващата песен</string>
+  <string name="settings_shake_to_play_summary">Разтърсете устройството, за да изпълни следващата песен</string>
   <string name="settings_lockscreen_album_art">Обложки на заключен екран</string>
-  <string name="settings_lockscreen_album_art_summary">Заменя фона на заключения екран с обложката на албума</string>
+  <string name="settings_lockscreen_album_art_summary">Заменя фона на заключения екран с обложка от албума</string>
   <!-- App widget -->
   <string name="app_widget_small">Музика: 4 \u00d7 1</string>
   <string name="app_widget_large">Музика: 4 \u00d7 2</string>
@@ -143,7 +143,7 @@
   <string name="no_effects_for_you">Еквалайзера не може да бъде отворен.</string>
   <string name="empty_music">За да копирате музика от вашия компютър към вашето устройство, използвайте USB кабел.</string>
   <string name="empty_search">Няма резултати от търсенето</string>
-  <string name="empty_search_check">Проверете дали е изписано праилино или опитайте друга ключова дума.</string>
+  <string name="empty_search_check">Проверете дали е изписано правилно или опитайте друга ключова дума.</string>
   <string name="empty_favorite">Песните маркирани като любими ще бъдат показани тук.</string>
   <string name="empty_recent_main">Няма скорошни песни</string>
   <string name="empty_recent">Песните който сте слушали последно ще се покажат тук.</string>
@@ -180,7 +180,7 @@
   <string name="footer_search_albums">Покажи всички албуми</string>
   <string name="footer_search_songs">Покажи всички песни</string>
   <string name="footer_search_playlists">Покажи всички списъци за изпълнение</string>
-  <string name="searchHint">Търси музика</string>
+  <string name="searchHint">Търсете музика</string>
   <string name="search_title_artists">Всички изпълнители на \"%s\"</string>
   <string name="search_title_albums">Всички албуми на \"%s\"</string>
   <string name="search_title_songs">Всички песни на \"%s\"</string>

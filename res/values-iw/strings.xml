@@ -62,12 +62,12 @@
   <string name="sort_order_entry_year">שנה</string>
   <string name="sort_order_entry_duration">משך</string>
   <string name="sort_order_entry_date_added">תאריך הוספה</string>
-  <string name="sort_order_entry_track_list">רשימת שירים</string>
+  <string name="sort_order_entry_track_list">רשימת רצועות</string>
   <string name="sort_order_entry_number_of_songs">מספר שירים</string>
   <string name="sort_order_entry_number_of_albums">מספר אלבומים</string>
   <string name="sort_order_entry_filename">שם קובץ</string>
   <!-- Default playlist names -->
-  <string name="playlist_last_added">הוספו לאחרונה</string>
+  <string name="playlist_last_added">נוספו לאחרונה</string>
   <string name="playlist_recently_played">הושמעו לאחרונה</string>
   <string name="playlist_top_tracks">הרצועות המובילות שלי</string>
   <!-- AlertDialog items -->
@@ -80,8 +80,8 @@
   <string name="create_playlist_prompt">שם רשימת ההשמעה</string>
   <string name="delete_dialog_title">למחוק את <xliff:g id="item" example="album">%s</xliff:g>?</string>
   <string name="clear_top_tracks_title">לנקות שירים מובילים?</string>
-  <string name="clear_recent_title">לנקות רשימת \"שהושמעו לאחרונה\"?</string>
-  <string name="clear_last_added">לנקות רשימת \"הוספו לאחרונה\"?</string>
+  <string name="clear_recent_title">לנקות רשימת \"הושמעו לאחרונה\"?</string>
+  <string name="clear_last_added">לנקות רשימת \"נוספו לאחרונה\"?</string>
   <string name="cannot_be_undone">פעולה זו אינה ניתנת לביטול</string>
   <string name="delete_warning">פעולה זו תמחק לתמיד את התמונות שבמטמון</string>
   <string name="new_photo">בחר תמונה מהגלריה</string>
@@ -98,7 +98,7 @@
   <string name="context_menu_fetch_album_art">קבל תמונת אלבום</string>
   <string name="context_menu_fetch_artist_image">קבל תמונת אמן</string>
   <string name="context_menu_remove_from_recent">הסר מרשימת האחרונים</string>
-  <string name="context_menu_use_as_ringtone">השתמש כצלצול</string>
+  <string name="context_menu_use_as_ringtone">השתמש כרינגטון</string>
   <string name="context_menu_remove_from_playlist">הסר מרשימת השמעה</string>
   <string name="context_menu_change_image">שנה תמונה</string>
   <!-- Content descriptions -->
@@ -109,25 +109,25 @@
   <string name="accessibility_shuffle">ערבב</string>
   <string name="accessibility_shuffle_all">ערבב הכל</string>
   <string name="accessibility_repeat">חזור</string>
-  <string name="accessibility_repeat_all">חזור על הכל</string>
+  <string name="accessibility_repeat_all">חזור על הכול</string>
   <string name="accessibility_repeat_one">חזור על נוכחי</string>
   <string name="accessibility_queue">פתח את תור ההשמעה</string>
   <string name="accessibility_browse">הצג מוזיקה</string>
   <!-- Toast messages -->
-  <string name="set_as_ringtone">\"<xliff:g id="name" example="Alarm Bell">%s</xliff:g>\" נקבע כצלצול</string>
-  <string name="playlist_renamed">שם רשימת ההשמעה שונה</string>
+  <string name="set_as_ringtone">\"<xliff:g id="name" example="Alarm Bell">%s</xliff:g>\" נקבע כרינגטון</string>
+  <string name="playlist_renamed">שונה שם רשימת ההשמעה</string>
   <!-- Settings -->
   <string name="settings_ui_category">ממשק</string>
   <string name="settings_storage_category">אחסון</string>
   <string name="settings_data_category">נתונים</string>
   <string name="settings_delete_cache_title">מחק מטמון</string>
-  <string name="settings_delete_cache_summary">מחק את כל התמונות שבמטמון</string>
+  <string name="settings_delete_cache_summary">מסיר את כל התמונות שבמטמון</string>
   <string name="settings_download_only_on_wifi_title">הורד דרך Wi-Fi בלבד</string>
-  <string name="settings_download_only_on_wifi_summary">כדי להוריד עלויות מפעיל, אל תוריד מאינטרנט סלולרי</string>
+  <string name="settings_download_only_on_wifi_summary">כדי להפחית עלויות ספק תקשורת, אל תוריד מאינטרנט סלולרי</string>
   <string name="settings_download_missing_artwork_title">הורד תמונת אלבום חסרה</string>
   <string name="settings_download_artist_images_title">הורד תמונות אמן חסרות</string>
   <string name="settings_general_category">כללי</string>
-  <string name="settings_show_music_visualization_title">הצג אפקטים ויזואלים</string>
+  <string name="settings_show_music_visualization_title">הצג אפקטים ויזואליים למוזיקה</string>
   <string name="settings_show_lyrics_title">הצג את מילות השיר</string>
   <string name="settings_show_lyrics_summary">עבור שירים עם קובץ srt</string>
   <string name="settings_shake_to_play">נער כדי לנגן</string>
@@ -143,21 +143,21 @@
   <string name="no_effects_for_you">האקולייזר לא הצליח להיפתח.</string>
   <string name="empty_music">כדי להעתיק מוזיקה מהמחשב למכשיר השתמש בכבל USB.</string>
   <string name="empty_search">לא נמצאו תוצאות חיפוש</string>
-  <string name="empty_search_check">אנא בדוק כי האיות נכון או נסה מילת מפתח שונה.</string>
+  <string name="empty_search_check">בדוק שהאיות נכון או נסה מילת מפתח שונה.</string>
   <string name="empty_favorite">שירים שסומנו כמועדפים יוצגו כאן.</string>
   <string name="empty_recent_main">אין שירים אחרונים</string>
   <string name="empty_recent">שירים שהאזנת להם לאחרונה יופיעו כאן.</string>
   <string name="empty_playlist_main">אין שירים ברשימת ההשמעה</string>
-  <string name="empty_playlist_secondary">כדי להוסיף שירים לרשימת ההשמעה הזו, הקש על תפריט אפשרויות של שיר, אלבום או אמן ובחר \"הוסף לרשימת השמעה\".</string>
+  <string name="empty_playlist_secondary">כדי להוסיף שירים לרשימת ההשמעה הזו, הקש על תפריט האפשרויות של שיר, אלבום או אמן ובחר \"הוסף לרשימת השמעה\".</string>
   <string name="empty_top_tracks_main">אין רצועות מובילות</string>
-  <string name="empty_top_tracks_secondary">השירים שאתה שומע הכי הרבה יתווספו לרשימה זו.</string>
+  <string name="empty_top_tracks_secondary">השירים שלהם אתה מקשיב ביותר יתווספו לרשימה זו.</string>
   <string name="empty_last_added_main">לא נוספו שירים לאחרונה</string>
   <string name="empty_last_added">שירים שנוספו בחודש האחרון יוצגו כאן.</string>
   <string name="empty_generic_main">לא נמצאה מוזיקה</string>
   <string name="empty_generic_secondary">כדי להעתיק מוזיקה מהמחשב למכשיר השתמש בכבל USB.</string>
   <string name="empty_queue_main">אין שירים בתור להשמעה</string>
-  <string name="empty_queue_secondary">כדי להוסיף שירים לתור ההשמעה שלך, הקש על תפריט אפשרויות של שיר, אלבום או אמן ובחר \"הוסף לתור\".</string>
-  <string name="error_playing_track">לא ניתן להשמיע את הרצועה %1$s</string>
+  <string name="empty_queue_secondary">כדי להוסיף שירים לתור ההשמעה שלך, הקש על תפריט האפשרויות של שיר, אלבום או אמן ובחר \"הוסף לתור\".</string>
+  <string name="error_playing_track">לא ניתן לנגן את הרצועה %1$s</string>
   <!-- Section Headers -->
   <string name="header_unknown_year">שנה לא ידועה</string>
   <string name="header_less_than_30s">פחות מ-30 שניות</string>

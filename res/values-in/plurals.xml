@@ -51,7 +51,7 @@
   </plurals>
   <!-- Toasts after adding song(s) to queue -->
   <plurals name="NNNtrackstoqueue">
-    <item quantity="other"><xliff:g id="number" example="1">%d</xliff:g> lagu telah ditambahkan ke antrian.</item>
+    <item quantity="other"><xliff:g id="number" example="1">%d</xliff:g> lagu telah ditambahkan ke antrean.</item>
   </plurals>
   <!-- Toasts after adding song(s) to the favorites list -->
   <plurals name="NNNtrackstofavorites">
