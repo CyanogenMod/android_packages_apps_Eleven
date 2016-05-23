@@ -18,6 +18,7 @@
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
   <string name="app_name">Muziek</string>
+  <!-- Page titles -->
   <string name="page_recent">Recent</string>
   <string name="page_artists">Artiesten</string>
   <string name="page_albums">Albums</string>
@@ -26,9 +27,11 @@
   <string name="page_genres">Genres</string>
   <string name="page_now_playing">Nu afspelen</string>
   <string name="page_play_queue">Wachtrij</string>
+  <!-- Section Headers -->
   <string name="header_albums">Albums</string>
   <string name="header_top_songs">Beste nummers</string>
   <string name="header_all_songs">Alle nummers</string>
+  <!-- Option menu items -->
   <string name="menu_settings">Instellingen</string>
   <string name="menu_search">Zoeken</string>
   <string name="menu_shuffle_item">Shuffle</string>
@@ -46,10 +49,12 @@
   <string name="menu_clear_queue">Wachtrij wissen</string>
   <string name="menu_save_queue">Wachtrij opslaan als afspeellijst</string>
   <string name="menu_equalizer">Equalizer</string>
+  <!-- Playlist items -->
   <string name="add_to_playlist">Toevoegen aan afspeellijst</string>
   <string name="add_to_queue">Toevoegen aan wachtrij</string>
   <string name="remove_from_recent">Verwijderen uit recente</string>
   <string name="remove_from_queue">Verwijderen uit wachtrij</string>
+  <!-- Sort orders -->
   <string name="sort_order_entry_az">A-Z</string>
   <string name="sort_order_entry_za">Z-A</string>
   <string name="sort_order_entry_artist">Artiest</string>
@@ -61,9 +66,11 @@
   <string name="sort_order_entry_number_of_songs">Aantal nummers</string>
   <string name="sort_order_entry_number_of_albums">Aantal albums</string>
   <string name="sort_order_entry_filename">Bestandsnaam</string>
+  <!-- Default playlist names -->
   <string name="playlist_last_added">Laatst toegevoegd</string>
   <string name="playlist_recently_played">Recent afgespeeld</string>
   <string name="playlist_top_tracks">Mijn beste nummers</string>
+  <!-- AlertDialog items -->
   <string name="new_playlist">Nieuwe afspeellijst</string>
   <string name="save">Opslaan</string>
   <string name="cancel">Annuleren</string>
@@ -81,6 +88,7 @@
   <string name="google_search">Google Zoeken</string>
   <string name="use_default">Standaardafbeelding</string>
   <string name="old_photo">Oude afbeelding</string>
+  <!-- Context menu items -->
   <string name="context_menu_play_selection">Afspelen</string>
   <string name="context_menu_play_next">Volgende afspelen</string>
   <string name="context_menu_play_album">Album afspelen</string>
@@ -93,6 +101,7 @@
   <string name="context_menu_use_as_ringtone">Gebruiken als beltoon</string>
   <string name="context_menu_remove_from_playlist">Verwijderen uit afspeellijst</string>
   <string name="context_menu_change_image">Afbeelding wijzigen</string>
+  <!-- Content descriptions -->
   <string name="accessibility_play">Afspelen</string>
   <string name="accessibility_pause">Pauzeren</string>
   <string name="accessibility_next">Volgende</string>
@@ -104,8 +113,10 @@
   <string name="accessibility_repeat_one">Eén herhalen</string>
   <string name="accessibility_queue">Wachtrij openen</string>
   <string name="accessibility_browse">Muziek verkennen</string>
+  <!-- Toast messages -->
   <string name="set_as_ringtone">\'<xliff:g id="name" example="Alarm Bell">%s</xliff:g>\' ingesteld als beltoon</string>
   <string name="playlist_renamed">Naam afspeellijst gewijzigd</string>
+  <!-- Settings -->
   <string name="settings_ui_category">Uiterlijk</string>
   <string name="settings_storage_category">Opslag</string>
   <string name="settings_data_category">Gegevens</string>
@@ -123,10 +134,12 @@
   <string name="settings_shake_to_play_summary">Uw apparaat schudden om het volgende nummer af te spelen</string>
   <string name="settings_lockscreen_album_art">Albumhoes op vergrendelingsscherm</string>
   <string name="settings_lockscreen_album_art_summary">Achtergrond vergrendelingsscherm vervangen door albumhoes</string>
+  <!-- App widget -->
   <string name="app_widget_small">Muziek: 4 \u00d7 1</string>
   <string name="app_widget_large">Muziek: 4 \u00d7 2</string>
   <string name="app_widget_large_alt">Muziek: 4 \u00d7 2 (alternatief)</string>
   <string name="app_widget_recent">Muziek: recent beluisterd</string>
+  <!-- Empty list / error messages -->
   <string name="no_effects_for_you">Kan equalizer niet openen.</string>
   <string name="empty_music">Om muziek van uw computer te kopiëren naar uw apparaat, kunt u een USB-kabel gebruiken.</string>
   <string name="empty_search">Geen zoekresultaten gevonden</string>
@@ -145,6 +158,7 @@
   <string name="empty_queue_main">Geen nummers in wachtrij</string>
   <string name="empty_queue_secondary">Om nummers toe te voegen aan de wachtrij, tik op het menu van een nummer, album of artiest en selecteer \'Toevoegen aan wachtrij\'.</string>
   <string name="error_playing_track">Kan nummer %1$s niet afspelen</string>
+  <!-- Section Headers -->
   <string name="header_unknown_year">Onbekend jaar</string>
   <string name="header_less_than_30s">Minder dan 30 seconden</string>
   <string name="header_30_to_60_seconds">30 - 60 seconden</string>
