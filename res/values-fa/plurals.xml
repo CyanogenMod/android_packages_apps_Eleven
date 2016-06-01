@@ -19,46 +19,57 @@
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
   <!-- Used to indicate the number of artists -->
   <plurals name="Nartists">
+    <item quantity="one"><xliff:g id="count">%d</xliff:g> هنرمند</item>
     <item quantity="other"><xliff:g id="count">%d</xliff:g> هنرمند</item>
   </plurals>
   <!-- Used to indicate the number of albums for an artist -->
   <plurals name="Nalbums">
+    <item quantity="one"><xliff:g id="count">%d</xliff:g> آلبوم</item>
     <item quantity="other"><xliff:g id="count">%d</xliff:g> آلبوم</item>
   </plurals>
   <!-- Used to indicate the number of songs for an album -->
   <plurals name="Nsongs">
+    <item quantity="one"><xliff:g id="count">%d</xliff:g> آهنگ</item>
     <item quantity="other"><xliff:g id="count">%d</xliff:g> آهنگ</item>
   </plurals>
   <!-- Used to indicate the number of genres -->
   <plurals name="Ngenres">
+    <item quantity="one"><xliff:g id="count">%d</xliff:g> سبک</item>
     <item quantity="other"><xliff:g id="count">%d</xliff:g> سبک</item>
   </plurals>
   <!-- Used to show a shortened version of hours-->
   <plurals name="Nhours">
+    <item quantity="one"><xliff:g id="hours">%d</xliff:g>ساعت</item>
     <item quantity="other"><xliff:g id="hours">%d</xliff:g>ساعت</item>
   </plurals>
   <!-- Used to show a shortened version of minutes -->
   <plurals name="Nminutes">
+    <item quantity="one"><xliff:g id="minutes">%d</xliff:g>دقیقه</item>
     <item quantity="other"><xliff:g id="minutes">%d</xliff:g>دقیقه</item>
   </plurals>
   <!-- Toasts after adding song(s) to playlists -->
   <plurals name="NNNtrackstoplaylist">
+    <item quantity="one"><xliff:g id="number" example="27">%d</xliff:g> آهنگ به لیست پخش اضافه شد.</item>
     <item quantity="other"><xliff:g id="number" example="27">%d</xliff:g> آهنگ به لیست پخش اضافه شد.</item>
   </plurals>
   <!-- Toasts after removing song(s) from playlists -->
   <plurals name="NNNtracksfromplaylist">
+    <item quantity="one"><xliff:g id="number" example="27">%d</xliff:g> آهنگ از لیست پخش حذف شد.</item>
     <item quantity="other"><xliff:g id="number" example="27">%d</xliff:g> آهنگ از لیست پخش حذف شد.</item>
   </plurals>
   <!-- Toasts after adding song(s) to queue -->
   <plurals name="NNNtrackstoqueue">
+    <item quantity="one"><xliff:g id="number" example="27">%d</xliff:g> آهنگ به صف پخش اضافه شد.</item>
     <item quantity="other"><xliff:g id="number" example="27">%d</xliff:g> آهنگ به صف پخش اضافه شد.</item>
   </plurals>
   <!-- Toasts after adding song(s) to the favorites list -->
   <plurals name="NNNtrackstofavorites">
+    <item quantity="one"><xliff:g id="number" example="27">%d</xliff:g> آهنگ به علاقه‌مندی‌ها اضافه شد.</item>
     <item quantity="other"><xliff:g id="number" example="27">%d</xliff:g> آهنگ به علاقه‌مندی‌ها اضافه شد.</item>
   </plurals>
   <!-- Toast confirming that song(s) was/were deleted. -->
   <plurals name="NNNtracksdeleted">
+    <item quantity="one"><xliff:g id="songs_to_delete">%d</xliff:g> آهنگ حذف شد.</item>
     <item quantity="other"><xliff:g id="songs_to_delete">%d</xliff:g> آهنگ حذف شد.</item>
   </plurals>
 </resources>
