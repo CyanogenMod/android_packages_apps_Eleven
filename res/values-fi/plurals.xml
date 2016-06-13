@@ -17,46 +17,57 @@
      limitations under the License.
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <!-- Used to indicate the number of artists -->
   <plurals name="Nartists">
     <item quantity="one"><xliff:g id="count">%d</xliff:g> esittäjä</item>
     <item quantity="other"><xliff:g id="count">%d</xliff:g> esittäjää</item>
   </plurals>
+  <!-- Used to indicate the number of albums for an artist -->
   <plurals name="Nalbums">
     <item quantity="one"><xliff:g id="count">%d</xliff:g> albumi</item>
     <item quantity="other"><xliff:g id="count">%d</xliff:g> albumia</item>
   </plurals>
+  <!-- Used to indicate the number of songs for an album -->
   <plurals name="Nsongs">
     <item quantity="one"><xliff:g id="count">%d</xliff:g> kappale</item>
     <item quantity="other"><xliff:g id="count">%d</xliff:g> kappaletta</item>
   </plurals>
+  <!-- Used to indicate the number of genres -->
   <plurals name="Ngenres">
     <item quantity="one"><xliff:g id="count">%d</xliff:g> tyylilaji</item>
     <item quantity="other"><xliff:g id="count">%d</xliff:g> tyylilajia</item>
   </plurals>
+  <!-- Used to show a shortened version of hours-->
   <plurals name="Nhours">
     <item quantity="one"><xliff:g id="hours">%d</xliff:g>t</item>
     <item quantity="other"><xliff:g id="hours">%d</xliff:g>t</item>
   </plurals>
+  <!-- Used to show a shortened version of minutes -->
   <plurals name="Nminutes">
     <item quantity="one"><xliff:g id="minutes">%d</xliff:g>min</item>
     <item quantity="other"><xliff:g id="minutes">%d</xliff:g>min</item>
   </plurals>
+  <!-- Toasts after adding song(s) to playlists -->
   <plurals name="NNNtrackstoplaylist">
     <item quantity="one"><xliff:g id="number" example="1">%d</xliff:g> kappale lisätty soittolistalle.</item>
     <item quantity="other"><xliff:g id="number" example="27">%d</xliff:g> kappaletta lisätty soittolistalle.</item>
   </plurals>
+  <!-- Toasts after removing song(s) from playlists -->
   <plurals name="NNNtracksfromplaylist">
     <item quantity="one"><xliff:g id="number" example="1">%d</xliff:g> kappale poistettu soittolistalta.</item>
     <item quantity="other"><xliff:g id="number" example="27">%d</xliff:g> kappaletta poistettu soittolistalta.</item>
   </plurals>
+  <!-- Toasts after adding song(s) to queue -->
   <plurals name="NNNtrackstoqueue">
     <item quantity="one"><xliff:g id="number" example="1">%d</xliff:g> kappale lisätty jonoon.</item>
     <item quantity="other"><xliff:g id="number" example="27">%d</xliff:g> kappaletta lisätty jonoon.</item>
   </plurals>
+  <!-- Toasts after adding song(s) to the favorites list -->
   <plurals name="NNNtrackstofavorites">
     <item quantity="one"><xliff:g id="number" example="1">%d</xliff:g> kappale lisätty suosikkeihin.</item>
     <item quantity="other"><xliff:g id="number" example="27">%d</xliff:g> kappaletta lisätty suosikkeihin.</item>
   </plurals>
+  <!-- Toast confirming that song(s) was/were deleted. -->
   <plurals name="NNNtracksdeleted">
     <item quantity="one"><xliff:g id="songs_to_delete" example="1">%d</xliff:g> kappale poistettiin.</item>
     <item quantity="other"><xliff:g id="songs_to_delete">%d</xliff:g> kappaletta poistettiin.</item>

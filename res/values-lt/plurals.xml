@@ -17,56 +17,67 @@
      limitations under the License.
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <!-- Used to indicate the number of artists -->
   <plurals name="Nartists">
     <item quantity="one"><xliff:g id="count">%d</xliff:g> atlikėjas</item>
     <item quantity="few"><xliff:g id="count">%d</xliff:g> atlikėjai</item>
     <item quantity="other"><xliff:g id="count">%d</xliff:g> atlikėjų</item>
   </plurals>
+  <!-- Used to indicate the number of albums for an artist -->
   <plurals name="Nalbums">
     <item quantity="one"><xliff:g id="count">%d</xliff:g> albumas</item>
     <item quantity="few"><xliff:g id="count">%d</xliff:g> albumai</item>
     <item quantity="other"><xliff:g id="count">%d</xliff:g> albumų</item>
   </plurals>
+  <!-- Used to indicate the number of songs for an album -->
   <plurals name="Nsongs">
     <item quantity="one"><xliff:g id="count">%d</xliff:g> daina</item>
     <item quantity="few"><xliff:g id="count">%d</xliff:g> dainos</item>
     <item quantity="other"><xliff:g id="count">%d</xliff:g> dainų</item>
   </plurals>
+  <!-- Used to indicate the number of genres -->
   <plurals name="Ngenres">
     <item quantity="one"><xliff:g id="count">%d</xliff:g> žanras</item>
     <item quantity="few"><xliff:g id="count">%d</xliff:g> žanrai</item>
     <item quantity="other"><xliff:g id="count">%d</xliff:g> žanrų</item>
   </plurals>
+  <!-- Used to show a shortened version of hours-->
   <plurals name="Nhours">
     <item quantity="one"><xliff:g id="hours">%d</xliff:g>val.</item>
     <item quantity="few"><xliff:g id="hours">%d</xliff:g>val.</item>
     <item quantity="other"><xliff:g id="hours">%d</xliff:g>val.</item>
   </plurals>
+  <!-- Used to show a shortened version of minutes -->
   <plurals name="Nminutes">
     <item quantity="one"><xliff:g id="minutes">%d</xliff:g>min.</item>
     <item quantity="few"><xliff:g id="minutes">%d</xliff:g>min.</item>
     <item quantity="other"><xliff:g id="minutes">%d</xliff:g>min.</item>
   </plurals>
+  <!-- Toasts after adding song(s) to playlists -->
   <plurals name="NNNtrackstoplaylist">
     <item quantity="one"><xliff:g id="number" example="1">%d</xliff:g> daina pridėta į grojaraštį.</item>
     <item quantity="few"><xliff:g id="number" example="1">%d</xliff:g> dainos pridėtos į grojaraštį.</item>
     <item quantity="other"><xliff:g id="number" example="1">%d</xliff:g> dainų pridėta į grojaraštį.</item>
   </plurals>
+  <!-- Toasts after removing song(s) from playlists -->
   <plurals name="NNNtracksfromplaylist">
     <item quantity="one"><xliff:g id="number" example="1">%d</xliff:g> daina pašalinta iš grojaraščio.</item>
     <item quantity="few"><xliff:g id="number" example="1">%d</xliff:g> dainos pašalintos iš grojaraščio.</item>
     <item quantity="other"><xliff:g id="number" example="1">%d</xliff:g> dainų pašalinta iš grojaraščio.</item>
   </plurals>
+  <!-- Toasts after adding song(s) to queue -->
   <plurals name="NNNtrackstoqueue">
     <item quantity="one"><xliff:g id="number" example="1">%d</xliff:g> daina pridėta į eilę.</item>
     <item quantity="few"><xliff:g id="number" example="1">%d</xliff:g> dainos pridėtos į eilę.</item>
     <item quantity="other"><xliff:g id="number" example="1">%d</xliff:g> dainų pridėta į eilę.</item>
   </plurals>
+  <!-- Toasts after adding song(s) to the favorites list -->
   <plurals name="NNNtrackstofavorites">
     <item quantity="one"><xliff:g id="number" example="1">%d</xliff:g> daina pridėta į mėgstamus.</item>
     <item quantity="few"><xliff:g id="number" example="1">%d</xliff:g> dainos pridėtos į mėgstamus.</item>
     <item quantity="other"><xliff:g id="number" example="1">%d</xliff:g> dainų pridėta į mėgstamus.</item>
   </plurals>
+  <!-- Toast confirming that song(s) was/were deleted. -->
   <plurals name="NNNtracksdeleted">
     <item quantity="one"><xliff:g id="songs_to_delete" example="1">%d</xliff:g> daina buvo ištrinta.</item>
     <item quantity="few"><xliff:g id="songs_to_delete" example="1">%d</xliff:g> dainos buvo ištrintos.</item>

@@ -18,6 +18,7 @@
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
   <string name="app_name">음악</string>
+  <!-- Page titles -->
   <string name="page_recent">최근</string>
   <string name="page_artists">아티스트</string>
   <string name="page_albums">앨범</string>
@@ -26,9 +27,11 @@
   <string name="page_genres">장르</string>
   <string name="page_now_playing">재생 중</string>
   <string name="page_play_queue">재생 대기열</string>
+  <!-- Section Headers -->
   <string name="header_albums">앨범</string>
   <string name="header_top_songs">자주 듣는 곡들</string>
   <string name="header_all_songs">모든 노래</string>
+  <!-- Option menu items -->
   <string name="menu_settings">설정</string>
   <string name="menu_search">검색</string>
   <string name="menu_shuffle_item">셔플</string>
@@ -46,10 +49,12 @@
   <string name="menu_clear_queue">대기열 비우기</string>
   <string name="menu_save_queue">큐를 재생 목록으로 저장</string>
   <string name="menu_equalizer">이퀄라이저</string>
+  <!-- Playlist items -->
   <string name="add_to_playlist">재생목록에 추가</string>
   <string name="add_to_queue">대기열에 추가</string>
   <string name="remove_from_recent">최근 재생 목록에서 제거</string>
   <string name="remove_from_queue">대기열에서 제거</string>
+  <!-- Sort orders -->
   <string name="sort_order_entry_az">오름차순</string>
   <string name="sort_order_entry_za">내림차순</string>
   <string name="sort_order_entry_artist">아티스트</string>
@@ -61,9 +66,11 @@
   <string name="sort_order_entry_number_of_songs">음악 수</string>
   <string name="sort_order_entry_number_of_albums">앨범 수</string>
   <string name="sort_order_entry_filename">파일명</string>
+  <!-- Default playlist names -->
   <string name="playlist_last_added">최근에 추가된 곡</string>
   <string name="playlist_recently_played">최근에 재생된 곡</string>
   <string name="playlist_top_tracks">자주 듣는 노래</string>
+  <!-- AlertDialog items -->
   <string name="new_playlist">새 재생목록</string>
   <string name="save">저장</string>
   <string name="cancel">취소</string>
@@ -81,6 +88,7 @@
   <string name="google_search">Google 검색</string>
   <string name="use_default">기본 사진 사용</string>
   <string name="old_photo">이전 사진 사용</string>
+  <!-- Context menu items -->
   <string name="context_menu_play_selection">재생</string>
   <string name="context_menu_play_next">다음 곡 재생</string>
   <string name="context_menu_play_album">앨범 재생</string>
@@ -93,6 +101,7 @@
   <string name="context_menu_use_as_ringtone">벨소리로 지정</string>
   <string name="context_menu_remove_from_playlist">재생목록에서 제거</string>
   <string name="context_menu_change_image">이미지 변경</string>
+  <!-- Content descriptions -->
   <string name="accessibility_play">재생</string>
   <string name="accessibility_pause">일시정지</string>
   <string name="accessibility_next">다음</string>
@@ -104,8 +113,10 @@
   <string name="accessibility_repeat_one">한 곡 반복</string>
   <string name="accessibility_queue">대기열 열기</string>
   <string name="accessibility_browse">음악 탐색</string>
+  <!-- Toast messages -->
   <string name="set_as_ringtone">\'<xliff:g id="name" example="Alarm Bell">%s</xliff:g>\'이(가) 벨소리로 지정되었습니다</string>
   <string name="playlist_renamed">재생목록의 이름이 변경되었습니다</string>
+  <!-- Settings -->
   <string name="settings_ui_category">인터페이스</string>
   <string name="settings_storage_category">저장소</string>
   <string name="settings_data_category">데이터</string>
@@ -123,10 +134,12 @@
   <string name="settings_shake_to_play_summary">기기를 흔들어 다음 곡을 재생</string>
   <string name="settings_lockscreen_album_art">잠금화면 앨범 아트</string>
   <string name="settings_lockscreen_album_art_summary">잠금화면 배경을 앨범 아트로 바꿈</string>
+  <!-- App widget -->
   <string name="app_widget_small">음악: 4 \u00d7 1</string>
   <string name="app_widget_large">음악: 4 \u00d7 2</string>
   <string name="app_widget_large_alt">음악: 4 \u00d7 2 (다른 배치)</string>
   <string name="app_widget_recent">음악: 최근에 들은 곡</string>
+  <!-- Empty list / error messages -->
   <string name="no_effects_for_you">이퀄라이저를 열 수 없습니다.</string>
   <string name="empty_music">컴퓨터에서 기기로 음악을 복사하려면 USB 케이블을 사용하십시오.</string>
   <string name="empty_search">검색 결과 없음</string>
@@ -145,6 +158,7 @@
   <string name="empty_queue_main">대기열에 노래 없음</string>
   <string name="empty_queue_secondary">노래를 재생 대기열에 추가하려면 노래, 앨범, 또는 아티스트의 옵션 메뉴를 탭하여 연 뒤 \"대기열에 추가\"를 선택하십시오.</string>
   <string name="error_playing_track">%1$s 트랙을 재생할 수 없음</string>
+  <!-- Section Headers -->
   <string name="header_unknown_year">알 수 없는 연도</string>
   <string name="header_less_than_30s">30초 미만</string>
   <string name="header_30_to_60_seconds">30-60초</string>

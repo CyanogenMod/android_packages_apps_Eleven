@@ -18,6 +18,7 @@
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
   <string name="app_name">Musek</string>
+  <!-- Page titles -->
   <string name="page_recent">Rezent</string>
   <string name="page_artists">Interpreten</string>
   <string name="page_albums">Alben</string>
@@ -26,9 +27,11 @@
   <string name="page_genres">Genren</string>
   <string name="page_now_playing">Gëtt ofgespillt</string>
   <string name="page_play_queue">Waardeschlaang ofspillen</string>
+  <!-- Section Headers -->
   <string name="header_albums">Alben</string>
   <string name="header_top_songs">Top-Lidder</string>
   <string name="header_all_songs">All d\'Lidder</string>
+  <!-- Option menu items -->
   <string name="menu_settings">Astellungen</string>
   <string name="menu_search">Sichen</string>
   <string name="menu_shuffle_item">Mëschen</string>
@@ -46,10 +49,12 @@
   <string name="menu_clear_queue">Waardeschlaang eidel maachen</string>
   <string name="menu_save_queue">Waardeschläif an eng Ofspilllëscht späicheren</string>
   <string name="menu_equalizer">Equalizer</string>
+  <!-- Playlist items -->
   <string name="add_to_playlist">An d\'Ofspilllëscht setzen</string>
   <string name="add_to_queue">Un d\'Waardeschlaang hänken</string>
   <string name="remove_from_recent">Aus der \"Viru kuerzem gelauschtert\"-Lëscht läschen</string>
   <string name="remove_from_queue">Aus der Waardeschlaang läschen</string>
+  <!-- Sort orders -->
   <string name="sort_order_entry_az">A-Z</string>
   <string name="sort_order_entry_za">Z-A</string>
   <string name="sort_order_entry_artist">Interpret</string>
@@ -61,9 +66,11 @@
   <string name="sort_order_entry_number_of_songs">Unzuel u Museksstécker</string>
   <string name="sort_order_entry_number_of_albums">Unzuel vun Alben</string>
   <string name="sort_order_entry_filename">Fichiersnumm</string>
+  <!-- Default playlist names -->
   <string name="playlist_last_added">Fir d\'lescht dobäigesat</string>
   <string name="playlist_recently_played">Viru kuerzem ofgespillt</string>
   <string name="playlist_top_tracks">Meng Top-Lidder</string>
+  <!-- AlertDialog items -->
   <string name="new_playlist">Nei Ofspilllëscht</string>
   <string name="save">Späicheren</string>
   <string name="cancel">Ofbriechen</string>
@@ -81,6 +88,7 @@
   <string name="google_search">Google-Sich</string>
   <string name="use_default">Standardfoto benotzen</string>
   <string name="old_photo">Al Foto benotzen</string>
+  <!-- Context menu items -->
   <string name="context_menu_play_selection">Ofspillen</string>
   <string name="context_menu_play_next">Als nächst ofspillen</string>
   <string name="context_menu_play_album">Album ofspillen</string>
@@ -93,6 +101,7 @@
   <string name="context_menu_use_as_ringtone">Als Schelltoun benotzen</string>
   <string name="context_menu_remove_from_playlist">Aus der Ofspilllëscht läschen</string>
   <string name="context_menu_change_image">Bild änneren</string>
+  <!-- Content descriptions -->
   <string name="accessibility_play">Ofspillen</string>
   <string name="accessibility_pause">Paus</string>
   <string name="accessibility_next">Weider</string>
@@ -104,8 +113,10 @@
   <string name="accessibility_repeat_one">Eent widderhuelen</string>
   <string name="accessibility_queue">Waardeschlaang opmaachen</string>
   <string name="accessibility_browse">Musek duerchsichen</string>
+  <!-- Toast messages -->
   <string name="set_as_ringtone">\'<xliff:g id="name" example="Alarm Bell">%s</xliff:g>\' als Schelltoun setzen</string>
   <string name="playlist_renamed">Ofspilllëscht ëmbenannt</string>
+  <!-- Settings -->
   <string name="settings_ui_category">Interface</string>
   <string name="settings_storage_category">Späicher</string>
   <string name="settings_data_category">Daten</string>
@@ -123,10 +134,12 @@
   <string name="settings_shake_to_play_summary">Apparat rësele fir dat nächst Lidd ofzespillen</string>
   <string name="settings_lockscreen_album_art">Album-Biller um Spärschierm</string>
   <string name="settings_lockscreen_album_art_summary">D\'Hannergrondbild um Spärschierm mam Album-Bild ersetzen</string>
+  <!-- App widget -->
   <string name="app_widget_small">Musek: 4 \u00d7 1</string>
   <string name="app_widget_large">Musek: 4 \u00d7 2</string>
   <string name="app_widget_large_alt">Musek: 4 \u00d7 2 (alternativ)</string>
   <string name="app_widget_recent">Musek: viru kuerzem gelauschtert</string>
+  <!-- Empty list / error messages -->
   <string name="no_effects_for_you">Den Equalizer konnt net opgemaach ginn.</string>
   <string name="empty_music">Benotz en USB-Kabel fir Musek vun dengem Computer op den Apparat z\'iwwerdroen.</string>
   <string name="empty_search">Keng Sichresultater fonnt</string>
@@ -145,6 +158,7 @@
   <string name="empty_queue_main">Keng Lidder an der Waardeschlaang</string>
   <string name="empty_queue_secondary">Fir Lidder an d\'Waardeschlaang ze setzen, dréck den Optiounsmenü bei engem Lidd, Album oder Interpret, a wiel \"An d\'Waardeschlaang setzen\" aus.</string>
   <string name="error_playing_track">Lidd %1$s kann net ofgespillt ginn</string>
+  <!-- Section Headers -->
   <string name="header_unknown_year">Onbekannt Joer</string>
   <string name="header_less_than_30s">Manner wéi 30 Sekonnen</string>
   <string name="header_30_to_60_seconds">30-60 Sekonnen</string>
