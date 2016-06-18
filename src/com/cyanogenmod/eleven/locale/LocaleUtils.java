@@ -127,6 +127,9 @@ public class LocaleUtils {
          * for the new # bucket, so the returned range becomes 0 to N+1.
          */
         public int getBucketIndex(String name) {
+            if (name == null) {
+                return -1;
+            }
             boolean prefixIsNumeric = false;
             final int length = name.length();
             int offset = 0;
