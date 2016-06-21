@@ -19,57 +19,79 @@
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
   <!-- Used to indicate the number of artists -->
   <plurals name="Nartists">
-    <item quantity="one">אמן <xliff:g id="count">%d</xliff:g></item>
+    <item quantity="one">אמן אחד</item>
+    <item quantity="two"><xliff:g id="count">%d</xliff:g> אמנים</item>
+    <item quantity="many"><xliff:g id="count">%d</xliff:g> אמנים</item>
     <item quantity="other"><xliff:g id="count">%d</xliff:g> אמנים</item>
   </plurals>
   <!-- Used to indicate the number of albums for an artist -->
   <plurals name="Nalbums">
     <item quantity="one">אלבום <xliff:g id="count">%d</xliff:g></item>
+    <item quantity="two"><xliff:g id="count">%d</xliff:g> אלבומים</item>
+    <item quantity="many"><xliff:g id="count">%d</xliff:g> אלבומים</item>
     <item quantity="other"><xliff:g id="count">%d</xliff:g> אלבומים</item>
   </plurals>
   <!-- Used to indicate the number of songs for an album -->
   <plurals name="Nsongs">
     <item quantity="one">שיר <xliff:g id="count">%d</xliff:g></item>
+    <item quantity="two"><xliff:g id="count">%d</xliff:g> שירים</item>
+    <item quantity="many"><xliff:g id="count">%d</xliff:g> שירים</item>
     <item quantity="other"><xliff:g id="count">%d</xliff:g> שירים</item>
   </plurals>
   <!-- Used to indicate the number of genres -->
   <plurals name="Ngenres">
     <item quantity="one">ז\'אנר <xliff:g id="count">%d</xliff:g></item>
+    <item quantity="two"><xliff:g id="count">%d</xliff:g> ז\'אנרים</item>
+    <item quantity="many"><xliff:g id="count">%d</xliff:g> ז\'אנרים</item>
     <item quantity="other"><xliff:g id="count">%d</xliff:g> ז\'אנרים</item>
   </plurals>
   <!-- Used to show a shortened version of hours-->
   <plurals name="Nhours">
     <item quantity="one">ש\' <xliff:g id="hours">%d</xliff:g></item>
+    <item quantity="two"><xliff:g id="hours">%d</xliff:g> ש\'</item>
+    <item quantity="many"><xliff:g id="hours">%d</xliff:g> ש\'</item>
     <item quantity="other"><xliff:g id="hours">%d</xliff:g> ש\'</item>
   </plurals>
   <!-- Used to show a shortened version of minutes -->
   <plurals name="Nminutes">
     <item quantity="one">דק\' <xliff:g id="minutes">%d</xliff:g></item>
+    <item quantity="two"><xliff:g id="minutes">%d</xliff:g> דק\'</item>
+    <item quantity="many"><xliff:g id="minutes">%d</xliff:g> דק\'</item>
     <item quantity="other"><xliff:g id="minutes">%d</xliff:g> דק\'</item>
   </plurals>
   <!-- Toasts after adding song(s) to playlists -->
   <plurals name="NNNtrackstoplaylist">
     <item quantity="one">שיר <xliff:g id="number" example="1">%d</xliff:g> נוסף לרשימת ההשמעה.</item>
+    <item quantity="two"><xliff:g id="number" example="27">%d</xliff:g> שירים נוספו לרשימת ההשמעה.</item>
+    <item quantity="many"><xliff:g id="number" example="27">%d</xliff:g> שירים נוספו לרשימת ההשמעה.</item>
     <item quantity="other"><xliff:g id="number" example="27">%d</xliff:g> שירים נוספו לרשימת ההשמעה.</item>
   </plurals>
   <!-- Toasts after removing song(s) from playlists -->
   <plurals name="NNNtracksfromplaylist">
     <item quantity="one">שיר <xliff:g id="number" example="1">%d</xliff:g> הוסר מרשימת ההשמעה.</item>
+    <item quantity="two"><xliff:g id="number" example="27">%d</xliff:g> שירים הוסרו מרשימת ההשמעה.</item>
+    <item quantity="many"><xliff:g id="number" example="27">%d</xliff:g> שירים הוסרו מרשימת ההשמעה.</item>
     <item quantity="other"><xliff:g id="number" example="27">%d</xliff:g> שירים הוסרו מרשימת ההשמעה.</item>
   </plurals>
   <!-- Toasts after adding song(s) to queue -->
   <plurals name="NNNtrackstoqueue">
     <item quantity="one">שיר <xliff:g id="number" example="1">%d</xliff:g> נוסף לתור ההשמעה.</item>
+    <item quantity="two"><xliff:g id="number" example="27">%d</xliff:g> שירים נוספו לתור ההשמעה.</item>
+    <item quantity="many"><xliff:g id="number" example="27">%d</xliff:g> שירים נוספו לתור ההשמעה.</item>
     <item quantity="other"><xliff:g id="number" example="27">%d</xliff:g> שירים נוספו לתור ההשמעה.</item>
   </plurals>
   <!-- Toasts after adding song(s) to the favorites list -->
   <plurals name="NNNtrackstofavorites">
     <item quantity="one">שיר <xliff:g id="number" example="1">%d</xliff:g> נוסף למועדפים.</item>
+    <item quantity="two"><xliff:g id="number" example="27">%d</xliff:g> שירים נוספו למועדפים.</item>
+    <item quantity="many"><xliff:g id="number" example="27">%d</xliff:g> שירים נוספו למועדפים.</item>
     <item quantity="other"><xliff:g id="number" example="27">%d</xliff:g> שירים נוספו למועדפים.</item>
   </plurals>
   <!-- Toast confirming that song(s) was/were deleted. -->
   <plurals name="NNNtracksdeleted">
     <item quantity="one">שיר <xliff:g id="songs_to_delete" example="1">%d</xliff:g> נמחק.</item>
+    <item quantity="two"><xliff:g id="songs_to_delete">%d</xliff:g> שירים נמחקו.</item>
+    <item quantity="many"><xliff:g id="songs_to_delete">%d</xliff:g> שירים נמחקו.</item>
     <item quantity="other"><xliff:g id="songs_to_delete">%d</xliff:g> שירים נמחקו.</item>
   </plurals>
 </resources>
