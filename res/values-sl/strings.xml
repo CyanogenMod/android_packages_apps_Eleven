@@ -33,7 +33,7 @@
   <string name="header_all_songs">Vse skladbe</string>
   <!-- Option menu items -->
   <string name="menu_settings">Nastavitve</string>
-  <string name="menu_search">Iskanje</string>
+  <string name="menu_search">Išči</string>
   <string name="menu_shuffle_item">Premešaj</string>
   <string name="menu_shuffle_all">Premešaj vse</string>
   <string name="menu_shuffle_playlist">Premešaj seznam predvajanja</string>
@@ -180,7 +180,7 @@
   <string name="footer_search_albums">Prikaži vse albume</string>
   <string name="footer_search_songs">Prikaži vse skladbe</string>
   <string name="footer_search_playlists">Prikaži vse sezname predvajanja</string>
-  <string name="searchHint">Iskanje glasbe</string>
+  <string name="searchHint">Išči po glasbi</string>
   <string name="search_title_artists">Vseh \"%s\" izvajalcev</string>
   <string name="search_title_albums">Vseh \"%s\" albumov</string>
   <string name="search_title_songs">Vseh \"%s\" skladb</string>
