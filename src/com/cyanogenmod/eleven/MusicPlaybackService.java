@@ -66,7 +66,6 @@ import com.cyanogenmod.eleven.provider.SongPlayCount;
 import com.cyanogenmod.eleven.service.MusicPlaybackTrack;
 import com.cyanogenmod.eleven.utils.BitmapWithColors;
 import com.cyanogenmod.eleven.utils.Lists;
-import com.cyanogenmod.eleven.utils.PreferenceUtils;
 import com.cyanogenmod.eleven.utils.ShakeDetector;
 import com.cyanogenmod.eleven.utils.SrtManager;
 
@@ -692,6 +691,7 @@ public class MusicPlaybackService extends Service {
             public void onSkipToNext() {
                 gotoNext(true);
             }
+
             @Override
             public void onSkipToPrevious() {
                 prev(false);
@@ -705,6 +705,7 @@ public class MusicPlaybackService extends Service {
             }
         });
         mSession.setFlags(MediaSession.FLAG_HANDLES_TRANSPORT_CONTROLS);
+        mSession.setFlags(MediaSession.FLAG_HANDLES_MEDIA_BUTTONS);
     }
 
     /**
@@ -1488,8 +1489,16 @@ public class MusicPlaybackService extends Service {
                 ? PlaybackState.STATE_PLAYING
                 : PlaybackState.STATE_PAUSED;
 
+        long playBackStateActions = PlaybackState.ACTION_PLAY |
+                PlaybackState.ACTION_PLAY_PAUSE |
+                PlaybackState.ACTION_PLAY_FROM_MEDIA_ID |
+                PlaybackState.ACTION_PAUSE |
+                PlaybackState.ACTION_SKIP_TO_NEXT |
+                PlaybackState.ACTION_SKIP_TO_PREVIOUS;
+
         if (what.equals(PLAYSTATE_CHANGED) || what.equals(POSITION_CHANGED)) {
             mSession.setPlaybackState(new PlaybackState.Builder()
+                    .setActions(playBackStateActions)
                     .setState(playState, position(), 1.0f).build());
         } else if (what.equals(META_CHANGED) || what.equals(QUEUE_CHANGED)) {
             Bitmap albumArt = getAlbumArt(false).getBitmap();
@@ -1517,6 +1526,7 @@ public class MusicPlaybackService extends Service {
                     .build());
 
             mSession.setPlaybackState(new PlaybackState.Builder()
+                    .setActions(playBackStateActions)
                     .setState(playState, position(), 1.0f).build());
         }
     }
