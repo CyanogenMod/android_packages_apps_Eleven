@@ -18,6 +18,7 @@ package com.cyanogenmod.eleven.widgets;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.TransitionDrawable;
 import android.util.AttributeSet;
@@ -63,8 +64,8 @@ public class BlurScrimImage extends FrameLayout {
             return;
         }
 
-        Bitmap blurredBitmap = ((BitmapDrawable) getResources()
-                .getDrawable(R.drawable.default_artwork_blur)).getBitmap();
+        Drawable blurredDrawable = getResources().getDrawable(R.drawable.default_artwork_blur);
+        Bitmap blurredBitmap = ((BitmapDrawable) blurredDrawable).getBitmap();
 
         TransitionDrawable imageTransition = ImageWorker.createImageTransitionDrawable(getResources(),
                 mImageView.getDrawable(), blurredBitmap, ImageWorker.FADE_IN_TIME_SLOW, true, true);
