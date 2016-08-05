@@ -55,7 +55,7 @@
   <!-- Toasts after removing song(s) from playlists -->
   <plurals name="NNNtracksfromplaylist">
     <item quantity="one"><xliff:g id="number" example="1">%d</xliff:g> låt borttagen från spellistan.</item>
-    <item quantity="other"><xliff:g id="number" example="27"> %d </xliff:g> låtar borttagna från spellistan.</item>
+    <item quantity="other"><xliff:g id="number" example="27">%d</xliff:g> låtar borttagna från spellistan.</item>
   </plurals>
   <!-- Toasts after adding song(s) to queue -->
   <plurals name="NNNtrackstoqueue">
