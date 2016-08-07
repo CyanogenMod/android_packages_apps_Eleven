@@ -56,8 +56,8 @@
   <!-- Toasts after adding song(s) to playlists -->
   <plurals name="NNNtrackstoplaylist">
     <item quantity="one"><xliff:g id="number" example="1">%d</xliff:g> трек добавлен в плейлист.</item>
-    <item quantity="few"><xliff:g id="number" example="27">%d</xliff:g> трека добавлены в плейлист.</item>
-    <item quantity="other"><xliff:g id="number" example="27">%d</xliff:g> треков добавлены в плейлист.</item>
+    <item quantity="few"><xliff:g id="number" example="1">%d</xliff:g> трека добавлены в плейлист.</item>
+    <item quantity="other"><xliff:g id="number" example="1">%d</xliff:g> треков добавлены в плейлист.</item>
   </plurals>
   <!-- Toasts after removing song(s) from playlists -->
   <plurals name="NNNtracksfromplaylist">
@@ -68,19 +68,19 @@
   <!-- Toasts after adding song(s) to queue -->
   <plurals name="NNNtrackstoqueue">
     <item quantity="one"><xliff:g id="number" example="1">%d</xliff:g> трек добавлен в очередь.</item>
-    <item quantity="few"><xliff:g id="number" example="27">%d</xliff:g> трека добавлены в очередь.</item>
-    <item quantity="other"><xliff:g id="number" example="27">%d</xliff:g> треков добавлены в очередь.</item>
+    <item quantity="few"><xliff:g id="number" example="2">%d</xliff:g> трека добавлены в очередь.</item>
+    <item quantity="other"><xliff:g id="number" example="5">%d</xliff:g> треков добавлены в очередь.</item>
   </plurals>
   <!-- Toasts after adding song(s) to the favorites list -->
   <plurals name="NNNtrackstofavorites">
     <item quantity="one"><xliff:g id="number" example="1">%d</xliff:g> трек добавлен в избранное.</item>
-    <item quantity="few"><xliff:g id="number" example="27">%d</xliff:g> трека добавлены в избранное.</item>
-    <item quantity="other"><xliff:g id="number" example="27">%d</xliff:g> треков добавлены в избранное.</item>
+    <item quantity="few"><xliff:g id="number" example="2">%d</xliff:g> трека добавлены в избранное.</item>
+    <item quantity="other"><xliff:g id="number" example="5">%d</xliff:g> треков добавлены в избранное.</item>
   </plurals>
   <!-- Toast confirming that song(s) was/were deleted. -->
   <plurals name="NNNtracksdeleted">
     <item quantity="one"><xliff:g id="songs_to_delete" example="1">%d</xliff:g> трек удален.</item>
-    <item quantity="few"><xliff:g id="songs_to_delete">%d</xliff:g> трека удалены.</item>
-    <item quantity="other"><xliff:g id="songs_to_delete">%d</xliff:g> треков удалены.</item>
+    <item quantity="few"><xliff:g id="songs_to_delete" example="2">%d</xliff:g> трека удалены.</item>
+    <item quantity="other"><xliff:g id="songs_to_delete" example="5">%d</xliff:g> треков удалены.</item>
   </plurals>
 </resources>

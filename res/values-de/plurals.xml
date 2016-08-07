@@ -44,8 +44,8 @@
   </plurals>
   <!-- Used to show a shortened version of minutes -->
   <plurals name="Nminutes">
-    <item quantity="one"><xliff:g id="minutes">%d</xliff:g> m</item>
-    <item quantity="other"><xliff:g id="minutes">%d</xliff:g> m</item>
+    <item quantity="one"><xliff:g id="minutes">%d</xliff:g> Min.</item>
+    <item quantity="other"><xliff:g id="minutes">%d</xliff:g> Min.</item>
   </plurals>
   <!-- Toasts after adding song(s) to playlists -->
   <plurals name="NNNtrackstoplaylist">

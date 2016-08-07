@@ -19,7 +19,7 @@
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
   <!-- Used to indicate the number of artists -->
   <plurals name="Nartists">
-    <item quantity="one">אמן <xliff:g id="count">%d</xliff:g></item>
+    <item quantity="one">אמן אחד</item>
     <item quantity="two"><xliff:g id="count">%d</xliff:g> אמנים</item>
     <item quantity="many"><xliff:g id="count">%d</xliff:g> אמנים</item>
     <item quantity="other"><xliff:g id="count">%d</xliff:g> אמנים</item>
