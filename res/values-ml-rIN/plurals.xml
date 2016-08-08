@@ -19,57 +19,57 @@
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
   <!-- Used to indicate the number of artists -->
   <plurals name="Nartists">
-    <item quantity="one"><xliff:g id="count">%d</xliff:g> കലാകാരന്</item>
-    <item quantity="other"><xliff:g id="count">%d</xliff:g> കലാകാരന്മാർ</item>
+    <item quantity="one"><xliff:g id="count">%d</xliff:g> ആര്‍ട്ടിസ്റ്റ്</item>
+    <item quantity="other"><xliff:g id="count">%d</xliff:g> ആർട്ടിസ്റ്റുകൾ</item>
   </plurals>
   <!-- Used to indicate the number of albums for an artist -->
   <plurals name="Nalbums">
     <item quantity="one"><xliff:g id="count">%d</xliff:g> ആൽബം</item>
-    <item quantity="other"><xliff:g id="count">%d</xliff:g> ആൽബങ്ങളും</item>
+    <item quantity="other"><xliff:g id="count">%d</xliff:g> ആൽബങ്ങൾ</item>
   </plurals>
   <!-- Used to indicate the number of songs for an album -->
   <plurals name="Nsongs">
-    <item quantity="one"><xliff:g id="count">%d</xliff:g> പാട്ട്</item>
-    <item quantity="other"><xliff:g id="count">%d</xliff:g> പാട്ടുകൾ</item>
+    <item quantity="one"><xliff:g id="count">%d</xliff:g> ഗാനം</item>
+    <item quantity="other"><xliff:g id="count">%d</xliff:g> ഗാനങ്ങള്‍</item>
   </plurals>
   <!-- Used to indicate the number of genres -->
   <plurals name="Ngenres">
-    <item quantity="one"><xliff:g id="count">%d</xliff:g>സംഗീത തരം</item>
-    <item quantity="other"><xliff:g id="count">%d</xliff:g>സംഗീത തരങ്ങൾ</item>
+    <item quantity="one"><xliff:g id="count">%d</xliff:g> വിഭാഗം</item>
+    <item quantity="other"><xliff:g id="count">%d</xliff:g> തരങ്ങൾ</item>
   </plurals>
   <!-- Used to show a shortened version of hours-->
   <plurals name="Nhours">
-    <item quantity="one"><xliff:g id="hours">%d</xliff:g></item>
-    <item quantity="other"><xliff:g id="hours">%d</xliff:g></item>
+    <item quantity="one"><xliff:g id="hours">%d</xliff:g>മണിക്കൂര്‍</item>
+    <item quantity="other"><xliff:g id="hours">%d</xliff:g>മണികൂറുകള്‍</item>
   </plurals>
   <!-- Used to show a shortened version of minutes -->
   <plurals name="Nminutes">
-    <item quantity="one"><xliff:g id="minutes">%d</xliff:g></item>
-    <item quantity="other"><xliff:g id="minutes">%d</xliff:g></item>
+    <item quantity="one"><xliff:g id="minutes">%d</xliff:g>മിനിറ്റ്</item>
+    <item quantity="other"><xliff:g id="minutes">%d</xliff:g>മിനിറ്റുകള്‍</item>
   </plurals>
   <!-- Toasts after adding song(s) to playlists -->
   <plurals name="NNNtrackstoplaylist">
     <item quantity="one"><xliff:g id="number" example="1">%d</xliff:g> ഗാനം പ്ലേലിസ്റ്റിലേക്ക് ചേർത്തു.</item>
-    <item quantity="other"><xliff:g id="number" example="1">%d</xliff:g> പാട്ടുകൾ പ്ലേലിസ്റ്റിലേക്ക് ചേർത്തു.</item>
+    <item quantity="other"><xliff:g id="number" example="27">%d</xliff:g> ഗാനങ്ങൾ പ്ലേലിസ്റ്റിലേക്ക് ചേർത്തു.</item>
   </plurals>
   <!-- Toasts after removing song(s) from playlists -->
   <plurals name="NNNtracksfromplaylist">
-    <item quantity="one"><xliff:g id="number" example="1">%d</xliff:g> ഗാനം പ്ലേലിസ്റ്റിൽ നിന്നും നീക്കം.</item>
-    <item quantity="other"><xliff:g id="number" example="1">%d</xliff:g> ഗാനം പ്ലേലിസ്റ്റിൽ നിന്നും നീക്കം.</item>
+    <item quantity="one"><xliff:g id="number" example="1">%d</xliff:g> ഗാനം പ്ലേലിസ്റ്റിൽ നിന്നും നീക്കി.</item>
+    <item quantity="other"><xliff:g id="number" example="27">%d</xliff:g> ഗാനങ്ങൾ പ്ലേലിസ്റ്റിൽ നിന്നും നീക്കി.</item>
   </plurals>
   <!-- Toasts after adding song(s) to queue -->
   <plurals name="NNNtrackstoqueue">
-    <item quantity="one"><xliff:g id="number" example="1">%d</xliff:g> ഗാനം ക്യൂ ചേർത്തു.</item>
-    <item quantity="other"><xliff:g id="number" example="1">%d</xliff:g> പാട്ടുകൾ ക്യൂ ചേർത്തു.</item>
+    <item quantity="one"><xliff:g id="number" example="1">%d</xliff:g> ഗാനം ക്യൂവിലേക്ക് ചേർത്തു.</item>
+    <item quantity="other"><xliff:g id="number" example="27">%d</xliff:g> ഗാനങ്ങൾ ക്യൂവിലേക്ക് ചേർത്തു.</item>
   </plurals>
   <!-- Toasts after adding song(s) to the favorites list -->
   <plurals name="NNNtrackstofavorites">
-    <item quantity="one"><xliff:g id="number" example="1">%d</xliff:g> പാട്ട് പ്രിയപ്പെട്ടവലേക്ക് ചേർത്തു.</item>
-    <item quantity="other"><xliff:g id="number" example="1">%d</xliff:g> പാട്ടുകൾ പ്രിയപ്പെട്ടവലേക്ക് ചേർത്തു.</item>
+    <item quantity="one"><xliff:g id="number" example="1">%d</xliff:g> ഗാനം ഇഷ്ടങ്ങളിലേയ്ക്ക് ചേർത്തു.</item>
+    <item quantity="other"><xliff:g id="number" example="27">%d</xliff:g> ഗാനങ്ങൾ പ്രിയപ്പെട്ടവയിലേക്ക് ചേർത്തു.</item>
   </plurals>
   <!-- Toast confirming that song(s) was/were deleted. -->
   <plurals name="NNNtracksdeleted">
-    <item quantity="one"><xliff:g id="songs_to_delete" example="1">%d</xliff:g> പാട്ട് ഡിലീറ്റ് ചെയ്തു.</item>
-    <item quantity="other"><xliff:g id="songs_to_delete" example="1">%d</xliff:g> പാട്ടുകൾ ഇല്ലാതാക്കി.</item>
+    <item quantity="one"><xliff:g id="songs_to_delete" example="1">%d</xliff:g> ഗാനം ഇല്ലാതാക്കി.</item>
+    <item quantity="other"><xliff:g id="songs_to_delete">%d</xliff:g> ഗാനങ്ങൾ ഇല്ലാതാക്കി.</item>
   </plurals>
 </resources>

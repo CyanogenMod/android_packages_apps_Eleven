@@ -35,7 +35,7 @@
   <!-- Used to indicate the number of genres -->
   <plurals name="Ngenres">
     <item quantity="one"><xliff:g id="count">%d</xliff:g> sjanger</item>
-    <item quantity="other"><xliff:g id="count">%d</xliff:g> sjangre</item>
+    <item quantity="other"><xliff:g id="count">%d</xliff:g> sjangere</item>
   </plurals>
   <!-- Used to show a shortened version of hours-->
   <plurals name="Nhours">
