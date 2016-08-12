@@ -452,8 +452,6 @@ public class MusicPlaybackService extends Service {
      */
     private MediaSession mSession;
 
-    private ComponentName mMediaButtonReceiverComponent;
-
     // We use this to distinguish between different cards when saving/restoring
     // playlists
     private int mCardId;
@@ -617,9 +615,6 @@ public class MusicPlaybackService extends Service {
         // Initialize the audio manager and register any headset controls for
         // playback
         mAudioManager = (AudioManager)getSystemService(Context.AUDIO_SERVICE);
-        mMediaButtonReceiverComponent = new ComponentName(getPackageName(),
-                MediaButtonIntentReceiver.class.getName());
-        mAudioManager.registerMediaButtonEventReceiver(mMediaButtonReceiverComponent);
 
         // Use the remote control APIs to set the playback state
         setUpMediaSession();
@@ -703,8 +698,14 @@ public class MusicPlaybackService extends Service {
                 releaseServiceUiAndStop();
             }
         });
-        mSession.setFlags(MediaSession.FLAG_HANDLES_TRANSPORT_CONTROLS);
-        mSession.setFlags(MediaSession.FLAG_HANDLES_MEDIA_BUTTONS);
+
+        PendingIntent pi = PendingIntent.getBroadcast(this, 0,
+                new Intent(this, MediaButtonIntentReceiver.class),
+                PendingIntent.FLAG_UPDATE_CURRENT);
+        mSession.setMediaButtonReceiver(pi);
+
+        mSession.setFlags(MediaSession.FLAG_HANDLES_TRANSPORT_CONTROLS
+                | MediaSession.FLAG_HANDLES_MEDIA_BUTTONS);
     }
 
     /**
@@ -1493,7 +1494,8 @@ public class MusicPlaybackService extends Service {
                 PlaybackState.ACTION_PLAY_FROM_MEDIA_ID |
                 PlaybackState.ACTION_PAUSE |
                 PlaybackState.ACTION_SKIP_TO_NEXT |
-                PlaybackState.ACTION_SKIP_TO_PREVIOUS;
+                PlaybackState.ACTION_SKIP_TO_PREVIOUS |
+                PlaybackState.ACTION_STOP;
 
         if (what.equals(PLAYSTATE_CHANGED) || what.equals(POSITION_CHANGED)) {
             mSession.setPlaybackState(new PlaybackState.Builder()
@@ -2391,8 +2393,6 @@ public class MusicPlaybackService extends Service {
         intent.putExtra(AudioEffect.EXTRA_PACKAGE_NAME, getPackageName());
         sendBroadcast(intent);
 
-        mAudioManager.registerMediaButtonEventReceiver(new ComponentName(getPackageName(),
-                MediaButtonIntentReceiver.class.getName()));
         mSession.setActive(true);
 
         if (createNewNextTrack) {
