@@ -31,7 +31,7 @@
   </plurals>
   <!-- Used to indicate the number of genres -->
   <plurals name="Ngenres">
-    <item quantity="other"><xliff:g id="count">%d</xliff:g> genre</item>
+    <item quantity="other"><xliff:g id="count">%d</xliff:g> aliran</item>
   </plurals>
   <!-- Used to show a shortened version of hours-->
   <plurals name="Nhours">
