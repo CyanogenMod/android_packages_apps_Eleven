@@ -146,13 +146,13 @@
   <string name="empty_search_check">Controleer of u de juiste spelling gebruikt of probeer een ander trefwoord.</string>
   <string name="empty_favorite">Uw favoriete nummers worden hier getoond.</string>
   <string name="empty_recent_main">Geen recente nummers</string>
-  <string name="empty_recent">Nummers waar u recent naar heeft geluisterd worden hier getoond.</string>
+  <string name="empty_recent">Nummers waar u recent naar hebt geluisterd worden hier getoond.</string>
   <string name="empty_playlist_main">Geen nummers in afspeellijst</string>
   <string name="empty_playlist_secondary">Om nummers toe te voegen aan deze afspeellijst, tik op het menu van een nummer, album of artiest en selecteer \'Toevoegen aan afspeellijst\'.</string>
   <string name="empty_top_tracks_main">Geen beste nummers</string>
   <string name="empty_top_tracks_secondary">Nummers waar u het meest naar luistert worden toegevoegd aan deze lijst.</string>
   <string name="empty_last_added_main">Geen nummers recent toegevoegd</string>
-  <string name="empty_last_added">Nummers die u in de afgelopen maand heeft toegevoegd worden hier getoond.</string>
+  <string name="empty_last_added">Nummers die u in de afgelopen maand hebt toegevoegd worden hier getoond.</string>
   <string name="empty_generic_main">Geen muziek gevonden</string>
   <string name="empty_generic_secondary">Om muziek van uw computer te kopiëren naar uw apparaat, kunt u een USB-kabel gebruiken.</string>
   <string name="empty_queue_main">Geen nummers in wachtrij</string>
