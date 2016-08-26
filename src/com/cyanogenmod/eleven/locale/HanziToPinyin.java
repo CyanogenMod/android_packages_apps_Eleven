@@ -21,7 +21,7 @@ import android.util.Log;
 
 import java.util.ArrayList;
 
-import libcore.icu.Transliterator;
+import android.icu.text.Transliterator;
 
 /**
  * An object to convert Chinese character to its corresponding pinyin string.
@@ -72,8 +72,8 @@ public class HanziToPinyin {
 
     private HanziToPinyin() {
         try {
-            mPinyinTransliterator = new Transliterator("Han-Latin/Names; Latin-Ascii; Any-Upper");
-            mAsciiTransliterator = new Transliterator("Latin-Ascii");
+            mPinyinTransliterator = Transliterator.getInstance("Han-Latin/Names; Latin-Ascii; Any-Upper");
+            mAsciiTransliterator = Transliterator.getInstance("Latin-Ascii");
         } catch (RuntimeException e) {
             Log.w(TAG, "Han-Latin/Names transliterator data is missing,"
                     + " HanziToPinyin is disabled");
