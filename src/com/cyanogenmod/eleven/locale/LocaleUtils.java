@@ -33,9 +33,9 @@ import java.util.Iterator;
 import java.util.Locale;
 import java.util.Set;
 
-import libcore.icu.AlphabeticIndex;
-import libcore.icu.AlphabeticIndex.ImmutableIndex;
-import libcore.icu.Transliterator;
+import android.icu.text.AlphabeticIndex;
+import android.icu.text.AlphabeticIndex.ImmutableIndex;
+import android.icu.text.Transliterator;
 
 /**
  * This utility class provides specialized handling for locale specific
@@ -108,7 +108,7 @@ public class LocaleUtils {
                 .addLabels(LOCALE_GREEK)
                 .addLabels(LOCALE_UKRAINIAN)
                 .addLabels(LOCALE_SERBIAN)
-                .getImmutableIndex();
+                .buildImmutableIndex();
             mAlphabeticIndexBucketCount = mAlphabeticIndex.getBucketCount();
             mNumberBucketIndex = mAlphabeticIndexBucketCount - 1;
         }
@@ -190,7 +190,7 @@ public class LocaleUtils {
             } else if (bucketIndex > mNumberBucketIndex) {
                 --bucketIndex;
             }
-            return mAlphabeticIndex.getBucketLabel(bucketIndex);
+            return mAlphabeticIndex.getBucket(bucketIndex).getLabel();
         }
 
         @SuppressWarnings("unused")
@@ -323,7 +323,7 @@ public class LocaleUtils {
                     mInitializedTransliterator = true;
                     Transliterator t = null;
                     try {
-                        t = new Transliterator("Hiragana-Latin; Katakana-Latin;"
+                        t = Transliterator.getInstance("Hiragana-Latin; Katakana-Latin;"
                                 + " Latin-Ascii");
                     } catch (RuntimeException e) {
                         Log.w(TAG, "Hiragana/Katakana-Latin transliterator data"

@@ -349,7 +349,7 @@ public abstract class PopupMenuHelper implements PopupMenu.OnMenuItemClickListen
                             // do nothing
                         }
                     });
-                    builder.show(null, null);
+                    builder.showDialog(null, null);
                     return true;
                 case FragmentMenuItems.NEW_PLAYLIST:
                     CreateNewPlaylist.getInstance(getIdList()).show(
