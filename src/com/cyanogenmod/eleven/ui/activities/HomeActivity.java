@@ -15,13 +15,16 @@
  */
 package com.cyanogenmod.eleven.ui.activities;
 
+import android.Manifest;
 import android.animation.ArgbEvaluator;
 import android.animation.ObjectAnimator;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.provider.MediaStore;
@@ -51,6 +54,8 @@ import com.cyanogenmod.eleven.utils.BitmapWithColors;
 import com.cyanogenmod.eleven.utils.MusicUtils;
 import com.cyanogenmod.eleven.utils.NavUtils;
 
+import java.util.ArrayList;
+
 public class HomeActivity extends SlidingPanelActivity implements
         FragmentManager.OnBackStackChangedListener {
     private static final String TAG = "HomeActivity";
@@ -65,6 +70,9 @@ public class HomeActivity extends SlidingPanelActivity implements
 
     private static final int NEW_PHOTO = 1;
     public static final int EQUALIZER = 2;
+
+    private static final int PERMISSION_REQUEST_STORAGE = 1;
+    private Bundle mSavedInstanceState;
 
     private String mKey;
     private boolean mLoadedBaseFragment = false;
@@ -81,6 +89,14 @@ public class HomeActivity extends SlidingPanelActivity implements
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        mSavedInstanceState = savedInstanceState;
+
+        if (!needRequestStoragePermission()) {
+            init();
+        }
+    }
+
+    private void init() {
         // if we've been launched by an intent, parse it
         Intent launchIntent = getIntent();
         boolean intentHandled = false;
@@ -89,7 +105,7 @@ public class HomeActivity extends SlidingPanelActivity implements
         }
 
         // if the intent didn't cause us to load a fragment, load the music browse one
-        if (savedInstanceState == null && !mLoadedBaseFragment) {
+        if (mSavedInstanceState == null && !mLoadedBaseFragment) {
             final MusicBrowserPhoneFragment fragment = new MusicBrowserPhoneFragment();
             if (launchIntent != null) {
                 fragment.setDefaultPageIdx(launchIntent.getIntExtra(EXTRA_BROWSE_PAGE_IDX,
@@ -97,7 +113,7 @@ public class HomeActivity extends SlidingPanelActivity implements
             }
             getSupportFragmentManager().beginTransaction()
                     .replace(R.id.activity_base_content, fragment)
-                    .commit();
+                    .commitAllowingStateLoss();
 
             mLoadedBaseFragment = true;
             mTopLevelActivity = true;
@@ -106,9 +122,9 @@ public class HomeActivity extends SlidingPanelActivity implements
         getSupportFragmentManager().addOnBackStackChangedListener(this);
 
         // if we are resuming from a saved instance state
-        if (savedInstanceState != null) {
+        if (mSavedInstanceState != null) {
             // track which fragments are loaded and if this is the top level activity
-            mTopLevelActivity = savedInstanceState.getBoolean(STATE_KEY_BASE_FRAGMENT);
+            mTopLevelActivity = mSavedInstanceState.getBoolean(STATE_KEY_BASE_FRAGMENT);
             mLoadedBaseFragment = mTopLevelActivity;
 
             // update the action bar based on the top most fragment
@@ -123,6 +139,8 @@ public class HomeActivity extends SlidingPanelActivity implements
         if (!intentHandled) {
             handlePlaybackIntent(launchIntent);
         }
+
+        mSavedInstanceState = null;
     }
 
     @Override
@@ -464,5 +482,59 @@ public class HomeActivity extends SlidingPanelActivity implements
             getActionBar().setDisplayHomeAsUpEnabled(
                     !(topFragment instanceof MusicBrowserPhoneFragment));
         }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String permissions[],
+            int[] grantResults) {
+        switch (requestCode) {
+            case PERMISSION_REQUEST_STORAGE: {
+                if (checkPermissionGrantResults(grantResults)) {
+                    init();
+                } else {
+                    finish();
+                }
+            }
+        }
+    }
+
+    private boolean needRequestStoragePermission() {
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M) return false;
+
+        boolean needRequest = false;
+        String[] permissions = {
+                Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                Manifest.permission.READ_EXTERNAL_STORAGE
+        };
+        ArrayList<String> permissionList = new ArrayList<String>();
+        for (String permission : permissions) {
+            if (checkSelfPermission(permission) != PackageManager.PERMISSION_GRANTED) {
+                permissionList.add(permission);
+                needRequest = true;
+            }
+        }
+
+        if (needRequest) {
+            int count = permissionList.size();
+            if (count > 0) {
+                String[] permissionArray = new String[count];
+                for (int i = 0; i < count; i++) {
+                    permissionArray[i] = permissionList.get(i);
+                }
+
+                requestPermissions(permissionArray, PERMISSION_REQUEST_STORAGE);
+            }
+        }
+
+        return needRequest;
+    }
+
+    private boolean checkPermissionGrantResults(int[] grantResults) {
+        for (int result : grantResults) {
+            if (result != PackageManager.PERMISSION_GRANTED) {
+                return false;
+            }
+        }
+        return true;
     }
 }
