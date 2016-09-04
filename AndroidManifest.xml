@@ -20,8 +20,8 @@
     android:versionName="3.0" >
 
     <uses-sdk
-        android:minSdkVersion="22"
-        android:targetSdkVersion="22" />
+        android:minSdkVersion="23"
+        android:targetSdkVersion="23" />
 
     <!-- Used for caching and creating new playlists -->
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
