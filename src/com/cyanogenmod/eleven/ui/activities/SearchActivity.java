@@ -331,7 +331,7 @@ public class SearchActivity extends FragmentActivity implements
                     resourceId = R.string.search_title_songs;
                     break;
             }
-            actionBar.setTitle(getString(resourceId, mFilterString).toUpperCase());
+            actionBar.setTitle(getString(resourceId, mFilterString));
             actionBar.setDisplayHomeAsUpEnabled(true);
 
             // Set the prefix
@@ -420,7 +420,7 @@ public class SearchActivity extends FragmentActivity implements
         MenuItem searchItem = menu.findItem(R.id.menu_search);
         mSearchView = (SearchView)searchItem.getActionView();
         mSearchView.setOnQueryTextListener(this);
-        mSearchView.setQueryHint(getString(R.string.searchHint).toUpperCase());
+        mSearchView.setQueryHint(getString(R.string.searchHint));
 
         // The SearchView has no way for you to customize or get access to the search icon in a
         // normal fashion, so we need to manually look for the icon and change the
