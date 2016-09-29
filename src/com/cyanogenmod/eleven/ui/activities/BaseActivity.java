@@ -138,7 +138,7 @@ public abstract class BaseActivity extends FragmentActivity implements ServiceCo
         mToolBar = (Toolbar) findViewById(R.id.toolbar);
         setActionBar(mToolBar);
 
-        getActionBar().setTitle(getString(R.string.app_name).toUpperCase());
+        setActionBarTitle(getString(R.string.app_name));
 
         // set the background on the root view
         getWindow().getDecorView().getRootView().setBackgroundColor(
@@ -292,7 +292,7 @@ public abstract class BaseActivity extends FragmentActivity implements ServiceCo
 
     public void setActionBarTitle(String title) {
         ActionBar actionBar = getActionBar();
-        actionBar.setTitle(title.toUpperCase());
+        actionBar.setTitle(title);
     }
 
     public void setActionBarAlpha(int alpha) {
