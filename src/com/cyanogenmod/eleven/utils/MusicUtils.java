@@ -113,8 +113,7 @@ public final class MusicUtils {
         }
         final ContextWrapper contextWrapper = new ContextWrapper(realActivity);
         contextWrapper.startService(new Intent(contextWrapper, MusicPlaybackService.class));
-        final ServiceBinder binder = new ServiceBinder(callback,
-                contextWrapper.getApplicationContext());
+        final ServiceBinder binder = new ServiceBinder(callback);
         if (contextWrapper.bindService(
                 new Intent().setClass(contextWrapper, MusicPlaybackService.class), binder, 0)) {
             mConnectionMap.put(contextWrapper, binder);
@@ -143,16 +142,14 @@ public final class MusicUtils {
 
     public static final class ServiceBinder implements ServiceConnection {
         private final ServiceConnection mCallback;
-        private final Context mContext;
 
         /**
          * Constructor of <code>ServiceBinder</code>
          *
          * @param context The {@link ServiceConnection} to use
          */
-        public ServiceBinder(final ServiceConnection callback, final Context context) {
+        public ServiceBinder(final ServiceConnection callback) {
             mCallback = callback;
-            mContext = context;
         }
 
         @Override
@@ -161,7 +158,6 @@ public final class MusicUtils {
             if (mCallback != null) {
                 mCallback.onServiceConnected(className, service);
             }
-            MusicUtils.initPlaybackServiceWithSettings(mContext);
         }
 
         @Override
@@ -276,16 +272,6 @@ public final class MusicUtils {
             }
         } catch (final RemoteException ignored) {
         }
-    }
-
-    /**
-     * Initialize playback service with values from Settings
-     */
-    public static void initPlaybackServiceWithSettings(final Context context) {
-        MusicUtils.setShakeToPlayEnabled(
-                PreferenceUtils.getInstance(context).getShakeToPlay());
-        MusicUtils.setShowAlbumArtOnLockscreen(
-                PreferenceUtils.getInstance(context).getShowAlbumArtOnLockscreen());
     }
 
     /**
