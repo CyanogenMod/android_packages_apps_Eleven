@@ -70,6 +70,7 @@ import com.cyanogenmod.eleven.provider.SongPlayCount;
 import com.cyanogenmod.eleven.service.MusicPlaybackTrack;
 import com.cyanogenmod.eleven.utils.BitmapWithColors;
 import com.cyanogenmod.eleven.utils.Lists;
+import com.cyanogenmod.eleven.utils.PreferenceUtils;
 import com.cyanogenmod.eleven.utils.ShakeDetector;
 import com.cyanogenmod.eleven.utils.SrtManager;
 
@@ -652,6 +653,9 @@ public class MusicPlaybackService extends Service {
         // Initialize the preferences
         mPreferences = getSharedPreferences("Service", 0);
         mCardId = getCardId();
+
+        mShowAlbumArtOnLockscreen = mPreferences.getBoolean(PreferenceUtils.SHOW_ALBUM_ART_ON_LOCKSCREEN, true);
+	setShakeToPlayEnabled(mPreferences.getBoolean(PreferenceUtils.SHAKE_TO_PLAY, true);
 
         registerExternalStorageListener();
 
