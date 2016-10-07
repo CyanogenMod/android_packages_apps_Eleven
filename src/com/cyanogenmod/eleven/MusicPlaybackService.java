@@ -44,6 +44,7 @@ import android.media.audiofx.AudioEffect;
 import android.media.session.MediaSession;
 import android.media.session.PlaybackState;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Handler;
 import android.os.HandlerThread;
 import android.os.IBinder;
@@ -52,7 +53,6 @@ import android.os.Message;
 import android.os.PowerManager;
 import android.os.RemoteException;
 import android.os.SystemClock;
-import android.provider.BaseColumns;
 import android.provider.MediaStore;
 import android.provider.MediaStore.Audio.AlbumColumns;
 import android.provider.MediaStore.Audio.AudioColumns;
@@ -80,10 +80,11 @@ import java.io.File;
 import java.io.IOException;
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.ListIterator;
 import java.util.Random;
-import java.util.TreeMap;
 import java.util.TreeSet;
 
 /**
@@ -505,6 +506,8 @@ public class MusicPlaybackService extends Service {
     private String mCachedKey;
     private BitmapWithColors[] mCachedBitmapWithColors = new BitmapWithColors[2];
 
+    private QueueUpdateTask mQueueUpdateTask;
+
     /**
      * Image cache
      */
@@ -736,8 +739,8 @@ public class MusicPlaybackService extends Service {
                 releaseServiceUiAndStop();
             }
             @Override
-            public void onSkipToQueueItem(long index) {
-                setQueuePosition((int) index);
+            public void onSkipToQueueItem(long id) {
+                setQueueItem(id);
             }
             @Override
             public boolean onMediaButtonEvent(@NonNull Intent mediaButtonIntent) {
@@ -1573,7 +1576,7 @@ public class MusicPlaybackService extends Service {
         if (what.equals(PLAYSTATE_CHANGED) || what.equals(POSITION_CHANGED)) {
             mSession.setPlaybackState(new PlaybackState.Builder()
                     .setActions(playBackStateActions)
-                    .setActiveQueueItemId(getQueuePosition())
+                    .setActiveQueueItemId(getAudioId())
                     .setState(playState, position(), 1.0f).build());
         } else if (what.equals(META_CHANGED) || what.equals(QUEUE_CHANGED)) {
             Bitmap albumArt = getAlbumArt(false).getBitmap();
@@ -1606,60 +1609,17 @@ public class MusicPlaybackService extends Service {
 
             mSession.setPlaybackState(new PlaybackState.Builder()
                     .setActions(playBackStateActions)
-                    .setActiveQueueItemId(getQueuePosition())
+                    .setActiveQueueItemId(getAudioId())
                     .setState(playState, position(), 1.0f).build());
         }
     }
 
     private synchronized void updateMediaSessionQueue() {
-        if (getQueuePosition() < 0 || getQueueSize() == 0) {
-            mSession.setQueue(null);
-            return;
+        if (mQueueUpdateTask != null) {
+            mQueueUpdateTask.cancel(true);
         }
-
-        final StringBuilder selection = new StringBuilder();
-        for (long id : getQueue()) {
-            if (selection.length() > 0) {
-                selection.append(",");
-            }
-            selection.append(id);
-        }
-        selection.insert(0, MediaStore.Audio.Media._ID + " IN (");
-        selection.append(")");
-
-        Cursor c = getApplicationContext().getContentResolver().query(
-                MediaStore.Audio.Media.EXTERNAL_CONTENT_URI,
-                new String[]{BaseColumns._ID, AudioColumns.TITLE, AudioColumns.ARTIST},
-                selection.toString(), null, null);
-
-        final TreeMap<Integer, MediaSession.QueueItem> items = new TreeMap<>();
-        if (c != null) {
-            try {
-                while (c.moveToNext()) {
-                    long id = c.getLong(c.getColumnIndexOrThrow(BaseColumns._ID));
-                    MediaDescription desc = new MediaDescription.Builder()
-                            .setTitle(c.getString(
-                                    c.getColumnIndexOrThrow(AudioColumns.TITLE)))
-                            .setSubtitle(c.getString(
-                                    c.getColumnIndexOrThrow(AudioColumns.ARTIST)))
-                            .build();
-
-                    int index = -1;
-                    for (int i = 0; i < getQueueSize(); i++) {
-                        if (getQueue()[i] == id) {
-                            index = i;
-                            break;
-                        }
-                    }
-                    if (index >= 0) {
-                        items.put(index, new MediaSession.QueueItem(desc, index));
-                    }
-                }
-            } finally {
-                c.close();
-            }
-        }
-        mSession.setQueue(new ArrayList<MediaSession.QueueItem>(items.values()));
+        mQueueUpdateTask = new QueueUpdateTask(getQueue());
+        mQueueUpdateTask.execute();
     }
 
     private Notification buildNotification() {
@@ -2795,6 +2755,18 @@ public class MusicPlaybackService extends Service {
         }
     }
 
+    private void setQueueItem(final long id) {
+        synchronized (this) {
+            final int len = mPlaylist.size();
+            for (int i = 0; i < len; i++) {
+                if (id == mPlaylist.get(i).mId) {
+                    setQueuePosition(i);
+                    break;
+                }
+            }
+        }
+    }
+
     /**
      * Queues a new list for playback
      *
@@ -3892,4 +3864,70 @@ public class MusicPlaybackService extends Service {
 
     }
 
+    private class QueueUpdateTask extends AsyncTask<Void, Void, List<MediaSession.QueueItem>> {
+        private long[] mQueue;
+
+        public QueueUpdateTask(long[] queue) {
+            mQueue = queue;
+        }
+
+        @Override
+        protected List<MediaSession.QueueItem> doInBackground(Void... params) {
+            if (mQueue == null || mQueue.length == 0) {
+                return null;
+            }
+
+            final StringBuilder selection = new StringBuilder();
+            selection.append(MediaStore.Audio.Media._ID).append(" IN (");
+            for (int i = 0; i < mQueue.length; i++) {
+                if (i != 0) {
+                    selection.append(",");
+                }
+                selection.append(mQueue[i]);
+            }
+            selection.append(")");
+
+            Cursor c = getContentResolver().query(
+                    MediaStore.Audio.Media.EXTERNAL_CONTENT_URI,
+                    new String[] { AudioColumns._ID, AudioColumns.TITLE, AudioColumns.ARTIST },
+                    selection.toString(), null, null);
+            if (c == null) {
+                return null;
+            }
+
+            try {
+                final MediaSession.QueueItem[] items = new MediaSession.QueueItem[mQueue.length];
+                final int idColumnIndex = c.getColumnIndexOrThrow(AudioColumns._ID);
+                final int titleColumnIndex = c.getColumnIndexOrThrow(AudioColumns.TITLE);
+                final int artistColumnIndex = c.getColumnIndexOrThrow(AudioColumns.ARTIST);
+
+                while (c.moveToNext() && !isCancelled()) {
+                    final MediaDescription desc = new MediaDescription.Builder()
+                            .setTitle(c.getString(titleColumnIndex))
+                            .setSubtitle(c.getString(artistColumnIndex))
+                            .build();
+
+                    final long id = c.getLong(idColumnIndex);
+                    int index = 0;
+                    for (int i = 0; i < mQueue.length; i++) {
+                        if (mQueue[i] == id) {
+                            index = i;
+                            break;
+                        }
+                    }
+                    items[index] = new MediaSession.QueueItem(desc, id);
+                }
+                return Arrays.asList(items);
+            } finally {
+                c.close();
+            }
+        }
+
+        @Override
+        protected void onPostExecute(List<MediaSession.QueueItem> items) {
+            if (!isCancelled()) {
+                mSession.setQueue(items);
+            }
+        }
+    }
 }
