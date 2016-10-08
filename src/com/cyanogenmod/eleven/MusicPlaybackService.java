@@ -662,7 +662,7 @@ public class MusicPlaybackService extends Service {
 
         mShowAlbumArtOnLockscreen = mPreferences.getBoolean(
                 PreferenceUtils.SHOW_ALBUM_ART_ON_LOCKSCREEN, true);
-        setShakeToPlayEnabled(mPreferences.getBoolean(PreferenceUtils.SHAKE_TO_PLAY, true));
+        setShakeToPlayEnabled(mPreferences.getBoolean(PreferenceUtils.SHAKE_TO_PLAY, false));
 
         registerExternalStorageListener();
 
