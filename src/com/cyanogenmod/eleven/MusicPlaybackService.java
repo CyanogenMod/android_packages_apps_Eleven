@@ -28,8 +28,8 @@ import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.content.SharedPreferences;
 import android.database.ContentObserver;
 import android.database.Cursor;
 import android.database.MatrixCursor;
@@ -37,7 +37,6 @@ import android.graphics.Bitmap;
 import android.hardware.SensorManager;
 import android.media.AudioManager;
 import android.media.AudioManager.OnAudioFocusChangeListener;
-import android.media.MediaDescription;
 import android.media.MediaMetadata;
 import android.media.MediaPlayer;
 import android.media.audiofx.AudioEffect;
@@ -52,7 +51,6 @@ import android.os.Message;
 import android.os.PowerManager;
 import android.os.RemoteException;
 import android.os.SystemClock;
-import android.provider.BaseColumns;
 import android.provider.MediaStore;
 import android.provider.MediaStore.Audio.AlbumColumns;
 import android.provider.MediaStore.Audio.AudioColumns;
@@ -83,7 +81,6 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.ListIterator;
 import java.util.Random;
-import java.util.TreeMap;
 import java.util.TreeSet;
 
 /**
@@ -734,10 +731,6 @@ public class MusicPlaybackService extends Service {
                 mPausedByTransientLossOfFocus = false;
                 seek(0);
                 releaseServiceUiAndStop();
-            }
-            @Override
-            public void onSkipToQueueItem(long index) {
-                setQueuePosition((int) index);
             }
             @Override
             public boolean onMediaButtonEvent(@NonNull Intent mediaButtonIntent) {
@@ -1573,7 +1566,6 @@ public class MusicPlaybackService extends Service {
         if (what.equals(PLAYSTATE_CHANGED) || what.equals(POSITION_CHANGED)) {
             mSession.setPlaybackState(new PlaybackState.Builder()
                     .setActions(playBackStateActions)
-                    .setActiveQueueItemId(getQueuePosition())
                     .setState(playState, position(), 1.0f).build());
         } else if (what.equals(META_CHANGED) || what.equals(QUEUE_CHANGED)) {
             Bitmap albumArt = getAlbumArt(false).getBitmap();
@@ -1600,66 +1592,10 @@ public class MusicPlaybackService extends Service {
                             mShowAlbumArtOnLockscreen ? albumArt : null)
                     .build());
 
-            if (what.equals(QUEUE_CHANGED)) {
-                updateMediaSessionQueue();
-            }
-
             mSession.setPlaybackState(new PlaybackState.Builder()
                     .setActions(playBackStateActions)
-                    .setActiveQueueItemId(getQueuePosition())
                     .setState(playState, position(), 1.0f).build());
         }
-    }
-
-    private synchronized void updateMediaSessionQueue() {
-        if (getQueuePosition() < 0 || getQueueSize() == 0) {
-            mSession.setQueue(null);
-            return;
-        }
-
-        final StringBuilder selection = new StringBuilder();
-        for (long id : getQueue()) {
-            if (selection.length() > 0) {
-                selection.append(",");
-            }
-            selection.append(id);
-        }
-        selection.insert(0, MediaStore.Audio.Media._ID + " IN (");
-        selection.append(")");
-
-        Cursor c = getApplicationContext().getContentResolver().query(
-                MediaStore.Audio.Media.EXTERNAL_CONTENT_URI,
-                new String[]{BaseColumns._ID, AudioColumns.TITLE, AudioColumns.ARTIST},
-                selection.toString(), null, null);
-
-        final TreeMap<Integer, MediaSession.QueueItem> items = new TreeMap<>();
-        if (c != null) {
-            try {
-                while (c.moveToNext()) {
-                    long id = c.getLong(c.getColumnIndexOrThrow(BaseColumns._ID));
-                    MediaDescription desc = new MediaDescription.Builder()
-                            .setTitle(c.getString(
-                                    c.getColumnIndexOrThrow(AudioColumns.TITLE)))
-                            .setSubtitle(c.getString(
-                                    c.getColumnIndexOrThrow(AudioColumns.ARTIST)))
-                            .build();
-
-                    int index = -1;
-                    for (int i = 0; i < getQueueSize(); i++) {
-                        if (getQueue()[i] == id) {
-                            index = i;
-                            break;
-                        }
-                    }
-                    if (index >= 0) {
-                        items.put(index, new MediaSession.QueueItem(desc, index));
-                    }
-                }
-            } finally {
-                c.close();
-            }
-        }
-        mSession.setQueue(new ArrayList<MediaSession.QueueItem>(items.values()));
     }
 
     private Notification buildNotification() {
