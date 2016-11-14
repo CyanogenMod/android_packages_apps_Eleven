@@ -675,8 +675,14 @@ public final class ImageCache {
         // getExternalCacheDir(context) returns null if external storage is not ready
         final String cachePath = getExternalCacheDir(context) != null
                                     ? getExternalCacheDir(context).getPath()
-                                    : context.getCacheDir().getPath();
-        return new File(cachePath, uniqueName);
+                                    : context.getCacheDir() != null
+                                        ? context.getCacheDir().getPath()
+                                        : null;
+        if (cachePath != null) {
+            return new File(cachePath, uniqueName);
+        } else {
+            return null;
+        }
     }
 
     /**

@@ -214,7 +214,9 @@ public class ImageUtils {
                                                   final String uniqueName) {
         final File cacheDir = ImageCache.getDiskCacheDir(context, uniqueName);
 
-        if (!cacheDir.exists()) {
+        if (cacheDir == null) {
+            return null;
+        } else if (!cacheDir.exists()) {
             cacheDir.mkdir();
         }
 
