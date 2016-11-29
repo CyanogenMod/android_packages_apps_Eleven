@@ -141,7 +141,7 @@
   <string name="app_widget_recent">Musika: berriki entzundakoak</string>
   <!-- Empty list / error messages -->
   <string name="no_effects_for_you">Ezin izan da ekualizadorea ireki.</string>
-  <string name="empty_music">Musika ordenagailutik galiura kopiatzeko USB kablea erabili.</string>
+  <string name="empty_music">Musika ordenagailutik gailura kopiatzeko erabili USB kablea.</string>
   <string name="empty_search">Ez da bilaketaren emaitzarik aurkitu</string>
   <string name="empty_search_check">Egiaztatu ondo idatzi duzula edo saiatu beste hitz gako batekin.</string>
   <string name="empty_favorite">Gogoko gisa markatutako abestiak hemen agertuko dira.</string>
@@ -154,7 +154,7 @@
   <string name="empty_last_added_main">Ez da abestirik gehitu berriki</string>
   <string name="empty_last_added">Azken hilabetean gehituriko abestiak hemen agertuko dira.</string>
   <string name="empty_generic_main">Ez da musikarik aurkitu</string>
-  <string name="empty_generic_secondary">Musika ordenagailutik galiura kopiatzeko USB kablea erabili.</string>
+  <string name="empty_generic_secondary">Musika ordenagailutik gailura kopiatzeko erabili USB kablea.</string>
   <string name="empty_queue_main">Ez dago abestirik erreprodukzio-zerrendan</string>
   <string name="empty_queue_secondary">Abestiak erreprodukzio-zerrendara gehitzeko, sakatu abesti, album edo artista bat eta hautatu \"Gehitu ilarara\".</string>
   <string name="error_playing_track">Ezin izan da %1$s. pista erreproduzitu</string>
