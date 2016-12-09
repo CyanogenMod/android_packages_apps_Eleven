@@ -18,20 +18,8 @@
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
   <!-- Used to indicate the number of artists -->
-  <plurals name="Nartists">
-    <item quantity="one"><xliff:g id="count">%d</xliff:g> artisto</item>
-    <item quantity="other"><xliff:g id="count">%d</xliff:g> artistoj</item>
-  </plurals>
   <!-- Used to indicate the number of albums for an artist -->
-  <plurals name="Nalbums">
-    <item quantity="one"><xliff:g id="count">%d</xliff:g> albumo</item>
-    <item quantity="other"><xliff:g id="count">%d</xliff:g> albumoj</item>
-  </plurals>
   <!-- Used to indicate the number of songs for an album -->
-  <plurals name="Nsongs">
-    <item quantity="one"><xliff:g id="count">%d</xliff:g> kanto</item>
-    <item quantity="other"><xliff:g id="count">%d</xliff:g> kantoj</item>
-  </plurals>
   <!-- Used to indicate the number of genres -->
   <!-- Used to show a shortened version of hours-->
   <!-- Used to show a shortened version of minutes -->

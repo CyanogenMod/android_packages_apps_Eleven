@@ -38,15 +38,7 @@
     <item quantity="other"><xliff:g id="count">%d</xliff:g> శైలులు</item>
   </plurals>
   <!-- Used to show a shortened version of hours-->
-  <plurals name="Nhours">
-    <item quantity="one"><xliff:g id="hours">%d</xliff:g>h</item>
-    <item quantity="other"><xliff:g id="hours">%d</xliff:g>గ</item>
-  </plurals>
   <!-- Used to show a shortened version of minutes -->
-  <plurals name="Nminutes">
-    <item quantity="one"><xliff:g id="minutes">%d</xliff:g>m</item>
-    <item quantity="other"><xliff:g id="minutes">%d</xliff:g>ని</item>
-  </plurals>
   <!-- Toasts after adding song(s) to playlists -->
   <plurals name="NNNtrackstoplaylist">
     <item quantity="one"><xliff:g id="number" example="1">%d</xliff:g> పాట  ప్లేజాబితాకు జోడించబడింది.</item>

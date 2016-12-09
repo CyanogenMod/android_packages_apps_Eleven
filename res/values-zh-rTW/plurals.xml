@@ -39,7 +39,7 @@
   </plurals>
   <!-- Used to show a shortened version of minutes -->
   <plurals name="Nminutes">
-    <item quantity="other"><xliff:g id="minutes">%d</xliff:g> 分鐘</item>
+    <item quantity="other"><xliff:g id="minutes">%d</xliff:g>分鐘</item>
   </plurals>
   <!-- Toasts after adding song(s) to playlists -->
   <plurals name="NNNtrackstoplaylist">
@@ -47,15 +47,15 @@
   </plurals>
   <!-- Toasts after removing song(s) from playlists -->
   <plurals name="NNNtracksfromplaylist">
-    <item quantity="other">已從播放清單中移除 <xliff:g id="number" example="27">%d</xliff:g> 首樂曲。</item>
+    <item quantity="other">已從播放清單中刪除 <xliff:g id="number" example="27">%d</xliff:g> 首樂曲。</item>
   </plurals>
   <!-- Toasts after adding song(s) to queue -->
   <plurals name="NNNtrackstoqueue">
-    <item quantity="other">已新增 <xliff:g id="number" example="27">%d</xliff:g> 首樂曲至佇列。</item>
+    <item quantity="other">已加入 <xliff:g id="number" example="27">%d</xliff:g> 首樂曲至隊列。</item>
   </plurals>
   <!-- Toasts after adding song(s) to the favorites list -->
   <plurals name="NNNtrackstofavorites">
-    <item quantity="other">已新增 <xliff:g id="number" example="27">%d</xliff:g> 首樂曲至最愛。</item>
+    <item quantity="other">已加入 <xliff:g id="number" example="27">%d</xliff:g> 首樂曲至最愛。</item>
   </plurals>
   <!-- Toast confirming that song(s) was/were deleted. -->
   <plurals name="NNNtracksdeleted">

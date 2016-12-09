@@ -39,8 +39,8 @@
   </plurals>
   <!-- Used to show a shortened version of hours-->
   <plurals name="Nhours">
-    <item quantity="one"><xliff:g id="hours">%d</xliff:g>ता</item>
-    <item quantity="other"><xliff:g id="hours">%d</xliff:g>ता</item>
+    <item quantity="one"><xliff:g id="hours">%d</xliff:g>h</item>
+    <item quantity="other"><xliff:g id="hours">%d</xliff:g>h</item>
   </plurals>
   <!-- Used to show a shortened version of minutes -->
   <plurals name="Nminutes">
