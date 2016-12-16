@@ -24,7 +24,7 @@
   <string name="page_albums">Album</string>
   <string name="page_songs">Lagu</string>
   <string name="page_playlists">Daftar Putar</string>
-  <string name="page_genres">Genre</string>
+  <string name="page_genres">Aliran</string>
   <string name="page_now_playing">Sedang diputar</string>
   <string name="page_play_queue">Putar daftar antrean</string>
   <!-- Section Headers -->
@@ -33,15 +33,15 @@
   <string name="header_all_songs">Semua Lagu</string>
   <!-- Option menu items -->
   <string name="menu_settings">Pengaturan</string>
-  <string name="menu_search">Telusuri</string>
-  <string name="menu_shuffle_item">Putar acak</string>
-  <string name="menu_shuffle_all">Putar acak semua</string>
+  <string name="menu_search">Cari</string>
+  <string name="menu_shuffle_item">Acak</string>
+  <string name="menu_shuffle_all">Acak semua</string>
   <string name="menu_shuffle_playlist">Putar acak daftar putar</string>
   <string name="menu_shuffle_album">Putar acak album</string>
   <string name="menu_shuffle_artist">Putar acak artis</string>
   <string name="menu_shuffle_top_tracks">Putar acak lagu teratas</string>
   <string name="menu_shuffle_recent">Putar acak yang terakhir diputar</string>
-  <string name="menu_shuffle_last_added">Putar acak yang terakhir ditambahkan</string>
+  <string name="menu_shuffle_last_added">Putar acak terakhir ditambahkan</string>
   <string name="menu_play_all">Putar semua</string>
   <string name="menu_sort_by">Urut berdasarkan</string>
   <string name="menu_clear_list">Hapus daftar</string>
@@ -85,22 +85,22 @@
   <string name="cannot_be_undone">Ini tidak dapat diurungkan</string>
   <string name="delete_warning">Ini akan menghapus cache gambar secara permanen</string>
   <string name="new_photo">Pilih foto dari Galeri</string>
-  <string name="google_search">Penelusuran Google</string>
-  <string name="use_default">Gunakan foto baku</string>
+  <string name="google_search">Pencarian Google</string>
+  <string name="use_default">Gunakan foto bawaan</string>
   <string name="old_photo">Gunakan foto lama</string>
   <!-- Context menu items -->
   <string name="context_menu_play_selection">Putar</string>
   <string name="context_menu_play_next">Putar selanjutnya</string>
   <string name="context_menu_play_album">Putar album</string>
   <string name="context_menu_more_by_artist">Lebih banyak oleh artis</string>
-  <string name="context_menu_rename_playlist">Ubah Nama</string>
+  <string name="context_menu_rename_playlist">Ubah nama</string>
   <string name="context_menu_delete">Hapus</string>
   <string name="context_menu_fetch_album_art">Mengambil seni album</string>
   <string name="context_menu_fetch_artist_image">Mengambil gambar artis</string>
   <string name="context_menu_remove_from_recent">Hapus dari terakhir</string>
   <string name="context_menu_use_as_ringtone">Gunakan sebagai nada dering</string>
   <string name="context_menu_remove_from_playlist">Hapus dari daftar putar</string>
-  <string name="context_menu_change_image">Ubah Gambar</string>
+  <string name="context_menu_change_image">Ganti Gambar</string>
   <!-- Content descriptions -->
   <string name="accessibility_play">Putar</string>
   <string name="accessibility_pause">Jeda</string>
@@ -130,8 +130,8 @@
   <string name="settings_show_music_visualization_title">Tampilkan visualisasi musik</string>
   <string name="settings_show_lyrics_title">Tampilkan lirik lagu</string>
   <string name="settings_show_lyrics_summary">Untuk lagu-lagu yang memiliki berkas srt</string>
-  <string name="settings_shake_to_play">Kocok untuk memutar</string>
-  <string name="settings_shake_to_play_summary">Kocok perangkat Anda untuk memutar lagu berikutnya</string>
+  <string name="settings_shake_to_play">Goyang untuk memutar</string>
+  <string name="settings_shake_to_play_summary">Goyang perangkat Anda untuk memutar lagu berikutnya</string>
   <string name="settings_lockscreen_album_art">Seni album pada layar kunci</string>
   <string name="settings_lockscreen_album_art_summary">Ganti latar belakang layar kunci dengan seni album</string>
   <!-- App widget -->
@@ -144,7 +144,7 @@
   <string name="empty_music">Untuk menyalin musik dari komputer ke perangkat Anda, gunakan kabel USB.</string>
   <string name="empty_search">Hasil penelusuran tidak ditemukan</string>
   <string name="empty_search_check">Periksa bahwa Anda memiliki ejaan yang benar atau coba kata kunci yang berbeda.</string>
-  <string name="empty_favorite">Lagu-lagu yang Anda Tandai sebagai favorit akan ditampilkan di sini.</string>
+  <string name="empty_favorite">Lagu-lagu yang anda tandai sebagai favorit akan ditampilkan di sini.</string>
   <string name="empty_recent_main">Tidak ada lagu terbaru</string>
   <string name="empty_recent">Lagu yang Anda dengarkan baru-baru ini akan muncul di sini.</string>
   <string name="empty_playlist_main">Tidak ada lagu dalam daftar putar</string>
@@ -180,7 +180,7 @@
   <string name="footer_search_albums">Tampilkan semua album</string>
   <string name="footer_search_songs">Tampilkan semua lagu</string>
   <string name="footer_search_playlists">Tampilkan semua daftar putar</string>
-  <string name="searchHint">Telusuri musik</string>
+  <string name="searchHint">Cari musik</string>
   <string name="search_title_artists">Semua \"%s\" artis</string>
   <string name="search_title_albums">Semua \"%s\" album</string>
   <string name="search_title_songs">Semua \"%s\" lagu</string>

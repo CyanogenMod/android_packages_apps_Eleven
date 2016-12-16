@@ -83,7 +83,7 @@
   <string name="clear_recent_title">最近再生した曲を消去しますか？</string>
   <string name="clear_last_added">最近追加した曲を消去しますか？</string>
   <string name="cannot_be_undone">この操作は元に戻せません</string>
-  <string name="delete_warning">キャッシュされた画像エントリーを恒久的に削除します</string>
+  <string name="delete_warning">キャッシュされた画像エントリーを完全に削除します</string>
   <string name="new_photo">ギャラリーから写真を選択</string>
   <string name="google_search">Google検索</string>
   <string name="use_default">デフォルトの写真を使用</string>

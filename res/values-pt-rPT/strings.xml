@@ -100,7 +100,7 @@
   <string name="context_menu_remove_from_recent">Remover das recentes</string>
   <string name="context_menu_use_as_ringtone">Usar como toque</string>
   <string name="context_menu_remove_from_playlist">Remover da lista de reprodução</string>
-  <string name="context_menu_change_image">Alterar Imagem</string>
+  <string name="context_menu_change_image">Alterar imagem</string>
   <!-- Content descriptions -->
   <string name="accessibility_play">Reproduzir</string>
   <string name="accessibility_pause">Pausa</string>
