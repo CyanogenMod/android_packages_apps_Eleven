@@ -45,7 +45,7 @@
   <string name="menu_play_all">全部播放</string>
   <string name="menu_sort_by">排序方式</string>
   <string name="menu_clear_list">清除清單</string>
-  <string name="menu_clear_recents">清除最近播放</string>
+  <string name="menu_clear_recents">清除最近</string>
   <string name="menu_clear_queue">清除佇列</string>
   <string name="menu_save_queue">將佇列保存到播放清單</string>
   <string name="menu_equalizer">等化器</string>
@@ -90,17 +90,17 @@
   <string name="old_photo">使用舊的相片</string>
   <!-- Context menu items -->
   <string name="context_menu_play_selection">播放</string>
-  <string name="context_menu_play_next">播放下一個</string>
+  <string name="context_menu_play_next">播放下一首</string>
   <string name="context_menu_play_album">播放專輯</string>
   <string name="context_menu_more_by_artist">更多此演出者的作品</string>
   <string name="context_menu_rename_playlist">重新命名</string>
   <string name="context_menu_delete">刪除</string>
   <string name="context_menu_fetch_album_art">取得專輯封面</string>
   <string name="context_menu_fetch_artist_image">取得演出者圖片</string>
-  <string name="context_menu_remove_from_recent">從最近刪除</string>
+  <string name="context_menu_remove_from_recent">從最近移除</string>
   <string name="context_menu_use_as_ringtone">設定為鈴聲</string>
-  <string name="context_menu_remove_from_playlist">從播放清單刪除</string>
-  <string name="context_menu_change_image">變更圖片</string>
+  <string name="context_menu_remove_from_playlist">從播放清單移除</string>
+  <string name="context_menu_change_image">更改圖片</string>
   <!-- Content descriptions -->
   <string name="accessibility_play">播放</string>
   <string name="accessibility_pause">暫停</string>
@@ -144,7 +144,7 @@
   <string name="empty_music">請透過 USB 傳輸線從電腦複製音樂到您的裝置。</string>
   <string name="empty_search">未發現搜尋結果</string>
   <string name="empty_search_check">請檢查拼寫是否正確，或嘗試其他關鍵字。</string>
-  <string name="empty_favorite">您標記為最愛的樂曲將會顯示在這裡。</string>
+  <string name="empty_favorite">您標示為最愛的樂曲將會顯示在這裡。</string>
   <string name="empty_recent_main">沒有最近播放的樂曲</string>
   <string name="empty_recent">最近聽過的樂曲將會顯示在這裡。</string>
   <string name="empty_playlist_main">播放清單中沒有樂曲</string>
@@ -159,7 +159,7 @@
   <string name="empty_queue_secondary">要新增樂曲至播放佇列，請輕觸樂曲、專輯或演出者，並在功能選單中選擇「新增至佇列」。</string>
   <string name="error_playing_track">無法播放曲目 %1$s</string>
   <!-- Section Headers -->
-  <string name="header_unknown_year">不明年份</string>
+  <string name="header_unknown_year">未知年份</string>
   <string name="header_less_than_30s">少於 30 秒</string>
   <string name="header_30_to_60_seconds">30 - 60 秒</string>
   <string name="header_1_to_2_minutes">1 - 2 分鐘</string>
@@ -177,7 +177,7 @@
   <string name="header_5_plus_albums">超過 5 張專輯</string>
   <string name="header_other">"其他"</string>
   <string name="footer_search_artists">顯示所有演出者</string>
-  <string name="footer_search_albums">顯示所以專輯</string>
+  <string name="footer_search_albums">顯示所有專輯</string>
   <string name="footer_search_songs">顯示所有歌曲</string>
   <string name="footer_search_playlists">顯示所有播放清單</string>
   <string name="searchHint">搜尋音樂</string>
