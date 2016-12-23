@@ -50,8 +50,8 @@
   <string name="menu_save_queue">將佇列保存到播放清單</string>
   <string name="menu_equalizer">等化器</string>
   <!-- Playlist items -->
-  <string name="add_to_playlist">加入播放清單</string>
-  <string name="add_to_queue">加入佇列</string>
+  <string name="add_to_playlist">新增至播放清單</string>
+  <string name="add_to_queue">新增至佇列</string>
   <string name="remove_from_recent">從最近播放清單移除</string>
   <string name="remove_from_queue">從佇列移除</string>
   <!-- Sort orders -->
@@ -61,13 +61,13 @@
   <string name="sort_order_entry_album">專輯</string>
   <string name="sort_order_entry_year">年份</string>
   <string name="sort_order_entry_duration">長度</string>
-  <string name="sort_order_entry_date_added">加入日期</string>
+  <string name="sort_order_entry_date_added">新增日期</string>
   <string name="sort_order_entry_track_list">曲目列表</string>
   <string name="sort_order_entry_number_of_songs">樂曲數量</string>
   <string name="sort_order_entry_number_of_albums">專輯數量</string>
   <string name="sort_order_entry_filename">檔案名稱</string>
   <!-- Default playlist names -->
-  <string name="playlist_last_added">最後加入</string>
+  <string name="playlist_last_added">最近新增</string>
   <string name="playlist_recently_played">最近播放</string>
   <string name="playlist_top_tracks">我的熱門曲目</string>
   <!-- AlertDialog items -->
@@ -81,7 +81,7 @@
   <string name="delete_dialog_title">刪除<xliff:g id="item" example="album">%s</xliff:g>?</string>
   <string name="clear_top_tracks_title">清除熱門曲目?</string>
   <string name="clear_recent_title">清除最近播放?</string>
-  <string name="clear_last_added">清除最後新增?</string>
+  <string name="clear_last_added">清除最近新增?</string>
   <string name="cannot_be_undone">這將無法復原</string>
   <string name="delete_warning">這將永久刪除已快取的影像</string>
   <string name="new_photo">從相簿選擇相片</string>
@@ -132,7 +132,7 @@
   <string name="settings_show_lyrics_summary">有 srt 檔的歌曲</string>
   <string name="settings_shake_to_play">搖動播放</string>
   <string name="settings_shake_to_play_summary">搖動您的裝置即可播放下一首歌曲</string>
-  <string name="settings_lockscreen_album_art">鎖屏專輯圖片</string>
+  <string name="settings_lockscreen_album_art">鎖定螢幕專輯封面</string>
   <string name="settings_lockscreen_album_art_summary">將鎖屏的背景圖換成專輯圖片</string>
   <!-- App widget -->
   <string name="app_widget_small">音樂：4 \u00d7 1</string>
@@ -152,7 +152,7 @@
   <string name="empty_top_tracks_main">沒有熱門曲目</string>
   <string name="empty_top_tracks_secondary">您最常聽的樂曲將新增至此清單。</string>
   <string name="empty_last_added_main">沒有最近新增的樂曲</string>
-  <string name="empty_last_added">您最近一個月加入的樂曲將會顯示在這裡。</string>
+  <string name="empty_last_added">您最近一個月新增的樂曲將會顯示在這裡。</string>
   <string name="empty_generic_main">找不到音樂</string>
   <string name="empty_generic_secondary">請透過USB傳輸線從您的電腦複製音樂至您的裝置。</string>
   <string name="empty_queue_main">播放佇列中沒有樂曲</string>
