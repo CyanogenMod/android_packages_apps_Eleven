@@ -45,13 +45,13 @@
   <string name="menu_play_all">全部播放</string>
   <string name="menu_sort_by">排序方式</string>
   <string name="menu_clear_list">清除清單</string>
-  <string name="menu_clear_recents">清除最近播放</string>
+  <string name="menu_clear_recents">清除最近</string>
   <string name="menu_clear_queue">清除佇列</string>
   <string name="menu_save_queue">將佇列保存到播放清單</string>
   <string name="menu_equalizer">等化器</string>
   <!-- Playlist items -->
-  <string name="add_to_playlist">加入播放清單</string>
-  <string name="add_to_queue">加入佇列</string>
+  <string name="add_to_playlist">新增至播放清單</string>
+  <string name="add_to_queue">新增至佇列</string>
   <string name="remove_from_recent">從最近播放清單移除</string>
   <string name="remove_from_queue">從佇列移除</string>
   <!-- Sort orders -->
@@ -61,46 +61,46 @@
   <string name="sort_order_entry_album">專輯</string>
   <string name="sort_order_entry_year">年份</string>
   <string name="sort_order_entry_duration">長度</string>
-  <string name="sort_order_entry_date_added">加入日期</string>
+  <string name="sort_order_entry_date_added">新增日期</string>
   <string name="sort_order_entry_track_list">曲目列表</string>
   <string name="sort_order_entry_number_of_songs">樂曲數量</string>
   <string name="sort_order_entry_number_of_albums">專輯數量</string>
   <string name="sort_order_entry_filename">檔案名稱</string>
   <!-- Default playlist names -->
-  <string name="playlist_last_added">最後加入</string>
+  <string name="playlist_last_added">最近新增</string>
   <string name="playlist_recently_played">最近播放</string>
   <string name="playlist_top_tracks">我的熱門曲目</string>
   <!-- AlertDialog items -->
   <string name="new_playlist">新增播放清單</string>
   <string name="save">儲存</string>
   <string name="cancel">取消</string>
-  <string name="overwrite">覆寫</string>
+  <string name="overwrite">覆蓋</string>
   <string name="clear">清除</string>
   <string name="new_playlist_name_template">播放清單<xliff:g id="number">%d</xliff:g></string>
   <string name="create_playlist_prompt">播放清單名稱</string>
-  <string name="delete_dialog_title">刪除<xliff:g id="item" example="album">%s</xliff:g>?</string>
-  <string name="clear_top_tracks_title">清除熱門曲目?</string>
-  <string name="clear_recent_title">清除最近播放?</string>
-  <string name="clear_last_added">清除最後新增?</string>
+  <string name="delete_dialog_title">是否刪除 <xliff:g id="item" example="album">%s</xliff:g>？</string>
+  <string name="clear_top_tracks_title">是否清除熱門曲目？</string>
+  <string name="clear_recent_title">是否清除最近播放？</string>
+  <string name="clear_last_added">是否清除最近新增？</string>
   <string name="cannot_be_undone">這將無法復原</string>
   <string name="delete_warning">這將永久刪除已快取的影像</string>
-  <string name="new_photo">從相簿選擇相片</string>
+  <string name="new_photo">從相簿選擇照片</string>
   <string name="google_search">Google 搜尋</string>
-  <string name="use_default">使用預設相片</string>
-  <string name="old_photo">使用舊的相片</string>
+  <string name="use_default">使用預設照片</string>
+  <string name="old_photo">使用舊的照片</string>
   <!-- Context menu items -->
   <string name="context_menu_play_selection">播放</string>
-  <string name="context_menu_play_next">播放下一個</string>
+  <string name="context_menu_play_next">播放下一首</string>
   <string name="context_menu_play_album">播放專輯</string>
   <string name="context_menu_more_by_artist">更多此演出者的作品</string>
   <string name="context_menu_rename_playlist">重新命名</string>
   <string name="context_menu_delete">刪除</string>
   <string name="context_menu_fetch_album_art">取得專輯封面</string>
   <string name="context_menu_fetch_artist_image">取得演出者圖片</string>
-  <string name="context_menu_remove_from_recent">從最近刪除</string>
+  <string name="context_menu_remove_from_recent">從最近移除</string>
   <string name="context_menu_use_as_ringtone">設定為鈴聲</string>
-  <string name="context_menu_remove_from_playlist">從播放清單刪除</string>
-  <string name="context_menu_change_image">變更圖片</string>
+  <string name="context_menu_remove_from_playlist">從播放清單移除</string>
+  <string name="context_menu_change_image">更改圖片</string>
   <!-- Content descriptions -->
   <string name="accessibility_play">播放</string>
   <string name="accessibility_pause">暫停</string>
@@ -132,8 +132,8 @@
   <string name="settings_show_lyrics_summary">有 srt 檔的歌曲</string>
   <string name="settings_shake_to_play">搖動播放</string>
   <string name="settings_shake_to_play_summary">搖動您的裝置即可播放下一首歌曲</string>
-  <string name="settings_lockscreen_album_art">鎖屏專輯圖片</string>
-  <string name="settings_lockscreen_album_art_summary">將鎖屏的背景圖換成專輯圖片</string>
+  <string name="settings_lockscreen_album_art">鎖定螢幕專輯封面</string>
+  <string name="settings_lockscreen_album_art_summary">在鎖定螢幕背景顯示專輯封面</string>
   <!-- App widget -->
   <string name="app_widget_small">音樂：4 \u00d7 1</string>
   <string name="app_widget_large">音樂：4 \u00d7 2</string>
@@ -144,7 +144,7 @@
   <string name="empty_music">請透過 USB 傳輸線從電腦複製音樂到您的裝置。</string>
   <string name="empty_search">未發現搜尋結果</string>
   <string name="empty_search_check">請檢查拼寫是否正確，或嘗試其他關鍵字。</string>
-  <string name="empty_favorite">您標記為最愛的樂曲將會顯示在這裡。</string>
+  <string name="empty_favorite">您標示為最愛的樂曲將會顯示在這裡。</string>
   <string name="empty_recent_main">沒有最近播放的樂曲</string>
   <string name="empty_recent">最近聽過的樂曲將會顯示在這裡。</string>
   <string name="empty_playlist_main">播放清單中沒有樂曲</string>
@@ -152,14 +152,14 @@
   <string name="empty_top_tracks_main">沒有熱門曲目</string>
   <string name="empty_top_tracks_secondary">您最常聽的樂曲將新增至此清單。</string>
   <string name="empty_last_added_main">沒有最近新增的樂曲</string>
-  <string name="empty_last_added">您最近一個月加入的樂曲將會顯示在這裡。</string>
+  <string name="empty_last_added">您最近一個月新增的樂曲將會顯示在這裡。</string>
   <string name="empty_generic_main">找不到音樂</string>
   <string name="empty_generic_secondary">請透過USB傳輸線從您的電腦複製音樂至您的裝置。</string>
   <string name="empty_queue_main">播放佇列中沒有樂曲</string>
   <string name="empty_queue_secondary">要新增樂曲至播放佇列，請輕觸樂曲、專輯或演出者，並在功能選單中選擇「新增至佇列」。</string>
   <string name="error_playing_track">無法播放曲目 %1$s</string>
   <!-- Section Headers -->
-  <string name="header_unknown_year">不明年份</string>
+  <string name="header_unknown_year">未知年份</string>
   <string name="header_less_than_30s">少於 30 秒</string>
   <string name="header_30_to_60_seconds">30 - 60 秒</string>
   <string name="header_1_to_2_minutes">1 - 2 分鐘</string>
@@ -177,7 +177,7 @@
   <string name="header_5_plus_albums">超過 5 張專輯</string>
   <string name="header_other">"其他"</string>
   <string name="footer_search_artists">顯示所有演出者</string>
-  <string name="footer_search_albums">顯示所以專輯</string>
+  <string name="footer_search_albums">顯示所有專輯</string>
   <string name="footer_search_songs">顯示所有歌曲</string>
   <string name="footer_search_playlists">顯示所有播放清單</string>
   <string name="searchHint">搜尋音樂</string>
