@@ -1759,4 +1759,26 @@ public final class MusicUtils {
 
         return str.toString();
     }
+
+    /**
+     * Sleep mode status get/set
+     */
+    public static boolean getSleepMode() {
+        if (mService != null) {
+            try {
+                return mService.getSleepMode();
+            } catch (final RemoteException ignored) {
+            }
+        }
+        return false;
+    }
+    
+    public static void setSleepMode(boolean enable) {
+        if (mService != null) {
+            try {
+                mService.setSleepMode(enable);
+            } catch (final RemoteException ignored) {
+            }
+        }
+    }
 }

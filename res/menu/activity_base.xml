@@ -18,6 +18,12 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android" >
 
     <item
+        android:id="@+id/menu_sleep_mode"
+        android:orderInCategory="999"
+        android:showAsAction="never"
+        android:title="@string/menu_sleep_mode"/>
+
+    <item
         android:id="@+id/menu_settings"
         android:orderInCategory="1000"
         android:showAsAction="never"

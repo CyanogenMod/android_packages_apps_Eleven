@@ -49,6 +49,7 @@ import com.cyanogenmod.eleven.utils.MusicUtils;
 import com.cyanogenmod.eleven.utils.MusicUtils.ServiceToken;
 import com.cyanogenmod.eleven.utils.NavUtils;
 import com.cyanogenmod.eleven.widgets.PlayPauseProgressButton;
+import com.cyanogenmod.eleven.widgets.SleepModeDialog;
 
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
@@ -198,6 +199,10 @@ public abstract class BaseActivity extends FragmentActivity implements ServiceCo
 
             case R.id.menu_search:
                 NavUtils.openSearch(BaseActivity.this, "");
+                return true;
+
+            case R.id.menu_sleep_mode:
+                SleepModeDialog.show(getSupportFragmentManager());
                 return true;
 
             default:
